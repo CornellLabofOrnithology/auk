@@ -10,8 +10,8 @@ Authors@R: c(
 URL: http://CornellLabofOrnithology.github.io/auk/, https://github.com/CornellLabofOrnithology/auk
 BugReports: https://github.com/CornellLabofOrnithology/auk/issues
 Description: Process the eBird Basic Dataset (EBD) using AWK. This package is 
-    used to filter the EBD by species, space, or time to produce a manageable 
-    file size that can be imported into R.
+    used to filter the EBD by taxonomically, spatially, or temporally to produce 
+    a manageable file size that can be imported into R.
 Depends: R (>= 3.3.3)
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
