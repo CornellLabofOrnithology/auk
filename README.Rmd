@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![Coverage Status](https://img.shields.io/codecov/c/github/CornellLabofOrnithology/auk/master.svg)](https://codecov.io/github/CornellLabofOrnithology/auk?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/auk)](https://cran.r-project.org/package=auk)
 
-**This package is in development, if you encounter any bugs, please open an issue on GitHub**
+**This package is in development. If you encounter any bugs, please open an issue on GitHub**
 
 ## Overview
 
