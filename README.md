@@ -19,7 +19,7 @@ This package can be installed directly from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ebird/auk")
+devtools::install_github("CornellLabofOrnithology/auk")
 ```
 
 `auk` requires the Unix utility AWK, which is available on most Linux and Mac OS X machines. Windows users will first need to install [Cygwin](https://www.cygwin.com) before using this package. Note that **Cygwin must be installed in the default location** (`C:/cygwin/bin/gawk.exe` or `C:/cygwin64/bin/gawk.exe`) in order for `auk` to work.
@@ -51,7 +51,7 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp3ehl0Q/filefb333f02430"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpmIOLMO/file12fc2151ab65"
 # number of lines in input
 length(readLines(f))
 #> [1] 101

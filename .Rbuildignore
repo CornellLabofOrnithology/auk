@@ -9,3 +9,5 @@
 ^appveyor\.yml$
 ^docs$
 ^_pkgdown\.yml$
+^NEWS\.md$
+^cran-comments\.md$

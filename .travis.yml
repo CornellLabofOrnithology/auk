@@ -1,0 +1,21 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+cache: packages
+latex: false
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+      r_build_args: '--no-build-vignettes'
+      r_check_args: '--ignore-vignettes'
+    - os: osx
+      latex: false
+      r_build_args: '--no-build-vignettes'
+      r_check_args: '--ignore-vignettes --no-examples'
+
+after_success:
+  - Rscript -e 'covr::codecov()'
+
