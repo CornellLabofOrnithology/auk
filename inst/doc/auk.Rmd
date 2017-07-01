@@ -1,0 +1,312 @@
+---
+title: "auk: eBird Data Processing with AWK"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE, error = FALSE
+)
+library(auk)
+```
+
+[eBird](http://www.ebird.org) is an online tool for recording bird observations. Since its inception, nearly 500 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the [eBird Basic Dataset (EBD)](http://ebird.org/ebird/data/download). Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.
+
+This vignette is divided into three sections. The first section provides background on the eBird data and motivation for the development of this package. The second section outlines the use of `auk` for filtering the EBD to produce a presence-only dataset. The final section demonstrates how `auk` can be used to produce zero-filled, presence-absence (or more correctly presence–non-detection)  data, a necessity for many modeling and analysis applications.
+
+## Background
+
+### The eBird Basic Dataset
+
+The eBird database currently contains nearly 500 million bird observations, and this rate of increase is accelerating as new users join eBird. These data are an extremely valuable tool both for basic science and conservation; however, given the sheer amount of data, accessing eBird data poses a unique challenge. Currently, access to the complete set of eBird observations is provided via the eBird Basic Dataset (EBD). This is a tab-separated text file, released quarterly, containing all validated bird sightings in the eBird database at the time of release. Each row corresponds to the sighting of a single species within a checklist and, in addition to the species and number of individuals reported, information is provided at the checklist level (location, time, date, search effort, etc.).
+
+In addition to the EBD, eBird provides a Sampling Event Data file that contains the checklist-level data for every valid checklist submitted to eBird, including checklists for which no species of birds were reported. In this file, each row corresponds to a checklist and only the checklist-level variables are included, not the associated bird data. While the EBD provides presence-only data, the EBD and Sampling Event Data can be combined to produce presence-absence data. This process is described below.
+
+For full metadata on the EBD and Sampling Event Data, consult the documentation provided when the [files are downloaded](http://ebird.org/ebird/data/download).
+
+### Data access
+
+To access the EBD, begin by [creating an eBird account and signing in](https://secure.birds.cornell.edu/cassso/login). Then visit the [Download Data](http://ebird.org/ebird/data/download) page. eBird data access is free; however, you will need to [request access](http://ebird.org/ebird/data/request) in order to obtain access to the EBD. Filling out the access request form allows eBird to keep track of the number of people using the data and obtain information on the applications for which the data are used
+
+Once you have access to the data, proceed to the [download page](http://ebird.org/ebird/data/download/ebd). There are two download options: prepackage download and custom download. Downloading the prepackaged option gives you access to the full global dataset. If you choose this route, you'll likely want to download both the EBD (~ 25 GB) and corresponding Sampling Event Data (~ 2.5 GB). If you know you're likely to only need data for a single species, or a small region, you can request a custom download be prepared consisting of only a subset of the data. This will result in significantly smaller files; however, note that custom requests that would result in huge numbers of checklists (e.g. all records from the US) won't work. In either case, download and decompress the files.
+
+### Example data
+
+This package comes with two example datasets. The first is suitable for practicing filtering the EBD and producing presence-only data. It's a sample of 500 records from the EBD. It contains data from North and Central America from 2010-2012 on 4 jay species: Gray Jay, Blue Jay, Steller's Jay, and Green Jay. It can be accessed with:
+
+```{r example-data-1, eval = FALSE}
+system.file("extdata/ebd-sample.txt", package = "auk")
+```
+
+The second is suitable for producing zero-filled, presence-absence data. It contains every sighting from Singapore in 2012 of Collared Kingfisher, White-throated Kingfisher, and Blue-eared Kingfisher. The full Sampling Event Data file is also included, and contains all checklists from Singapore in 2012. These files can be accessed with:
+
+```{r example-data-2, eval = FALSE}
+# ebd
+system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
+# sampling event data
+system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
+```
+
+### AWK
+
+R typically works with objects in memory and, as a result, there is a hard limit on the size of objects that can be brought into R. Because eBird contains nearly 500 million sightings, the EBD is an inherently large file (~150 GB uncompressed) and therefore impossible to manipulate directly in R. Thus it is generally necessary to create a subset of the EBD outside of R, then import this smaller subset for analysis.
+
+AWK is a Unix utility and programming language for processing column formatted text data. It is highly flexible and extremely fast, making it a valuable tool for pre-processing the EBD in order to create the smaller subset of data that is required. Users of the EBD can use AWK to produce a smaller file, subsetting the full text file taxonomically, spatially, or temporally, in order to produce a smaller file that can then be loaded in to R for visualization, analysis, and modelling. 
+
+Although AWK is a powerful tool, it has three disadvantages: it requires learning the syntax of a new language, it is only accessible via the command line, and it results in a portion of your workflow existing outside of R. This package is a wrapper for AWK specifically designed for filtering the EBD. The goal is to ease the use of the EBD by removing the hurdle of learning and using AWK.
+
+Linux and Mac users should already have AWK installed on their machines, however, Windows uses will need to install [Cygwin](https://www.cygwin.com) to gain access to AWK. Note that **Cygwin must be installed in the default location** (`C:/cygwin/bin/gawk.exe` or `C:/cygwin64/bin/gawk.exe`) in order for `auk` to work.
+
+### A note on versions
+
+This package contains a current (as of the time of package release) version of the [bird taxonomy used by eBird](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy). This taxonomy determines the species that can be reported in eBird and therefore the species that users of `auk` can extract from the EBD. eBird releases an updated taxonomy once a year, typically in August, at which time `auk` will be updated to include the current taxonomy. When using `auk`, users should be careful to ensure that the version they're using is in sync with the EBD file they're working with. This is most easily accomplished by always using the most recent version of `auk` and the most recent release of the EBD.
+
+## Presence data
+
+The most common use of the EBD is to produce a set of bird sightings, i.e. where and when was a given species seen. For example, this type of data could be used to produce a map of sighting locations, or to determine if a given bird has been seen in an area of interest. For more analytic work, such as species distribution modeling, presence and absence data are likely preferred (see Guillera-Arroita et al. 2015). Producing presence-absence data will be covered in the next section.
+
+### Cleaning
+
+Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function `auk_clean()` drops these erroneous records and removes the blank column. This process should be run on both the EBD and sampling event data. It typically takes several hours for the full EBD; however, it only needs to be run once because the output from the process is saved out to a new tab-separated text file for subsequent and potentially repeated use.
+
+```{r auk-clean, eval = FALSE}
+library(auk)
+# sample data, with intentially introduced errors
+f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
+f_out <- "ebd_cleaned.txt"
+# remove problem records
+cleaned <- auk_clean(f, f_out = f_out)
+# tidy up
+unlink(f_out)
+```
+
+### The `auk_ebd` object
+
+This package uses an `auk_ebd` object to keep track of the input EBD file, any filters defined, and the output file that is produced after filtering has been executed. By keeping everything wrapped up in one object, the user can keep track of exactly what set of input data and filters produced any given output data. To set up the initial `auk_ebd` object, use `auk_ebd()`:
+
+```{r auk-ebd}
+ebd <- system.file("extdata/ebd-sample_messy.txt", package = "auk") %>% 
+  auk_ebd()
+ebd
+```
+
+### Defining filters
+
+`auk` uses a [pipeline-based workflow](http://r4ds.had.co.nz/pipes.html) for defining filters, which can then be compiled into an AWK script. Any of the following filters can be applied:
+
+- `auk_species()`: filter by species using common or scientific names.
+- `auk_country()`: filter by country using the standard English names or [ISO 2-letter country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+- `auk_extent()`: filter by spatial extent, i.e. a range of latitudes and longitudes.
+- `auk_date()`: filter to checklists from a range of dates.
+- `auk_last_edited()`: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.
+- `auk_time()`: filter to checklists started during a range of times-of-day.
+- `auk_duration()`: filter to checklists that are the result of observation periods that lasted a given range of durations.
+- `auk_complete()`: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the "absence" information is inferred by the lack of reporting of a species on checklists. 
+
+Note that all of the functions listed above only modify the `auk_ebd` object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using `auk_filter()`.
+
+```{r auk-filter}
+ebd <- ebd %>% 
+  # species: common and scientific names can be mixed
+  auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>%
+  # country: codes and names can be mixed; case insensitive
+  auk_country(country = c("US", "Canada", "mexico")) %>%
+  # extent: formatted as `c(lng_min, lat_min, lng_max, lat_max)`
+  auk_extent(extent = c(-100, 37, -80, 52)) %>%
+  # date: use standard ISO date format `"YYYY-MM-DD"`
+  auk_date(date = c("2012-01-01", "2012-12-31")) %>%
+  # time: 24h format
+  auk_time(time = c("06:00", "09:00")) %>%
+  # duration: length in minutes of checklists
+  auk_duration(duration = c(0, 60)) %>%
+  # complete: all species seen or heard are recorded
+  auk_complete()
+ebd
+```
+
+In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official [eBird taxonomy](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy) and countries are checked using the [`countrycode`](https://github.com/vincentarelbundock/countrycode) package. This is particularly important because filtering is a time consuming process, so catching errors in advance can avoid several hours of wasted time.
+
+### Executing filters
+
+Each of the functions described in the *Defining filters* section only defines a filter. Once all of the required filters have been set, `auk_filter()` should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Gray Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:
+
+```{r auk-complete, eval = FALSE}
+output_file <- "ebd_filtered_blja-grja.txt"
+ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
+  auk_ebd() %>% 
+  auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>% 
+  auk_country(country = "Canada") %>% 
+  auk_filter(file = output_file)
+# tidy up
+unlink(output_file)
+```
+
+**Filtering the full EBD typically takes at least a couple hours**, so set it running then go grab lunch!
+
+### Reading
+
+EBD files can be read with `read_ebd()`. This is a wrapper around `data.table::fread()`, `readr::read_delim()`, or `read.delim()`, depending on which packages are installed. `read_ebd()` uses `stringsAsFactors = FALSE`, `quote = ""`, sets column classes, and converts variable names to `snake_case`.
+
+```{r read}
+system.file("extdata/ebd-sample.txt", package = "auk") %>% 
+  read_ebd() %>% 
+  str()
+```
+
+By default, `read_ebd()` returns a tibble for use with [Tidyverse](http://tidyverse.org) packages. Tibbles will behave just like plain data frames in most instances, but users can choose to return a plain `data.frame` or `data.table` by using the `setclass` argument.
+
+```{r read-tbl}
+ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
+  read_ebd(setclass = "data.frame")
+```
+
+`auk_filter()` returns an `auk_ebd` object with the output file paths stored in it. This `auk_ebd` object can then be passed directly to `auk_read()`, allowing for a complete pipeline. For example, we can create an `auk_ebd` object, define filters, filter with AWK, and read in the results all at once.
+
+```{r read-auk-ebd, eval = FALSE}
+output_file <- "ebd_filtered_blja-grja.txt"
+ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
+  auk_ebd() %>% 
+  auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>% 
+  auk_country(country = "Canada") %>% 
+  auk_filter(file = output_file) %>% 
+  read_ebd()
+# tidy up
+unlink(output_file)
+```
+
+### Saving the AWK command
+
+The AWK script can be saved for future reference by providing an output filename to `awk_file`. In addition, by setting `execute = FALSE` the AWK script will be generated but not run.
+
+```{r awk-script}
+awk_script <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
+  auk_ebd() %>% 
+  auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>% 
+  auk_country(country = "Canada") %>% 
+  auk_filter(awk_file = "awk-script.txt", execute = FALSE)
+# read back in and prepare for printing
+awk_file <- readLines(awk_script)
+awk_file[!grepl("^[[:space:]]*$", awk_file)] %>% 
+  paste0(collapse = "\n") %>% 
+  cat()
+# tidy up
+unlink(awk_script)
+```
+
+### Group checklists
+
+eBird allows observers birding together to share checklists. This process creates a new copy of the original checklist for each observer with whom the original checklist was shared; these copies can then be tweaked to add or remove some species that weren’t seen by the entire group, or altering the sampling-event data. For most applications, it's best to remove these duplicate (or near-duplicate) checklists. `auk_unique()` removes duplicates resulting from group checklists by selecting the observation with the lowest `sampling_event_identifier` (a unique ID for each checklist); this is the original checklists from which shared copies were generated. In addition to removing duplicates, a `checklist_id` field is added, which is equal to the `sampling_event_identifier` for non-group checklists and the `group_identifier` for grouped checklists. After running `auk_unique()`, every species will have a single entry for each `checklist_id`.
+
+`read_ebd()` automatically runs `auk_unique()`, however, we can use `unique = FALSE` then manually run `auk_unique()`.
+
+```{r auk-unique}
+# read in an ebd file and don't automatically remove duplicates
+ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  read_ebd(unique = FALSE)
+# remove duplicates
+ebd_unique <- auk_unique(ebd)
+# compare number of rows
+nrow(ebd)
+nrow(ebd_unique)
+```
+
+## Zero-filled, presence-absence data
+
+For many applications, presence-only data are sufficient; however, for modeling and analysis, presence-absence data are required. eBird observers only explicitly collect presence data, but they have the option of flagging their checklist as "complete" meaning that they are reporting all the species they saw or heard, and identified. Therefore, given a list of positive sightings (the EBD) and a list of all checklists (the sampling event data) it is possible to infer absences by filling zeros for all species not explicitly reported. This section of the vignette describes functions for producing zero-filled, presence-absence data.
+
+### Filtering
+
+When preparing to create zero-filled data, the EBD and sampling event data must be filtered to the same set of checklists to ensure consistency. To ensure these two datasets are synced, provide *both* the EBD and sampling event data files to `auk_ebd`, then filter as described in the previous section. This will ensure that all the filters applied to the ebd (except species) will be applied to the sampling event data so that we'll be working with the same set of checklists. It is critical that `auk_compete()` is called, since complete checklists are a requirement for zero-filling.
+
+For example, the following filters to only include sightings of Collared Kingfisher between 6 and 10am:
+
+```{r ebd-zf}
+# to produce zero-filled data, provide an EBD and sampling event data file
+f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
+f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
+filters <- auk_ebd(f_ebd, file_sampling = f_smp) %>% 
+  auk_species("Collared Kingfisher") %>% 
+  auk_time(c("06:00", "10:00")) %>% 
+  auk_complete()
+filters
+```
+
+As with presence-only data, call `auk_filter()` to actually run AWK. Output files must be provided for both the EBD and sampling event data.
+
+```{r zf-filter-fake, echo = TRUE}
+# needed to allow building vignette on machines without awk
+ebd_filtered <- filters
+ebd_filtered$output <- "ebd-filtered.txt"
+ebd_filtered$output_sampling <- "sampling-filtered.txt"
+```
+
+```{r zf-filter, eval = -1}
+ebd_filtered <- auk_filter(filters, 
+                           file = "ebd-filtered.txt",
+                           file_sampling = "sampling-filtered.txt")
+ebd_filtered
+```
+
+### Reading and zero-filling
+
+The filtered datasets can now be combined into a zero-filled, presence-absence dataset using `auk_zerofill()`.
+
+```{r auk-zf-fake, echo = FALSE}
+# needed to allow building vignette on machines without awk
+fake_ebd <- read_ebd(f_ebd)
+fake_smp <- read_sampling(f_smp)
+# filter in R to fake AWK call
+fake_ebd <- subset(
+  fake_ebd, 
+  all_species_reported & 
+    scientific_name %in% ebd_filtered$filters$species & 
+    time_observations_started >= ebd_filtered$filters$time[1] & 
+    time_observations_started <= ebd_filtered$filters$time[2])
+fake_smp <- subset(
+  fake_smp, 
+  all_species_reported & 
+    time_observations_started >= ebd_filtered$filters$time[1] & 
+    time_observations_started <= ebd_filtered$filters$time[2])
+ebd_zf <- auk_zerofill(fake_ebd, fake_smp)
+```
+
+```{r auk-zf, eval = -1}
+ebd_zf <- auk_zerofill(ebd_filtered)
+ebd_zf
+```
+
+Filenames or data frames of the EDB and sampling event data can also be passed to `auk_zerofill()`; see the documentation for these cases. By default, `auk_zerofill()` returns an `auk_zerofill` object consisting of two data frames that can be linked by a common `checklist_id` field: 
+
+- `ebd_zf$sampling_events` contains the checklist information
+- `ebd_zf$observations` contains the species counts and a binary presence-absence variable
+
+```{r zf-components}
+head(ebd_zf$observations)
+str(ebd_zf$sampling_events)
+```
+
+This format is efficient for storage because the checklist information isn't duplicated, however, a single flat data frame is often required for analysis. To collapse the two data frames together use `collapse_zerofill()`, or call `auk_zerofill()` with `collapse = TRUE`.
+
+```{r zf-collapse, eval = -1}
+ebd_zf_df <- auk_zerofill(ebd_filtered, collapse = TRUE)
+ebd_zf_df <- collapse_zerofill(ebd_zf)
+class(ebd_zf_df)
+names(ebd_zf_df)
+```
+
+## Acknowledgements
+
+This package is based on the AWK scripts provided in a presentation given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC eBird Data Workshop on August 15, 2016.
+
+## References
+
+```
+eBird Basic Dataset. Version: ebd_relFeb-2017. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
+Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. Lentini, M.A. McCarthy, R. Tingley, and B.A. Wintle. 2015. Is my species distribution model fit for purpose? Matching data and models to applications. Global Ecology and Biogeography 24:276-292.
+```

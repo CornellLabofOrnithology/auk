@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^data-raw$
+^README\.Rmd$
+^README\.md$
+^README-.*\.png$
+^\.travis\.yml$
+^codecov\.yml$
+^appveyor\.yml$
+^docs$
+^_pkgdown\.yml$

@@ -1,0 +1,34 @@
+Package: auk
+Title: eBird Data Processing with AWK
+Version: 0.1.0
+Authors@R: c(
+  person("Matthew", "Strimas-Mackey", email = "mes335@cornell.edu", role = c("aut", "cre")),
+  person("Eliot", "Miller", role = "aut"),
+  person("Wesley", "Hochachka", role = "aut"),
+  person("Cornell Lab of Ornithology", role = "cph")
+  )
+URL: http://CornellLabofOrnithology.github.io/auk/, https://github.com/CornellLabofOrnithology/auk
+BugReports: https://github.com/CornellLabofOrnithology/auk/issues
+Description: Process the eBird Basic Dataset (EBD) using AWK. This package is 
+    used to filter the EBD by species, space, or time to produce a manageable 
+    file size that can be imported into R.
+Depends: R (>= 3.3.3)
+License: GPL-3 | file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    assertthat,
+    stringr,
+    magrittr,
+    countrycode,
+    tidyr
+RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)
+Suggests:
+    readr,
+    data.table,
+    knitr,
+    rmarkdown,
+    testthat,
+    covr
+VignetteBuilder: knitr
