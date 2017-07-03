@@ -95,15 +95,12 @@ devtools::<span class="kw">install_github</span>(<span class="st">"CornellLabofO
 <a href="#cleaning" class="anchor"></a>Cleaning</h3>
 <p>Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function <code><a href="reference/auk_clean.html">auk_clean()</a></code> drops these erroneous records and removes the blank column.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(auk)
-<span class="co">#&gt; This version of auk uses the Aug 2016 eBird taxonomy</span>
-<span class="co">#&gt; Working with an EBD file downloaded after Aug 2017 may yield unexpected results</span>
-<span class="co">#&gt; To get a current taxonomy, update auk with install.packages('auk')</span>
 <span class="co"># sample data</span>
 f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample_messy.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
 tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, tmp)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpMykEmZ/file16411af27909"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmprlp4ub/file20751728c500"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
@@ -246,12 +243,12 @@ ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span clas
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
-<p>This package is based on the AWK scripts provided in a presentation given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC eBird Data Workshop on August 15, 2016.</p>
+<p>This package is based on AWK scripts provided as part of the eBird Data Workshop given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC on August 15, 2016.</p>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<pre><code>eBird Basic Dataset. Version: ebd_relFeb-2017. Cornell Lab of Ornithology, Ithaca, New York. May 2013.</code></pre>
+<pre><code>eBird Basic Dataset. Version: ebd_relMay-2017. Cornell Lab of Ornithology, Ithaca, New York. May 2013.</code></pre>
 </div>
 </div>
 </div>

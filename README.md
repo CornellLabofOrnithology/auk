@@ -43,15 +43,12 @@ Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of colum
 
 ``` r
 library(auk)
-#> This version of auk uses the Aug 2016 eBird taxonomy
-#> Working with an EBD file downloaded after Aug 2017 may yield unexpected results
-#> To get a current taxonomy, update auk with install.packages('auk')
 # sample data
 f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmplOGVUi/file163156ccbef0"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpNRd5HQ/file2065f82f839"
 # number of lines in input
 length(readLines(f))
 #> [1] 101
@@ -196,9 +193,9 @@ For many applications, presence-only data are sufficient; however, for modeling 
 Acknowledgements
 ----------------
 
-This package is based on the AWK scripts provided in a presentation given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC eBird Data Workshop on August 15, 2016.
+This package is based on AWK scripts provided as part of the eBird Data Workshop given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC on August 15, 2016.
 
 References
 ----------
 
-    eBird Basic Dataset. Version: ebd_relFeb-2017. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
+    eBird Basic Dataset. Version: ebd_relMay-2017. Cornell Lab of Ornithology, Ithaca, New York. May 2013.

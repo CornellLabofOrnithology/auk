@@ -51,7 +51,7 @@ This package contains a current (as of the time of package release) version of t
 
 Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function `auk_clean()` drops these erroneous records and removes the blank column.
 
-```{r auk-clean}
+```{r auk-clean, message = FALSE}
 library(auk)
 # sample data
 f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
@@ -135,10 +135,10 @@ For many applications, presence-only data are sufficient; however, for modeling 
 
 ## Acknowledgements
 
-This package is based on the AWK scripts provided in a presentation given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC eBird Data Workshop on August 15, 2016.
+This package is based on AWK scripts provided as part of the eBird Data Workshop given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC on August 15, 2016.
 
 ## References
 
 ```
-eBird Basic Dataset. Version: ebd_relFeb-2017. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
+eBird Basic Dataset. Version: ebd_relMay-2017. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
 ```

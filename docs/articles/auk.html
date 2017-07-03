@@ -61,9 +61,6 @@
     
     
 <div class="contents">
-<pre><code>## This version of auk uses the Aug 2016 eBird taxonomy
-## Working with an EBD file downloaded after Aug 2017 may yield unexpected results
-## To get a current taxonomy, update auk with install.packages('auk')</code></pre>
 <p><a href="http://www.ebird.org">eBird</a> is an online tool for recording bird observations. Since its inception, nearly 500 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
 <p>This vignette is divided into three sections. The first section provides background on the eBird data and motivation for the development of this package. The second section outlines the use of <code>auk</code> for filtering the EBD to produce a presence-only dataset. The final section demonstrates how <code>auk</code> can be used to produce zero-filled, presence-absence (or more correctly presence–non-detection) data, a necessity for many modeling and analysis applications.</p>
 <div id="background" class="section level2">

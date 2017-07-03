@@ -2,9 +2,9 @@
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  warning = FALSE, error = FALSE
+  warning = FALSE, error = FALSE, message = FALSE
 )
-library(auk)
+suppressPackageStartupMessages(library(auk))
 
 ## ----example-data-1, eval = FALSE----------------------------------------
 #  system.file("extdata/ebd-sample.txt", package = "auk")
