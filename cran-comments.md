@@ -12,4 +12,13 @@
 
 # R CMD check results
 
-There were no ERRORs, WARNINGs, or NOTEs. 
+There were no ERROR or WARNINGs.
+
+There was 1 NOTE:
+
+* checking CRAN incoming feasibility ... NOTE
+  Maintainer: ‘Matthew Strimas-Mackey <mes335@cornell.edu>’
+  Days since last update: 0
+  
+  First submission failed checks on binary build, this patch fixes errors.
+  
