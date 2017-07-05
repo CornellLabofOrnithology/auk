@@ -1,5 +1,5 @@
 ---
-title: "auk: eBird Data Processing with AWK"
+title: "auk: eBird Data Extraction with AWK"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to auk}
