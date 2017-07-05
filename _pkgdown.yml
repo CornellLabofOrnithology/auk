@@ -9,3 +9,9 @@ navbar:
   right:
   - icon: fa-github fa-lg
     href: https://github.com/CornellLabofOrnithology/auk
+
+authors:
+  Matthew Strimas-Mackey:
+    href: http://strimas.com
+  Eliot Miller:
+    href: http://eliotmiller.weebly.com/
