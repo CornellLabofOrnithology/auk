@@ -31,3 +31,8 @@ test_that("ebird_species error for non-character argument", {
   expect_error(ebird_species(1:10))
   expect_error(ebird_species(TRUE))
 })
+
+test_that("ebird_species works for species with non-ascii characters", {
+  expect_equal(ebird_species("Ruppell's Griffon"), "Gyps rueppelli")
+  expect_equal(ebird_species("R\u00FCppell's Griffon"), "Gyps rueppelli")
+})

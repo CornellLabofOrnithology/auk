@@ -1,6 +1,6 @@
 Package: auk
 Title: eBird Data Extraction with AWK
-Version: 0.0.1.900
+Version: 0.0.2
 Date: 2017-07-01
 Authors@R: c(
   person("Matthew", "Strimas-Mackey", email = "mes335@cornell.edu", role = c("aut", "cre")),
@@ -24,6 +24,7 @@ LazyData: true
 Imports:
     assertthat,
     stringr,
+    stringi,
     magrittr,
     countrycode,
     tidyr

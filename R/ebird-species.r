@@ -20,19 +20,22 @@
 #' ebird_species(species)
 ebird_species <- function(x, scientific = TRUE) {
   assertthat::assert_that(is.character(x))
-
+  
   # deal with case issues
   x <- tolower(trimws(x))
+  # convert to ascii
+  x <- stringi::stri_trans_general(x, "latin-ascii")
+  
   # first check for scientific names
-  sci <- match(x, tolower(ebird_taxonomy$name_scientific))
+  sci <- match(x, tolower(auk::ebird_taxonomy$name_scientific))
   # then for common names
-  com <- match(x, tolower(ebird_taxonomy$name_common))
+  com <- match(x, tolower(auk::ebird_taxonomy$name_common))
   # combine
   idx <- ifelse(is.na(sci), com, sci)
   # convert to output format, default scientific
   if (scientific)  {
-    return(ebird_taxonomy$name_scientific[idx])
+    return(auk::ebird_taxonomy$name_scientific[idx])
   } else {
-    return(ebird_taxonomy$name_common[idx])
+    return(auk::ebird_taxonomy$name_common[idx])
   }
 }

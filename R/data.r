@@ -3,7 +3,9 @@
 #' A simplified version of the taxonomy used by eBird. Includes proper species
 #' as well as various other categories such as `spuh` (e.g. *duck sp.*) and
 #' *slash* (e.g. *American Black Duck/Mallard*). This taxonomy is based on the
-#' Clements Checklist, which is updated annually, typically in the late summer.
+#' Clements Checklist, which is updated annually, typically in the late summer. 
+#' Non-ASCII characters (e.g. those with accents) have been converted to ASCII 
+#' equivalents in this data frame.
 #'
 #' @format A data frame with six variables and 15,251 rows:
 #'

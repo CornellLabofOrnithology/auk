@@ -25,5 +25,7 @@ A simplified version of the taxonomy used by eBird. Includes proper species
 as well as various other categories such as \code{spuh} (e.g. \emph{duck sp.}) and
 \emph{slash} (e.g. \emph{American Black Duck/Mallard}). This taxonomy is based on the
 Clements Checklist, which is updated annually, typically in the late summer.
+Non-ASCII characters (e.g. those with accents) have been converted to ASCII
+equivalents in this data frame.
 }
 \keyword{datasets}
