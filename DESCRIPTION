@@ -1,7 +1,7 @@
 Package: auk
 Title: eBird Data Extraction with AWK
 Version: 0.0.2
-Date: 2017-07-01
+Date: 2017-07-05
 Authors@R: c(
   person("Matthew", "Strimas-Mackey", email = "mes335@cornell.edu", role = c("aut", "cre")),
   person("Eliot", "Miller", role = "aut"),

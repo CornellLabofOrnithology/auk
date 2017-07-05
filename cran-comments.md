@@ -1,3 +1,7 @@
+# Patch release
+
+- removed all non-ASCII characters from package to pass CRAN checks
+
 # Test environments
 
 - local OS X install, R 3.3.3
