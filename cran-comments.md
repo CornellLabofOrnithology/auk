@@ -1,3 +1,7 @@
+# Resubmission
+
+- fix spelling error
+
 # Patch release
 
 - removed all non-ASCII characters from package to pass CRAN checks
