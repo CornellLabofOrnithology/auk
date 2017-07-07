@@ -15,9 +15,11 @@ Overview
 Installation
 ------------
 
-This package can be installed directly from GitHub with:
-
 ``` r
+# cran release
+install.packages("auk")
+
+# or install the development version from github
 # install.packages("devtools")
 devtools::install_github("CornellLabofOrnithology/auk")
 ```
@@ -48,7 +50,7 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpSOkq4l/file13c663362bf21"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpsvaDav/file55d44ab8a45"
 # number of lines in input
 length(readLines(f))
 #> [1] 101
