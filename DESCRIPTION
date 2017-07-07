@@ -8,7 +8,7 @@ Authors@R: c(
   person("Wesley", "Hochachka", role = "aut"),
   person("Cornell Lab of Ornithology", role = "cph")
   )
-URL: http://CornellLabofOrnithology.github.io/auk/, https://github.com/CornellLabofOrnithology/auk
+URL: https://github.com/CornellLabofOrnithology/auk, http://CornellLabofOrnithology.github.io/auk/
 BugReports: https://github.com/CornellLabofOrnithology/auk/issues
 Description: Extract and process bird sightings records from eBird 
     (<http://ebird.org>), an online tool for recording bird observations. 
