@@ -18,7 +18,7 @@ Description: Extract and process bird sightings records from eBird
     EBD based on taxonomic, spatial, or temporal filters, to produce a 
     manageable file size that can be imported into R.
 Depends: R (>= 3.1.0)
-License: GPL-3 | file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
