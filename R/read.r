@@ -113,7 +113,7 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
   }
 
   # remove possible blank final column
-  blank <- grepl("^[xX][0-9]{2}$", names(out)[ncol(out)])
+  blank <- grepl("^[xXvV][0-9]{2}$", names(out)[ncol(out)])
   if (blank) {
     out[ncol(out)] <- NULL
   }
