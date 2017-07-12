@@ -4,8 +4,9 @@
 \name{ebird_taxonomy}
 \alias{ebird_taxonomy}
 \title{eBird Taxonomy}
-\format{A data frame with six variables and 15,251 rows:
+\format{A data frame with eight variables and 15,251 rows:
 \itemize{
+\item \code{taxon_order}: numeric value used to sort rows in taxonomic order.
 \item \code{category}: whether the entry is for a species or another
 field-identifiable taxon, such as \code{spuh}, \code{slash}, \code{hybrid}, etc.
 \item \code{species_code}: a unique alphanumeric code identifying each species.
@@ -14,6 +15,8 @@ field-identifiable taxon, such as \code{spuh}, \code{slash}, \code{hybrid}, etc.
 \item \code{order}: the scientific name of the order that the species belongs to.
 \item \code{family}: the family of the species, in the form "Parulidae (New World
 Warblers)".
+\item \code{report_as}: for subspecies and recognizable forms, this field links to the
+corresponding species code.
 }
 
 For further details, see \url{http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy}}
