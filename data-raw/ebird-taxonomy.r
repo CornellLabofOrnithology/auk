@@ -6,9 +6,10 @@ library(stringi)
 # typically updated annually in the late summer
 ebird_taxonomy <- read_csv("data-raw/eBird_Taxonomy_v2016.csv", 
                            na = c("NA", "")) %>%
-  select(category = CATEGORY, species_code = SPECIES_CODE,
-         name_common = PRIMARY_COM_NAME, name_scientific = SCI_NAME,
-         order = ORDER, family = FAMILY) %>%
+  set_names(tolower(names(.))) %>% 
+  select(taxon_order, category, species_code,
+         name_common = primary_com_name, name_scientific = sci_name,
+         order = order, family = family, report_as) %>%
   # ascii conversion
   mutate(name_common = stri_trans_general(name_common, "latin-ascii")) %>%
   as.data.frame(stringsAsFactors = FALSE)
