@@ -12,8 +12,6 @@ ebird_taxonomy <- read_csv("data-raw/eBird_Taxonomy_v2016.csv",
          order = order, family = family, report_as) %>%
   # ascii conversion
   mutate(name_common = stri_trans_general(name_common, "latin-ascii")) %>% 
-  # fill report_as field to aid joining
-  mutate(report_as = coalesce(report_as, species_code)) %>%
   as.data.frame(stringsAsFactors = FALSE)
 
 write_csv(ebird_taxonomy, "data-raw/ebird-taxonomy.csv", na = "")
