@@ -17,8 +17,9 @@
 #' - `order`: the scientific name of the order that the species belongs to.
 #' - `family`: the family of the species, in the form "Parulidae (New World
 #' Warblers)".
-#' - `report_as`: for subspecies and recognizable forms, this field links to the 
-#' corresponding species code.
+#' - `report_as`: for taxa that can be resolved to true species (i.e. species,
+#' subspecies, and recognizable forms), this field links to the corresponding
+#' species code. For taxa that can't be resolved, this field is `NA`.
 #'
 #' For further details, see \url{http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy}
 #'
