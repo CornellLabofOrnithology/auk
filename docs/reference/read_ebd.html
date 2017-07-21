@@ -87,25 +87,23 @@ installed. <code>read_ebd()</code> reads the EBD itself, while read_sampling()` 
 sampling event data file.</p>
     
 
-    <pre class="usage"><span class='fu'>read_ebd</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='no'>sep</span>, <span class='no'>unique</span>, <span class='no'>setclass</span>)
+    <pre class="usage"><span class='fu'>read_ebd</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='no'>sep</span>, <span class='no'>unique</span>, <span class='no'>rollup</span>)
 
 <span class='co'># S3 method for character</span>
 <span class='fu'>read_ebd</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tbl"</span>, <span class='st'>"data.frame"</span>, <span class='st'>"data.table"</span>))
+  <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for auk_ebd</span>
 <span class='fu'>read_ebd</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tbl"</span>, <span class='st'>"data.frame"</span>, <span class='st'>"data.table"</span>))
+  <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='no'>sep</span>, <span class='no'>unique</span>, <span class='no'>setclass</span>)
+<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='no'>sep</span>, <span class='no'>unique</span>)
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tbl"</span>, <span class='st'>"data.frame"</span>, <span class='st'>"data.table"</span>))
+<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for auk_ebd</span>
-<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tbl"</span>, <span class='st'>"data.frame"</span>, <span class='st'>"data.table"</span>))</pre>
+<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -133,23 +131,19 @@ on the installed packages.</p></td>
 <code>unique = TRUE</code>, <code><a href='auk_unique.html'>auk_unique()</a></code> is called on the EBD before returning.</p></td>
     </tr>
     <tr>
-      <th>setclass</th>
-      <td><p><code>tbl</code>, <code>data.frame</code>, or <code>data.table</code>; optionally set
-additional classes to set on the output data. All return objects are
-data frames, but may additionally be <code>tbl</code> (for use with <code>dplyr</code>
-and the tidyverse) or <code>data.table</code> (for use with <code>data.table</code>). The default
-is to return a tibble.</p></td>
+      <th>rollup</th>
+      <td><p>logical; should taxonomic rollup to species level be applied.
+If <code>rollup = TRUE</code>, <code><a href='auk_rollup.html'>auk_rollup()</a></code> is called on the EBD before returning.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>data.frame</code> with additional class <code>tbl</code> unless <code>setclass</code> is used,
-in which case a standard <code>data.frame</code> or <code>data.table</code> can be returned. An
-additional column, <code>checklist_id</code>, is added to output files if
-<code>unique = TRUE</code>, that uniquely identifies the checklist from which the
-observation came. This field is equal to <code>sampling_event_identifier</code> for
-non-group checklists, and <code>group_identifier</code> for group checklists.</p>
+    <p>A data frame of EBD observations. An additional column,
+<code>checklist_id</code>, is added to output files if <code>unique = TRUE</code>, that uniquely
+identifies the checklist from which the observation came. This field is
+equal to <code>sampling_event_identifier</code> for non-group checklists, and
+<code>group_identifier</code> for group checklists.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -177,9 +171,6 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>read_ebd</span>()
-<span class='co'># optionally return a plain data.frame</span>
-<span class='no'>ebd_df</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>read_ebd</span>(<span class='kw'>setclass</span> <span class='kw'>=</span> <span class='st'>"data.frame"</span>)
 <span class='co'># read a sampling event data file</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>read_sampling</span>()</div></pre>

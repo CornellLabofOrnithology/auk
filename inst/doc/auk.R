@@ -5,8 +5,11 @@ knitr::opts_chunk$set(
   warning = FALSE, error = FALSE, message = FALSE
 )
 suppressPackageStartupMessages(library(auk))
+suppressPackageStartupMessages(library(dplyr))
 
 ## ----example-data-1, eval = FALSE----------------------------------------
+#  library(auk)
+#  library(dplyr)
 #  system.file("extdata/ebd-sample.txt", package = "auk")
 
 ## ----example-data-2, eval = FALSE----------------------------------------
@@ -61,11 +64,7 @@ ebd
 ## ----read----------------------------------------------------------------
 system.file("extdata/ebd-sample.txt", package = "auk") %>% 
   read_ebd() %>% 
-  str()
-
-## ----read-tbl------------------------------------------------------------
-ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
-  read_ebd(setclass = "data.frame")
+  glimpse()
 
 ## ----read-auk-ebd, eval = FALSE------------------------------------------
 #  output_file <- "ebd_filtered_blja-grja.txt"
@@ -101,6 +100,21 @@ ebd_unique <- auk_unique(ebd)
 # compare number of rows
 nrow(ebd)
 nrow(ebd_unique)
+
+## ----auk-rollup----------------------------------------------------------
+ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
+  read_ebd(rollup = FALSE)
+# note the presence of forms for american robin and bewick's wren
+ebd %>% 
+  filter(checklist_id == "S7980609") %>% 
+  select(id = checklist_id, category, 
+         species = common_name, subspecies = subspecies_common_name)
+# taxonomic rollup
+ebd %>% 
+  auk_rollup() %>% 
+  filter(checklist_id == "S7980609") %>% 
+  select(id = checklist_id, category,
+         species = common_name, subspecies = subspecies_common_name)
 
 ## ----ebd-zf--------------------------------------------------------------
 # to produce zero-filled data, provide an EBD and sampling event data file
@@ -148,11 +162,11 @@ ebd_zf
 
 ## ----zf-components-------------------------------------------------------
 head(ebd_zf$observations)
-str(ebd_zf$sampling_events)
+glimpse(ebd_zf$sampling_events)
 
 ## ----zf-collapse, eval = -1----------------------------------------------
 ebd_zf_df <- auk_zerofill(ebd_filtered, collapse = TRUE)
 ebd_zf_df <- collapse_zerofill(ebd_zf)
 class(ebd_zf_df)
-names(ebd_zf_df)
+ebd_zf_df
 

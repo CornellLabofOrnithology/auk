@@ -63,26 +63,6 @@ test_that("read_ebd data frames identical for different read functions", {
                ebd_bs$global_unique_identifier)
 })
 
-test_that("read_ebd sets correct output class", {
-  f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
-  f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-
-  expect_equal(class(read_ebd(f_ebd, setclass = "data.frame")), "data.frame")
-  expect_is(read_ebd(f_ebd, setclass = "tbl"), "tbl")
-  expect_equal(class(read_sampling(f_smp, setclass = "data.frame")),
-               "data.frame")
-  expect_is(read_sampling(f_smp, setclass = "tbl"), "tbl")
-})
-
-test_that("read_ebd sets output class to data.table", {
-  skip_if_not_installed("data.table")
-
-  f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
-  f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-  expect_is(read_ebd(f_ebd, setclass = "data.table"), "data.table")
-  expect_is(read_sampling(f_smp, setclass = "data.table"), "data.table")
-})
-
 test_that("read_ebd throws errors for invalid separator", {
   f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")

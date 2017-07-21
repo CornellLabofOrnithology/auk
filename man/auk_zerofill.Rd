@@ -11,16 +11,15 @@
 auk_zerofill(x, ...)
 
 \method{auk_zerofill}{data.frame}(x, sampling_events, species, unique = TRUE,
-  collapse = FALSE, setclass = c("tbl", "data.frame", "data.table"), ...)
+  collapse = FALSE, ...)
 
 \method{auk_zerofill}{character}(x, sampling_events, species, sep = "\\t",
-  unique = TRUE, collapse = FALSE, setclass = c("tbl", "data.frame",
-  "data.table"), ...)
+  unique = TRUE, collapse = FALSE, ...)
 
 \method{auk_zerofill}{auk_ebd}(x, species, sep = "\\t", unique = TRUE,
-  collapse = FALSE, setclass = c("tbl", "data.frame", "data.table"), ...)
+  collapse = FALSE, ...)
 
-collapse_zerofill(x, setclass = c("tbl", "data.frame", "data.table"))
+collapse_zerofill(x)
 }
 \arguments{
 \item{x}{filename, \code{data.frame} of EBD observations, or \code{auk_ebd} object with
@@ -51,12 +50,6 @@ is there a \code{checklist_id} field or not.}
 
 \item{collapse}{logical; whether to call \code{zerofill_collapse()} to return a
 data frame rather than an \code{auk_zerofill} object.}
-
-\item{setclass}{\code{tbl}, \code{data.frame}, or \code{data.table}; optionally set
-additional classes to set on the output data. All return objects are
-data frames, but may additionally be \code{tbl} (for use with \code{dplyr}
-and the tidyverse) or \code{data.table} (for use with \code{data.table}). The default
-is to return a tibble.}
 
 \item{sep}{character; single character used to separate fields within a row.}
 }

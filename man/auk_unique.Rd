@@ -32,7 +32,7 @@ argument is \code{TRUE}, then the \code{species_id} argument is ignored and remo
 of duplicated is done at the checklist level not the species level.}
 }
 \value{
-A data.frame with unique observations, and an additional field,
+A data frame with unique observations, and an additional field,
 \code{checklist_id}, which is a combination of the sampling event and group IDs.
 }
 \description{

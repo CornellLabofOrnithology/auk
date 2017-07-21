@@ -12,8 +12,8 @@
 #' - `category`: whether the entry is for a species or another
 #' field-identifiable taxon, such as `spuh`, `slash`, `hybrid`, etc.
 #' - `species_code`: a unique alphanumeric code identifying each species.
-#' - `name_common`: the common name of the species as used in eBird.
-#' - `name_scientific`: the scientific name of the species.
+#' - `common_name`: the common name of the species as used in eBird.
+#' - `scientific_name`: the scientific name of the species.
 #' - `order`: the scientific name of the order that the species belongs to.
 #' - `family`: the family of the species, in the form "Parulidae (New World
 #' Warblers)".

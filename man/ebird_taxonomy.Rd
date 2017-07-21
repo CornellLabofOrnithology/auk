@@ -10,8 +10,8 @@
 \item \code{category}: whether the entry is for a species or another
 field-identifiable taxon, such as \code{spuh}, \code{slash}, \code{hybrid}, etc.
 \item \code{species_code}: a unique alphanumeric code identifying each species.
-\item \code{name_common}: the common name of the species as used in eBird.
-\item \code{name_scientific}: the scientific name of the species.
+\item \code{common_name}: the common name of the species as used in eBird.
+\item \code{scientific_name}: the scientific name of the species.
 \item \code{order}: the scientific name of the order that the species belongs to.
 \item \code{family}: the family of the species, in the form "Parulidae (New World
 Warblers)".

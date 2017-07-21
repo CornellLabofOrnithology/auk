@@ -15,11 +15,8 @@
 #' @param sep character; single character used to separate fields within a row.
 #' @param unique logical; should duplicate grouped checklists be removed. If
 #'   `unique = TRUE`, [auk_unique()] is called on the EBD before returning.
-#' @param setclass `tbl`, `data.frame`, or `data.table`; optionally set
-#'   additional classes to set on the output data. All return objects are
-#'   data frames, but may additionally be `tbl` (for use with `dplyr`
-#'   and the tidyverse) or `data.table` (for use with `data.table`). The default
-#'   is to return a tibble.
+#' @param rollup logical; should taxonomic rollup to species level be applied. 
+#'   If `rollup = TRUE`, [auk_rollup()] is called on the EBD before returning.
 #'
 #' @details  This functions performs the following processing steps:
 #'
@@ -31,39 +28,29 @@
 #' - Duplicate observations resulting from group checklists are removed using
 #' [auk_unique()], unless `unique = FALSE`.
 #'
-#' @return A `data.frame` with additional class `tbl` unless `setclass` is used,
-#'   in which case a standard `data.frame` or `data.table` can be returned. An
-#'   additional column, `checklist_id`, is added to output files if
-#'   `unique = TRUE`, that uniquely identifies the checklist from which the
-#'   observation came. This field is equal to `sampling_event_identifier` for
-#'   non-group checklists, and `group_identifier` for group checklists.
+#' @return A data frame of EBD observations. An additional column,
+#'   `checklist_id`, is added to output files if `unique = TRUE`, that uniquely
+#'   identifies the checklist from which the observation came. This field is
+#'   equal to `sampling_event_identifier` for non-group checklists, and
+#'   `group_identifier` for group checklists.
 #' @export
 #' @examples
 #' ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #'   read_ebd()
-#' # optionally return a plain data.frame
-#' ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   read_ebd(setclass = "data.frame")
-read_ebd <- function(x, reader, sep, unique, setclass) {
+read_ebd <- function(x, reader, sep, unique, rollup) {
   UseMethod("read_ebd")
 }
 
 #' @export
 #' @describeIn read_ebd Filename of EBD.
-read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
-                               setclass = c("tbl", "data.frame",
-                                            "data.table")) {
+read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE, 
+                               rollup = TRUE) {
   # checks
   assertthat::assert_that(
     assertthat::is.string(x),
     file.exists(x),
     missing(reader) || is.character(reader),
     assertthat::is.string(sep), nchar(sep) == 1, sep != " ")
-  setclass <- match.arg(setclass)
-  if (setclass == "data.table" &&
-      !requireNamespace("data.table", quietly = TRUE)) {
-    stop("data.table package must be installed to return a data.table.")
-  }
 
   # pick reader
   if (missing(reader)) {
@@ -125,20 +112,23 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
   if (unique) {
     out <- auk_unique(out)
   }
+  # taxonomic rollup
+  if (rollup) {
+    out <- auk_rollup(out)
+  }
   row.names(out) <- NULL
-  set_class(out, setclass = setclass)
+  dplyr::as_tibble(out)
 }
 
 #' @export
 #' @describeIn read_ebd `auk_ebd` object output from [auk_filter()]
-read_ebd.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE,
-                             setclass = c("tbl", "data.frame", "data.table")) {
-  setclass <- match.arg(setclass)
+read_ebd.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE, 
+                             rollup = TRUE) {
   if (is.null(x$output)) {
     stop("No output EBD file in this auk_ebd object, try calling auk_filter().")
   }
-  read_ebd(x$output, reader = reader, sep = sep, unique = unique,
-           setclass = setclass)
+  read_ebd(x$output, reader = reader, sep = sep, unique = unique, 
+           rollup = rollup)
 }
 
 #' @rdname read_ebd
@@ -147,18 +137,15 @@ read_ebd.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE,
 #' # read a sampling event data file
 #' x <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
 #'   read_sampling()
-read_sampling <- function(x, reader, sep, unique, setclass) {
+read_sampling <- function(x, reader, sep, unique) {
   UseMethod("read_sampling")
 }
 
 #' @export
 #' @describeIn read_ebd Filename of sampling event data file
-read_sampling.character <- function(x, reader, sep = "\t", unique = TRUE,
-                                    setclass = c("tbl", "data.frame",
-                                                 "data.table")) {
-  setclass <- match.arg(setclass)
-  out <- read_ebd(x = x, reader = reader, sep = sep, unique = FALSE,
-                  setclass = setclass)
+read_sampling.character <- function(x, reader, sep = "\t", unique = TRUE) {
+  out <- read_ebd(x = x, reader = reader, sep = sep, unique = FALSE, 
+                  rollup = FALSE)
   if (unique) {
     out <- auk_unique(out, checklists_only = TRUE)
   }
@@ -168,13 +155,9 @@ read_sampling.character <- function(x, reader, sep = "\t", unique = TRUE,
 #' @export
 #' @describeIn read_ebd `auk_ebd` object output from [auk_filter()]. Must have
 #'   had a sampling event data file set in the original call to [auk_ebd()].
-read_sampling.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE,
-                                  setclass = c("tbl", "data.frame",
-                                               "data.table")) {
-  setclass <- match.arg(setclass)
+read_sampling.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE) {
   if (is.null(x$output_sampling)) {
     stop("No output sampling event data file in this auk_ebd object.")
   }
-  read_sampling(x$output_sampling, reader = reader, sep = sep, unique = unique,
-                setclass = setclass)
+  read_sampling(x$output_sampling, reader = reader, sep = sep, unique = unique)
 }

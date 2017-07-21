@@ -31,7 +31,7 @@
 #'   specified in the `checklist_id` parameter for non-group checklists and from
 #'   the field specified by the `group_id` parameter for grouped checklists.
 #'
-#' @return A data.frame with unique observations, and an additional field,
+#' @return A data frame with unique observations, and an additional field,
 #'   `checklist_id`, which is a combination of the sampling event and group IDs.
 #' @export
 #' @examples
@@ -62,9 +62,6 @@ auk_unique <- function(x,
     is.character(x[[checklist_id]]),
     checklists_only || is.character(x[[species_id]]))
 
-  # preserve class
-  orig_class <- class(x)
-
   # identify and separate non-group records
   grouped <- !is.na(x[[group_id]])
   x_grouped <- x[grouped, ]
@@ -90,7 +87,5 @@ auk_unique <- function(x,
   # move id field to front
   out <- out[, c("checklist_id", setdiff(names(out), "checklist_id"))]
 
-  # re-assign class
-  class(out) <- orig_class
-  return(out)
+  dplyr::as_tibble(out)
 }

@@ -8,10 +8,10 @@ ebird_taxonomy <- read_csv("data-raw/eBird_Taxonomy_v2016.csv",
                            na = c("NA", "")) %>%
   set_names(tolower(names(.))) %>% 
   select(taxon_order, category, species_code,
-         name_common = primary_com_name, name_scientific = sci_name,
-         order = order, family = family, report_as) %>%
+         common_name = primary_com_name, scientific_name = sci_name,
+         order, family, report_as) %>%
   # ascii conversion
-  mutate(name_common = stri_trans_general(name_common, "latin-ascii")) %>% 
+  mutate(common_name = stri_trans_general(common_name, "latin-ascii")) %>% 
   as.data.frame(stringsAsFactors = FALSE)
 
 write_csv(ebird_taxonomy, "data-raw/ebird-taxonomy.csv", na = "")

@@ -4,7 +4,7 @@
 \name{auk}
 \alias{auk}
 \alias{auk-package}
-\title{\code{auk}: eBird Data Extraction with AWK}
+\title{\code{auk}: eBird Data Extraction and Processing with AWK}
 \description{
 Tools for extracting and processing eBird data from the eBird Basic Dataset
 (EBD).

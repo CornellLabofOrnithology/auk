@@ -27,15 +27,15 @@ ebird_species <- function(x, scientific = TRUE) {
   x <- stringi::stri_trans_general(x, "latin-ascii")
   
   # first check for scientific names
-  sci <- match(x, tolower(auk::ebird_taxonomy$name_scientific))
+  sci <- match(x, tolower(auk::ebird_taxonomy$scientific_name))
   # then for common names
-  com <- match(x, tolower(auk::ebird_taxonomy$name_common))
+  com <- match(x, tolower(auk::ebird_taxonomy$common_name))
   # combine
   idx <- ifelse(is.na(sci), com, sci)
   # convert to output format, default scientific
   if (scientific)  {
-    return(auk::ebird_taxonomy$name_scientific[idx])
+    return(auk::ebird_taxonomy$scientific_name[idx])
   } else {
-    return(auk::ebird_taxonomy$name_common[idx])
+    return(auk::ebird_taxonomy$common_name[idx])
   }
 }

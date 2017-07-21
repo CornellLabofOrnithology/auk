@@ -9,21 +9,19 @@
 \alias{read_sampling.auk_ebd}
 \title{Read an EBD file}
 \usage{
-read_ebd(x, reader, sep, unique, setclass)
+read_ebd(x, reader, sep, unique, rollup)
 
 \method{read_ebd}{character}(x, reader, sep = "\\t", unique = TRUE,
-  setclass = c("tbl", "data.frame", "data.table"))
+  rollup = TRUE)
 
 \method{read_ebd}{auk_ebd}(x, reader, sep = "\\t", unique = TRUE,
-  setclass = c("tbl", "data.frame", "data.table"))
+  rollup = TRUE)
 
-read_sampling(x, reader, sep, unique, setclass)
+read_sampling(x, reader, sep, unique)
 
-\method{read_sampling}{character}(x, reader, sep = "\\t", unique = TRUE,
-  setclass = c("tbl", "data.frame", "data.table"))
+\method{read_sampling}{character}(x, reader, sep = "\\t", unique = TRUE)
 
-\method{read_sampling}{auk_ebd}(x, reader, sep = "\\t", unique = TRUE,
-  setclass = c("tbl", "data.frame", "data.table"))
+\method{read_sampling}{auk_ebd}(x, reader, sep = "\\t", unique = TRUE)
 }
 \arguments{
 \item{x}{filename or \code{auk_ebd} object with associated output
@@ -40,19 +38,15 @@ on the installed packages.}
 \item{unique}{logical; should duplicate grouped checklists be removed. If
 \code{unique = TRUE}, \code{\link[=auk_unique]{auk_unique()}} is called on the EBD before returning.}
 
-\item{setclass}{\code{tbl}, \code{data.frame}, or \code{data.table}; optionally set
-additional classes to set on the output data. All return objects are
-data frames, but may additionally be \code{tbl} (for use with \code{dplyr}
-and the tidyverse) or \code{data.table} (for use with \code{data.table}). The default
-is to return a tibble.}
+\item{rollup}{logical; should taxonomic rollup to species level be applied.
+If \code{rollup = TRUE}, \code{\link[=auk_rollup]{auk_rollup()}} is called on the EBD before returning.}
 }
 \value{
-A \code{data.frame} with additional class \code{tbl} unless \code{setclass} is used,
-in which case a standard \code{data.frame} or \code{data.table} can be returned. An
-additional column, \code{checklist_id}, is added to output files if
-\code{unique = TRUE}, that uniquely identifies the checklist from which the
-observation came. This field is equal to \code{sampling_event_identifier} for
-non-group checklists, and \code{group_identifier} for group checklists.
+A data frame of EBD observations. An additional column,
+\code{checklist_id}, is added to output files if \code{unique = TRUE}, that uniquely
+identifies the checklist from which the observation came. This field is
+equal to \code{sampling_event_identifier} for non-group checklists, and
+\code{group_identifier} for group checklists.
 }
 \description{
 Read an eBird Basic Dataset file using \code{\link[data.table:fread]{data.table::fread()}},
@@ -87,9 +81,6 @@ had a sampling event data file set in the original call to \code{\link[=auk_ebd]
 \examples{
 ebd <- system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
   read_ebd()
-# optionally return a plain data.frame
-ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
-  read_ebd(setclass = "data.frame")
 # read a sampling event data file
 x <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") \%>\%
   read_sampling()

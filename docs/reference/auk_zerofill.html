@@ -92,18 +92,17 @@ checklist was had a count of zero.</p>
 
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'>auk_zerofill</span>(<span class='no'>x</span>, <span class='no'>sampling_events</span>, <span class='no'>species</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tbl"</span>, <span class='st'>"data.frame"</span>, <span class='st'>"data.table"</span>), <span class='no'>...</span>)
+  <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for character</span>
 <span class='fu'>auk_zerofill</span>(<span class='no'>x</span>, <span class='no'>sampling_events</span>, <span class='no'>species</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>,
-  <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tbl"</span>, <span class='st'>"data.frame"</span>,
-  <span class='st'>"data.table"</span>), <span class='no'>...</span>)
+  <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for auk_ebd</span>
 <span class='fu'>auk_zerofill</span>(<span class='no'>x</span>, <span class='no'>species</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tbl"</span>, <span class='st'>"data.frame"</span>, <span class='st'>"data.table"</span>), <span class='no'>...</span>)
+  <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
-<span class='fu'>collapse_zerofill</span>(<span class='no'>x</span>, <span class='kw'>setclass</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"tbl"</span>, <span class='st'>"data.frame"</span>, <span class='st'>"data.table"</span>))</pre>
+<span class='fu'>collapse_zerofill</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -148,14 +147,6 @@ is there a <code>checklist_id</code> field or not.</p></td>
       <th>collapse</th>
       <td><p>logical; whether to call <code>zerofill_collapse()</code> to return a
 data frame rather than an <code>auk_zerofill</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>setclass</th>
-      <td><p><code>tbl</code>, <code>data.frame</code>, or <code>data.table</code>; optionally set
-additional classes to set on the output data. All return objects are
-data frames, but may additionally be <code>tbl</code> (for use with <code>dplyr</code>
-and the tidyverse) or <code>data.table</code> (for use with <code>data.table</code>). The default
-is to return a tibble.</p></td>
     </tr>
     <tr>
       <th>sep</th>

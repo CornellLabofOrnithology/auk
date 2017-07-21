@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-auk: eBird Data Extraction with AWK
-===================================
+auk: eBird Data Extraction and Processing with AWK
+==================================================
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Travis-CI Build Status](https://img.shields.io/travis/CornellLabofOrnithology/auk/master.svg?label=Mac%20OSX%20%26%20Linux)](https://travis-ci.org/CornellLabofOrnithology/auk) [![AppVeyor Build Status](https://img.shields.io/appveyor/ci/mstrimas/auk/master.svg?label=Windows)](https://ci.appveyor.com/project/mstrimas/auk) [![Coverage Status](https://img.shields.io/codecov/c/github/CornellLabofOrnithology/auk/master.svg)](https://codecov.io/github/CornellLabofOrnithology/auk?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/auk)](https://cran.r-project.org/package=auk) [![Downloads](http://cranlogs.r-pkg.org/badges/auk?color=brightgreen)](http://www.r-pkg.org/pkg/auk)
 
@@ -50,7 +50,7 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpbOsGj9/file684c63994a4"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp98OFqk/file3dca9616305"
 # number of lines in input
 length(readLines(f))
 #> [1] 101
@@ -141,7 +141,7 @@ system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #>  $ checklist_id              : chr  "S12813888" "S14439115" "S10152130" "S20381156" ...
 #>  $ global_unique_identifier  : chr  "URN:CornellLabOfOrnithology:EBIRD:OBS179266095" "URN:CornellLabOfOrnithology:EBIRD:OBS201696412" "URN:CornellLabOfOrnithology:EBIRD:OBS144228837" "URN:CornellLabOfOrnithology:EBIRD:OBS278542844" ...
 #>  $ last_edited_date          : chr  "2013-02-02 15:17:20" "2013-06-18 13:03:16" "2017-03-03 11:30:08" "2014-10-30 15:19:52" ...
-#>  $ taxonomic_order           : int  18772 18772 18772 18816 18772 18772 18772 18772 18772 18772 ...
+#>  $ taxonomic_order           : num  18772 18772 18772 18816 18772 ...
 #>  $ category                  : chr  "species" "species" "species" "species" ...
 #>  $ common_name               : chr  "Green Jay" "Green Jay" "Green Jay" "Steller's Jay" ...
 #>  $ scientific_name           : chr  "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocitta stelleri" ...

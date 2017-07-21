@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>eBird Taxonomy — ebird_taxonomy • auk</title>
+<title>Roll up EBD taxonomy to species — auk_rollup • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,46 +77,63 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>eBird Taxonomy</h1>
+    <h1>Roll up EBD taxonomy to species</h1>
     </div>
 
     
-    <p>A simplified version of the taxonomy used by eBird. Includes proper species
-as well as various other categories such as <code>spuh</code> (e.g. <em>duck sp.</em>) and
-<em>slash</em> (e.g. <em>American Black Duck/Mallard</em>). This taxonomy is based on the
-Clements Checklist, which is updated annually, typically in the late summer.
-Non-ASCII characters (e.g. those with accents) have been converted to ASCII
-equivalents in this data frame.</p>
+    <p>The eBird Basic Dataset (EBD) includes both true species and other taxa,
+including domestics, hybrids, subspecies, "spuhs", and recognizable forms.
+In some cases, a checklist may contain multiple records for the same species,
+for example, both Audubon and Myrtle Yellow-rumped Warblers, as well as some
+records that are not resolvable to species, for example, "warbler sp.".
+This function, addresses these cases by removing taxa not identifiable to
+species and rolling up taxa identified below species level to a single record
+for each species in each checklist. By default, <code><a href='read_ebd.html'>read_ebd()</a></code> calls
+<code>ebd_rollup()</code> when importing an EBD file.</p>
     
 
-    <pre class="usage"><span class='no'>ebird_taxonomy</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <pre class="usage"><span class='fu'>auk_rollup</span>(<span class='no'>x</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>data.frame; the EBD data frame, typically as imported by
+<code><a href='read_ebd.html'>read_ebd()</a></code></p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with eight variables and 15,251 rows:</p><ul>
-<li><p><code>taxon_order</code>: numeric value used to sort rows in taxonomic order.</p></li>
-<li><p><code>category</code>: whether the entry is for a species or another
-field-identifiable taxon, such as <code>spuh</code>, <code>slash</code>, <code>hybrid</code>, etc.</p></li>
-<li><p><code>species_code</code>: a unique alphanumeric code identifying each species.</p></li>
-<li><p><code>common_name</code>: the common name of the species as used in eBird.</p></li>
-<li><p><code>scientific_name</code>: the scientific name of the species.</p></li>
-<li><p><code>order</code>: the scientific name of the order that the species belongs to.</p></li>
-<li><p><code>family</code>: the family of the species, in the form "Parulidae (New World
-Warblers)".</p></li>
-<li><p><code>report_as</code>: for taxa that can be resolved to true species (i.e. species,
-subspecies, and recognizable forms), this field links to the corresponding
-species code. For taxa that can't be resolved, this field is <code>NA</code>.</p></li>
-</ul>
-    <p>For further details, see <a href = 'http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy'>http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy</a></p>
+    <p>A data frame of the EBD with taxonomic rollup applied.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>When rolling observations up to species level the observed counts
+are summed across any taxa that resolve to the same species. However, if
+any of these taxa have a count of "X" (i.e. the observer did not enter a
+count), then the rolled up record will get an "X" as well. For example, if
+an observer saw 3 Myrtle and 2 Audubon Warblers, this will roll up to 5
+Yellow-rumped Warblers. However, if an "X" was entered for Myrtle, this
+would roll up to "X" for Yellow-rumped Warbler.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-rollup-ex.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
-          </ul>
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

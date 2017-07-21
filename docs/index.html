@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eBird Data Extraction with AWK • auk</title>
+<title>eBird Data Extraction and Processing with AWK • auk</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -59,9 +59,9 @@
     
 <div class="contents">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="auk-ebird-data-extraction-with-awk" class="section level1">
+<div id="auk-ebird-data-extraction-and-processing-with-awk" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#auk-ebird-data-extraction-with-awk" class="anchor"></a>auk: eBird Data Extraction with AWK</h1></div>
+<a href="#auk-ebird-data-extraction-and-processing-with-awk" class="anchor"></a>auk: eBird Data Extraction and Processing with AWK</h1></div>
 
 <p><strong>This package is in development. If you encounter any bugs, please open an issue on GitHub</strong></p>
 <div id="overview" class="section level2">
@@ -103,7 +103,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, tmp)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpnXfCBg/file685d114a5ad7"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpg63ZPk/file3dda433d5f5b"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
@@ -192,7 +192,7 @@ ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span clas
 <span class="co">#&gt;  $ checklist_id              : chr  "S12813888" "S14439115" "S10152130" "S20381156" ...</span>
 <span class="co">#&gt;  $ global_unique_identifier  : chr  "URN:CornellLabOfOrnithology:EBIRD:OBS179266095" "URN:CornellLabOfOrnithology:EBIRD:OBS201696412" "URN:CornellLabOfOrnithology:EBIRD:OBS144228837" "URN:CornellLabOfOrnithology:EBIRD:OBS278542844" ...</span>
 <span class="co">#&gt;  $ last_edited_date          : chr  "2013-02-02 15:17:20" "2013-06-18 13:03:16" "2017-03-03 11:30:08" "2014-10-30 15:19:52" ...</span>
-<span class="co">#&gt;  $ taxonomic_order           : int  18772 18772 18772 18816 18772 18772 18772 18772 18772 18772 ...</span>
+<span class="co">#&gt;  $ taxonomic_order           : num  18772 18772 18772 18816 18772 ...</span>
 <span class="co">#&gt;  $ category                  : chr  "species" "species" "species" "species" ...</span>
 <span class="co">#&gt;  $ common_name               : chr  "Green Jay" "Green Jay" "Green Jay" "Steller's Jay" ...</span>
 <span class="co">#&gt;  $ scientific_name           : chr  "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocitta stelleri" ...</span>

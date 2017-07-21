@@ -29,11 +29,6 @@
 #'   is there a `checklist_id` field or not.
 #' @param collapse logical; whether to call `zerofill_collapse()` to return a
 #'   data frame rather than an `auk_zerofill` object.
-#' @param setclass `tbl`, `data.frame`, or `data.table`; optionally set
-#'   additional classes to set on the output data. All return objects are
-#'   data frames, but may additionally be `tbl` (for use with `dplyr`
-#'   and the tidyverse) or `data.table` (for use with `data.table`). The default
-#'   is to return a tibble.
 #' @param ... additional arguments passed to methods.
 #'
 #' @details
@@ -73,20 +68,13 @@ auk_zerofill <- function(x, ...) {
 
 #' @export
 #' @describeIn auk_zerofill EBD data frame.
-auk_zerofill.data.frame <- function(x, sampling_events, species,
-                                    unique = TRUE, collapse = FALSE,
-                                    setclass = c("tbl", "data.frame",
-                                                 "data.table"), ...) {
+auk_zerofill.data.frame <- function(x, sampling_events, species, unique = TRUE, 
+                                    collapse = FALSE, ...) {
   # checks
   assertthat::assert_that(
     is.data.frame(sampling_events),
     missing(species) || is.character(species),
     assertthat::is.flag(unique))
-  setclass <- match.arg(setclass)
-  if (setclass == "data.table" &&
-      !requireNamespace("data.table", quietly = TRUE)) {
-    stop("data.table package must be installed to return a data.table.")
-  }
 
   # process species names
   # first check for scientific names
@@ -122,6 +110,11 @@ auk_zerofill.data.frame <- function(x, sampling_events, species,
       sampling_events <- auk_unique(sampling_events, checklists_only = TRUE)
     }
   }
+  
+  # check that auk_rollup has been run
+  if (anyDuplicated(x[, c("checklist_id", "scientific_name")])) {
+    x <- auk_rollup(x)
+  }
 
   # subset ebd to remove checklist level fields
   species_cols <- c("checklist_id", "scientific_name", "observation_count")
@@ -131,7 +124,7 @@ auk_zerofill.data.frame <- function(x, sampling_events, species,
              paste(species_cols, collapse =", "))
     )
   }
-  x <- x[, species_cols]
+  x <- dplyr::select(x, dplyr::one_of(species_cols))
 
   # ensure all checklist in ebd are in sampling file
   if (!all(x$checklist_id %in% sampling_events$checklist_id)) {
@@ -171,13 +164,13 @@ auk_zerofill.data.frame <- function(x, sampling_events, species,
   )
 
   out <- structure(
-    list(observations = set_class(x, setclass = setclass),
-         sampling_events = set_class(sampling_events, setclass = setclass)),
+    list(observations = dplyr::as_tibble(x),
+         sampling_events = dplyr::as_tibble(sampling_events)),
     class = "auk_zerofill"
   )
   # return a data frame?
   if (collapse) {
-    return(collapse_zerofill(out, setclass = setclass))
+    return(collapse_zerofill(out))
   } else {
     return(out)
   }
@@ -186,26 +179,21 @@ auk_zerofill.data.frame <- function(x, sampling_events, species,
 #' @export
 #' @describeIn auk_zerofill Filename of EBD.
 auk_zerofill.character <- function(x, sampling_events, species, sep = "\t",
-                                   unique = TRUE, collapse = FALSE,
-                                   setclass = c("tbl", "data.frame",
-                                                "data.table"), ...) {
+                                   unique = TRUE, collapse = FALSE, ...) {
   # checks
   assertthat::assert_that(
     assertthat::is.string(x), file.exists(x),
     assertthat::is.string(sampling_events), file.exists(sampling_events),
     missing(species) || is.character(species),
     assertthat::is.string(sep), nchar(sep) == 1, sep != " ")
-  setclass <- match.arg(setclass)
 
   # read in the two files
-  ebd <- read_ebd(x = x, sep = sep, unique = FALSE, setclass = "data.frame")
-  sed <- read_sampling(x = sampling_events, sep = sep, unique = FALSE,
-                       setclass = "data.frame")
+  ebd <- read_ebd(x = x, sep = sep, unique = FALSE)
+  sed <- read_sampling(x = sampling_events, sep = sep, unique = FALSE)
 
   # pass on to df method
   auk_zerofill(x = ebd, sampling_events = sed, species = species,
-               unique = unique, collapse = collapse,
-               setclass = setclass)
+               unique = unique, collapse = collapse)
 }
 
 #' @export
@@ -213,10 +201,7 @@ auk_zerofill.character <- function(x, sampling_events, species, sep = "\t",
 #'   have had a sampling event data file set in the original call to
 #'   [auk_ebd()].
 auk_zerofill.auk_ebd <- function(x, species, sep = "\t",
-                                 unique = TRUE, collapse = FALSE,
-                                 setclass = c("tbl", "data.frame",
-                                              "data.table"), ...) {
-  setclass <- match.arg(setclass)
+                                 unique = TRUE, collapse = FALSE, ...) {
   # zero-filling requires complete checklists
   if (!x$filters$complete) {
     e <- paste0("Sampling event data file provided, but filters have not been ",
@@ -235,22 +220,20 @@ auk_zerofill.auk_ebd <- function(x, species, sep = "\t",
   # pass on to file method
   auk_zerofill(x = x$output, sampling_events = x$output_sampling,
                species = species, sep = sep, unique = unique,
-               collapse = collapse, setclass = setclass)
+               collapse = collapse)
 }
 
 #' @rdname auk_zerofill
 #' @export
-collapse_zerofill <- function(x, setclass = c("tbl", "data.frame",
-                                              "data.table")) {
+collapse_zerofill <- function(x) {
   UseMethod("collapse_zerofill")
 }
 
 #' @export
-collapse_zerofill.auk_zerofill <- function(x, setclass = c("tbl", "data.frame",
-                                                           "data.table")) {
-  setclass = match.arg(setclass)
-  out <- merge(x$sampling_events, x$observations, by = "checklist_id")
-  set_class(out, setclass = setclass)
+collapse_zerofill.auk_zerofill <- function(x) {
+  out <- dplyr::inner_join(x$sampling_events, x$observations, 
+                           by = "checklist_id")
+  dplyr::as_tibble(out)
 }
 
 #' @export

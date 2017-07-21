@@ -83,7 +83,9 @@
 <h3 class="hasAnchor">
 <a href="#example-data" class="anchor"></a>Example data</h3>
 <p>This package comes with two example datasets. The first is suitable for practicing filtering the EBD and producing presence-only data. It’s a sample of 500 records from the EBD. It contains data from North and Central America from 2010-2012 on 4 jay species: Gray Jay, Blue Jay, Steller’s Jay, and Green Jay. It can be accessed with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(auk)
+<span class="kw">library</span>(dplyr)
+<span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</code></pre></div>
 <p>The second is suitable for producing zero-filled, presence-absence data. It contains every sighting from Singapore in 2012 of Collared Kingfisher, White-throated Kingfisher, and Blue-eared Kingfisher. The full Sampling Event Data file is also included, and contains all checklists from Singapore in 2012. These files can be accessed with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ebd</span>
 <span class="kw">system.file</span>(<span class="st">"extdata/zerofill-ex_ebd.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
@@ -220,58 +222,56 @@ ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span clas
 <p>EBD files can be read with <code><a href="../reference/read_ebd.html">read_ebd()</a></code>. This is a wrapper around <code>data.table::fread()</code>, <code>readr::read_delim()</code>, or <code>read.delim()</code>, depending on which packages are installed. <code><a href="../reference/read_ebd.html">read_ebd()</a></code> uses <code>stringsAsFactors = FALSE</code>, <code>quote = ""</code>, sets column classes, and converts variable names to <code>snake_case</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">str</span>()
-<span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    487 obs. of  47 variables:</span>
-<span class="co">#&gt;  $ checklist_id              : chr  "S12813888" "S14439115" "S10152130" "S20381156" ...</span>
-<span class="co">#&gt;  $ global_unique_identifier  : chr  "URN:CornellLabOfOrnithology:EBIRD:OBS179266095" "URN:CornellLabOfOrnithology:EBIRD:OBS201696412" "URN:CornellLabOfOrnithology:EBIRD:OBS144228837" "URN:CornellLabOfOrnithology:EBIRD:OBS278542844" ...</span>
-<span class="co">#&gt;  $ last_edited_date          : chr  "2013-02-02 15:17:20" "2013-06-18 13:03:16" "2017-03-03 11:30:08" "2014-10-30 15:19:52" ...</span>
-<span class="co">#&gt;  $ taxonomic_order           : int  18772 18772 18772 18816 18772 18772 18772 18772 18772 18772 ...</span>
-<span class="co">#&gt;  $ category                  : chr  "species" "species" "species" "species" ...</span>
-<span class="co">#&gt;  $ common_name               : chr  "Green Jay" "Green Jay" "Green Jay" "Steller's Jay" ...</span>
-<span class="co">#&gt;  $ scientific_name           : chr  "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocitta stelleri" ...</span>
-<span class="co">#&gt;  $ subspecies_common_name    : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ subspecies_scientific_name: chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ observation_count         : chr  "X" "4" "1" "2" ...</span>
-<span class="co">#&gt;  $ breeding_bird_atlas_code  : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ age_sex                   : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ country                   : chr  "Mexico" "Mexico" "Belize" "Mexico" ...</span>
-<span class="co">#&gt;  $ country_code              : chr  "MX" "MX" "BZ" "MX" ...</span>
-<span class="co">#&gt;  $ state                     : chr  "Tamaulipas" "Chiapas" "Belize" "Chiapas" ...</span>
-<span class="co">#&gt;  $ state_code                : chr  "MX-TAM" "MX-CHP" "BZ-BZ" "MX-CHP" ...</span>
-<span class="co">#&gt;  $ county                    : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ county_code               : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ iba_code                  : chr  NA "MX_169" NA "MX_200" ...</span>
-<span class="co">#&gt;  $ bcr_code                  : int  36 60 NA NA 56 47 60 56 NA 60 ...</span>
-<span class="co">#&gt;  $ usfws_code                : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ atlas_block               : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ locality                  : chr  "Mexico across river from Salineno" "MtySantuario_Punto_10" "Crooked Tree Village west" "San Antonio( Bosque mesofilo Punto 6)" ...</span>
-<span class="co">#&gt;  $ locality_id               : chr  "L1914289" "L2234972" "L1444745" "L3141369" ...</span>
-<span class="co">#&gt;  $ locality_type             : chr  "P" "P" "P" "P" ...</span>
-<span class="co">#&gt;  $ latitude                  : num  26.5 15.7 17.8 15.1 20.9 ...</span>
-<span class="co">#&gt;  $ longitude                 : num  -99.1 -92.9 -88.5 -92.1 -88.4 ...</span>
-<span class="co">#&gt;  $ observation_date          : Date, format: "2010-11-12" "2012-05-06" ...</span>
-<span class="co">#&gt;  $ time_observations_started : chr  "07:20:00" "10:30:00" "06:50:00" "10:30:00" ...</span>
-<span class="co">#&gt;  $ observer_id               : chr  "obsr347082" "obsr313215" "obsr246930" "obsr354246" ...</span>
-<span class="co">#&gt;  $ first_name                : chr  "Beth" "MONITORES COMUNITARIOS" "Lee" "CBM" ...</span>
-<span class="co">#&gt;  $ last_name                 : chr  "eBirder" "eBirder" "eBirder" "eBirder" ...</span>
-<span class="co">#&gt;  $ sampling_event_identifier : chr  "S12813888" "S14439115" "S10152130" "S20381156" ...</span>
-<span class="co">#&gt;  $ protocol_type             : chr  "eBird - Stationary Count" "eBird - Traveling Count" "eBird - Traveling Count" "eBird - Stationary Count" ...</span>
-<span class="co">#&gt;  $ project_code              : chr  "EBIRD" "EBIRD" "EBIRD" "EBIRD" ...</span>
-<span class="co">#&gt;  $ duration_minutes          : int  40 10 100 10 110 55 10 60 60 10 ...</span>
-<span class="co">#&gt;  $ effort_distance_km        : num  NA 0.257 1.127 NA 1.2 ...</span>
-<span class="co">#&gt;  $ effort_area_ha            : num  NA NA NA NA NA ...</span>
-<span class="co">#&gt;  $ number_observers          : int  20 1 2 4 2 2 1 1 4 1 ...</span>
-<span class="co">#&gt;  $ all_species_reported      : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
-<span class="co">#&gt;  $ group_identifier          : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ has_media                 : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span>
-<span class="co">#&gt;  $ approved                  : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
-<span class="co">#&gt;  $ reviewed                  : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span>
-<span class="co">#&gt;  $ reason                    : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ trip_comments             : chr  "RGV Bird Festival Trip, viewed from the US side of the river" "Placido Morales Hdz en  Santuario, Angel Albino Corzo, 1556 msnm." "With Glenn Crawford and 3 tourists. Glenn says that the frog calls that are heard nearly everywhere in Belize d"| __truncated__ "Muestreo realizado por Antonio, Ren� y Evaristo" ...</span>
-<span class="co">#&gt;  $ species_comments          : chr  NA NA NA NA ...</span></code></pre></div>
-<p>By default, <code><a href="../reference/read_ebd.html">read_ebd()</a></code> returns a tibble for use with <a href="http://tidyverse.org">Tidyverse</a> packages. Tibbles will behave just like plain data frames in most instances, but users can choose to return a plain <code>data.frame</code> or <code>data.table</code> by using the <code>setclass</code> argument.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd_df &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>(<span class="dt">setclass =</span> <span class="st">"data.frame"</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">glimpse</span>()
+<span class="co">#&gt; Observations: 487</span>
+<span class="co">#&gt; Variables: 47</span>
+<span class="co">#&gt; $ checklist_id               &lt;chr&gt; "S12813888", "S14439115", "S1015213...</span>
+<span class="co">#&gt; $ global_unique_identifier   &lt;chr&gt; "URN:CornellLabOfOrnithology:EBIRD:...</span>
+<span class="co">#&gt; $ last_edited_date           &lt;chr&gt; "2013-02-02 15:17:20", "2013-06-18 ...</span>
+<span class="co">#&gt; $ taxonomic_order            &lt;dbl&gt; 18772, 18772, 18772, 18816, 18772, ...</span>
+<span class="co">#&gt; $ category                   &lt;chr&gt; "species", "species", "species", "s...</span>
+<span class="co">#&gt; $ common_name                &lt;chr&gt; "Green Jay", "Green Jay", "Green Ja...</span>
+<span class="co">#&gt; $ scientific_name            &lt;chr&gt; "Cyanocorax yncas", "Cyanocorax ync...</span>
+<span class="co">#&gt; $ subspecies_common_name     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ subspecies_scientific_name &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ observation_count          &lt;chr&gt; "X", "4", "1", "2", "X", "X", "2", ...</span>
+<span class="co">#&gt; $ breeding_bird_atlas_code   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ age_sex                    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ country                    &lt;chr&gt; "Mexico", "Mexico", "Belize", "Mexi...</span>
+<span class="co">#&gt; $ country_code               &lt;chr&gt; "MX", "MX", "BZ", "MX", "MX", "MX",...</span>
+<span class="co">#&gt; $ state                      &lt;chr&gt; "Tamaulipas", "Chiapas", "Belize", ...</span>
+<span class="co">#&gt; $ state_code                 &lt;chr&gt; "MX-TAM", "MX-CHP", "BZ-BZ", "MX-CH...</span>
+<span class="co">#&gt; $ county                     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ county_code                &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ iba_code                   &lt;chr&gt; NA, "MX_169", NA, "MX_200", NA, "MX...</span>
+<span class="co">#&gt; $ bcr_code                   &lt;int&gt; 36, 60, NA, NA, 56, 47, 60, 56, NA,...</span>
+<span class="co">#&gt; $ usfws_code                 &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ atlas_block                &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ locality                   &lt;chr&gt; "Mexico across river from Salineno"...</span>
+<span class="co">#&gt; $ locality_id                &lt;chr&gt; "L1914289", "L2234972", "L1444745",...</span>
+<span class="co">#&gt; $ locality_type              &lt;chr&gt; "P", "P", "P", "P", "P", "P", "P", ...</span>
+<span class="co">#&gt; $ latitude                   &lt;dbl&gt; 26.51374, 15.71611, 17.78029, 15.10...</span>
+<span class="co">#&gt; $ longitude                  &lt;dbl&gt; -99.11917, -92.88886, -88.54685, -9...</span>
+<span class="co">#&gt; $ observation_date           &lt;date&gt; 2010-11-12, 2012-05-06, 2012-03-11...</span>
+<span class="co">#&gt; $ time_observations_started  &lt;chr&gt; "07:20:00", "10:30:00", "06:50:00",...</span>
+<span class="co">#&gt; $ observer_id                &lt;chr&gt; "obsr347082", "obsr313215", "obsr24...</span>
+<span class="co">#&gt; $ first_name                 &lt;chr&gt; "Beth", "MONITORES COMUNITARIOS", "...</span>
+<span class="co">#&gt; $ last_name                  &lt;chr&gt; "eBirder", "eBirder", "eBirder", "e...</span>
+<span class="co">#&gt; $ sampling_event_identifier  &lt;chr&gt; "S12813888", "S14439115", "S1015213...</span>
+<span class="co">#&gt; $ protocol_type              &lt;chr&gt; "eBird - Stationary Count", "eBird ...</span>
+<span class="co">#&gt; $ project_code               &lt;chr&gt; "EBIRD", "EBIRD", "EBIRD", "EBIRD",...</span>
+<span class="co">#&gt; $ duration_minutes           &lt;int&gt; 40, 10, 100, 10, 110, 55, 10, 60, 6...</span>
+<span class="co">#&gt; $ effort_distance_km         &lt;dbl&gt; NA, 0.257, 1.127, NA, 1.200, NA, 0....</span>
+<span class="co">#&gt; $ effort_area_ha             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 4.0469,...</span>
+<span class="co">#&gt; $ number_observers           &lt;int&gt; 20, 1, 2, 4, 2, 2, 1, 1, 4, 1, 1, 1...</span>
+<span class="co">#&gt; $ all_species_reported       &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,...</span>
+<span class="co">#&gt; $ group_identifier           &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ has_media                  &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, ...</span>
+<span class="co">#&gt; $ approved                   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,...</span>
+<span class="co">#&gt; $ reviewed                   &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, ...</span>
+<span class="co">#&gt; $ reason                     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA,...</span>
+<span class="co">#&gt; $ trip_comments              &lt;chr&gt; "RGV Bird Festival Trip, viewed fro...</span>
+<span class="co">#&gt; $ species_comments           &lt;chr&gt; NA, NA, NA, NA, NA, "audible-only",...</span></code></pre></div>
 <p><code><a href="../reference/auk_filter.html">auk_filter()</a></code> returns an <code>auk_ebd</code> object with the output file paths stored in it. This <code>auk_ebd</code> object can then be passed directly to <code>auk_read()</code>, allowing for a complete pipeline. For example, we can create an <code>auk_ebd</code> object, define filters, filter with AWK, and read in the results all at once.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span>
 ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
@@ -340,6 +340,43 @@ ebd_unique &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="co">#&gt; [1] 500</span>
 <span class="kw">nrow</span>(ebd_unique)
 <span class="co">#&gt; [1] 487</span></code></pre></div>
+</div>
+<div id="taxonomic-rollup" class="section level3">
+<h3 class="hasAnchor">
+<a href="#taxonomic-rollup" class="anchor"></a>Taxonomic rollup</h3>
+<p>The eBird Basic Dataset (EBD) includes both true species and other taxa, including domestics, hybrids, subspecies, “spuhs”, and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, “warbler sp.”. For most use cases, a single record for each species on each checklist is desired. The function <code>ebd_rollup()</code> addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-rollup-ex.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>(<span class="dt">rollup =</span> <span class="ot">FALSE</span>)
+<span class="co"># note the presence of forms for american robin and bewick's wren</span>
+ebd %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(checklist_id ==<span class="st"> "S7980609"</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dt">id =</span> checklist_id, category, 
+         <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
+<span class="co">#&gt; # A tibble: 7 x 4</span>
+<span class="co">#&gt;         id category            species                         subspecies</span>
+<span class="co">#&gt;      &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;                              &lt;chr&gt;</span>
+<span class="co">#&gt; 1 S7980609  species      American Crow                               &lt;NA&gt;</span>
+<span class="co">#&gt; 2 S7980609  species American Goldfinch                               &lt;NA&gt;</span>
+<span class="co">#&gt; 3 S7980609  species     American Robin                               &lt;NA&gt;</span>
+<span class="co">#&gt; 4 S7980609     issf     American Robin American Robin (migratorius Group)</span>
+<span class="co">#&gt; 5 S7980609  species         Bald Eagle                               &lt;NA&gt;</span>
+<span class="co">#&gt; 6 S7980609  species      Bewick's Wren                               &lt;NA&gt;</span>
+<span class="co">#&gt; 7 S7980609     issf      Bewick's Wren     Bewick's Wren (spilurus Group)</span>
+<span class="co"># taxonomic rollup</span>
+ebd %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_rollup.html">auk_rollup</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(checklist_id ==<span class="st"> "S7980609"</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dt">id =</span> checklist_id, category,
+         <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
+<span class="co">#&gt; # A tibble: 5 x 4</span>
+<span class="co">#&gt;         id category            species subspecies</span>
+<span class="co">#&gt;      &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;</span>
+<span class="co">#&gt; 1 S7980609  species      American Crow       &lt;NA&gt;</span>
+<span class="co">#&gt; 2 S7980609  species American Goldfinch       &lt;NA&gt;</span>
+<span class="co">#&gt; 3 S7980609  species     American Robin       &lt;NA&gt;</span>
+<span class="co">#&gt; 4 S7980609  species         Bald Eagle       &lt;NA&gt;</span>
+<span class="co">#&gt; 5 S7980609  species      Bewick's Wren       &lt;NA&gt;</span></code></pre></div>
+<p>By default, <code><a href="../reference/read_ebd.html">read_ebd()</a></code> calls <code>ebd_rollup()</code> when importing an EBD file. To avoid this, and retain subspecies, use <code><a href="../reference/read_ebd.html">read_ebd(rollup = FALSE)</a></code>.</p>
 </div>
 </div>
 <div id="zero-filled-presence-absence-data" class="section level2">
@@ -426,64 +463,72 @@ ebd_zf
 <span class="co">#&gt; 4    S10006731 Todiramphus chloris                 5             TRUE</span>
 <span class="co">#&gt; 5    S10006786 Todiramphus chloris                 0            FALSE</span>
 <span class="co">#&gt; 6    S10011787 Todiramphus chloris                 3             TRUE</span>
-<span class="kw">str</span>(ebd_zf$sampling_events)
-<span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    179 obs. of  32 variables:</span>
-<span class="co">#&gt;  $ checklist_id             : chr  "S23107780" "S10926976" "S34396450" "S10920563" ...</span>
-<span class="co">#&gt;  $ last_edited_date         : chr  "2015-04-28 11:48:17" "2015-11-18 20:52:57" "2017-02-15 23:43:12" "2013-10-14 16:08:49" ...</span>
-<span class="co">#&gt;  $ country                  : chr  "Singapore" "Singapore" "Singapore" "Singapore" ...</span>
-<span class="co">#&gt;  $ country_code             : chr  "SG" "SG" "SG" "SG" ...</span>
-<span class="co">#&gt;  $ state                    : chr  "Singapore" "Singapore" "Singapore" "Singapore" ...</span>
-<span class="co">#&gt;  $ state_code               : chr  "SG-" "SG-" "SG-" "SG-" ...</span>
-<span class="co">#&gt;  $ county                   : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ county_code              : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ iba_code                 : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ bcr_code                 : int  NA NA NA NA NA NA NA NA NA NA ...</span>
-<span class="co">#&gt;  $ usfws_code               : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ atlas_block              : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ locality                 : chr  "Bukit Brown Cemetery" "SG Botanic Gardens" "Pulau Ubin" "MacRitchie Reservoir Park" ...</span>
-<span class="co">#&gt;  $ locality_id              : chr  "L3597391" "L952084" "L1055540" "L1203001" ...</span>
-<span class="co">#&gt;  $ locality_type            : chr  "P" "H" "H" "H" ...</span>
-<span class="co">#&gt;  $ latitude                 : num  1.34 1.31 1.4 1.34 1.34 ...</span>
-<span class="co">#&gt;  $ longitude                : num  104 104 104 104 104 ...</span>
-<span class="co">#&gt;  $ observation_date         : Date, format: "2012-06-28" "2012-06-06" ...</span>
-<span class="co">#&gt;  $ time_observations_started: chr  "09:50:00" "07:15:00" "09:00:00" "09:53:00" ...</span>
-<span class="co">#&gt;  $ observer_id              : chr  "obs553262" "obs20302" "obs816783" "obs39443" ...</span>
-<span class="co">#&gt;  $ first_name               : chr  "Smathi" "William" "Roksana" "Foster" ...</span>
-<span class="co">#&gt;  $ last_name                : chr  "eBirder" "eBirder" "eBirder" "eBirder" ...</span>
-<span class="co">#&gt;  $ sampling_event_identifier: chr  "S23107780" "S10926976" "S34396450" "S10920563" ...</span>
-<span class="co">#&gt;  $ protocol_type            : chr  "eBird - Traveling Count" "eBird - Traveling Count" "eBird - Traveling Count" "eBird - Traveling Count" ...</span>
-<span class="co">#&gt;  $ project_code             : chr  "EBIRD" "EBIRD" "EBIRD" "EBIRD" ...</span>
-<span class="co">#&gt;  $ duration_minutes         : int  80 75 180 240 470 150 30 210 180 205 ...</span>
-<span class="co">#&gt;  $ effort_distance_km       : num  1 0.805 4 6.437 11.265 ...</span>
-<span class="co">#&gt;  $ effort_area_ha           : num  NA NA NA NA NA NA NA NA NA NA ...</span>
-<span class="co">#&gt;  $ number_observers         : int  1 1 2 1 1 12 2 2 1 1 ...</span>
-<span class="co">#&gt;  $ all_species_reported     : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
-<span class="co">#&gt;  $ group_identifier         : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ trip_comments            : chr  "Hot &amp; humid; 50% cloud cover" "Wind NE, light, mostly cloudy, 28C" NA "Walking the lakeshore boardwalk." ...</span></code></pre></div>
+<span class="kw">glimpse</span>(ebd_zf$sampling_events)
+<span class="co">#&gt; Observations: 179</span>
+<span class="co">#&gt; Variables: 32</span>
+<span class="co">#&gt; $ checklist_id              &lt;chr&gt; "S23107780", "S10926976", "S34396450...</span>
+<span class="co">#&gt; $ last_edited_date          &lt;chr&gt; "2015-04-28 11:48:17", "2015-11-18 2...</span>
+<span class="co">#&gt; $ country                   &lt;chr&gt; "Singapore", "Singapore", "Singapore...</span>
+<span class="co">#&gt; $ country_code              &lt;chr&gt; "SG", "SG", "SG", "SG", "SG", "SG", ...</span>
+<span class="co">#&gt; $ state                     &lt;chr&gt; "Singapore", "Singapore", "Singapore...</span>
+<span class="co">#&gt; $ state_code                &lt;chr&gt; "SG-", "SG-", "SG-", "SG-", "SG-", "...</span>
+<span class="co">#&gt; $ county                    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span>
+<span class="co">#&gt; $ county_code               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span>
+<span class="co">#&gt; $ iba_code                  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span>
+<span class="co">#&gt; $ bcr_code                  &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span>
+<span class="co">#&gt; $ usfws_code                &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span>
+<span class="co">#&gt; $ atlas_block               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span>
+<span class="co">#&gt; $ locality                  &lt;chr&gt; "Bukit Brown Cemetery", "SG Botanic ...</span>
+<span class="co">#&gt; $ locality_id               &lt;chr&gt; "L3597391", "L952084", "L1055540", "...</span>
+<span class="co">#&gt; $ locality_type             &lt;chr&gt; "P", "H", "H", "H", "H", "H", "P", "...</span>
+<span class="co">#&gt; $ latitude                  &lt;dbl&gt; 1.335977, 1.314832, 1.403689, 1.3416...</span>
+<span class="co">#&gt; $ longitude                 &lt;dbl&gt; 103.8235, 103.8160, 103.9609, 103.83...</span>
+<span class="co">#&gt; $ observation_date          &lt;date&gt; 2012-06-28, 2012-06-06, 2012-06-23,...</span>
+<span class="co">#&gt; $ time_observations_started &lt;chr&gt; "09:50:00", "07:15:00", "09:00:00", ...</span>
+<span class="co">#&gt; $ observer_id               &lt;chr&gt; "obs553262", "obs20302", "obs816783"...</span>
+<span class="co">#&gt; $ first_name                &lt;chr&gt; "Smathi", "William", "Roksana", "Fos...</span>
+<span class="co">#&gt; $ last_name                 &lt;chr&gt; "eBirder", "eBirder", "eBirder", "eB...</span>
+<span class="co">#&gt; $ sampling_event_identifier &lt;chr&gt; "S23107780", "S10926976", "S34396450...</span>
+<span class="co">#&gt; $ protocol_type             &lt;chr&gt; "eBird - Traveling Count", "eBird - ...</span>
+<span class="co">#&gt; $ project_code              &lt;chr&gt; "EBIRD", "EBIRD", "EBIRD", "EBIRD", ...</span>
+<span class="co">#&gt; $ duration_minutes          &lt;int&gt; 80, 75, 180, 240, 470, 150, 30, 210,...</span>
+<span class="co">#&gt; $ effort_distance_km        &lt;dbl&gt; 1.000, 0.805, 4.000, 6.437, 11.265, ...</span>
+<span class="co">#&gt; $ effort_area_ha            &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span>
+<span class="co">#&gt; $ number_observers          &lt;int&gt; 1, 1, 2, 1, 1, 12, 2, 2, 1, 1, 1, 1,...</span>
+<span class="co">#&gt; $ all_species_reported      &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, ...</span>
+<span class="co">#&gt; $ group_identifier          &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span>
+<span class="co">#&gt; $ trip_comments             &lt;chr&gt; "Hot &amp; humid; 50% cloud cover", "Win...</span></code></pre></div>
 <p>This format is efficient for storage because the checklist information isn’t duplicated, however, a single flat data frame is often required for analysis. To collapse the two data frames together use <code><a href="../reference/auk_zerofill.html">collapse_zerofill()</a></code>, or call <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code> with <code>collapse = TRUE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ebd_zf_df &lt;- auk_zerofill(ebd_filtered, collapse = TRUE)
 ebd_zf_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_zerofill.html">collapse_zerofill</a></span>(ebd_zf)
 <span class="kw">class</span>(ebd_zf_df)
 <span class="co">#&gt; [1] "tbl_df"     "tbl"        "data.frame"</span>
-<span class="kw">names</span>(ebd_zf_df)
-<span class="co">#&gt;  [1] "checklist_id"              "last_edited_date"         </span>
-<span class="co">#&gt;  [3] "country"                   "country_code"             </span>
-<span class="co">#&gt;  [5] "state"                     "state_code"               </span>
-<span class="co">#&gt;  [7] "county"                    "county_code"              </span>
-<span class="co">#&gt;  [9] "iba_code"                  "bcr_code"                 </span>
-<span class="co">#&gt; [11] "usfws_code"                "atlas_block"              </span>
-<span class="co">#&gt; [13] "locality"                  "locality_id"              </span>
-<span class="co">#&gt; [15] "locality_type"             "latitude"                 </span>
-<span class="co">#&gt; [17] "longitude"                 "observation_date"         </span>
-<span class="co">#&gt; [19] "time_observations_started" "observer_id"              </span>
-<span class="co">#&gt; [21] "first_name"                "last_name"                </span>
-<span class="co">#&gt; [23] "sampling_event_identifier" "protocol_type"            </span>
-<span class="co">#&gt; [25] "project_code"              "duration_minutes"         </span>
-<span class="co">#&gt; [27] "effort_distance_km"        "effort_area_ha"           </span>
-<span class="co">#&gt; [29] "number_observers"          "all_species_reported"     </span>
-<span class="co">#&gt; [31] "group_identifier"          "trip_comments"            </span>
-<span class="co">#&gt; [33] "scientific_name"           "observation_count"        </span>
-<span class="co">#&gt; [35] "species_observed"</span></code></pre></div>
+ebd_zf_df
+<span class="co">#&gt; # A tibble: 179 x 35</span>
+<span class="co">#&gt;    checklist_id    last_edited_date   country country_code     state</span>
+<span class="co">#&gt;           &lt;chr&gt;               &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;</span>
+<span class="co">#&gt;  1    S23107780 2015-04-28 11:48:17 Singapore           SG Singapore</span>
+<span class="co">#&gt;  2    S10926976 2015-11-18 20:52:57 Singapore           SG Singapore</span>
+<span class="co">#&gt;  3    S34396450 2017-02-15 23:43:12 Singapore           SG Singapore</span>
+<span class="co">#&gt;  4    S10920563 2013-10-14 16:08:49 Singapore           SG Singapore</span>
+<span class="co">#&gt;  5    S18149280 2014-04-30 12:03:34 Singapore           SG Singapore</span>
+<span class="co">#&gt;  6    S34396153 2017-02-15 23:13:05 Singapore           SG Singapore</span>
+<span class="co">#&gt;  7    S10246206 2012-03-23 19:35:01 Singapore           SG Singapore</span>
+<span class="co">#&gt;  8    S12252359 2014-05-04 10:41:45 Singapore           SG Singapore</span>
+<span class="co">#&gt;  9    S17614547 2014-08-18 15:48:59 Singapore           SG Singapore</span>
+<span class="co">#&gt; 10    S17604516 2014-08-18 15:48:59 Singapore           SG Singapore</span>
+<span class="co">#&gt; # ... with 169 more rows, and 30 more variables: state_code &lt;chr&gt;,</span>
+<span class="co">#&gt; #   county &lt;chr&gt;, county_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;,</span>
+<span class="co">#&gt; #   usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;,</span>
+<span class="co">#&gt; #   locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   longitude &lt;dbl&gt;, observation_date &lt;date&gt;,</span>
+<span class="co">#&gt; #   time_observations_started &lt;chr&gt;, observer_id &lt;chr&gt;, first_name &lt;chr&gt;,</span>
+<span class="co">#&gt; #   last_name &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,</span>
+<span class="co">#&gt; #   project_code &lt;chr&gt;, duration_minutes &lt;int&gt;, effort_distance_km &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;,</span>
+<span class="co">#&gt; #   all_species_reported &lt;lgl&gt;, group_identifier &lt;chr&gt;,</span>
+<span class="co">#&gt; #   trip_comments &lt;chr&gt;, scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;,</span>
+<span class="co">#&gt; #   species_observed &lt;lgl&gt;</span></code></pre></div>
 </div>
 </div>
 <div id="acknowledgements" class="section level2">

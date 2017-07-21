@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
   warning = FALSE, error = FALSE, message = FALSE
 )
 suppressPackageStartupMessages(library(auk))
+suppressPackageStartupMessages(library(dplyr))
 ```
 
 [eBird](http://www.ebird.org) is an online tool for recording bird observations. Since its inception, nearly 500 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the [eBird Basic Dataset (EBD)](http://ebird.org/ebird/data/download). Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.
@@ -41,6 +42,8 @@ Once you have access to the data, proceed to the [download page](http://ebird.or
 This package comes with two example datasets. The first is suitable for practicing filtering the EBD and producing presence-only data. It's a sample of 500 records from the EBD. It contains data from North and Central America from 2010-2012 on 4 jay species: Gray Jay, Blue Jay, Steller's Jay, and Green Jay. It can be accessed with:
 
 ```{r example-data-1, eval = FALSE}
+library(auk)
+library(dplyr)
 system.file("extdata/ebd-sample.txt", package = "auk")
 ```
 
@@ -156,14 +159,7 @@ EBD files can be read with `read_ebd()`. This is a wrapper around `data.table::f
 ```{r read}
 system.file("extdata/ebd-sample.txt", package = "auk") %>% 
   read_ebd() %>% 
-  str()
-```
-
-By default, `read_ebd()` returns a tibble for use with [Tidyverse](http://tidyverse.org) packages. Tibbles will behave just like plain data frames in most instances, but users can choose to return a plain `data.frame` or `data.table` by using the `setclass` argument.
-
-```{r read-tbl}
-ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
-  read_ebd(setclass = "data.frame")
+  glimpse()
 ```
 
 `auk_filter()` returns an `auk_ebd` object with the output file paths stored in it. This `auk_ebd` object can then be passed directly to `auk_read()`, allowing for a complete pipeline. For example, we can create an `auk_ebd` object, define filters, filter with AWK, and read in the results all at once.
@@ -215,6 +211,28 @@ ebd_unique <- auk_unique(ebd)
 nrow(ebd)
 nrow(ebd_unique)
 ```
+
+### Taxonomic rollup
+
+The eBird Basic Dataset (EBD) includes both true species and other taxa, including domestics, hybrids, subspecies, "spuhs", and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, "warbler sp.". For most use cases, a single record for each species on each checklist is desired. The function `ebd_rollup()` addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist. 
+
+```{r auk-rollup}
+ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
+  read_ebd(rollup = FALSE)
+# note the presence of forms for american robin and bewick's wren
+ebd %>% 
+  filter(checklist_id == "S7980609") %>% 
+  select(id = checklist_id, category, 
+         species = common_name, subspecies = subspecies_common_name)
+# taxonomic rollup
+ebd %>% 
+  auk_rollup() %>% 
+  filter(checklist_id == "S7980609") %>% 
+  select(id = checklist_id, category,
+         species = common_name, subspecies = subspecies_common_name)
+```
+
+By default, `read_ebd()` calls `ebd_rollup()` when importing an EBD file. To avoid this, and retain subspecies, use `read_ebd(rollup = FALSE)`.
 
 ## Zero-filled, presence-absence data
 
@@ -288,7 +306,7 @@ Filenames or data frames of the EDB and sampling event data can also be passed t
 
 ```{r zf-components}
 head(ebd_zf$observations)
-str(ebd_zf$sampling_events)
+glimpse(ebd_zf$sampling_events)
 ```
 
 This format is efficient for storage because the checklist information isn't duplicated, however, a single flat data frame is often required for analysis. To collapse the two data frames together use `collapse_zerofill()`, or call `auk_zerofill()` with `collapse = TRUE`.
@@ -297,7 +315,7 @@ This format is efficient for storage because the checklist information isn't dup
 ebd_zf_df <- auk_zerofill(ebd_filtered, collapse = TRUE)
 ebd_zf_df <- collapse_zerofill(ebd_zf)
 class(ebd_zf_df)
-names(ebd_zf_df)
+ebd_zf_df
 ```
 
 ## Acknowledgements

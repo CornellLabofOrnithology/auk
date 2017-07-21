@@ -20,7 +20,7 @@ get_col_types <- function(header,
   col_types = c(
     "GLOBAL UNIQUE IDENTIFIER" = "character",
     "LAST EDITED DATE" = "character",
-    "TAXONOMIC ORDER" = "integer",
+    "TAXONOMIC ORDER" = "numeric",
     "CATEGORY" = "character",
     "COMMON NAME" = "character",
     "SCIENTIFIC NAME" = "character",
@@ -28,6 +28,7 @@ get_col_types <- function(header,
     "SUBSPECIES SCIENTIFIC NAME" = "character",
     "OBSERVATION COUNT" = "character",
     "BREEDING BIRD ATLAS CODE" = "character",
+    "BREEDING BIRD ATLAS CATEGORY" = "character",
     "AGE/SEX" = "character",
     "COUNTRY" = "character",
     "COUNTRY CODE" = "character",
@@ -83,29 +84,6 @@ get_col_types <- function(header,
     names(col_types) <- stringr::str_replace_all(names(col_types), "[ /]", ".")
   }
   col_types
-}
-
-# set output format
-set_class <- function(x, setclass = c("tbl", "data.frame", "data.table")) {
-  setclass = match.arg(setclass)
-  if (setclass == "data.table" &&
-      !requireNamespace("data.table", quietly = TRUE)) {
-    stop("data.table package must be installed to return a data.table.")
-  }
-
-  if (setclass == "tbl") {
-    if (inherits(x, "tbl")) {
-      return(x)
-    }
-    return(structure(x, class = c("tbl_df", "tbl", "data.frame")))
-  } else if (setclass == "data.table") {
-    if (inherits(x, "data.table")) {
-      return(x)
-    }
-    return(data.table::as.data.table(x))
-  } else {
-    return(structure(x, class = "data.frame"))
-  }
 }
 
 choose_reader <- function(x) {
