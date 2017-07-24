@@ -19,7 +19,7 @@ including domestics, hybrids, subspecies, "spuhs", and recognizable forms.
 In some cases, a checklist may contain multiple records for the same species,
 for example, both Audubon and Myrtle Yellow-rumped Warblers, as well as some
 records that are not resolvable to species, for example, "warbler sp.".
-This function, addresses these cases by removing taxa not identifiable to
+This function addresses these cases by removing taxa not identifiable to
 species and rolling up taxa identified below species level to a single record
 for each species in each checklist. By default, \code{\link[=read_ebd]{read_ebd()}} calls
 \code{ebd_rollup()} when importing an EBD file.
