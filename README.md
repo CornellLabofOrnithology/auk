@@ -50,7 +50,7 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp98OFqk/file3dca9616305"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpgPMeJW/file9dd51246eb7a"
 # number of lines in input
 length(readLines(f))
 #> [1] 101
@@ -191,6 +191,11 @@ Presence-absence data
 ---------------------
 
 For many applications, presence-only data are sufficient; however, for modeling and analysis, presence-absence data are required. `auk` includes functionality to produce presence-absence data from eBird checklists. For full details, consult the vignette: `vignette("auk")`.
+
+Code of Conduct
+---------------
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 Acknowledgements
 ----------------

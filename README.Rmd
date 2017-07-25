@@ -136,6 +136,10 @@ system.file("extdata/ebd-sample.txt", package = "auk") %>%
 
 For many applications, presence-only data are sufficient; however, for modeling and analysis, presence-absence data are required. `auk` includes functionality to produce presence-absence data from eBird checklists. For full details, consult the vignette: `vignette("auk")`.
 
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+
 ## Acknowledgements
 
 This package is based on AWK scripts provided as part of the eBird Data Workshop given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC on August 15, 2016.
