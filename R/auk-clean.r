@@ -47,7 +47,7 @@
 auk_clean <- function(f_in, f_out, sep = "\t",
                       remove_blank = TRUE, overwrite = FALSE) {
   # checks
-  awk_path <- auk_getpath()
+  -awk_path <- auk_getpath()
   if (is.na(awk_path)) {
     stop("auk_clean() requires a valid AWK install.")
   }

@@ -17,7 +17,7 @@ get_col_types <- function(header,
   reader <- match.arg(reader)
 
   # column types based on feb 2017 ebd
-  col_types = c(
+  col_types <- c(
     "GLOBAL UNIQUE IDENTIFIER" = "character",
     "LAST EDITED DATE" = "character",
     "TAXONOMIC ORDER" = "numeric",
@@ -71,16 +71,16 @@ get_col_types <- function(header,
 
   # make reader specific changes
   if (reader == "fread") {
-    col_types[col_types == "logical"] = "integer"
-    col_types[col_types == "Date"] = "character"
+    col_types[col_types == "logical"] <- "integer"
+    col_types[col_types == "Date"] <- "character"
   } else if (reader == "readr") {
-    col_types = substr(col_types, 1, 1)
+    col_types <- substr(col_types, 1, 1)
     # add in guesses
     col_types <- col_types[header]
     col_types[is.na(col_types)] <- "?"
     col_types <- paste(col_types, collapse = "")
   } else {
-    col_types[col_types == "logical"] = "integer"
+    col_types[col_types == "logical"] <- "integer"
     names(col_types) <- stringr::str_replace_all(names(col_types), "[ /]", ".")
   }
   col_types
