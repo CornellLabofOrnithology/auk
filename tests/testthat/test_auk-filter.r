@@ -11,7 +11,7 @@ test_that("auk_filter filter an ebd", {
     auk_country(country = c("US", "Canada")) %>%
     auk_extent(extent = c(-100, 37, -80, 52)) %>%
     auk_date(date = c("2012-01-01", "2012-12-31")) %>%
-    auk_time(time = c("06:00", "09:00")) %>%
+    auk_time(start_time = c("06:00", "09:00")) %>%
     auk_duration(duration = c(0, 60)) %>%
     auk_complete()
   # run filters
@@ -44,7 +44,7 @@ test_that("auk_filter filter sampling and ebd files", {
   f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
   filters <- auk_ebd(f, f_smp) %>%
     auk_species(species = "Collared Kingfisher") %>%
-    auk_time(time = c("06:00", "09:00")) %>%
+    auk_time(start_time = c("06:00", "09:00")) %>%
     auk_duration(duration = c(0, 60)) %>%
     auk_complete()
   # run filters

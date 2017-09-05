@@ -93,7 +93,7 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpul7eDv/filed1725ec23a60"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpyb1pPf/filedabb2004e523"
 # number of lines in input
 length(readLines(f))
 #> [1] 101
@@ -126,12 +126,13 @@ ebd <- auk_ebd(f) %>%
   auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>%
   # country: codes and names can be mixed; case insensitive
   auk_country(country = c("US", "Canada", "mexico")) %>%
-  # extent: formatted as `c(lng_min, lat_min, lng_max, lat_max)`
+  # extent: long and lat in decimal degrees
+  # formatted as `c(lng_min, lat_min, lng_max, lat_max)`
   auk_extent(extent = c(-100, 37, -80, 52)) %>%
   # date: use standard ISO date format `"YYYY-MM-DD"`
   auk_date(date = c("2012-01-01", "2012-12-31")) %>%
   # time: 24h format
-  auk_time(time = c("06:00", "09:00")) %>%
+  auk_time(start_time = c("06:00", "09:00")) %>%
   # duration: length in minutes of checklists
   auk_duration(duration = c(0, 60)) %>%
   # complete: all species seen or heard are recorded
@@ -148,7 +149,7 @@ ebd
 #>   Countries: CA, MX, US
 #>   Spatial extent: Lat -100 - -80; Lon 37 - 52
 #>   Date: 2012-01-01 - 2012-12-31
-#>   Time: 06:00-09:00
+#>   Start time: 06:00-09:00
 #>   Last edited date: all
 #>   Duration: 0-60 minutes
 #>   Complete checklists only: yes

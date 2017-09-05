@@ -139,7 +139,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, tmp)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpj6XhnC/filed183692f6838"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpvIneU8/filedacc26a4c219"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
@@ -178,12 +178,13 @@ ebd &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_ebd.ht
 <span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># country: codes and names can be mixed; case insensitive</span>
 <span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># extent: formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span>
+<span class="st">  </span><span class="co"># extent: long and lat in decimal degrees</span>
+<span class="st">  </span><span class="co"># formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span>
 <span class="st">  </span><span class="kw"><a href="reference/auk_extent.html">auk_extent</a></span>(<span class="dt">extent =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="op">-</span><span class="dv">80</span>, <span class="dv">52</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># date: use standard ISO date format `"YYYY-MM-DD"`</span>
 <span class="st">  </span><span class="kw"><a href="reference/auk_date.html">auk_date</a></span>(<span class="dt">date =</span> <span class="kw">c</span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># time: 24h format</span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_time.html">auk_time</a></span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_time.html">auk_time</a></span>(<span class="dt">start_time =</span> <span class="kw">c</span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># duration: length in minutes of checklists</span>
 <span class="st">  </span><span class="kw"><a href="reference/auk_duration.html">auk_duration</a></span>(<span class="dt">duration =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># complete: all species seen or heard are recorded</span>
@@ -200,7 +201,7 @@ ebd
 <span class="co">#&gt;   Countries: CA, MX, US</span>
 <span class="co">#&gt;   Spatial extent: Lat -100 - -80; Lon 37 - 52</span>
 <span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span>
-<span class="co">#&gt;   Time: 06:00-09:00</span>
+<span class="co">#&gt;   Start time: 06:00-09:00</span>
 <span class="co">#&gt;   Last edited date: all</span>
 <span class="co">#&gt;   Duration: 0-60 minutes</span>
 <span class="co">#&gt;   Complete checklists only: yes</span></code></pre></div>
@@ -308,6 +309,10 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 </ul>
 <h2>License</h2>
 <p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> + file <a href="LICENSE.html">LICENSE</a></p>
+<h2>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html">Citing auk</a></li>
+</ul>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>

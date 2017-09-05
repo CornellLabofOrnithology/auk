@@ -6,8 +6,8 @@
 #' perform the filtering.
 #'
 #' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
-#' @param time character; 2 element character vector giving the range of times
-#'   in 24 hour format, e.g. `"06:30"` or `"16:22"`.
+#' @param start_time character; 2 element character vector giving the range of 
+#'   times in 24 hour format, e.g. `"06:30"` or `"16:22"`.
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -15,30 +15,31 @@
 #' # only keep checklists started between 6 and 8 in the morning
 #' system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #'   auk_ebd() %>%
-#'   auk_time(time = c("06:00", "08:00"))
-auk_time <- function(x, time)  {
+#'   auk_time(start_time = c("06:00", "08:00"))
+auk_time <- function(x, start_time)  {
   UseMethod("auk_time")
 }
 
 #' @export
-auk_time.auk_ebd <- function(x, time) {
+auk_time.auk_ebd <- function(x, start_time) {
   # checks
   assertthat::assert_that(
-    length(time) == 2,
-    is.character(time)
+    length(start_time) == 2,
+    is.character(start_time)
   )
   # check for valid times
-  if (!all(stringr::str_detect(time, "^([01]?\\d|2[0-3]):?([0-5]\\d)$"))) {
+  if (!all(stringr::str_detect(start_time, 
+                               "^([01]?\\d|2[0-3]):?([0-5]\\d)$"))) {
     stop("Invalid time format.")
   }
 
   # add optional 0 at start
-  time <- paste0(ifelse(nchar(time) == 4, "0", ""), time)
+  start_time <- paste0(ifelse(nchar(start_time) == 4, "0", ""), start_time)
 
   # check ordering of times makes sense
-  assertthat::assert_that(time[1] <= time[2])
+  assertthat::assert_that(start_time[1] <= start_time[2])
 
   # define filter
-  x$filters$time <- time
+  x$filters$time <- start_time
   return(x)
 }

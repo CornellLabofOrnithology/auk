@@ -4,13 +4,13 @@
 \alias{auk_time}
 \title{Filter the eBird data by checklist start time}
 \usage{
-auk_time(x, time)
+auk_time(x, start_time)
 }
 \arguments{
 \item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
 
-\item{time}{character; 2 element character vector giving the range of times
-in 24 hour format, e.g. \code{"06:30"} or \code{"16:22"}.}
+\item{start_time}{character; 2 element character vector giving the range of
+times in 24 hour format, e.g. \code{"06:30"} or \code{"16:22"}.}
 }
 \value{
 An \code{auk_ebd} object.
@@ -25,5 +25,5 @@ perform the filtering.
 # only keep checklists started between 6 and 8 in the morning
 system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
   auk_ebd() \%>\%
-  auk_time(time = c("06:00", "08:00"))
+  auk_time(start_time = c("06:00", "08:00"))
 }

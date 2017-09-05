@@ -160,12 +160,13 @@ ebd_filters <- ebd %>%
   auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>%
   # country: codes and names can be mixed; case insensitive
   auk_country(country = c("US", "Canada", "mexico")) %>%
-  # extent: formatted as `c(lng_min, lat_min, lng_max, lat_max)`
+  # extent: long and lat in decimal degrees
+  # formatted as `c(lng_min, lat_min, lng_max, lat_max)`
   auk_extent(extent = c(-100, 37, -80, 52)) %>%
   # date: use standard ISO date format `"YYYY-MM-DD"`
   auk_date(date = c("2012-01-01", "2012-12-31")) %>%
   # time: 24h format
-  auk_time(time = c("06:00", "09:00")) %>%
+  auk_time(start_time = c("06:00", "09:00")) %>%
   # duration: length in minutes of checklists
   auk_duration(duration = c(0, 60)) %>%
   # complete: all species seen or heard are recorded
@@ -317,14 +318,14 @@ fake_smp <- read_sampling(f_smp)
 fake_ebd <- subset(
   fake_ebd, 
   all_species_reported & 
-    scientific_name %in% ebd_sed_filtered$filters$species & 
-    time_observations_started >= ebd_sed_filtered$filters$time[1] & 
-    time_observations_started <= ebd_sed_filtered$filters$time[2])
+    scientific_name %in% filters$filters$species & 
+    time_observations_started >= filters$filters$time[1] & 
+    time_observations_started <= filters$filters$time[2])
 fake_smp <- subset(
   fake_smp, 
   all_species_reported & 
-    time_observations_started >= ebd_sed_filtered$filters$time[1] & 
-    time_observations_started <= ebd_sed_filtered$filters$time[2])
+    time_observations_started >= filters$filters$time[1] & 
+    time_observations_started <= filters$filters$time[2])
 ebd_zf <- auk_zerofill(fake_ebd, fake_smp)
 ```
 

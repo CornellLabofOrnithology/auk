@@ -77,7 +77,7 @@ test_that("auk_ebd prints method", {
     auk_extent(extent = c(-100, 37, -80, 52)) %>%
     auk_date(date = c("2012-01-01", "2012-12-31")) %>%
     auk_last_edited(date = c("2010-01-01", "2017-12-31")) %>%
-    auk_time(time = c("06:00", "09:00")) %>%
+    auk_time(start_time = c("06:00", "09:00")) %>%
     auk_duration(duration = c(0, 60)) %>%
     auk_complete()
   filters$output <- "output.txt"

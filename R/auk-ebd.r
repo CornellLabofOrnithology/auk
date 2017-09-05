@@ -177,7 +177,7 @@ print.auk_ebd <- function(x, ...) {
   }
   cat("\n")
   # time filter
-  cat("  Time: ")
+  cat("  Start time: ")
   if (length(x$filters$time) == 0) {
     cat("all")
   } else {

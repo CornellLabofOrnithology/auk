@@ -87,7 +87,7 @@ filters have been defined, <code><a href='auk_filter.html'>auk_filter()</a></cod
 perform the filtering.</p>
     
 
-    <pre class="usage"><span class='fu'>auk_time</span>(<span class='no'>x</span>, <span class='no'>time</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_time</span>(<span class='no'>x</span>, <span class='no'>start_time</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -97,9 +97,9 @@ perform the filtering.</p>
       <td><p><code>auk_ebd</code> object; reference to object created by <code><a href='auk_ebd.html'>auk_ebd()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>time</th>
-      <td><p>character; 2 element character vector giving the range of times
-in 24 hour format, e.g. <code>"06:30"</code> or <code>"16:22"</code>.</p></td>
+      <th>start_time</th>
+      <td><p>character; 2 element character vector giving the range of
+times in 24 hour format, e.g. <code>"06:30"</code> or <code>"16:22"</code>.</p></td>
     </tr>
     </table>
     
@@ -112,7 +112,7 @@ in 24 hour format, e.g. <code>"06:30"</code> or <code>"16:22"</code>.</p></td>
     <pre class="examples"><div class='input'><span class='co'># only keep checklists started between 6 and 8 in the morning</span>
 <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_time</span>(<span class='kw'>time</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"06:00"</span>, <span class='st'>"08:00"</span>))</div><div class='output co'>#&gt; Input 
+  <span class='fu'>auk_time</span>(<span class='kw'>start_time</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"06:00"</span>, <span class='st'>"08:00"</span>))</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -123,7 +123,7 @@ in 24 hour format, e.g. <code>"06:30"</code> or <code>"16:22"</code>.</p></td>
 #&gt;   Countries: all
 #&gt;   Spatial extent: full extent
 #&gt;   Date: all
-#&gt;   Time: 06:00-08:00
+#&gt;   Start time: 06:00-08:00
 #&gt;   Last edited date: all
 #&gt;   Duration: all
 #&gt;   Complete checklists only: no</div></pre>

@@ -9,7 +9,7 @@ auk_date(x, date)
 \arguments{
 \item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
 
-\item{date}{character or date; date range to filter by , provided either as a
+\item{date}{character or date; date range to filter by, provided either as a
 character vector in the format \code{"2015-12-31"} or a vector of Date objects.}
 }
 \value{

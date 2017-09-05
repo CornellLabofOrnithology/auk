@@ -1,0 +1,20 @@
+citHeader("To cite auk in publications use:")
+
+citEntry(
+  entry        = "Manual",
+  title        = "auk: eBird Data Extraction and Processing with AWK",
+  author       = personList(
+                   as.person("Matthew Strimas-Mackey"),
+                   as.person("Eliot Miller"),
+                   as.person("Wesley Hochachka")
+                 ),
+  year         = "2017",
+  note         = "R package version 0.1.0",
+  url          = "https://cornelllabofornithology.github.io/auk/",
+
+  textVersion  =
+  paste("Matthew Strimas-Mackey, Eliot Miller, and Wesley Hochachka (2017).",
+        "auk: eBird Data Extraction and Processing with AWK.",
+        "R package version 0.1.0.",
+        "https://cornelllabofornithology.github.io/auk/")
+)
