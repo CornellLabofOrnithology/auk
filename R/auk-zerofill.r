@@ -1,13 +1,13 @@
-#' Read and zero-fill an EBD file
+#' Read and zero-fill an eBird data file
 #'
 #' Read an eBird Basic Dataset file, and associated sampling event data file, to
-#' produce a zero-filled, presence-absence dataset. The EBD contains bird
+#' produce a zero-filled, presence-absence dataset. The basic dataa contains bird
 #' sightings and the sampling event data is a set of all checklists, they can be
 #' combined to infer absence data by assuming any species not reported on a
 #' checklist was had a count of zero.
 #'
-#' @param x filename, `data.frame` of EBD observations, or `auk_ebd` object with
-#'   associated output files as created by [auk_filter()]. If a filename is
+#' @param x filename, `data.frame` of eBird observations, or `auk_ebd` object
+#'   with associated output files as created by [auk_filter()]. If a filename is
 #'   provided, it must point to the EBD and the `sampling_events` argument must
 #'   point to the sampling event data file. If a `data.frame` is provided it
 #'   should have been imported with [read_ebd()], to ensure the variables names
@@ -27,7 +27,7 @@
 #' @param unique logical; should [auk_unique()] be run on the input data if it
 #'   hasn't already. The check that [auk_unique()] has been run is simplistic:
 #'   is there a `checklist_id` field or not.
-#' @param collapse logical; whether to call `zerofill_collapse()` to return a
+#' @param collapse logical; whether to call `collapse_zerofill()` to return a
 #'   data frame rather than an `auk_zerofill` object.
 #' @param ... additional arguments passed to methods.
 #'

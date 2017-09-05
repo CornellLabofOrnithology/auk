@@ -2,27 +2,27 @@
 % Please edit documentation in R/auk-filter.r
 \name{auk_filter}
 \alias{auk_filter}
-\title{Filter the EBD using AWK}
+\title{Filter the eBird file using AWK}
 \usage{
 auk_filter(x, file, file_sampling, awk_file, sep, filter_sampling, execute,
   overwrite)
 }
 \arguments{
-\item{x}{\code{auk_ebd} object; reference to EBD file created by \code{\link[=auk_ebd]{auk_ebd()}} with
+\item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}} with
 filters defined.}
 
 \item{file}{character; output file.}
 
-\item{file_sampling}{character; optional output file for EBD sampling data.}
+\item{file_sampling}{character; optional output file for sampling data.}
 
 \item{awk_file}{character; output file to optionally save the awk script to.}
 
-\item{sep}{character; the input field separator, the EBD is tab separated by
-default. Must only be a single character and space delimited is not allowed
-since spaces appear in many of the fields.}
+\item{sep}{character; the input field separator, the eBird file is tab
+separated by default. Must only be a single character and space delimited
+is not allowed since spaces appear in many of the fields.}
 
-\item{filter_sampling}{logical; whether the EBD sampling event data should
-also be filtered.}
+\item{filter_sampling}{logical; whether the sampling event data should also
+be filtered.}
 
 \item{execute}{logical; whether to execute the awk script, or output it to a
 file for manual execution. If this flag is \code{FALSE}, \code{awk_file} must be
@@ -40,11 +40,11 @@ this script to produce a filtered eBird Reference Dataset (ERD). The initial
 creation of the \code{auk_ebd} object should be done with \code{\link[=auk_ebd]{auk_ebd()}} and filters
 can be defined using the various other functions in this package, e.g.
 \code{\link[=auk_species]{auk_species()}} or \code{\link[=auk_country]{auk_country()}}. \strong{Note that this function typically takes
-at least a couple hours to run on the full EBD.}
+at least a couple hours to run on the full dataset}
 }
 \details{
-If an EBD sampling file is provided in the \link[=auk_ebd]{auk_ebd}
-object, this function will filter both the EBD and the sampling data using
+If a sampling file is provided in the \link[=auk_ebd]{auk_ebd} object, this
+function will filter both the eBird Basic Dataset and the sampling data using
 the same set of filters. This ensures that the files are in sync, i.e. that
 they contain data on the same set of checklists.
 
@@ -75,7 +75,5 @@ out_file <- tempfile()
 auk_filter(filters, file = out_file) \%>\%
   read_ebd() \%>\%
   str()
-# clean
-unlink(out_file)
 }
 }

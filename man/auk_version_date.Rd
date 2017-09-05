@@ -2,13 +2,13 @@
 % Please edit documentation in R/auk-version-date.r
 \name{auk_version_date}
 \alias{auk_version_date}
-\title{Dates of EBD and Taxonomy in package version}
+\title{Dates of eBird Basic Dataset and taxonomy in package version}
 \usage{
 auk_version_date()
 }
 \value{
-A date vector with the EBD date and taxonomy date that this version
-of the package corresponds to.
+A date vector with the eBird data date and taxonomy date that this
+version of the package corresponds to.
 }
 \description{
 This package depends on the version of the EBD and on the eBird taxonomy. Use

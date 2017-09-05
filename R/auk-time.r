@@ -1,11 +1,11 @@
-#' Filter the EBD by checklist start time
+#' Filter the eBird data by checklist start time
 #'
 #' Define a filter for the eBird Basic Dataset (EBD) based on a range of start
 #' times for the checklist. This function only defines the filter and, once all
 #' filters have been defined, [auk_filter()] should be used to call AWK and
 #' perform the filtering.
 #'
-#' @param x `auk_ebd` object; reference to EBD file created by [auk_ebd()].
+#' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
 #' @param time character; 2 element character vector giving the range of times
 #'   in 24 hour format, e.g. `"06:30"` or `"16:22"`.
 #'

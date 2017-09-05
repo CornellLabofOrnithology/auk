@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Roll up EBD taxonomy to species — auk_rollup • auk</title>
+<title>Roll up eBird taxonomy to species — auk_rollup • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,7 +77,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Roll up EBD taxonomy to species</h1>
+    <h1>Roll up eBird taxonomy to species</h1>
     </div>
 
     
@@ -89,7 +89,7 @@ records that are not resolvable to species, for example, "warbler sp.".
 This function addresses these cases by removing taxa not identifiable to
 species and rolling up taxa identified below species level to a single record
 for each species in each checklist. By default, <code><a href='read_ebd.html'>read_ebd()</a></code> calls
-<code>ebd_rollup()</code> when importing an EBD file.</p>
+<code>ebd_rollup()</code> when importing an eBird data file.</p>
     
 
     <pre class="usage"><span class='fu'>auk_rollup</span>(<span class='no'>x</span>)</pre>
@@ -99,14 +99,14 @@ for each species in each checklist. By default, <code><a href='read_ebd.html'>re
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>data.frame; the EBD data frame, typically as imported by
+      <td><p>data.frame; data frame of eBird data, typically as imported by
 <code><a href='read_ebd.html'>read_ebd()</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame of the EBD with taxonomic rollup applied.</p>
+    <p>A data frame of the eBird data with taxonomic rollup applied.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 

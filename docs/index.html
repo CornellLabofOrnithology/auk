@@ -77,7 +77,7 @@
 
 <span class="co"># or install the development version from github</span>
 <span class="co"># install.packages("devtools")</span>
-devtools::<span class="kw">install_github</span>(<span class="st">"CornellLabofOrnithology/auk"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"CornellLabofOrnithology/auk"</span>)</code></pre></div>
 <p><code>auk</code> requires the Unix utility AWK, which is available on most Linux and Mac OS X machines. Windows users will first need to install <a href="https://www.cygwin.com">Cygwin</a> before using this package. Note that <strong>Cygwin must be installed in the default location</strong> (<code>C:/cygwin/bin/gawk.exe</code> or <code>C:/cygwin64/bin/gawk.exe</code>) in order for <code>auk</code> to work.</p>
 </div>
 <div id="vignette" class="section level2">
@@ -88,7 +88,43 @@ devtools::<span class="kw">install_github</span>(<span class="st">"CornellLabofO
 <div id="a-note-on-versions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#a-note-on-versions" class="anchor"></a>A note on versions</h2>
-<p>This package contains a current (as of the time of package release) version of the <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract from the EBD. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the EBD file they’re working with. This is most easily accomplished by always using the must recent version of <code>auk</code> and the most recent release of the EBD.</p>
+<p>This package contains a current (as of the time of package release) version of the <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the eBird Basic Dataset they’re working with. This is most easily accomplished by always using the must recent version of <code>auk</code> and the most recent release of the dataset.</p>
+</div>
+<div id="quick-start" class="section level2">
+<h2 class="hasAnchor">
+<a href="#quick-start" class="anchor"></a>Quick start</h2>
+<p>This package uses the command-line program AWK to extract subsets of the eBird Basic Dataset for use in R. This is a multi-step process:</p>
+<ol style="list-style-type: decimal">
+<li>Define a reference to the eBird data file.</li>
+<li>Define a set of spatial, temporal, or taxonomic filters. Each type of filter corresponds to a different function, e.g. <code>auk_species</code> to filter by species. At this stage the filters are only set up, no actual filtering is done until the next step.</li>
+<li>Filter the eBird data text file, producing a new text file with only the selected rows.</li>
+<li>Import this text file into R as a data frame.</li>
+</ol>
+<p>Because the eBird dataset is so large, step 3 typically takes several hours to run. Here’s a simple example that extract all Gray Jay records from within Canada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(auk)
+<span class="kw">library</span>(dplyr)
+<span class="co"># path to the ebird data file, here a sample included in the package</span>
+input_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
+<span class="co"># output text file</span>
+output_file &lt;-<span class="st"> "ebd_filtered_grja.txt"</span>
+ebird_data &lt;-<span class="st"> </span>input_file <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 1. reference file</span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 2. define filters</span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="st">"Gray Jay"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 3. run filtering</span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 4. read text file into r data frame</span>
+<span class="st">  </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>()</code></pre></div>
+<p>For those not familiar with the pipe operator (<code>%&gt;%</code>), the above code could be rewritten:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">input_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
+output_file &lt;-<span class="st"> "ebd_filtered_grja.txt"</span>
+ebd &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>(input_file)
+ebd_filters &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(ebd, <span class="dt">species =</span> <span class="st">"Gray Jay"</span>)
+ebd_filters &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(ebd_filters, <span class="dt">country =</span> <span class="st">"Canada"</span>)
+ebd_filtered &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(ebd_filters, <span class="dt">file =</span> output_file)
+ebd_df &lt;-<span class="st"> </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>(ebd_filtered)</code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -96,33 +132,32 @@ devtools::<span class="kw">install_github</span>(<span class="st">"CornellLabofO
 <div id="cleaning" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cleaning" class="anchor"></a>Cleaning</h3>
-<p>Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function <code><a href="reference/auk_clean.html">auk_clean()</a></code> drops these erroneous records and removes the blank column.</p>
+<p>Some rows in the dataset may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function <code><a href="reference/auk_clean.html">auk_clean()</a></code> drops these erroneous records and removes the blank column.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(auk)
 <span class="co"># sample data</span>
 f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample_messy.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
 tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, tmp)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpvCEAoe/file5f203a0014ad"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpj6XhnC/filed183692f6838"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
 <span class="co"># number of lines in output</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(tmp))
-<span class="co">#&gt; [1] 96</span>
-<span class="kw">unlink</span>(tmp)</code></pre></div>
+<span class="co">#&gt; [1] 96</span></code></pre></div>
 </div>
 <div id="filtering" class="section level3">
 <h3 class="hasAnchor">
 <a href="#filtering" class="anchor"></a>Filtering</h3>
-<p><code>auk</code> uses a <a href="http://r4ds.had.co.nz/pipes.html">pipeline-based workflow</a> for defining filters, which can then be compiled into an AWK script. Users should start by defining a reference to the EBD file with <code><a href="reference/auk_ebd.html">auk_ebd()</a></code>. Then any of the following filters can be applied:</p>
+<p><code>auk</code> uses a <a href="http://r4ds.had.co.nz/pipes.html">pipeline-based workflow</a> for defining filters, which can then be compiled into an AWK script. Users should start by defining a reference to the dataset file with <code><a href="reference/auk_ebd.html">auk_ebd()</a></code>. Then any of the following filters can be applied:</p>
 <ul>
 <li>
 <code><a href="reference/auk_species.html">auk_species()</a></code>: filter by species using common or scientific names.</li>
 <li>
 <code><a href="reference/auk_country.html">auk_country()</a></code>: filter by country using the standard English names or <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country codes</a>.</li>
 <li>
-<code><a href="reference/auk_extent.html">auk_extent()</a></code>: filter by spatial extent, i.e. a range of latitudes and longitudes.</li>
+<code><a href="reference/auk_extent.html">auk_extent()</a></code>: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
 <code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates.</li>
 <li>
@@ -138,19 +173,19 @@ tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample data</span>
 f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
 <span class="co"># define an EBD reference and a set of filters</span>
-ebd &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>(f) %&gt;%<span class="st"> </span>
+ebd &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>(f) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># species: common and scientific names can be mixed</span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># country: codes and names can be mixed; case insensitive</span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># extent: formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_extent.html">auk_extent</a></span>(<span class="dt">extent =</span> <span class="kw">c</span>(-<span class="dv">100</span>, <span class="dv">37</span>, -<span class="dv">80</span>, <span class="dv">52</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="reference/auk_extent.html">auk_extent</a></span>(<span class="dt">extent =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="op">-</span><span class="dv">80</span>, <span class="dv">52</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># date: use standard ISO date format `"YYYY-MM-DD"`</span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_date.html">auk_date</a></span>(<span class="dt">date =</span> <span class="kw">c</span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="reference/auk_date.html">auk_date</a></span>(<span class="dt">date =</span> <span class="kw">c</span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># time: 24h format</span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_time.html">auk_time</a></span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="reference/auk_time.html">auk_time</a></span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># duration: length in minutes of checklists</span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_duration.html">auk_duration</a></span>(<span class="dt">duration =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="reference/auk_duration.html">auk_duration</a></span>(<span class="dt">duration =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># complete: all species seen or heard are recorded</span>
 <span class="st">  </span><span class="kw"><a href="reference/auk_complete.html">auk_complete</a></span>()
 ebd
@@ -172,21 +207,19 @@ ebd
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package.</p>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Gray Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span>
-ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file)
-<span class="co"># tidy up</span>
-<span class="kw">unlink</span>(output_file)</code></pre></div>
-<p><strong>Filtering the full EBD typically takes at least a couple hours</strong>, so set it running then go grab lunch!</p>
+ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file)</code></pre></div>
+<p><strong>Filtering the full dataset typically takes at least a couple hours</strong>, so set it running then go grab lunch!</p>
 </div>
 <div id="reading" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reading" class="anchor"></a>Reading</h3>
-<p>EBD files can be read with <code><a href="reference/read_ebd.html">read_ebd()</a></code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>() %&gt;%<span class="st"> </span>
+<p>eBird Basic Dataset files can be read with <code><a href="reference/read_ebd.html">read_ebd()</a></code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">str</span>()
 <span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    487 obs. of  47 variables:</span>
 <span class="co">#&gt;  $ checklist_id              : chr  "S12813888" "S14439115" "S10152130" "S20381156" ...</span>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter the EBD using AWK — auk_filter • auk</title>
+<title>Filter the eBird file using AWK — auk_filter • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,7 +77,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter the EBD using AWK</h1>
+    <h1>Filter the eBird file using AWK</h1>
     </div>
 
     
@@ -86,7 +86,7 @@ this script to produce a filtered eBird Reference Dataset (ERD). The initial
 creation of the <code>auk_ebd</code> object should be done with <code><a href='auk_ebd.html'>auk_ebd()</a></code> and filters
 can be defined using the various other functions in this package, e.g.
 <code><a href='auk_species.html'>auk_species()</a></code> or <code><a href='auk_country.html'>auk_country()</a></code>. <strong>Note that this function typically takes
-at least a couple hours to run on the full EBD.</strong></p>
+at least a couple hours to run on the full dataset</strong></p>
     
 
     <pre class="usage"><span class='fu'>auk_filter</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>file_sampling</span>, <span class='no'>awk_file</span>, <span class='no'>sep</span>, <span class='no'>filter_sampling</span>, <span class='no'>execute</span>,
@@ -97,7 +97,7 @@ at least a couple hours to run on the full EBD.</strong></p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>auk_ebd</code> object; reference to EBD file created by <code><a href='auk_ebd.html'>auk_ebd()</a></code> with
+      <td><p><code>auk_ebd</code> object; reference to object created by <code><a href='auk_ebd.html'>auk_ebd()</a></code> with
 filters defined.</p></td>
     </tr>
     <tr>
@@ -106,7 +106,7 @@ filters defined.</p></td>
     </tr>
     <tr>
       <th>file_sampling</th>
-      <td><p>character; optional output file for EBD sampling data.</p></td>
+      <td><p>character; optional output file for sampling data.</p></td>
     </tr>
     <tr>
       <th>awk_file</th>
@@ -114,14 +114,14 @@ filters defined.</p></td>
     </tr>
     <tr>
       <th>sep</th>
-      <td><p>character; the input field separator, the EBD is tab separated by
-default. Must only be a single character and space delimited is not allowed
-since spaces appear in many of the fields.</p></td>
+      <td><p>character; the input field separator, the eBird file is tab
+separated by default. Must only be a single character and space delimited
+is not allowed since spaces appear in many of the fields.</p></td>
     </tr>
     <tr>
       <th>filter_sampling</th>
-      <td><p>logical; whether the EBD sampling event data should
-also be filtered.</p></td>
+      <td><p>logical; whether the sampling event data should also
+be filtered.</p></td>
     </tr>
     <tr>
       <th>execute</th>
@@ -142,8 +142,8 @@ then the path to the AWK script is returned instead.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If an EBD sampling file is provided in the <a href='auk_ebd.html'>auk_ebd</a>
-object, this function will filter both the EBD and the sampling data using
+    <p>If a sampling file is provided in the <a href='auk_ebd.html'>auk_ebd</a> object, this
+function will filter both the eBird Basic Dataset and the sampling data using
 the same set of filters. This ensures that the files are in sync, i.e. that
 they contain data on the same set of checklists.</p>
 <p>The AWK script can be saved for future reference by providing an output
@@ -173,8 +173,6 @@ will likely need to install <a href = 'https://www.cygwin.com'>Cygwin</a>.</p>
   <span class='fu'>auk_filter</span>(<span class='no'>filters</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>out_file</span>) <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='read_ebd.html'>read_ebd</a></span>() <span class='kw'>%&gt;%</span>
     <span class='fu'>str</span>()
-  <span class='co'># clean</span>
-  <span class='fu'>unlink</span>(<span class='no'>out_file</span>)
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

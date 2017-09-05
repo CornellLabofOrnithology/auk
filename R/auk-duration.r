@@ -1,11 +1,11 @@
-#' Filter the EBD by duration
+#' Filter the eBird data by duration
 #'
 #' Define a filter for the eBird Basic Dataset (EBD) based on the duration of
 #' the checklist. This function only defines the filter and, once all filters
 #' have been defined, [auk_filter()] should be used to call AWK and perform the
 #' filtering.
 #'
-#' @param x `auk_ebd` object; reference to EBD file created by [auk_ebd()].
+#' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
 #' @param duration integer; 2 element vector specifying the range of durations
 #'   in minutes to filter by.
 #'

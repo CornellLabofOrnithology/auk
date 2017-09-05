@@ -62,7 +62,43 @@
     
 <div class="contents">
 <p><a href="http://www.ebird.org">eBird</a> is an online tool for recording bird observations. Since its inception, nearly 500 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
-<p>This vignette is divided into three sections. The first section provides background on the eBird data and motivation for the development of this package. The second section outlines the use of <code>auk</code> for filtering the EBD to produce a presence-only dataset. The final section demonstrates how <code>auk</code> can be used to produce zero-filled, presence-absence (or more correctly presence–non-detection) data, a necessity for many modeling and analysis applications.</p>
+<p>This vignette is divided into three sections. The first section provides background on the eBird data and motivation for the development of this package. The second section outlines the use of <code>auk</code> for filtering text file to produce a presence-only dataset. The final section demonstrates how <code>auk</code> can be used to produce zero-filled, presence-absence (or more correctly presence–non-detection) data, a necessity for many modeling and analysis applications.</p>
+<div id="quick-start" class="section level2">
+<h2 class="hasAnchor">
+<a href="#quick-start" class="anchor"></a>Quick start</h2>
+<p>This package uses the command-line program AWK to extract subsets of the eBird Basic Dataset for use in R. This is a multi-step process:</p>
+<ol style="list-style-type: decimal">
+<li>Define a reference to the eBird data file.</li>
+<li>Define a set of spatial, temporal, or taxonomic filters. Each type of filter corresponds to a different function, e.g. <code>auk_species</code> to filter by species. At this stage the filters are only set up, no actual filtering is done until the next step.</li>
+<li>Filter the eBird data text file, producing a new text file with only the selected rows.</li>
+<li>Import this text file into R as a data frame.</li>
+</ol>
+<p>Because the eBird dataset is so large, step 3 typically takes several hours to run. Here’s a simple example that extract all Gray Jay records from within Canada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(auk)
+<span class="kw">library</span>(dplyr)
+<span class="co"># path to the ebird data file, here a sample included in the package</span>
+input_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
+<span class="co"># output text file</span>
+output_file &lt;-<span class="st"> "ebd_filtered_grja.txt"</span>
+ebird_data &lt;-<span class="st"> </span>input_file <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 1. reference file</span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 2. define filters</span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="st">"Gray Jay"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 3. run filtering</span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 4. read text file into r data frame</span>
+<span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>()</code></pre></div>
+<p>For those not familiar with the pipe operator (<code>%&gt;%</code>), the above code could be rewritten:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">input_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
+output_file &lt;-<span class="st"> "ebd_filtered_grja.txt"</span>
+ebd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>(input_file)
+ebd_filters &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(ebd, <span class="dt">species =</span> <span class="st">"Gray Jay"</span>)
+ebd_filters &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(ebd_filters, <span class="dt">country =</span> <span class="st">"Canada"</span>)
+ebd_filtered &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_filter.html">auk_filter</a></span>(ebd_filters, <span class="dt">file =</span> output_file)
+ebd_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>(ebd_filtered)</code></pre></div>
+</div>
 <div id="background" class="section level2">
 <h2 class="hasAnchor">
 <a href="#background" class="anchor"></a>Background</h2>
@@ -70,13 +106,13 @@
 <h3 class="hasAnchor">
 <a href="#the-ebird-basic-dataset" class="anchor"></a>The eBird Basic Dataset</h3>
 <p>The eBird database currently contains nearly 500 million bird observations, and this rate of increase is accelerating as new users join eBird. These data are an extremely valuable tool both for basic science and conservation; however, given the sheer amount of data, accessing eBird data poses a unique challenge. Currently, access to the complete set of eBird observations is provided via the eBird Basic Dataset (EBD). This is a tab-separated text file, released quarterly, containing all validated bird sightings in the eBird database at the time of release. Each row corresponds to the sighting of a single species within a checklist and, in addition to the species and number of individuals reported, information is provided at the checklist level (location, time, date, search effort, etc.).</p>
-<p>In addition to the EBD, eBird provides a Sampling Event Data file that contains the checklist-level data for every valid checklist submitted to eBird, including checklists for which no species of birds were reported. In this file, each row corresponds to a checklist and only the checklist-level variables are included, not the associated bird data. While the EBD provides presence-only data, the EBD and Sampling Event Data can be combined to produce presence-absence data. This process is described below.</p>
-<p>For full metadata on the EBD and Sampling Event Data, consult the documentation provided when the <a href="http://ebird.org/ebird/data/download">files are downloaded</a>.</p>
+<p>In addition, eBird provides a Sampling Event Data file that contains the checklist-level data for every valid checklist submitted to eBird, including checklists for which no species of birds were reported. In this file, each row corresponds to a checklist and only the checklist-level variables are included, not the associated bird data. While the eBird Basic Dataset provides presence-only data, it can be combined with the Sampling Event Data file to produce presence-absence data. This process is described below.</p>
+<p>For full metadata on the both datasets, consult the documentation provided when the <a href="http://ebird.org/ebird/data/download">files are downloaded</a>.</p>
 </div>
 <div id="data-access" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-access" class="anchor"></a>Data access</h3>
-<p>To access the EBD, begin by <a href="https://secure.birds.cornell.edu/cassso/login">creating an eBird account and signing in</a>. Then visit the <a href="http://ebird.org/ebird/data/download">Download Data</a> page. eBird data access is free; however, you will need to <a href="http://ebird.org/ebird/data/request">request access</a> in order to obtain access to the EBD. Filling out the access request form allows eBird to keep track of the number of people using the data and obtain information on the applications for which the data are used</p>
+<p>To access eBird data, begin by <a href="https://secure.birds.cornell.edu/cassso/login">creating an eBird account and signing in</a>. Then visit the <a href="http://ebird.org/ebird/data/download">Download Data</a> page. eBird data access is free; however, you will need to <a href="http://ebird.org/ebird/data/request">request access</a> in order to obtain access to the EBD. Filling out the access request form allows eBird to keep track of the number of people using the data and obtain information on the applications for which the data are used</p>
 <p>Once you have access to the data, proceed to the <a href="http://ebird.org/ebird/data/download/ebd">download page</a>. There are two download options: prepackage download and custom download. Downloading the prepackaged option gives you access to the full global dataset. If you choose this route, you’ll likely want to download both the EBD (~ 25 GB) and corresponding Sampling Event Data (~ 2.5 GB). If you know you’re likely to only need data for a single species, or a small region, you can request a custom download be prepared consisting of only a subset of the data. This will result in significantly smaller files; however, note that custom requests that would result in huge numbers of checklists (e.g. all records from the US) won’t work. In either case, download and decompress the files.</p>
 </div>
 <div id="example-data" class="section level3">
@@ -95,39 +131,37 @@
 <div id="awk" class="section level3">
 <h3 class="hasAnchor">
 <a href="#awk" class="anchor"></a>AWK</h3>
-<p>R typically works with objects in memory and, as a result, there is a hard limit on the size of objects that can be brought into R. Because eBird contains nearly 500 million sightings, the EBD is an inherently large file (~150 GB uncompressed) and therefore impossible to manipulate directly in R. Thus it is generally necessary to create a subset of the EBD outside of R, then import this smaller subset for analysis.</p>
-<p>AWK is a Unix utility and programming language for processing column formatted text data. It is highly flexible and extremely fast, making it a valuable tool for pre-processing the EBD in order to create the smaller subset of data that is required. Users of the EBD can use AWK to produce a smaller file, subsetting the full text file taxonomically, spatially, or temporally, in order to produce a smaller file that can then be loaded in to R for visualization, analysis, and modelling.</p>
-<p>Although AWK is a powerful tool, it has three disadvantages: it requires learning the syntax of a new language, it is only accessible via the command line, and it results in a portion of your workflow existing outside of R. This package is a wrapper for AWK specifically designed for filtering the EBD. The goal is to ease the use of the EBD by removing the hurdle of learning and using AWK.</p>
+<p>R typically works with objects in memory and, as a result, there is a hard limit on the size of objects that can be brought into R. Because eBird contains nearly 500 million sightings, the eBird Basic Dataset is an inherently large file (~150 GB uncompressed) and therefore impossible to manipulate directly in R. Thus it is generally necessary to create a subset of the file outside of R, then import this smaller subset for analysis.</p>
+<p>AWK is a Unix utility and programming language for processing column formatted text data. It is highly flexible and extremely fast, making it a valuable tool for pre-processing the eBird data in order to create the smaller subset of data that is required. Users of the data can use AWK to produce a smaller file, subsetting the full text file taxonomically, spatially, or temporally, in order to produce a smaller file that can then be loaded in to R for visualization, analysis, and modelling.</p>
+<p>Although AWK is a powerful tool, it has three disadvantages: it requires learning the syntax of a new language, it is only accessible via the command line, and it results in a portion of your workflow existing outside of R. This package is a wrapper for AWK specifically designed for filtering eBird data The goal is to ease the use of the this data by removing the hurdle of learning and using AWK.</p>
 <p>Linux and Mac users should already have AWK installed on their machines, however, Windows uses will need to install <a href="https://www.cygwin.com">Cygwin</a> to gain access to AWK. Note that <strong>Cygwin must be installed in the default location</strong> (<code>C:/cygwin/bin/gawk.exe</code> or <code>C:/cygwin64/bin/gawk.exe</code>) in order for <code>auk</code> to work.</p>
 </div>
 <div id="a-note-on-versions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-note-on-versions" class="anchor"></a>A note on versions</h3>
-<p>This package contains a current (as of the time of package release) version of the <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract from the EBD. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the EBD file they’re working with. This is most easily accomplished by always using the most recent version of <code>auk</code> and the most recent release of the EBD.</p>
+<p>This package contains a current (as of the time of package release) version of the <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract from the EBD. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the EBD file they’re working with. This is most easily accomplished by always using the most recent version of <code>auk</code> and the most recent release of the eBird Basic Dataset</p>
 </div>
 </div>
 <div id="presence-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#presence-data" class="anchor"></a>Presence data</h2>
-<p>The most common use of the EBD is to produce a set of bird sightings, i.e. where and when was a given species seen. For example, this type of data could be used to produce a map of sighting locations, or to determine if a given bird has been seen in an area of interest. For more analytic work, such as species distribution modeling, presence and absence data are likely preferred (see Guillera-Arroita et al. 2015). Producing presence-absence data will be covered in the next section.</p>
+<p>The most common use of the eBird data is to produce a set of bird sightings, i.e. where and when was a given species seen. For example, this type of data could be used to produce a map of sighting locations, or to determine if a given bird has been seen in an area of interest. For more analytic work, such as species distribution modeling, presence and absence data are likely preferred (see Guillera-Arroita et al. 2015). Producing presence-absence data will be covered in the next section.</p>
 <div id="cleaning" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cleaning" class="anchor"></a>Cleaning</h3>
-<p>Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function <code><a href="../reference/auk_clean.html">auk_clean()</a></code> drops these erroneous records and removes the blank column. This process should be run on both the EBD and sampling event data. It typically takes several hours for the full EBD; however, it only needs to be run once because the output from the process is saved out to a new tab-separated text file for subsequent and potentially repeated use.</p>
+<p>Some rows in the eBird Basic Dataset may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function <code><a href="../reference/auk_clean.html">auk_clean()</a></code> drops these erroneous records and removes the blank column. This process should be run on both the EBD and sampling event data. It typically takes several hours for the full EBD; however, it only needs to be run once because the output from the process is saved out to a new tab-separated text file for subsequent and potentially repeated use.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(auk)
 <span class="co"># sample data, with intentially introduced errors</span>
 f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample_messy.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
 f_out &lt;-<span class="st"> "ebd_cleaned.txt"</span>
 <span class="co"># remove problem records</span>
-cleaned &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_clean.html">auk_clean</a></span>(f, <span class="dt">f_out =</span> f_out)
-<span class="co"># tidy up</span>
-<span class="kw">unlink</span>(f_out)</code></pre></div>
+cleaned &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_clean.html">auk_clean</a></span>(f, <span class="dt">f_out =</span> f_out)</code></pre></div>
 </div>
 <div id="the-auk_ebd-object" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-auk_ebd-object" class="anchor"></a>The <code>auk_ebd</code> object</h3>
-<p>This package uses an <code>auk_ebd</code> object to keep track of the input EBD file, any filters defined, and the output file that is produced after filtering has been executed. By keeping everything wrapped up in one object, the user can keep track of exactly what set of input data and filters produced any given output data. To set up the initial <code>auk_ebd</code> object, use <code><a href="../reference/auk_ebd.html">auk_ebd()</a></code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample_messy.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
+<p>This package uses an <code>auk_ebd</code> object to keep track of the input data file, any filters defined, and the output file that is produced after filtering has been executed. By keeping everything wrapped up in one object, the user can keep track of exactly what set of input data and filters produced any given output data. To set up the initial <code>auk_ebd</code> object, use <code><a href="../reference/auk_ebd.html">auk_ebd()</a></code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample_messy.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>()
 ebd
 <span class="co">#&gt; Input </span>
@@ -156,7 +190,7 @@ ebd
 <li>
 <code><a href="../reference/auk_country.html">auk_country()</a></code>: filter by country using the standard English names or <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country codes</a>.</li>
 <li>
-<code><a href="../reference/auk_extent.html">auk_extent()</a></code>: filter by spatial extent, i.e. a range of latitudes and longitudes.</li>
+<code><a href="../reference/auk_extent.html">auk_extent()</a></code>: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
 <code><a href="../reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates.</li>
 <li>
@@ -169,22 +203,22 @@ ebd
 <code><a href="../reference/auk_complete.html">auk_complete()</a></code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the “absence” information is inferred by the lack of reporting of a species on checklists.</li>
 </ul>
 <p>Note that all of the functions listed above only modify the <code>auk_ebd</code> object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using <code><a href="../reference/auk_filter.html">auk_filter()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd &lt;-<span class="st"> </span>ebd %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd_filters &lt;-<span class="st"> </span>ebd <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># species: common and scientific names can be mixed</span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># country: codes and names can be mixed; case insensitive</span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># extent: formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_extent.html">auk_extent</a></span>(<span class="dt">extent =</span> <span class="kw">c</span>(-<span class="dv">100</span>, <span class="dv">37</span>, -<span class="dv">80</span>, <span class="dv">52</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/auk_extent.html">auk_extent</a></span>(<span class="dt">extent =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="op">-</span><span class="dv">80</span>, <span class="dv">52</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># date: use standard ISO date format `"YYYY-MM-DD"`</span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_date.html">auk_date</a></span>(<span class="dt">date =</span> <span class="kw">c</span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/auk_date.html">auk_date</a></span>(<span class="dt">date =</span> <span class="kw">c</span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># time: 24h format</span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_time.html">auk_time</a></span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/auk_time.html">auk_time</a></span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># duration: length in minutes of checklists</span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_duration.html">auk_duration</a></span>(<span class="dt">duration =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/auk_duration.html">auk_duration</a></span>(<span class="dt">duration =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># complete: all species seen or heard are recorded</span>
 <span class="st">  </span><span class="kw"><a href="../reference/auk_complete.html">auk_complete</a></span>()
-ebd
+ebd_filters
 <span class="co">#&gt; Input </span>
 <span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/ebd-sample_messy.txt </span>
 <span class="co">#&gt; </span>
@@ -207,21 +241,19 @@ ebd
 <a href="#executing-filters" class="anchor"></a>Executing filters</h3>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="../reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Gray Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span>
-ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file)
-<span class="co"># tidy up</span>
-<span class="kw">unlink</span>(output_file)</code></pre></div>
+ebd_jays &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file)</code></pre></div>
 <p><strong>Filtering the full EBD typically takes at least a couple hours</strong>, so set it running then go grab lunch!</p>
 </div>
 <div id="reading" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reading" class="anchor"></a>Reading</h3>
-<p>EBD files can be read with <code><a href="../reference/read_ebd.html">read_ebd()</a></code>. This is a wrapper around <code>data.table::fread()</code>, <code>readr::read_delim()</code>, or <code>read.delim()</code>, depending on which packages are installed. <code><a href="../reference/read_ebd.html">read_ebd()</a></code> uses <code>stringsAsFactors = FALSE</code>, <code>quote = ""</code>, sets column classes, and converts variable names to <code>snake_case</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>() %&gt;%<span class="st"> </span>
+<p>eBird Basic Dataset files can be read with <code><a href="../reference/read_ebd.html">read_ebd()</a></code>. This is a wrapper around <code>data.table::fread()</code>, <code>readr::read_delim()</code>, or <code>read.delim()</code>, depending on which packages are installed. <code><a href="../reference/read_ebd.html">read_ebd()</a></code> uses <code>stringsAsFactors = FALSE</code>, <code>quote = ""</code>, sets column classes, and converts variable names to <code>snake_case</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">glimpse</span>()
 <span class="co">#&gt; Observations: 487</span>
 <span class="co">#&gt; Variables: 47</span>
@@ -274,30 +306,28 @@ ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span clas
 <span class="co">#&gt; $ species_comments           &lt;chr&gt; NA, NA, NA, NA, NA, "audible-only",...</span></code></pre></div>
 <p><code><a href="../reference/auk_filter.html">auk_filter()</a></code> returns an <code>auk_ebd</code> object with the output file paths stored in it. This <code>auk_ebd</code> object can then be passed directly to <code>auk_read()</code>, allowing for a complete pipeline. For example, we can create an <code>auk_ebd</code> object, define filters, filter with AWK, and read in the results all at once.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span>
-ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>()
-<span class="co"># tidy up</span>
-<span class="kw">unlink</span>(output_file)</code></pre></div>
+ebd_df &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>()</code></pre></div>
 </div>
 <div id="saving-the-awk-command" class="section level3">
 <h3 class="hasAnchor">
 <a href="#saving-the-awk-command" class="anchor"></a>Saving the AWK command</h3>
 <p>The AWK script can be saved for future reference by providing an output filename to <code>awk_file</code>. In addition, by setting <code>execute = FALSE</code> the AWK script will be generated but not run.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">awk_script &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">awk_script &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="dt">awk_file =</span> <span class="st">"awk-script.txt"</span>, <span class="dt">execute =</span> <span class="ot">FALSE</span>)
 <span class="co"># read back in and prepare for printing</span>
 awk_file &lt;-<span class="st"> </span><span class="kw">readLines</span>(awk_script)
-awk_file[!<span class="kw">grepl</span>(<span class="st">"^[[:space:]]*$"</span>, awk_file)] %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">paste0</span>(<span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) %&gt;%<span class="st"> </span>
+awk_file[<span class="op">!</span><span class="kw">grepl</span>(<span class="st">"^[[:space:]]*$"</span>, awk_file)] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">paste0</span>(<span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">cat</span>()
-<span class="co">#&gt; BEGIN {</span>
+<span class="co">#&gt; </span><span class="re">BEGIN</span><span class="co"> {</span>
 <span class="co">#&gt;   FS = " "</span>
 <span class="co">#&gt;   OFS = "    "</span>
 <span class="co">#&gt; }</span>
@@ -321,9 +351,7 @@ awk_file[!<span class="kw">grepl</span>(<span class="st">"^[[:space:]]*$"</span>
 <span class="co">#&gt;   if (keep == 1) {</span>
 <span class="co">#&gt;     print $0</span>
 <span class="co">#&gt;   }</span>
-<span class="co">#&gt; }</span>
-<span class="co"># tidy up</span>
-<span class="kw">unlink</span>(awk_script)</code></pre></div>
+<span class="co">#&gt; }</span></code></pre></div>
 </div>
 <div id="group-checklists" class="section level3">
 <h3 class="hasAnchor">
@@ -331,12 +359,12 @@ awk_file[!<span class="kw">grepl</span>(<span class="st">"^[[:space:]]*$"</span>
 <p>eBird allows observers birding together to share checklists. This process creates a new copy of the original checklist for each observer with whom the original checklist was shared; these copies can then be tweaked to add or remove some species that weren’t seen by the entire group, or altering the sampling-event data. For most applications, it’s best to remove these duplicate (or near-duplicate) checklists. <code><a href="../reference/auk_unique.html">auk_unique()</a></code> removes duplicates resulting from group checklists by selecting the observation with the lowest <code>sampling_event_identifier</code> (a unique ID for each checklist); this is the original checklists from which shared copies were generated. In addition to removing duplicates, a <code>checklist_id</code> field is added, which is equal to the <code>sampling_event_identifier</code> for non-group checklists and the <code>group_identifier</code> for grouped checklists. After running <code><a href="../reference/auk_unique.html">auk_unique()</a></code>, every species will have a single entry for each <code>checklist_id</code>.</p>
 <p><code><a href="../reference/read_ebd.html">read_ebd()</a></code> automatically runs <code><a href="../reference/auk_unique.html">auk_unique()</a></code>, however, we can use <code>unique = FALSE</code> then manually run <code><a href="../reference/auk_unique.html">auk_unique()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># read in an ebd file and don't automatically remove duplicates</span>
-ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%
+ebd_dupes &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>(<span class="dt">unique =</span> <span class="ot">FALSE</span>)
 <span class="co"># remove duplicates</span>
-ebd_unique &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_unique.html">auk_unique</a></span>(ebd)
+ebd_unique &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_unique.html">auk_unique</a></span>(ebd_dupes)
 <span class="co"># compare number of rows</span>
-<span class="kw">nrow</span>(ebd)
+<span class="kw">nrow</span>(ebd_dupes)
 <span class="co">#&gt; [1] 500</span>
 <span class="kw">nrow</span>(ebd_unique)
 <span class="co">#&gt; [1] 487</span></code></pre></div>
@@ -344,12 +372,12 @@ ebd_unique &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <div id="taxonomic-rollup" class="section level3">
 <h3 class="hasAnchor">
 <a href="#taxonomic-rollup" class="anchor"></a>Taxonomic rollup</h3>
-<p>The eBird Basic Dataset (EBD) includes both true species and other taxa, including domestics, hybrids, subspecies, “spuhs”, and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, “warbler sp.”. For most use cases, a single record for each species on each checklist is desired. The function <code>ebd_rollup()</code> addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-rollup-ex.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) %&gt;%
+<p>The eBird Basic Dataset includes both true species and other taxa, including domestics, hybrids, subspecies, “spuhs”, and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, “warbler sp.”. For most use cases, a single record for each species on each checklist is desired. The function <code>ebd_rollup()</code> addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd_noru &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-rollup-ex.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>(<span class="dt">rollup =</span> <span class="ot">FALSE</span>)
 <span class="co"># note the presence of forms for american robin and bewick's wren</span>
-ebd %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(checklist_id ==<span class="st"> "S7980609"</span>) %&gt;%<span class="st"> </span>
+ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(checklist_id <span class="op">==</span><span class="st"> "S7980609"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="dt">id =</span> checklist_id, category, 
          <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
 <span class="co">#&gt; # A tibble: 7 x 4</span>
@@ -363,9 +391,9 @@ ebd %&gt;%<span class="st"> </span>
 <span class="co">#&gt; 6 S7980609  species      Bewick's Wren                               &lt;NA&gt;</span>
 <span class="co">#&gt; 7 S7980609     issf      Bewick's Wren     Bewick's Wren (spilurus Group)</span>
 <span class="co"># taxonomic rollup</span>
-ebd %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_rollup.html">auk_rollup</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(checklist_id ==<span class="st"> "S7980609"</span>) %&gt;%<span class="st"> </span>
+ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_rollup.html">auk_rollup</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(checklist_id <span class="op">==</span><span class="st"> "S7980609"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="dt">id =</span> checklist_id, category,
          <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
 <span class="co">#&gt; # A tibble: 5 x 4</span>
@@ -376,24 +404,24 @@ ebd %&gt;%<span class="st"> </span>
 <span class="co">#&gt; 3 S7980609  species     American Robin       &lt;NA&gt;</span>
 <span class="co">#&gt; 4 S7980609  species         Bald Eagle       &lt;NA&gt;</span>
 <span class="co">#&gt; 5 S7980609  species      Bewick's Wren       &lt;NA&gt;</span></code></pre></div>
-<p>By default, <code><a href="../reference/read_ebd.html">read_ebd()</a></code> calls <code>ebd_rollup()</code> when importing an EBD file. To avoid this, and retain subspecies, use <code><a href="../reference/read_ebd.html">read_ebd(rollup = FALSE)</a></code>.</p>
+<p>By default, <code><a href="../reference/read_ebd.html">read_ebd()</a></code> calls <code>ebd_rollup()</code> when importing an eBird Basic Dataset file. To avoid this, and retain subspecies, use <code><a href="../reference/read_ebd.html">read_ebd(rollup = FALSE)</a></code>.</p>
 </div>
 </div>
 <div id="zero-filled-presence-absence-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#zero-filled-presence-absence-data" class="anchor"></a>Zero-filled, presence-absence data</h2>
-<p>For many applications, presence-only data are sufficient; however, for modeling and analysis, presence-absence data are required. eBird observers only explicitly collect presence data, but they have the option of flagging their checklist as “complete” meaning that they are reporting all the species they saw or heard, and identified. Therefore, given a list of positive sightings (the EBD) and a list of all checklists (the sampling event data) it is possible to infer absences by filling zeros for all species not explicitly reported. This section of the vignette describes functions for producing zero-filled, presence-absence data.</p>
+<p>For many applications, presence-only data are sufficient; however, for modeling and analysis, presence-absence data are required. eBird observers only explicitly collect presence data, but they have the option of flagging their checklist as “complete” meaning that they are reporting all the species they saw or heard, and identified. Therefore, given a list of positive sightings (the basic dataset) and a list of all checklists (the sampling event data) it is possible to infer absences by filling zeros for all species not explicitly reported. This section of the vignette describes functions for producing zero-filled, presence-absence data.</p>
 <div id="filtering" class="section level3">
 <h3 class="hasAnchor">
 <a href="#filtering" class="anchor"></a>Filtering</h3>
-<p>When preparing to create zero-filled data, the EBD and sampling event data must be filtered to the same set of checklists to ensure consistency. To ensure these two datasets are synced, provide <em>both</em> the EBD and sampling event data files to <code>auk_ebd</code>, then filter as described in the previous section. This will ensure that all the filters applied to the ebd (except species) will be applied to the sampling event data so that we’ll be working with the same set of checklists. It is critical that <code>auk_compete()</code> is called, since complete checklists are a requirement for zero-filling.</p>
+<p>When preparing to create zero-filled data, the eBird Basic Dataset and sampling event data must be filtered to the same set of checklists to ensure consistency. To ensure these two datasets are synced, provide <em>both</em> to <code>auk_ebd</code>, then filter as described in the previous section. This will ensure that all the filters applied to the ebd (except species) will be applied to the sampling event data so that we’ll be working with the same set of checklists. It is critical that <code>auk_compete()</code> is called, since complete checklists are a requirement for zero-filling.</p>
 <p>For example, the following filters to only include sightings of Collared Kingfisher between 6 and 10am:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to produce zero-filled data, provide an EBD and sampling event data file</span>
 f_ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/zerofill-ex_ebd.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
 f_smp &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/zerofill-ex_sampling.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
-filters &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>(f_ebd, <span class="dt">file_sampling =</span> f_smp) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="st">"Collared Kingfisher"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/auk_time.html">auk_time</a></span>(<span class="kw">c</span>(<span class="st">"06:00"</span>, <span class="st">"10:00"</span>)) %&gt;%<span class="st"> </span>
+filters &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>(f_ebd, <span class="dt">file_sampling =</span> f_smp) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="st">"Collared Kingfisher"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/auk_time.html">auk_time</a></span>(<span class="kw">c</span>(<span class="st">"06:00"</span>, <span class="st">"10:00"</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/auk_complete.html">auk_complete</a></span>()
 filters
 <span class="co">#&gt; Input </span>
@@ -413,14 +441,10 @@ filters
 <span class="co">#&gt;   Duration: all</span>
 <span class="co">#&gt;   Complete checklists only: yes</span></code></pre></div>
 <p>As with presence-only data, call <code><a href="../reference/auk_filter.html">auk_filter()</a></code> to actually run AWK. Output files must be provided for both the EBD and sampling event data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># needed to allow building vignette on machines without awk</span>
-ebd_filtered &lt;-<span class="st"> </span>filters
-ebd_filtered$output &lt;-<span class="st"> "ebd-filtered.txt"</span>
-ebd_filtered$output_sampling &lt;-<span class="st"> "sampling-filtered.txt"</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ebd_filtered &lt;- auk_filter(filters, 
-##                            file = "ebd-filtered.txt",
-##                            file_sampling = "sampling-filtered.txt")
-ebd_filtered
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ebd_sed_filtered &lt;- auk_filter(filters, 
+##                                file = "ebd-filtered.txt",
+##                                file_sampling = "sampling-filtered.txt")
+ebd_sed_filtered
 <span class="co">#&gt; Input </span>
 <span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_ebd.txt </span>
 <span class="co">#&gt;   Sampling events: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_sampling.txt </span>
@@ -443,17 +467,17 @@ ebd_filtered
 <h3 class="hasAnchor">
 <a href="#reading-and-zero-filling" class="anchor"></a>Reading and zero-filling</h3>
 <p>The filtered datasets can now be combined into a zero-filled, presence-absence dataset using <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ebd_zf &lt;- auk_zerofill(ebd_filtered)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ebd_zf &lt;- auk_zerofill(ebd_sed_filtered)
 ebd_zf
 <span class="co">#&gt; Zero-filled EBD: 179 unique checklists, for 1 species.</span></code></pre></div>
-<p>Filenames or data frames of the EDB and sampling event data can also be passed to <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code>; see the documentation for these cases. By default, <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code> returns an <code>auk_zerofill</code> object consisting of two data frames that can be linked by a common <code>checklist_id</code> field:</p>
+<p>Filenames or data frames of the basic dataset and sampling event data can also be passed to <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code>; see the documentation for these cases. By default, <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code> returns an <code>auk_zerofill</code> object consisting of two data frames that can be linked by a common <code>checklist_id</code> field:</p>
 <ul>
 <li>
 <code>ebd_zf$sampling_events</code> contains the checklist information</li>
 <li>
 <code>ebd_zf$observations</code> contains the species counts and a binary presence-absence variable</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ebd_zf$observations)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ebd_zf<span class="op">$</span>observations)
 <span class="co">#&gt; # A tibble: 6 x 4</span>
 <span class="co">#&gt;   checklist_id     scientific_name observation_count species_observed</span>
 <span class="co">#&gt;          &lt;chr&gt;               &lt;chr&gt;             &lt;chr&gt;            &lt;lgl&gt;</span>
@@ -463,7 +487,7 @@ ebd_zf
 <span class="co">#&gt; 4    S10006731 Todiramphus chloris                 5             TRUE</span>
 <span class="co">#&gt; 5    S10006786 Todiramphus chloris                 0            FALSE</span>
 <span class="co">#&gt; 6    S10011787 Todiramphus chloris                 3             TRUE</span>
-<span class="kw">glimpse</span>(ebd_zf$sampling_events)
+<span class="kw">glimpse</span>(ebd_zf<span class="op">$</span>sampling_events)
 <span class="co">#&gt; Observations: 179</span>
 <span class="co">#&gt; Variables: 32</span>
 <span class="co">#&gt; $ checklist_id              &lt;chr&gt; "S23107780", "S10926976", "S34396450...</span>
@@ -550,7 +574,8 @@ Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. L
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#background">Background</a></li>
+<li><a href="#quick-start">Quick start</a></li>
+      <li><a href="#background">Background</a></li>
       <li><a href="#presence-data">Presence data</a></li>
       <li><a href="#zero-filled-presence-absence-data">Zero-filled, presence-absence data</a></li>
       <li><a href="#acknowledgements">Acknowledgements</a></li>

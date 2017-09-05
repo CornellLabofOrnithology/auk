@@ -2,7 +2,7 @@
 % Please edit documentation in R/auk-ebd.r
 \name{auk_ebd}
 \alias{auk_ebd}
-\title{Reference to EBD file}
+\title{Reference to eBird data file}
 \usage{
 auk_ebd(file, file_sampling, sep = "\\t")
 }
@@ -14,11 +14,13 @@ required if you intend to zero-fill the data to produce a presence-absence
 data set. The sampling file consists of just effort information for every
 eBird checklist. Any species not appearing in the EBD for a given checklist
 is implicitly considered to have a count of 0. This file should be
-downloaded at the same time as the EBD to ensure they are in sync.}
+downloaded at the same time as the basic dataset to ensure they are in
+sync.}
 
-\item{sep}{character; the input field separator, the EBD is tab separated so
-this should generally not be modified. Must only be a single character and
-space delimited is not allowed since spaces appear in many of the fields.}
+\item{sep}{character; the input field separator, the eBird data are tab
+separated so this should generally not be modified. Must only be a single
+character and space delimited is not allowed since spaces appear in many of
+the fields.}
 }
 \value{
 An \code{auk_ebd} object storing the file reference and the desired
@@ -29,7 +31,7 @@ Create a reference to an eBird Basic Dataset (EBD) file in preparation for
 filtering using AWK.
 }
 \details{
-The EBD can be downloaded as a tab-separated text file from the
+eBird data can be downloaded as a tab-separated text file from the
 \href{http://ebird.org/ebird/data/download}{eBird website} after submitting a
 request for access. As of February 2017, this file is nearly 150 GB making
 it challenging to work with. If you're only interested in a single species
@@ -40,13 +42,13 @@ There are two potential pathways for preparing eBird data. Users wishing to
 produce presence only data, should download the \href{http://ebird.org/ebird/data/download/}{eBird Basic Dataset}
 and reference this file when calling \code{auk_ebd()}. Users wishing to produce
 zero-filled, presence absence data should additionally download the sampling
-event data file associated with the EBD. This file contains only checklist
-information and can be used to infer absences. The sampling event data file
-should be provided to \code{auk_ebd()} via the \code{file_sampling} argument. For
-further details consult the vignettes.
+event data file associated with the basic dataset This file contains only
+checklist information and can be used to infer absences. The sampling event
+data file should be provided to \code{auk_ebd()} via the \code{file_sampling} argument.
+For further details consult the vignettes.
 }
 \examples{
-# set up reference to sample EBD file
+# set up reference to sample file
 f <- system.file("extdata/ebd-sample.txt", package = "auk")
 auk_ebd(f)
 # to produce zero-filled data, provide a sampling event data file

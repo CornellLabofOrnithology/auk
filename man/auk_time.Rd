@@ -2,12 +2,12 @@
 % Please edit documentation in R/auk-time.r
 \name{auk_time}
 \alias{auk_time}
-\title{Filter the EBD by checklist start time}
+\title{Filter the eBird data by checklist start time}
 \usage{
 auk_time(x, time)
 }
 \arguments{
-\item{x}{\code{auk_ebd} object; reference to EBD file created by \code{\link[=auk_ebd]{auk_ebd()}}.}
+\item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
 
 \item{time}{character; 2 element character vector giving the range of times
 in 24 hour format, e.g. \code{"06:30"} or \code{"16:22"}.}

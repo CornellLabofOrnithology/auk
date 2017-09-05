@@ -34,14 +34,57 @@ Full details on using `auk` to produce both presence-only and presence-absence d
 A note on versions
 ------------------
 
-This package contains a current (as of the time of package release) version of the [bird taxonomy used by eBird](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy). This taxonomy determines the species that can be reported in eBird and therefore the species that users of `auk` can extract from the EBD. eBird releases an updated taxonomy once a year, typically in August, at which time `auk` will be updated to include the current taxonomy. When using `auk`, users should be careful to ensure that the version they're using is in sync with the EBD file they're working with. This is most easily accomplished by always using the must recent version of `auk` and the most recent release of the EBD.
+This package contains a current (as of the time of package release) version of the [bird taxonomy used by eBird](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy). This taxonomy determines the species that can be reported in eBird and therefore the species that users of `auk` can extract. eBird releases an updated taxonomy once a year, typically in August, at which time `auk` will be updated to include the current taxonomy. When using `auk`, users should be careful to ensure that the version they're using is in sync with the eBird Basic Dataset they're working with. This is most easily accomplished by always using the must recent version of `auk` and the most recent release of the dataset.
+
+Quick start
+-----------
+
+This package uses the command-line program AWK to extract subsets of the eBird Basic Dataset for use in R. This is a multi-step process:
+
+1.  Define a reference to the eBird data file.
+2.  Define a set of spatial, temporal, or taxonomic filters. Each type of filter corresponds to a different function, e.g. `auk_species` to filter by species. At this stage the filters are only set up, no actual filtering is done until the next step.
+3.  Filter the eBird data text file, producing a new text file with only the selected rows.
+4.  Import this text file into R as a data frame.
+
+Because the eBird dataset is so large, step 3 typically takes several hours to run. Here's a simple example that extract all Gray Jay records from within Canada.
+
+``` r
+library(auk)
+library(dplyr)
+# path to the ebird data file, here a sample included in the package
+input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
+# output text file
+output_file <- "ebd_filtered_grja.txt"
+ebird_data <- input_file %>% 
+  # 1. reference file
+  auk_ebd() %>% 
+  # 2. define filters
+  auk_species(species = "Gray Jay") %>% 
+  auk_country(country = "Canada") %>% 
+  # 3. run filtering
+  auk_filter(file = output_file) %>% 
+  # 4. read text file into r data frame
+  read_ebd()
+```
+
+For those not familiar with the pipe operator (`%>%`), the above code could be rewritten:
+
+``` r
+input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
+output_file <- "ebd_filtered_grja.txt"
+ebd <- auk_ebd(input_file)
+ebd_filters <- auk_species(ebd, species = "Gray Jay")
+ebd_filters <- auk_country(ebd_filters, country = "Canada")
+ebd_filtered <- auk_filter(ebd_filters, file = output_file)
+ebd_df <- read_ebd(ebd_filtered)
+```
 
 Usage
 -----
 
 ### Cleaning
 
-Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function `auk_clean()` drops these erroneous records and removes the blank column.
+Some rows in the dataset may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function `auk_clean()` drops these erroneous records and removes the blank column.
 
 ``` r
 library(auk)
@@ -50,23 +93,22 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp7Y4wXX/file5f1011a97d5b"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpul7eDv/filed1725ec23a60"
 # number of lines in input
 length(readLines(f))
 #> [1] 101
 # number of lines in output
 length(readLines(tmp))
 #> [1] 96
-unlink(tmp)
 ```
 
 ### Filtering
 
-`auk` uses a [pipeline-based workflow](http://r4ds.had.co.nz/pipes.html) for defining filters, which can then be compiled into an AWK script. Users should start by defining a reference to the EBD file with `auk_ebd()`. Then any of the following filters can be applied:
+`auk` uses a [pipeline-based workflow](http://r4ds.had.co.nz/pipes.html) for defining filters, which can then be compiled into an AWK script. Users should start by defining a reference to the dataset file with `auk_ebd()`. Then any of the following filters can be applied:
 
 -   `auk_species()`: filter by species using common or scientific names.
 -   `auk_country()`: filter by country using the standard English names or [ISO 2-letter country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
--   `auk_extent()`: filter by spatial extent, i.e. a range of latitudes and longitudes.
+-   `auk_extent()`: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.
 -   `auk_date()`: filter to checklists from a range of dates.
 -   `auk_last_edited()`: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.
 -   `auk_time()`: filter to checklists started during a range of times-of-day.
@@ -118,20 +160,18 @@ Each of the functions described in the *Defining filters* section only defines a
 
 ``` r
 output_file <- "ebd_filtered_blja-grja.txt"
-ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
+ebd_filtered <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
   auk_ebd() %>% 
   auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>% 
   auk_country(country = "Canada") %>% 
   auk_filter(file = output_file)
-# tidy up
-unlink(output_file)
 ```
 
-**Filtering the full EBD typically takes at least a couple hours**, so set it running then go grab lunch!
+**Filtering the full dataset typically takes at least a couple hours**, so set it running then go grab lunch!
 
 ### Reading
 
-EBD files can be read with `read_ebd()`:
+eBird Basic Dataset files can be read with `read_ebd()`:
 
 ``` r
 system.file("extdata/ebd-sample.txt", package = "auk") %>% 

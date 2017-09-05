@@ -1,4 +1,4 @@
-#' Filter the EBD by country
+#' Filter the eBird data by country
 #'
 #' Define a filter for the eBird Basic Dataset (EBD) based on a set of
 #' countries. This function only defines the filter and, once all filters have

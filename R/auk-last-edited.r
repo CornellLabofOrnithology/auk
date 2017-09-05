@@ -1,4 +1,4 @@
-#' Filter the EBD by last edited date
+#' Filter the eBird data by last edited date
 #'
 #' Define a filter for the eBird Basic Dataset (EBD) based on a range of last
 #' edited dates. Last edited date is typically used to extract just new or
@@ -6,7 +6,7 @@
 #' filters have been defined, [auk_filter()] should be used to call AWK and
 #' perform the filtering.
 #'
-#' @param x `auk_ebd` object; reference to EBD file created by [auk_ebd()].
+#' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
 #' @param date character or date; date range to filter by, provided either as a
 #'   character vector in the format `"2015-12-31"` or a vector of Date objects.
 #'

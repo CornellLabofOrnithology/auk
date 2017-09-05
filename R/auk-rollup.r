@@ -1,4 +1,4 @@
-#' Roll up EBD taxonomy to species
+#' Roll up eBird taxonomy to species
 #' 
 #' The eBird Basic Dataset (EBD) includes both true species and other taxa,  
 #' including domestics, hybrids, subspecies, "spuhs", and recognizable forms. 
@@ -8,9 +8,9 @@
 #' This function addresses these cases by removing taxa not identifiable to 
 #' species and rolling up taxa identified below species level to a single record 
 #' for each species in each checklist. By default, [read_ebd()] calls 
-#' `ebd_rollup()` when importing an EBD file.
+#' `ebd_rollup()` when importing an eBird data file.
 #'
-#' @param x data.frame; the EBD data frame, typically as imported by
+#' @param x data.frame; data frame of eBird data, typically as imported by
 #'   [read_ebd()]
 #' @details When rolling observations up to species level the observed counts
 #'   are summed across any taxa that resolve to the same species. However, if
@@ -19,7 +19,7 @@
 #'   an observer saw 3 Myrtle and 2 Audubon Warblers, this will roll up to 5 
 #'   Yellow-rumped Warblers. However, if an "X" was entered for Myrtle, this 
 #'   would roll up to "X" for Yellow-rumped Warbler.
-#' @return A data frame of the EBD with taxonomic rollup applied.
+#' @return A data frame of the eBird data with taxonomic rollup applied.
 #' @export
 #' @examples
 #' ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>% 

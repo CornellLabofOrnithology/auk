@@ -1,0 +1,39 @@
+
+BEGIN {
+  FS = "	"
+  OFS = "	"
+}
+{
+  keep = 1
+
+  # filters
+  
+  if (keep == 1 && ($6 == "Cyanocitta cristata" || $6 == "Perisoreus canadensis")) {
+    keep = 1
+  } else {
+    keep = 0
+  }
+
+  
+  if (keep == 1 && ($13 == "CA")) {
+    keep = 1
+  } else {
+    keep = 0
+  }
+
+  
+  
+  
+  
+  
+
+  # keeps header
+  if (NR == 1) {
+    keep = 1
+  }
+
+  if (keep == 1) {
+    print $0
+  }
+}
+

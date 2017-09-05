@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clean an EBD file — auk_clean • auk</title>
+<title>Clean an eBird data file — auk_clean • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,14 +77,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Clean an EBD file</h1>
+    <h1>Clean an eBird data file</h1>
     </div>
 
     
     <p>Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of
 columns, often resulting from tabs embedded in the comments field. This
 function drops these problematic records. <strong>Note that this function typically
-takes at least 3 hours to run on the full EBD.</strong></p>
+takes at least 3 hours to run on the full dataset</strong></p>
     
 
     <pre class="usage"><span class='fu'>auk_clean</span>(<span class='no'>f_in</span>, <span class='no'>f_out</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>remove_blank</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -103,9 +103,9 @@ takes at least 3 hours to run on the full EBD.</strong></p>
     </tr>
     <tr>
       <th>sep</th>
-      <td><p>character; the input field separator, the EBD is tab separated by
-default. Must only be a single character and space delimited is not allowed
-since spaces appear in many of the fields.</p></td>
+      <td><p>character; the input field separator, the basic dataset is tab
+separated by default. Must only be a single character and space delimited
+is not allowed since spaces appear in many of the fields.</p></td>
     </tr>
     <tr>
       <th>remove_blank</th>
@@ -126,7 +126,7 @@ however, if an error was encountered the exit code is returned.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function can clean an EBD file or an EBD sampling file.</p>
+    <p>This function can clean a basic dataset file or a sampling file.</p>
 <p>Calling this function requires that the command line utility AWK is
 installed. Linux and Mac machines should have AWK by default, Windows users
 will likely need to install <a href = 'https://www.cygwin.com'>Cygwin</a>.</p>
@@ -148,7 +148,6 @@ will likely need to install <a href = 'https://www.cygwin.com'>Cygwin</a>.</p>
   <span class='co'># note that the extra blank column has also been removed</span>
   <span class='fu'>ncol</span>(<span class='fu'>read.delim</span>(<span class='no'>f</span>, <span class='kw'>nrows</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='st'>""</span>))
   <span class='fu'>ncol</span>(<span class='fu'>read.delim</span>(<span class='no'>tmp</span>, <span class='kw'>nrows</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='st'>""</span>))
-  <span class='fu'>unlink</span>(<span class='no'>tmp</span>)
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

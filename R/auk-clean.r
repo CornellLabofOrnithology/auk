@@ -1,15 +1,15 @@
-#' Clean an EBD file
+#' Clean an eBird data file
 #'
 #' Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of
 #' columns, often resulting from tabs embedded in the comments field. This
 #' function drops these problematic records. **Note that this function typically
-#' takes at least 3 hours to run on the full EBD.**
+#' takes at least 3 hours to run on the full dataset**
 #'
 #' @param f_in character; input file.
 #' @param f_out character; output file.
-#' @param sep character; the input field separator, the EBD is tab separated by
-#'   default. Must only be a single character and space delimited is not allowed
-#'   since spaces appear in many of the fields.
+#' @param sep character; the input field separator, the basic dataset is tab
+#'   separated by default. Must only be a single character and space delimited
+#'   is not allowed since spaces appear in many of the fields.
 #' @param remove_blank logical; whether the trailing blank should be removed
 #'   from the end of each row. The EBD comes with an extra tab at the end of
 #'   each line, which causes a extra blank column.
@@ -17,7 +17,7 @@
 #'
 #' @details
 #'
-#' This function can clean an EBD file or an EBD sampling file.
+#' This function can clean a basic dataset file or a sampling file.
 #'
 #' Calling this function requires that the command line utility AWK is
 #' installed. Linux and Mac machines should have AWK by default, Windows users
@@ -42,7 +42,6 @@
 #' # note that the extra blank column has also been removed
 #' ncol(read.delim(f, nrows = 5, quote = ""))
 #' ncol(read.delim(tmp, nrows = 5, quote = ""))
-#' unlink(tmp)
 #' }
 auk_clean <- function(f_in, f_out, sep = "\t",
                       remove_blank = TRUE, overwrite = FALSE) {

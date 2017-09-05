@@ -2,12 +2,12 @@
 % Please edit documentation in R/auk-last-edited.r
 \name{auk_last_edited}
 \alias{auk_last_edited}
-\title{Filter the EBD by last edited date}
+\title{Filter the eBird data by last edited date}
 \usage{
 auk_last_edited(x, date)
 }
 \arguments{
-\item{x}{\code{auk_ebd} object; reference to EBD file created by \code{\link[=auk_ebd]{auk_ebd()}}.}
+\item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
 
 \item{date}{character or date; date range to filter by, provided either as a
 character vector in the format \code{"2015-12-31"} or a vector of Date objects.}

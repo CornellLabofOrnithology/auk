@@ -2,7 +2,7 @@
 % Please edit documentation in R/auk-country.r
 \name{auk_country}
 \alias{auk_country}
-\title{Filter the EBD by country}
+\title{Filter the eBird data by country}
 \usage{
 auk_country(x, country, replace)
 }

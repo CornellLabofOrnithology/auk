@@ -7,6 +7,33 @@ knitr::opts_chunk$set(
 suppressPackageStartupMessages(library(auk))
 suppressPackageStartupMessages(library(dplyr))
 
+## ----quickstart, eval = FALSE--------------------------------------------
+#  library(auk)
+#  library(dplyr)
+#  # path to the ebird data file, here a sample included in the package
+#  input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
+#  # output text file
+#  output_file <- "ebd_filtered_grja.txt"
+#  ebird_data <- input_file %>%
+#    # 1. reference file
+#    auk_ebd() %>%
+#    # 2. define filters
+#    auk_species(species = "Gray Jay") %>%
+#    auk_country(country = "Canada") %>%
+#    # 3. run filtering
+#    auk_filter(file = output_file) %>%
+#    # 4. read text file into r data frame
+#    read_ebd()
+
+## ----quickstart-nopipes, eval = FALSE------------------------------------
+#  input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
+#  output_file <- "ebd_filtered_grja.txt"
+#  ebd <- auk_ebd(input_file)
+#  ebd_filters <- auk_species(ebd, species = "Gray Jay")
+#  ebd_filters <- auk_country(ebd_filters, country = "Canada")
+#  ebd_filtered <- auk_filter(ebd_filters, file = output_file)
+#  ebd_df <- read_ebd(ebd_filtered)
+
 ## ----example-data-1, eval = FALSE----------------------------------------
 #  library(auk)
 #  library(dplyr)
@@ -25,8 +52,6 @@ suppressPackageStartupMessages(library(dplyr))
 #  f_out <- "ebd_cleaned.txt"
 #  # remove problem records
 #  cleaned <- auk_clean(f, f_out = f_out)
-#  # tidy up
-#  unlink(f_out)
 
 ## ----auk-ebd-------------------------------------------------------------
 ebd <- system.file("extdata/ebd-sample_messy.txt", package = "auk") %>% 
@@ -34,7 +59,7 @@ ebd <- system.file("extdata/ebd-sample_messy.txt", package = "auk") %>%
 ebd
 
 ## ----auk-filter----------------------------------------------------------
-ebd <- ebd %>% 
+ebd_filters <- ebd %>% 
   # species: common and scientific names can be mixed
   auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>%
   # country: codes and names can be mixed; case insensitive
@@ -49,17 +74,15 @@ ebd <- ebd %>%
   auk_duration(duration = c(0, 60)) %>%
   # complete: all species seen or heard are recorded
   auk_complete()
-ebd
+ebd_filters
 
 ## ----auk-complete, eval = FALSE------------------------------------------
 #  output_file <- "ebd_filtered_blja-grja.txt"
-#  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+#  ebd_jays <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #    auk_ebd() %>%
 #    auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>%
 #    auk_country(country = "Canada") %>%
 #    auk_filter(file = output_file)
-#  # tidy up
-#  unlink(output_file)
 
 ## ----read----------------------------------------------------------------
 system.file("extdata/ebd-sample.txt", package = "auk") %>% 
@@ -68,14 +91,12 @@ system.file("extdata/ebd-sample.txt", package = "auk") %>%
 
 ## ----read-auk-ebd, eval = FALSE------------------------------------------
 #  output_file <- "ebd_filtered_blja-grja.txt"
-#  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+#  ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #    auk_ebd() %>%
 #    auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>%
 #    auk_country(country = "Canada") %>%
 #    auk_filter(file = output_file) %>%
 #    read_ebd()
-#  # tidy up
-#  unlink(output_file)
 
 ## ----awk-script----------------------------------------------------------
 awk_script <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
@@ -88,29 +109,27 @@ awk_file <- readLines(awk_script)
 awk_file[!grepl("^[[:space:]]*$", awk_file)] %>% 
   paste0(collapse = "\n") %>% 
   cat()
-# tidy up
-unlink(awk_script)
 
 ## ----auk-unique----------------------------------------------------------
 # read in an ebd file and don't automatically remove duplicates
-ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+ebd_dupes <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
   read_ebd(unique = FALSE)
 # remove duplicates
-ebd_unique <- auk_unique(ebd)
+ebd_unique <- auk_unique(ebd_dupes)
 # compare number of rows
-nrow(ebd)
+nrow(ebd_dupes)
 nrow(ebd_unique)
 
 ## ----auk-rollup----------------------------------------------------------
-ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
+ebd_noru <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
   read_ebd(rollup = FALSE)
 # note the presence of forms for american robin and bewick's wren
-ebd %>% 
+ebd_noru %>% 
   filter(checklist_id == "S7980609") %>% 
   select(id = checklist_id, category, 
          species = common_name, subspecies = subspecies_common_name)
 # taxonomic rollup
-ebd %>% 
+ebd_noru %>% 
   auk_rollup() %>% 
   filter(checklist_id == "S7980609") %>% 
   select(id = checklist_id, category,
@@ -126,17 +145,17 @@ filters <- auk_ebd(f_ebd, file_sampling = f_smp) %>%
   auk_complete()
 filters
 
-## ----zf-filter-fake, echo = TRUE-----------------------------------------
+## ----zf-filter-fake, echo = FALSE----------------------------------------
 # needed to allow building vignette on machines without awk
-ebd_filtered <- filters
-ebd_filtered$output <- "ebd-filtered.txt"
-ebd_filtered$output_sampling <- "sampling-filtered.txt"
+ebd_sed_filtered <- filters
+ebd_sed_filtered$output <- "ebd-filtered.txt"
+ebd_sed_filtered$output_sampling <- "sampling-filtered.txt"
 
 ## ----zf-filter, eval = -1------------------------------------------------
-ebd_filtered <- auk_filter(filters, 
-                           file = "ebd-filtered.txt",
-                           file_sampling = "sampling-filtered.txt")
-ebd_filtered
+ebd_sed_filtered <- auk_filter(filters, 
+                               file = "ebd-filtered.txt",
+                               file_sampling = "sampling-filtered.txt")
+ebd_sed_filtered
 
 ## ----auk-zf-fake, echo = FALSE-------------------------------------------
 # needed to allow building vignette on machines without awk
@@ -146,18 +165,18 @@ fake_smp <- read_sampling(f_smp)
 fake_ebd <- subset(
   fake_ebd, 
   all_species_reported & 
-    scientific_name %in% ebd_filtered$filters$species & 
-    time_observations_started >= ebd_filtered$filters$time[1] & 
-    time_observations_started <= ebd_filtered$filters$time[2])
+    scientific_name %in% ebd_sed_filtered$filters$species & 
+    time_observations_started >= ebd_sed_filtered$filters$time[1] & 
+    time_observations_started <= ebd_sed_filtered$filters$time[2])
 fake_smp <- subset(
   fake_smp, 
   all_species_reported & 
-    time_observations_started >= ebd_filtered$filters$time[1] & 
-    time_observations_started <= ebd_filtered$filters$time[2])
+    time_observations_started >= ebd_sed_filtered$filters$time[1] & 
+    time_observations_started <= ebd_sed_filtered$filters$time[2])
 ebd_zf <- auk_zerofill(fake_ebd, fake_smp)
 
 ## ----auk-zf, eval = -1---------------------------------------------------
-ebd_zf <- auk_zerofill(ebd_filtered)
+ebd_zf <- auk_zerofill(ebd_sed_filtered)
 ebd_zf
 
 ## ----zf-components-------------------------------------------------------

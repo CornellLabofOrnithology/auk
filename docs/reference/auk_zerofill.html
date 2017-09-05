@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read and zero-fill an EBD file — auk_zerofill • auk</title>
+<title>Read and zero-fill an eBird data file — auk_zerofill • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,12 +77,12 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read and zero-fill an EBD file</h1>
+    <h1>Read and zero-fill an eBird data file</h1>
     </div>
 
     
     <p>Read an eBird Basic Dataset file, and associated sampling event data file, to
-produce a zero-filled, presence-absence dataset. The EBD contains bird
+produce a zero-filled, presence-absence dataset. The basic dataa contains bird
 sightings and the sampling event data is a set of all checklists, they can be
 combined to infer absence data by assuming any species not reported on a
 checklist was had a count of zero.</p>
@@ -109,8 +109,8 @@ checklist was had a count of zero.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>filename, <code>data.frame</code> of EBD observations, or <code>auk_ebd</code> object with
-associated output files as created by <code><a href='auk_filter.html'>auk_filter()</a></code>. If a filename is
+      <td><p>filename, <code>data.frame</code> of eBird observations, or <code>auk_ebd</code> object
+with associated output files as created by <code><a href='auk_filter.html'>auk_filter()</a></code>. If a filename is
 provided, it must point to the EBD and the <code>sampling_events</code> argument must
 point to the sampling event data file. If a <code>data.frame</code> is provided it
 should have been imported with <code><a href='read_ebd.html'>read_ebd()</a></code>, to ensure the variables names
@@ -145,7 +145,7 @@ is there a <code>checklist_id</code> field or not.</p></td>
     </tr>
     <tr>
       <th>collapse</th>
-      <td><p>logical; whether to call <code>zerofill_collapse()</code> to return a
+      <td><p>logical; whether to call <code>collapse_zerofill()</code> to return a
 data frame rather than an <code>auk_zerofill</code> object.</p></td>
     </tr>
     <tr>

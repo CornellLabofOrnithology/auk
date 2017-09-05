@@ -2,12 +2,12 @@
 % Please edit documentation in R/auk-complete.r
 \name{auk_complete}
 \alias{auk_complete}
-\title{Filter out incomplete checklists from the EBD}
+\title{Filter out incomplete checklists from the eBird data}
 \usage{
 auk_complete(x)
 }
 \arguments{
-\item{x}{\code{auk_ebd} object; reference to EBD file created by \code{\link[=auk_ebd]{auk_ebd()}}.}
+\item{x}{\code{auk_ebd} object; reference to basic dataset file created by \code{\link[=auk_ebd]{auk_ebd()}}.}
 }
 \value{
 An \code{auk_ebd} object.

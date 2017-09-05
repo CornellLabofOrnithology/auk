@@ -1,4 +1,4 @@
-#' Filter out incomplete checklists from the EBD
+#' Filter out incomplete checklists from the eBird data
 #'
 #' Define a filter for the eBird Basic Dataset (EBD) to only keep complete
 #' checklists, i.e. those for which all birds seen or heard were recorded. These
@@ -7,7 +7,7 @@
 #' filters have been defined, [auk_filter()] should be used to call AWK and
 #' perform the filtering.
 #'
-#' @param x `auk_ebd` object; reference to EBD file created by [auk_ebd()].
+#' @param x `auk_ebd` object; reference to basic dataset file created by [auk_ebd()].
 #'
 #' @return An `auk_ebd` object.
 #' @export

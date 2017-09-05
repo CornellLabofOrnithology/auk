@@ -1,30 +1,30 @@
-#' Filter the EBD using AWK
+#' Filter the eBird file using AWK
 #'
 #' Convert the filters defined in an `auk_ebd` object into an AWK script and run
 #' this script to produce a filtered eBird Reference Dataset (ERD). The initial
 #' creation of the `auk_ebd` object should be done with [auk_ebd()] and filters
 #' can be defined using the various other functions in this package, e.g.
 #' [auk_species()] or [auk_country()]. **Note that this function typically takes
-#' at least a couple hours to run on the full EBD.**
+#' at least a couple hours to run on the full dataset**
 #'
-#' @param x `auk_ebd` object; reference to EBD file created by [auk_ebd()] with
+#' @param x `auk_ebd` object; reference to object created by [auk_ebd()] with
 #'   filters defined.
 #' @param file character; output file.
-#' @param file_sampling character; optional output file for EBD sampling data.
+#' @param file_sampling character; optional output file for sampling data.
 #' @param awk_file character; output file to optionally save the awk script to.
-#' @param filter_sampling logical; whether the EBD sampling event data should
-#'   also be filtered.
-#' @param sep character; the input field separator, the EBD is tab separated by
-#'   default. Must only be a single character and space delimited is not allowed
-#'   since spaces appear in many of the fields.
+#' @param filter_sampling logical; whether the sampling event data should also
+#'   be filtered.
+#' @param sep character; the input field separator, the eBird file is tab
+#'   separated by default. Must only be a single character and space delimited
+#'   is not allowed since spaces appear in many of the fields.
 #' @param execute logical; whether to execute the awk script, or output it to a
 #'   file for manual execution. If this flag is `FALSE`, `awk_file` must be
 #'   provided.
 #' @param overwrite logical; overwrite output file if it already exists
 #'
 #' @details
-#' If an EBD sampling file is provided in the [auk_ebd][auk_ebd()]
-#' object, this function will filter both the EBD and the sampling data using
+#' If a sampling file is provided in the [auk_ebd][auk_ebd()] object, this
+#' function will filter both the eBird Basic Dataset and the sampling data using
 #' the same set of filters. This ensures that the files are in sync, i.e. that
 #' they contain data on the same set of checklists.
 #'
@@ -58,8 +58,6 @@
 #' auk_filter(filters, file = out_file) %>%
 #'   read_ebd() %>%
 #'   str()
-#' # clean
-#' unlink(out_file)
 #' }
 auk_filter <- function(x, file, file_sampling, awk_file, sep,
                        filter_sampling, execute, overwrite) {

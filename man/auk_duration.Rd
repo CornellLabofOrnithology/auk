@@ -2,12 +2,12 @@
 % Please edit documentation in R/auk-duration.r
 \name{auk_duration}
 \alias{auk_duration}
-\title{Filter the EBD by duration}
+\title{Filter the eBird data by duration}
 \usage{
 auk_duration(x, duration)
 }
 \arguments{
-\item{x}{\code{auk_ebd} object; reference to EBD file created by \code{\link[=auk_ebd]{auk_ebd()}}.}
+\item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
 
 \item{duration}{integer; 2 element vector specifying the range of durations
 in minutes to filter by.}

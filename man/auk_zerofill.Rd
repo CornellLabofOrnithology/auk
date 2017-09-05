@@ -6,7 +6,7 @@
 \alias{auk_zerofill.character}
 \alias{auk_zerofill.auk_ebd}
 \alias{collapse_zerofill}
-\title{Read and zero-fill an EBD file}
+\title{Read and zero-fill an eBird data file}
 \usage{
 auk_zerofill(x, ...)
 
@@ -22,8 +22,8 @@ auk_zerofill(x, ...)
 collapse_zerofill(x)
 }
 \arguments{
-\item{x}{filename, \code{data.frame} of EBD observations, or \code{auk_ebd} object with
-associated output files as created by \code{\link[=auk_filter]{auk_filter()}}. If a filename is
+\item{x}{filename, \code{data.frame} of eBird observations, or \code{auk_ebd} object
+with associated output files as created by \code{\link[=auk_filter]{auk_filter()}}. If a filename is
 provided, it must point to the EBD and the \code{sampling_events} argument must
 point to the sampling event data file. If a \code{data.frame} is provided it
 should have been imported with \code{\link[=read_ebd]{read_ebd()}}, to ensure the variables names
@@ -48,7 +48,7 @@ species, don't pass anything to this argument.}
 hasn't already. The check that \code{\link[=auk_unique]{auk_unique()}} has been run is simplistic:
 is there a \code{checklist_id} field or not.}
 
-\item{collapse}{logical; whether to call \code{zerofill_collapse()} to return a
+\item{collapse}{logical; whether to call \code{collapse_zerofill()} to return a
 data frame rather than an \code{auk_zerofill} object.}
 
 \item{sep}{character; single character used to separate fields within a row.}
@@ -58,7 +58,7 @@ By default, an \code{auk_zerofill} object, or a data frame if \code{collapse = T
 }
 \description{
 Read an eBird Basic Dataset file, and associated sampling event data file, to
-produce a zero-filled, presence-absence dataset. The EBD contains bird
+produce a zero-filled, presence-absence dataset. The basic dataa contains bird
 sightings and the sampling event data is a set of all checklists, they can be
 combined to infer absence data by assuming any species not reported on a
 checklist was had a count of zero.

@@ -1,10 +1,10 @@
-#' Filter the EBD by species
+#' Filter the eBird data by species
 #'
 #' Define a filter for the eBird Basic Dataset (EBD) based on species. This
 #' function only defines the filter and, once all filters have been defined,
 #' [auk_filter()] should be used to call AWK and perform the filtering.
 #'
-#' @param x `auk_ebd` object; reference to EBD file created by [auk_ebd()].
+#' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
 #' @param species character; species to filter by, provided as scientific or
 #'   English common names, or a mixture of both. These names must match the
 #'   official eBird Taxomony ([ebird_taxonomy]).

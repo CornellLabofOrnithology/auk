@@ -2,16 +2,16 @@
 % Please edit documentation in R/auk-rollup.r
 \name{auk_rollup}
 \alias{auk_rollup}
-\title{Roll up EBD taxonomy to species}
+\title{Roll up eBird taxonomy to species}
 \usage{
 auk_rollup(x)
 }
 \arguments{
-\item{x}{data.frame; the EBD data frame, typically as imported by
+\item{x}{data.frame; data frame of eBird data, typically as imported by
 \code{\link[=read_ebd]{read_ebd()}}}
 }
 \value{
-A data frame of the EBD with taxonomic rollup applied.
+A data frame of the eBird data with taxonomic rollup applied.
 }
 \description{
 The eBird Basic Dataset (EBD) includes both true species and other taxa,
@@ -22,7 +22,7 @@ records that are not resolvable to species, for example, "warbler sp.".
 This function addresses these cases by removing taxa not identifiable to
 species and rolling up taxa identified below species level to a single record
 for each species in each checklist. By default, \code{\link[=read_ebd]{read_ebd()}} calls
-\code{ebd_rollup()} when importing an EBD file.
+\code{ebd_rollup()} when importing an eBird data file.
 }
 \details{
 When rolling observations up to species level the observed counts
