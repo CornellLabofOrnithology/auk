@@ -10,7 +10,9 @@ auk_getpath()
 Path to AWK or \code{NA} if AWK wasn't found.
 }
 \description{
-Return the OS specific path to AWK, or highlights if it's not installed.
+Return the OS specific path to AWK, or highlights if it's not installed. To
+manually set the path to AWK, set the \code{AWK_PATH} environment variable in your
+\code{.Renviron} file.
 }
 \examples{
 auk_getpath()

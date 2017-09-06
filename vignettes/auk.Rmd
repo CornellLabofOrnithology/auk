@@ -106,7 +106,19 @@ AWK is a Unix utility and programming language for processing column formatted t
 
 Although AWK is a powerful tool, it has three disadvantages: it requires learning the syntax of a new language, it is only accessible via the command line, and it results in a portion of your workflow existing outside of R. This package is a wrapper for AWK specifically designed for filtering eBird data The goal is to ease the use of the this data by removing the hurdle of learning and using AWK.
 
-Linux and Mac users should already have AWK installed on their machines, however, Windows uses will need to install [Cygwin](https://www.cygwin.com) to gain access to AWK. Note that **Cygwin must be installed in the default location** (`C:/cygwin/bin/gawk.exe` or `C:/cygwin64/bin/gawk.exe`) in order for `auk` to work.
+Linux and Mac users should already have AWK installed on their machines, however, Windows uses will need to install [Cygwin](https://www.cygwin.com) to gain access to AWK. Note that **Cygwin should be installed in the default location** (`C:/cygwin/bin/gawk.exe` or `C:/cygwin64/bin/gawk.exe`) in order for `auk` to work. To check that AWK is installed and can be found run `auk_getpath()`.
+
+If AWK is installed in a non-standard location, or can't be found by `auk`, you can manually set the path to AWK. To do so, set the `AWK_PATH` environment in your `.Renviron` file. For example, Mac and Linux users might add the following line:
+
+```
+AWK_PATH=/usr/bin/awk
+```
+
+while Windows users might add:
+
+```
+AWK_PATH=C:/cygwin64/bin/gawk.exe
+```
 
 ### A note on versions
 
