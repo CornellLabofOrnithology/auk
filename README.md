@@ -50,7 +50,6 @@ Because the eBird dataset is so large, step 3 typically takes several hours to r
 
 ``` r
 library(auk)
-library(dplyr)
 # path to the ebird data file, here a sample included in the package
 input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
 # output text file
@@ -93,7 +92,7 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp97C8MK/file1165218f9812"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpJyXO5n/file153e1a8de829"
 # number of lines in input
 length(readLines(f))
 #> [1] 101

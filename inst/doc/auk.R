@@ -9,7 +9,6 @@ suppressPackageStartupMessages(library(dplyr))
 
 ## ----quickstart, eval = FALSE--------------------------------------------
 #  library(auk)
-#  library(dplyr)
 #  # path to the ebird data file, here a sample included in the package
 #  input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
 #  # output text file
