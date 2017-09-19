@@ -164,8 +164,8 @@ print.auk_ebd <- function(x, ...) {
   if (length(e) == 0) {
     cat("full extent")
   } else {
-    cat(paste0("Lat ", round(e[1]), " - ", round(e[3]), "; "))
-    cat(paste0("Lon ", round(e[2]), " - ", round(e[4])))
+    cat(paste0("Lon ", round(e[1]), " - ", round(e[3]), "; "))
+    cat(paste0("Lat ", round(e[2]), " - ", round(e[4])))
   }
   cat("\n")
   # date filter
