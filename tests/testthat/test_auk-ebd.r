@@ -5,7 +5,7 @@ test_that("auk_ebd refrence ebd file", {
   ebd <- auk_ebd(f)
 
   filter_names <- c("species", "country", "extent", "date", "time",
-                    "last_edited", "duration", "complete")
+                    "last_edited", "duration", "distance", "complete")
 
   expect_is(ebd, "auk_ebd")
   expect_equal(ebd$file, normalizePath(f))
@@ -26,7 +26,7 @@ test_that("auk_ebd refrence ebd and sampling files", {
   ebd <- auk_ebd(f_ebd, file_sampling = f_smpl)
 
   filter_names <- c("species", "country", "extent", "date", "time",
-                    "last_edited", "duration", "complete")
+                    "last_edited", "duration", "distance", "complete")
 
   expect_is(ebd, "auk_ebd")
   expect_equal(ebd$file, normalizePath(f_ebd))

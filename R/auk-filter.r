@@ -201,10 +201,10 @@ awk_translate <- function(filters, col_idx, sep) {
   } else {
     lat_idx <- col_idx$index[col_idx$id == "lat"]
     lng_idx <- col_idx$index[col_idx$id == "lng"]
-    condition <- paste0("$${lng_idx} > ${xmn} && ",
-                        "$${lng_idx} < ${xmx} && ",
-                        "$${lat_idx} > ${ymn} && ",
-                        "$${lat_idx} < ${ymx}") %>%
+    condition <- paste0("$${lng_idx} >= ${xmn} && ",
+                        "$${lng_idx} <= ${xmx} && ",
+                        "$${lat_idx} >= ${ymn} && ",
+                        "$${lat_idx} >= ${ymx}") %>%
       str_interp(list(lat_idx = lat_idx, lng_idx = lng_idx,
                       xmn = filters$extent[1], xmx = filters$extent[3],
                       ymn = filters$extent[2], ymx = filters$extent[4]))
@@ -215,7 +215,7 @@ awk_translate <- function(filters, col_idx, sep) {
     filter_strings$date <- ""
   } else {
     idx <- col_idx$index[col_idx$id == "date"]
-    condition <- str_interp("$${idx} > \"${mn}\" && $${idx} < \"${mx}\"",
+    condition <- str_interp("$${idx} >= \"${mn}\" && $${idx} <= \"${mx}\"",
                             list(idx = idx,
                                  mn = filters$date[1],
                                  mx = filters$date[2]))
@@ -226,7 +226,7 @@ awk_translate <- function(filters, col_idx, sep) {
     filter_strings$time <- ""
   } else {
     idx <- col_idx$index[col_idx$id == "time"]
-    condition <- str_interp("$${idx} > \"${mn}\" && $${idx} < \"${mx}\"",
+    condition <- str_interp("$${idx} >= \"${mn}\" && $${idx} <= \"${mx}\"",
                             list(idx = idx,
                                  mn = filters$time[1],
                                  mx = filters$time[2]))
@@ -237,7 +237,7 @@ awk_translate <- function(filters, col_idx, sep) {
     filter_strings$last_edited <- ""
   } else {
     idx <- col_idx$index[col_idx$id == "last_edited"]
-    condition <- str_interp("$${idx} > \"${mn}\" && $${idx} < \"${mx}\"",
+    condition <- str_interp("$${idx} >= \"${mn}\" && $${idx} <= \"${mx}\"",
                             list(idx = idx,
                                  mn = filters$last_edited[1],
                                  mx = filters$last_edited[2]))
@@ -249,11 +249,34 @@ awk_translate <- function(filters, col_idx, sep) {
     filter_strings$duration <- ""
   } else {
     idx <- col_idx$index[col_idx$id == "duration"]
-    condition <- str_interp("$${idx} > ${mn} && $${idx} < ${mx}",
+    condition <- str_interp("$${idx} >= ${mn} && $${idx} <= ${mx}",
                             list(idx = idx,
                                  mn = filters$duration[1],
                                  mx = filters$duration[2]))
     filter_strings$duration <- str_interp(awk_if, list(condition = condition))
+  }
+  # distance filter
+  if (length(filters$distance) == 0) {
+    filter_strings$distance <- ""
+  } else {
+    idx <- col_idx$index[col_idx$id == "distance"]
+    # include stationary counts
+    if (0.0001 >= filters$distance[1]) {
+      p_idx <- col_idx$index[col_idx$id == "protocol"]
+      inc_stat <- str_interp("$${idx} == \"eBird - Stationary Count\"",
+                             list(idx = p_idx))
+      condition <- str_interp("${inc} || ($${idx} >= ${mn} && $${idx} <= ${mx})",
+                              list(idx = idx,
+                                   mn = filters$distance[1],
+                                   mx = filters$distance[2],
+                                   inc = inc_stat))
+    } else {
+      condition <- str_interp("$${idx} >= ${mn} && $${idx} <= ${mx}",
+                              list(idx = idx,
+                                   mn = filters$distance[1],
+                                   mx = filters$distance[2]))
+    }
+    filter_strings$distance <- str_interp(awk_if, list(condition = condition))
   }
   # complete checklists only
   if (filters$complete) {
@@ -284,6 +307,7 @@ BEGIN {
   ${date}
   ${time}
   ${duration}
+  ${distance}
   ${complete}
 
   # keeps header

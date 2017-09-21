@@ -59,12 +59,15 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
     id = c("species",
            "country", "lat", "lng",
            "date", "time", "last_edited",
-           "duration", "complete"),
+           "protocol",
+           "duration", "distance", "complete"),
     name = c("scientific name",
              "country code", "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date",
-             "duration minutes", "all species reported"),
+             "protocol type",
+             "duration minutes", "effort distance km",
+             "all species reported"),
     stringsAsFactors = FALSE)
   # all these columns should be in header
   if (!all(col_idx$name %in% header)) {
@@ -110,6 +113,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         time = character(),
         last_edited = character(),
         duration = numeric(),
+        distance = numeric(),
         complete = FALSE
       )
     ),
@@ -198,6 +202,14 @@ print.auk_ebd <- function(x, ...) {
     cat("all")
   } else {
     cat(paste0(x$filters$duration[1], "-", x$filters$duration[2], " minutes"))
+  }
+  cat("\n")
+  # distance filter
+  cat("  Distance travelled: ")
+  if (length(x$filters$distance) == 0) {
+    cat("all")
+  } else {
+    cat(paste0(x$filters$distance[1], "-", x$filters$distance[2], " km"))
   }
   cat("\n")
   # complete checklists only

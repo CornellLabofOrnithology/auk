@@ -180,6 +180,7 @@ ebd
 <span class="co">#&gt;   Start time: all</span>
 <span class="co">#&gt;   Last edited date: all</span>
 <span class="co">#&gt;   Duration: all</span>
+<span class="co">#&gt;   Distance travelled: all</span>
 <span class="co">#&gt;   Complete checklists only: no</span></code></pre></div>
 </div>
 <div id="defining-filters" class="section level3">
@@ -192,7 +193,8 @@ ebd
 <li><code>auk_date()</code>: filter to checklists from a range of dates.</li>
 <li><code>auk_last_edited()</code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
 <li><code>auk_time()</code>: filter to checklists started during a range of times-of-day.</li>
-<li><code>auk_duration()</code>: filter to checklists that are the result of observation periods that lasted a given range of durations.</li>
+<li><code>auk_duration()</code>: filter to checklists with observation durations within a given range.</li>
+<li><code>auk_distance()</code>: filter to checklists with distances travelled within a given range.</li>
 <li><code>auk_complete()</code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the “absence” information is inferred by the lack of reporting of a species on checklists.</li>
 </ul>
 <p>Note that all of the functions listed above only modify the <code>auk_ebd</code> object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using <code>auk_filter()</code>.</p>
@@ -222,11 +224,12 @@ ebd_filters
 <span class="co">#&gt; Filters </span>
 <span class="co">#&gt;   Species: Cyanocitta cristata, Perisoreus canadensis</span>
 <span class="co">#&gt;   Countries: CA, MX, US</span>
-<span class="co">#&gt;   Spatial extent: Lat -100 - -80; Lon 37 - 52</span>
+<span class="co">#&gt;   Spatial extent: Lon -100 - -80; Lat 37 - 52</span>
 <span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span>
 <span class="co">#&gt;   Start time: 06:00-09:00</span>
 <span class="co">#&gt;   Last edited date: all</span>
 <span class="co">#&gt;   Duration: 0-60 minutes</span>
+<span class="co">#&gt;   Distance travelled: all</span>
 <span class="co">#&gt;   Complete checklists only: yes</span></code></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package. This is particularly important because filtering is a time consuming process, so catching errors in advance can avoid several hours of wasted time.</p>
 </div>
@@ -426,6 +429,7 @@ filters
 <span class="co">#&gt;   Start time: 06:00-10:00</span>
 <span class="co">#&gt;   Last edited date: all</span>
 <span class="co">#&gt;   Duration: all</span>
+<span class="co">#&gt;   Distance travelled: all</span>
 <span class="co">#&gt;   Complete checklists only: yes</span></code></pre></div>
 <p>As with presence-only data, call <code>auk_filter()</code> to actually run AWK. Output files must be provided for both the EBD and sampling event data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ebd_sed_filtered &lt;- auk_filter(filters, 
@@ -448,6 +452,7 @@ ebd_sed_filtered
 <span class="co">#&gt;   Start time: 06:00-10:00</span>
 <span class="co">#&gt;   Last edited date: all</span>
 <span class="co">#&gt;   Duration: all</span>
+<span class="co">#&gt;   Distance travelled: all</span>
 <span class="co">#&gt;   Complete checklists only: yes</span></code></pre></div>
 </div>
 <div id="reading-and-zero-filling" class="section level3">

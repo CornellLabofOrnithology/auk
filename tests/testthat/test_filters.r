@@ -218,6 +218,37 @@ test_that("auk_duration", {
   expect_error(auk_duration(ebd, c(60, 30)))
 })
 
+test_that("auk_distance", {
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd()
+  
+  # works correctly
+  d <- c(0, 10)
+  ebd <- auk_distance(ebd, d)
+  expect_equal(ebd$filters$distance, d)
+  
+  # overwrite
+  d <- c(5, 10)
+  ebd <- auk_distance(ebd, d)
+  expect_equal(ebd$filters$distance, d)
+  
+  # miles conversion
+  d <- c(5, 10)
+  ebd_km <- auk_distance(ebd, d)
+  ebd_miles <- auk_distance(ebd, 0.621371 * d, distance_units = "miles")
+  expect_equal(round(ebd_km$filters$distance, 1), 
+               round(ebd_miles$filters$distance, 1))
+  
+  # invalid distance format
+  expect_error(auk_distance(ebd, c("0", "10")))
+  expect_error(auk_distance(ebd, 0))
+  expect_error(auk_distance(ebd, c(0, 5, 10)))
+  expect_error(auk_distance(ebd, c(-10, 10)))
+  
+  # distances not sequential
+  expect_error(auk_distance(ebd, c(10, 5)))
+})
+
 test_that("auk_complete", {
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
     auk_ebd()

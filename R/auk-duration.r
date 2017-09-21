@@ -3,7 +3,9 @@
 #' Define a filter for the eBird Basic Dataset (EBD) based on the duration of
 #' the checklist. This function only defines the filter and, once all filters
 #' have been defined, [auk_filter()] should be used to call AWK and perform the
-#' filtering.
+#' filtering. Note that checklists with no effort, such as incidental 
+#' observations, will be excluded if this filter is used since they have no 
+#' associated duration information.
 #'
 #' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
 #' @param duration integer; 2 element vector specifying the range of durations
@@ -16,6 +18,10 @@
 #' system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #'   auk_ebd() %>%
 #'   auk_duration(duration = c(0, 60))
+#'   
+#' # alternatively, without pipes
+#' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
+#' auk_duration(ebd, duration = c(0, 60))
 auk_duration <- function(x, duration)  {
   UseMethod("auk_duration")
 }

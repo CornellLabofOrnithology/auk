@@ -92,7 +92,7 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpJyXO5n/file153e1a8de829"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpPfluJG/file79cf52261e89"
 # number of lines in input
 length(readLines(f))
 #> [1] 101
@@ -111,7 +111,8 @@ length(readLines(tmp))
 -   `auk_date()`: filter to checklists from a range of dates.
 -   `auk_last_edited()`: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.
 -   `auk_time()`: filter to checklists started during a range of times-of-day.
--   `auk_duration()`: filter to checklists that are the result of observation periods that lasted a given range of durations.
+-   `auk_duration()`: filter to checklists with observation durations within a given range.
+-   `auk_distance()`: filter to checklists with distances travelled within a given range.
 -   `auk_complete()`: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the "absence"" information is inferred by the lack of reporting of a species on checklists.
 
 Note that all of the functions listed above only modify the `auk_ebd` object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using `auk_filter()`.
@@ -146,11 +147,12 @@ ebd
 #> Filters 
 #>   Species: Cyanocitta cristata, Perisoreus canadensis
 #>   Countries: CA, MX, US
-#>   Spatial extent: Lat -100 - -80; Lon 37 - 52
+#>   Spatial extent: Lon -100 - -80; Lat 37 - 52
 #>   Date: 2012-01-01 - 2012-12-31
 #>   Start time: 06:00-09:00
 #>   Last edited date: all
 #>   Duration: 0-60 minutes
+#>   Distance travelled: all
 #>   Complete checklists only: yes
 ```
 
