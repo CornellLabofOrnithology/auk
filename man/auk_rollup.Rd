@@ -34,6 +34,6 @@ Yellow-rumped Warblers. However, if an "X" was entered for Myrtle, this
 would roll up to "X" for Yellow-rumped Warbler.
 }
 \examples{
-ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") \%>\% 
-  read_ebd(rollup = FALSE)
+f <- system.file("extdata/ebd-rollup-ex.txt", package = "auk")
+read_ebd(f, rollup = FALSE)
 }

@@ -22,8 +22,8 @@
 #' @return A data frame of the eBird data with taxonomic rollup applied.
 #' @export
 #' @examples
-#' ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>% 
-#'   read_ebd(rollup = FALSE)
+#' f <- system.file("extdata/ebd-rollup-ex.txt", package = "auk")
+#' read_ebd(f, rollup = FALSE)
 auk_rollup <- function(x) {
   assertthat::assert_that(
     is.data.frame(x),

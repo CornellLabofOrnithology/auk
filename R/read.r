@@ -35,8 +35,8 @@
 #'   `group_identifier` for group checklists.
 #' @export
 #' @examples
-#' ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   read_ebd()
+#' f <- system.file("extdata/ebd-sample.txt", package = "auk")
+#' read_ebd(f)
 read_ebd <- function(x, reader, sep, unique, rollup) {
   UseMethod("read_ebd")
 }

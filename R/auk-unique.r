@@ -36,8 +36,8 @@
 #' @export
 #' @examples
 #' # read in an ebd file and don't automatically remove duplicates
-#' ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   read_ebd(unique = FALSE)
+#' f <- system.file("extdata/ebd-sample.txt", package = "auk")
+#' ebd <- read_ebd(f, unique = FALSE)
 #' # remove duplicates
 #' ebd_unique <- auk_unique(ebd)
 #' nrow(ebd)

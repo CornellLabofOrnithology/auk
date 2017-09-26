@@ -31,4 +31,8 @@ species <- c("Gray Jay", "Pluvialis squatarola")
 system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
   auk_ebd() \%>\%
   auk_species(species)
+  
+# alternatively, without pipes
+ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
+auk_species(ebd, species)
 }

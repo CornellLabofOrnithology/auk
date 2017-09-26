@@ -16,6 +16,10 @@
 #' system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #'   auk_ebd() %>%
 #'   auk_extent(extent = c(-125, 37, -120, 52))
+#'   
+#' # alternatively, without pipes
+#' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
+#' auk_extent(ebd, extent = c(-125, 37, -120, 52))
 auk_extent <- function(x, extent)  {
   UseMethod("auk_extent")
 }

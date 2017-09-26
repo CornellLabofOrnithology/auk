@@ -10,5 +10,5 @@
 #' @examples
 #' auk_version_date()
 auk_version_date <- function() {
-  c(edb_date = as.Date("2017-05-01"), taxonomy_date = as.Date("2017-08-17"))
+  c(edb_date = as.Date("2017-09-19"), taxonomy_date = as.Date("2017-08-17"))
 }

@@ -35,4 +35,8 @@ country <- c("CA", "United States", "mexico")
 system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
   auk_ebd() \%>\%
   auk_country(country)
+  
+# alternatively, without pipes
+ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
+auk_country(ebd, country)
 }

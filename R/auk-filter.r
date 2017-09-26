@@ -52,12 +52,22 @@
 #'   auk_time(start_time = c("06:00", "09:00")) %>%
 #'   auk_duration(duration = c(0, 60)) %>%
 #'   auk_complete()
+#'   
+#' # alternatively, without pipes
+#' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
+#' filters <- auk_species(filters, species = c("Gray Jay", "Blue Jay"))
+#' filters <- auk_country(filters, country = c("US", "Canada"))
+#' filters <- auk_extent(filters, extent = c(-100, 37, -80, 52))
+#' filters <- auk_date(filters, date = c("2012-01-01", "2012-12-31"))
+#' filters <- auk_time(filters, start_time = c("06:00", "09:00"))
+#' filters <- auk_duration(filters, duration = c(0, 60))
+#' filters <- auk_complete(filters)
+#' 
 #' \dontrun{
 #' # temp output file
 #' out_file <- tempfile()
-#' auk_filter(filters, file = out_file) %>%
-#'   read_ebd() %>%
-#'   str()
+#' filtered <- auk_filter(filters, file = out_file)
+#' str(read_ebd(filtered))
 #' }
 auk_filter <- function(x, file, file_sampling, awk_file, sep,
                        filter_sampling, execute, overwrite) {

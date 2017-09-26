@@ -79,8 +79,8 @@ had a sampling event data file set in the original call to \code{\link[=auk_ebd]
 }}
 
 \examples{
-ebd <- system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
-  read_ebd()
+f <- system.file("extdata/ebd-sample.txt", package = "auk")
+read_ebd(f)
 # read a sampling event data file
 x <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") \%>\%
   read_sampling()

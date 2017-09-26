@@ -15,6 +15,10 @@
 #' system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #'   auk_ebd() %>%
 #'   auk_date(date = c("2010-01-01", "2010-12-31"))
+#'   
+#' # alternatively, without pipes
+#' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
+#' auk_date(ebd, date = c("2010-01-01", "2010-12-31"))
 auk_date <- function(x, date)  {
   UseMethod("auk_date")
 }
