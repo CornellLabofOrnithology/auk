@@ -14,6 +14,13 @@
 #' @param awk_file character; output file to optionally save the awk script to.
 #' @param filter_sampling logical; whether the sampling event data should also
 #'   be filtered.
+#' @param keep character; a character vector specifying the names of the columns
+#'   to keep in the output file. Columns should be as they appear in the header
+#'   of the EBD, however, names are not case sensitive and spaces may be
+#'   replaced by underscores, e.g. `"COMMON NAME"`, `"common name"`, and
+#'   `"common_NAME"` are all valid.
+#' @param drop character; a character vector of columns to drop in the same
+#'   format as `keep`. Ignored if `keep` is supplied.
 #' @param sep character; the input field separator, the eBird file is tab
 #'   separated by default. Must only be a single character and space delimited
 #'   is not allowed since spaces appear in many of the fields.
@@ -55,7 +62,7 @@
 #'   
 #' # alternatively, without pipes
 #' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
-#' filters <- auk_species(filters, species = c("Gray Jay", "Blue Jay"))
+#' filters <- auk_species(ebd, species = c("Gray Jay", "Blue Jay"))
 #' filters <- auk_country(filters, country = c("US", "Canada"))
 #' filters <- auk_extent(filters, extent = c(-100, 37, -80, 52))
 #' filters <- auk_date(filters, date = c("2012-01-01", "2012-12-31"))
@@ -63,21 +70,22 @@
 #' filters <- auk_duration(filters, duration = c(0, 60))
 #' filters <- auk_complete(filters)
 #' 
+#' # apply filters
 #' \dontrun{
 #' # temp output file
 #' out_file <- tempfile()
 #' filtered <- auk_filter(filters, file = out_file)
 #' str(read_ebd(filtered))
 #' }
-auk_filter <- function(x, file, file_sampling, awk_file, sep,
+auk_filter <- function(x, file, file_sampling, awk_file, keep, drop, sep,
                        filter_sampling, execute, overwrite) {
   UseMethod("auk_filter")
 }
 
 #' @export
-auk_filter.auk_ebd <- function(x, file, file_sampling, awk_file, sep = "\t",
-                               filter_sampling = TRUE, execute = TRUE,
-                               overwrite = FALSE) {
+auk_filter.auk_ebd <- function(x, file, file_sampling, awk_file, keep, drop, 
+                               sep = "\t", filter_sampling = TRUE, 
+                               execute = TRUE, overwrite = FALSE) {
   # checks
   awk_path <- auk_getpath()
   if (execute && is.na(awk_path)) {
@@ -90,6 +98,8 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, awk_file, sep = "\t",
     !execute || assertthat::is.string(file),
     missing(awk_file) || assertthat::is.string(awk_file),
     assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
+    missing(keep) || is.character(keep),
+    missing(drop) || is.character(drop),
     assertthat::is.flag(filter_sampling),
     assertthat::is.flag(overwrite)
   )
@@ -135,19 +145,65 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, awk_file, sep = "\t",
                "auk_complete(), or manually filter out incomplete checklists.")
     warning(w)
   }
+  
+  # pick columns to retain
+  must_keep <- c("group identifier", "sampling event identifier", 
+                 "scientific name", "observation count")
+  if (!missing(keep)) {
+    keep <- tolower(keep)
+    keep <- stringr::str_replace_all(keep, "_", " ")
+    stopifnot(all(keep %in% x$col_idx$name))
+    if (!all(must_keep %in% keep)) {
+      m <- paste("The following columns must be retained:",
+                 paste(must_keep, collapse = ", "))
+      stop(m)
+    }
+    idx <- x$col_idx$index[x$col_idx$name %in% keep]
+    select_cols <- paste0("$", idx, collapse = ", ")
+  } else if (!missing(drop)) {
+    drop <- tolower(drop)
+    drop <- stringr::str_replace_all(drop, "_", " ")
+    stopifnot(all(drop %in% x$col_idx$name))
+    if (any(must_keep %in% drop)) {
+      m <- paste("The following columns must be retained:",
+                 paste(must_keep, collapse = ", "))
+      stop(m)
+    }
+    idx <- x$col_idx$index[!x$col_idx$name %in% drop]
+    select_cols <- paste0("$", idx, collapse = ", ")
+  } else {
+    select_cols <- "$0"
+  }
 
   # create awk script for the ebd
   awk_script <- awk_translate(filters = x$filters,
                               col_idx = x$col_idx,
-                              sep = sep)
+                              sep = sep,
+                              select = select_cols)
   # create awk script for the ebd sampling data
   if (filter_sampling) {
+    # pick columns to retain
+    if (!missing(keep)) {
+      keep <- tolower(keep)
+      keep <- stringr::str_replace_all(keep, "_", " ")
+      idx <- x$col_idx$index[x$col_idx_sampling$name %in% keep]
+      select_cols <- paste0("$", idx, collapse = ", ")
+    } else if (!missing(drop)) {
+      drop <- tolower(drop)
+      drop <- stringr::str_replace_all(drop, "_", " ")
+      idx <- x$col_idx$index[!x$col_idx_sampling$name %in% drop]
+      select_cols <- paste0("$", idx, collapse = ", ")
+    } else {
+      select_cols <- "$0"
+    }
+    
     # remove species filter
     s_filters <- x$filters
     s_filters$species <- character()
     awk_script_sampling <- awk_translate(filters = s_filters,
                                          col_idx = x$col_idx_sampling,
-                                         sep = sep)
+                                         sep = sep,
+                                         select = select_cols)
   }
 
   # output awk file
@@ -184,9 +240,14 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, awk_file, sep = "\t",
   return(x)
 }
 
-awk_translate <- function(filters, col_idx, sep) {
+awk_translate <- function(filters, col_idx, sep, select) {
+  if (missing(select)) {
+    select <- "$0"
+  }
+  # only keep filter columns
+  col_idx <- col_idx[!is.na(col_idx$id), ]
   # set up filters
-  filter_strings <- list(sep = sep)
+  filter_strings <- list(sep = sep, select = select)
   # species filter
   if (length(filters$species) == 0) {
     filter_strings$species <- ""
@@ -326,7 +387,7 @@ BEGIN {
   }
 
   if (keep == 1) {
-    print $0
+    print ${select}
   }
 }
 "

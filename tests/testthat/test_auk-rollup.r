@@ -1,4 +1,4 @@
-context("auk_filter")
+context("auk_rollup")
 
 test_that("auk_filter rolls up to species level", {
   ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%

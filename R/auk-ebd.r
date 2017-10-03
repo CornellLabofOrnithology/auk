@@ -53,9 +53,13 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
 
   # read header rows
   header <- tolower(get_header(file, sep))
-
+  col_idx <- data.frame(id = NA_character_, 
+                        name = header, 
+                        index = seq_along(header),
+                        stringsAsFactors = FALSE)
+  
   # identify columns required for filtering
-  col_idx <- data.frame(
+  filter_cols <- data.frame(
     id = c("species",
            "country", "lat", "lng",
            "date", "time", "last_edited",
@@ -70,10 +74,10 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
              "all species reported"),
     stringsAsFactors = FALSE)
   # all these columns should be in header
-  if (!all(col_idx$name %in% header)) {
+  if (!all(filter_cols$name %in% col_idx$name)) {
     stop("Problem parsing header in EBD file.")
   }
-  col_idx$index <- match(col_idx$name, header)
+  col_idx$id[match(filter_cols$name, col_idx$name)] <- filter_cols$id
 
   # process sampling data header
   if (!missing(file_sampling)) {
@@ -82,15 +86,19 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
     )
     file_sampling <- normalizePath(file_sampling)
     # species not in sampling data
-    col_idx_sampling <- col_idx[col_idx$id != "species", ]
+    filter_cols_sampling <- filter_cols[filter_cols$id != "species", ]
     # read header rows
     header_sampling <- tolower(get_header(file_sampling, sep))
+    col_idx_sampling <- data.frame(id = NA_character_, 
+                                   name = header_sampling, 
+                                   index = seq_along(header_sampling),
+                                   stringsAsFactors = FALSE)
     # all these columns should be in header
-    if (!all(col_idx_sampling$name %in% header_sampling)) {
+    if (!all(filter_cols_sampling$name %in% col_idx_sampling$name)) {
       stop("Problem parsing header in EBD file.")
     }
-    col_idx_sampling$index <- match(col_idx_sampling$name, header_sampling)
-
+    mtch <- match(filter_cols_sampling$name, col_idx_sampling$name)
+    col_idx_sampling$id[mtch] <- filter_cols_sampling$id
   } else {
     file_sampling <- NULL
     col_idx_sampling <- NULL

@@ -39,7 +39,7 @@ auk_rollup <- function(x) {
   
   # remove anything not identifiable to a species
   tax <- dplyr::filter(auk::ebird_taxonomy, .data$category == "species")
-  tax <- dplyr::select(tax, .data$scientific_name)
+  tax <- dplyr::select(tax, .data$scientific_name, .data$taxon_order)
   x <- dplyr::inner_join(x, tax, by = "scientific_name")
   
   # summarize species for cases where multiple subspecies reported on same list
@@ -57,12 +57,12 @@ auk_rollup <- function(x) {
   # drop any duplicate species records
   x <- dplyr::group_by(x, rlang::UQ(cid), .data$scientific_name)
   # give precedence to true species records
-  x <- dplyr::filter(x, dplyr::row_number(.data$taxonomic_order) == 1)
+  x <- dplyr::filter(x, dplyr::row_number(.data$taxon_order) == 1)
   x <- dplyr::ungroup(x)
   
   # update counts with summary
   x <- dplyr::inner_join(x, sp, by = c(as.character(cid)[2], "scientific_name"))
   x <- dplyr::mutate(x, observation_count = .data$count)
-  x <- dplyr::select(x, -.data$count)
+  x <- dplyr::select(x, -.data$count, -.data$taxon_order)
   dplyr::as_tibble(x)
 }

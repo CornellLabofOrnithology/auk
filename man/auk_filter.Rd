@@ -4,8 +4,8 @@
 \alias{auk_filter}
 \title{Filter the eBird file using AWK}
 \usage{
-auk_filter(x, file, file_sampling, awk_file, sep, filter_sampling, execute,
-  overwrite)
+auk_filter(x, file, file_sampling, awk_file, keep, drop, sep, filter_sampling,
+  execute, overwrite)
 }
 \arguments{
 \item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}} with
@@ -16,6 +16,15 @@ filters defined.}
 \item{file_sampling}{character; optional output file for sampling data.}
 
 \item{awk_file}{character; output file to optionally save the awk script to.}
+
+\item{keep}{character; a character vector specifying the names of the columns
+to keep in the output file. Columns should be as they appear in the header
+of the EBD, however, names are not case sensitive and spaces may be
+replaced by underscores, e.g. \code{"COMMON NAME"}, \code{"common name"}, and
+\code{"common_NAME"} are all valid.}
+
+\item{drop}{character; a character vector of columns to drop in the same
+format as \code{keep}. Ignored if \code{keep} is supplied.}
 
 \item{sep}{character; the input field separator, the eBird file is tab
 separated by default. Must only be a single character and space delimited
@@ -72,7 +81,7 @@ filters <- system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
   
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
-filters <- auk_species(filters, species = c("Gray Jay", "Blue Jay"))
+filters <- auk_species(ebd, species = c("Gray Jay", "Blue Jay"))
 filters <- auk_country(filters, country = c("US", "Canada"))
 filters <- auk_extent(filters, extent = c(-100, 37, -80, 52))
 filters <- auk_date(filters, date = c("2012-01-01", "2012-12-31"))
@@ -80,6 +89,7 @@ filters <- auk_time(filters, start_time = c("06:00", "09:00"))
 filters <- auk_duration(filters, duration = c(0, 60))
 filters <- auk_complete(filters)
 
+# apply filters
 \dontrun{
 # temp output file
 out_file <- tempfile()
