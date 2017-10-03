@@ -127,6 +127,24 @@ and longitudes in decimal degrees: <code>c(lng_min, lat_min, lng_max, lat_max)</
 #&gt;   Last edited date: all
 #&gt;   Duration: all
 #&gt;   Distance travelled: all
+#&gt;   Complete checklists only: no</div><div class='input'>
+<span class='co'># alternatively, without pipes</span>
+<span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
+<span class='fu'>auk_extent</span>(<span class='no'>ebd</span>, <span class='kw'>extent</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>125</span>, <span class='fl'>37</span>, -<span class='fl'>120</span>, <span class='fl'>52</span>))</div><div class='output co'>#&gt; Input 
+#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
+#&gt; 
+#&gt; Output 
+#&gt;   Filters not executed
+#&gt; 
+#&gt; Filters 
+#&gt;   Species: all
+#&gt;   Countries: all
+#&gt;   Spatial extent: Lon -125 - -120; Lat 37 - 52
+#&gt;   Date: all
+#&gt;   Start time: all
+#&gt;   Last edited date: all
+#&gt;   Duration: all
+#&gt;   Distance travelled: all
 #&gt;   Complete checklists only: no</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

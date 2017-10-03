@@ -57,7 +57,6 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
     reader <- NULL
   }
   reader <- choose_reader(reader)
-
   # get header
   header <- get_header(x, sep = sep)
   if (header[length(header)] == "") {

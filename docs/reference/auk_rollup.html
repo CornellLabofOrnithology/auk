@@ -120,8 +120,36 @@ would roll up to "X" for Yellow-rumped Warbler.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-rollup-ex.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-rollup-ex.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>f</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 186 x 47
+#&gt;    checklist_id                       global_unique_identifier
+#&gt;           &lt;chr&gt;                                          &lt;chr&gt;
+#&gt;  1     S5303232  URN:CornellLabOfOrnithology:EBIRD:OBS74460207
+#&gt;  2     S5271028  URN:CornellLabOfOrnithology:EBIRD:OBS74039017
+#&gt;  3    S25970116 URN:CornellLabOfOrnithology:EBIRD:OBS355093798
+#&gt;  4     S5231866  URN:CornellLabOfOrnithology:EBIRD:OBS73545417
+#&gt;  5     S5276125  URN:CornellLabOfOrnithology:EBIRD:OBS74105800
+#&gt;  6     S5239452  URN:CornellLabOfOrnithology:EBIRD:OBS73638626
+#&gt;  7    S13313466 URN:CornellLabOfOrnithology:EBIRD:OBS184656248
+#&gt;  8     S5276112  URN:CornellLabOfOrnithology:EBIRD:OBS74105705
+#&gt;  9     S5230408  URN:CornellLabOfOrnithology:EBIRD:OBS73530097
+#&gt; 10     S5230409  URN:CornellLabOfOrnithology:EBIRD:OBS73530110
+#&gt; # ... with 176 more rows, and 45 more variables: last_edited_date &lt;chr&gt;,
+#&gt; #   taxonomic_order &lt;dbl&gt;, category &lt;chr&gt;, common_name &lt;chr&gt;,
+#&gt; #   scientific_name &lt;chr&gt;, subspecies_common_name &lt;chr&gt;,
+#&gt; #   subspecies_scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;,
+#&gt; #   breeding_bird_atlas_code &lt;chr&gt;, age_sex &lt;chr&gt;, country &lt;chr&gt;,
+#&gt; #   country_code &lt;chr&gt;, state_province &lt;chr&gt;, subnational1_code &lt;chr&gt;,
+#&gt; #   county &lt;chr&gt;, subnational2_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;,
+#&gt; #   usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;, locality_id &lt;chr&gt;,
+#&gt; #   locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,
+#&gt; #   observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,
+#&gt; #   observer_id &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,
+#&gt; #   sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;, project_code &lt;chr&gt;,
+#&gt; #   duration_minutes &lt;int&gt;, effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;,
+#&gt; #   number_observers &lt;int&gt;, all_species_reported &lt;lgl&gt;, group_identifier &lt;chr&gt;,
+#&gt; #   has_media &lt;lgl&gt;, approved &lt;lgl&gt;, reviewed &lt;lgl&gt;, reason &lt;chr&gt;,
+#&gt; #   trip_comments &lt;chr&gt;, species_comments &lt;chr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

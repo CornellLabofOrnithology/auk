@@ -89,8 +89,8 @@ can be defined using the various other functions in this package, e.g.
 at least a couple hours to run on the full dataset</strong></p>
     
 
-    <pre class="usage"><span class='fu'>auk_filter</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>file_sampling</span>, <span class='no'>awk_file</span>, <span class='no'>sep</span>, <span class='no'>filter_sampling</span>, <span class='no'>execute</span>,
-  <span class='no'>overwrite</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_filter</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>file_sampling</span>, <span class='no'>awk_file</span>, <span class='no'>keep</span>, <span class='no'>drop</span>, <span class='no'>sep</span>, <span class='no'>filter_sampling</span>,
+  <span class='no'>execute</span>, <span class='no'>overwrite</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -111,6 +111,19 @@ filters defined.</p></td>
     <tr>
       <th>awk_file</th>
       <td><p>character; output file to optionally save the awk script to.</p></td>
+    </tr>
+    <tr>
+      <th>keep</th>
+      <td><p>character; a character vector specifying the names of the columns
+to keep in the output file. Columns should be as they appear in the header
+of the EBD, however, names are not case sensitive and spaces may be
+replaced by underscores, e.g. <code>"COMMON NAME"</code>, <code>"common name"</code>, and
+<code>"common_NAME"</code> are all valid.</p></td>
+    </tr>
+    <tr>
+      <th>drop</th>
+      <td><p>character; a character vector of columns to drop in the same
+format as <code>keep</code>. Ignored if <code>keep</code> is supplied.</p></td>
     </tr>
     <tr>
       <th>sep</th>
@@ -167,12 +180,23 @@ will likely need to install <a href = 'https://www.cygwin.com'>Cygwin</a>.</p>
   <span class='fu'><a href='auk_time.html'>auk_time</a></span>(<span class='kw'>start_time</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"06:00"</span>, <span class='st'>"09:00"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_duration.html'>auk_duration</a></span>(<span class='kw'>duration</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>60</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_complete.html'>auk_complete</a></span>()
+
+<span class='co'># alternatively, without pipes</span>
+<span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
+<span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_species.html'>auk_species</a></span>(<span class='no'>ebd</span>, <span class='kw'>species</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Gray Jay"</span>, <span class='st'>"Blue Jay"</span>))
+<span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_country.html'>auk_country</a></span>(<span class='no'>filters</span>, <span class='kw'>country</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"US"</span>, <span class='st'>"Canada"</span>))
+<span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_extent.html'>auk_extent</a></span>(<span class='no'>filters</span>, <span class='kw'>extent</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>100</span>, <span class='fl'>37</span>, -<span class='fl'>80</span>, <span class='fl'>52</span>))
+<span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_date.html'>auk_date</a></span>(<span class='no'>filters</span>, <span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"2012-01-01"</span>, <span class='st'>"2012-12-31"</span>))
+<span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_time.html'>auk_time</a></span>(<span class='no'>filters</span>, <span class='kw'>start_time</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"06:00"</span>, <span class='st'>"09:00"</span>))
+<span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_duration.html'>auk_duration</a></span>(<span class='no'>filters</span>, <span class='kw'>duration</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>60</span>))
+<span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_complete.html'>auk_complete</a></span>(<span class='no'>filters</span>)
+
+<span class='co'># apply filters</span>
 <span class='fu'>not_run</span>({
   <span class='co'># temp output file</span>
   <span class='no'>out_file</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
-  <span class='fu'>auk_filter</span>(<span class='no'>filters</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>out_file</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='read_ebd.html'>read_ebd</a></span>() <span class='kw'>%&gt;%</span>
-    <span class='fu'>str</span>()
+  <span class='no'>filtered</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_filter</span>(<span class='no'>filters</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>out_file</span>)
+  <span class='fu'>str</span>(<span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>filtered</span>))
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
