@@ -63,13 +63,13 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
     id = c("species",
            "country", "lat", "lng",
            "date", "time", "last_edited",
-           "protocol",
+           "protocol", "project", 
            "duration", "distance", "complete"),
     name = c("scientific name",
              "country code", "latitude", "longitude",
              "observation date", "time observations started",
-             "last edited date",
-             "protocol type",
+             "last edited date", 
+             "protocol type", "project code",
              "duration minutes", "effort distance km",
              "all species reported"),
     stringsAsFactors = FALSE)
@@ -120,6 +120,8 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         date = character(),
         time = character(),
         last_edited = character(),
+        protocol = character(), 
+        project = character(),
         duration = numeric(),
         distance = numeric(),
         complete = FALSE
@@ -172,12 +174,12 @@ print.auk_ebd <- function(x, ...) {
   cat("\n")
   # extent filter
   cat("  Spatial extent: ")
-  e <- x$filters$extent
+  e <- round(x$filters$extent, 1)
   if (length(e) == 0) {
     cat("full extent")
   } else {
-    cat(paste0("Lon ", round(e[1]), " - ", round(e[3]), "; "))
-    cat(paste0("Lat ", round(e[2]), " - ", round(e[4])))
+    cat(paste0("Lon ", e[1], " - ", e[3], "; "))
+    cat(paste0("Lat ", e[2], " - ", e[4]))
   }
   cat("\n")
   # date filter
@@ -202,6 +204,22 @@ print.auk_ebd <- function(x, ...) {
     cat("all")
   } else {
     cat(paste0(x$filters$last_edited[1], " - ", x$filters$last_edited[2]))
+  }
+  cat("\n")
+  # protocol filter
+  cat("  Protocol: ")
+  if (length(x$filters$protocol) == 0) {
+    cat("all")
+  } else {
+    cat(paste(x$filters$protocol, collapse = ", "))
+  }
+  cat("\n")
+  # project filter
+  cat("  Project code: ")
+  if (length(x$filters$project) == 0) {
+    cat("all")
+  } else {
+    cat(paste(x$filters$project, collapse = ", "))
   }
   cat("\n")
   # duration filter

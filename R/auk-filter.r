@@ -186,12 +186,12 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, awk_file, keep, drop,
     if (!missing(keep)) {
       keep <- tolower(keep)
       keep <- stringr::str_replace_all(keep, "_", " ")
-      idx <- x$col_idx$index[x$col_idx_sampling$name %in% keep]
+      idx <- x$col_idx_sampling$index[x$col_idx_sampling$name %in% keep]
       select_cols <- paste0("$", idx, collapse = ", ")
     } else if (!missing(drop)) {
       drop <- tolower(drop)
       drop <- stringr::str_replace_all(drop, "_", " ")
-      idx <- x$col_idx$index[!x$col_idx_sampling$name %in% drop]
+      idx <- x$col_idx_sampling$index[!x$col_idx_sampling$name %in% drop]
       select_cols <- paste0("$", idx, collapse = ", ")
     } else {
       select_cols <- "$0"
@@ -275,7 +275,7 @@ awk_translate <- function(filters, col_idx, sep, select) {
     condition <- paste0("$${lng_idx} >= ${xmn} && ",
                         "$${lng_idx} <= ${xmx} && ",
                         "$${lat_idx} >= ${ymn} && ",
-                        "$${lat_idx} >= ${ymx}") %>%
+                        "$${lat_idx} <= ${ymx}") %>%
       str_interp(list(lat_idx = lat_idx, lng_idx = lng_idx,
                       xmn = filters$extent[1], xmx = filters$extent[3],
                       ymn = filters$extent[2], ymx = filters$extent[4]))
@@ -314,6 +314,28 @@ awk_translate <- function(filters, col_idx, sep, select) {
                                  mx = filters$last_edited[2]))
     filter_strings$last_edited <- str_interp(awk_if,
                                              list(condition = condition))
+  }
+  # project filter
+  if (length(filters$project) == 0) {
+    filter_strings$project <- ""
+  } else {
+    idx <- col_idx$index[col_idx$id == "project"]
+    condition <- paste0("$", idx, " == \"", filters$project, "\"",
+                        collapse = " || ")
+    filter_strings$project <- str_interp(awk_if, list(condition = condition))
+  }
+  # protocol filter
+  if (length(filters$protocol) == 0) {
+    filter_strings$protocol <- ""
+  } else {
+    protocol_db <- dplyr::recode(filters$protocol,
+                                 stationary = "eBird - Stationary Count",
+                                 traveling = "eBird - Traveling Count",
+                                 casual = "eBird - Casual Observation")
+    idx <- col_idx$index[col_idx$id == "protocol"]
+    condition <- paste0("$", idx, " == \"", protocol_db, "\"",
+                        collapse = " || ")
+    filter_strings$protocol <- str_interp(awk_if, list(condition = condition))
   }
   # duration filter
   if (length(filters$duration) == 0) {
@@ -377,6 +399,9 @@ BEGIN {
   ${extent}
   ${date}
   ${time}
+  ${last_edited}
+  ${protocol}
+  ${project}
   ${duration}
   ${distance}
   ${complete}

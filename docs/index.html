@@ -138,7 +138,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, tmp)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp9RQoWd/file13bcc70c43d88"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpkKaTb7/file46801eecfa83"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
@@ -161,6 +161,10 @@ tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates.</li>
 <li>
 <code><a href="reference/auk_last_edited.html">auk_last_edited()</a></code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
+<li>
+<code><a href="reference/auk_protocol.html">auk_protocol()</a></code>: filter to checklists that following a specific search protocol, either stationary, traveling, or casual.</li>
+<li>
+<code><a href="reference/auk_project.html">auk_project()</a></code>: filter to checklists collected as part of a specific project (e.g. a breeding bird survey).</li>
 <li>
 <code><a href="reference/auk_time.html">auk_time()</a></code>: filter to checklists started during a range of times-of-day.</li>
 <li>
@@ -204,6 +208,8 @@ ebd
 <span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span>
 <span class="co">#&gt;   Start time: 06:00-09:00</span>
 <span class="co">#&gt;   Last edited date: all</span>
+<span class="co">#&gt;   Protocol: all</span>
+<span class="co">#&gt;   Project code: all</span>
 <span class="co">#&gt;   Duration: 0-60 minutes</span>
 <span class="co">#&gt;   Distance travelled: all</span>
 <span class="co">#&gt;   Complete checklists only: yes</span></code></pre></div>

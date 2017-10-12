@@ -4,9 +4,6 @@ test_that("auk_ebd refrence ebd file", {
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
   ebd <- auk_ebd(f)
 
-  filter_names <- c("species", "country", "extent", "date", "time",
-                    "last_edited", "duration", "distance", "complete")
-
   expect_is(ebd, "auk_ebd")
   expect_equal(ebd$file, normalizePath(f))
   expect_equal(ebd$file, normalizePath(f))
@@ -17,16 +14,12 @@ test_that("auk_ebd refrence ebd file", {
   expect_is(ebd$col_idx$index, "integer")
   expect_true(all(!is.na(ebd$col_idx$index)))
   expect_null(ebd$col_idx_sampling)
-  expect_equal(names(ebd$filters), filter_names)
 })
 
 test_that("auk_ebd refrence ebd and sampling files", {
   f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
   ebd <- auk_ebd(f_ebd, file_sampling = f_smpl)
-
-  filter_names <- c("species", "country", "extent", "date", "time",
-                    "last_edited", "duration", "distance", "complete")
 
   expect_is(ebd, "auk_ebd")
   expect_equal(ebd$file, normalizePath(f_ebd))
@@ -39,7 +32,6 @@ test_that("auk_ebd refrence ebd and sampling files", {
   expect_is(ebd$col_idx_sampling, "data.frame")
   expect_is(ebd$col_idx_sampling$index, "integer")
   expect_true(all(!is.na(ebd$col_idx_sampling$index)))
-  expect_equal(names(ebd$filters), filter_names)
 })
 
 test_that("auk_ebd bad file references throws error", {

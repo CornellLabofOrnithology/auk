@@ -159,6 +159,8 @@ ebd
 - `auk_extent()`: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.
 - `auk_date()`: filter to checklists from a range of dates.
 - `auk_last_edited()`: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.
+- `auk_protocol()`: filter to checklists that following a specific search protocol, either stationary, traveling, or casual.
+- `auk_project()`: filter to checklists collected as part of a specific project (e.g. a breeding bird survey).
 - `auk_time()`: filter to checklists started during a range of times-of-day.
 - `auk_duration()`: filter to checklists with observation durations within a given range.
 - `auk_distance()`: filter to checklists with distances travelled within a given range.

@@ -92,7 +92,7 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmprq5ylg/file13bbbe4e6f9"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp3s4sS2/file466d50ef5b8"
 # number of lines in input
 length(readLines(f))
 #> [1] 101
@@ -110,6 +110,8 @@ length(readLines(tmp))
 -   `auk_extent()`: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.
 -   `auk_date()`: filter to checklists from a range of dates.
 -   `auk_last_edited()`: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.
+-   `auk_protocol()`: filter to checklists that following a specific search protocol, either stationary, traveling, or casual.
+-   `auk_project()`: filter to checklists collected as part of a specific project (e.g. a breeding bird survey).
 -   `auk_time()`: filter to checklists started during a range of times-of-day.
 -   `auk_duration()`: filter to checklists with observation durations within a given range.
 -   `auk_distance()`: filter to checklists with distances travelled within a given range.
@@ -151,6 +153,8 @@ ebd
 #>   Date: 2012-01-01 - 2012-12-31
 #>   Start time: 06:00-09:00
 #>   Last edited date: all
+#>   Protocol: all
+#>   Project code: all
 #>   Duration: 0-60 minutes
 #>   Distance travelled: all
 #>   Complete checklists only: yes

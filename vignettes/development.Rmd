@@ -1,0 +1,105 @@
+---
+title: "auk development"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to auk}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+This vignette describes the process of updating and extending `auk`. Two topics are covered: updating `auk` when a new eBird taxonomy is released and extending `auk` to include new filters.
+
+## Updating the eBird taxonomy
+
+## Adding new filters
+
+The primary functionality of `auk` is to apply filters to the EBD to extract a subset of records that can be imported into R and further analyzed. Individual filters are defined by a particular function (e.g. `auk_date()` or `auk_country()`) and correspond to subsetting on a particular column (e.g. "OBSERVATION DATE" and "COUNTRY CODE", respectively). Defining a new filter is a fairly complicated process, involving carefully updating many components of the package, and should only be attempted by experienced R programmers. To add a filter called `color`, the following steps are required:
+
+1. Update `auk_ebd()` (in file `R/auk-ebd.r`) to define the column number for the new filter, create a placeholder in the `auk_ebd` object to store the filtering criteria, and update the `auk_ebd` print method for the new filter.
+2. Create a new function `auk_color()` (in file `R/auk-color.r`) that defines the new filter. As a starting point, use one of the other filtering functions. For example to filter on a range of numeric values, start with `auk_duration()`, to filter on a logical (true/false) variable use `auk_complete()`, or to filter on a discrete, categorical variable use `auk_country()`. Be sure to apply extensive checking on the validity of inputs and update the documentation, including examples.
+3. Update `auk_filter()` (in file `R/auk-filter.r`) to incorporate the filtering criteria into the AWK script. Again, use an existing filter as a template.
+4. Create unit tests for the new filter by creating a new `test_that()` block in `tests/testthat/test_filters.r`. Again, use an existing filter as a template.
+5. Update `README.md` and `vignettes/auk.Rmd` to add the new filter to the list of potential filtes.
+6. Build, test, check, and push to GitHub
+
+### 1. Update `auk_ebd()`
+
+Near the top of the code for `auk_ebd()`, a data frames named `filter_cols` is defined which specifies which columns have associated filters. Add a new row to this data frame and set `name` as the name of the column in the file header that will be filtered on and `id` as the name of the filter. For example, if you're creating a filter called `auk_color()` that filters on the column "FEATHER COLOR", then set `id = "color"` and `name = "feather color"`. Ideally, similar filters should be grouped together in this data frame, so insert the new row accordingly.
+
+Next, at the end of the code for `auk_ebd()`, the `auk_ebd` object is created and returned with the statement beginning with `structure(...`. This object should have placeholders for every filter. So, add a new element to the list, naming the variable after the `id` in the above data frame, putting it in the same order as in the above data frame, and choosing a sensible data type. For example, if `color` is a categorical variable, add a new list element `color = character()`, and if it is a logical (T/F) variable, add `color = logical()`.
+
+Finally, within `auk-ebd.r` a `print.auk_ebd()` method is defined, which you'll need to update to print the filter in a sensible way. Here you're best to find another filter with a similar format and use that as a template. Again, be sure to put the print code for the filter in the right order. For example, for a categorical filter allow multiple potential values, you may way something like:
+
+```{r print-filter, eval=FALSE}
+# color filter
+cat("  Feather color: ")
+if (length(x$filters$species) == 0) {
+  cat("all")
+} else {
+  cat(paste(x$filters$color, collapse = ", "))
+}
+cat("\n")
+```
+
+### 2. Create filter function
+
+Create a new function that will allow users to define a filter. Be sure to following the naming conventions used, for our color example, the function should be named `auk_color()` and it should be in a file called `auk-color.r`. It's easiest to use an existing function as a template here. In general, the function should take two argument, the `auk_ebd` object to modify, and an argument with the filter criteria, e.g. `auk_color(x, color)`. Note how the name of the function matches the name of the second argument. The function should be edited to include the following:
+
+1. Extensive checks on the incoming arguments. Remember that filtering with AWK takes multiple hours, so it's best to catch any errors early, prior to running `auk_filter()`. At the very least, check data types and, where possible, check that values are valid (e.g. `color` should be in `c("red", "green", "blue", ...)`). Provide informative error or warning messages where appropriate.
+2. Setting the filter criteria in the `auk_ebd` object. This is generally as simple as `x$filters$color = color`.
+3. Thorough documentation. Document all the arguments and provide examples with and without the pipe operator (`%>%`).
+
+### 3. Update `auk_filter()`
+
+The actual work of filtering is done by `auk_filter()`, which generates an AWK script, then calls AWK. This function must be updated to parse the filters defined using the function you created in 2 into AWK code. In the code for `auk_filter()`, there are two calls to the internal function `awk_translate()`, which is an internal function defined in the same file. It's `awk_translate()` that you'll need to edit. This function has a series of code blocks each of which prepares the AWK code for a different filter. Find an existing filter that is similar to the new one you're creating and copy it over to the correct spot (remember to preserve the ordering of the filters). For the `auk_color()` example, the code chunk would look like:
+
+```{r awk-code, eval=FALSE}
+  # color filter
+  if (length(filters$color) == 0) {
+    filter_strings$color <- ""
+  } else {
+    idx <- col_idx$index[col_idx$id == "color"]
+    condition <- paste0("$", idx, " == \"", filters$color, "\"",
+                        collapse = " || ")
+    filter_strings$color <- str_interp(awk_if, list(condition = condition))
+  }
+```
+
+When given a sampling event data file in addition to a EBD file, `auk_filter()` will filter both files. By default `auk_filter()` will apply all filters to both files, however, some filters (e.g. species) are only appropriate for the EBD. To address this, prior to calling `auk_translate()` for the sampling data, reset the species-specific filters. In the case of color, which is a species specific variable, modify the code as follows:
+
+```{r species-specific, eval=FALSE}
+s_filters <- x$filters
+s_filters$species <- character()
+## ADD THIS LINE
+s_filters$color <- character()
+##
+awk_script_sampling <- awk_translate(filters = s_filters,
+                                     col_idx = x$col_idx_sampling,
+                                     sep = sep,
+                                     select = select_cols)
+```
+
+Finally, at the end of the `auk-filter.r` file, there's a string named `awk_filter`, which defines the template for the AWK script. Each filter has a line in this string (e.g. `${species}`) where the AWK code will be inserted. You'll need to add a line in this file for your new filter: `${color}`.
+
+### 4. Unit tests
+
+Now that you've successfully created the filter, play around with it a bit to make sure it works as expected. Once you feel the filter is working, it's time to formalize this testing process by defining unit tests. Open the file `tests/testthat/test_filters.r` and you'll notice a series of calls like `test_that("auk_species", ...`, each of which contains tests for a specific filter.
+
+Usinging an existing test block as an example, define a new block (again, put it in the correct order relative to the other filters). Consult the [Testing chapter](http://r-pkgs.had.co.nz/tests.html) of Hadley Wickham's [R packages book](http://r-pkgs.had.co.nz/) for details on defining good unit tests. At the very least, define tests to make sure that typical use works as expected, that errors are caught when input is invalid, and that edge cases are correctly handled.
+
+### 5. Update vignette and README
+
+Both the vignette (`vignettes/auk.Rmd`) and README (`README.Rmd`) have sections giving a short description of each filter. Add the new filter you've created here.
+
+### 6. Build, test, check, and push to GitHub
+
+Carrry out the following final steps:
+
+1. Run `devtools::document()` to generate package documentation
+2. Run `devtools::build()` to build and install the package
+3. Run `devtools::check()` to run the units tests and variety of other checks via `R CMD check`
+5. Build the vignettes with `devtools::build_vignettes()`
+6. Build the package website with `pkgdown::build_site()`
+7. Commit to git, then push to GitHub
