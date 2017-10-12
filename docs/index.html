@@ -138,7 +138,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, tmp)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpyKLNFg/fileffa7871112c"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpzyptoV/file25853d1ab7b4"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
@@ -171,6 +171,8 @@ tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <code><a href="reference/auk_duration.html">auk_duration()</a></code>: filter to checklists with observation durations within a given range.</li>
 <li>
 <code><a href="reference/auk_distance.html">auk_distance()</a></code>: filter to checklists with distances travelled within a given range.</li>
+<li>
+<code><a href="reference/auk_breeding.html">auk_breeding()</a></code>: only retain observations that have an associate breeding bird atlas code.</li>
 <li>
 <code><a href="reference/auk_complete.html">auk_complete()</a></code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the “absence”" information is inferred by the lack of reporting of a species on checklists.</li>
 </ul>
@@ -212,6 +214,7 @@ ebd
 <span class="co">#&gt;   Project code: all</span>
 <span class="co">#&gt;   Duration: 0-60 minutes</span>
 <span class="co">#&gt;   Distance travelled: all</span>
+<span class="co">#&gt;   Records with breeding codes only: no</span>
 <span class="co">#&gt;   Complete checklists only: yes</span></code></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package.</p>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Gray Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>

@@ -64,13 +64,15 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
            "country", "lat", "lng",
            "date", "time", "last_edited",
            "protocol", "project", 
-           "duration", "distance", "complete"),
+           "duration", "distance", 
+           "breeding", "complete"),
     name = c("scientific name",
              "country code", "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
              "protocol type", "project code",
              "duration minutes", "effort distance km",
+             "breeding bird atlas code",
              "all species reported"),
     stringsAsFactors = FALSE)
   # all these columns should be in header
@@ -86,7 +88,8 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
     )
     file_sampling <- normalizePath(file_sampling)
     # species not in sampling data
-    filter_cols_sampling <- filter_cols[filter_cols$id != "species", ]
+    not_in_sampling <- c("species", "breeding")
+    filter_cols_sampling <- filter_cols[!filter_cols$id %in% not_in_sampling, ]
     # read header rows
     header_sampling <- tolower(get_header(file_sampling, sep))
     col_idx_sampling <- data.frame(id = NA_character_, 
@@ -124,6 +127,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         project = character(),
         duration = numeric(),
         distance = numeric(),
+        breeding = FALSE,
         complete = FALSE
       )
     ),
@@ -236,6 +240,14 @@ print.auk_ebd <- function(x, ...) {
     cat("all")
   } else {
     cat(paste0(x$filters$distance[1], "-", x$filters$distance[2], " km"))
+  }
+  cat("\n")
+  # complete checklists only
+  cat("  Records with breeding codes only: ")
+  if (x$filters$breeding) {
+    cat("yes")
+  } else {
+    cat("no")
   }
   cat("\n")
   # complete checklists only

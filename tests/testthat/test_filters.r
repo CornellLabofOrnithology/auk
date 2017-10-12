@@ -297,3 +297,13 @@ test_that("auk_complete", {
   ebd <- auk_complete(ebd)
   expect_equal(ebd$filters$complete, TRUE)
 })
+
+test_that("auk_breeding", {
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd()
+  
+  # works correctly
+  expect_equal(ebd$filters$complete, FALSE)
+  ebd <- auk_complete(ebd)
+  expect_equal(ebd$filters$complete, TRUE)
+})

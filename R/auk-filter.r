@@ -200,6 +200,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, awk_file, keep, drop,
     # remove species filter
     s_filters <- x$filters
     s_filters$species <- character()
+    s_filters$breeding <- FALSE
     awk_script_sampling <- awk_translate(filters = s_filters,
                                          col_idx = x$col_idx_sampling,
                                          sep = sep,
@@ -371,6 +372,14 @@ awk_translate <- function(filters, col_idx, sep, select) {
     }
     filter_strings$distance <- str_interp(awk_if, list(condition = condition))
   }
+  # breeding records only
+  if (filters$breeding) {
+    idx <- col_idx$index[col_idx$id == "breeding"]
+    condition <- str_interp("$${idx} != \"\"", list(idx = idx))
+    filter_strings$breeding <- str_interp(awk_if, list(condition = condition))
+  } else {
+    filter_strings$breeding <- ""
+  }
   # complete checklists only
   if (filters$complete) {
     idx <- col_idx$index[col_idx$id == "complete"]
@@ -404,6 +413,7 @@ BEGIN {
   ${project}
   ${duration}
   ${distance}
+  ${breeding}
   ${complete}
 
   # keeps header

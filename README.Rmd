@@ -122,6 +122,7 @@ length(readLines(tmp))
 - `auk_time()`: filter to checklists started during a range of times-of-day.
 - `auk_duration()`: filter to checklists with observation durations within a given range.
 - `auk_distance()`: filter to checklists with distances travelled within a given range.
+- `auk_breeding()`: only retain observations that have an associate breeding bird atlas code.
 - `auk_complete()`: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the "absence"" information is inferred by the lack of reporting of a species on checklists. 
 
 Note that all of the functions listed above only modify the `auk_ebd` object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using `auk_filter()`.
