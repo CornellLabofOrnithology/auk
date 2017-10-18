@@ -77,7 +77,7 @@
 
 <span class="co"># or install the development version from github</span>
 <span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"CornellLabofOrnithology/auk"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"CornellLabofOrnithology/auk"</span>)</code></pre></div>
 <p><code>auk</code> requires the Unix utility AWK, which is available on most Linux and Mac OS X machines. Windows users will first need to install <a href="https://www.cygwin.com">Cygwin</a> before using this package. Note that <strong>Cygwin must be installed in the default location</strong> (<code>C:/cygwin/bin/gawk.exe</code> or <code>C:/cygwin64/bin/gawk.exe</code>) in order for <code>auk</code> to work.</p>
 </div>
 <div id="vignette" class="section level2">
@@ -138,7 +138,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, tmp)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpzyptoV/file25853d1ab7b4"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp5TBYgL/file173e63f472d8c"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>

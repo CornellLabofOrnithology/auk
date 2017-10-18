@@ -271,10 +271,10 @@ ebd_jays &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span
 <div id="reading" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reading" class="anchor"></a>Reading</h3>
-<p>eBird Basic Dataset files can be read with <code><a href="../reference/read_ebd.html">read_ebd()</a></code>. This is a wrapper around <code>data.table::fread()</code>, <code>readr::read_delim()</code>, or <code>read.delim()</code>, depending on which packages are installed. <code><a href="../reference/read_ebd.html">read_ebd()</a></code> uses <code>stringsAsFactors = FALSE</code>, <code>quote = ""</code>, sets column classes, and converts variable names to <code>snake_case</code>.</p>
+<p>eBird Basic Dataset files can be read with <code><a href="../reference/read_ebd.html">read_ebd()</a></code>. This is a wrapper around <code><a href="http://www.rdocumentation.org/packages/data.table/topics/fread">data.table::fread()</a></code>, <code><a href="http://www.rdocumentation.org/packages/readr/topics/read_delim">readr::read_delim()</a></code>, or <code>read.delim()</code>, depending on which packages are installed. <code><a href="../reference/read_ebd.html">read_ebd()</a></code> uses <code>stringsAsFactors = FALSE</code>, <code>quote = ""</code>, sets column classes, and converts variable names to <code>snake_case</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">glimpse</span>()
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>()
 <span class="co">#&gt; Observations: 487</span>
 <span class="co">#&gt; Variables: 47</span>
 <span class="co">#&gt; $ checklist_id               &lt;chr&gt; "S12813888", "S14439115", "S1015213...</span>
@@ -397,8 +397,8 @@ ebd_unique &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>(<span class="dt">rollup =</span> <span class="ot">FALSE</span>)
 <span class="co"># note the presence of forms for american robin and bewick's wren</span>
 ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(checklist_id <span class="op">==</span><span class="st"> "S7980609"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="dt">id =</span> checklist_id, category, 
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(checklist_id <span class="op">==</span><span class="st"> "S7980609"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="dt">id =</span> checklist_id, category, 
          <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
 <span class="co">#&gt; # A tibble: 7 x 4</span>
 <span class="co">#&gt;         id category            species                         subspecies</span>
@@ -413,8 +413,8 @@ ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="co"># taxonomic rollup</span>
 ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/auk_rollup.html">auk_rollup</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(checklist_id <span class="op">==</span><span class="st"> "S7980609"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="dt">id =</span> checklist_id, category,
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(checklist_id <span class="op">==</span><span class="st"> "S7980609"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="dt">id =</span> checklist_id, category,
          <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
 <span class="co">#&gt; # A tibble: 5 x 4</span>
 <span class="co">#&gt;         id category            species subspecies</span>
@@ -515,7 +515,7 @@ ebd_zf
 <span class="co">#&gt; 4    S10006731 Todiramphus chloris                 5             TRUE</span>
 <span class="co">#&gt; 5    S10006786 Todiramphus chloris                 0            FALSE</span>
 <span class="co">#&gt; 6    S10011787 Todiramphus chloris                 3             TRUE</span>
-<span class="kw">glimpse</span>(ebd_zf<span class="op">$</span>sampling_events)
+<span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(ebd_zf<span class="op">$</span>sampling_events)
 <span class="co">#&gt; Observations: 179</span>
 <span class="co">#&gt; Variables: 32</span>
 <span class="co">#&gt; $ checklist_id              &lt;chr&gt; "S23107780", "S10926976", "S34396450...</span>

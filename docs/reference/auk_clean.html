@@ -129,26 +129,26 @@ however, if an error was encountered the exit code is returned.</p>
     <p>This function can clean a basic dataset file or a sampling file.</p>
 <p>Calling this function requires that the command line utility AWK is
 installed. Linux and Mac machines should have AWK by default, Windows users
-will likely need to install <a href = 'https://www.cygwin.com'>Cygwin</a>.</p>
+will likely need to install <a href='https://www.cygwin.com'>Cygwin</a>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='co'># example data with errors</span>
-  <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample_messy.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
-  <span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># example data with errors</span>
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample_messy.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
 
-  <span class='co'># clean file to remove problem rows</span>
-  <span class='fu'>auk_clean</span>(<span class='no'>f</span>, <span class='no'>tmp</span>)
-  <span class='co'># number of lines in input</span>
-  <span class='fu'>length</span>(<span class='fu'>readLines</span>(<span class='no'>f</span>))
-  <span class='co'># number of lines in output</span>
-  <span class='fu'>length</span>(<span class='fu'>readLines</span>(<span class='no'>tmp</span>))
+<span class='co'># clean file to remove problem rows</span>
+<span class='fu'>auk_clean</span>(<span class='no'>f</span>, <span class='no'>tmp</span>)
+<span class='co'># number of lines in input</span>
+<span class='fu'>length</span>(<span class='fu'>readLines</span>(<span class='no'>f</span>))
+<span class='co'># number of lines in output</span>
+<span class='fu'>length</span>(<span class='fu'>readLines</span>(<span class='no'>tmp</span>))
 
-  <span class='co'># note that the extra blank column has also been removed</span>
-  <span class='fu'>ncol</span>(<span class='fu'>read.delim</span>(<span class='no'>f</span>, <span class='kw'>nrows</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='st'>""</span>))
-  <span class='fu'>ncol</span>(<span class='fu'>read.delim</span>(<span class='no'>tmp</span>, <span class='kw'>nrows</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='st'>""</span>))
-})</div></pre>
+<span class='co'># note that the extra blank column has also been removed</span>
+<span class='fu'>ncol</span>(<span class='fu'>read.delim</span>(<span class='no'>f</span>, <span class='kw'>nrows</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='st'>""</span>))
+<span class='fu'>ncol</span>(<span class='fu'>read.delim</span>(<span class='no'>tmp</span>, <span class='kw'>nrows</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='st'>""</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -4,12 +4,12 @@
 #' filtering using AWK.
 #'
 #' @param file character; input file.
-#' @param file_sampling character; optional input sampling event data file,
-#'   required if you intend to zero-fill the data to produce a presence-absence
-#'   data set. The sampling file consists of just effort information for every
-#'   eBird checklist. Any species not appearing in the EBD for a given checklist
-#'   is implicitly considered to have a count of 0. This file should be
-#'   downloaded at the same time as the basic dataset to ensure they are in
+#' @param file_sampling character; optional input sampling event data (i.e.
+#'   checklists) file, required if you intend to zero-fill the data to produce a
+#'   presence-absence data set. This file consists of just effort information
+#'   for every eBird checklist. Any species not appearing in the EBD for a given
+#'   checklist is implicitly considered to have a count of 0. This file should
+#'   be downloaded at the same time as the basic dataset to ensure they are in
 #'   sync.
 #' @param sep character; the input field separator, the eBird data are tab
 #'   separated so this should generally not be modified. Must only be a single
@@ -25,25 +25,25 @@
 #'
 #' @details
 #' There are two potential pathways for preparing eBird data. Users wishing to
-#' produce presence only data, should download the [eBird Basic Dataset](http://ebird.org/ebird/data/download/)
+#' produce presence only data, should download the [eBird Basic Dataset](http://ebird.org/ebird/data/download/) 
 #' and reference this file when calling `auk_ebd()`. Users wishing to produce
 #' zero-filled, presence absence data should additionally download the sampling
 #' event data file associated with the basic dataset This file contains only
 #' checklist information and can be used to infer absences. The sampling event
-#' data file should be provided to `auk_ebd()` via the `file_sampling` argument.
-#' For further details consult the vignettes.
+#' data file should be provided to `auk_ebd()` via the `file_sampling`
+#' argument. For further details consult the vignettes.
 #'
 #' @return An `auk_ebd` object storing the file reference and the desired
 #'   filters once created with other package functions.
 #' @export
 #' @examples
-#' # set up reference to sample file
+#' # set up reference to example file
 #' f <- system.file("extdata/ebd-sample.txt", package = "auk")
 #' auk_ebd(f)
-#' # to produce zero-filled data, provide a sampling event data file
+#' # to produce zero-filled data, provide a checklist file
 #' f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
-#' f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-#' auk_ebd(f_ebd, file_sampling = f_smpl)
+#' f_cl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
+#' auk_ebd(f_ebd, file_sampling = f_cl)
 auk_ebd <- function(file, file_sampling, sep = "\t") {
   # checks
   assertthat::assert_that(
