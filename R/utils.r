@@ -92,7 +92,7 @@ choose_reader <- function(x) {
   if (is.null(x)) {
     if (requireNamespace("data.table", quietly = TRUE)) {
       reader <- "fread"
-    } else if (requireNamespace("data.table", quietly = TRUE)) {
+    } else if (requireNamespace("readr", quietly = TRUE)) {
       reader <- "readr"
     } else {
       reader <- "base"
