@@ -57,8 +57,8 @@ data frame rather than an \code{auk_zerofill} object.}
 By default, an \code{auk_zerofill} object, or a data frame if \code{collapse = TRUE}.
 }
 \description{
-Read an eBird Basic Dataset file, and associated sampling event data file, to
-produce a zero-filled, presence-absence dataset. The basic dataa contains bird
+Read an eBird Basic Dataset (EBD) file, and associated sampling event data file, to
+produce a zero-filled, presence-absence dataset. The EBD contains bird
 sightings and the sampling event data is a set of all checklists, they can be
 combined to infer absence data by assuming any species not reported on a
 checklist was had a count of zero.

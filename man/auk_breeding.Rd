@@ -2,7 +2,7 @@
 % Please edit documentation in R/auk-breeding.r
 \name{auk_breeding}
 \alias{auk_breeding}
-\title{Filter to only inlcude observations with breeding codes}
+\title{Filter to only include observations with breeding codes}
 \usage{
 auk_breeding(x)
 }
@@ -15,7 +15,7 @@ An \code{auk_ebd} object.
 }
 \description{
 eBird users have the option of specifying breeding bird atlas codes for their
-observations, for example, if nesting building behaviour is observered. Use
+observations, for example, if nesting building behaviour is observed. Use
 this filter to select only those observations with an associated breeding
 code. This function only defines the filter and, once all filters have been
 defined, \code{\link[=auk_filter]{auk_filter()}} should be used to call AWK and perform the filtering.
