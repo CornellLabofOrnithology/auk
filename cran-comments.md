@@ -1,9 +1,9 @@
 # Test environments
 
-- local OS X install, R 3.4.1
-- OS X (on travis-ci), R 3.4.1
-- ubuntu 14.04 (on travis-ci), R 3.4.1
-- Windows (appveyor), R 3.4.1
+- local OS X install, R 3.4.2
+- OS X (on travis-ci), R 3.4.2
+- ubuntu 14.04 (on travis-ci), R 3.4.2
+- Windows (appveyor), R 3.4.2
 - win-builder
 
 # R CMD check results
