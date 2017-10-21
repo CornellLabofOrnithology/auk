@@ -1,3 +1,9 @@
+# Resubmission
+
+This is a resubmission. In this version I have:
+
+- Removed the LICENSE file because it was redundant
+
 # Test environments
 
 - local OS X install, R 3.4.2
