@@ -2,7 +2,7 @@
 title: "auk development"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to auk}
+  %\VignetteIndexEntry{auk development}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

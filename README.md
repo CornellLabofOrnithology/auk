@@ -92,7 +92,7 @@ f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
 tmp <- tempfile()
 # remove problem records
 auk_clean(f, tmp)
-#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpwb7WiQ/file6f4c679fb330"
+#> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpnG3Alh/file76c22ad5d6d3"
 # number of lines in input
 length(readLines(f))
 #> [1] 101
