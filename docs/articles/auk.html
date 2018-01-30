@@ -401,15 +401,15 @@ ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="dt">id =</span> checklist_id, category, 
          <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
 <span class="co">#&gt; # A tibble: 7 x 4</span>
-<span class="co">#&gt;         id category            species                         subspecies</span>
-<span class="co">#&gt;      &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;                              &lt;chr&gt;</span>
-<span class="co">#&gt; 1 S7980609  species      American Crow                               &lt;NA&gt;</span>
-<span class="co">#&gt; 2 S7980609  species American Goldfinch                               &lt;NA&gt;</span>
-<span class="co">#&gt; 3 S7980609  species     American Robin                               &lt;NA&gt;</span>
-<span class="co">#&gt; 4 S7980609     issf     American Robin American Robin (migratorius Group)</span>
-<span class="co">#&gt; 5 S7980609  species         Bald Eagle                               &lt;NA&gt;</span>
-<span class="co">#&gt; 6 S7980609  species      Bewick's Wren                               &lt;NA&gt;</span>
-<span class="co">#&gt; 7 S7980609     issf      Bewick's Wren     Bewick's Wren (spilurus Group)</span>
+<span class="co">#&gt;   id       category species            subspecies                        </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;                             </span>
+<span class="co">#&gt; 1 S7980609 species  American Crow      &lt;NA&gt;                              </span>
+<span class="co">#&gt; 2 S7980609 species  American Goldfinch &lt;NA&gt;                              </span>
+<span class="co">#&gt; 3 S7980609 species  American Robin     &lt;NA&gt;                              </span>
+<span class="co">#&gt; 4 S7980609 issf     American Robin     American Robin (migratorius Group)</span>
+<span class="co">#&gt; 5 S7980609 species  Bald Eagle         &lt;NA&gt;                              </span>
+<span class="co">#&gt; 6 S7980609 species  Bewick's Wren      &lt;NA&gt;                              </span>
+<span class="co">#&gt; 7 S7980609 issf     Bewick's Wren      Bewick's Wren (spilurus Group)</span>
 <span class="co"># taxonomic rollup</span>
 ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/auk_rollup.html">auk_rollup</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
@@ -417,13 +417,13 @@ ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="dt">id =</span> checklist_id, category,
          <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
 <span class="co">#&gt; # A tibble: 5 x 4</span>
-<span class="co">#&gt;         id category            species subspecies</span>
-<span class="co">#&gt;      &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;</span>
-<span class="co">#&gt; 1 S7980609  species      American Crow       &lt;NA&gt;</span>
-<span class="co">#&gt; 2 S7980609  species American Goldfinch       &lt;NA&gt;</span>
-<span class="co">#&gt; 3 S7980609  species     American Robin       &lt;NA&gt;</span>
-<span class="co">#&gt; 4 S7980609  species         Bald Eagle       &lt;NA&gt;</span>
-<span class="co">#&gt; 5 S7980609  species      Bewick's Wren       &lt;NA&gt;</span></code></pre></div>
+<span class="co">#&gt;   id       category species            subspecies</span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;     </span>
+<span class="co">#&gt; 1 S7980609 species  American Crow      &lt;NA&gt;      </span>
+<span class="co">#&gt; 2 S7980609 species  American Goldfinch &lt;NA&gt;      </span>
+<span class="co">#&gt; 3 S7980609 species  American Robin     &lt;NA&gt;      </span>
+<span class="co">#&gt; 4 S7980609 species  Bald Eagle         &lt;NA&gt;      </span>
+<span class="co">#&gt; 5 S7980609 species  Bewick's Wren      &lt;NA&gt;</span></code></pre></div>
 <p>By default, <code><a href="../reference/read_ebd.html">read_ebd()</a></code> calls <code>ebd_rollup()</code> when importing an eBird Basic Dataset file. To avoid this, and retain subspecies, use <code><a href="../reference/read_ebd.html">read_ebd(rollup = FALSE)</a></code>.</p>
 </div>
 </div>
@@ -507,14 +507,14 @@ ebd_zf
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ebd_zf<span class="op">$</span>observations)
 <span class="co">#&gt; # A tibble: 6 x 4</span>
-<span class="co">#&gt;   checklist_id     scientific_name observation_count species_observed</span>
-<span class="co">#&gt;          &lt;chr&gt;               &lt;chr&gt;             &lt;chr&gt;            &lt;lgl&gt;</span>
-<span class="co">#&gt; 1     G1733362 Todiramphus chloris                 X             TRUE</span>
-<span class="co">#&gt; 2      G366411 Todiramphus chloris                 2             TRUE</span>
-<span class="co">#&gt; 3    S10006552 Todiramphus chloris                 1             TRUE</span>
-<span class="co">#&gt; 4    S10006731 Todiramphus chloris                 5             TRUE</span>
-<span class="co">#&gt; 5    S10006786 Todiramphus chloris                 0            FALSE</span>
-<span class="co">#&gt; 6    S10011787 Todiramphus chloris                 3             TRUE</span>
+<span class="co">#&gt;   checklist_id scientific_name     observation_count species_observed</span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;             &lt;lgl&gt;           </span>
+<span class="co">#&gt; 1 G1733362     Todiramphus chloris X                 T               </span>
+<span class="co">#&gt; 2 G366411      Todiramphus chloris 2                 T               </span>
+<span class="co">#&gt; 3 S10006552    Todiramphus chloris 1                 T               </span>
+<span class="co">#&gt; 4 S10006731    Todiramphus chloris 5                 T               </span>
+<span class="co">#&gt; 5 S10006786    Todiramphus chloris 0                 F               </span>
+<span class="co">#&gt; 6 S10011787    Todiramphus chloris 3                 T</span>
 <span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(ebd_zf<span class="op">$</span>sampling_events)
 <span class="co">#&gt; Observations: 179</span>
 <span class="co">#&gt; Variables: 32</span>
@@ -557,25 +557,25 @@ ebd_zf_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/a
 <span class="co">#&gt; [1] "tbl_df"     "tbl"        "data.frame"</span>
 ebd_zf_df
 <span class="co">#&gt; # A tibble: 179 x 35</span>
-<span class="co">#&gt;    checklist_id    last_edited_date   country country_code     state</span>
-<span class="co">#&gt;           &lt;chr&gt;               &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;</span>
-<span class="co">#&gt;  1    S23107780 2015-04-28 11:48:17 Singapore           SG Singapore</span>
-<span class="co">#&gt;  2    S10926976 2015-11-18 20:52:57 Singapore           SG Singapore</span>
-<span class="co">#&gt;  3    S34396450 2017-02-15 23:43:12 Singapore           SG Singapore</span>
-<span class="co">#&gt;  4    S10920563 2013-10-14 16:08:49 Singapore           SG Singapore</span>
-<span class="co">#&gt;  5    S18149280 2014-04-30 12:03:34 Singapore           SG Singapore</span>
-<span class="co">#&gt;  6    S34396153 2017-02-15 23:13:05 Singapore           SG Singapore</span>
-<span class="co">#&gt;  7    S10246206 2012-03-23 19:35:01 Singapore           SG Singapore</span>
-<span class="co">#&gt;  8    S12252359 2014-05-04 10:41:45 Singapore           SG Singapore</span>
-<span class="co">#&gt;  9    S17614547 2014-08-18 15:48:59 Singapore           SG Singapore</span>
-<span class="co">#&gt; 10    S17604516 2014-08-18 15:48:59 Singapore           SG Singapore</span>
-<span class="co">#&gt; # ... with 169 more rows, and 30 more variables: state_code &lt;chr&gt;,</span>
-<span class="co">#&gt; #   county &lt;chr&gt;, county_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;,</span>
-<span class="co">#&gt; #   usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;,</span>
-<span class="co">#&gt; #   locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   longitude &lt;dbl&gt;, observation_date &lt;date&gt;,</span>
-<span class="co">#&gt; #   time_observations_started &lt;chr&gt;, observer_id &lt;chr&gt;, first_name &lt;chr&gt;,</span>
-<span class="co">#&gt; #   last_name &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,</span>
+<span class="co">#&gt;    checklist_id last_edited_date   country  country_code state  state_code</span>
+<span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;     </span>
+<span class="co">#&gt;  1 S23107780    2015-04-28 11:48:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt;  2 S10926976    2015-11-18 20:52:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt;  3 S34396450    2017-02-15 23:43:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt;  4 S10920563    2013-10-14 16:08:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt;  5 S18149280    2014-04-30 12:03:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt;  6 S34396153    2017-02-15 23:13:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt;  7 S10246206    2012-03-23 19:35:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt;  8 S12252359    2014-05-04 10:41:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt;  9 S17614547    2014-08-18 15:48:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt; 10 S17604516    2014-08-18 15:48:… Singapo… SG           Singa… SG-       </span>
+<span class="co">#&gt; # ... with 169 more rows, and 29 more variables: county &lt;chr&gt;,</span>
+<span class="co">#&gt; #   county_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;,</span>
+<span class="co">#&gt; #   atlas_block &lt;chr&gt;, locality &lt;chr&gt;, locality_id &lt;chr&gt;,</span>
+<span class="co">#&gt; #   locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,</span>
+<span class="co">#&gt; #   observer_id &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,</span>
+<span class="co">#&gt; #   sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,</span>
 <span class="co">#&gt; #   project_code &lt;chr&gt;, duration_minutes &lt;int&gt;, effort_distance_km &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;,</span>
 <span class="co">#&gt; #   all_species_reported &lt;lgl&gt;, group_identifier &lt;chr&gt;,</span>

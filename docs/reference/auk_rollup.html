@@ -122,20 +122,19 @@ would roll up to "X" for Yellow-rumped Warbler.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-rollup-ex.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
 <span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>f</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 186 x 47
-#&gt;    checklist_id                       global_unique_identifier
-#&gt;           &lt;chr&gt;                                          &lt;chr&gt;
-#&gt;  1     S5303232  URN:CornellLabOfOrnithology:EBIRD:OBS74460207
-#&gt;  2     S5271028  URN:CornellLabOfOrnithology:EBIRD:OBS74039017
-#&gt;  3    S25970116 URN:CornellLabOfOrnithology:EBIRD:OBS355093798
-#&gt;  4     S5231866  URN:CornellLabOfOrnithology:EBIRD:OBS73545417
-#&gt;  5     S5276125  URN:CornellLabOfOrnithology:EBIRD:OBS74105800
-#&gt;  6     S5239452  URN:CornellLabOfOrnithology:EBIRD:OBS73638626
-#&gt;  7    S13313466 URN:CornellLabOfOrnithology:EBIRD:OBS184656248
-#&gt;  8     S5276112  URN:CornellLabOfOrnithology:EBIRD:OBS74105705
-#&gt;  9     S5230408  URN:CornellLabOfOrnithology:EBIRD:OBS73530097
-#&gt; 10     S5230409  URN:CornellLabOfOrnithology:EBIRD:OBS73530110
-#&gt; # ... with 176 more rows, and 45 more variables: last_edited_date &lt;chr&gt;,
-#&gt; #   taxonomic_order &lt;dbl&gt;, category &lt;chr&gt;, common_name &lt;chr&gt;,
+#&gt;    checklist_id global_unique_identi… last_edited_date taxonomic_order category
+#&gt;    &lt;chr&gt;        &lt;chr&gt;                 &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt;   
+#&gt;  1 S5303232     URN:CornellLabOfOrni… 2014-11-18 09:4…            2832 spuh    
+#&gt;  2 S5271028     URN:CornellLabOfOrni… 2014-11-18 09:4…           19073 species 
+#&gt;  3 S25970116    URN:CornellLabOfOrni… 2015-11-23 15:5…           19073 species 
+#&gt;  4 S5231866     URN:CornellLabOfOrni… 2014-11-18 09:4…           19073 species 
+#&gt;  5 S5276125     URN:CornellLabOfOrni… 2014-11-18 09:4…           19073 species 
+#&gt;  6 S5239452     URN:CornellLabOfOrni… 2014-11-18 09:3…           19073 species 
+#&gt;  7 S13313466    URN:CornellLabOfOrni… 2014-11-18 09:3…           19073 species 
+#&gt;  8 S5276112     URN:CornellLabOfOrni… 2014-11-18 09:4…           19073 species 
+#&gt;  9 S5230408     URN:CornellLabOfOrni… 2014-11-18 09:4…           19073 species 
+#&gt; 10 S5230409     URN:CornellLabOfOrni… 2014-11-18 09:3…           19073 species 
+#&gt; # ... with 176 more rows, and 42 more variables: common_name &lt;chr&gt;,
 #&gt; #   scientific_name &lt;chr&gt;, subspecies_common_name &lt;chr&gt;,
 #&gt; #   subspecies_scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;,
 #&gt; #   breeding_bird_atlas_code &lt;chr&gt;, age_sex &lt;chr&gt;, country &lt;chr&gt;,
