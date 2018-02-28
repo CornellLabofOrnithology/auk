@@ -6,9 +6,13 @@
 #' filters have been defined, [auk_filter()] should be used to call AWK and
 #' perform the filtering.
 #'
-#' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#'   [auk_ebd()] or [auk_sampling()].
 #' @param date character or date; date range to filter by, provided either as a
 #'   character vector in the format `"2015-12-31"` or a vector of Date objects.
+#' 
+#' @details This function can also work with on an `auk_sampling` object if the 
+#'   user only wishes to filter the sampling event data.
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -43,4 +47,9 @@ auk_last_edited.auk_ebd <- function(x, date) {
   # define filter
   x$filters$last_edited <- date
   return(x)
+}
+
+#' @export
+auk_last_edited.auk_sampling <- function(x, date) {
+  auk_last_edited.auk_ebd(x, date)
 }

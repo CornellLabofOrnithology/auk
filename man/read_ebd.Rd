@@ -7,6 +7,7 @@
 \alias{read_sampling}
 \alias{read_sampling.character}
 \alias{read_sampling.auk_ebd}
+\alias{read_sampling.auk_sampling}
 \title{Read an EBD file}
 \usage{
 read_ebd(x, reader, sep, unique, rollup)
@@ -22,6 +23,8 @@ read_sampling(x, reader, sep, unique)
 \method{read_sampling}{character}(x, reader, sep = "\\t", unique = TRUE)
 
 \method{read_sampling}{auk_ebd}(x, reader, sep = "\\t", unique = TRUE)
+
+\method{read_sampling}{auk_sampling}(x, reader, sep = "\\t", unique = TRUE)
 }
 \arguments{
 \item{x}{filename or \code{auk_ebd} object with associated output
@@ -76,6 +79,8 @@ function used.
 
 \item \code{auk_ebd}: \code{auk_ebd} object output from \code{\link[=auk_filter]{auk_filter()}}. Must have
 had a sampling event data file set in the original call to \code{\link[=auk_ebd]{auk_ebd()}}.
+
+\item \code{auk_sampling}: \code{auk_sampling} object output from \code{\link[=auk_filter]{auk_filter()}}.
 }}
 
 \examples{

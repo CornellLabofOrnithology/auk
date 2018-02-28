@@ -7,27 +7,28 @@
 #' [auk_species()] or [auk_country()]. **Note that this function typically takes
 #' at least a couple hours to run on the full dataset**
 #'
-#' @param x `auk_ebd` object; reference to object created by [auk_ebd()] with
-#'   filters defined.
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#'   [auk_ebd()] or [auk_sampling()].
 #' @param file character; output file.
 #' @param file_sampling character; optional output file for sampling data.
-#' @param awk_file character; output file to optionally save the awk script to.
-#' @param filter_sampling logical; whether the sampling event data should also
-#'   be filtered.
 #' @param keep character; a character vector specifying the names of the columns
 #'   to keep in the output file. Columns should be as they appear in the header
-#'   of the EBD, however, names are not case sensitive and spaces may be
+#'   of the EBD; however, names are not case sensitive and spaces may be
 #'   replaced by underscores, e.g. `"COMMON NAME"`, `"common name"`, and
 #'   `"common_NAME"` are all valid.
 #' @param drop character; a character vector of columns to drop in the same
 #'   format as `keep`. Ignored if `keep` is supplied.
+#' @param awk_file character; output file to optionally save the awk script to.
 #' @param sep character; the input field separator, the eBird file is tab
 #'   separated by default. Must only be a single character and space delimited
 #'   is not allowed since spaces appear in many of the fields.
+#' @param filter_sampling logical; whether the sampling event data should also
+#'   be filtered.
 #' @param execute logical; whether to execute the awk script, or output it to a
 #'   file for manual execution. If this flag is `FALSE`, `awk_file` must be
 #'   provided.
 #' @param overwrite logical; overwrite output file if it already exists
+#' @param ... arguments passed on to methods.
 #'
 #' @details
 #' If a sampling file is provided in the [auk_ebd][auk_ebd()] object, this
@@ -77,15 +78,15 @@
 #' filtered <- auk_filter(filters, file = out_file)
 #' str(read_ebd(filtered))
 #' }
-auk_filter <- function(x, file, file_sampling, awk_file, keep, drop, sep,
-                       filter_sampling, execute, overwrite) {
+auk_filter <- function(x, file, ...) {
   UseMethod("auk_filter")
 }
 
 #' @export
-auk_filter.auk_ebd <- function(x, file, file_sampling, awk_file, keep, drop, 
+#' @describeIn auk_filter `auk_ebd` object
+auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
                                sep = "\t", filter_sampling = TRUE, 
-                               execute = TRUE, overwrite = FALSE) {
+                               execute = TRUE, overwrite = FALSE, ...) {
   # checks
   awk_path <- auk_getpath()
   if (execute && is.na(awk_path)) {
@@ -241,6 +242,100 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, awk_file, keep, drop,
   return(x)
 }
 
+#' @export
+#' @describeIn auk_filter `auk_sampling` object
+auk_filter.auk_sampling <- function(x, file, keep, drop, awk_file,
+                                    sep = "\t", execute = TRUE, 
+                                    overwrite = FALSE, ...) {
+  # checks
+  awk_path <- auk_getpath()
+  if (execute && is.na(awk_path)) {
+    stop("auk_filter() requires a valid AWK install, unless execute = FALSE.")
+  }
+  assertthat::assert_that(
+    file.exists(x$file),
+    assertthat::is.flag(execute),
+    !execute || assertthat::is.string(file),
+    missing(awk_file) || assertthat::is.string(awk_file),
+    assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
+    missing(keep) || is.character(keep),
+    missing(drop) || is.character(drop),
+    assertthat::is.flag(overwrite)
+  )
+  if (!execute && missing(awk_file)) {
+    stop("awk_file must be set when execute is FALSE.")
+  }
+  
+  # check output file
+  if (!missing(file)) {
+    if (!dir.exists(dirname(file))) {
+      stop("Output directory doesn't exist.")
+    }
+    if (!overwrite && file.exists(file)) {
+      stop("Output file already exists, use overwrite = TRUE.")
+    }
+    file <- path.expand(file)
+  }
+  # check output awk file
+  if (!missing(awk_file) && !dir.exists(dirname(awk_file))) {
+    stop("Output directory for awk file doesn't exist.")
+  }
+  
+  # pick columns to retain
+  must_keep <- c("group identifier", "sampling event identifier")
+  if (!missing(keep)) {
+    keep <- tolower(keep)
+    keep <- stringr::str_replace_all(keep, "_", " ")
+    stopifnot(all(keep %in% x$col_idx$name))
+    if (!all(must_keep %in% keep)) {
+      m <- paste("The following columns must be retained:",
+                 paste(must_keep, collapse = ", "))
+      stop(m)
+    }
+    idx <- x$col_idx$index[x$col_idx$name %in% keep]
+    select_cols <- paste0("$", idx, collapse = ", ")
+  } else if (!missing(drop)) {
+    drop <- tolower(drop)
+    drop <- stringr::str_replace_all(drop, "_", " ")
+    stopifnot(all(drop %in% x$col_idx$name))
+    if (any(must_keep %in% drop)) {
+      m <- paste("The following columns must be retained:",
+                 paste(must_keep, collapse = ", "))
+      stop(m)
+    }
+    idx <- x$col_idx$index[!x$col_idx$name %in% drop]
+    select_cols <- paste0("$", idx, collapse = ", ")
+  } else {
+    select_cols <- "$0"
+  }
+  
+  # create awk script for the sampling event file
+  awk_script <- awk_translate(filters = x$filters,
+                              col_idx = x$col_idx,
+                              sep = sep,
+                              select = select_cols)
+  
+  # output awk file
+  if (!missing(awk_file)) {
+    writeLines(awk_script, awk_file)
+    if (!execute) {
+      return(normalizePath(awk_file))
+    }
+  }
+  
+  # run awk
+  # ebd
+  exit_code <- system2(awk_path,
+                       args = paste0("'", awk_script, "' '", x$file, "'"),
+                       stdout = file)
+  if (exit_code != 0) {
+    stop("Error running AWK command.")
+  } else {
+    x$output <- normalizePath(file)
+  }
+  return(x)
+}
+
 awk_translate <- function(filters, col_idx, sep, select) {
   if (missing(select)) {
     select <- "$0"
@@ -250,7 +345,7 @@ awk_translate <- function(filters, col_idx, sep, select) {
   # set up filters
   filter_strings <- list(sep = sep, select = select)
   # species filter
-  if (length(filters$species) == 0) {
+  if (!"species" %in% names(filters) || length(filters$species) == 0) {
     filter_strings$species <- ""
   } else {
     idx <- col_idx$index[col_idx$id == "species"]
@@ -329,12 +424,8 @@ awk_translate <- function(filters, col_idx, sep, select) {
   if (length(filters$protocol) == 0) {
     filter_strings$protocol <- ""
   } else {
-    protocol_db <- dplyr::recode(filters$protocol,
-                                 stationary = "eBird - Stationary Count",
-                                 traveling = "eBird - Traveling Count",
-                                 casual = "eBird - Casual Observation")
     idx <- col_idx$index[col_idx$id == "protocol"]
-    condition <- paste0("$", idx, " == \"", protocol_db, "\"",
+    condition <- paste0("$", idx, " == \"", filters$protocol, "\"",
                         collapse = " || ")
     filter_strings$protocol <- str_interp(awk_if, list(condition = condition))
   }
@@ -357,7 +448,7 @@ awk_translate <- function(filters, col_idx, sep, select) {
     # include stationary counts
     if (0.0001 >= filters$distance[1]) {
       p_idx <- col_idx$index[col_idx$id == "protocol"]
-      inc_stat <- str_interp("$${idx} == \"eBird - Stationary Count\"",
+      inc_stat <- str_interp("$${idx} == \"Stationary\"",
                              list(idx = p_idx))
       condition <- str_interp("${inc} || ($${idx} >= ${mn} && $${idx} <= ${mx})",
                               list(idx = idx,
@@ -373,7 +464,7 @@ awk_translate <- function(filters, col_idx, sep, select) {
     filter_strings$distance <- str_interp(awk_if, list(condition = condition))
   }
   # breeding records only
-  if (filters$breeding) {
+  if ("breeding" %in% names(filters) && filters$breeding) {
     idx <- col_idx$index[col_idx$id == "breeding"]
     condition <- str_interp("$${idx} != \"\"", list(idx = idx))
     filter_strings$breeding <- str_interp(awk_if, list(condition = condition))

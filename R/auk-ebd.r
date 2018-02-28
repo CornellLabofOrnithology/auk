@@ -16,22 +16,23 @@
 #'   character and space delimited is not allowed since spaces appear in many of
 #'   the fields.
 #'
-#' @details eBird data can be downloaded as a tab-separated text file from the
-#'   [eBird website](http://ebird.org/ebird/data/download) after submitting a
-#'   request for access. As of February 2017, this file is nearly 150 GB making
-#'   it challenging to work with. If you're only interested in a single species
-#'   or a small region it is possible to submit a custom download request. This
-#'   approach is suggested to speed up processing time.
+#' @details 
+#' eBird data can be downloaded as a tab-separated text file from the [eBird
+#' website](http://ebird.org/ebird/data/download) after submitting a request for
+#' access. As of February 2017, this file is nearly 150 GB making it challenging
+#' to work with. If you're only interested in a single species or a small region
+#' it is possible to submit a custom download request. This approach is
+#' suggested to speed up processing time.
 #'
-#' @details
 #' There are two potential pathways for preparing eBird data. Users wishing to
-#' produce presence only data, should download the [eBird Basic Dataset](http://ebird.org/ebird/data/download/) 
-#' and reference this file when calling `auk_ebd()`. Users wishing to produce
-#' zero-filled, presence absence data should additionally download the sampling
-#' event data file associated with the basic dataset This file contains only
-#' checklist information and can be used to infer absences. The sampling event
-#' data file should be provided to `auk_ebd()` via the `file_sampling`
-#' argument. For further details consult the vignettes.
+#' produce presence only data, should download the [eBird Basic
+#' Dataset](http://ebird.org/ebird/data/download/) and reference this file when
+#' calling `auk_ebd()`. Users wishing to produce zero-filled, presence absence
+#' data should additionally download the sampling event data file associated
+#' with the basic dataset This file contains only checklist information and can
+#' be used to infer absences. The sampling event data file should be provided to
+#' `auk_ebd()` via the `file_sampling` argument. For further details consult the
+#' vignettes.
 #'
 #' @return An `auk_ebd` object storing the file reference and the desired
 #'   filters once created with other package functions.
@@ -243,7 +244,7 @@ print.auk_ebd <- function(x, ...) {
     cat(paste0(x$filters$distance[1], "-", x$filters$distance[2], " km"))
   }
   cat("\n")
-  # complete checklists only
+  # breeding codes
   cat("  Records with breeding codes only: ")
   if (x$filters$breeding) {
     cat("yes")

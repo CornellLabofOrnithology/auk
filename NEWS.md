@@ -1,5 +1,11 @@
 # auk 0.1.0.900
 
+- New object, `auk_sampling`, and associated methods for working with the sampling data only
+- New function, `auk_select()`, for selecting a subset of columns
+- Allow selection of a subset of columns when filtering
+- Remove free text columns in `auk_clean()` to decrease file size
+- Updated to work with current version of EBD
+
 # auk 0.1.0
 
 - eBird taxonomy update to August 2017 version, users should download the most recent EBD to ensure the taxonomy is in sync with the new package

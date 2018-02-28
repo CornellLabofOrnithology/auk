@@ -170,14 +170,14 @@ test_that("auk_last_edited", {
 test_that("auk_protocol", {
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
     auk_ebd() %>% 
-    auk_protocol("stationary")
+    auk_protocol("Stationary")
   
   # works correctly
-  expect_equal(ebd$filters$protocol, "stationary")
+  expect_equal(ebd$filters$protocol, "Stationary")
   
   # multiple protocols
-  ebd <- auk_protocol(ebd, c("stationary", "traveling"))
-  expect_equal(ebd$filters$protocol, c("stationary", "traveling"))
+  ebd <- auk_protocol(ebd, c("Stationary", "Traveling"))
+  expect_equal(ebd$filters$protocol, c("Stationary", "Traveling"))
   
   # raises error for bad input
   expect_error(auk_protocol(ebd, "STATIONARY"))

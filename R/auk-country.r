@@ -5,7 +5,8 @@
 #' been defined, [auk_filter()] should be used to call AWK and perform the
 #' filtering.
 #'
-#' @param x `auk_ebd` object; reference to EBD file created by [auk_ebd()].
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#'   [auk_ebd()] or [auk_sampling()].
 #' @param country character; countries to filter by. Countries can either be
 #'   expressed as English names or
 #'   [ISO 2-letter country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -14,6 +15,9 @@
 #' @param replace logical; multiple calls to `auk_country()` are additive,
 #'   unless `replace = FALSE`, in which case the previous list of countries to
 #'   filter by will be removed and replaced by that in the current call.
+#' 
+#' @details This function can also work with on an `auk_sampling` object if the 
+#'   user only wishes to filter the sampling event data.
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -46,11 +50,12 @@ auk_country.auk_ebd <- function(x, country, replace = FALSE) {
                                          destination = "iso2c",
                                          warn = FALSE)
   # lookup codes
-  code_codes <- match(tolower(country),
-                      tolower(countrycode::countrycode_data$iso2c))
-  code_codes <- countrycode::countrycode_data$iso2c[code_codes]
+  code_codes <- countrycode::countrycode(country,
+                                         origin = "iso2c",
+                                         destination = "iso2c",
+                                         warn = FALSE)
   # combine, preference to codes
-  country_codes <- ifelse(is.na(code_codes), name_codes, code_codes)
+  country_codes <- dplyr::coalesce(code_codes, name_codes)
 
   # check codes are valid
   valid_codes <- !is.na(country_codes)
@@ -68,4 +73,9 @@ auk_country.auk_ebd <- function(x, country, replace = FALSE) {
   }
   x$filters$country <- sort(unique(c(x$filters$country, country_codes)))
   return(x)
+}
+
+#' @export
+auk_country.auk_sampling <- function(x, country, replace = FALSE) {
+  auk_country.auk_ebd(x, country, replace)
 }

@@ -8,12 +8,16 @@
 #' be assumed to have 0 distance they will be kept if 0 is in the range defined 
 #' by `distance`.
 #'
-#' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#'   [auk_ebd()] or [auk_sampling()].
 #' @param distance integer; 2 element vector specifying the range of distances
 #'   to filter by. The default is to accept distances in kilometers, use 
 #'   `distance_units = "miles"` for miles.
 #' @param distance_units character; whether distances are provided in kilometers 
 #'   (the default) or miles.
+#' 
+#' @details This function can also work with on an `auk_sampling` object if the 
+#'   user only wishes to filter the sampling event data.
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -50,4 +54,10 @@ auk_distance.auk_ebd <- function(x, distance,
   # define filter
   x$filters$distance <- distance
   return(x)
+}
+
+#' @export
+auk_distance.auk_sampling <- function(x, distance, 
+                                      distance_units = c("km", "miles")) {
+  auk_distance.auk_ebd(x, distance, distance_units)
 }

@@ -7,10 +7,13 @@
 auk_extent(x, extent)
 }
 \arguments{
-\item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
+\item{x}{\code{auk_ebd} or \code{auk_sampling} object; reference to file created by
+\code{\link[=auk_ebd]{auk_ebd()}} or \code{\link[=auk_sampling]{auk_sampling()}}.}
 
 \item{extent}{numeric; spatial extent expressed as the range of latitudes
-and longitudes in decimal degrees: \code{c(lng_min, lat_min, lng_max, lat_max)}.}
+and longitudes in decimal degrees: \code{c(lng_min, lat_min, lng_max, lat_max)}.
+Note that longitudes in the Western Hemishphere and latitudes sound of the
+equator should be given as negative numbers.}
 }
 \value{
 An \code{auk_ebd} object.
@@ -20,6 +23,10 @@ Define a filter for the eBird Basic Dataset (EBD) based on spatial extent.
 This function only defines the filter and, once all filters have been
 defined, \code{\link[=auk_filter]{auk_filter()}} should be used to call AWK and perform the
 filtering.
+}
+\details{
+This function can also work with on an \code{auk_sampling} object if the
+user only wishes to filter the sampling event data.
 }
 \examples{
 # fliter to locations roughly in the Pacific Northwest

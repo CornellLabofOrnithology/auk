@@ -4,7 +4,7 @@
 \alias{auk_clean}
 \title{Clean an eBird data file}
 \usage{
-auk_clean(f_in, f_out, sep = "\\t", remove_blank = TRUE,
+auk_clean(f_in, f_out, sep = "\\t", remove_text = FALSE,
   overwrite = FALSE)
 }
 \arguments{
@@ -16,9 +16,12 @@ auk_clean(f_in, f_out, sep = "\\t", remove_blank = TRUE,
 separated by default. Must only be a single character and space delimited
 is not allowed since spaces appear in many of the fields.}
 
-\item{remove_blank}{logical; whether the trailing blank should be removed
-from the end of each row. The EBD comes with an extra tab at the end of
-each line, which causes a extra blank column.}
+\item{remove_text}{logical; whether all free text entry columns should be
+removed. These columns include comments, location names, and observer
+names. These columns cause import errors due to special characters and
+increase the file size, yet are rarely valuable for analytical
+applications, so may be removed. Setting this argument to \code{TRUE} can lead
+to a significant reduction in file size.}
 
 \item{overwrite}{logical; overwrite output file if it already exists}
 }

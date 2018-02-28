@@ -94,7 +94,8 @@ perform the filtering.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>auk_ebd</code> object; reference to object created by <code><a href='auk_ebd.html'>auk_ebd()</a></code>.</p></td>
+      <td><p><code>auk_ebd</code> or <code>auk_sampling</code> object; reference to file created by
+<code><a href='auk_ebd.html'>auk_ebd()</a></code> or <code><a href='auk_sampling.html'>auk_sampling()</a></code>.</p></td>
     </tr>
     <tr>
       <th>start_time</th>
@@ -106,6 +107,11 @@ times in 24 hour format, e.g. <code>"06:30"</code> or <code>"16:22"</code>.</p><
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An <code>auk_ebd</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function can also work with on an <code>auk_sampling</code> object if the
+user only wishes to filter the sampling event data.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -159,6 +165,8 @@ times in 24 hour format, e.g. <code>"06:30"</code> or <code>"16:22"</code>.</p><
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

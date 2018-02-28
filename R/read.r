@@ -160,3 +160,13 @@ read_sampling.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE) {
   }
   read_sampling(x$output_sampling, reader = reader, sep = sep, unique = unique)
 }
+
+#' @export
+#' @describeIn read_ebd `auk_sampling` object output from [auk_filter()].
+read_sampling.auk_sampling <- function(x, reader, sep = "\t", unique = TRUE) {
+  if (is.null(x$output)) {
+    stop(paste("No output sampling file in this auk_ebd object,",
+               "try calling auk_filter()."))
+  }
+  read_sampling(x$output, reader = reader, sep = sep, unique = unique)
+}

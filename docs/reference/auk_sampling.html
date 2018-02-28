@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter the eBird data by last edited date — auk_last_edited • auk</title>
+<title>Reference to eBird sampling event file — auk_sampling • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,65 +77,69 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter the eBird data by last edited date</h1>
+    <h1>Reference to eBird sampling event file</h1>
     </div>
 
     
-    <p>Define a filter for the eBird Basic Dataset (EBD) based on a range of last
-edited dates. Last edited date is typically used to extract just new or
-recently edited data. This function only defines the filter and, once all
-filters have been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used to call AWK and
-perform the filtering.</p>
+    <p>Create a reference to an eBird sampling event file in preparation for
+filtering using AWK. For working with the sightings data use <code><a href='auk_ebd.html'>auk_ebd()</a></code>,
+only use <code>auk_sampling()</code> if you intend to only work with checklist-level
+data.</p>
     
 
-    <pre class="usage"><span class='fu'>auk_last_edited</span>(<span class='no'>x</span>, <span class='no'>date</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_sampling</span>(<span class='no'>file</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p><code>auk_ebd</code> or <code>auk_sampling</code> object; reference to file created by
-<code><a href='auk_ebd.html'>auk_ebd()</a></code> or <code><a href='auk_sampling.html'>auk_sampling()</a></code>.</p></td>
+      <th>file</th>
+      <td><p>character; input sampling event data file, which contains
+checklist data from eBird.</p></td>
     </tr>
     <tr>
-      <th>date</th>
-      <td><p>character or date; date range to filter by, provided either as a
-character vector in the format <code>"2015-12-31"</code> or a vector of Date objects.</p></td>
+      <th>sep</th>
+      <td><p>character; the input field separator, the eBird data are tab
+separated so this should generally not be modified. Must only be a single
+character and space delimited is not allowed since spaces appear in many of
+the fields.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>auk_ebd</code> object.</p>
+    <p>An <code>auk_sampling</code> object storing the file reference and the desired
+filters once created with other package functions.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function can also work with on an <code>auk_sampling</code> object if the
-user only wishes to filter the sampling event data.</p>
+    <p>eBird data can be downloaded as a tab-separated text file from the
+<a href='http://ebird.org/ebird/data/download'>eBird website</a> after submitting a
+request for access. In the eBird Basic Dataset (EBD) each row corresponds
+to a observation of a single bird species on a single checklist, while the
+sampling event data file contains a single row for every checklist. This
+function creates an R object to reference only the sampling data.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_last_edited</span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"2010-01-01"</span>, <span class='st'>"2010-12-31"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
+    <pre class="examples"><div class='input'><span class='co'># set up reference to example file</span>
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='fu'>auk_sampling</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; Input 
+#&gt;   Sampling events: /Users/mes335/projects/auk/inst/extdata/zerofill-ex_sampling.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
 #&gt; 
 #&gt; Filters 
-#&gt;   Species: all
 #&gt;   Countries: all
 #&gt;   Spatial extent: full extent
 #&gt;   Date: all
 #&gt;   Start time: all
-#&gt;   Last edited date: 2010-01-01 - 2010-12-31
+#&gt;   Last edited date: all
 #&gt;   Protocol: all
 #&gt;   Project code: all
 #&gt;   Duration: all
 #&gt;   Distance travelled: all
-#&gt;   Records with breeding codes only: no
 #&gt;   Complete checklists only: no</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

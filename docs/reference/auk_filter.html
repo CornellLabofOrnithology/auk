@@ -89,34 +89,42 @@ can be defined using the various other functions in this package, e.g.
 at least a couple hours to run on the full dataset</strong></p>
     
 
-    <pre class="usage"><span class='fu'>auk_filter</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>file_sampling</span>, <span class='no'>awk_file</span>, <span class='no'>keep</span>, <span class='no'>drop</span>, <span class='no'>sep</span>, <span class='no'>filter_sampling</span>,
-  <span class='no'>execute</span>, <span class='no'>overwrite</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_filter</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for auk_ebd</span>
+<span class='fu'>auk_filter</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>file_sampling</span>, <span class='no'>keep</span>, <span class='no'>drop</span>, <span class='no'>awk_file</span>,
+  <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>filter_sampling</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for auk_sampling</span>
+<span class='fu'>auk_filter</span>(<span class='no'>x</span>, <span class='no'>file</span>, <span class='no'>keep</span>, <span class='no'>drop</span>, <span class='no'>awk_file</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>,
+  <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>auk_ebd</code> object; reference to object created by <code><a href='auk_ebd.html'>auk_ebd()</a></code> with
-filters defined.</p></td>
+      <td><p><code>auk_ebd</code> or <code>auk_sampling</code> object; reference to file created by
+<code><a href='auk_ebd.html'>auk_ebd()</a></code> or <code><a href='auk_sampling.html'>auk_sampling()</a></code>.</p></td>
     </tr>
     <tr>
       <th>file</th>
       <td><p>character; output file.</p></td>
     </tr>
     <tr>
-      <th>file_sampling</th>
-      <td><p>character; optional output file for sampling data.</p></td>
+      <th>...</th>
+      <td><p>arguments passed on to methods.</p></td>
     </tr>
     <tr>
-      <th>awk_file</th>
-      <td><p>character; output file to optionally save the awk script to.</p></td>
+      <th>file_sampling</th>
+      <td><p>character; optional output file for sampling data.</p></td>
     </tr>
     <tr>
       <th>keep</th>
       <td><p>character; a character vector specifying the names of the columns
 to keep in the output file. Columns should be as they appear in the header
-of the EBD, however, names are not case sensitive and spaces may be
+of the EBD; however, names are not case sensitive and spaces may be
 replaced by underscores, e.g. <code>"COMMON NAME"</code>, <code>"common name"</code>, and
 <code>"common_NAME"</code> are all valid.</p></td>
     </tr>
@@ -124,6 +132,10 @@ replaced by underscores, e.g. <code>"COMMON NAME"</code>, <code>"common name"</c
       <th>drop</th>
       <td><p>character; a character vector of columns to drop in the same
 format as <code>keep</code>. Ignored if <code>keep</code> is supplied.</p></td>
+    </tr>
+    <tr>
+      <th>awk_file</th>
+      <td><p>character; output file to optionally save the awk script to.</p></td>
     </tr>
     <tr>
       <th>sep</th>
@@ -168,6 +180,13 @@ must be specified.</p>
 installed. Linux and Mac machines should have AWK by default, Windows users
 will likely need to install <a href='https://www.cygwin.com'>Cygwin</a>.</p>
     
+    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+
+    <ul>
+<li><p><code>auk_ebd</code>: <code>auk_ebd</code> object</p></li>
+<li><p><code>auk_sampling</code>: <code>auk_sampling</code> object</p></li>
+</ul>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># define filters</span>
@@ -206,6 +225,8 @@ will likely need to install <a href='https://www.cygwin.com'>Cygwin</a>.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#methods-by-class-">Methods (by class)</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

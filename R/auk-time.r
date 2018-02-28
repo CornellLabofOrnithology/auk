@@ -5,9 +5,13 @@
 #' filters have been defined, [auk_filter()] should be used to call AWK and
 #' perform the filtering.
 #'
-#' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#'   [auk_ebd()] or [auk_sampling()].
 #' @param start_time character; 2 element character vector giving the range of 
 #'   times in 24 hour format, e.g. `"06:30"` or `"16:22"`.
+#' 
+#' @details This function can also work with on an `auk_sampling` object if the 
+#'   user only wishes to filter the sampling event data.
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -46,4 +50,9 @@ auk_time.auk_ebd <- function(x, start_time) {
   # define filter
   x$filters$time <- start_time
   return(x)
+}
+
+#' @export
+auk_time.auk_sampling <- function(x, start_time) {
+  auk_time.auk_ebd(x, start_time)
 }

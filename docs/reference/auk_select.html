@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter the eBird data by last edited date — auk_last_edited • auk</title>
+<title>Select a subset of columns — auk_select • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,18 +77,15 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter the eBird data by last edited date</h1>
+    <h1>Select a subset of columns</h1>
     </div>
 
     
-    <p>Define a filter for the eBird Basic Dataset (EBD) based on a range of last
-edited dates. Last edited date is typically used to extract just new or
-recently edited data. This function only defines the filter and, once all
-filters have been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used to call AWK and
-perform the filtering.</p>
+    <p>Select a subset of columns from the eBird Basic Dataset (EBD) or the sampling
+events file. Subsetting the columns can significantly decrease file size.</p>
     
 
-    <pre class="usage"><span class='fu'>auk_last_edited</span>(<span class='no'>x</span>, <span class='no'>date</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_select</span>(<span class='no'>x</span>, <span class='no'>select</span>, <span class='no'>file</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -99,44 +96,45 @@ perform the filtering.</p>
 <code><a href='auk_ebd.html'>auk_ebd()</a></code> or <code><a href='auk_sampling.html'>auk_sampling()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>date</th>
-      <td><p>character or date; date range to filter by, provided either as a
-character vector in the format <code>"2015-12-31"</code> or a vector of Date objects.</p></td>
+      <th>select</th>
+      <td><p>character; a character vector specifying the names of the
+columns to select. Columns should be as they appear in the header of the
+EBD; however, names are not case sensitive and spaces may be replaced by
+underscores, e.g. <code>"COMMON NAME"</code>, <code>"common name"</code>, and <code>"common_NAME"</code> are
+all valid.</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>character; output file.</p></td>
+    </tr>
+    <tr>
+      <th>sep</th>
+      <td><p>character; the input field separator, the eBird file is tab
+separated by default. Must only be a single character and space delimited
+is not allowed since spaces appear in many of the fields.</p></td>
+    </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>logical; overwrite output file if it already exists</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>auk_ebd</code> object.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function can also work with on an <code>auk_sampling</code> object if the
-user only wishes to filter the sampling event data.</p>
+    <p>Invisibly returns the filename of the output file.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_last_edited</span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"2010-01-01"</span>, <span class='st'>"2010-12-31"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
-#&gt; 
-#&gt; Output 
-#&gt;   Filters not executed
-#&gt; 
-#&gt; Filters 
-#&gt;   Species: all
-#&gt;   Countries: all
-#&gt;   Spatial extent: full extent
-#&gt;   Date: all
-#&gt;   Start time: all
-#&gt;   Last edited date: 2010-01-01 - 2010-12-31
-#&gt;   Protocol: all
-#&gt;   Project code: all
-#&gt;   Duration: all
-#&gt;   Distance travelled: all
-#&gt;   Records with breeding codes only: no
-#&gt;   Complete checklists only: no</div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># select a minimal set of columns</span>
+<span class='no'>out_file</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
+<span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
+<span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"latitude"</span>, <span class='st'>"longitude"</span>,
+          <span class='st'>"group identifier"</span>, <span class='st'>"sampling event identifier"</span>,
+          <span class='st'>"scientific name"</span>, <span class='st'>"observation count"</span>)
+<span class='no'>selected</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_select</span>(<span class='no'>ebd</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>cols</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>out_file</span>)
+<span class='fu'>str</span>(<span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>selected</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -144,8 +142,6 @@ user only wishes to filter the sampling event data.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

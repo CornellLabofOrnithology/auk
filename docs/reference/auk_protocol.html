@@ -94,11 +94,12 @@ and perform the filtering.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>auk_ebd</code> object; reference to object created by <code><a href='auk_ebd.html'>auk_ebd()</a></code>.</p></td>
+      <td><p><code>auk_ebd</code> or <code>auk_sampling</code> object; reference to file created by
+<code><a href='auk_ebd.html'>auk_ebd()</a></code> or <code><a href='auk_sampling.html'>auk_sampling()</a></code>.</p></td>
     </tr>
     <tr>
       <th>protocol</th>
-      <td><p>character; "stationary", "traveling", or "causal". Other
+      <td><p>character; "Stationary", "Traveling", or "Incidental". Other
 protocols exist in the database, however, this function only extracts these
 three standard protocols.</p></td>
     </tr>
@@ -108,11 +109,16 @@ three standard protocols.</p></td>
 
     <p>An <code>auk_ebd</code> object.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function can also work with on an <code>auk_sampling</code> object if the
+user only wishes to filter the sampling event data.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_protocol</span>(<span class='st'>"stationary"</span>)</div><div class='output co'>#&gt; Input 
+  <span class='fu'>auk_protocol</span>(<span class='st'>"Stationary"</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -125,7 +131,7 @@ three standard protocols.</p></td>
 #&gt;   Date: all
 #&gt;   Start time: all
 #&gt;   Last edited date: all
-#&gt;   Protocol: stationary
+#&gt;   Protocol: Stationary
 #&gt;   Project code: all
 #&gt;   Duration: all
 #&gt;   Distance travelled: all
@@ -133,7 +139,7 @@ three standard protocols.</p></td>
 #&gt;   Complete checklists only: no</div><div class='input'>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
-<span class='fu'>auk_protocol</span>(<span class='no'>ebd</span>, <span class='st'>"stationary"</span>)</div><div class='output co'>#&gt; Input 
+<span class='fu'>auk_protocol</span>(<span class='no'>ebd</span>, <span class='st'>"Stationary"</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -146,7 +152,7 @@ three standard protocols.</p></td>
 #&gt;   Date: all
 #&gt;   Start time: all
 #&gt;   Last edited date: all
-#&gt;   Protocol: stationary
+#&gt;   Protocol: Stationary
 #&gt;   Project code: all
 #&gt;   Duration: all
 #&gt;   Distance travelled: all
@@ -159,6 +165,8 @@ three standard protocols.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

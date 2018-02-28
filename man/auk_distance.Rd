@@ -7,7 +7,8 @@
 auk_distance(x, distance, distance_units)
 }
 \arguments{
-\item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
+\item{x}{\code{auk_ebd} or \code{auk_sampling} object; reference to file created by
+\code{\link[=auk_ebd]{auk_ebd()}} or \code{\link[=auk_sampling]{auk_sampling()}}.}
 
 \item{distance}{integer; 2 element vector specifying the range of distances
 to filter by. The default is to accept distances in kilometers, use
@@ -27,6 +28,10 @@ perform the filtering. Note that stationary checklists (i.e. point counts)
 have no distance associated with them, however, since these checklists can
 be assumed to have 0 distance they will be kept if 0 is in the range defined
 by \code{distance}.
+}
+\details{
+This function can also work with on an \code{auk_sampling} object if the
+user only wishes to filter the sampling event data.
 }
 \examples{
 # only keep checklists that are less than 10 km long

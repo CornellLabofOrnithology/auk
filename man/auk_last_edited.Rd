@@ -7,7 +7,8 @@
 auk_last_edited(x, date)
 }
 \arguments{
-\item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
+\item{x}{\code{auk_ebd} or \code{auk_sampling} object; reference to file created by
+\code{\link[=auk_ebd]{auk_ebd()}} or \code{\link[=auk_sampling]{auk_sampling()}}.}
 
 \item{date}{character or date; date range to filter by, provided either as a
 character vector in the format \code{"2015-12-31"} or a vector of Date objects.}
@@ -21,6 +22,10 @@ edited dates. Last edited date is typically used to extract just new or
 recently edited data. This function only defines the filter and, once all
 filters have been defined, \code{\link[=auk_filter]{auk_filter()}} should be used to call AWK and
 perform the filtering.
+}
+\details{
+This function can also work with on an \code{auk_sampling} object if the
+user only wishes to filter the sampling event data.
 }
 \examples{
 system.file("extdata/ebd-sample.txt", package = "auk") \%>\%

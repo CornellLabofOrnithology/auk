@@ -7,7 +7,8 @@
 auk_duration(x, duration)
 }
 \arguments{
-\item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
+\item{x}{\code{auk_ebd} or \code{auk_sampling} object; reference to file created by
+\code{\link[=auk_ebd]{auk_ebd()}} or \code{\link[=auk_sampling]{auk_sampling()}}.}
 
 \item{duration}{integer; 2 element vector specifying the range of durations
 in minutes to filter by.}
@@ -22,6 +23,10 @@ have been defined, \code{\link[=auk_filter]{auk_filter()}} should be used to cal
 filtering. Note that checklists with no effort, such as incidental
 observations, will be excluded if this filter is used since they have no
 associated duration information.
+}
+\details{
+This function can also work with on an \code{auk_sampling} object if the
+user only wishes to filter the sampling event data.
 }
 \examples{
 # only keep checklists that are less than an hour long

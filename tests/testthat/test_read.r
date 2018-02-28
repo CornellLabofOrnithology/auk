@@ -13,17 +13,23 @@ test_that("read_ebd reads an ebd file correctly", {
   expect_true(all(grepl("^[_a-z]+$", nm)))
 })
 
-test_that("read_ebd reads an ebd file correctly", {
+test_that("reads a sampling file correctly", {
   f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
   ebd <- auk_ebd(f_ebd, file_sampling = f)
   ebd$output <- f_ebd
   ebd$output_sampling <- f
   nm <- names(read_sampling(f))
+  
+  # auk_sampling
+  sampling <- auk_sampling(f)
+  sampling$output <- f
 
   expect_is(read_sampling(f), "data.frame")
   expect_is(read_sampling(ebd), "data.frame")
+  expect_is(read_sampling(sampling), "data.frame")
   expect_equal(read_sampling(f), read_sampling(ebd))
+  expect_equal(read_sampling(f), read_sampling(sampling))
   expect_lt(nrow(read_sampling(f)), nrow(read_sampling(f, unique = FALSE)))
   expect_true(all(grepl("^[_a-z]+$", nm)))
 })

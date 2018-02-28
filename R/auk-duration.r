@@ -7,9 +7,13 @@
 #' observations, will be excluded if this filter is used since they have no 
 #' associated duration information.
 #'
-#' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#'   [auk_ebd()] or [auk_sampling()].
 #' @param duration integer; 2 element vector specifying the range of durations
 #'   in minutes to filter by.
+#' 
+#' @details This function can also work with on an `auk_sampling` object if the 
+#'   user only wishes to filter the sampling event data.
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -39,4 +43,9 @@ auk_duration.auk_ebd <- function(x, duration) {
   # define filter
   x$filters$duration <- as.integer(round(duration))
   return(x)
+}
+
+#' @export
+auk_duration.auk_sampling <- function(x, duration) {
+  auk_duration.auk_ebd(x, duration)
 }

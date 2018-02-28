@@ -87,7 +87,7 @@ function drops these problematic records. <strong>Note that this function typica
 takes at least 3 hours to run on the full dataset</strong></p>
     
 
-    <pre class="usage"><span class='fu'>auk_clean</span>(<span class='no'>f_in</span>, <span class='no'>f_out</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>remove_blank</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>auk_clean</span>(<span class='no'>f_in</span>, <span class='no'>f_out</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>remove_text</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -108,10 +108,13 @@ separated by default. Must only be a single character and space delimited
 is not allowed since spaces appear in many of the fields.</p></td>
     </tr>
     <tr>
-      <th>remove_blank</th>
-      <td><p>logical; whether the trailing blank should be removed
-from the end of each row. The EBD comes with an extra tab at the end of
-each line, which causes a extra blank column.</p></td>
+      <th>remove_text</th>
+      <td><p>logical; whether all free text entry columns should be
+removed. These columns include comments, location names, and observer
+names. These columns cause import errors due to special characters and
+increase the file size, yet are rarely valuable for analytical
+applications, so may be removed. Setting this argument to <code>TRUE</code> can lead
+to a significant reduction in file size.</p></td>
     </tr>
     <tr>
       <th>overwrite</th>

@@ -15,7 +15,6 @@ knitr::opts_chunk$set(
 # auk: eBird Data Extraction and Processing with AWK
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![rOpenSci](https://badges.ropensci.org/136_status.svg)](https://github.com/ropensci/onboarding/issues/136)
 [![Travis-CI Build Status](https://img.shields.io/travis/CornellLabofOrnithology/auk/master.svg?label=Mac%20OSX%20%26%20Linux)](https://travis-ci.org/CornellLabofOrnithology/auk)
 [![AppVeyor Build Status](https://img.shields.io/appveyor/ci/mstrimas/auk/master.svg?label=Windows)](https://ci.appveyor.com/project/mstrimas/auk)
 [![Coverage Status](https://img.shields.io/codecov/c/github/CornellLabofOrnithology/auk/master.svg)](https://codecov.io/github/CornellLabofOrnithology/auk?branch=master)
@@ -187,6 +186,9 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 ## Acknowledgements
 
 This package is based on AWK scripts provided as part of the eBird Data Workshop given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC on August 15, 2016.
+
+`auk` benefited significantly from the [rOpenSci](https://ropensci.org/) review process, including helpful suggestions from 
+[Auriel Fournier](https://github.com/aurielfournier) and [Edmund Hart](https://github.com/emhart).
 
 ## References
 

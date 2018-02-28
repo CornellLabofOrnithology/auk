@@ -5,9 +5,15 @@
 #' defined, [auk_filter()] should be used to call AWK and perform the
 #' filtering.
 #'
-#' @param x `auk_ebd` object; reference to object created by [auk_ebd()].
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#'   [auk_ebd()] or [auk_sampling()].
 #' @param extent numeric; spatial extent expressed as the range of latitudes
-#'   and longitudes in decimal degrees: `c(lng_min, lat_min, lng_max, lat_max)`.
+#'   and longitudes in decimal degrees: `c(lng_min, lat_min, lng_max, lat_max)`. 
+#'   Note that longitudes in the Western Hemishphere and latitudes sound of the 
+#'   equator should be given as negative numbers.
+#' 
+#' @details This function can also work with on an `auk_sampling` object if the 
+#'   user only wishes to filter the sampling event data.
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -41,4 +47,9 @@ auk_extent.auk_ebd <- function(x, extent) {
   # define filter
   x$filters$extent <- extent
   return(x)
+}
+
+#' @export
+auk_extent.auk_sampling <- function(x, extent) {
+  auk_extent.auk_ebd(x, extent)
 }

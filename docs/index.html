@@ -138,7 +138,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, tmp)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpz4mO8R/file14b8578612ad"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpPqhgTo/filedbbc2317eaa2"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
@@ -297,6 +297,7 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <h2 class="hasAnchor">
 <a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
 <p>This package is based on AWK scripts provided as part of the eBird Data Workshop given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC on August 15, 2016.</p>
+<p><code>auk</code> benefited significantly from the <a href="https://ropensci.org/">rOpenSci</a> review process, including helpful suggestions from <a href="https://github.com/aurielfournier">Auriel Fournier</a> and <a href="https://github.com/emhart">Edmund Hart</a>.</p>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
@@ -337,7 +338,6 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="http://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a></li>
-<li><a href="https://github.com/ropensci/onboarding/issues/136"><img src="https://badges.ropensci.org/136_status.svg" alt="rOpenSci"></a></li>
 <li><a href="https://travis-ci.org/CornellLabofOrnithology/auk"><img src="https://img.shields.io/travis/CornellLabofOrnithology/auk/master.svg?label=Mac%20OSX%20%26%20Linux" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/mstrimas/auk"><img src="https://img.shields.io/appveyor/ci/mstrimas/auk/master.svg?label=Windows" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://codecov.io/github/CornellLabofOrnithology/auk?branch=master"><img src="https://img.shields.io/codecov/c/github/CornellLabofOrnithology/auk/master.svg" alt="Coverage Status"></a></li>
