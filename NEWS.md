@@ -1,10 +1,11 @@
 # auk 0.1.0.900
 
+- New function, `auk_split()`, splits EBD up into multiple files by species
 - New object, `auk_sampling`, and associated methods for working with the sampling data only
 - New function, `auk_select()`, for selecting a subset of columns
 - Allow selection of a subset of columns when filtering
 - Remove free text columns in `auk_clean()` to decrease file size
-- Updated to work with current version of EBD
+- Updated to work with Feb 2018 version of EBD
 
 # auk 0.1.0
 

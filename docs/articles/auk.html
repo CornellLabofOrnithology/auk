@@ -509,12 +509,12 @@ ebd_zf
 <span class="co">#&gt; # A tibble: 6 x 4</span>
 <span class="co">#&gt;   checklist_id scientific_name     observation_count species_observed</span>
 <span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;             &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 G1733362     Todiramphus chloris X                 T               </span>
-<span class="co">#&gt; 2 G366411      Todiramphus chloris 2                 T               </span>
-<span class="co">#&gt; 3 S10006552    Todiramphus chloris 1                 T               </span>
-<span class="co">#&gt; 4 S10006731    Todiramphus chloris 5                 T               </span>
-<span class="co">#&gt; 5 S10006786    Todiramphus chloris 0                 F               </span>
-<span class="co">#&gt; 6 S10011787    Todiramphus chloris 3                 T</span>
+<span class="co">#&gt; 1 G1733362     Todiramphus chloris X                 TRUE            </span>
+<span class="co">#&gt; 2 G366411      Todiramphus chloris 2                 TRUE            </span>
+<span class="co">#&gt; 3 S10006552    Todiramphus chloris 1                 TRUE            </span>
+<span class="co">#&gt; 4 S10006731    Todiramphus chloris 5                 TRUE            </span>
+<span class="co">#&gt; 5 S10006786    Todiramphus chloris 0                 FALSE           </span>
+<span class="co">#&gt; 6 S10011787    Todiramphus chloris 3                 TRUE</span>
 <span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(ebd_zf<span class="op">$</span>sampling_events)
 <span class="co">#&gt; Observations: 179</span>
 <span class="co">#&gt; Variables: 32</span>
@@ -587,11 +587,12 @@ ebd_zf_df
 <h2 class="hasAnchor">
 <a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
 <p>This package is based on the AWK scripts provided in a presentation given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC eBird Data Workshop on August 15, 2016.</p>
+<p><code>auk</code> benefited significantly from the <a href="https://ropensci.org/">rOpenSci</a> review process, including helpful suggestions from <a href="https://github.com/aurielfournier">Auriel Fournier</a> and <a href="https://github.com/emhart">Edmund Hart</a>.</p>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<pre><code>eBird Basic Dataset. Version: ebd_relFeb-2017. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
+<pre><code>eBird Basic Dataset. Version: ebd_relFeb-2018. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
 
 Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. Lentini, M.A. McCarthy, R. Tingley, and B.A. Wintle. 2015. Is my species distribution model fit for purpose? Matching data and models to applications. Global Ecology and Biogeography 24:276-292.</code></pre>
 </div>
