@@ -9,7 +9,7 @@
 #'   [auk_ebd()] or [auk_sampling()].
 #' @param protocol character; "Stationary", "Traveling", or "Incidental". Other 
 #'   protocols exist in the database, however, this function only extracts these 
-#'   three standard protocols.
+#'   three standard protocols. Multiple protocols are accepted.
 #' 
 #' @details This function can also work with on an `auk_sampling` object if the 
 #'   user only wishes to filter the sampling event data.

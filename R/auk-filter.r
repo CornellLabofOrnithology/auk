@@ -350,20 +350,36 @@ awk_translate <- function(filters, col_idx, sep, select) {
   filter_strings <- list(sep = sep, select = select)
   # species filter
   if (!"species" %in% names(filters) || length(filters$species) == 0) {
+    filter_strings$species_array <- ""
     filter_strings$species <- ""
   } else {
+    # generate list
+    species_list <- paste(filters$species, collapse = "\t")
+    species_array <- "
+    split(\"%s\", speciesValues, \"\t\")
+    for (i in speciesValues) species[speciesValues[i]] = 1"
+    filter_strings$species_array <- sprintf(species_array, species_list)
+    
+    # check in list
     idx <- col_idx$index[col_idx$id == "species"]
-    condition <- paste0("$", idx, " == \"", filters$species, "\"",
-                        collapse = " || ")
+    condition <- paste0("$", idx, " in species")
     filter_strings$species <- str_interp(awk_if, list(condition = condition))
   }
   # country filter
   if (length(filters$country) == 0) {
+    filter_strings$country_array <- ""
     filter_strings$country <- ""
   } else {
+    # generate list
+    country_list <- paste(filters$country, collapse = "\t")
+    country_array <- "
+    split(\"%s\", countryValues, \"\t\")
+    for (i in countryValues) countries[countryValues[i]] = 1"
+    filter_strings$country_array <- sprintf(country_array, country_list)
+    
+    # check in list
     idx <- col_idx$index[col_idx$id == "country"]
-    condition <- paste0("$", idx, " == \"", filters$country, "\"",
-                        collapse = " || ")
+    condition <- paste0("$", idx, " in countries")
     filter_strings$country <- str_interp(awk_if, list(condition = condition))
   }
   # extent filter
@@ -493,6 +509,9 @@ awk_filter <- "
 BEGIN {
   FS = \"${sep}\"
   OFS = \"${sep}\"
+
+  ${species_array}
+  ${country_array}
 }
 {
   keep = 1
