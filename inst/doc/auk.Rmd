@@ -162,7 +162,7 @@ ebd
 - `auk_species()`: filter by species using common or scientific names.
 - `auk_country()`: filter by country using the standard English names or [ISO 2-letter country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 - `auk_extent()`: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.
-- `auk_date()`: filter to checklists from a range of dates.
+- `auk_date()`: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard "`*`" in place of the year, e.g. `date = c("*-05-01", "*-06-30")` for observations from May and June of any year.
 - `auk_last_edited()`: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.
 - `auk_protocol()`: filter to checklists that following a specific search protocol, either stationary, traveling, or casual.
 - `auk_project()`: filter to checklists collected as part of a specific project (e.g. a breeding bird survey).

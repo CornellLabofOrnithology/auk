@@ -11,7 +11,9 @@ auk_date(x, date)
 \code{\link[=auk_ebd]{auk_ebd()}} or \code{\link[=auk_sampling]{auk_sampling()}}.}
 
 \item{date}{character or date; date range to filter by, provided either as a
-character vector in the format \code{"2015-12-31"} or a vector of Date objects.}
+character vector in the format \code{"2015-12-31"} or a vector of Date objects.
+To filter on a range of dates, regardless of year, use \code{"*"} in place of
+the year.}
 }
 \value{
 An \code{auk_ebd} object.
@@ -23,8 +25,13 @@ defined, \code{\link[=auk_filter]{auk_filter()}} should be used to call AWK and 
 filtering.
 }
 \details{
-This function can also work with on an \code{auk_sampling} object if the
-user only wishes to filter the sampling event data.
+To select observations from a range of dates, regardless of year,
+the  wildcard \code{"*"} can be used in place of the year. For example, using
+\code{date = c("*-05-01", "*-06-30")} will return observations from May and June
+of \emph{any year}.
+
+This function can also work with on an \code{auk_sampling} object if the user only
+wishes to filter the sampling event data.
 }
 \examples{
 system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
@@ -34,4 +41,10 @@ system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 auk_date(ebd, date = c("2010-01-01", "2010-12-31"))
+
+# the * wildcard can be used in place of year to select dates from all years
+system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
+  auk_ebd() \%>\%
+  # may-june records from all years
+  auk_date(date = c("*-05-01", "*-06-30"))
 }

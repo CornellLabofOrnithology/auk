@@ -72,20 +72,21 @@ test_that("auk_date", {
   # character input
   d <- c("2015-01-01", "2015-12-31")
   sed <- auk_date(sed, d)
-  expect_equal(sed$filters$date, d)
+  expect_equivalent(sed$filters$date, d)
+  expect_true(!attr(sed$filters$date, "wildcard"))
   # date input
   sed <- auk_date(sed, as.Date(d))
-  expect_equal(sed$filters$date, d)
+  expect_equivalent(sed$filters$date, d)
   
   # single day is ok
   d <- c("2015-01-01", "2015-01-01")
   sed <- auk_date(sed, d)
-  expect_equal(sed$filters$date, d)
+  expect_equivalent(sed$filters$date, d)
   
   # overwrite
   d <- c("2010-01-01", "2010-12-31")
   sed <- auk_date(sed, d)
-  expect_equal(sed$filters$date, d)
+  expect_equivalent(sed$filters$date, d)
   
   # invalid date format
   expect_error(auk_date(sed, c("01-01-2015", "2015-12-31")))

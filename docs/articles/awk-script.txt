@@ -2,25 +2,33 @@
 BEGIN {
   FS = "	"
   OFS = "	"
+
+  
+    split("Cyanocitta cristata	Perisoreus canadensis", speciesValues, "	")
+    for (i in speciesValues) species[speciesValues[i]] = 1
+  
+    split("CA", countryValues, "	")
+    for (i in countryValues) countries[countryValues[i]] = 1
 }
 {
   keep = 1
 
   # filters
   
-  if (keep == 1 && ($6 == "Cyanocitta cristata" || $6 == "Perisoreus canadensis")) {
+  if (keep == 1 && ($6 in species)) {
     keep = 1
   } else {
     keep = 0
   }
 
   
-  if (keep == 1 && ($14 == "CA")) {
+  if (keep == 1 && ($14 in countries)) {
     keep = 1
   } else {
     keep = 0
   }
 
+  
   
   
   

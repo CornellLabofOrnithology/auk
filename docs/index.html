@@ -143,7 +143,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 f_out &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, f_out)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpiTenGX/file5ffe54dbef07"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpul4qkm/file6bfc5183803b"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
@@ -163,7 +163,7 @@ f_out &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <li>
 <code><a href="reference/auk_extent.html">auk_extent()</a></code>: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
-<code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates.</li>
+<code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code>*</code>” in place of the year, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
 <li>
 <code><a href="reference/auk_last_edited.html">auk_last_edited()</a></code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
 <li>

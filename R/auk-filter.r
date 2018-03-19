@@ -399,8 +399,19 @@ awk_translate <- function(filters, col_idx, sep, select) {
   }
   # date filter
   if (length(filters$date) == 0) {
+    filter_strings$date_substr <- ""
     filter_strings$date <- ""
+  } else if (isTRUE(attr(filters$date, "wildcard"))) {
+    # extract just the month and day with awk
+    idx <- col_idx$index[col_idx$id == "date"]
+    filter_strings$date_substr <- sprintf("monthday = substr($%i, 6, 5)", idx)
+    # remove the wildcard part of date
+    dates <- stringr::str_replace(filters$date, "^\\*-", "")
+    condition <- str_interp("monthday >= \"${mn}\" && monthday <= \"${mx}\"",
+                            list(mn = dates[1], mx = dates[2]))
+    filter_strings$date <- str_interp(awk_if, list(condition = condition))
   } else {
+    filter_strings$date_substr <- ""
     idx <- col_idx$index[col_idx$id == "date"]
     condition <- str_interp("$${idx} >= \"${mn}\" && $${idx} <= \"${mx}\"",
                             list(idx = idx,
@@ -520,6 +531,7 @@ BEGIN {
   ${species}
   ${country}
   ${extent}
+  ${date_substr}
   ${date}
   ${time}
   ${last_edited}

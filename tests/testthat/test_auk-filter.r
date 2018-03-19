@@ -178,3 +178,26 @@ test_that("auk_filter filter an auk_sampling object", {
   expect_true(all(s_df$duration_minutes >= filters$filters$duration[1]))
   expect_true(all(s_df$duration_minutes <= filters$filters$duration[2]))
 })
+
+test_that("auk_filter works with wildcard dates", {
+  skip_on_cran()
+  skip_on_os("windows")
+  
+  # set up filters
+  f <- system.file("extdata/ebd-sample.txt", package = "auk")
+  tmp <- tempfile()
+  filters <- auk_ebd(f) %>%
+    auk_date(date = c("*-05-01", "*-06-30"))
+  ebd <- auk_filter(filters, file = tmp) %>% 
+    read_ebd()
+  unlink(tmp)
+  
+  expect_is(ebd, "data.frame")
+  expect_lt(nrow(ebd), nrow(read_ebd(f)))
+  expect_equal(nrow(ebd), 73)
+  month_day <- as.Date(ebd$observation_date) %>% 
+    format("%m-%d")
+  md_range <- sub("*-", "", filters$filters$date, fixed = TRUE)
+  expect_true(all(month_day >= md_range[1]))
+  expect_true(all(month_day <= md_range[2]))
+})

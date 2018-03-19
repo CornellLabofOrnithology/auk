@@ -103,20 +103,21 @@ test_that("auk_date", {
   # character input
   d <- c("2015-01-01", "2015-12-31")
   ebd <- auk_date(ebd, d)
-  expect_equal(ebd$filters$date, d)
+  expect_equivalent(ebd$filters$date, d)
+  expect_true(!attr(ebd$filters$date, "wildcard"))
   # date input
   ebd <- auk_date(ebd, as.Date(d))
-  expect_equal(ebd$filters$date, d)
+  expect_equivalent(ebd$filters$date, d)
 
   # single day is ok
   d <- c("2015-01-01", "2015-01-01")
   ebd <- auk_date(ebd, d)
-  expect_equal(ebd$filters$date, d)
+  expect_equivalent(ebd$filters$date, d)
 
   # overwrite
   d <- c("2010-01-01", "2010-12-31")
   ebd <- auk_date(ebd, d)
-  expect_equal(ebd$filters$date, d)
+  expect_equivalent(ebd$filters$date, d)
 
   # invalid date format
   expect_error(auk_date(ebd, c("01-01-2015", "2015-12-31")))
@@ -127,7 +128,23 @@ test_that("auk_date", {
 
   # dates not sequential
   expect_error(auk_date(ebd, c("2015-12-31", "2015-01-01")))
+})
 
+test_that("auk_date wildcards", {
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd()
+  
+  d <- c("*-05-01", "*-06-30")
+  ebd <- auk_date(ebd, d)
+  expect_equivalent(ebd$filters$date, d)
+  expect_true(attr(ebd$filters$date, "wildcard"))
+  
+  # invalid date format
+  expect_error(auk_date(ebd, "*-01-01"))
+  expect_error(auk_date(ebd, c("*-05-01", "2012-06-30")))
+  
+  # dates not sequential
+  expect_error(auk_date(ebd, c("*-12-31", "*-01-01")))
 })
 
 test_that("auk_last_edited", {

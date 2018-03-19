@@ -201,7 +201,7 @@ ebd
 <li>
 <code><a href="../reference/auk_extent.html">auk_extent()</a></code>: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
-<code><a href="../reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates.</li>
+<code><a href="../reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code>*</code>” in place of the year, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
 <li>
 <code><a href="../reference/auk_last_edited.html">auk_last_edited()</a></code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
 <li>
@@ -352,16 +352,20 @@ awk_file[<span class="op">!</span><span class="kw">grepl</span>(<span class="st"
 <span class="co">#&gt; </span><span class="re">BEGIN</span><span class="co"> {</span>
 <span class="co">#&gt;   FS = " "</span>
 <span class="co">#&gt;   OFS = "    "</span>
+<span class="co">#&gt;     split("Cyanocitta cristata   Perisoreus canadensis", speciesValues, "    ")</span>
+<span class="co">#&gt;     for (i in speciesValues) species[speciesValues[i]] = 1</span>
+<span class="co">#&gt;     split("CA", countryValues, " ")</span>
+<span class="co">#&gt;     for (i in countryValues) countries[countryValues[i]] = 1</span>
 <span class="co">#&gt; }</span>
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;   keep = 1</span>
 <span class="co">#&gt;   # filters</span>
-<span class="co">#&gt;   if (keep == 1 &amp;&amp; ($6 == "Cyanocitta cristata" || $6 == "Perisoreus canadensis")) {</span>
+<span class="co">#&gt;   if (keep == 1 &amp;&amp; ($6 in species)) {</span>
 <span class="co">#&gt;     keep = 1</span>
 <span class="co">#&gt;   } else {</span>
 <span class="co">#&gt;     keep = 0</span>
 <span class="co">#&gt;   }</span>
-<span class="co">#&gt;   if (keep == 1 &amp;&amp; ($14 == "CA")) {</span>
+<span class="co">#&gt;   if (keep == 1 &amp;&amp; ($14 in countries)) {</span>
 <span class="co">#&gt;     keep = 1</span>
 <span class="co">#&gt;   } else {</span>
 <span class="co">#&gt;     keep = 0</span>

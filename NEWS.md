@@ -3,6 +3,7 @@
 - New function, `auk_split()`, splits EBD up into multiple files by species
 - New object, `auk_sampling`, and associated methods for working with the sampling data only
 - New function, `auk_select()`, for selecting a subset of columns
+- `auk_date()` now allows filtering date ranges across years using wildcards, e.g. `date = c("*-05-01", "*-06-30")` for observations from May and June of any year
 - Now using AWK arrays to speed up country and species filtering; ~20% speed up when filtering on many species/countries
 - Allow selection of a subset of columns when filtering
 - Remove free text columns in `auk_clean()` to decrease file size
