@@ -5,8 +5,10 @@
 #' includes taxa not identifiable to a species (e.g. hybrids) and taxa reported
 #' below the species level (e.g. subspecies). This function produces a list of 
 #' observations of true species, by removing the former and rolling the latter 
-#' up to the species level. By default, [read_ebd()] calls `ebd_rollup()` when 
-#' importing an eBird data file.
+#' up to the species level. In the resulting EBD data.frame, 
+#' `category` will be `"species"` for all records and the subspecies fields will 
+#' be dropped. By default, [read_ebd()] calls `ebd_rollup()` when importing an 
+#' eBird data file.
 #'
 #' @param x data.frame; data frame of eBird data, typically as imported by
 #'   [read_ebd()]
@@ -25,9 +27,9 @@
 #'   - **Species:** e.g., Mallard. Combined with lower level taxa if present on 
 #'   the same checklist.
 #'   - **ISSF or Identifiable Sub-specific Group:** Identifiable subspecies or
-#'   group of subspecies, e.g., Mallard (Mexican). If the checklist contains 
-#'   multiple taxa corresponding to the same species, the lower level taxa are 
-#'   rolled up, otherwise these records are left as is
+#'   group of subspecies, e.g., Mallard (Mexican). Rolled-up to species level.
+#'   - **Intergrade:** Hybrid between two ISSF (subspecies or subspecies
+#'   groups), e.g., Mallard (Mexican intergrade. Rolled-up to species level.
 #'   - **Form:** Miscellaneous other taxa, including recently-described species
 #'   yet to be accepted or distinctive forms that are not universally accepted
 #'   (Red-tailed Hawk (Northern), Upland Goose (Bar-breasted)). If the checklist
@@ -38,29 +40,49 @@
 #'   - **Slash:** Identification to Species-pair e.g., American Black
 #'   Duck/Mallard). Dropped by auk_rollup()
 #'   - **Hybrid:** Hybrid between two species, e.g., American Black Duck x
-#'   Mallard (hybrid). Dropped by auk_rollup()
-#'   - **Intergrade:** Hybrid between two ISSF (subspecies or subspecies groups),
-#'   e.g., Mallard (Mexican intergrade. Dropped by auk_rollup()
+#'   Mallard (hybrid). Dropped by auk_rollup().
 #'   - **Domestic:** Distinctly-plumaged domesticated varieties that may be
 #'   free-flying (these do not count on personal lists) e.g., Mallard (Domestic
 #'   type). Dropped by auk_rollup()
 #'   
 #' @return A data frame of the eBird data with taxonomic rollup applied.
-#' @references Consult the [eBird taxonomy](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy)page for further details.
+#' @references Consult the [eBird taxonomy](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy) 
+#'   page for further details.
 #' @export
 #' @examples
 #' # get the path to the example data included in the package
 #' # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt
 #' f <- system.file("extdata/ebd-rollup-ex.txt", package = "auk")
+#' # read in data without rolling up
 #' ebd <- read_ebd(f, rollup = FALSE)
-#' nrow(ebd)
+#' # rollup
 #' ebd_ru <- auk_rollup(ebd)
-#' nrow(ebd_ru)
+#' 
+#' # all taxa not identifiable to species are dropped
+#' unique(ebd$category)
+#' unique(ebd_ru$category)
+#' 
+#' # yellow-rump warbler subspecies rollup
+#' library(dplyr)
+#' # without rollup, there are three observations
+#' ebd %>%
+#'   filter(common_name == "Yellow-rumped Warbler") %>% 
+#'   select(checklist_id, category, common_name, subspecies_common_name, 
+#'          observation_count)
+#' # with rollup, they have been combined
+#' ebd_ru %>%
+#'   filter(common_name == "Yellow-rumped Warbler") %>% 
+#'   select(checklist_id, category, common_name, observation_count)
 auk_rollup <- function(x) {
   assertthat::assert_that(
     is.data.frame(x),
     "scientific_name" %in% names(x)
   )
+  
+  # return as is if already run
+  if (isTRUE(attr(x, "rollup"))) {
+    return(x)
+  }
   
   # has auk_unique been applied?
   if ("checklist_id" %in% names(x)) {
@@ -96,5 +118,20 @@ auk_rollup <- function(x) {
   x <- dplyr::inner_join(x, sp, by = c(as.character(cid)[2], "scientific_name"))
   x <- dplyr::mutate(x, observation_count = .data$count)
   x <- dplyr::select(x, -.data$count, -.data$taxon_order)
+  
+  # drop subspecies fields, set category to species
+  if ("category" %in% names(x)) {
+    x$category <- "species"
+  }
+  if ("subspecies_common_name" %in% names(x)) {
+    x$subspecies_common_name <- NULL
+  }
+  if ("subspecies_scientific_name" %in% names(x)) {
+    x$subspecies_scientific_name <- NULL
+  }
+  
+  # attribute flag
+  attr(x, "rollup") <- TRUE
+  
   dplyr::as_tibble(x)
 }

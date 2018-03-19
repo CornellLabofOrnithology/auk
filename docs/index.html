@@ -143,7 +143,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 f_out &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, f_out)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmptlRzbK/file3dde27bb2774"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpj9wJRm/file54774a6b0196"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
@@ -203,7 +203,7 @@ ebd &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_ebd.ht
 <span class="st">  </span><span class="kw"><a href="reference/auk_complete.html">auk_complete</a></span>()
 ebd
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.4/library/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -238,7 +238,7 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">str</span>()
-<span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    493 obs. of  49 variables:</span>
+<span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    493 obs. of  47 variables:</span>
 <span class="co">#&gt;  $ checklist_id                : chr  "S38071246" "S39033573" "S38070341" "S37442113" ...</span>
 <span class="co">#&gt;  $ global_unique_identifier    : chr  "URN:CornellLabOfOrnithology:EBIRD:OBS517693917" "URN:CornellLabOfOrnithology:EBIRD:OBS530638805" "URN:CornellLabOfOrnithology:EBIRD:OBS517681525" "URN:CornellLabOfOrnithology:EBIRD:OBS509009139" ...</span>
 <span class="co">#&gt;  $ last_edited_date            : chr  "2017-07-10 15:23:56" "2017-09-06 13:13:36" "2017-07-10 14:18:14" "2017-06-07 02:05:59" ...</span>
@@ -246,8 +246,6 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <span class="co">#&gt;  $ category                    : chr  "species" "species" "species" "species" ...</span>
 <span class="co">#&gt;  $ common_name                 : chr  "Green Jay" "Green Jay" "Green Jay" "Green Jay" ...</span>
 <span class="co">#&gt;  $ scientific_name             : chr  "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" ...</span>
-<span class="co">#&gt;  $ subspecies_common_name      : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ subspecies_scientific_name  : chr  NA NA NA NA ...</span>
 <span class="co">#&gt;  $ observation_count           : chr  "5" "1" "1" "3" ...</span>
 <span class="co">#&gt;  $ breeding_bird_atlas_code    : chr  NA NA NA NA ...</span>
 <span class="co">#&gt;  $ breeding_bird_atlas_category: chr  NA NA NA NA ...</span>
@@ -287,7 +285,8 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <span class="co">#&gt;  $ reviewed                    : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span>
 <span class="co">#&gt;  $ reason                      : chr  NA NA NA NA ...</span>
 <span class="co">#&gt;  $ trip_comments               : chr  "Pedro Pablo V�zquez" "Miguel M�ndez L�pez" "Miguel M�ndez L�pez" "Miguel M�ndez L�pez" ...</span>
-<span class="co">#&gt;  $ species_comments            : chr  NA NA NA NA ...</span></code></pre></div>
+<span class="co">#&gt;  $ species_comments            : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  - attr(*, "rollup")= logi TRUE</span></code></pre></div>
 </div>
 </div>
 <div id="presence-absence-data" class="section level2">

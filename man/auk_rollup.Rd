@@ -19,8 +19,10 @@ field-identifiable taxon that could be relevant for birders to report. This
 includes taxa not identifiable to a species (e.g. hybrids) and taxa reported
 below the species level (e.g. subspecies). This function produces a list of
 observations of true species, by removing the former and rolling the latter
-up to the species level. By default, \code{\link[=read_ebd]{read_ebd()}} calls \code{ebd_rollup()} when
-importing an eBird data file.
+up to the species level. In the resulting EBD data.frame,
+\code{category} will be \code{"species"} for all records and the subspecies fields will
+be dropped. By default, \code{\link[=read_ebd]{read_ebd()}} calls \code{ebd_rollup()} when importing an
+eBird data file.
 }
 \details{
 When rolling observations up to species level the observed counts
@@ -37,9 +39,9 @@ categories, and the way they are treated by \code{\link[=auk_rollup]{auk_rollup(
 \item \strong{Species:} e.g., Mallard. Combined with lower level taxa if present on
 the same checklist.
 \item \strong{ISSF or Identifiable Sub-specific Group:} Identifiable subspecies or
-group of subspecies, e.g., Mallard (Mexican). If the checklist contains
-multiple taxa corresponding to the same species, the lower level taxa are
-rolled up, otherwise these records are left as is
+group of subspecies, e.g., Mallard (Mexican). Rolled-up to species level.
+\item \strong{Intergrade:} Hybrid between two ISSF (subspecies or subspecies
+groups), e.g., Mallard (Mexican intergrade. Rolled-up to species level.
 \item \strong{Form:} Miscellaneous other taxa, including recently-described species
 yet to be accepted or distinctive forms that are not universally accepted
 (Red-tailed Hawk (Northern), Upland Goose (Bar-breasted)). If the checklist
@@ -50,9 +52,7 @@ dabbling duck sp.. Dropped by auk_rollup().
 \item \strong{Slash:} Identification to Species-pair e.g., American Black
 Duck/Mallard). Dropped by auk_rollup()
 \item \strong{Hybrid:} Hybrid between two species, e.g., American Black Duck x
-Mallard (hybrid). Dropped by auk_rollup()
-\item \strong{Intergrade:} Hybrid between two ISSF (subspecies or subspecies groups),
-e.g., Mallard (Mexican intergrade. Dropped by auk_rollup()
+Mallard (hybrid). Dropped by auk_rollup().
 \item \strong{Domestic:} Distinctly-plumaged domesticated varieties that may be
 free-flying (these do not count on personal lists) e.g., Mallard (Domestic
 type). Dropped by auk_rollup()
@@ -62,11 +62,28 @@ type). Dropped by auk_rollup()
 # get the path to the example data included in the package
 # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt
 f <- system.file("extdata/ebd-rollup-ex.txt", package = "auk")
+# read in data without rolling up
 ebd <- read_ebd(f, rollup = FALSE)
-nrow(ebd)
+# rollup
 ebd_ru <- auk_rollup(ebd)
-nrow(ebd_ru)
+
+# all taxa not identifiable to species are dropped
+unique(ebd$category)
+unique(ebd_ru$category)
+
+# yellow-rump warbler subspecies rollup
+library(dplyr)
+# without rollup, there are three observations
+ebd \%>\%
+  filter(common_name == "Yellow-rumped Warbler") \%>\% 
+  select(checklist_id, category, common_name, subspecies_common_name, 
+         observation_count)
+# with rollup, they have been combined
+ebd_ru \%>\%
+  filter(common_name == "Yellow-rumped Warbler") \%>\% 
+  select(checklist_id, category, common_name, observation_count)
 }
 \references{
-Consult the \href{http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy}{eBird taxonomy}page for further details.
+Consult the \href{http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy}{eBird taxonomy}
+page for further details.
 }

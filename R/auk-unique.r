@@ -61,6 +61,11 @@ auk_unique <- function(x,
     is.character(x[[group_id]]),
     is.character(x[[checklist_id]]),
     checklists_only || is.character(x[[species_id]]))
+  
+  # return as is if already run
+  if (isTRUE(attr(x, "unique"))) {
+    return(x)
+  }
 
   # identify and separate non-group records
   grouped <- !is.na(x[[group_id]])
@@ -82,10 +87,13 @@ auk_unique <- function(x,
   x_grouped$checklist_id <- x_grouped[[group_id]]
 
   # only keep non-group or non-duplicated records
-  out <- rbind(x[!grouped, ], x_grouped)
+  x <- rbind(x[!grouped, ], x_grouped)
 
   # move id field to front
-  out <- out[, c("checklist_id", setdiff(names(out), "checklist_id"))]
+  x <- dplyr::select(x, .data$checklist_id, dplyr::everything())#out[, c("checklist_id", setdiff(names(out), "checklist_id"))]
 
-  dplyr::as_tibble(out)
+  # attribute flag
+  attr(x, "unique") <- TRUE
+  
+  dplyr::as_tibble(x)
 }

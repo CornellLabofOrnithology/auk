@@ -165,11 +165,11 @@ cleaned &lt;-<span class="st"> </span><span class="kw">auk_clean</span>(f, <span
 <div id="the-auk_ebd-object" class="section level3">
 <h3>The <code>auk_ebd</code> object</h3>
 <p>This package uses an <code>auk_ebd</code> object to keep track of the input data file, any filters defined, and the output file that is produced after filtering has been executed. By keeping everything wrapped up in one object, the user can keep track of exactly what set of input data and filters produced any given output data. To set up the initial <code>auk_ebd</code> object, use <code>auk_ebd()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/ebd-sample_messy.txt&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;auk&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/ebd-sample.txt&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;auk&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">auk_ebd</span>()
 ebd
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/ebd-sample_messy.txt </span>
+<span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -224,7 +224,7 @@ ebd
 <span class="st">  </span><span class="kw">auk_complete</span>()
 ebd_filters
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/ebd-sample_messy.txt </span>
+<span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -262,7 +262,7 @@ ebd_jays &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span
 <span class="st">  </span><span class="kw">read_ebd</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">glimpse</span>()
 <span class="co">#&gt; Observations: 493</span>
-<span class="co">#&gt; Variables: 49</span>
+<span class="co">#&gt; Variables: 47</span>
 <span class="co">#&gt; $ checklist_id                 &lt;chr&gt; &quot;S38071246&quot;, &quot;S39033573&quot;, &quot;S38070...</span>
 <span class="co">#&gt; $ global_unique_identifier     &lt;chr&gt; &quot;URN:CornellLabOfOrnithology:EBIR...</span>
 <span class="co">#&gt; $ last_edited_date             &lt;chr&gt; &quot;2017-07-10 15:23:56&quot;, &quot;2017-09-0...</span>
@@ -270,8 +270,6 @@ ebd_jays &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span
 <span class="co">#&gt; $ category                     &lt;chr&gt; &quot;species&quot;, &quot;species&quot;, &quot;species&quot;, ...</span>
 <span class="co">#&gt; $ common_name                  &lt;chr&gt; &quot;Green Jay&quot;, &quot;Green Jay&quot;, &quot;Green ...</span>
 <span class="co">#&gt; $ scientific_name              &lt;chr&gt; &quot;Cyanocorax yncas&quot;, &quot;Cyanocorax y...</span>
-<span class="co">#&gt; $ subspecies_common_name       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N...</span>
-<span class="co">#&gt; $ subspecies_scientific_name   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N...</span>
 <span class="co">#&gt; $ observation_count            &lt;chr&gt; &quot;5&quot;, &quot;1&quot;, &quot;1&quot;, &quot;3&quot;, &quot;5&quot;, &quot;2&quot;, &quot;2&quot;...</span>
 <span class="co">#&gt; $ breeding_bird_atlas_code     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N...</span>
 <span class="co">#&gt; $ breeding_bird_atlas_category &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N...</span>
@@ -377,26 +375,41 @@ ebd_unique &lt;-<span class="st"> </span><span class="kw">auk_unique</span>(ebd_
 </div>
 <div id="taxonomic-rollup" class="section level3">
 <h3>Taxonomic rollup</h3>
-<p>The eBird Basic Dataset includes both true species and other taxa, including domestics, hybrids, subspecies, “spuhs”, and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, “warbler sp.”. For most use cases, a single record for each species on each checklist is desired. The function <code>ebd_rollup()</code> addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebd_noru &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/ebd-rollup-ex.txt&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;auk&quot;</span>) <span class="op">%&gt;%</span>
+<p>The eBird Basic Dataset includes both true species and other taxa, including domestics, hybrids, subspecies, “spuhs”, and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon’s and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, “warbler sp.”. For most use cases, a single record for each species on each checklist is desired. The function <code>ebd_rollup()</code> addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># read in sample data without rolling up</span>
+ebd &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/ebd-rollup-ex.txt&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;auk&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">read_ebd</span>(<span class="dt">rollup =</span> <span class="ot">FALSE</span>)
-<span class="co"># note the presence of forms for american robin and bewick's wren</span>
-ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(checklist_id <span class="op">==</span><span class="st"> &quot;S7980609&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="dt">id =</span> checklist_id, category, 
-         <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
-<span class="co">#&gt; # A tibble: 0 x 4</span>
-<span class="co">#&gt; # ... with 4 variables: id &lt;chr&gt;, category &lt;chr&gt;, species &lt;chr&gt;,</span>
-<span class="co">#&gt; #   subspecies &lt;chr&gt;</span>
-<span class="co"># taxonomic rollup</span>
-ebd_noru <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">auk_rollup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(checklist_id <span class="op">==</span><span class="st"> &quot;S7980609&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="dt">id =</span> checklist_id, category,
-         <span class="dt">species =</span> common_name, <span class="dt">subspecies =</span> subspecies_common_name)
-<span class="co">#&gt; # A tibble: 0 x 4</span>
-<span class="co">#&gt; # ... with 4 variables: id &lt;chr&gt;, category &lt;chr&gt;, species &lt;chr&gt;,</span>
-<span class="co">#&gt; #   subspecies &lt;chr&gt;</span></code></pre></div>
+<span class="co"># apply roll up</span>
+ebd_ru &lt;-<span class="st"> </span><span class="kw">auk_rollup</span>(ebd)
+
+<span class="co"># all taxa not identifiable to species are dropped</span>
+<span class="co"># taxa below species have been rolled up to species</span>
+<span class="kw">unique</span>(ebd<span class="op">$</span>category)
+<span class="co">#&gt; [1] &quot;domestic&quot;   &quot;form&quot;       &quot;hybrid&quot;     &quot;intergrade&quot; &quot;slash&quot;     </span>
+<span class="co">#&gt; [6] &quot;spuh&quot;       &quot;species&quot;    &quot;issf&quot;</span>
+<span class="kw">unique</span>(ebd_ru<span class="op">$</span>category)
+<span class="co">#&gt; [1] &quot;species&quot;</span>
+
+<span class="co"># yellow-rump warbler subspecies rollup</span>
+<span class="co"># without rollup, there are three observations</span>
+ebd <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(common_name <span class="op">==</span><span class="st"> &quot;Yellow-rumped Warbler&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(checklist_id, category, common_name, subspecies_common_name,
+         observation_count)
+<span class="co">#&gt; # A tibble: 3 x 5</span>
+<span class="co">#&gt;   checklist_id category common_name   subspecies_common_… observation_cou…</span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;               &lt;chr&gt;           </span>
+<span class="co">#&gt; 1 S41507433    species  Yellow-rumpe… &lt;NA&gt;                10              </span>
+<span class="co">#&gt; 2 S41507433    issf     Yellow-rumpe… Yellow-rumped Warb… 5               </span>
+<span class="co">#&gt; 3 S41507433    issf     Yellow-rumpe… Yellow-rumped Warb… 1</span>
+<span class="co"># with rollup, they have been combined</span>
+ebd_ru <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(common_name <span class="op">==</span><span class="st"> &quot;Yellow-rumped Warbler&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(checklist_id, category, common_name, observation_count)
+<span class="co">#&gt; # A tibble: 1 x 4</span>
+<span class="co">#&gt;   checklist_id category common_name           observation_count</span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;            </span>
+<span class="co">#&gt; 1 S41507433    species  Yellow-rumped Warbler 16</span></code></pre></div>
 <p>By default, <code>read_ebd()</code> calls <code>ebd_rollup()</code> when importing an eBird Basic Dataset file. To avoid this, and retain subspecies, use <code>read_ebd(rollup = FALSE)</code>.</p>
 </div>
 </div>
@@ -416,8 +429,8 @@ filters &lt;-<span class="st"> </span><span class="kw">auk_ebd</span>(f_ebd, <sp
 <span class="st">  </span><span class="kw">auk_complete</span>()
 filters
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /Users/mes335/projects/auk/inst/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -441,8 +454,8 @@ filters
 ##                                file_sampling = &quot;sampling-filtered.txt&quot;)
 ebd_sed_filtered
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /Users/mes335/projects/auk/inst/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   EBD: ebd-filtered.txt </span>

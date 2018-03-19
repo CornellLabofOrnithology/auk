@@ -16,7 +16,9 @@
 #' @param unique logical; should duplicate grouped checklists be removed. If
 #'   `unique = TRUE`, [auk_unique()] is called on the EBD before returning.
 #' @param rollup logical; should taxonomic rollup to species level be applied. 
-#'   If `rollup = TRUE`, [auk_rollup()] is called on the EBD before returning.
+#'   If `rollup = TRUE`, [auk_rollup()] is called on the EBD before returning. 
+#'   Note that this process can be time consuming for large files, try turning 
+#'   rollup off if reading is taking too long.
 #'
 #' @details  This functions performs the following processing steps:
 #'

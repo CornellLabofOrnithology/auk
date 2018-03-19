@@ -3,8 +3,10 @@ title: "auk: eBird Data Extraction with AWK"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to auk}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, echo = FALSE}
@@ -148,7 +150,7 @@ cleaned <- auk_clean(f, f_out = f_out)
 This package uses an `auk_ebd` object to keep track of the input data file, any filters defined, and the output file that is produced after filtering has been executed. By keeping everything wrapped up in one object, the user can keep track of exactly what set of input data and filters produced any given output data. To set up the initial `auk_ebd` object, use `auk_ebd()`:
 
 ```{r auk-ebd}
-ebd <- system.file("extdata/ebd-sample_messy.txt", package = "auk") %>% 
+ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
   auk_ebd()
 ebd
 ```
@@ -267,22 +269,30 @@ nrow(ebd_unique)
 
 ### Taxonomic rollup
 
-The eBird Basic Dataset includes both true species and other taxa, including domestics, hybrids, subspecies, "spuhs", and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, "warbler sp.". For most use cases, a single record for each species on each checklist is desired. The function `ebd_rollup()` addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist. 
+The eBird Basic Dataset includes both true species and other taxa, including domestics, hybrids, subspecies, "spuhs", and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon's and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, "warbler sp.". For most use cases, a single record for each species on each checklist is desired. The function `ebd_rollup()` addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist. 
 
 ```{r auk-rollup}
-ebd_noru <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
+# read in sample data without rolling up
+ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
   read_ebd(rollup = FALSE)
-# note the presence of forms for american robin and bewick's wren
-ebd_noru %>% 
-  filter(checklist_id == "S7980609") %>% 
-  select(id = checklist_id, category, 
-         species = common_name, subspecies = subspecies_common_name)
-# taxonomic rollup
-ebd_noru %>% 
-  auk_rollup() %>% 
-  filter(checklist_id == "S7980609") %>% 
-  select(id = checklist_id, category,
-         species = common_name, subspecies = subspecies_common_name)
+# apply roll up
+ebd_ru <- auk_rollup(ebd)
+
+# all taxa not identifiable to species are dropped
+# taxa below species have been rolled up to species
+unique(ebd$category)
+unique(ebd_ru$category)
+
+# yellow-rump warbler subspecies rollup
+# without rollup, there are three observations
+ebd %>%
+  filter(common_name == "Yellow-rumped Warbler") %>%
+  select(checklist_id, category, common_name, subspecies_common_name,
+         observation_count)
+# with rollup, they have been combined
+ebd_ru %>%
+  filter(common_name == "Yellow-rumped Warbler") %>%
+  select(checklist_id, category, common_name, observation_count)
 ```
 
 By default, `read_ebd()` calls `ebd_rollup()` when importing an eBird Basic Dataset file. To avoid this, and retain subspecies, use `read_ebd(rollup = FALSE)`.

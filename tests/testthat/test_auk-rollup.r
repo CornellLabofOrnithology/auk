@@ -1,6 +1,6 @@
 context("auk_rollup")
 
-test_that("auk_filter rolls up to species level", {
+test_that("auk_rollup rolls up to species level", {
   ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
     read_ebd(rollup = FALSE)
   ebd_ru <- auk_rollup(ebd)
@@ -9,9 +9,13 @@ test_that("auk_filter rolls up to species level", {
   vars <- c("checklist_id", "scientific_name")
   expect_gt(anyDuplicated(ebd[, vars]), 0)
   expect_equal(anyDuplicated(ebd_ru[, vars]), 0)
+  expect_equal(unique(ebd_ru$category), "species")
+  dropped_cols <- c("subspecies_common_name", "subspecies_scientific_name")
+  expect_true(all(dropped_cols %in% names(ebd)))
+  expect_true(all(!dropped_cols %in% names(ebd_ru)))
 })
 
-test_that("auk_filter works with unique = FALSE", {
+test_that("auk_rollup works with unique = FALSE", {
   ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
     read_ebd(unique = FALSE, rollup = FALSE)
   ebd_ru <- auk_rollup(ebd)
@@ -20,4 +24,8 @@ test_that("auk_filter works with unique = FALSE", {
   vars <- c("sampling_event_identifier", "scientific_name")
   expect_gt(anyDuplicated(ebd[, vars]), 0)
   expect_equal(anyDuplicated(ebd_ru[, vars]), 0)
+  expect_equal(unique(ebd_ru$category), "species")
+  dropped_cols <- c("subspecies_common_name", "subspecies_scientific_name")
+  expect_true(all(dropped_cols %in% names(ebd)))
+  expect_true(all(!dropped_cols %in% names(ebd_ru)))
 })

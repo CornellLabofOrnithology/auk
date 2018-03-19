@@ -5,8 +5,8 @@ ebird_dir <- "~/data/ebird/ebd_relFeb-2018/"
 # ebd
 f <- file.path(ebird_dir, "ebd_relFeb-2018.txt")
 f_subset <- file.path(ebird_dir, "ebd_relFeb-2018_subset.txt")
-f_sg <- file.path(ebird_dir, "ebd_relFeb-2017_SG.txt")
-f_ru <- file.path(ebird_dir, "ebd_relFeb-2017_rollup.txt")
+f_sg <- file.path(ebird_dir, "ebd_relFeb-2018_SG.txt")
+f_ru <- file.path(ebird_dir, "ebd_relFeb-2018_rollup.txt")
 # sampling
 s <- file.path(ebird_dir, "ebd_sampling_relFeb-2018.txt")
 s_subset <- file.path(ebird_dir, "ebd_sampling_relFeb-2018_subset.txt")

@@ -42,7 +42,9 @@ on the installed packages.}
 \code{unique = TRUE}, \code{\link[=auk_unique]{auk_unique()}} is called on the EBD before returning.}
 
 \item{rollup}{logical; should taxonomic rollup to species level be applied.
-If \code{rollup = TRUE}, \code{\link[=auk_rollup]{auk_rollup()}} is called on the EBD before returning.}
+If \code{rollup = TRUE}, \code{\link[=auk_rollup]{auk_rollup()}} is called on the EBD before returning.
+Note that this process can be time consuming for large files, try turning
+rollup off if reading is taking too long.}
 }
 \value{
 A data frame of EBD observations. An additional column,

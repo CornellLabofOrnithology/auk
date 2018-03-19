@@ -86,8 +86,10 @@ field-identifiable taxon that could be relevant for birders to report. This
 includes taxa not identifiable to a species (e.g. hybrids) and taxa reported
 below the species level (e.g. subspecies). This function produces a list of
 observations of true species, by removing the former and rolling the latter
-up to the species level. By default, <code><a href='read_ebd.html'>read_ebd()</a></code> calls <code>ebd_rollup()</code> when
-importing an eBird data file.</p>
+up to the species level. In the resulting EBD data.frame,
+<code>category</code> will be <code>"species"</code> for all records and the subspecies fields will
+be dropped. By default, <code><a href='read_ebd.html'>read_ebd()</a></code> calls <code>ebd_rollup()</code> when importing an
+eBird data file.</p>
     
 
     <pre class="usage"><span class='fu'>auk_rollup</span>(<span class='no'>x</span>)</pre>
@@ -120,9 +122,9 @@ categories, and the way they are treated by <code>auk_rollup()</code> are as fol
 <li><p><strong>Species:</strong> e.g., Mallard. Combined with lower level taxa if present on
 the same checklist.</p></li>
 <li><p><strong>ISSF or Identifiable Sub-specific Group:</strong> Identifiable subspecies or
-group of subspecies, e.g., Mallard (Mexican). If the checklist contains
-multiple taxa corresponding to the same species, the lower level taxa are
-rolled up, otherwise these records are left as is</p></li>
+group of subspecies, e.g., Mallard (Mexican). Rolled-up to species level.</p></li>
+<li><p><strong>Intergrade:</strong> Hybrid between two ISSF (subspecies or subspecies
+groups), e.g., Mallard (Mexican intergrade. Rolled-up to species level.</p></li>
 <li><p><strong>Form:</strong> Miscellaneous other taxa, including recently-described species
 yet to be accepted or distinctive forms that are not universally accepted
 (Red-tailed Hawk (Northern), Upland Goose (Bar-breasted)). If the checklist
@@ -133,9 +135,7 @@ dabbling duck sp.. Dropped by auk_rollup().</p></li>
 <li><p><strong>Slash:</strong> Identification to Species-pair e.g., American Black
 Duck/Mallard). Dropped by auk_rollup()</p></li>
 <li><p><strong>Hybrid:</strong> Hybrid between two species, e.g., American Black Duck x
-Mallard (hybrid). Dropped by auk_rollup()</p></li>
-<li><p><strong>Intergrade:</strong> Hybrid between two ISSF (subspecies or subspecies groups),
-e.g., Mallard (Mexican intergrade. Dropped by auk_rollup()</p></li>
+Mallard (hybrid). Dropped by auk_rollup().</p></li>
 <li><p><strong>Domestic:</strong> Distinctly-plumaged domesticated varieties that may be
 free-flying (these do not count on personal lists) e.g., Mallard (Domestic
 type). Dropped by auk_rollup()</p></li>
@@ -143,16 +143,46 @@ type). Dropped by auk_rollup()</p></li>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Consult the <a href='http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy'>eBird taxonomy</a>page for further details.</p>
+    <p>Consult the <a href='http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy'>eBird taxonomy</a>
+page for further details.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># get the path to the example data included in the package</span>
 <span class='co'># in practice, provide path to ebd, e.g. f &lt;- "data/ebd_relFeb-2018.txt</span>
 <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-rollup-ex.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='co'># read in data without rolling up</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>f</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'>nrow</span>(<span class='no'>ebd</span>)</div><div class='output co'>#&gt; [1] 21</div><div class='input'><span class='no'>ebd_ru</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_rollup</span>(<span class='no'>ebd</span>)
-<span class='fu'>nrow</span>(<span class='no'>ebd_ru</span>)</div><div class='output co'>#&gt; [1] 7</div></pre>
+<span class='co'># rollup</span>
+<span class='no'>ebd_ru</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_rollup</span>(<span class='no'>ebd</span>)
+
+<span class='co'># all taxa not identifiable to species are dropped</span>
+<span class='fu'>unique</span>(<span class='no'>ebd</span>$<span class='no'>category</span>)</div><div class='output co'>#&gt; [1] "domestic"   "form"       "hybrid"     "intergrade" "slash"     
+#&gt; [6] "spuh"       "species"    "issf"      </div><div class='input'><span class='fu'>unique</span>(<span class='no'>ebd_ru</span>$<span class='no'>category</span>)</div><div class='output co'>#&gt; [1] "species"</div><div class='input'>
+<span class='co'># yellow-rump warbler subspecies rollup</span>
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:testthat’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    matches</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='co'># without rollup, there are three observations</span>
+<span class='no'>ebd</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>common_name</span> <span class='kw'>==</span> <span class='st'>"Yellow-rumped Warbler"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>checklist_id</span>, <span class='no'>category</span>, <span class='no'>common_name</span>, <span class='no'>subspecies_common_name</span>,
+         <span class='no'>observation_count</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 5
+#&gt;   checklist_id category common_name           subspecies_comm… observation_cou…
+#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;            &lt;chr&gt;           
+#&gt; 1 S41507433    species  Yellow-rumped Warbler &lt;NA&gt;             10              
+#&gt; 2 S41507433    issf     Yellow-rumped Warbler Yellow-rumped W… 5               
+#&gt; 3 S41507433    issf     Yellow-rumped Warbler Yellow-rumped W… 1               </div><div class='input'><span class='co'># with rollup, they have been combined</span>
+<span class='no'>ebd_ru</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>common_name</span> <span class='kw'>==</span> <span class='st'>"Yellow-rumped Warbler"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>checklist_id</span>, <span class='no'>category</span>, <span class='no'>common_name</span>, <span class='no'>observation_count</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt;   checklist_id category common_name           observation_count
+#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;            
+#&gt; 1 S41507433    species  Yellow-rumped Warbler 16               </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

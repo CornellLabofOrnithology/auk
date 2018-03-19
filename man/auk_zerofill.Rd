@@ -42,11 +42,10 @@ removed.}
 \item{species}{character; species to include in zero-filled dataset, provided
 as scientific or English common names, or a mixture of both. These names
 must match the official eBird Taxomony (\link{ebird_taxonomy}). To include all
-species, don't pass anything to this argument.}
+species, leave this argument blank.}
 
 \item{unique}{logical; should \code{\link[=auk_unique]{auk_unique()}} be run on the input data if it
-hasn't already. The check that \code{\link[=auk_unique]{auk_unique()}} has been run is simplistic:
-is there a \code{checklist_id} field or not.}
+hasn't already.}
 
 \item{collapse}{logical; whether to call \code{collapse_zerofill()} to return a
 data frame rather than an \code{auk_zerofill} object.}

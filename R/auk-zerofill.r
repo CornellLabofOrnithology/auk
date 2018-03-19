@@ -22,11 +22,10 @@
 #' @param species character; species to include in zero-filled dataset, provided
 #'   as scientific or English common names, or a mixture of both. These names
 #'   must match the official eBird Taxomony ([ebird_taxonomy]). To include all
-#'   species, don't pass anything to this argument.
+#'   species, leave this argument blank.
 #' @param sep character; single character used to separate fields within a row.
 #' @param unique logical; should [auk_unique()] be run on the input data if it
-#'   hasn't already. The check that [auk_unique()] has been run is simplistic:
-#'   is there a `checklist_id` field or not.
+#'   hasn't already.
 #' @param collapse logical; whether to call `collapse_zerofill()` to return a
 #'   data frame rather than an `auk_zerofill` object.
 #' @param ... additional arguments passed to methods.
@@ -92,17 +91,16 @@ auk_zerofill.data.frame <- function(x, sampling_events, species, unique = TRUE,
   }
 
   # check that auk_unique has been run
-  if (!"checklist_id" %in% names(x)) {
+  if (!isTRUE(attr(x, "unique"))) {
     if (!unique){
-      stop(paste0(
-        "The EBD doesn't appear to have been run through auk_unique(). ",
+      stop(paste(
+        "The EBD doesn't appear to have been run through auk_unique().",
         "Set unique = TRUE."))
     } else {
       x <- auk_unique(x)
     }
   }
-  if (!"checklist_id" %in% names(sampling_events) ||
-      anyDuplicated(sampling_events[, "checklist_id"])) {
+  if (!isTRUE(attr(sampling_events, "unique"))) {
     if (!unique){
       stop(paste("The sampling events data doesn't appear to have been run",
                  "through auk_unique(). Set unique = TRUE."))
@@ -112,7 +110,7 @@ auk_zerofill.data.frame <- function(x, sampling_events, species, unique = TRUE,
   }
   
   # check that auk_rollup has been run
-  if (anyDuplicated(x[, c("checklist_id", "scientific_name")])) {
+  if (!isTRUE(attr(x, "rollup"))) {
     x <- auk_rollup(x)
   }
 
