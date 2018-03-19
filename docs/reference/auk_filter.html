@@ -189,9 +189,11 @@ will likely need to install <a href='https://www.cygwin.com'>Cygwin</a>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># define filters</span>
-<span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='co'># get the path to the example data included in the package</span>
+<span class='co'># in practice, provide path to ebd, e.g. f &lt;- "data/ebd_relFeb-2018.txt"</span>
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='co'># define filters</span>
+<span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='no'>f</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_species.html'>auk_species</a></span>(<span class='kw'>species</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Gray Jay"</span>, <span class='st'>"Blue Jay"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_country.html'>auk_country</a></span>(<span class='kw'>country</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"US"</span>, <span class='st'>"Canada"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_extent.html'>auk_extent</a></span>(<span class='kw'>extent</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>100</span>, <span class='fl'>37</span>, -<span class='fl'>80</span>, <span class='fl'>52</span>)) <span class='kw'>%&gt;%</span>
@@ -211,9 +213,11 @@ will likely need to install <a href='https://www.cygwin.com'>Cygwin</a>.</p>
 <span class='no'>filters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_complete.html'>auk_complete</a></span>(<span class='no'>filters</span>)
 
 <span class='co'># apply filters</span></div><span class='co'># NOT RUN {</span>
-<span class='co'># temp output file</span>
-<span class='no'>out_file</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
-<span class='no'>filtered</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_filter</span>(<span class='no'>filters</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>out_file</span>)
+<span class='co'># output to a temp file for example</span>
+<span class='co'># in practice, provide path to output file</span>
+<span class='co'># e.g. f_out &lt;- "output/ebd_filtered.txt"</span>
+<span class='no'>f_out</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
+<span class='no'>filtered</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_filter</span>(<span class='no'>filters</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>f_out</span>)
 <span class='fu'>str</span>(<span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>filtered</span>))
 <span class='co'># }</span></pre>
   </div>

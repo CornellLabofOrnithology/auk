@@ -23,9 +23,15 @@
 #' @examples
 #' \dontrun{
 #' species <- c("Gray Jay", "Cyanocitta stelleri")
+#' # get the path to the example data included in the package
+#' # in practice, provide path to a filtered ebd file
+#' # e.g. f <- "data/ebd_filtered.txt
+#' f <- system.file("extdata/ebd-sample.txt", package = "auk")
+#' # output to a temporary directory for example
+#' # in practice, provide the path to the output location
+#' # e.g. prefix <- "output/ebd_"
 #' prefix <- file.path(tempdir(), "ebd_")
-#' species_files <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_split(species = species, prefix = prefix)
+#' species_files <- auk_split(f, species = species, prefix = prefix)
 #' }
 auk_split <- function(file, species, prefix = "", ext = "txt", sep = "\t",
                       overwrite = FALSE) {

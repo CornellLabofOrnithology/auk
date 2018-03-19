@@ -47,7 +47,8 @@ be used to infer absences. The sampling event data file should be provided to
 vignettes.
 }
 \examples{
-# set up reference to example file
+# get the path to the example data included in the package
+# in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt
 f <- system.file("extdata/ebd-sample.txt", package = "auk")
 auk_ebd(f)
 # to produce zero-filled data, provide a checklist file

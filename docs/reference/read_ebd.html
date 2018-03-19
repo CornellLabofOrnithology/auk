@@ -174,29 +174,30 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
-<span class='fu'>read_ebd</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 487 x 47
+<span class='fu'>read_ebd</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 493 x 49
 #&gt;    checklist_id global_unique_identi… last_edited_date taxonomic_order category
 #&gt;    &lt;chr&gt;        &lt;chr&gt;                 &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt;   
-#&gt;  1 S12813888    URN:CornellLabOfOrni… 2013-02-02 15:1…          18772. species 
-#&gt;  2 S14439115    URN:CornellLabOfOrni… 2013-06-18 13:0…          18772. species 
-#&gt;  3 S10152130    URN:CornellLabOfOrni… 2017-03-03 11:3…          18772. species 
-#&gt;  4 S20381156    URN:CornellLabOfOrni… 2014-10-30 15:1…          18816. species 
-#&gt;  5 S26088262    URN:CornellLabOfOrni… 2015-12-01 13:4…          18772. species 
-#&gt;  6 S26809848    URN:CornellLabOfOrni… 2016-01-10 01:0…          18772. species 
-#&gt;  7 S14425228    URN:CornellLabOfOrni… 2013-06-16 17:3…          18772. species 
-#&gt;  8 S6508761     URN:CornellLabOfOrni… 2016-08-15 17:4…          18772. species 
-#&gt;  9 S11825255    URN:CornellLabOfOrni… 2016-02-11 10:0…          18772. species 
-#&gt; 10 S14438912    URN:CornellLabOfOrni… 2013-06-16 22:0…          18772. species 
-#&gt; # ... with 477 more rows, and 42 more variables: common_name &lt;chr&gt;,
+#&gt;  1 S38071246    URN:CornellLabOfOrni… 2017-07-10 15:2…          18772. species 
+#&gt;  2 S39033573    URN:CornellLabOfOrni… 2017-09-06 13:1…          18772. species 
+#&gt;  3 S38070341    URN:CornellLabOfOrni… 2017-07-10 14:1…          18772. species 
+#&gt;  4 S37442113    URN:CornellLabOfOrni… 2017-06-07 02:0…          18772. species 
+#&gt;  5 S6346368     URN:CornellLabOfOrni… 2016-08-11 08:5…          18772. species 
+#&gt;  6 S12277768    URN:CornellLabOfOrni… 2016-10-13 16:5…          18772. species 
+#&gt;  7 S39245695    URN:CornellLabOfOrni… 2017-09-18 04:5…          18772. species 
+#&gt;  8 S17291793    URN:CornellLabOfOrni… 2016-05-24 21:0…          18772. species 
+#&gt;  9 S39245980    URN:CornellLabOfOrni… 2017-09-18 05:2…          18772. species 
+#&gt; 10 S39244313    URN:CornellLabOfOrni… 2017-09-18 02:4…          18772. species 
+#&gt; # ... with 483 more rows, and 44 more variables: common_name &lt;chr&gt;,
 #&gt; #   scientific_name &lt;chr&gt;, subspecies_common_name &lt;chr&gt;,
 #&gt; #   subspecies_scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;,
-#&gt; #   breeding_bird_atlas_code &lt;chr&gt;, age_sex &lt;chr&gt;, country &lt;chr&gt;,
-#&gt; #   country_code &lt;chr&gt;, state &lt;chr&gt;, state_code &lt;chr&gt;, county &lt;chr&gt;,
-#&gt; #   county_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;,
-#&gt; #   atlas_block &lt;chr&gt;, locality &lt;chr&gt;, locality_id &lt;chr&gt;, locality_type &lt;chr&gt;,
-#&gt; #   latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, observation_date &lt;date&gt;,
-#&gt; #   time_observations_started &lt;chr&gt;, observer_id &lt;chr&gt;, first_name &lt;chr&gt;,
-#&gt; #   last_name &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,
+#&gt; #   breeding_bird_atlas_code &lt;chr&gt;, breeding_bird_atlas_category &lt;chr&gt;,
+#&gt; #   age_sex &lt;chr&gt;, country &lt;chr&gt;, country_code &lt;chr&gt;, state &lt;chr&gt;,
+#&gt; #   state_code &lt;chr&gt;, county &lt;chr&gt;, county_code &lt;chr&gt;, iba_code &lt;chr&gt;,
+#&gt; #   bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;,
+#&gt; #   locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,
+#&gt; #   observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,
+#&gt; #   observer_id &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,
+#&gt; #   sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;, protocol_code &lt;chr&gt;,
 #&gt; #   project_code &lt;chr&gt;, duration_minutes &lt;int&gt;, effort_distance_km &lt;dbl&gt;,
 #&gt; #   effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;, all_species_reported &lt;lgl&gt;,
 #&gt; #   group_identifier &lt;chr&gt;, has_media &lt;lgl&gt;, approved &lt;lgl&gt;, reviewed &lt;lgl&gt;,

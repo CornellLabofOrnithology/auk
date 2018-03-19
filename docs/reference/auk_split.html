@@ -133,9 +133,15 @@ is not allowed since spaces appear in many of the fields.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"Gray Jay"</span>, <span class='st'>"Cyanocitta stelleri"</span>)
+<span class='co'># get the path to the example data included in the package</span>
+<span class='co'># in practice, provide path to a filtered ebd file</span>
+<span class='co'># e.g. f &lt;- "data/ebd_filtered.txt</span>
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='co'># output to a temporary directory for example</span>
+<span class='co'># in practice, provide the path to the output location</span>
+<span class='co'># e.g. prefix &lt;- "output/ebd_"</span>
 <span class='no'>prefix</span> <span class='kw'>&lt;-</span> <span class='fu'>file.path</span>(<span class='fu'>tempdir</span>(), <span class='st'>"ebd_"</span>)
-<span class='no'>species_files</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_split</span>(<span class='kw'>species</span> <span class='kw'>=</span> <span class='no'>species</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='no'>prefix</span>)
+<span class='no'>species_files</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_split</span>(<span class='no'>f</span>, <span class='kw'>species</span> <span class='kw'>=</span> <span class='no'>species</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='no'>prefix</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

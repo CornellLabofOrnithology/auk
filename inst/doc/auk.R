@@ -10,6 +10,7 @@ suppressPackageStartupMessages(library(dplyr))
 ## ----quickstart, eval = FALSE--------------------------------------------
 #  library(auk)
 #  # path to the ebird data file, here a sample included in the package
+#  # in practice, provide path to ebd, e.g. input_file <- "data/ebd_relFeb-2018.txt"
 #  input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
 #  # output text file
 #  output_file <- "ebd_filtered_grja.txt"

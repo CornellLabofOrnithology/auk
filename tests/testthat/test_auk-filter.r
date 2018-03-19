@@ -12,7 +12,7 @@ test_that("auk_filter filter an ebd", {
     auk_extent(extent = c(-100, 37, -80, 52)) %>%
     auk_date(date = c("2012-01-01", "2012-12-31")) %>%
     auk_time(start_time = c("06:00", "09:00")) %>%
-    auk_duration(duration = c(0, 60)) %>%
+    auk_duration(duration = c(0, 120)) %>%
     auk_complete()
   # run filters
   tmp <- tempfile()
@@ -28,7 +28,7 @@ test_that("auk_filter filter an ebd", {
 
   expect_is(ebd, "data.frame")
   expect_lt(nrow(ebd), nrow(read_ebd(f)))
-  expect_equal(nrow(ebd), 12)
+  expect_equal(nrow(ebd), 5)
   expect_true(all(ebd$scientific_name %in% filters$filters$species))
   expect_true(all(ebd$country_code %in% filters$filters$country))
   expect_true(all(ebd$all_species_reported))
@@ -172,7 +172,7 @@ test_that("auk_filter filter an auk_sampling object", {
   
   expect_is(s_df, "data.frame")
   expect_lt(nrow(s_df), nrow(read_sampling(f)))
-  expect_equal(nrow(s_df), 18)
+  expect_equal(nrow(s_df), 19)
   expect_true(all(s_df$time_observations_started >= filters$filters$time[1]))
   expect_true(all(s_df$time_observations_started <= filters$filters$time[2]))
   expect_true(all(s_df$duration_minutes >= filters$filters$duration[1]))

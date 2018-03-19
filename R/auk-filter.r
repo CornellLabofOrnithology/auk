@@ -50,9 +50,11 @@
 #'   then the path to the AWK script is returned instead.
 #' @export
 #' @examples
+#' # get the path to the example data included in the package
+#' # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt"
+#' f <- system.file("extdata/ebd-sample.txt", package = "auk")
 #' # define filters
-#' filters <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' filters <- auk_ebd(f) %>%
 #'   auk_species(species = c("Gray Jay", "Blue Jay")) %>%
 #'   auk_country(country = c("US", "Canada")) %>%
 #'   auk_extent(extent = c(-100, 37, -80, 52)) %>%
@@ -73,9 +75,11 @@
 #' 
 #' # apply filters
 #' \dontrun{
-#' # temp output file
-#' out_file <- tempfile()
-#' filtered <- auk_filter(filters, file = out_file)
+#' # output to a temp file for example
+#' # in practice, provide path to output file
+#' # e.g. f_out <- "output/ebd_filtered.txt"
+#' f_out <- tempfile()
+#' filtered <- auk_filter(filters, file = f_out)
 #' str(read_ebd(filtered))
 #' }
 auk_filter <- function(x, file, ...) {

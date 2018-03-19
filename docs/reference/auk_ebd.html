@@ -136,7 +136,8 @@ vignettes.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># set up reference to example file</span>
+    <pre class="examples"><div class='input'><span class='co'># get the path to the example data included in the package</span>
+<span class='co'># in practice, provide path to ebd, e.g. f &lt;- "data/ebd_relFeb-2018.txt</span>
 <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
 <span class='fu'>auk_ebd</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 

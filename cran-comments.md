@@ -1,15 +1,9 @@
-# Resubmission
-
-This is a resubmission. In this version I have:
-
-- Removed the LICENSE file because it was redundant
-
 # Test environments
 
-- local OS X install, R 3.4.2
-- OS X (on travis-ci), R 3.4.2
-- ubuntu 14.04 (on travis-ci), R 3.4.2
-- Windows (appveyor), R 3.4.2
+- local OS X install, R 3.4.4
+- OS X (travis-ci), R 3.4.4
+- ubuntu 14.04 (travis-ci), R 3.4.4
+- Windows (appveyor), R 3.4.4
 - win-builder
 
 # R CMD check results

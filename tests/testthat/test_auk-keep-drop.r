@@ -9,7 +9,7 @@ test_that("auk_filter correctly keeps all columns by default", {
     auk_species(species = c("Gray Jay", "Blue Jay")) %>% 
     auk_filter(file = tempfile()) %>% 
     read_ebd(unique = FALSE, rollup = FALSE)
-  expect_equal(ncol(ebd), 46)
+  expect_equal(ncol(ebd), 48)
 })
 
 test_that("auk_filter correctly keeps columns", {
@@ -36,7 +36,7 @@ test_that("auk_filter correctly drops columns", {
     auk_species(species = c("Gray Jay", "Blue Jay")) %>% 
     auk_filter(file = tempfile(), drop = "species comments") %>% 
     read_ebd(unique = FALSE, rollup = FALSE)
-  expect_equal(ncol(ebd), 45)
+  expect_equal(ncol(ebd), 47)
   expect_true(!"species_comments" %in% names(ebd))
 })
 

@@ -15,7 +15,7 @@ BEGIN {
   }
 
   
-  if (keep == 1 && ($13 == "CA")) {
+  if (keep == 1 && ($14 == "CA")) {
     keep = 1
   } else {
     keep = 0

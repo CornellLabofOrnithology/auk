@@ -1,4 +1,4 @@
-# auk 0.1.0.900
+# auk 0.2.0
 
 - New function, `auk_split()`, splits EBD up into multiple files by species
 - New object, `auk_sampling`, and associated methods for working with the sampling data only

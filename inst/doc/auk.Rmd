@@ -35,6 +35,7 @@ Because the eBird dataset is so large, step 3 typically takes several hours to r
 ```{r quickstart, eval = FALSE}
 library(auk)
 # path to the ebird data file, here a sample included in the package
+# in practice, provide path to ebd, e.g. input_file <- "data/ebd_relFeb-2018.txt"
 input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
 # output text file
 output_file <- "ebd_filtered_grja.txt"
@@ -96,6 +97,8 @@ system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
 # sampling event data
 system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
 ```
+
+**Important note:** in this vignette, `system.file()` is used to return the path to the example data included in this package. When using `auk` in practice, provide the path to the location of the EBD on your computer, this could be a relative path, e.g. `"data/ebd_relFeb-2018.txt"`, or an absolute path, e.g. `"~/ebird/ebd_relFeb-2018/ebd_relFeb-2018.txt"`.
 
 ### AWK
 
@@ -372,10 +375,13 @@ ebd_zf_df
 
 This package is based on the AWK scripts provided in a presentation given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC eBird Data Workshop on August 15, 2016.
 
+`auk` benefited significantly from the [rOpenSci](https://ropensci.org/) review process, including helpful suggestions from 
+[Auriel Fournier](https://github.com/aurielfournier) and [Edmund Hart](https://github.com/emhart).
+
 ## References
 
 ```
-eBird Basic Dataset. Version: ebd_relFeb-2017. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
+eBird Basic Dataset. Version: ebd_relFeb-2018. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
 
 Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. Lentini, M.A. McCarthy, R. Tingley, and B.A. Wintle. 2015. Is my species distribution model fit for purpose? Matching data and models to applications. Global Ecology and Biogeography 24:276-292.
 ```

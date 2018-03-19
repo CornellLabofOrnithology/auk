@@ -189,10 +189,10 @@ have had a sampling event data file set in the original call to
     <pre class="examples"><div class='input'><span class='co'># read and zero-fill the sampling data</span>
 <span class='no'>f_ebd</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
 <span class='no'>f_smpl</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
-<span class='fu'>auk_zerofill</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>)</div><div class='output co'>#&gt; Zero-filled EBD: 749 unique checklists, for 3 species.</div><div class='input'>
+<span class='fu'>auk_zerofill</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>)</div><div class='output co'>#&gt; Zero-filled EBD: 1,025 unique checklists, for 3 species.</div><div class='input'>
 <span class='co'># use the species argument to only include a subset of species</span>
 <span class='fu'>auk_zerofill</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>,
-             <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"Collared Kingfisher"</span>)</div><div class='output co'>#&gt; Zero-filled EBD: 749 unique checklists, for 1 species.</div><div class='input'>
+             <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"Collared Kingfisher"</span>)</div><div class='output co'>#&gt; Zero-filled EBD: 1,025 unique checklists, for 1 species.</div><div class='input'>
 <span class='co'># to return a data frame use collapse = TRUE</span>
 <span class='no'>ebd_df</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_zerofill</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
   </div>

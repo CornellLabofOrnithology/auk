@@ -23,7 +23,9 @@
 #'   filters once created with other package functions.
 #' @export
 #' @examples
-#' # set up reference to example file
+#' # get the path to the example data included in the package
+#' # in practice, provide path to the sampling event data
+#' # e.g. f <- "data/ebd_sampling_relFeb-2018.txt"
 #' f <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
 #' auk_sampling(f)
 auk_sampling <- function(file, sep = "\t") {

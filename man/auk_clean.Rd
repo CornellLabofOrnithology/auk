@@ -26,8 +26,8 @@ to a significant reduction in file size.}
 \item{overwrite}{logical; overwrite output file if it already exists}
 }
 \value{
-If AWK ran without errors, the output filename is returned,
-however, if an error was encountered the exit code is returned.
+If AWK ran without errors, the output filename is returned, however,
+if an error was encountered the exit code is returned.
 }
 \description{
 Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of
@@ -44,19 +44,23 @@ will likely need to install \href{https://www.cygwin.com}{Cygwin}.
 }
 \examples{
 \dontrun{
-# example data with errors
+# get the path to the example data included in the package
+# in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt
 f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
-tmp <- tempfile()
+# output to a temp file for example
+# in practice, provide path to output file
+# e.g. f_out <- "output/ebd_clean.txt"
+f_out <- tempfile()
 
 # clean file to remove problem rows
-auk_clean(f, tmp)
+auk_clean(f, f_out)
 # number of lines in input
 length(readLines(f))
 # number of lines in output
-length(readLines(tmp))
+length(readLines(f_out))
 
 # note that the extra blank column has also been removed
 ncol(read.delim(f, nrows = 5, quote = ""))
-ncol(read.delim(tmp, nrows = 5, quote = ""))
+ncol(read.delim(f_out, nrows = 5, quote = ""))
 }
 }

@@ -81,15 +81,13 @@
     </div>
 
     
-    <p>The eBird Basic Dataset (EBD) includes both true species and other taxa,
-including domestics, hybrids, subspecies, "spuhs", and recognizable forms.
-In some cases, a checklist may contain multiple records for the same species,
-for example, both Audubon and Myrtle Yellow-rumped Warblers, as well as some
-records that are not resolvable to species, for example, "warbler sp.".
-This function addresses these cases by removing taxa not identifiable to
-species and rolling up taxa identified below species level to a single record
-for each species in each checklist. By default, <code><a href='read_ebd.html'>read_ebd()</a></code> calls
-<code>ebd_rollup()</code> when importing an eBird data file.</p>
+    <p>The eBird Basic Dataset (EBD) includes both true species and every other
+field-identifiable taxon that could be relevant for birders to report. This
+includes taxa not identifiable to a species (e.g. hybrids) and taxa reported
+below the species level (e.g. subspecies). This function produces a list of
+observations of true species, by removing the former and rolling the latter
+up to the species level. By default, <code><a href='read_ebd.html'>read_ebd()</a></code> calls <code>ebd_rollup()</code> when
+importing an eBird data file.</p>
     
 
     <pre class="usage"><span class='fu'>auk_rollup</span>(<span class='no'>x</span>)</pre>
@@ -114,41 +112,47 @@ for each species in each checklist. By default, <code><a href='read_ebd.html'>re
 are summed across any taxa that resolve to the same species. However, if
 any of these taxa have a count of "X" (i.e. the observer did not enter a
 count), then the rolled up record will get an "X" as well. For example, if
-an observer saw 3 Myrtle and 2 Audubon Warblers, this will roll up to 5
+an observer saw 3 Myrtle and 2 Audubon's Warblers, this will roll up to 5
 Yellow-rumped Warblers. However, if an "X" was entered for Myrtle, this
 would roll up to "X" for Yellow-rumped Warbler.</p>
+<p>The eBird taxonomy groups taxa into eight different categories. These
+categories, and the way they are treated by <code>auk_rollup()</code> are as follows:</p><ul>
+<li><p><strong>Species:</strong> e.g., Mallard. Combined with lower level taxa if present on
+the same checklist.</p></li>
+<li><p><strong>ISSF or Identifiable Sub-specific Group:</strong> Identifiable subspecies or
+group of subspecies, e.g., Mallard (Mexican). If the checklist contains
+multiple taxa corresponding to the same species, the lower level taxa are
+rolled up, otherwise these records are left as is</p></li>
+<li><p><strong>Form:</strong> Miscellaneous other taxa, including recently-described species
+yet to be accepted or distinctive forms that are not universally accepted
+(Red-tailed Hawk (Northern), Upland Goose (Bar-breasted)). If the checklist
+contains multiple taxa corresponding to the same species, the lower level
+taxa are rolled up, otherwise these records are left as is.</p></li>
+<li><p><strong>Spuh:</strong>  Genus or identification at broad level -- e.g., duck sp.,
+dabbling duck sp.. Dropped by auk_rollup().</p></li>
+<li><p><strong>Slash:</strong> Identification to Species-pair e.g., American Black
+Duck/Mallard). Dropped by auk_rollup()</p></li>
+<li><p><strong>Hybrid:</strong> Hybrid between two species, e.g., American Black Duck x
+Mallard (hybrid). Dropped by auk_rollup()</p></li>
+<li><p><strong>Intergrade:</strong> Hybrid between two ISSF (subspecies or subspecies groups),
+e.g., Mallard (Mexican intergrade. Dropped by auk_rollup()</p></li>
+<li><p><strong>Domestic:</strong> Distinctly-plumaged domesticated varieties that may be
+free-flying (these do not count on personal lists) e.g., Mallard (Domestic
+type). Dropped by auk_rollup()</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Consult the <a href='http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy'>eBird taxonomy</a>page for further details.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-rollup-ex.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
-<span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>f</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 186 x 47
-#&gt;    checklist_id global_unique_identi… last_edited_date taxonomic_order category
-#&gt;    &lt;chr&gt;        &lt;chr&gt;                 &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt;   
-#&gt;  1 S5303232     URN:CornellLabOfOrni… 2014-11-18 09:4…           2832. spuh    
-#&gt;  2 S5271028     URN:CornellLabOfOrni… 2014-11-18 09:4…          19073. species 
-#&gt;  3 S25970116    URN:CornellLabOfOrni… 2015-11-23 15:5…          19073. species 
-#&gt;  4 S5231866     URN:CornellLabOfOrni… 2014-11-18 09:4…          19073. species 
-#&gt;  5 S5276125     URN:CornellLabOfOrni… 2014-11-18 09:4…          19073. species 
-#&gt;  6 S5239452     URN:CornellLabOfOrni… 2014-11-18 09:3…          19073. species 
-#&gt;  7 S13313466    URN:CornellLabOfOrni… 2014-11-18 09:3…          19073. species 
-#&gt;  8 S5276112     URN:CornellLabOfOrni… 2014-11-18 09:4…          19073. species 
-#&gt;  9 S5230408     URN:CornellLabOfOrni… 2014-11-18 09:4…          19073. species 
-#&gt; 10 S5230409     URN:CornellLabOfOrni… 2014-11-18 09:3…          19073. species 
-#&gt; # ... with 176 more rows, and 42 more variables: common_name &lt;chr&gt;,
-#&gt; #   scientific_name &lt;chr&gt;, subspecies_common_name &lt;chr&gt;,
-#&gt; #   subspecies_scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;,
-#&gt; #   breeding_bird_atlas_code &lt;chr&gt;, age_sex &lt;chr&gt;, country &lt;chr&gt;,
-#&gt; #   country_code &lt;chr&gt;, state_province &lt;chr&gt;, subnational1_code &lt;chr&gt;,
-#&gt; #   county &lt;chr&gt;, subnational2_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;,
-#&gt; #   usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;, locality_id &lt;chr&gt;,
-#&gt; #   locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,
-#&gt; #   observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,
-#&gt; #   observer_id &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,
-#&gt; #   sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;, project_code &lt;chr&gt;,
-#&gt; #   duration_minutes &lt;int&gt;, effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;,
-#&gt; #   number_observers &lt;int&gt;, all_species_reported &lt;lgl&gt;, group_identifier &lt;chr&gt;,
-#&gt; #   has_media &lt;lgl&gt;, approved &lt;lgl&gt;, reviewed &lt;lgl&gt;, reason &lt;chr&gt;,
-#&gt; #   trip_comments &lt;chr&gt;, species_comments &lt;chr&gt;</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># get the path to the example data included in the package</span>
+<span class='co'># in practice, provide path to ebd, e.g. f &lt;- "data/ebd_relFeb-2018.txt</span>
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-rollup-ex.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>f</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>nrow</span>(<span class='no'>ebd</span>)</div><div class='output co'>#&gt; [1] 21</div><div class='input'><span class='no'>ebd_ru</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_rollup</span>(<span class='no'>ebd</span>)
+<span class='fu'>nrow</span>(<span class='no'>ebd_ru</span>)</div><div class='output co'>#&gt; [1] 7</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -158,6 +162,8 @@ would roll up to "X" for Yellow-rumped Warbler.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#references">References</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

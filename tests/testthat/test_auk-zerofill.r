@@ -68,7 +68,7 @@ test_that("auk_zerofill prints method", {
   f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
   zf <- auk_zerofill(x = f_ebd, sampling_events = f_smpl)
 
-  p_format <- "Zero-filled EBD: [0-9]+ unique checklists, for [0-9]+ species."
+  p_format <- "Zero-filled EBD: [,0-9]+ unique checklists, for [0-9]+ species."
   expect_output(print(zf), p_format)
 })
 

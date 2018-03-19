@@ -63,7 +63,6 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#auk-ebird-data-extraction-and-processing-with-awk" class="anchor"></a>auk: eBird Data Extraction and Processing with AWK</h1></div>
 
-<p><strong>This package is in development. If you encounter any bugs, please open an issue on GitHub</strong></p>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
@@ -103,26 +102,28 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p>Because the eBird dataset is so large, step 3 typically takes several hours to run. Here’s a simple example that extract all Gray Jay records from within Canada.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(auk)
 <span class="co"># path to the ebird data file, here a sample included in the package</span>
-input_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
+<span class="co"># get the path to the example data included in the package</span>
+<span class="co"># in practice, provide path to ebd, e.g. f_in &lt;- "data/ebd_relFeb-2018.txt</span>
+f_in &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
 <span class="co"># output text file</span>
-output_file &lt;-<span class="st"> "ebd_filtered_grja.txt"</span>
-ebird_data &lt;-<span class="st"> </span>input_file <span class="op">%&gt;%</span><span class="st"> </span>
+f_out &lt;-<span class="st"> "ebd_filtered_grja.txt"</span>
+ebird_data &lt;-<span class="st"> </span>f_in <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># 1. reference file</span>
 <span class="st">  </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># 2. define filters</span>
 <span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="st">"Gray Jay"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># 3. run filtering</span>
-<span class="st">  </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> f_out) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># 4. read text file into r data frame</span>
 <span class="st">  </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>()</code></pre></div>
 <p>For those not familiar with the pipe operator (<code>%&gt;%</code>), the above code could be rewritten:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">input_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
-output_file &lt;-<span class="st"> "ebd_filtered_grja.txt"</span>
-ebd &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>(input_file)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f_in &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
+f_out &lt;-<span class="st"> "ebd_filtered_grja.txt"</span>
+ebd &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>(f_in)
 ebd_filters &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(ebd, <span class="dt">species =</span> <span class="st">"Gray Jay"</span>)
 ebd_filters &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(ebd_filters, <span class="dt">country =</span> <span class="st">"Canada"</span>)
-ebd_filtered &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(ebd_filters, <span class="dt">file =</span> output_file)
+ebd_filtered &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(ebd_filters, <span class="dt">file =</span> f_out)
 ebd_df &lt;-<span class="st"> </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>(ebd_filtered)</code></pre></div>
 </div>
 <div id="usage" class="section level2">
@@ -133,18 +134,22 @@ ebd_df &lt;-<span class="st"> </span><span class="kw"><a href="reference/read_eb
 <a href="#cleaning" class="anchor"></a>Cleaning</h3>
 <p>Some rows in the dataset may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function <code><a href="reference/auk_clean.html">auk_clean()</a></code> drops these erroneous records and removes the blank column.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(auk)
-<span class="co"># sample data</span>
+<span class="co"># get the path to the example data included in the package</span>
+<span class="co"># in practice, provide path to ebd, e.g. f &lt;- "data/ebd_relFeb-2018.txt</span>
 f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample_messy.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)
-tmp &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
+<span class="co"># output to a temp file for example --&gt;</span>
+<span class="co"># in practice, provide path to output file --&gt;</span>
+<span class="co"># e.g. f_out &lt;- "output/ebd_clean.txt" --&gt;</span>
+f_out &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
-<span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, tmp)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp18filF/file30a840f02be7"</span>
+<span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, f_out)
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp7Onkwd/file3a926fdc33b"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 101</span>
 <span class="co"># number of lines in output</span>
-<span class="kw">length</span>(<span class="kw">readLines</span>(tmp))
-<span class="co">#&gt; [1] 96</span></code></pre></div>
+<span class="kw">length</span>(<span class="kw">readLines</span>(f_out))
+<span class="co">#&gt; [1] 97</span></code></pre></div>
 </div>
 <div id="filtering" class="section level3">
 <h3 class="hasAnchor">
@@ -233,54 +238,56 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">str</span>()
-<span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    487 obs. of  47 variables:</span>
-<span class="co">#&gt;  $ checklist_id              : chr  "S12813888" "S14439115" "S10152130" "S20381156" ...</span>
-<span class="co">#&gt;  $ global_unique_identifier  : chr  "URN:CornellLabOfOrnithology:EBIRD:OBS179266095" "URN:CornellLabOfOrnithology:EBIRD:OBS201696412" "URN:CornellLabOfOrnithology:EBIRD:OBS144228837" "URN:CornellLabOfOrnithology:EBIRD:OBS278542844" ...</span>
-<span class="co">#&gt;  $ last_edited_date          : chr  "2013-02-02 15:17:20" "2013-06-18 13:03:16" "2017-03-03 11:30:08" "2014-10-30 15:19:52" ...</span>
-<span class="co">#&gt;  $ taxonomic_order           : num  18772 18772 18772 18816 18772 ...</span>
-<span class="co">#&gt;  $ category                  : chr  "species" "species" "species" "species" ...</span>
-<span class="co">#&gt;  $ common_name               : chr  "Green Jay" "Green Jay" "Green Jay" "Steller's Jay" ...</span>
-<span class="co">#&gt;  $ scientific_name           : chr  "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocitta stelleri" ...</span>
-<span class="co">#&gt;  $ subspecies_common_name    : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ subspecies_scientific_name: chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ observation_count         : chr  "X" "4" "1" "2" ...</span>
-<span class="co">#&gt;  $ breeding_bird_atlas_code  : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ age_sex                   : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ country                   : chr  "Mexico" "Mexico" "Belize" "Mexico" ...</span>
-<span class="co">#&gt;  $ country_code              : chr  "MX" "MX" "BZ" "MX" ...</span>
-<span class="co">#&gt;  $ state                     : chr  "Tamaulipas" "Chiapas" "Belize" "Chiapas" ...</span>
-<span class="co">#&gt;  $ state_code                : chr  "MX-TAM" "MX-CHP" "BZ-BZ" "MX-CHP" ...</span>
-<span class="co">#&gt;  $ county                    : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ county_code               : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ iba_code                  : chr  NA "MX_169" NA "MX_200" ...</span>
-<span class="co">#&gt;  $ bcr_code                  : int  36 60 NA NA 56 47 60 56 NA 60 ...</span>
-<span class="co">#&gt;  $ usfws_code                : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ atlas_block               : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ locality                  : chr  "Mexico across river from Salineno" "MtySantuario_Punto_10" "Crooked Tree Village west" "San Antonio( Bosque mesofilo Punto 6)" ...</span>
-<span class="co">#&gt;  $ locality_id               : chr  "L1914289" "L2234972" "L1444745" "L3141369" ...</span>
-<span class="co">#&gt;  $ locality_type             : chr  "P" "P" "P" "P" ...</span>
-<span class="co">#&gt;  $ latitude                  : num  26.5 15.7 17.8 15.1 20.9 ...</span>
-<span class="co">#&gt;  $ longitude                 : num  -99.1 -92.9 -88.5 -92.1 -88.4 ...</span>
-<span class="co">#&gt;  $ observation_date          : Date, format: "2010-11-12" "2012-05-06" ...</span>
-<span class="co">#&gt;  $ time_observations_started : chr  "07:20:00" "10:30:00" "06:50:00" "10:30:00" ...</span>
-<span class="co">#&gt;  $ observer_id               : chr  "obsr347082" "obsr313215" "obsr246930" "obsr354246" ...</span>
-<span class="co">#&gt;  $ first_name                : chr  "Beth" "MONITORES COMUNITARIOS" "Lee" "CBM" ...</span>
-<span class="co">#&gt;  $ last_name                 : chr  "eBirder" "eBirder" "eBirder" "eBirder" ...</span>
-<span class="co">#&gt;  $ sampling_event_identifier : chr  "S12813888" "S14439115" "S10152130" "S20381156" ...</span>
-<span class="co">#&gt;  $ protocol_type             : chr  "eBird - Stationary Count" "eBird - Traveling Count" "eBird - Traveling Count" "eBird - Stationary Count" ...</span>
-<span class="co">#&gt;  $ project_code              : chr  "EBIRD" "EBIRD" "EBIRD" "EBIRD" ...</span>
-<span class="co">#&gt;  $ duration_minutes          : int  40 10 100 10 110 55 10 60 60 10 ...</span>
-<span class="co">#&gt;  $ effort_distance_km        : num  NA 0.257 1.127 NA 1.2 ...</span>
-<span class="co">#&gt;  $ effort_area_ha            : num  NA NA NA NA NA ...</span>
-<span class="co">#&gt;  $ number_observers          : int  20 1 2 4 2 2 1 1 4 1 ...</span>
-<span class="co">#&gt;  $ all_species_reported      : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
-<span class="co">#&gt;  $ group_identifier          : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ has_media                 : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span>
-<span class="co">#&gt;  $ approved                  : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
-<span class="co">#&gt;  $ reviewed                  : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span>
-<span class="co">#&gt;  $ reason                    : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ trip_comments             : chr  "RGV Bird Festival Trip, viewed from the US side of the river" "Placido Morales Hdz en  Santuario, Angel Albino Corzo, 1556 msnm." "With Glenn Crawford and 3 tourists. Glenn says that the frog calls that are heard nearly everywhere in Belize d"| __truncated__ "Muestreo realizado por Antonio, Ren� y Evaristo" ...</span>
-<span class="co">#&gt;  $ species_comments          : chr  NA NA NA NA ...</span></code></pre></div>
+<span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    493 obs. of  49 variables:</span>
+<span class="co">#&gt;  $ checklist_id                : chr  "S38071246" "S39033573" "S38070341" "S37442113" ...</span>
+<span class="co">#&gt;  $ global_unique_identifier    : chr  "URN:CornellLabOfOrnithology:EBIRD:OBS517693917" "URN:CornellLabOfOrnithology:EBIRD:OBS530638805" "URN:CornellLabOfOrnithology:EBIRD:OBS517681525" "URN:CornellLabOfOrnithology:EBIRD:OBS509009139" ...</span>
+<span class="co">#&gt;  $ last_edited_date            : chr  "2017-07-10 15:23:56" "2017-09-06 13:13:36" "2017-07-10 14:18:14" "2017-06-07 02:05:59" ...</span>
+<span class="co">#&gt;  $ taxonomic_order             : num  18772 18772 18772 18772 18772 ...</span>
+<span class="co">#&gt;  $ category                    : chr  "species" "species" "species" "species" ...</span>
+<span class="co">#&gt;  $ common_name                 : chr  "Green Jay" "Green Jay" "Green Jay" "Green Jay" ...</span>
+<span class="co">#&gt;  $ scientific_name             : chr  "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" ...</span>
+<span class="co">#&gt;  $ subspecies_common_name      : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ subspecies_scientific_name  : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ observation_count           : chr  "5" "1" "1" "3" ...</span>
+<span class="co">#&gt;  $ breeding_bird_atlas_code    : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ breeding_bird_atlas_category: chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ age_sex                     : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ country                     : chr  "Mexico" "Mexico" "Mexico" "Mexico" ...</span>
+<span class="co">#&gt;  $ country_code                : chr  "MX" "MX" "MX" "MX" ...</span>
+<span class="co">#&gt;  $ state                       : chr  "Chiapas" "Chiapas" "Chiapas" "Chiapas" ...</span>
+<span class="co">#&gt;  $ state_code                  : chr  "MX-CHP" "MX-CHP" "MX-CHP" "MX-CHP" ...</span>
+<span class="co">#&gt;  $ county                      : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ county_code                 : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ iba_code                    : chr  "MX_169" NA NA NA ...</span>
+<span class="co">#&gt;  $ bcr_code                    : int  60 60 60 60 NA NA 60 NA 60 60 ...</span>
+<span class="co">#&gt;  $ usfws_code                  : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ atlas_block                 : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ locality                    : chr  "07_020_AN_CafetalPedro_trad_P06" "07_020_LaConcordia_SanFranc�sco_Magallanes_P01" "07_020_LaConcordia_SanFranc�sco_Crucero_P10" "07_020_LaConcordia_SanFranc�sco_Bosque_P02" ...</span>
+<span class="co">#&gt;  $ locality_id                 : chr  "L6074118" "L6247542" "L6073944" "L5943501" ...</span>
+<span class="co">#&gt;  $ locality_type               : chr  "P" "P" "P" "P" ...</span>
+<span class="co">#&gt;  $ latitude                    : num  15.8 15.8 15.8 15.8 14.9 ...</span>
+<span class="co">#&gt;  $ longitude                   : num  -93.1 -93 -93 -93 -87.8 ...</span>
+<span class="co">#&gt;  $ observation_date            : Date, format: "2011-10-26" "2011-08-17" ...</span>
+<span class="co">#&gt;  $ time_observations_started   : chr  "07:35:00" "07:01:00" "11:29:00" "07:57:00" ...</span>
+<span class="co">#&gt;  $ observer_id                 : chr  "obsr313215" "obsr313215" "obsr313215" "obsr313215" ...</span>
+<span class="co">#&gt;  $ first_name                  : chr  "MONITORES COMUNITARIOS" "MONITORES COMUNITARIOS" "MONITORES COMUNITARIOS" "MONITORES COMUNITARIOS" ...</span>
+<span class="co">#&gt;  $ last_name                   : chr  "eBirder" "eBirder" "eBirder" "eBirder" ...</span>
+<span class="co">#&gt;  $ sampling_event_identifier   : chr  "S38071246" "S39033573" "S38070341" "S37442113" ...</span>
+<span class="co">#&gt;  $ protocol_type               : chr  "Stationary" "Stationary" "Stationary" "Stationary" ...</span>
+<span class="co">#&gt;  $ protocol_code               : chr  "P21" "P21" "P21" "P21" ...</span>
+<span class="co">#&gt;  $ project_code                : chr  "EBIRD_MEX" "EBIRD_MEX" "EBIRD_MEX" "EBIRD_MEX" ...</span>
+<span class="co">#&gt;  $ duration_minutes            : int  10 10 10 10 50 60 10 60 10 10 ...</span>
+<span class="co">#&gt;  $ effort_distance_km          : num  NA NA NA NA NA ...</span>
+<span class="co">#&gt;  $ effort_area_ha              : num  NA NA NA NA NA NA NA NA NA NA ...</span>
+<span class="co">#&gt;  $ number_observers            : int  1 1 1 1 1 14 1 2 1 1 ...</span>
+<span class="co">#&gt;  $ all_species_reported        : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
+<span class="co">#&gt;  $ group_identifier            : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ has_media                   : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span>
+<span class="co">#&gt;  $ approved                    : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
+<span class="co">#&gt;  $ reviewed                    : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span>
+<span class="co">#&gt;  $ reason                      : chr  NA NA NA NA ...</span>
+<span class="co">#&gt;  $ trip_comments               : chr  "Pedro Pablo V�zquez" "Miguel M�ndez L�pez" "Miguel M�ndez L�pez" "Miguel M�ndez L�pez" ...</span>
+<span class="co">#&gt;  $ species_comments            : chr  NA NA NA NA ...</span></code></pre></div>
 </div>
 </div>
 <div id="presence-absence-data" class="section level2">
@@ -321,7 +328,7 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 </li>
 </ul>
 <h2>License</h2>
-<p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></p>
+<p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> + file <a href="LICENSE.html">LICENSE</a></p>
 <h2>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html">Citing auk</a></li>
