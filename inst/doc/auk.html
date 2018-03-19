@@ -335,16 +335,20 @@ awk_file[<span class="op">!</span><span class="kw">grepl</span>(<span class="st"
 <span class="co">#&gt; </span><span class="re">BEGIN</span><span class="co"> {</span>
 <span class="co">#&gt;   FS = &quot; &quot;</span>
 <span class="co">#&gt;   OFS = &quot;    &quot;</span>
+<span class="co">#&gt;     split(&quot;Cyanocitta cristata   Perisoreus canadensis&quot;, speciesValues, &quot;    &quot;)</span>
+<span class="co">#&gt;     for (i in speciesValues) species[speciesValues[i]] = 1</span>
+<span class="co">#&gt;     split(&quot;CA&quot;, countryValues, &quot; &quot;)</span>
+<span class="co">#&gt;     for (i in countryValues) countries[countryValues[i]] = 1</span>
 <span class="co">#&gt; }</span>
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;   keep = 1</span>
 <span class="co">#&gt;   # filters</span>
-<span class="co">#&gt;   if (keep == 1 &amp;&amp; ($6 == &quot;Cyanocitta cristata&quot; || $6 == &quot;Perisoreus canadensis&quot;)) {</span>
+<span class="co">#&gt;   if (keep == 1 &amp;&amp; ($6 in species)) {</span>
 <span class="co">#&gt;     keep = 1</span>
 <span class="co">#&gt;   } else {</span>
 <span class="co">#&gt;     keep = 0</span>
 <span class="co">#&gt;   }</span>
-<span class="co">#&gt;   if (keep == 1 &amp;&amp; ($14 == &quot;CA&quot;)) {</span>
+<span class="co">#&gt;   if (keep == 1 &amp;&amp; ($14 in countries)) {</span>
 <span class="co">#&gt;     keep = 1</span>
 <span class="co">#&gt;   } else {</span>
 <span class="co">#&gt;     keep = 0</span>
