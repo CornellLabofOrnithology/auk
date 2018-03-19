@@ -8,9 +8,4 @@
 
 # R CMD check results
 
-There were no ERRORs or WARNINGs.
-
-There was 1 NOTE:
-
-- License components with restrictions and base license permitting such: GPL-3 + file LICENSE
-  
+0 ERRORs | 0 WARNINGs | 0 NOTEs
