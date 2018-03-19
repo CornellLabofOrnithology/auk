@@ -3,6 +3,7 @@
 - New function, `auk_split()`, splits EBD up into multiple files by species
 - New object, `auk_sampling`, and associated methods for working with the sampling data only
 - New function, `auk_select()`, for selecting a subset of columns
+- Now using AWK arrays to speed up country and species filtering; ~20% speed up when filtering on many species/countries
 - Allow selection of a subset of columns when filtering
 - Remove free text columns in `auk_clean()` to decrease file size
 - Updated to work with Feb 2018 version of EBD
