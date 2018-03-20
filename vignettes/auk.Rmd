@@ -246,6 +246,7 @@ awk_script <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
   auk_filter(awk_file = "awk-script.txt", execute = FALSE)
 # read back in and prepare for printing
 awk_file <- readLines(awk_script)
+unlink("awk-script.txt")
 awk_file[!grepl("^[[:space:]]*$", awk_file)] %>% 
   paste0(collapse = "\n") %>% 
   cat()

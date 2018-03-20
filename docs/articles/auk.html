@@ -356,6 +356,7 @@ ebd_df &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span c
 <span class="st">  </span><span class="kw"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="dt">awk_file =</span> <span class="st">"awk-script.txt"</span>, <span class="dt">execute =</span> <span class="ot">FALSE</span>)
 <span class="co"># read back in and prepare for printing</span>
 awk_file &lt;-<span class="st"> </span><span class="kw">readLines</span>(awk_script)
+<span class="kw">unlink</span>(<span class="st">"awk-script.txt"</span>)
 awk_file[<span class="op">!</span><span class="kw">grepl</span>(<span class="st">"^[[:space:]]*$"</span>, awk_file)] <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">paste0</span>(<span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">cat</span>()
