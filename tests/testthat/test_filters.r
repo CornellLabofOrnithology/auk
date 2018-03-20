@@ -32,21 +32,21 @@ test_that("auk_species", {
 })
 
 test_that("auk_country", {
-  country <- c("CA", "United States", "mexico")
+  country <- c("CA", "United States", "mexico", "kosovo", "AC")
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
     auk_ebd() %>%
     auk_country(country)
 
   # works correctly
-  expect_equal(ebd$filters$country, c("CA", "MX", "US"))
+  expect_equal(ebd$filters$country, c("AC", "CA", "MX", "US", "XK"))
 
   # add
   ebd <- auk_country(ebd, "Belize")
-  expect_equal(ebd$filters$country, c("BZ", "CA", "MX", "US"))
+  expect_equal(ebd$filters$country, c("AC", "BZ", "CA", "MX", "US", "XK"))
 
   # no duplication
   ebd <- auk_country(ebd, rep(country, 2), replace = TRUE)
-  expect_equal(ebd$filters$country, c("CA", "MX", "US"))
+  expect_equal(ebd$filters$country, c("AC", "CA", "MX", "US", "XK"))
 
   # overwrite
   ebd <- auk_country(ebd, "Belize", replace = TRUE)
@@ -65,7 +65,7 @@ test_that("auk_country", {
 
   # raises error for bad countries
   expect_error(auk_country(ebd, "Atlantis"))
-  expect_error(auk_country(ebd, "XX"))
+  expect_error(auk_country(ebd, "AA"))
   expect_error(auk_country(ebd, ""))
   expect_error(auk_country(ebd, NA))
 })

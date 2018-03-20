@@ -56,6 +56,10 @@ auk_country.auk_ebd <- function(x, country, replace = FALSE) {
                                          warn = FALSE)
   # combine, preference to codes
   country_codes <- dplyr::coalesce(code_codes, name_codes)
+  
+  # some codes don't match to countrycodes package, treat seperately
+  no_code <- is.na(country_codes)
+  country_codes[no_code] <- missing_countries(country[no_code])
 
   # check codes are valid
   valid_codes <- !is.na(country_codes)
@@ -78,4 +82,17 @@ auk_country.auk_ebd <- function(x, country, replace = FALSE) {
 #' @export
 auk_country.auk_sampling <- function(x, country, replace = FALSE) {
   auk_country.auk_ebd(x, country, replace)
+}
+
+missing_countries <- function(x) {
+  cc <- setNames(c("AC", "CP", "CS", "XX", "XK", "FM"), 
+                 c("ashmore and cartier islands", "clipperton island", 
+                   "coral sea islands", "high seas", 
+                   "kosovo", "micronesia"))
+  # convert country names to codes
+  name_codes <- setNames(cc[match(toupper(x), cc)], NULL)
+  # lookup codes
+  code_codes <- setNames(cc[tolower(x)], NULL)
+  # combine, preference to codes
+  dplyr::coalesce(code_codes, name_codes)
 }
