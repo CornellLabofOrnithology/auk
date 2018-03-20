@@ -22,5 +22,23 @@
 #' species code. For taxa that can't be resolved, this field is `NA`.
 #'
 #' For further details, see \url{http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy}
-#'
 "ebird_taxonomy"
+
+#' eBird States
+#'
+#' A data frame of state codes used by eBird. These codes are 4 to 6 characters, 
+#' consisting of two parts, the 2-letter ISO country code and a 1-3 character 
+#' state code, separated by a dash. For example, `"US-NY"` corresponds to New 
+#' York State in the United States. These state codes are required to filter by 
+#' state using [auk_state()].
+#' 
+#' 
+#' Note that some countries are not broken into states in eBird and therefore do 
+#' not appear in this data frame.
+#' 
+#' @format A data frame with four variables and 3,145 rows:
+#' - `country`: short form of English country name.
+#' - `country_code`: 2-letter ISO country code.
+#' - `state`: state name.
+#' - `state_code`: 4 to 6 character state code.
+"ebird_states"

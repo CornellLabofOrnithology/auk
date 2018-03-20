@@ -32,7 +32,7 @@
 #' # alternatively, without pipes
 #' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 #' auk_country(ebd, country)
-auk_country <- function(x, country, replace)  {
+auk_country <- function(x, country, replace = FALSE)  {
   UseMethod("auk_country")
 }
 
@@ -75,7 +75,8 @@ auk_country.auk_ebd <- function(x, country, replace = FALSE) {
   } else {
     x$filters$country <- c(x$filters$country, country_codes)
   }
-  x$filters$country <- sort(unique(c(x$filters$country, country_codes)))
+  x$filters$country <- sort(unique(x$filters$country))
+  x$filters$state <- character()
   return(x)
 }
 
@@ -85,14 +86,16 @@ auk_country.auk_sampling <- function(x, country, replace = FALSE) {
 }
 
 missing_countries <- function(x) {
-  cc <- setNames(c("AC", "CP", "CS", "XX", "XK", "FM"), 
-                 c("ashmore and cartier islands", "clipperton island", 
-                   "coral sea islands", "high seas", 
-                   "kosovo", "micronesia"))
+  cc <- structure(c("AC", "CP", "CS", "XX", "XK", "FM"), 
+                  .Names = c("ashmore and cartier islands", "clipperton island", 
+                             "coral sea islands", "high seas", 
+                             "kosovo", "micronesia"))
   # convert country names to codes
-  name_codes <- setNames(cc[match(toupper(x), cc)], NULL)
+  name_codes <- cc[match(toupper(x), cc)]
   # lookup codes
-  code_codes <- setNames(cc[tolower(x)], NULL)
+  code_codes <- cc[tolower(x)]
   # combine, preference to codes
-  dplyr::coalesce(code_codes, name_codes)
+  out <- dplyr::coalesce(code_codes, name_codes)
+  names(out) <- NULL
+  out
 }

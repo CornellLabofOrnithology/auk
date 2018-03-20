@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter the eBird data by protocol — auk_protocol • auk</title>
+<title>Filter the eBird data by state — auk_state • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,12 +25,12 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-<meta property="og:title" content="Filter the eBird data by protocol — auk_protocol" />
+<meta property="og:title" content="Filter the eBird data by state — auk_state" />
 
-<meta property="og:description" content="Filter to just data collected following a specific search protocol:
-stationary, traveling, or casual. This function only defines the filter and,
-once all filters have been defined, auk_filter() should be used to call AWK
-and perform the filtering." />
+<meta property="og:description" content="Define a filter for the eBird Basic Dataset (EBD) based on a set of
+states This function only defines the filter and, once all filters have
+been defined, auk_filter() should be used to call AWK and perform the
+filtering." />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -84,18 +84,18 @@ and perform the filtering." />
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter the eBird data by protocol</h1>
-    <small>Source: <a href='https:/github.com/CornellLabofOrnithology/auk/blob/master/R/auk-protocol.r'><code>R/auk-protocol.r</code></a></small>
+    <h1>Filter the eBird data by state</h1>
+    <small>Source: <a href='https:/github.com/CornellLabofOrnithology/auk/blob/master/R/auk-state.r'><code>R/auk-state.r</code></a></small>
     </div>
 
     
-    <p>Filter to just data collected following a specific search protocol:
-stationary, traveling, or casual. This function only defines the filter and,
-once all filters have been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used to call AWK
-and perform the filtering.</p>
+    <p>Define a filter for the eBird Basic Dataset (EBD) based on a set of
+states This function only defines the filter and, once all filters have
+been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used to call AWK and perform the
+filtering.</p>
     
 
-    <pre class="usage"><span class='fu'>auk_protocol</span>(<span class='no'>x</span>, <span class='no'>protocol</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_state</span>(<span class='no'>x</span>, <span class='no'>state</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -106,10 +106,18 @@ and perform the filtering.</p>
 <code><a href='auk_ebd.html'>auk_ebd()</a></code> or <code><a href='auk_sampling.html'>auk_sampling()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>protocol</th>
-      <td><p>character; "Stationary", "Traveling", or "Incidental". Other
-protocols exist in the database, however, this function only extracts these
-three standard protocols. Multiple protocols are accepted.</p></td>
+      <th>state</th>
+      <td><p>character; states to filter by. eBird uses 4 to 6 character
+state codes consisting of two parts, the 2-letter ISO country code and a
+1-3 character state code, separated by a dash. For example, <code>"US-NY"</code>
+corresponds to New York State in the United States. Refer to the data frame
+<a href='ebird_states.html'>ebird_states</a> for look up state codes.</p></td>
+    </tr>
+    <tr>
+      <th>replace</th>
+      <td><p>logical; multiple calls to <code>auk_state()</code> are additive,
+unless <code>replace = FALSE</code>, in which case the previous list of states to
+filter by will be removed and replaced by that in the current call.</p></td>
     </tr>
     </table>
     
@@ -119,14 +127,28 @@ three standard protocols. Multiple protocols are accepted.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function can also work with on an <code>auk_sampling</code> object if the
-user only wishes to filter the sampling event data.</p>
+    <p>It is not possible to filter by both country and state, so calling
+<code>auk_state()</code> will reset the country filter to all countries, and vice versa.</p>
+<p>This function can also work with on an <code>auk_sampling</code> object if the user only
+wishes to filter the sampling event data.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='co'># state codes for a given country can be looked up in ebird_states</span>
+<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>ebird_states</span>, <span class='no'>country</span> <span class='kw'>==</span> <span class='st'>"Costa Rica"</span>)</div><div class='output co'>#&gt; # A tibble: 7 x 4
+#&gt;   country    country_code state      state_code
+#&gt;   &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     
+#&gt; 1 Costa Rica CR           Alajuela   CR-A      
+#&gt; 2 Costa Rica CR           Cartago    CR-C      
+#&gt; 3 Costa Rica CR           Guanacaste CR-G      
+#&gt; 4 Costa Rica CR           Heredia    CR-H      
+#&gt; 5 Costa Rica CR           Limón      CR-L      
+#&gt; 6 Costa Rica CR           Puntarenas CR-P      
+#&gt; 7 Costa Rica CR           San José   CR-SJ     </div><div class='input'><span class='co'># choose texas, united states and puntarenas, cost rica</span>
+<span class='no'>states</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"US-TX"</span>, <span class='st'>"CR-P"</span>)
+<span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_protocol</span>(<span class='st'>"Stationary"</span>)</div><div class='output co'>#&gt; Input 
+  <span class='fu'>auk_state</span>(<span class='no'>states</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -135,12 +157,12 @@ user only wishes to filter the sampling event data.</p>
 #&gt; Filters 
 #&gt;   Species: all
 #&gt;   Countries: all
-#&gt;   States: all
+#&gt;   States: CR-P, US-TX
 #&gt;   Spatial extent: full extent
 #&gt;   Date: all
 #&gt;   Start time: all
 #&gt;   Last edited date: all
-#&gt;   Protocol: Stationary
+#&gt;   Protocol: all
 #&gt;   Project code: all
 #&gt;   Duration: all
 #&gt;   Distance travelled: all
@@ -148,7 +170,7 @@ user only wishes to filter the sampling event data.</p>
 #&gt;   Complete checklists only: no</div><div class='input'>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
-<span class='fu'>auk_protocol</span>(<span class='no'>ebd</span>, <span class='st'>"Stationary"</span>)</div><div class='output co'>#&gt; Input 
+<span class='fu'>auk_state</span>(<span class='no'>ebd</span>, <span class='no'>states</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -157,12 +179,12 @@ user only wishes to filter the sampling event data.</p>
 #&gt; Filters 
 #&gt;   Species: all
 #&gt;   Countries: all
-#&gt;   States: all
+#&gt;   States: CR-P, US-TX
 #&gt;   Spatial extent: full extent
 #&gt;   Date: all
 #&gt;   Start time: all
 #&gt;   Last edited date: all
-#&gt;   Protocol: Stationary
+#&gt;   Protocol: all
 #&gt;   Project code: all
 #&gt;   Duration: all
 #&gt;   Distance travelled: all

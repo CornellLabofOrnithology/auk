@@ -18,13 +18,22 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Remove duplicate group checklists — auk_unique" />
+
+<meta property="og:description" content="eBird checklists can be shared among a group of multiple observers, in which
+case observations will be duplicated in the database. This functions removes
+these duplicates from the eBird Basic Dataset (EBD) or the EBD sampling event
+data (with checklists_only = TRUE), creating a set of unique bird
+observations. This function is called automatically by read_ebd() and
+read_sampling()." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -78,6 +87,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Remove duplicate group checklists</h1>
+    <small>Source: <a href='https:/github.com/CornellLabofOrnithology/auk/blob/master/R/auk-unique.r'><code>R/auk-unique.r</code></a></small>
     </div>
 
     
@@ -173,7 +183,7 @@ the field specified by the <code>group_id</code> parameter for grouped checklist
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -181,3 +191,4 @@ the field specified by the <code>group_id</code> parameter for grouped checklist
 
   </body>
 </html>
+

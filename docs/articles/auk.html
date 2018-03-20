@@ -8,8 +8,11 @@
 <title>auk: eBird Data Extraction with AWK • auk</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="auk: eBird Data Extraction with AWK">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -56,7 +59,10 @@
     <div class="page-header toc-ignore">
       <h1>auk: eBird Data Extraction with AWK</h1>
             
-          </div>
+      
+      <small>Source: <a href="https:/github.com/CornellLabofOrnithology/auk/blob/master/vignettes/auk.Rmd"><code>vignettes/auk.Rmd</code></a></small>
+
+    </div>
 
     
     
@@ -170,7 +176,7 @@ cleaned &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk
 <span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>()
 ebd
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.4/library/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -178,6 +184,7 @@ ebd
 <span class="co">#&gt; Filters </span>
 <span class="co">#&gt;   Species: all</span>
 <span class="co">#&gt;   Countries: all</span>
+<span class="co">#&gt;   States: all</span>
 <span class="co">#&gt;   Spatial extent: full extent</span>
 <span class="co">#&gt;   Date: all</span>
 <span class="co">#&gt;   Start time: all</span>
@@ -198,6 +205,8 @@ ebd
 <code><a href="../reference/auk_species.html">auk_species()</a></code>: filter by species using common or scientific names.</li>
 <li>
 <code><a href="../reference/auk_country.html">auk_country()</a></code>: filter by country using the standard English names or <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country codes</a>.</li>
+<li>
+<code><a href="../reference/auk_state.html">auk_state()</a></code>: filter by state using the eBird state codes, see <code><a href="../reference/ebird_states.html">?ebird_states</a></code>.</li>
 <li>
 <code><a href="../reference/auk_extent.html">auk_extent()</a></code>: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
@@ -238,7 +247,7 @@ ebd
 <span class="st">  </span><span class="kw"><a href="../reference/auk_complete.html">auk_complete</a></span>()
 ebd_filters
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.4/library/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -246,6 +255,7 @@ ebd_filters
 <span class="co">#&gt; Filters </span>
 <span class="co">#&gt;   Species: Cyanocitta cristata, Perisoreus canadensis</span>
 <span class="co">#&gt;   Countries: CA, MX, US</span>
+<span class="co">#&gt;   States: all</span>
 <span class="co">#&gt;   Spatial extent: Lon -100 - -80; Lat 37 - 52</span>
 <span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span>
 <span class="co">#&gt;   Start time: 06:00-09:00</span>
@@ -454,8 +464,8 @@ filters &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk
 <span class="st">  </span><span class="kw"><a href="../reference/auk_complete.html">auk_complete</a></span>()
 filters
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.4/library/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /Users/mes335/Library/R/3.4/library/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -463,6 +473,7 @@ filters
 <span class="co">#&gt; Filters </span>
 <span class="co">#&gt;   Species: Todiramphus chloris</span>
 <span class="co">#&gt;   Countries: all</span>
+<span class="co">#&gt;   States: all</span>
 <span class="co">#&gt;   Spatial extent: full extent</span>
 <span class="co">#&gt;   Date: all</span>
 <span class="co">#&gt;   Start time: 06:00-10:00</span>
@@ -479,8 +490,8 @@ filters
 ##                                file_sampling = "sampling-filtered.txt")
 ebd_sed_filtered
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.4/library/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /Users/mes335/Library/R/3.4/library/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /Library/Frameworks/R.framework/Versions/3.4/Resources/library/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   EBD: ebd-filtered.txt </span>
@@ -489,6 +500,7 @@ ebd_sed_filtered
 <span class="co">#&gt; Filters </span>
 <span class="co">#&gt;   Species: Todiramphus chloris</span>
 <span class="co">#&gt;   Countries: all</span>
+<span class="co">#&gt;   States: all</span>
 <span class="co">#&gt;   Spatial extent: full extent</span>
 <span class="co">#&gt;   Date: all</span>
 <span class="co">#&gt;   Start time: 06:00-10:00</span>
@@ -632,7 +644,7 @@ Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. L
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

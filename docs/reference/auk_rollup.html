@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Roll up eBird taxonomy to species — auk_rollup" />
+
+<meta property="og:description" content="The eBird Basic Dataset (EBD) includes both true species and every other
+field-identifiable taxon that could be relevant for birders to report. This
+includes taxa not identifiable to a species (e.g. hybrids) and taxa reported
+below the species level (e.g. subspecies). This function produces a list of
+observations of true species, by removing the former and rolling the latter
+up to the species level. In the resulting EBD data.frame,
+category will be "species" for all records and the subspecies fields will
+be dropped. By default, read_ebd() calls ebd_rollup() when importing an
+eBird data file." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -78,6 +90,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Roll up eBird taxonomy to species</h1>
+    <small>Source: <a href='https:/github.com/CornellLabofOrnithology/auk/blob/master/R/auk-rollup.r'><code>R/auk-rollup.r</code></a></small>
     </div>
 
     
@@ -201,7 +214,7 @@ page for further details.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -209,3 +222,4 @@ page for further details.</p>
 
   </body>
 </html>
+

@@ -45,12 +45,12 @@ auk_sampling <- function(file, sep = "\t") {
   
   # identify columns required for filtering
   filter_cols <- data.frame(
-    id = c("country", "lat", "lng",
+    id = c("country", "state", "lat", "lng",
            "date", "time", "last_edited",
            "protocol", "project", 
            "duration", "distance", 
            "complete"),
-    name = c("country code", "latitude", "longitude",
+    name = c("country code", "state code", "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
              "protocol type", "project code",
@@ -71,6 +71,7 @@ auk_sampling <- function(file, sep = "\t") {
       col_idx = col_idx,
       filters = list(
         country = character(),
+        state = character(),
         extent = numeric(),
         date = character(),
         time = character(),
@@ -109,6 +110,16 @@ print.auk_sampling <- function(x, ...) {
     cat(paste(x$filters$country, collapse = ", "))
   } else {
     cat(paste0(length(x$filters$country), " countries"))
+  }
+  cat("\n")
+  # state filter
+  cat("  States: ")
+  if (length(x$filters$state) == 0) {
+    cat("all")
+  } else if (length(x$filters$state) <= 10) {
+    cat(paste(x$filters$state, collapse = ", "))
+  } else {
+    cat(paste0(length(x$filters$state), " states"))
   }
   cat("\n")
   # extent filter

@@ -39,7 +39,7 @@
 #' @examples
 #' f <- system.file("extdata/ebd-sample.txt", package = "auk")
 #' read_ebd(f)
-read_ebd <- function(x, reader, sep, unique, rollup) {
+read_ebd <- function(x, reader, sep = "\t", unique = TRUE, rollup = TRUE) {
   UseMethod("read_ebd")
 }
 
@@ -138,7 +138,7 @@ read_ebd.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE,
 #' # read a sampling event data file
 #' x <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
 #'   read_sampling()
-read_sampling <- function(x, reader, sep, unique) {
+read_sampling <- function(x, reader, sep = "\t", unique = TRUE) {
   UseMethod("read_sampling")
 }
 

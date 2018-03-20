@@ -4,7 +4,7 @@
 \alias{auk_country}
 \title{Filter the eBird data by country}
 \usage{
-auk_country(x, country, replace)
+auk_country(x, country, replace = FALSE)
 }
 \arguments{
 \item{x}{\code{auk_ebd} or \code{auk_sampling} object; reference to file created by

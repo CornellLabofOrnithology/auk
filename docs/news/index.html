@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • auk</title>
+<title>Changelog • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,14 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Changelog" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -78,19 +79,22 @@
 
   <div class="col-md-9">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Change log <small></small></h1>
+      <small>Source: <a href='https:/github.com/CornellLabofOrnithology/auk/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div class="contents">
     <div id="auk-0-2-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#auk-0-2-0" class="anchor"></a>auk 0.2.0</h1>
+<h1 class="page-header">
+<a href="#auk-0-2-0" class="anchor"></a>auk 0.2.0<small> Unreleased </small>
+</h1>
 <ul>
 <li>New function, <code><a href="../reference/auk_split.html">auk_split()</a></code>, splits EBD up into multiple files by species</li>
 <li>New object, <code>auk_sampling</code>, and associated methods for working with the sampling data only</li>
 <li>New function, <code><a href="../reference/auk_select.html">auk_select()</a></code>, for selecting a subset of columns</li>
 <li>
 <code><a href="../reference/auk_date.html">auk_date()</a></code> now allows filtering date ranges across years using wildcards, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year</li>
+<li>New function, <code><a href="../reference/auk_state.html">auk_state()</a></code> for filtering by state</li>
 <li>Now using AWK arrays to speed up country and species filtering; ~20% speed up when filtering on many species/countries</li>
 <li>Allow selection of a subset of columns when filtering</li>
 <li>Remove free text columns in <code><a href="../reference/auk_clean.html">auk_clean()</a></code> to decrease file size</li>
@@ -98,8 +102,9 @@
 </ul>
 </div>
     <div id="auk-0-1-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#auk-0-1-0" class="anchor"></a>auk 0.1.0</h1>
+<h1 class="page-header">
+<a href="#auk-0-1-0" class="anchor"></a>auk 0.1.0<small> 2017-10-21 </small>
+</h1>
 <ul>
 <li>eBird taxonomy update to August 2017 version, users should download the most recent EBD to ensure the taxonomy is in sync with the new package</li>
 <li>Manually set AWK path with environment variable <code>AWK_PATH</code> in <code>.Renviron</code> file</li>
@@ -111,15 +116,17 @@
 </ul>
 </div>
     <div id="auk-0-0-2" class="section level1">
-<h1 class="hasAnchor">
-<a href="#auk-0-0-2" class="anchor"></a>auk 0.0.2</h1>
+<h1 class="page-header">
+<a href="#auk-0-0-2" class="anchor"></a>auk 0.0.2<small> 2017-07-05 </small>
+</h1>
 <ul>
 <li>Patch release converting ebird_taxonomy to ASCII to pass CRAN checks</li>
 </ul>
 </div>
     <div id="auk-0-0-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#auk-0-0-1" class="anchor"></a>auk 0.0.1</h1>
+<h1 class="page-header">
+<a href="#auk-0-0-1" class="anchor"></a>auk 0.0.1<small> 2017-07-05 </small>
+</h1>
 <ul>
 <li>First CRAN release</li>
 </ul>
@@ -147,7 +154,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -155,3 +162,4 @@
 
   </body>
 </html>
+

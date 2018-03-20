@@ -10,7 +10,7 @@
 \alias{read_sampling.auk_sampling}
 \title{Read an EBD file}
 \usage{
-read_ebd(x, reader, sep, unique, rollup)
+read_ebd(x, reader, sep = "\\t", unique = TRUE, rollup = TRUE)
 
 \method{read_ebd}{character}(x, reader, sep = "\\t", unique = TRUE,
   rollup = TRUE)
@@ -18,7 +18,7 @@ read_ebd(x, reader, sep, unique, rollup)
 \method{read_ebd}{auk_ebd}(x, reader, sep = "\\t", unique = TRUE,
   rollup = TRUE)
 
-read_sampling(x, reader, sep, unique)
+read_sampling(x, reader, sep = "\\t", unique = TRUE)
 
 \method{read_sampling}{character}(x, reader, sep = "\\t", unique = TRUE)
 

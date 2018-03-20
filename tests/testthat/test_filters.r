@@ -70,6 +70,51 @@ test_that("auk_country", {
   expect_error(auk_country(ebd, NA))
 })
 
+test_that("auk_state", {
+  state <- c("CR-P", "US-TX")
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd() %>%
+    auk_state(state)
+  
+  # works correctly
+  expect_equal(ebd$filters$state, state)
+  
+  # add
+  ebd <- auk_state(ebd, "CA-BC")
+  expect_equal(ebd$filters$state, c("CA-BC", "CR-P", "US-TX"))
+  
+  # no duplication
+  ebd <- auk_state(ebd, rep(state, 2))
+  expect_equal(ebd$filters$state, c("CA-BC", "CR-P", "US-TX"))
+  
+  # overwrite
+  ebd <- auk_state(ebd, "CA-BC", replace = TRUE)
+  expect_equal(ebd$filters$state, "CA-BC")
+  
+  # raises error for bad states
+  expect_error(auk_state(ebd, "US-XX"))
+  expect_error(auk_state(ebd, "AA-AA"))
+  expect_error(auk_state(ebd, ""))
+  expect_error(auk_state(ebd, NA))
+})
+
+test_that("auk_state/country mutually exclusive", {
+  state <- c("CR-P", "US-TX")
+  country <- c("Costa Rica", "US")
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd() %>%
+    auk_state(state)
+  
+  expect_length(ebd$filters$country, 0)
+  expect_length(ebd$filters$state, 2)
+  ebd <- auk_country(ebd, country)
+  expect_length(ebd$filters$country, 2)
+  expect_length(ebd$filters$state, 0)
+  ebd <- auk_state(ebd, state)
+  expect_length(ebd$filters$country, 0)
+  expect_length(ebd$filters$state, 2)
+})
+
 test_that("auk_extent", {
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
     auk_ebd()

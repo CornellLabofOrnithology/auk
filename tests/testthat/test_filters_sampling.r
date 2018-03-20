@@ -34,9 +34,37 @@ test_that("auk_country", {
   
   # raises error for bad countries
   expect_error(auk_country(sed, "Atlantis"))
-  expect_error(auk_country(sed, "XX"))
+  expect_error(auk_country(sed, "AA"))
   expect_error(auk_country(sed, ""))
   expect_error(auk_country(sed, NA))
+})
+
+test_that("auk_state", {
+  state <- c("CR-P", "US-TX")
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+    auk_sampling() %>%
+    auk_state(state)
+  
+  # works correctly
+  expect_equal(sed$filters$state, state)
+  
+  # add
+  sed <- auk_state(sed, "CA-BC")
+  expect_equal(sed$filters$state, c("CA-BC", "CR-P", "US-TX"))
+  
+  # no duplication
+  sed <- auk_state(sed, rep(state, 2))
+  expect_equal(sed$filters$state, c("CA-BC", "CR-P", "US-TX"))
+  
+  # overwrite
+  sed <- auk_state(sed, "CA-BC", replace = TRUE)
+  expect_equal(sed$filters$state, "CA-BC")
+  
+  # raises error for bad states
+  expect_error(auk_state(sed, "US-XX"))
+  expect_error(auk_state(sed, "AA-AA"))
+  expect_error(auk_state(sed, ""))
+  expect_error(auk_state(sed, NA))
 })
 
 test_that("auk_extent", {

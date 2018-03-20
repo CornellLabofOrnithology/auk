@@ -169,7 +169,7 @@ cleaned &lt;-<span class="st"> </span><span class="kw">auk_clean</span>(f, <span
 <span class="st">  </span><span class="kw">auk_ebd</span>()
 ebd
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.4/library/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -177,6 +177,7 @@ ebd
 <span class="co">#&gt; Filters </span>
 <span class="co">#&gt;   Species: all</span>
 <span class="co">#&gt;   Countries: all</span>
+<span class="co">#&gt;   States: all</span>
 <span class="co">#&gt;   Spatial extent: full extent</span>
 <span class="co">#&gt;   Date: all</span>
 <span class="co">#&gt;   Start time: all</span>
@@ -194,6 +195,7 @@ ebd
 <ul>
 <li><code>auk_species()</code>: filter by species using common or scientific names.</li>
 <li><code>auk_country()</code>: filter by country using the standard English names or <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country codes</a>.</li>
+<li><code>auk_state()</code>: filter by state using the eBird state codes, see <code>?ebird_states</code>.</li>
 <li><code>auk_extent()</code>: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li><code>auk_date()</code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code>*</code>” in place of the year, e.g. <code>date = c(&quot;*-05-01&quot;, &quot;*-06-30&quot;)</code> for observations from May and June of any year.</li>
 <li><code>auk_last_edited()</code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
@@ -224,7 +226,7 @@ ebd
 <span class="st">  </span><span class="kw">auk_complete</span>()
 ebd_filters
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.4/library/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -232,6 +234,7 @@ ebd_filters
 <span class="co">#&gt; Filters </span>
 <span class="co">#&gt;   Species: Cyanocitta cristata, Perisoreus canadensis</span>
 <span class="co">#&gt;   Countries: CA, MX, US</span>
+<span class="co">#&gt;   States: all</span>
 <span class="co">#&gt;   Spatial extent: Lon -100 - -80; Lat 37 - 52</span>
 <span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span>
 <span class="co">#&gt;   Start time: 06:00-09:00</span>
@@ -433,8 +436,8 @@ filters &lt;-<span class="st"> </span><span class="kw">auk_ebd</span>(f_ebd, <sp
 <span class="st">  </span><span class="kw">auk_complete</span>()
 filters
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.4/library/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /Users/mes335/Library/R/3.4/library/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /Users/mes335/projects/auk/inst/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -442,6 +445,7 @@ filters
 <span class="co">#&gt; Filters </span>
 <span class="co">#&gt;   Species: Todiramphus chloris</span>
 <span class="co">#&gt;   Countries: all</span>
+<span class="co">#&gt;   States: all</span>
 <span class="co">#&gt;   Spatial extent: full extent</span>
 <span class="co">#&gt;   Date: all</span>
 <span class="co">#&gt;   Start time: 06:00-10:00</span>
@@ -458,8 +462,8 @@ filters
 ##                                file_sampling = &quot;sampling-filtered.txt&quot;)
 ebd_sed_filtered
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.4/library/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /Users/mes335/Library/R/3.4/library/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /Users/mes335/projects/auk/inst/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   EBD: ebd-filtered.txt </span>
@@ -468,6 +472,7 @@ ebd_sed_filtered
 <span class="co">#&gt; Filters </span>
 <span class="co">#&gt;   Species: Todiramphus chloris</span>
 <span class="co">#&gt;   Countries: all</span>
+<span class="co">#&gt;   States: all</span>
 <span class="co">#&gt;   Spatial extent: full extent</span>
 <span class="co">#&gt;   Date: all</span>
 <span class="co">#&gt;   Start time: 06:00-10:00</span>

@@ -64,13 +64,13 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
   # identify columns required for filtering
   filter_cols <- data.frame(
     id = c("species",
-           "country", "lat", "lng",
+           "country", "state", "lat", "lng",
            "date", "time", "last_edited",
            "protocol", "project", 
            "duration", "distance", 
            "breeding", "complete"),
     name = c("scientific name",
-             "country code", "latitude", "longitude",
+             "country code", "state code", "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
              "protocol type", "project code",
@@ -122,6 +122,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
       filters = list(
         species = character(),
         country = character(),
+        state = character(),
         extent = numeric(),
         date = character(),
         time = character(),
@@ -177,6 +178,16 @@ print.auk_ebd <- function(x, ...) {
     cat(paste(x$filters$country, collapse = ", "))
   } else {
     cat(paste0(length(x$filters$country), " countries"))
+  }
+  cat("\n")
+  # state filter
+  cat("  States: ")
+  if (length(x$filters$state) == 0) {
+    cat("all")
+  } else if (length(x$filters$state) <= 10) {
+    cat(paste(x$filters$state, collapse = ", "))
+  } else {
+    cat(paste0(length(x$filters$state), " states"))
   }
   cat("\n")
   # extent filter
