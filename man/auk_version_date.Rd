@@ -13,7 +13,7 @@ version of the package corresponds to.
 \description{
 This package depends on the version of the EBD and on the eBird taxonomy. Use
 this function to determine the version dates for which the package is
-suitable. The EBD is update quartely (March 15, June 15, September 15,
+suitable. The EBD is update quarterly (March 15, June 15, September 15,
 December 15), while the taxonomy is updated annually in September. To ensure
 proper functioning, always use the latest version of the auk package and the
 EBD.

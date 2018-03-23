@@ -334,7 +334,7 @@ ebd_jays &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span
 <span class="co">#&gt; $ approved                     &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRU...</span>
 <span class="co">#&gt; $ reviewed                     &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE...</span>
 <span class="co">#&gt; $ reason                       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N...</span>
-<span class="co">#&gt; $ trip_comments                &lt;chr&gt; "Pedro Pablo V�zquez", "Miguel M�...</span>
+<span class="co">#&gt; $ trip_comments                &lt;chr&gt; "Pedro Pablo Vzquez", "Miguel Mnd...</span>
 <span class="co">#&gt; $ species_comments             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N...</span></code></pre></div>
 <p><code><a href="../reference/auk_filter.html">auk_filter()</a></code> returns an <code>auk_ebd</code> object with the output file paths stored in it. This <code>auk_ebd</code> object can then be passed directly to <code>auk_read()</code>, allowing for a complete pipeline. For example, we can create an <code>auk_ebd</code> object, define filters, filter with AWK, and read in the results all at once.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span>

@@ -18,7 +18,7 @@ match the official eBird Taxomony (\link{ebird_taxonomy}).}
 splitting by species "A" and "B" and \code{prefix = "data/ebd_"}, the resulting
 files will be "data/ebd_A.txt" and "data/ebd_B.txt".}
 
-\item{ext}{characer; file extension, typically "txt".}
+\item{ext}{character; file extension, typically "txt".}
 
 \item{sep}{character; the input field separator, the eBird file is tab
 separated by default. Must only be a single character and space delimited

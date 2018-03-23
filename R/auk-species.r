@@ -8,9 +8,9 @@
 #' @param species character; species to filter by, provided as scientific or
 #'   English common names, or a mixture of both. These names must match the
 #'   official eBird Taxomony ([ebird_taxonomy]).
-#' @param replace logical; multiple calls to `auk_species()` are additive, unless
-#'   `replace = FALSE`, in which case the previous list of species to filter by
-#'   will be removed and replaced by that in the current call.
+#' @param replace logical; multiple calls to `auk_species()` are additive, 
+#'   unless `replace = FALSE`, in which case the previous list of species to 
+#'   filter by will be removed and replaced by that in the current call.
 #'
 #' @return An `auk_ebd` object.
 #' @export

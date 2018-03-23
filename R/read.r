@@ -1,7 +1,7 @@
 #' Read an EBD file
 #'
 #' Read an eBird Basic Dataset file using [data.table::fread()],
-#' [readr::read_delim()], or [read.delim] depending on which packages are
+#' [readr::read_delim()], or [read.delim()] depending on which packages are
 #' installed. `read_ebd()` reads the EBD itself, while read_sampling()` reads a
 #' sampling event data file.
 #'
@@ -9,7 +9,7 @@
 #'   files as created by [auk_filter()].
 #' @param reader character; the function to use for reading the input file,
 #'   options are `"fread"`, `"readr"`, or `"base"`, for [data.table::fread()],
-#'   [readr::read_delim()], or [read.delim], respectively. This argument should
+#'   [readr::read_delim()], or [read.delim()], respectively. This argument should
 #'   typically be left empty to have the function choose the best reader based
 #'   on the installed packages.
 #' @param sep character; single character used to separate fields within a row.

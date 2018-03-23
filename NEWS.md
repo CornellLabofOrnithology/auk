@@ -1,3 +1,7 @@
+# auk 0.2.0.9000
+
+- Removed all non-ASCII characters from example files, fixing [issue #14](https://github.com/CornellLabofOrnithology/auk/issues/14)
+
 # auk 0.2.0
 
 - New function, `auk_split()`, splits EBD up into multiple files by species
@@ -9,6 +13,7 @@
 - Allow selection of a subset of columns when filtering
 - Remove free text columns in `auk_clean()` to decrease file size
 - Updated to work with Feb 2018 version of EBD
+- Fixed broken dependency on `countrycode` package
 
 # auk 0.1.0
 

@@ -152,13 +152,13 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 f_out &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, f_out)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmplgI9tR/file31c934fb5346"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpqeKHYq/file80a13f443e4a"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
-<span class="co">#&gt; [1] 101</span>
+<span class="co">#&gt; [1] 51</span>
 <span class="co"># number of lines in output</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f_out))
-<span class="co">#&gt; [1] 97</span></code></pre></div>
+<span class="co">#&gt; [1] 46</span></code></pre></div>
 </div>
 <div id="filtering" class="section level3">
 <h3 class="hasAnchor">
@@ -272,7 +272,7 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <span class="co">#&gt;  $ bcr_code                    : int  60 60 60 60 NA NA 60 NA 60 60 ...</span>
 <span class="co">#&gt;  $ usfws_code                  : chr  NA NA NA NA ...</span>
 <span class="co">#&gt;  $ atlas_block                 : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ locality                    : chr  "07_020_AN_CafetalPedro_trad_P06" "07_020_LaConcordia_SanFranc�sco_Magallanes_P01" "07_020_LaConcordia_SanFranc�sco_Crucero_P10" "07_020_LaConcordia_SanFranc�sco_Bosque_P02" ...</span>
+<span class="co">#&gt;  $ locality                    : chr  "07_020_AN_CafetalPedro_trad_P06" "07_020_LaConcordia_SanFrancsco_Magallanes_P01" "07_020_LaConcordia_SanFrancsco_Crucero_P10" "07_020_LaConcordia_SanFrancsco_Bosque_P02" ...</span>
 <span class="co">#&gt;  $ locality_id                 : chr  "L6074118" "L6247542" "L6073944" "L5943501" ...</span>
 <span class="co">#&gt;  $ locality_type               : chr  "P" "P" "P" "P" ...</span>
 <span class="co">#&gt;  $ latitude                    : num  15.8 15.8 15.8 15.8 14.9 ...</span>
@@ -296,7 +296,7 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <span class="co">#&gt;  $ approved                    : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
 <span class="co">#&gt;  $ reviewed                    : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span>
 <span class="co">#&gt;  $ reason                      : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ trip_comments               : chr  "Pedro Pablo V�zquez" "Miguel M�ndez L�pez" "Miguel M�ndez L�pez" "Miguel M�ndez L�pez" ...</span>
+<span class="co">#&gt;  $ trip_comments               : chr  "Pedro Pablo Vzquez" "Miguel Mndez Lpez" "Miguel Mndez Lpez" "Miguel Mndez Lpez" ...</span>
 <span class="co">#&gt;  $ species_comments            : chr  NA NA NA NA ...</span>
 <span class="co">#&gt;  - attr(*, "rollup")= logi TRUE</span></code></pre></div>
 </div>

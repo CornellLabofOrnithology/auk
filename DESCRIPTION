@@ -1,14 +1,12 @@
 Package: auk
 Title: eBird Data Extraction and Processing with AWK
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: c(
   person("Matthew", "Strimas-Mackey", email = "mes335@cornell.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-8929-7776")),
   person("Eliot", "Miller", role = "aut"),
   person("Wesley", "Hochachka", role = "aut"),
   person("Cornell Lab of Ornithology", role = "cph")
   )
-URL: https://github.com/CornellLabofOrnithology/auk, http://CornellLabofOrnithology.github.io/auk/
-BugReports: https://github.com/CornellLabofOrnithology/auk/issues
 Description: Extract and process bird sightings records from eBird 
     (<http://ebird.org>), an online tool for recording bird observations. 
     Public access to the full eBird database is via the eBird Basic Dataset 
@@ -16,25 +14,28 @@ Description: Extract and process bird sightings records from eBird
     text file. This package is an interface to AWK for extracting data from the 
     EBD based on taxonomic, spatial, or temporal filters, to produce a 
     manageable file size that can be imported into R.
-Depends: R (>= 3.1.2)
 License: GPL-3
-Encoding: UTF-8
-LazyData: true
-Imports:
+URL: https://github.com/CornellLabofOrnithology/auk, http://CornellLabofOrnithology.github.io/auk/
+BugReports: https://github.com/CornellLabofOrnithology/auk/issues
+Depends: 
+    R (>= 3.1.2)
+Imports: 
     assertthat,
-    stringr,
-    stringi,
-    countrycode,
-    tidyr,
+    countrycode (>= 1.0.0),
     dplyr (>= 0.7.0),
-    rlang
-RoxygenNote: 6.0.1
-Roxygen: list(markdown = TRUE)
-Suggests:
-    readr,
+    rlang,
+    stringi,
+    stringr,
+    tidyr
+Suggests: 
+    covr,
     data.table,
     knitr,
+    readr,
     rmarkdown,
-    testthat,
-    covr
+    testthat
 VignetteBuilder: knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1

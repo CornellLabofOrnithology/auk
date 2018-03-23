@@ -28,7 +28,7 @@
 <meta property="og:title" content="Read an EBD file — read_ebd" />
 
 <meta property="og:description" content="Read an eBird Basic Dataset file using data.table::fread(),
-readr::read_delim(), or read.delim depending on which packages are
+readr::read_delim(), or read.delim() depending on which packages are
 installed. read_ebd() reads the EBD itself, while read_sampling()` reads a
 sampling event data file." />
 <meta name="twitter:card" content="summary" />
@@ -90,7 +90,7 @@ sampling event data file." />
 
     
     <p>Read an eBird Basic Dataset file using <code><a href='http://www.rdocumentation.org/packages/data.table/topics/fread'>data.table::fread()</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/readr/topics/read_delim'>readr::read_delim()</a></code>, or read.delim depending on which packages are
+<code><a href='http://www.rdocumentation.org/packages/readr/topics/read_delim'>readr::read_delim()</a></code>, or <code>read.delim()</code> depending on which packages are
 installed. <code>read_ebd()</code> reads the EBD itself, while read_sampling()` reads a
 sampling event data file.</p>
     
@@ -128,7 +128,7 @@ files as created by <code><a href='auk_filter.html'>auk_filter()</a></code>.</p>
       <th>reader</th>
       <td><p>character; the function to use for reading the input file,
 options are <code>"fread"</code>, <code>"readr"</code>, or <code>"base"</code>, for <code><a href='http://www.rdocumentation.org/packages/data.table/topics/fread'>data.table::fread()</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/readr/topics/read_delim'>readr::read_delim()</a></code>, or read.delim, respectively. This argument should
+<code><a href='http://www.rdocumentation.org/packages/readr/topics/read_delim'>readr::read_delim()</a></code>, or <code>read.delim()</code>, respectively. This argument should
 typically be left empty to have the function choose the best reader based
 on the installed packages.</p></td>
     </tr>

@@ -9,7 +9,7 @@
 #'   [auk_ebd()] or [auk_sampling()].
 #' @param extent numeric; spatial extent expressed as the range of latitudes
 #'   and longitudes in decimal degrees: `c(lng_min, lat_min, lng_max, lat_max)`. 
-#'   Note that longitudes in the Western Hemishphere and latitudes sound of the 
+#'   Note that longitudes in the Western Hemisphere and latitudes sound of the 
 #'   equator should be given as negative numbers.
 #' 
 #' @details This function can also work with on an `auk_sampling` object if the 

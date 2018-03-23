@@ -32,7 +32,7 @@ files as created by \code{\link[=auk_filter]{auk_filter()}}.}
 
 \item{reader}{character; the function to use for reading the input file,
 options are \code{"fread"}, \code{"readr"}, or \code{"base"}, for \code{\link[data.table:fread]{data.table::fread()}},
-\code{\link[readr:read_delim]{readr::read_delim()}}, or \link{read.delim}, respectively. This argument should
+\code{\link[readr:read_delim]{readr::read_delim()}}, or \code{\link[=read.delim]{read.delim()}}, respectively. This argument should
 typically be left empty to have the function choose the best reader based
 on the installed packages.}
 
@@ -55,7 +55,7 @@ equal to \code{sampling_event_identifier} for non-group checklists, and
 }
 \description{
 Read an eBird Basic Dataset file using \code{\link[data.table:fread]{data.table::fread()}},
-\code{\link[readr:read_delim]{readr::read_delim()}}, or \link{read.delim} depending on which packages are
+\code{\link[readr:read_delim]{readr::read_delim()}}, or \code{\link[=read.delim]{read.delim()}} depending on which packages are
 installed. \code{read_ebd()} reads the EBD itself, while read_sampling()` reads a
 sampling event data file.
 }

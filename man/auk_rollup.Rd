@@ -48,14 +48,14 @@ yet to be accepted or distinctive forms that are not universally accepted
 contains multiple taxa corresponding to the same species, the lower level
 taxa are rolled up, otherwise these records are left as is.
 \item \strong{Spuh:}  Genus or identification at broad level -- e.g., duck sp.,
-dabbling duck sp.. Dropped by auk_rollup().
+dabbling duck sp.. Dropped by \code{auk_rollup()}.
 \item \strong{Slash:} Identification to Species-pair e.g., American Black
-Duck/Mallard). Dropped by auk_rollup()
+Duck/Mallard). Dropped by \code{auk_rollup()}.
 \item \strong{Hybrid:} Hybrid between two species, e.g., American Black Duck x
-Mallard (hybrid). Dropped by auk_rollup().
+Mallard (hybrid). Dropped by \code{auk_rollup()}.
 \item \strong{Domestic:} Distinctly-plumaged domesticated varieties that may be
 free-flying (these do not count on personal lists) e.g., Mallard (Domestic
-type). Dropped by auk_rollup()
+type). Dropped by \code{auk_rollup()}.
 }
 }
 \examples{

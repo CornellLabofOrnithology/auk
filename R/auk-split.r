@@ -12,7 +12,7 @@
 #' @param prefix character; a file and directory prefix. For example, if 
 #'   splitting by species "A" and "B" and `prefix = "data/ebd_"`, the resulting 
 #'   files will be "data/ebd_A.txt" and "data/ebd_B.txt".
-#' @param ext characer; file extension, typically "txt".
+#' @param ext character; file extension, typically "txt".
 #' @param sep character; the input field separator, the eBird file is tab
 #'   separated by default. Must only be a single character and space delimited
 #'   is not allowed since spaces appear in many of the fields.

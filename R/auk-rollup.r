@@ -36,14 +36,14 @@
 #'   contains multiple taxa corresponding to the same species, the lower level
 #'   taxa are rolled up, otherwise these records are left as is.
 #'   - **Spuh:**  Genus or identification at broad level -- e.g., duck sp.,
-#'   dabbling duck sp.. Dropped by auk_rollup().
+#'   dabbling duck sp.. Dropped by `auk_rollup()`.
 #'   - **Slash:** Identification to Species-pair e.g., American Black
-#'   Duck/Mallard). Dropped by auk_rollup()
+#'   Duck/Mallard). Dropped by `auk_rollup()`.
 #'   - **Hybrid:** Hybrid between two species, e.g., American Black Duck x
-#'   Mallard (hybrid). Dropped by auk_rollup().
+#'   Mallard (hybrid). Dropped by `auk_rollup()`.
 #'   - **Domestic:** Distinctly-plumaged domesticated varieties that may be
 #'   free-flying (these do not count on personal lists) e.g., Mallard (Domestic
-#'   type). Dropped by auk_rollup()
+#'   type). Dropped by `auk_rollup()`.
 #'   
 #' @return A data frame of the eBird data with taxonomic rollup applied.
 #' @references Consult the [eBird taxonomy](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy) 

@@ -17,5 +17,4 @@ ebird_taxonomy <- read_xlsx("data-raw/eBird_Taxonomy_v2017_18Aug2017.xlsx") %>%
 write_csv(ebird_taxonomy, "data-raw/ebird-taxonomy.csv", na = "")
 usethis::use_data(ebird_taxonomy, overwrite = TRUE, compress = "xz")
 
-
 filter(ebird_taxonomy, scientific_name == "Gyps rueppelli")

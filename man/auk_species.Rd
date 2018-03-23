@@ -13,9 +13,9 @@ auk_species(x, species, replace)
 English common names, or a mixture of both. These names must match the
 official eBird Taxomony (\link{ebird_taxonomy}).}
 
-\item{replace}{logical; multiple calls to \code{auk_species()} are additive, unless
-\code{replace = FALSE}, in which case the previous list of species to filter by
-will be removed and replaced by that in the current call.}
+\item{replace}{logical; multiple calls to \code{auk_species()} are additive,
+unless \code{replace = FALSE}, in which case the previous list of species to
+filter by will be removed and replaced by that in the current call.}
 }
 \value{
 An \code{auk_ebd} object.
