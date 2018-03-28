@@ -117,7 +117,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     if (!dir.exists(dirname(file))) {
       stop("Output directory doesn't exist.")
     }
-    if (!overwrite && file.exists(file)) {
+    if (!overwrite && file.exists(file) && execute) {
       stop("Output file already exists, use overwrite = TRUE.")
     }
     file <- path.expand(file)
@@ -137,7 +137,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     if (!dir.exists(dirname(file_sampling))) {
       stop("Output directory for sampling file doesn't exist.")
     }
-    if (!overwrite && file.exists(file_sampling)) {
+    if (!overwrite && file.exists(file_sampling) && execute) {
       stop("Output sampling file already exists, use overwrite = TRUE.")
     }
     file_sampling <- path.expand(file_sampling)
@@ -382,6 +382,23 @@ awk_translate <- function(filters, col_idx, sep, select) {
     condition <- paste0("$", idx, " in countries")
     filter_strings$country <- str_interp(awk_if, list(condition = condition))
   }
+  # state filter
+  if (length(filters$state) == 0) {
+    filter_strings$state_array <- ""
+    filter_strings$state <- ""
+  } else {
+    # generate list
+    state_list <- paste(filters$state, collapse = "\t")
+    state_array <- "
+    split(\"%s\", stateValues, \"\t\")
+    for (i in stateValues) states[stateValues[i]] = 1"
+    filter_strings$state_array <- sprintf(state_array, state_list)
+    
+    # check in list
+    idx <- col_idx$index[col_idx$id == "state"]
+    condition <- paste0("$", idx, " in states")
+    filter_strings$state <- str_interp(awk_if, list(condition = condition))
+  }
   # extent filter
   if (length(filters$extent) == 0) {
     filter_strings$extent <- ""
@@ -518,11 +535,11 @@ awk_translate <- function(filters, col_idx, sep, select) {
 # awk script template
 awk_filter <- "
 BEGIN {
-  FS = \"${sep}\"
-  OFS = \"${sep}\"
+  FS = OFS = \"${sep}\"
 
   ${species_array}
   ${country_array}
+  ${state_array}
 }
 {
   keep = 1
@@ -530,6 +547,7 @@ BEGIN {
   # filters
   ${species}
   ${country}
+  ${state}
   ${extent}
   ${date_substr}
   ${date}

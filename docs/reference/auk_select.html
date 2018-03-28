@@ -30,6 +30,8 @@
 <meta property="og:description" content="Select a subset of columns from the eBird Basic Dataset (EBD) or the sampling
 events file. Subsetting the columns can significantly decrease file size." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -52,8 +54,12 @@ events file. Subsetting the columns can significantly decrease file size." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">auk</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">auk</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -83,7 +89,7 @@ events file. Subsetting the columns can significantly decrease file size." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Select a subset of columns</h1>
-    <small>Source: <a href='https:/github.com/CornellLabofOrnithology/auk/blob/master/R/auk-select.r'><code>R/auk-select.r</code></a></small>
+    <small>Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-select.r'><code>R/auk-select.r</code></a></small>
     </div>
 
     
@@ -93,7 +99,7 @@ events file. Subsetting the columns can significantly decrease file size.</p>
 
     <pre class="usage"><span class='fu'>auk_select</span>(<span class='no'>x</span>, <span class='no'>select</span>, <span class='no'>file</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>

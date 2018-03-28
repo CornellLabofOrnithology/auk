@@ -1,6 +1,6 @@
 pandoc: 1.19.2.1
 pkgdown: 0.1.0.9000
-pkgdown_sha: 9fcc3acd70db8ea9ccb2d55efe7cd573eecbbb4b
+pkgdown_sha: 966bc9d667ab87806ef684bab22e39effe62c8a5
 articles:
   auk: auk.html
   development: development.html

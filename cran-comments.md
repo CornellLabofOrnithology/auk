@@ -1,3 +1,7 @@
+# Patch release
+
+Fixes bug preventing state filtering from working and removes all non-ASCII characters from data files.
+
 # Test environments
 
 - local OS X install, R 3.4.4

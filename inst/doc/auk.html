@@ -337,8 +337,7 @@ awk_file[<span class="op">!</span><span class="kw">grepl</span>(<span class="st"
 <span class="st">  </span><span class="kw">paste0</span>(<span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">cat</span>()
 <span class="co">#&gt; </span><span class="re">BEGIN</span><span class="co"> {</span>
-<span class="co">#&gt;   FS = &quot; &quot;</span>
-<span class="co">#&gt;   OFS = &quot;    &quot;</span>
+<span class="co">#&gt;   FS = OFS = &quot;   &quot;</span>
 <span class="co">#&gt;     split(&quot;Cyanocitta cristata   Perisoreus canadensis&quot;, speciesValues, &quot;    &quot;)</span>
 <span class="co">#&gt;     for (i in speciesValues) species[speciesValues[i]] = 1</span>
 <span class="co">#&gt;     split(&quot;CA&quot;, countryValues, &quot; &quot;)</span>

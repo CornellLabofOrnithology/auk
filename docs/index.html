@@ -33,8 +33,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">auk</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="index.html">auk</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -152,7 +156,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 f_out &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, f_out)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpqeKHYq/file80a13f443e4a"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpb3fbvl/file9674670ee29b"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 51</span>
@@ -328,31 +332,43 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2 class="hasAnchor">
-<a href="#sidebar" class="anchor"></a>Links</h2>
+    <div class="links">
+<h2>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cran.r-project.org/package=auk">https://​cran.r-project.org/​package=auk</a>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=auk">https://​cloud.r-project.org/​package=auk</a>
 </li>
 <li>Browse source code at <br><a href="https://github.com/CornellLabofOrnithology/auk">https://​github.com/​CornellLabofOrnithology/​auk</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/CornellLabofOrnithology/auk/issues">https://​github.com/​CornellLabofOrnithology/​auk/​issues</a>
 </li>
 </ul>
+</div>
+<div class="license">
 <h2>License</h2>
-<p><a href="LICENSE.html">Full license</a><br><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a><small></small></small></p>
+<ul class="list-unstyled">
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+</ul>
+</div>
+<div class="citation">
 <h2>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html">Citing auk</a></li>
 </ul>
+</div>
+<div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="http://strimas.com">Matthew Strimas-Mackey</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8929-7776" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid"></a> </li>
+<a href="http://strimas.com">Matthew Strimas-Mackey</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8929-7776" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" height="16"></a> </li>
 <li>
 <a href="http://eliotmiller.weebly.com/">Eliot Miller</a> <br><small class="roles"> Author </small>  </li>
 <li>Wesley Hochachka <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
+</div>
+
+      <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="http://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a></li>
@@ -363,6 +379,7 @@ ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <li><a href="https://cran.r-project.org/package=auk"><img src="http://www.r-pkg.org/badges/version/auk" alt="CRAN_Status_Badge"></a></li>
 <li><a href="http://www.r-pkg.org/pkg/auk"><img src="http://cranlogs.r-pkg.org/badges/grand-total/auk?color=brightgreen" alt="Downloads"></a></li>
 </ul>
+</div>
 </div>
 
 </div>

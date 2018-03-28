@@ -48,7 +48,7 @@ write_tsv(y, f, na = "")
 readLines(f) %>% 
   stri_trans_general("latin-ascii") %>% 
   iconv("latin1", "ASCII", sub="") %>% 
-  str_replace_all("'|\"", "") %>% 
+  str_replace_all("\"", "") %>% 
   writeLines(f)
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
 stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
@@ -61,7 +61,7 @@ y <- sample_n(y, 50)
 f <- "inst/extdata/ebd-sample_messy.txt"
 write_tsv(y, f, na = "")
 readLines(f) %>% 
-  str_replace_all("'|\"", "") %>% 
+  str_replace_all("\"", "") %>% 
   writeLines(f)
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
 stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
@@ -88,7 +88,7 @@ write_tsv(x_ebd, f, na = "")
 readLines(f) %>% 
   stri_trans_general("latin-ascii") %>% 
   iconv("latin1", "ASCII", sub="") %>% 
-  str_replace_all("'|\"", "") %>% 
+  str_replace_all("\"", "") %>% 
   writeLines(f)
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
 stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
@@ -103,7 +103,7 @@ write_tsv(x_samp, f, na = "")
 readLines(f) %>% 
   stri_trans_general("latin-ascii") %>% 
   iconv("latin1", "ASCII", sub="") %>% 
-  str_replace_all("'|\"", "") %>% 
+  str_replace_all("\"", "") %>% 
   writeLines(f)
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
 
@@ -134,7 +134,7 @@ write_tsv(ru_ex, f, na = "")
 readLines(f) %>% 
   stri_trans_general("latin-ascii") %>% 
   iconv("latin1", "ASCII", sub="") %>% 
-  str_replace_all("'|\"", "") %>% 
+  str_replace_all("\"", "") %>% 
   writeLines(f)
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
 stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))

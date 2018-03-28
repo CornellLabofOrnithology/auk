@@ -44,12 +44,14 @@ test_that("auk_filter filter an ebd", {
   ebd <- auk_ebd(f) %>%
     auk_project("EBIRD_CAN") %>% 
     auk_protocol("Stationary") %>% 
+    auk_state("CA-ON") %>% 
     auk_filter(file = tmp) %>% 
     read_ebd()
   unlink(tmp)
   
   expect_true(all(ebd$project_code == "EBIRD_CAN"))
   expect_true(all(ebd$protocol_type == "Stationary"))
+  expect_true(all(ebd$state_code == "CA-ON"))
   
   # again
   ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk") %>% 
