@@ -18,7 +18,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -59,18 +59,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>auk: eBird Data Extraction with AWK</h1>
             
       
       <small>Source: <a href="https://github.com/CornellLabofOrnithology/auk/blob/master/vignettes/auk.Rmd"><code>vignettes/auk.Rmd</code></a></small>
+      <div class="hidden name"><code>auk.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <p><a href="http://www.ebird.org">eBird</a> is an online tool for recording bird observations. Since its inception, nearly 500 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
 <p>This vignette is divided into three sections. The first section provides background on the eBird data and motivation for the development of this package. The second section outlines the use of <code>auk</code> for filtering text file to produce a presence-only dataset. The final section demonstrates how <code>auk</code> can be used to produce zero-filled, presence-absence (or more correctly presence–non-detection) data, a necessity for many modeling and analysis applications.</p>
 <div id="quick-start" class="section level2">
@@ -622,7 +622,6 @@ ebd_zf_df
 
 Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. Lentini, M.A. McCarthy, R. Tingley, and B.A. Wintle. 2015. Is my species distribution model fit for purpose? Matching data and models to applications. Global Ecology and Biogeography 24:276-292.</code></pre>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -653,6 +652,8 @@ Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. L
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

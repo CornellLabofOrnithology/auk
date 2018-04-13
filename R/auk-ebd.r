@@ -56,6 +56,9 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
   # read header rows
   header <- tolower(get_header(file, sep))
   header <- stringr::str_replace_all(header, "_", " ")
+  # fix for custom download
+  header[header == "state province"] <- "state"
+  header[header == "subnational1 code"] <- "state code"
   col_idx <- data.frame(id = NA_character_, 
                         name = header, 
                         index = seq_along(header),

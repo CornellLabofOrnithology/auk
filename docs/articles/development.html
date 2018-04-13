@@ -18,7 +18,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -59,18 +59,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>auk development</h1>
             
       
       <small>Source: <a href="https://github.com/CornellLabofOrnithology/auk/blob/master/vignettes/development.Rmd"><code>vignettes/development.Rmd</code></a></small>
+      <div class="hidden name"><code>development.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <p>This vignette describes the process of updating and extending <code>auk</code>. Three topics are covered: updating <code>auk</code> when a new eBird taxonomy is released, extending <code>auk</code> to include new filters, and CRAN submission.</p>
 <div id="updating-the-ebird-taxonomy" class="section level2">
 <h2 class="hasAnchor">
@@ -190,7 +190,6 @@ awk_script_sampling &lt;-<span class="st"> </span><span class="kw">awk_translate
 <p>At this point, you’ll need to wait for binaries of your package to build, which could take a couple days. It’s possible that problems will arise during this process and your package will be rejected, in which case, you’ll need to fix any problems and resubmit.</p>
 <p>Once the package is on CRAN, create a new release on GitHub and tag it with the version number.</p>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -218,6 +217,8 @@ awk_script_sampling &lt;-<span class="st"> </span><span class="kw">awk_translate
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>
