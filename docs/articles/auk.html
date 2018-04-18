@@ -119,6 +119,12 @@ ebd_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read
 <p>In addition, eBird provides a Sampling Event Data file that contains the checklist-level data for every valid checklist submitted to eBird, including checklists for which no species of birds were reported. In this file, each row corresponds to a checklist and only the checklist-level variables are included, not the associated bird data. While the eBird Basic Dataset provides presence-only data, it can be combined with the Sampling Event Data file to produce presence-absence data. This process is described below.</p>
 <p>For full metadata on the both datasets, consult the documentation provided when the <a href="http://ebird.org/ebird/data/download">files are downloaded</a>.</p>
 </div>
+</div>
+<div id="auk-vs--rebird" class="section level2">
+<h2 class="hasAnchor">
+<a href="#auk-vs--rebird" class="anchor"></a><code>auk</code> vs. <code>rebird</code>
+</h2>
+<p>Those interested in eBird data may also want to consider <a href="https://github.com/ropensci/rebird"><code>rebird</code></a>, an R package that provides an interface to the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs">eBird APIs</a>. The functions in <code>rebird</code> are mostly limited to accessing recent (i.e. within the last 30 days) observations, although <code>ebirdfreq()</code> does provide historical frequency of observation data. In contrast, <code>auk</code> gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require <code>auk</code>; however, for some use cases, e.g. building tools for birders, <code>rebird</code> provides a quick and easy way to access data.</p>
 <div id="data-access" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-access" class="anchor"></a>Data access</h3>
@@ -631,6 +637,7 @@ Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. L
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#quick-start">Quick start</a></li>
       <li><a href="#background">Background</a></li>
+      <li><a href="#auk-vs--rebird"><code>auk</code> vs. <code>rebird</code></a></li>
       <li><a href="#presence-data">Presence data</a></li>
       <li><a href="#zero-filled-presence-absence-data">Zero-filled, presence-absence data</a></li>
       <li><a href="#acknowledgements">Acknowledgements</a></li>

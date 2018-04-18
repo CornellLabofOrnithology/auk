@@ -55,6 +55,21 @@ Full details on using `auk` to produce both presence-only and
 presence-absence data are outlined in the vignette, which can be
 accessed with `vignette("auk")`.
 
+`auk` vs. `rebird`
+------------------
+
+Those interested in eBird data may also want to consider
+[`rebird`](https://github.com/ropensci/rebird), an R package that
+provides an interface to the [eBird
+APIs](https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs). The
+functions in `rebird` are mostly limited to accessing recent (i.e.
+within the last 30 days) observations, although `ebirdfreq()` does
+provide historical frequency of observation data. In contrast, `auk`
+gives access to the full set of ~ 500 million eBird observations. For
+most ecological applications, users will require `auk`; however, for
+some use cases, e.g. building tools for birders, `rebird` provides a
+quick and easy way to access data.
+
 A note on versions
 ------------------
 
@@ -138,7 +153,7 @@ drops these erroneous records and removes the blank column.
     f_out <- tempfile()
     # remove problem records
     auk_clean(f, f_out)
-    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp0f9mcr/file27df11f3795d"
+    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp5DoknN/file69b1395af5e5"
     # number of lines in input
     length(readLines(f))
     #> [1] 51

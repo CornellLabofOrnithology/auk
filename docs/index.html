@@ -96,6 +96,12 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <a href="#vignette" class="anchor"></a>Vignette</h2>
 <p>Full details on using <code>auk</code> to produce both presence-only and presence-absence data are outlined in the vignette, which can be accessed with <code><a href="articles/auk.html">vignette("auk")</a></code>.</p>
 </div>
+<div id="auk-vs--rebird" class="section level2">
+<h2 class="hasAnchor">
+<a href="#auk-vs--rebird" class="anchor"></a><code>auk</code> vs. <code>rebird</code>
+</h2>
+<p>Those interested in eBird data may also want to consider <a href="https://github.com/ropensci/rebird"><code>rebird</code></a>, an R package that provides an interface to the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs">eBird APIs</a>. The functions in <code>rebird</code> are mostly limited to accessing recent (i.e. within the last 30 days) observations, although <code>ebirdfreq()</code> does provide historical frequency of observation data. In contrast, <code>auk</code> gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require <code>auk</code>; however, for some use cases, e.g. building tools for birders, <code>rebird</code> provides a quick and easy way to access data.</p>
+</div>
 <div id="a-note-on-versions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#a-note-on-versions" class="anchor"></a>A note on versions</h2>
@@ -155,7 +161,7 @@ f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class=
 f_out &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="co"># remove problem records</span>
 <span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, f_out)
-<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpBBTmSY/file2a4a570facd7"</span>
+<span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpO8oce2/file71211108a30f"</span>
 <span class="co"># number of lines in input</span>
 <span class="kw">length</span>(<span class="kw">readLines</span>(f))
 <span class="co">#&gt; [1] 51</span>

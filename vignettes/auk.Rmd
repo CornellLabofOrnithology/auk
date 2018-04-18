@@ -75,6 +75,10 @@ In addition, eBird provides a Sampling Event Data file that contains the checkli
 
 For full metadata on the both datasets, consult the documentation provided when the [files are downloaded](http://ebird.org/ebird/data/download).
 
+## `auk` vs. `rebird`
+
+Those interested in eBird data may also want to consider [`rebird`](https://github.com/ropensci/rebird), an R package that provides an interface to the [eBird APIs](https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs). The functions in `rebird` are mostly limited to accessing recent (i.e. within the last 30 days) observations, although `ebirdfreq()` does provide historical frequency of observation data. In contrast, `auk` gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require `auk`; however, for some use cases, e.g. building tools for birders, `rebird` provides a quick and easy way to access data.
+
 ### Data access
 
 To access eBird data, begin by [creating an eBird account and signing in](https://secure.birds.cornell.edu/cassso/login). Then visit the [Download Data](http://ebird.org/ebird/data/download) page. eBird data access is free; however, you will need to [request access](http://ebird.org/ebird/data/request) in order to obtain access to the EBD. Filling out the access request form allows eBird to keep track of the number of people using the data and obtain information on the applications for which the data are used
