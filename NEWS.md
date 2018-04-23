@@ -1,3 +1,7 @@
+# auk 0.2.2
+
+- Fixed bug causing auk to fail on files downloaded via custom download form
+
 # auk 0.2.1
 
 - Patch release fixing a couple bugs
