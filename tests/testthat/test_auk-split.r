@@ -1,7 +1,7 @@
 context("auk_split")
 library(dplyr)
 
-test_that("auk_clean splits correctly", {
+test_that("auk_split splits correctly", {
   skip_on_cran()
   skip_on_os("windows")
   
@@ -19,7 +19,7 @@ test_that("auk_clean splits correctly", {
       filter(scientific_name == species[i])
     expect_is(ebd, "data.frame")
     expect_true(all(ebd$scientific_name == species[i]))
-    expect_identical(ebd, ebd_full)
+    expect_equal(nrow(ebd), nrow(ebd_full))
   }
   
   unlink(list.files(dirname(prefix), basename(prefix), full.names = TRUE))

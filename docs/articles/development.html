@@ -8,8 +8,8 @@
 <title>auk development • auk</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="auk development">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="auk development">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -64,7 +64,7 @@
       <h1>auk development</h1>
             
       
-      <small>Source: <a href="https://github.com/CornellLabofOrnithology/auk/blob/master/vignettes/development.Rmd"><code>vignettes/development.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/CornellLabofOrnithology/auk/blob/master/vignettes/development.Rmd"><code>vignettes/development.Rmd</code></a></small>
       <div class="hidden name"><code>development.Rmd</code></div>
 
     </div>
@@ -101,14 +101,14 @@
 <p>For filters that don’t apply to the sampling event data file, i.e. filters at the species level rather than the checklist level, add the id to the character vector <code>not_in_sampling</code>. For example, modify the code to read: <code>not_in_sampling &lt;- c("species", "breeding", "color")</code>.</p>
 <p>Next, at the end of the code for <code><a href="../reference/auk_ebd.html">auk_ebd()</a></code>, the <code>auk_ebd</code> object is created and returned with the statement beginning with <code>structure(...</code>. This object should have placeholders for every filter. So, add a new element to the list, naming the variable after the <code>id</code> in the above data frame, putting it in the same order as in the above data frame, and choosing a sensible data type. For example, if <code>color</code> is a categorical variable, add a new list element <code>color = character()</code>, and if it’s a numeric variable, add <code>color = numeric()</code>.</p>
 <p>Finally, within <code>auk-ebd.r</code> a <code>print.auk_ebd()</code> method is defined, which you’ll need to update to print the filter in a sensible way. Here you’re best to find another filter with a similar format and use that as a template. Again, be sure to put the print code for the filter in the right order. For example, for a categorical filter allow multiple potential values, you may way something like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># color filter</span>
-<span class="kw">cat</span>(<span class="st">"  Feather color: "</span>)
-<span class="cf">if</span> (<span class="kw">length</span>(x<span class="op">$</span>filters<span class="op">$</span>color) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
-  <span class="kw">cat</span>(<span class="st">"all"</span>)
-} <span class="cf">else</span> {
-  <span class="kw">cat</span>(<span class="kw">paste</span>(x<span class="op">$</span>filters<span class="op">$</span>color, <span class="dt">collapse =</span> <span class="st">", "</span>))
-}
-<span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># color filter</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">cat</span>(<span class="st">"  Feather color: "</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="cf">if</span> (<span class="kw">length</span>(x<span class="op">$</span>filters<span class="op">$</span>color) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="kw">cat</span>(<span class="st">"all"</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="kw">cat</span>(<span class="kw">paste</span>(x<span class="op">$</span>filters<span class="op">$</span>color, <span class="dt">collapse =</span> <span class="st">", "</span>))</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</a></code></pre></div>
 </div>
 <div id="create-filter-function" class="section level3">
 <h3 class="hasAnchor">
@@ -125,25 +125,25 @@
 <a href="#update-auk_filter" class="anchor"></a>3. Update <code><a href="../reference/auk_filter.html">auk_filter()</a></code>
 </h3>
 <p>The actual work of filtering is done by <code><a href="../reference/auk_filter.html">auk_filter()</a></code>, which generates an AWK script, then calls AWK. This function must be updated to parse the filters defined using the function you created in step 2 into AWK code. In the code for <code><a href="../reference/auk_filter.html">auk_filter()</a></code>, there are two calls to the internal function <code>awk_translate()</code>, which is an internal function defined in the same file. It’s <code>awk_translate()</code> that you’ll need to edit. This function has a series of code blocks each of which prepares the AWK code for a different filter. Find an existing filter that is similar to the new one you’re creating and copy it over to the correct spot (remember to preserve the ordering of the filters). For the <code>auk_color()</code> example, the code chunk would look like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># color filter</span>
-  <span class="cf">if</span> (<span class="kw">length</span>(filters<span class="op">$</span>color) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
-    filter_strings<span class="op">$</span>color &lt;-<span class="st"> ""</span>
-  } <span class="cf">else</span> {
-    idx &lt;-<span class="st"> </span>col_idx<span class="op">$</span>index[col_idx<span class="op">$</span>id <span class="op">==</span><span class="st"> "color"</span>]
-    condition &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"$"</span>, idx, <span class="st">" == </span><span class="ch">\"</span><span class="st">"</span>, filters<span class="op">$</span>color, <span class="st">"</span><span class="ch">\"</span><span class="st">"</span>,
-                        <span class="dt">collapse =</span> <span class="st">" || "</span>)
-    filter_strings<span class="op">$</span>color &lt;-<span class="st"> </span><span class="kw">str_interp</span>(awk_if, <span class="kw">list</span>(<span class="dt">condition =</span> condition))
-  }</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">  <span class="co"># color filter</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="cf">if</span> (<span class="kw">length</span>(filters<span class="op">$</span>color) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    filter_strings<span class="op">$</span>color &lt;-<span class="st"> ""</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    idx &lt;-<span class="st"> </span>col_idx<span class="op">$</span>index[col_idx<span class="op">$</span>id <span class="op">==</span><span class="st"> "color"</span>]</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">    condition &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"$"</span>, idx, <span class="st">" == </span><span class="ch">\"</span><span class="st">"</span>, filters<span class="op">$</span>color, <span class="st">"</span><span class="ch">\"</span><span class="st">"</span>,</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">                        <span class="dt">collapse =</span> <span class="st">" || "</span>)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    filter_strings<span class="op">$</span>color &lt;-<span class="st"> </span><span class="kw">str_interp</span>(awk_if, <span class="kw">list</span>(<span class="dt">condition =</span> condition))</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  }</a></code></pre></div>
 <p>When given a sampling event data file in addition to a EBD file, <code><a href="../reference/auk_filter.html">auk_filter()</a></code> will filter both files. By default <code><a href="../reference/auk_filter.html">auk_filter()</a></code> will apply all filters to both files, however, some filters (e.g. species) are only appropriate for the EBD. To address this, prior to calling <code>auk_translate()</code> for the sampling data, reset the species-specific filters. In the case of color, which is a species specific variable, modify the code as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s_filters &lt;-<span class="st"> </span>x<span class="op">$</span>filters
-s_filters<span class="op">$</span>species &lt;-<span class="st"> </span><span class="kw">character</span>()
-## ADD THIS LINE
-s_filters<span class="op">$</span>color &lt;-<span class="st"> </span><span class="kw">character</span>()
-##
-awk_script_sampling &lt;-<span class="st"> </span><span class="kw">awk_translate</span>(<span class="dt">filters =</span> s_filters,
-                                     <span class="dt">col_idx =</span> x<span class="op">$</span>col_idx_sampling,
-                                     <span class="dt">sep =</span> sep,
-                                     <span class="dt">select =</span> select_cols)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">s_filters &lt;-<span class="st"> </span>x<span class="op">$</span>filters</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">s_filters<span class="op">$</span>species &lt;-<span class="st"> </span><span class="kw">character</span>()</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">## ADD THIS LINE</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">s_filters<span class="op">$</span>color &lt;-<span class="st"> </span><span class="kw">character</span>()</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">##</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">awk_script_sampling &lt;-<span class="st"> </span><span class="kw">awk_translate</span>(<span class="dt">filters =</span> s_filters,</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">                                     <span class="dt">col_idx =</span> x<span class="op">$</span>col_idx_sampling,</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">                                     <span class="dt">sep =</span> sep,</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">                                     <span class="dt">select =</span> select_cols)</a></code></pre></div>
 <p>Finally, at the end of the <code>auk-filter.r</code> file, there’s a string named <code>awk_filter</code>, which defines the template for the AWK script. Each filter has a line in this string (e.g. <code>${species}</code>) where the AWK code will be inserted. You’ll need to add a line in this file for your new filter: <code>${color}</code>.</p>
 </div>
 <div id="unit-tests" class="section level3">

@@ -1,6 +1,8 @@
 # auk 0.2.2
 
+- Updated to work with EDB version 1.9
 - Fixed bug causing auk to fail on files downloaded via custom download form
+- Modified tests to be more general to all sample data
 
 # auk 0.2.1
 

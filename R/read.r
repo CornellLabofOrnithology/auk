@@ -52,7 +52,8 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
     assertthat::is.string(x),
     file.exists(x),
     missing(reader) || is.character(reader),
-    assertthat::is.string(sep), nchar(sep) == 1, sep != " ")
+    assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
+    length(readLines(x, 2)) > 1)
 
   # pick reader
   if (missing(reader)) {

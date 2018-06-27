@@ -66,6 +66,9 @@ auk_unique <- function(x,
   if (isTRUE(attr(x, "unique"))) {
     return(x)
   }
+  
+  # convert empty string groud_id to NA
+  x[[group_id]][x[[group_id]] == ""] <- NA_integer_
 
   # identify and separate non-group records
   grouped <- !is.na(x[[group_id]])

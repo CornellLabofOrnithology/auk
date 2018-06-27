@@ -10,7 +10,7 @@ test_that("auk_clean cleans out unreadable records", {
   # clean file to remove problem rows
   cleaned <- auk_clean(f, tmp)
 
-  expect_error(read_ebd(f))
+  expect_warning(read_ebd(f))
   expect_is(read_ebd(cleaned), "data.frame")
   expect_lt(length(readLines(cleaned)), length(readLines(f)))
   expect_equal(ncol(read.delim(f, nrows = 5, quote = "")),

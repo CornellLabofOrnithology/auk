@@ -21,10 +21,15 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Remove duplicate group checklists — auk_unique" />
 
 <meta property="og:description" content="eBird checklists can be shared among a group of multiple observers, in which
@@ -36,6 +41,7 @@ read_sampling()." />
 <meta name="twitter:card" content="summary" />
 
 
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -43,8 +49,6 @@ read_sampling()." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -96,10 +100,11 @@ read_sampling()." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Remove duplicate group checklists</h1>
-    <small>Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-unique.r'><code>R/auk-unique.r</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-unique.r'><code>R/auk-unique.r</code></a></small>
     <div class="hidden name"><code>auk_unique.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>eBird checklists can be shared among a group of multiple observers, in which
 case observations will be duplicated in the database. This functions removes
@@ -108,6 +113,7 @@ data (with <code>checklists_only = TRUE</code>), creating a set of unique bird
 observations. This function is called automatically by <code><a href='read_ebd.html'>read_ebd()</a></code> and
 <code><a href='read_ebd.html'>read_sampling()</a></code>.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>auk_unique</span>(<span class='no'>x</span>, <span class='kw'>group_id</span> <span class='kw'>=</span> <span class='st'>"group_identifier"</span>,
   <span class='kw'>checklist_id</span> <span class='kw'>=</span> <span class='st'>"sampling_event_identifier"</span>,
@@ -170,7 +176,7 @@ the field specified by the <code>group_id</code> parameter for grouped checklist
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>f</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='co'># remove duplicates</span>
 <span class='no'>ebd_unique</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_unique</span>(<span class='no'>ebd</span>)
-<span class='fu'>nrow</span>(<span class='no'>ebd</span>)</div><div class='output co'>#&gt; [1] 500</div><div class='input'><span class='fu'>nrow</span>(<span class='no'>ebd_unique</span>)</div><div class='output co'>#&gt; [1] 493</div></pre>
+<span class='fu'>nrow</span>(<span class='no'>ebd</span>)</div><div class='output co'>#&gt; [1] 500</div><div class='input'><span class='fu'>nrow</span>(<span class='no'>ebd_unique</span>)</div><div class='output co'>#&gt; [1] 495</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

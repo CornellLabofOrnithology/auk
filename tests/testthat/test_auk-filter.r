@@ -28,7 +28,7 @@ test_that("auk_filter filter an ebd", {
 
   expect_is(ebd, "data.frame")
   expect_lt(nrow(ebd), nrow(read_ebd(f)))
-  expect_equal(nrow(ebd), 5)
+  expect_gt(nrow(ebd), 1)
   expect_true(all(ebd$scientific_name %in% filters$filters$species))
   expect_true(all(ebd$country_code %in% filters$filters$country))
   expect_true(all(ebd$all_species_reported))
@@ -43,14 +43,14 @@ test_that("auk_filter filter an ebd", {
   tmp <- tempfile()
   ebd <- auk_ebd(f) %>%
     auk_project("EBIRD_CAN") %>% 
-    auk_protocol("Stationary") %>% 
+    auk_protocol("Traveling") %>% 
     auk_state("CA-ON") %>% 
     auk_filter(file = tmp) %>% 
     read_ebd()
   unlink(tmp)
   
   expect_true(all(ebd$project_code == "EBIRD_CAN"))
-  expect_true(all(ebd$protocol_type == "Stationary"))
+  expect_true(all(ebd$protocol_type == "Traveling"))
   expect_true(all(ebd$state_code == "CA-ON"))
   
   # again
@@ -196,7 +196,7 @@ test_that("auk_filter works with wildcard dates", {
   
   expect_is(ebd, "data.frame")
   expect_lt(nrow(ebd), nrow(read_ebd(f)))
-  expect_equal(nrow(ebd), 73)
+  expect_gt(nrow(ebd), 0)
   month_day <- as.Date(ebd$observation_date) %>% 
     format("%m-%d")
   md_range <- sub("*-", "", filters$filters$date, fixed = TRUE)
