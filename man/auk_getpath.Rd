@@ -17,3 +17,8 @@ manually set the path to AWK, set the \code{AWK_PATH} environment variable in yo
 \examples{
 auk_getpath()
 }
+\seealso{
+Other helpers: \code{\link{auk_version_date}},
+  \code{\link{ebird_species}}
+}
+\concept{helpers}

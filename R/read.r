@@ -36,6 +36,7 @@
 #'   equal to `sampling_event_identifier` for non-group checklists, and
 #'   `group_identifier` for group checklists.
 #' @export
+#' @family import
 #' @examples
 #' f <- system.file("extdata/ebd-sample.txt", package = "auk")
 #' read_ebd(f)

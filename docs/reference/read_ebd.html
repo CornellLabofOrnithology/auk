@@ -124,13 +124,15 @@ sampling event data file.</p>
 <span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>,
+  <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for auk_ebd</span>
 <span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for auk_sampling</span>
-<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>,
+  <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,22 +199,26 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
 <li><p><code>auk_sampling</code>: <code>auk_sampling</code> object output from <code><a href='auk_filter.html'>auk_filter()</a></code>.</p></li>
 </ul>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other import: <code><a href='auk_zerofill.html'>auk_zerofill</a></code></p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
 <span class='fu'>read_ebd</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 495 x 45
-#&gt;    checklist_id global_unique_identi… last_edited_date taxonomic_order category
-#&gt;    &lt;chr&gt;        &lt;chr&gt;                 &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt;   
-#&gt;  1 S38863093    URN:CornellLabOfOrni… 2017-08-28 01:2…           18772 species 
-#&gt;  2 S9652135     URN:CornellLabOfOrni… 2016-08-15 17:4…           18772 species 
-#&gt;  3 S11454809    URN:CornellLabOfOrni… 2016-06-10 10:3…           18772 species 
-#&gt;  4 S6280429     URN:CornellLabOfOrni… 2010-04-16 13:4…           18772 species 
-#&gt;  5 S9433007     URN:CornellLabOfOrni… 2016-02-11 10:4…           18772 species 
-#&gt;  6 S14448232    URN:CornellLabOfOrni… 2013-09-12 20:5…           18772 species 
-#&gt;  7 S14425205    URN:CornellLabOfOrni… 2013-06-16 11:0…           18772 species 
-#&gt;  8 S38788151    URN:CornellLabOfOrni… 2018-06-05 13:5…           18772 species 
-#&gt;  9 S14437144    URN:CornellLabOfOrni… 2013-06-16 18:4…           18772 species 
-#&gt; 10 S38617405    URN:CornellLabOfOrni… 2017-08-13 05:5…           18772 species 
+#&gt;    checklist_id global_unique_i… last_edited_date taxonomic_order category
+#&gt;    &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt;   
+#&gt;  1 S38863093    URN:CornellLabO… 2017-08-28 01:2…           18772 species 
+#&gt;  2 S9652135     URN:CornellLabO… 2016-08-15 17:4…           18772 species 
+#&gt;  3 S11454809    URN:CornellLabO… 2016-06-10 10:3…           18772 species 
+#&gt;  4 S6280429     URN:CornellLabO… 2010-04-16 13:4…           18772 species 
+#&gt;  5 S9433007     URN:CornellLabO… 2016-02-11 10:4…           18772 species 
+#&gt;  6 S14448232    URN:CornellLabO… 2013-09-12 20:5…           18772 species 
+#&gt;  7 S14425205    URN:CornellLabO… 2013-06-16 11:0…           18772 species 
+#&gt;  8 S38788151    URN:CornellLabO… 2018-06-05 13:5…           18772 species 
+#&gt;  9 S14437144    URN:CornellLabO… 2013-06-16 18:4…           18772 species 
+#&gt; 10 S38617405    URN:CornellLabO… 2017-08-13 05:5…           18772 species 
 #&gt; # ... with 485 more rows, and 40 more variables: common_name &lt;chr&gt;,
 #&gt; #   scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;,
 #&gt; #   breeding_bird_atlas_code &lt;chr&gt;, breeding_bird_atlas_category &lt;chr&gt;,
@@ -240,6 +246,8 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
       <li><a href="#details">Details</a></li>
 
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

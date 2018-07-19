@@ -17,6 +17,7 @@
 #'
 #' @return An `auk_ebd` object.
 #' @export
+#' @family filter
 #' @examples
 #' # fliter to locations roughly in the Pacific Northwest
 #' system.file("extdata/ebd-sample.txt", package = "auk") %>%

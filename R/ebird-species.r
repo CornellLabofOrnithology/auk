@@ -12,6 +12,7 @@
 #' @return Character vector of scientific names or common names if names if
 #'   `scientific = FALSE`.
 #' @export
+#' @family helpers
 #' @examples
 #' # mix common and scientific names, case-insensitive
 #' species <- c("Blackburnian Warbler", "Poecile atricapillus",

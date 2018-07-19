@@ -6,6 +6,7 @@
 #'
 #' @return Path to AWK or `NA` if AWK wasn't found.
 #' @export
+#' @family helpers
 #' @examples
 #' auk_getpath()
 auk_getpath <- function() {

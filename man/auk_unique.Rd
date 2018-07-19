@@ -59,3 +59,7 @@ ebd_unique <- auk_unique(ebd)
 nrow(ebd)
 nrow(ebd_unique)
 }
+\seealso{
+Other pre: \code{\link{auk_rollup}}
+}
+\concept{pre}

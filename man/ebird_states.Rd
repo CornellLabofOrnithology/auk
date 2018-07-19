@@ -25,4 +25,8 @@ state using \code{\link[=auk_state]{auk_state()}}.
 Note that some countries are not broken into states in eBird and therefore do
 not appear in this data frame.
 }
+\seealso{
+Other data: \code{\link{ebird_taxonomy}}
+}
+\concept{data}
 \keyword{datasets}

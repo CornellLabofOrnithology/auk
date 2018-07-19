@@ -32,4 +32,8 @@ Clements Checklist, which is updated annually, typically in the late summer.
 Non-ASCII characters (e.g. those with accents) have been converted to ASCII
 equivalents in this data frame.
 }
+\seealso{
+Other data: \code{\link{ebird_states}}
+}
+\concept{data}
 \keyword{datasets}

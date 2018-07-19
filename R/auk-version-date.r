@@ -10,6 +10,7 @@
 #' @return A date vector with the eBird data date and taxonomy date that this 
 #'   version of the package corresponds to.
 #' @export
+#' @family helpers
 #' @examples
 #' auk_version_date()
 auk_version_date <- function() {

@@ -34,6 +34,7 @@
 #' @return A data frame with unique observations, and an additional field,
 #'   `checklist_id`, which is a combination of the sampling event and group IDs.
 #' @export
+#' @family pre
 #' @examples
 #' # read in an ebd file and don't automatically remove duplicates
 #' f <- system.file("extdata/ebd-sample.txt", package = "auk")

@@ -21,6 +21,7 @@
 #'
 #' @return An `auk_ebd` object.
 #' @export
+#' @family filter
 #' @examples
 #' # country names and ISO2 codes can be mixed
 #' # not case sensitive

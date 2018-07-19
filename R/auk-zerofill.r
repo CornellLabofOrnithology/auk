@@ -49,6 +49,7 @@
 #' @return By default, an `auk_zerofill` object, or a data frame if `collapse =
 #'   TRUE`.
 #' @export
+#' @family import
 #' @examples
 #' # read and zero-fill the sampling data
 #' f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")

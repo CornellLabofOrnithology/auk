@@ -37,6 +37,7 @@
 #' @return An `auk_ebd` object storing the file reference and the desired
 #'   filters once created with other package functions.
 #' @export
+#' @family objects
 #' @examples
 #' # get the path to the example data included in the package
 #' # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt

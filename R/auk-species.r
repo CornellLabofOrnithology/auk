@@ -14,6 +14,7 @@
 #'
 #' @return An `auk_ebd` object.
 #' @export
+#' @family filter
 #' @examples
 #' # common and scientific names can be mixed
 #' species <- c("Gray Jay", "Pluvialis squatarola")

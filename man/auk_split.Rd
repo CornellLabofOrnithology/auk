@@ -49,3 +49,8 @@ prefix <- file.path(tempdir(), "ebd_")
 species_files <- auk_split(f, species = species, prefix = prefix)
 }
 }
+\seealso{
+Other text: \code{\link{auk_clean}},
+  \code{\link{auk_select}}
+}
+\concept{text}

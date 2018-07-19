@@ -24,6 +24,7 @@
 #'
 #' @return An `auk_ebd` object.
 #' @export
+#' @family filter
 #' @examples
 #' # state codes for a given country can be looked up in ebird_states
 #' dplyr::filter(ebird_states, country == "Costa Rica")

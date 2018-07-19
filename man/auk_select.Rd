@@ -43,3 +43,8 @@ selected <- auk_select(ebd, select = cols, file = out_file)
 str(read_ebd(selected))
 }
 }
+\seealso{
+Other text: \code{\link{auk_clean}},
+  \code{\link{auk_split}}
+}
+\concept{text}

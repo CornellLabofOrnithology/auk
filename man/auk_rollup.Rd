@@ -87,3 +87,7 @@ ebd_ru \%>\%
 Consult the \href{http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy}{eBird taxonomy}
 page for further details.
 }
+\seealso{
+Other pre: \code{\link{auk_unique}}
+}
+\concept{pre}

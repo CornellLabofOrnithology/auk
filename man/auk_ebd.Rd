@@ -58,3 +58,7 @@ f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
 f_cl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
 auk_ebd(f_ebd, file_sampling = f_cl)
 }
+\seealso{
+Other objects: \code{\link{auk_sampling}}
+}
+\concept{objects}

@@ -12,3 +12,26 @@ authors:
     href: http://strimas.com
   Eliot Miller:
     href: http://eliotmiller.weebly.com/
+    
+reference:
+- title: EBD Objects
+  contents:
+  - has_concept("objects")
+- title: Process Text Files
+  contents:
+  - has_concept("text")
+- title: Filter
+  contents:
+  - has_concept("filter")
+- title: Pre-process
+  contents:
+  - has_concept("pre")
+- title: Import
+  contents:
+  - has_concept("import")
+- title: Data
+  contents:
+  - has_concept("data")
+- title: Helpers
+  contents:
+  - has_concept("helpers")

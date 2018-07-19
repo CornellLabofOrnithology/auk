@@ -20,6 +20,7 @@
 #'
 #' @return A vector of output filenames, one for each species.
 #' @export
+#' @family text
 #' @examples
 #' \dontrun{
 #' species <- c("Gray Jay", "Cyanocitta stelleri")

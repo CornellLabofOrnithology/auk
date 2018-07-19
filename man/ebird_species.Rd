@@ -29,3 +29,8 @@ species <- c("Blackburnian Warbler", "Poecile atricapillus",
 # species not in the ebird taxonomy return NA
 ebird_species(species)
 }
+\seealso{
+Other helpers: \code{\link{auk_getpath}},
+  \code{\link{auk_version_date}}
+}
+\concept{helpers}

@@ -49,6 +49,7 @@
 #' @references Consult the [eBird taxonomy](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy) 
 #'   page for further details.
 #' @export
+#' @family pre
 #' @examples
 #' # get the path to the example data included in the package
 #' # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt

@@ -18,6 +18,7 @@
 #'
 #' @return Invisibly returns the filename of the output file.
 #' @export
+#' @family text
 #' @examples
 #' \dontrun{
 #' # select a minimal set of columns

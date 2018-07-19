@@ -10,11 +10,11 @@
 \usage{
 auk_zerofill(x, ...)
 
-\method{auk_zerofill}{data.frame}(x, sampling_events, species, unique = TRUE,
-  collapse = FALSE, ...)
-
-\method{auk_zerofill}{character}(x, sampling_events, species, sep = "\\t",
+\method{auk_zerofill}{data.frame}(x, sampling_events, species,
   unique = TRUE, collapse = FALSE, ...)
+
+\method{auk_zerofill}{character}(x, sampling_events, species,
+  sep = "\\t", unique = TRUE, collapse = FALSE, ...)
 
 \method{auk_zerofill}{auk_ebd}(x, species, sep = "\\t", unique = TRUE,
   collapse = FALSE, ...)
@@ -102,3 +102,7 @@ auk_zerofill(x = f_ebd, sampling_events = f_smpl,
 # to return a data frame use collapse = TRUE
 ebd_df <- auk_zerofill(x = f_ebd, sampling_events = f_smpl, collapse = TRUE)
 }
+\seealso{
+Other import: \code{\link{read_ebd}}
+}
+\concept{import}

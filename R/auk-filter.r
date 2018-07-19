@@ -49,6 +49,7 @@
 #' @return An `auk_ebd` object with the output files set. If `execute = FALSE`,
 #'   then the path to the AWK script is returned instead.
 #' @export
+#' @family filter
 #' @examples
 #' # get the path to the example data included in the package
 #' # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt"

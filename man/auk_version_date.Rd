@@ -21,3 +21,8 @@ EBD.
 \examples{
 auk_version_date()
 }
+\seealso{
+Other helpers: \code{\link{auk_getpath}},
+  \code{\link{ebird_species}}
+}
+\concept{helpers}

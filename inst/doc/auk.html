@@ -616,13 +616,13 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb15-19" data-line-number="19"><span class="st">  </span><span class="kw">select</span>(checklist_id, category, common_name, subspecies_common_name,</a>
 <a class="sourceLine" id="cb15-20" data-line-number="20">         observation_count)</a>
 <a class="sourceLine" id="cb15-21" data-line-number="21"><span class="co">#&gt; # A tibble: 5 x 5</span></a>
-<a class="sourceLine" id="cb15-22" data-line-number="22"><span class="co">#&gt;   checklist_id category   common_name  subspecies_common… observation_cou…</span></a>
-<a class="sourceLine" id="cb15-23" data-line-number="23"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;              &lt;chr&gt;           </span></a>
-<a class="sourceLine" id="cb15-24" data-line-number="24"><span class="co">#&gt; 1 S45216549    intergrade Yellow-rump… Yellow-rumped War… 3               </span></a>
-<a class="sourceLine" id="cb15-25" data-line-number="25"><span class="co">#&gt; 2 S45115209    intergrade Yellow-rump… Yellow-rumped War… 1               </span></a>
-<a class="sourceLine" id="cb15-26" data-line-number="26"><span class="co">#&gt; 3 S33053360    issf       Yellow-rump… Yellow-rumped War… 2               </span></a>
-<a class="sourceLine" id="cb15-27" data-line-number="27"><span class="co">#&gt; 4 S33053360    issf       Yellow-rump… Yellow-rumped War… 1               </span></a>
-<a class="sourceLine" id="cb15-28" data-line-number="28"><span class="co">#&gt; 5 S33053360    species    Yellow-rump… &lt;NA&gt;               2</span></a>
+<a class="sourceLine" id="cb15-22" data-line-number="22"><span class="co">#&gt;   checklist_id category  common_name  subspecies_common_… observation_cou…</span></a>
+<a class="sourceLine" id="cb15-23" data-line-number="23"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;           </span></a>
+<a class="sourceLine" id="cb15-24" data-line-number="24"><span class="co">#&gt; 1 S45216549    intergra… Yellow-rump… Yellow-rumped Warb… 3               </span></a>
+<a class="sourceLine" id="cb15-25" data-line-number="25"><span class="co">#&gt; 2 S45115209    intergra… Yellow-rump… Yellow-rumped Warb… 1               </span></a>
+<a class="sourceLine" id="cb15-26" data-line-number="26"><span class="co">#&gt; 3 S33053360    issf      Yellow-rump… Yellow-rumped Warb… 2               </span></a>
+<a class="sourceLine" id="cb15-27" data-line-number="27"><span class="co">#&gt; 4 S33053360    issf      Yellow-rump… Yellow-rumped Warb… 1               </span></a>
+<a class="sourceLine" id="cb15-28" data-line-number="28"><span class="co">#&gt; 5 S33053360    species   Yellow-rump… &lt;NA&gt;                2</span></a>
 <a class="sourceLine" id="cb15-29" data-line-number="29"><span class="co"># with rollup, they have been combined</span></a>
 <a class="sourceLine" id="cb15-30" data-line-number="30">ebd_ru <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb15-31" data-line-number="31"><span class="st">  </span><span class="kw">filter</span>(common_name <span class="op">==</span><span class="st"> &quot;Yellow-rumped Warbler&quot;</span>) <span class="op">%&gt;%</span></a>
@@ -762,18 +762,18 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></a>
 <a class="sourceLine" id="cb20-5" data-line-number="5">ebd_zf_df</a>
 <a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt; # A tibble: 181 x 34</span></a>
-<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt;    checklist_id last_edited_date   country  country_code state  state_code</span></a>
-<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;     </span></a>
-<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="co">#&gt;  1 S9791113     2017-05-27 10:36:… Singapo… SG           Singa… SG-       </span></a>
-<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="co">#&gt;  2 S9776533     2017-05-27 10:36:… Singapo… SG           Singa… SG-       </span></a>
-<a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co">#&gt;  3 S9628006     2017-05-27 10:37:… Singapo… SG           Singa… SG-       </span></a>
-<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co">#&gt;  4 S9598822     2017-05-27 10:37:… Singapo… SG           Singa… SG-       </span></a>
-<a class="sourceLine" id="cb20-13" data-line-number="13"><span class="co">#&gt;  5 S10532644    2017-05-27 10:25:… Singapo… SG           Singa… SG-       </span></a>
-<a class="sourceLine" id="cb20-14" data-line-number="14"><span class="co">#&gt;  6 S10615620    2017-10-19 12:47:… Singapo… SG           Singa… SG-       </span></a>
-<a class="sourceLine" id="cb20-15" data-line-number="15"><span class="co">#&gt;  7 S9732235     2018-04-15 11:34:… Singapo… SG           Singa… SG-       </span></a>
-<a class="sourceLine" id="cb20-16" data-line-number="16"><span class="co">#&gt;  8 S10440230    2012-04-13 22:02:… Singapo… SG           Singa… SG-       </span></a>
-<a class="sourceLine" id="cb20-17" data-line-number="17"><span class="co">#&gt;  9 S9811595     2017-07-05 13:16:… Singapo… SG           Singa… SG-       </span></a>
-<a class="sourceLine" id="cb20-18" data-line-number="18"><span class="co">#&gt; 10 S9829900     2013-09-11 12:29:… Singapo… SG           Singa… SG-       </span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt;    checklist_id last_edited_date country country_code state state_code</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;     </span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="co">#&gt;  1 S9791113     2017-05-27 10:3… Singap… SG           Sing… SG-       </span></a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="co">#&gt;  2 S9776533     2017-05-27 10:3… Singap… SG           Sing… SG-       </span></a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co">#&gt;  3 S9628006     2017-05-27 10:3… Singap… SG           Sing… SG-       </span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co">#&gt;  4 S9598822     2017-05-27 10:3… Singap… SG           Sing… SG-       </span></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13"><span class="co">#&gt;  5 S10532644    2017-05-27 10:2… Singap… SG           Sing… SG-       </span></a>
+<a class="sourceLine" id="cb20-14" data-line-number="14"><span class="co">#&gt;  6 S10615620    2017-10-19 12:4… Singap… SG           Sing… SG-       </span></a>
+<a class="sourceLine" id="cb20-15" data-line-number="15"><span class="co">#&gt;  7 S9732235     2018-04-15 11:3… Singap… SG           Sing… SG-       </span></a>
+<a class="sourceLine" id="cb20-16" data-line-number="16"><span class="co">#&gt;  8 S10440230    2012-04-13 22:0… Singap… SG           Sing… SG-       </span></a>
+<a class="sourceLine" id="cb20-17" data-line-number="17"><span class="co">#&gt;  9 S9811595     2017-07-05 13:1… Singap… SG           Sing… SG-       </span></a>
+<a class="sourceLine" id="cb20-18" data-line-number="18"><span class="co">#&gt; 10 S9829900     2013-09-11 12:2… Singap… SG           Sing… SG-       </span></a>
 <a class="sourceLine" id="cb20-19" data-line-number="19"><span class="co">#&gt; # ... with 171 more rows, and 28 more variables: county &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb20-20" data-line-number="20"><span class="co">#&gt; #   county_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb20-21" data-line-number="21"><span class="co">#&gt; #   atlas_block &lt;chr&gt;, locality &lt;chr&gt;, locality_id &lt;chr&gt;,</span></a>

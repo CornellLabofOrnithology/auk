@@ -64,3 +64,8 @@ ncol(read.delim(f, nrows = 5, quote = ""))
 ncol(read.delim(f_out, nrows = 5, quote = ""))
 }
 }
+\seealso{
+Other text: \code{\link{auk_select}},
+  \code{\link{auk_split}}
+}
+\concept{text}

@@ -22,6 +22,7 @@
 #' species code. For taxa that can't be resolved, this field is `NA`.
 #'
 #' For further details, see \url{http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy}
+#' @family data
 "ebird_taxonomy"
 
 #' eBird States
@@ -41,4 +42,5 @@
 #' - `country_code`: 2-letter ISO country code.
 #' - `state`: state name.
 #' - `state_code`: 4 to 6 character state code.
+#' @family data
 "ebird_states"

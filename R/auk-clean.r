@@ -29,6 +29,7 @@
 #' @return If AWK ran without errors, the output filename is returned, however,
 #'   if an error was encountered the exit code is returned.
 #' @export
+#' @family text
 #' @examples
 #' \dontrun{
 #' # get the path to the example data included in the package

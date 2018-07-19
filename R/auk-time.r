@@ -15,6 +15,7 @@
 #'
 #' @return An `auk_ebd` object.
 #' @export
+#' @family filter
 #' @examples
 #' # only keep checklists started between 6 and 8 in the morning
 #' system.file("extdata/ebd-sample.txt", package = "auk") %>%
