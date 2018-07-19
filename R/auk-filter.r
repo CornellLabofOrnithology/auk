@@ -217,7 +217,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
   if (!missing(awk_file)) {
     writeLines(awk_script, awk_file)
     if (!execute) {
-      return(normalizePath(awk_file))
+      return(normalizePath(awk_file, mustWork = FALSE))
     }
   }
 

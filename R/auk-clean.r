@@ -71,7 +71,7 @@ auk_clean <- function(f_in, f_out, sep = "\t", remove_text = FALSE,
   if (!overwrite && file.exists(f_out)) {
     stop("Output file already exists, use overwrite = TRUE.")
   }
-  f_out <- path.expand(f_out)
+  f_out <- normalizePath(f_out, mustWork = FALSE)
 
   # determine number of columns
   # read header row

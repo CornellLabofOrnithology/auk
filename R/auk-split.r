@@ -48,7 +48,7 @@ auk_split <- function(file, species, prefix = "", ext = "txt", sep = "\t",
     assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
     assertthat::is.flag(overwrite)
   )
-  file <- path.expand(file)
+  file <- normalizePath(file)
   
   # check all species names are valid and convert to scientific
   species_clean <- ebird_species(species)
@@ -66,7 +66,7 @@ auk_split <- function(file, species, prefix = "", ext = "txt", sep = "\t",
   if (!dir.exists(dirname(prefix))) {
     stop("Output directory doesn't exist.")
   }
-  prefix <- path.expand(prefix)
+  prefix <- normalizePath(prefix, mustWork = FALSE)
   f_sp <- paste0(prefix,
                  stringr::str_replace_all(species_clean, "[^a-zA-Z]", "_"),
                  ".", ext)

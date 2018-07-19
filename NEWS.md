@@ -3,6 +3,7 @@
 - Updated to work with EDB version 1.9
 - Fixed bug causing auk to fail on files downloaded via custom download form
 - Modified tests to be more general to all sample data
+- Fixed bug with normalizePath use on Windows
 
 # auk 0.2.1
 

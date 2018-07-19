@@ -45,7 +45,7 @@ test_that("auk_clean won't overwrite an existing file", {
   cleaned <- auk_clean(f, tmp)
 
   expect_error(auk_clean(f, tmp))
-  expect_equal(auk_clean(f, tmp, overwrite = TRUE), tmp)
+  expect_equal(auk_clean(f, tmp, overwrite = TRUE), normalizePath(tmp))
 
   unlink(tmp)
 })
