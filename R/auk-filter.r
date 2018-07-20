@@ -223,9 +223,11 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
 
   # run awk
   # ebd
+  err <- tempfile()
   exit_code <- system2(awk_path,
                        args = paste0("'", awk_script, "' '", x$file, "'"),
-                       stdout = file)
+                       stdout = file, stderr = err)
+  unlink(err)
   if (exit_code != 0) {
     stop("Error running AWK command.")
   } else {
@@ -234,10 +236,12 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
 
   # ebd sampling
   if (filter_sampling) {
+    err <- tempfile()
     exit_code <- system2(awk_path,
                          args = paste0("'", awk_script_sampling, "' '",
                                        x$file_sampling, "'"),
-                         stdout = file_sampling)
+                         stdout = file_sampling, stderr = err)
+    unlink(err)
     if (exit_code != 0) {
       stop("Error running AWK command.")
     } else {
@@ -330,9 +334,11 @@ auk_filter.auk_sampling <- function(x, file, keep, drop, awk_file,
   
   # run awk
   # ebd
+  err <- tempfile()
   exit_code <- system2(awk_path,
                        args = paste0("'", awk_script, "' '", x$file, "'"),
-                       stdout = file)
+                       stdout = file, stderr = err)
+  unlink(err)
   if (exit_code != 0) {
     stop("Error running AWK command.")
   } else {

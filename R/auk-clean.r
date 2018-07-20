@@ -105,9 +105,11 @@ auk_clean <- function(f_in, f_out, sep = "\t", remove_text = FALSE,
                     list(sep = sep, ncols = ncols, print_cols = print_cols))
 
   # run command
+  err <- tempfile()
   exit_code <- system2(awk_path,
                        args = paste0("'", awk, "' ", f_in),
-                       stdout = f_out)
+                       stdout = f_out, stderr = err)
+  unlink(err)
   if (exit_code == 0) {
     f_out
   } else {
