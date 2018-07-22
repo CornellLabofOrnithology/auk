@@ -33,8 +33,8 @@
 <meta property="og:title" content="Lookup species in eBird taxonomy — ebird_species" />
 
 <meta property="og:description" content="Given a list of common or scientific names, check that they appear in the
-official eBird taxonomy and convert them all to scientific names, or common
-names if scientific = FALSE. Un-matched species are returned as NA." />
+official eBird taxonomy and convert them all to scientific names, common
+names, or species codes. Un-matched species are returned as NA." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,12 +104,12 @@ names if scientific = FALSE. Un-matched species are returned as NA." />
     <div class="ref-description">
     
     <p>Given a list of common or scientific names, check that they appear in the
-official eBird taxonomy and convert them all to scientific names, or common
-names if <code>scientific = FALSE</code>. Un-matched species are returned as <code>NA</code>.</p>
+official eBird taxonomy and convert them all to scientific names, common
+names, or species codes. Un-matched species are returned as <code>NA</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ebird_species</span>(<span class='no'>x</span>, <span class='kw'>scientific</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>ebird_species</span>(<span class='no'>x</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"scientific"</span>, <span class='st'>"common"</span>, <span class='st'>"code"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -120,16 +120,16 @@ names if <code>scientific = FALSE</code>. Un-matched species are returned as <co
 English common names, or a mixture of both. Case insensitive.</p></td>
     </tr>
     <tr>
-      <th>scientific</th>
-      <td><p>logical; whether to return scientific (<code>TRUE</code>) or English
-common names (<code>FALSE</code>).</p></td>
+      <th>type</th>
+      <td><p>character; whether to return scientific names (<code>scientific</code>),
+English common names (<code>common</code>), or 6-letter eBird species codes (<code>code</code>).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Character vector of scientific names or common names if names if
-<code>scientific = FALSE</code>.</p>
+    <p>Character vector of species identified by scientific name, common
+name, or species code.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -141,7 +141,7 @@ common names (<code>FALSE</code>).</p></td>
     <pre class="examples"><div class='input'><span class='co'># mix common and scientific names, case-insensitive</span>
 <span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"Blackburnian Warbler"</span>, <span class='st'>"Poecile atricapillus"</span>,
              <span class='st'>"american dipper"</span>, <span class='st'>"Caribou"</span>)
-<span class='co'># species not in the ebird taxonomy return NA</span>
+<span class='co'># note that species not in the ebird taxonomy return NA</span>
 <span class='fu'>ebird_species</span>(<span class='no'>species</span>)</div><div class='output co'>#&gt; [1] "Setophaga fusca"      "Poecile atricapillus" "Cinclus mexicanus"   
 #&gt; [4] NA                    </div></pre>
   </div>

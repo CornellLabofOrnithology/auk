@@ -1,26 +1,27 @@
 #' Lookup species in eBird taxonomy
 #'
 #' Given a list of common or scientific names, check that they appear in the
-#' official eBird taxonomy and convert them all to scientific names, or common
-#' names if `scientific = FALSE`. Un-matched species are returned as `NA`.
+#' official eBird taxonomy and convert them all to scientific names, common
+#' names, or species codes. Un-matched species are returned as `NA`.
 #'
 #' @param x character; species to look up, provided as scientific or
 #'   English common names, or a mixture of both. Case insensitive.
-#' @param scientific logical; whether to return scientific (`TRUE`) or English
-#'   common names (`FALSE`).
+#' @param type character; whether to return scientific names (`scientific`),
+#'   English common names (`common`), or 6-letter eBird species codes (`code`).
 #'
-#' @return Character vector of scientific names or common names if names if
-#'   `scientific = FALSE`.
+#' @return Character vector of species identified by scientific name, common 
+#'   name, or species code.
 #' @export
 #' @family helpers
 #' @examples
 #' # mix common and scientific names, case-insensitive
 #' species <- c("Blackburnian Warbler", "Poecile atricapillus",
 #'              "american dipper", "Caribou")
-#' # species not in the ebird taxonomy return NA
+#' # note that species not in the ebird taxonomy return NA
 #' ebird_species(species)
-ebird_species <- function(x, scientific = TRUE) {
+ebird_species <- function(x, type = c("scientific", "common", "code")) {
   assertthat::assert_that(is.character(x))
+  type <- match.arg(type)
   
   # deal with case issues
   x <- tolower(trimws(x))
@@ -34,9 +35,11 @@ ebird_species <- function(x, scientific = TRUE) {
   # combine
   idx <- ifelse(is.na(sci), com, sci)
   # convert to output format, default scientific
-  if (scientific)  {
+  if (identical(type, "scientific")) {
     return(auk::ebird_taxonomy$scientific_name[idx])
-  } else {
+  } else if (identical(type, "common")) {
     return(auk::ebird_taxonomy$common_name[idx])
+  } else {
+    return(auk::ebird_taxonomy$species_code[idx])
   }
 }

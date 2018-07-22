@@ -1,4 +1,4 @@
-get_header <- function(x, sep) {
+get_header <- function(x, sep = "\t") {
   readLines(x, n = 1) %>%
     stringr::str_split(sep) %>%
     `[[`(1) %>%

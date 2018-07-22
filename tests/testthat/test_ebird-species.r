@@ -21,10 +21,17 @@ test_that("ebird_species NA if not in taxonomy", {
 
 test_that("ebird_species return common names", {
   species <- c("Blackburnian Warbler", "Poecile atricapillus")
-  expect_equal(ebird_species(species, scientific = FALSE),
+  expect_equal(ebird_species(species, type = "common"),
                c("Blackburnian Warbler", "Black-capped Chickadee"))
-  expect_equal(ebird_species("Pityriasis gymnocephala", scientific = FALSE),
+  expect_equal(ebird_species("Pityriasis gymnocephala", type = "common"),
                "Bornean Bristlehead")
+})
+
+test_that("ebird_species return species codes", {
+  species <- c("Blackburnian Warbler", "Poecile atricapillus")
+  expect_equal(ebird_species(species, type = "code"), c("bkbwar", "bkcchi"))
+  expect_equal(ebird_species("Pityriasis gymnocephala", type = "code"), 
+               "borbri1")
 })
 
 test_that("ebird_species error for non-character argument", {
