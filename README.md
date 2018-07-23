@@ -154,7 +154,7 @@ drops these erroneous records and removes the blank column.
     f_out <- tempfile()
     # remove problem records
     auk_clean(f, f_out)
-    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpLAoI7Z/filee879121df663"
+    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpvusTpk/file1ed5612d4c20"
     # number of lines in input
     length(readLines(f))
     #> [1] 51
@@ -228,7 +228,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_complete()
     ebd
     #> Input 
-    #>   EBD: /Users/mes335/Library/R/3.5/library/auk/extdata/ebd-sample.txt 
+    #>   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
     #> 
     #> Output 
     #>   Filters not executed
