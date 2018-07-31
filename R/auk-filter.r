@@ -406,6 +406,15 @@ awk_translate <- function(filters, col_idx, sep, select) {
     condition <- paste0("$", idx, " in states")
     filter_strings$state <- str_interp(awk_if, list(condition = condition))
   }
+  # bcr filter
+  if (length(filters$bcr) == 0) {
+    filter_strings$bcr <- ""
+  } else {
+    idx <- col_idx$index[col_idx$id == "bcr"]
+    condition <- paste0("$", idx, " == \"", filters$bcr, "\"",
+                        collapse = " || ")
+    filter_strings$bcr <- str_interp(awk_if, list(condition = condition))
+  }
   # extent filter
   if (length(filters$extent) == 0) {
     filter_strings$extent <- ""
@@ -555,6 +564,7 @@ BEGIN {
   ${species}
   ${country}
   ${state}
+  ${bcr}
   ${extent}
   ${date_substr}
   ${date}

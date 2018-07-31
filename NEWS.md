@@ -1,3 +1,8 @@
+# auk 0.2.3
+
+- New auk_bcr() function to extract data from BCRs
+- Added bcr_codes data frame to look up BCR names and codes
+
 # auk 0.2.2
 
 - Updated to work with EDB version 1.9

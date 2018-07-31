@@ -1,3 +1,7 @@
+is_integer <- function(x) {
+  x == round(x)
+}
+
 get_header <- function(x, sep = "\t") {
   readLines(x, n = 1) %>%
     stringr::str_split(sep) %>%

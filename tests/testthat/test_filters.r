@@ -115,6 +115,25 @@ test_that("auk_state/country mutually exclusive", {
   expect_length(ebd$filters$state, 2)
 })
 
+test_that("auk_bcr", {
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd() %>% 
+    auk_bcr(bcr = 24)
+  
+  # works correctly
+  expect_equal(ebd$filters$bcr, 24)
+  
+  # multiple bcrs
+  ebd <- auk_bcr(ebd, bcr = c(24, 22))
+  expect_equal(ebd$filters$bcr, c(22, 24))
+  
+  # raises error for bad input
+  expect_error(auk_bcr(ebd, "22"))
+  expect_error(auk_bcr(ebd, 2.2))
+  expect_error(auk_bcr(ebd, 0))
+  expect_error(auk_bcr(ebd, 100))
+})
+
 test_that("auk_extent", {
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
     auk_ebd()

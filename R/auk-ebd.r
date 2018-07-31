@@ -68,13 +68,15 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
   # identify columns required for filtering
   filter_cols <- data.frame(
     id = c("species",
-           "country", "state", "lat", "lng",
+           "country", "state", "bcr",
+           "lat", "lng", 
            "date", "time", "last_edited",
            "protocol", "project", 
            "duration", "distance", 
            "breeding", "complete"),
     name = c("scientific name",
-             "country code", "state code", "latitude", "longitude",
+             "country code", "state code", "bcr code",
+             "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
              "protocol type", "project code",
@@ -94,7 +96,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
       file.exists(file_sampling)
     )
     file_sampling <- normalizePath(file_sampling)
-    # species not in sampling data
+    # variables not in sampling data
     not_in_sampling <- c("species", "breeding")
     filter_cols_sampling <- filter_cols[!filter_cols$id %in% not_in_sampling, ]
     # read header rows
@@ -127,6 +129,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         species = character(),
         country = character(),
         state = character(),
+        bcr = integer(),
         extent = numeric(),
         date = character(),
         time = character(),
@@ -192,6 +195,16 @@ print.auk_ebd <- function(x, ...) {
     cat(paste(x$filters$state, collapse = ", "))
   } else {
     cat(paste0(length(x$filters$state), " states"))
+  }
+  cat("\n")
+  # bcr filter
+  cat("  BCRs: ")
+  if (length(x$filters$bcr) == 0) {
+    cat("all")
+  } else if (length(x$filters$bcr) <= 10) {
+    cat(paste(x$filters$bcr, collapse = ", "))
+  } else {
+    cat(paste0(length(x$filters$bcr), " BCRs"))
   }
   cat("\n")
   # extent filter

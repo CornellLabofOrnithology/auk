@@ -25,7 +25,7 @@ An \code{auk_ebd} object.
 }
 \description{
 Define a filter for the eBird Basic Dataset (EBD) based on a set of
-states This function only defines the filter and, once all filters have
+states. This function only defines the filter and, once all filters have
 been defined, \code{\link[=auk_filter]{auk_filter()}} should be used to call AWK and perform the
 filtering.
 }
@@ -50,12 +50,13 @@ ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 auk_state(ebd, states)
 }
 \seealso{
-Other filter: \code{\link{auk_breeding}},
-  \code{\link{auk_complete}}, \code{\link{auk_country}},
-  \code{\link{auk_date}}, \code{\link{auk_distance}},
-  \code{\link{auk_duration}}, \code{\link{auk_extent}},
-  \code{\link{auk_filter}}, \code{\link{auk_last_edited}},
-  \code{\link{auk_project}}, \code{\link{auk_protocol}},
-  \code{\link{auk_species}}, \code{\link{auk_time}}
+Other filter: \code{\link{auk_bcr}},
+  \code{\link{auk_breeding}}, \code{\link{auk_complete}},
+  \code{\link{auk_country}}, \code{\link{auk_date}},
+  \code{\link{auk_distance}}, \code{\link{auk_duration}},
+  \code{\link{auk_extent}}, \code{\link{auk_filter}},
+  \code{\link{auk_last_edited}}, \code{\link{auk_project}},
+  \code{\link{auk_protocol}}, \code{\link{auk_species}},
+  \code{\link{auk_time}}
 }
 \concept{filter}

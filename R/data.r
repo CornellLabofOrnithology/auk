@@ -44,3 +44,16 @@
 #' - `state_code`: 4 to 6 character state code.
 #' @family data
 "ebird_states"
+
+#' BCR Codes
+#'
+#' A data frame of Bird Conservation Region (BCR) codes. BCRs are ecologically
+#' distinct regions in North America with similar bird communities, habitats,
+#' and resource management issues. These codes are required to filter by BCR
+#' using [auk_bcr()].
+#' 
+#' @format A data frame with two variables and 66 rows:
+#' - `bcr_code`: integer code from 1 to 66.
+#' - `bcr_name`: name of BCR.
+#' @family data
+"bcr_codes"

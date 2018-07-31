@@ -1,7 +1,7 @@
 #' Filter the eBird data by state
 #'
 #' Define a filter for the eBird Basic Dataset (EBD) based on a set of
-#' states This function only defines the filter and, once all filters have
+#' states. This function only defines the filter and, once all filters have
 #' been defined, [auk_filter()] should be used to call AWK and perform the
 #' filtering.
 #'

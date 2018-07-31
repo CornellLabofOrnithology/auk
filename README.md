@@ -154,7 +154,7 @@ drops these erroneous records and removes the blank column.
     f_out <- tempfile()
     # remove problem records
     auk_clean(f, f_out)
-    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpvusTpk/file1ed5612d4c20"
+    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpxLkvHS/fileb200246496a4"
     # number of lines in input
     length(readLines(f))
     #> [1] 51
@@ -173,8 +173,11 @@ Users should start by defining a reference to the dataset file with
 -   `auk_country()`: filter by country using the standard English names
     or [ISO 2-letter country
     codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
--   `auk_state()`: filter by state using the eBird state codes, see
+-   `auk_state()`: filter by state using eBird state codes, see
     `?ebird_states`.
+-   `auk_bcr()`: filter by [Bird Conservation Region
+    (BCR)](http://nabci-us.org/resources/bird-conservation-regions/)
+    using BCR codes, see `?bcr_codes`.
 -   `auk_extent()`: filter by spatial extent, i.e. a range of latitudes
     and longitudes in decimal degrees.
 -   `auk_date()`: filter to checklists from a range of dates. To extract
@@ -237,6 +240,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
     #>   Species: Cyanocitta cristata, Perisoreus canadensis
     #>   Countries: CA, MX, US
     #>   States: all
+    #>   BCRs: all
     #>   Spatial extent: Lon -100 - -80; Lat 37 - 52
     #>   Date: 2012-01-01 - 2012-12-31
     #>   Start time: 06:00-09:00
