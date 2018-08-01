@@ -8,7 +8,9 @@ auk_clean(f_in, f_out, sep = "\\t", remove_text = FALSE,
   overwrite = FALSE)
 }
 \arguments{
-\item{f_in}{character; input file.}
+\item{f_in}{character; input file. If file is not found as specified, it will
+be looked for in the directory specified by the \code{EBD_PATH} environment
+variable.}
 
 \item{f_out}{character; output file.}
 

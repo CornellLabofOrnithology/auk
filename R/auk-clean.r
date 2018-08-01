@@ -5,7 +5,9 @@
 #' function drops these problematic records. **Note that this function typically
 #' takes at least 3 hours to run on the full dataset**
 #'
-#' @param f_in character; input file.
+#' @param f_in character; input file. If file is not found as specified, it will 
+#'   be looked for in the directory specified by the `EBD_PATH` environment 
+#'   variable.
 #' @param f_out character; output file.
 #' @param sep character; the input field separator, the basic dataset is tab
 #'   separated by default. Must only be a single character and space delimited
@@ -54,16 +56,16 @@
 auk_clean <- function(f_in, f_out, sep = "\t", remove_text = FALSE, 
                       overwrite = FALSE) {
   # checks
-  awk_path <- auk_getpath()
+  awk_path <- auk_get_awk_path()
   if (is.na(awk_path)) {
     stop("auk_clean() requires a valid AWK install.")
   }
   assertthat::assert_that(
-    file.exists(f_in),
     assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
     assertthat::is.flag(remove_text),
     assertthat::is.flag(overwrite)
   )
+  f_in <- ebd_file(f_in)
   # check output file
   if (!dir.exists(dirname(f_out))) {
     stop("Output directory doesn't exist.")

@@ -7,7 +7,9 @@
 auk_ebd(file, file_sampling, sep = "\\t")
 }
 \arguments{
-\item{file}{character; input file.}
+\item{file}{character; input file. If file is not found as specified, it will
+be looked for in the directory specified by the \code{EBD_PATH} environment
+variable.}
 
 \item{file_sampling}{character; optional input sampling event data (i.e.
 checklists) file, required if you intend to zero-fill the data to produce a
@@ -15,7 +17,8 @@ presence-absence data set. This file consists of just effort information
 for every eBird checklist. Any species not appearing in the EBD for a given
 checklist is implicitly considered to have a count of 0. This file should
 be downloaded at the same time as the basic dataset to ensure they are in
-sync.}
+sync. If file is not found as specified, it will be looked for in the
+directory specified by the \code{EBD_PATH} environment variable.}
 
 \item{sep}{character; the input field separator, the eBird data are tab
 separated so this should generally not be modified. Must only be a single

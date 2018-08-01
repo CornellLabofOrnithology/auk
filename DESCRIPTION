@@ -26,14 +26,16 @@ Imports:
     rlang,
     stringi,
     stringr,
-    tidyr
+    tidyr,
+    utils
 Suggests: 
     covr,
     data.table,
     knitr,
     readr,
     rmarkdown,
-    testthat
+    testthat,
+    rstudioapi
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true

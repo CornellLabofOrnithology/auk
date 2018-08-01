@@ -100,8 +100,12 @@
 <a href="#auk-0-2-3" class="anchor"></a>auk 0.2.3<small> Unreleased </small>
 </h1>
 <ul>
-<li>New auk_bcr() function to extract data from BCRs</li>
-<li>Added bcr_codes data frame to look up BCR names and codes</li>
+<li>New <code><a href="../reference/auk_bcr.html">auk_bcr()</a></code> function to extract data from BCRs</li>
+<li>Added <code>bcr_codes</code> data frame to look up BCR names and codes</li>
+<li>
+<code>auk_getpath()</code> renamed <code><a href="../reference/auk_get_awk_path.html">auk_get_awk_path()</a></code>, and added <code><a href="../reference/auk_set_awk_path.html">auk_set_awk_path()</a></code>
+</li>
+<li>Added <code><a href="../reference/auk_set_ebd_path.html">auk_set_ebd_path()</a></code> and <code><a href="../reference/auk_get_ebd_path.html">auk_get_ebd_path()</a></code> to set and get the <code>EBD_PATH</code> environment variable. Now users only need to set this once and just refer to the file name, rather than specifying the full path every time.</li>
 </ul>
 </div>
     <div id="auk-0-2-2" class="section level1">
@@ -111,10 +115,11 @@
 <ul>
 <li>Updated to work with EDB version 1.9</li>
 <li>Modified tests to be more general to all sample data</li>
-<li>ebird_species() now returns 6-letter species codes</li>
+<li>
+<code><a href="../reference/ebird_species.html">ebird_species()</a></code> now returns 6-letter species codes</li>
 <li>Fixed bug causing auk to fail on files downloaded via custom download form</li>
-<li>Fixed bug with normalizePath() use on Windows</li>
-<li>Fixed bug with system2() on Windows</li>
+<li>Fixed bug with <code>normalizePath()</code> use on Windows</li>
+<li>Fixed bug with <code>system2()</code> on Windows</li>
 </ul>
 </div>
     <div id="auk-0-2-1" class="section level1">

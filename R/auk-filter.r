@@ -93,7 +93,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
                                sep = "\t", filter_sampling = TRUE, 
                                execute = TRUE, overwrite = FALSE, ...) {
   # checks
-  awk_path <- auk_getpath()
+  awk_path <- auk_get_awk_path()
   if (execute && is.na(awk_path)) {
     stop("auk_filter() requires a valid AWK install, unless execute = FALSE.")
   }
@@ -257,7 +257,7 @@ auk_filter.auk_sampling <- function(x, file, keep, drop, awk_file,
                                     sep = "\t", execute = TRUE, 
                                     overwrite = FALSE, ...) {
   # checks
-  awk_path <- auk_getpath()
+  awk_path <- auk_get_awk_path()
   if (execute && is.na(awk_path)) {
     stop("auk_filter() requires a valid AWK install, unless execute = FALSE.")
   }

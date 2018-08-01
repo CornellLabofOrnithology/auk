@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lookup species in eBird taxonomy — ebird_species • auk</title>
+<title>Set the path to EBD text files — auk_set_ebd_path • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,15 @@
 
 
 
-<meta property="og:title" content="Lookup species in eBird taxonomy — ebird_species" />
+<meta property="og:title" content="Set the path to EBD text files — auk_set_ebd_path" />
 
-<meta property="og:description" content="Given a list of common or scientific names, check that they appear in the
-official eBird taxonomy and convert them all to scientific names, common
-names, or species codes. Un-matched species are returned as NA." />
+<meta property="og:description" content="Users of auk are encouraged to set the path to the directory containing the
+eBird Basic Dataset (EBD) text files in the EBD_PATH environment variable.
+All functions referencing the EBD or sampling event data files will check in
+this directory to find the files, thus avoiding the need to specify the full
+path every time. This will increase the portability of your code. This
+function is a helper for editing the .Renviron file to add this path, it is
+also possible to manually edit the file." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -96,53 +100,50 @@ names, or species codes. Un-matched species are returned as NA." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lookup species in eBird taxonomy</h1>
-    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/ebird-species.r'><code>R/ebird-species.r</code></a></small>
-    <div class="hidden name"><code>ebird_species.Rd</code></div>
+    <h1>Set the path to EBD text files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-set-ebd-path.r'><code>R/auk-set-ebd-path.r</code></a></small>
+    <div class="hidden name"><code>auk_set_ebd_path.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Given a list of common or scientific names, check that they appear in the
-official eBird taxonomy and convert them all to scientific names, common
-names, or species codes. Un-matched species are returned as <code>NA</code>.</p>
+    <p>Users of <code>auk</code> are encouraged to set the path to the directory containing the
+eBird Basic Dataset (EBD) text files in the <code>EBD_PATH</code> environment variable.
+All functions referencing the EBD or sampling event data files will check in
+this directory to find the files, thus avoiding the need to specify the full
+path every time. This will increase the portability of your code. This
+function is a helper for editing the .Renviron file to add this path, it is
+also possible to manually edit the file.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ebird_species</span>(<span class='no'>x</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"scientific"</span>, <span class='st'>"common"</span>, <span class='st'>"code"</span>))</pre>
+    <pre class="usage"><span class='fu'>auk_set_ebd_path</span>(<span class='no'>path</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>character; species to look up, provided as scientific or
-English common names, or a mixture of both. Case insensitive.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>character; whether to return scientific names (<code>scientific</code>),
-English common names (<code>common</code>), or 6-letter eBird species codes (<code>code</code>).</p></td>
+      <th>path</th>
+      <td><p>character; directory where the EBD text files are stored, e.g.
+<code>"/home/matt/ebd"</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Character vector of species identified by scientific name, common
-name, or species code.</p>
+    <p>Opens .Renviron for editing and returns the AWK path invisibly.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other helpers: <code><a href='auk_version_date.html'>auk_version_date</a></code></p></div>
+    <div class='dont-index'><p>Other paths: <code><a href='auk_get_awk_path.html'>auk_get_awk_path</a></code>,
+  <code><a href='auk_get_ebd_path.html'>auk_get_ebd_path</a></code>,
+  <code><a href='auk_set_awk_path.html'>auk_set_awk_path</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># mix common and scientific names, case-insensitive</span>
-<span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"Blackburnian Warbler"</span>, <span class='st'>"Poecile atricapillus"</span>,
-             <span class='st'>"american dipper"</span>, <span class='st'>"Caribou"</span>)
-<span class='co'># note that species not in the ebird taxonomy return NA</span>
-<span class='fu'>ebird_species</span>(<span class='no'>species</span>)</div><div class='output co'>#&gt; [1] "Setophaga fusca"      "Poecile atricapillus" "Cinclus mexicanus"   
-#&gt; [4] NA                    </div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>auk_set_ebd_path</span>(<span class='st'>"/home/matt/ebd"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

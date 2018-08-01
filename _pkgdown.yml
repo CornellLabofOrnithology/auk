@@ -32,6 +32,9 @@ reference:
 - title: Data
   contents:
   - has_concept("data")
+- title: Path Management
+  contents:
+  - has_concept("paths")
 - title: Helpers
   contents:
   - has_concept("helpers")

@@ -37,7 +37,7 @@ auk_select <- function(x, select, file, sep = "\t", overwrite = FALSE) {
 #' @export
 auk_select.auk_ebd <- function(x, select, file, sep = "\t", overwrite = FALSE) {
   # checks
-  awk_path <- auk_getpath()
+  awk_path <- auk_get_awk_path()
   assertthat::assert_that(
     is.character(select),
     assertthat::is.string(file)

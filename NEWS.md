@@ -1,16 +1,20 @@
 # auk 0.2.3
 
-- New auk_bcr() function to extract data from BCRs
-- Added bcr_codes data frame to look up BCR names and codes
+- New `auk_bcr()` function to extract data from BCRs
+- Added `bcr_codes` data frame to look up BCR names and codes
+- `auk_getpath()` renamed `auk_get_awk_path()`, and added `auk_set_awk_path()`
+- Added `auk_set_ebd_path()` and `auk_get_ebd_path()` to set and get the 
+`EBD_PATH` environment variable. Now users only need to set this once and just 
+refer to the file name, rather than specifying the full path every time.
 
 # auk 0.2.2
 
 - Updated to work with EDB version 1.9
 - Modified tests to be more general to all sample data
-- ebird_species() now returns 6-letter species codes
+- `ebird_species()` now returns 6-letter species codes
 - Fixed bug causing auk to fail on files downloaded via custom download form
-- Fixed bug with normalizePath() use on Windows
-- Fixed bug with system2() on Windows
+- Fixed bug with `normalizePath()` use on Windows
+- Fixed bug with `system2()` on Windows
 
 # auk 0.2.1
 

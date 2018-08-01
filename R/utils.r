@@ -121,3 +121,34 @@ choose_reader <- function(x) {
   }
   return(reader)
 }
+
+# adapted from usethis::edit_r_environ()
+edit_r_environ <- function(message) {
+    renv_path <- path.expand("~/.Renviron")
+    if (!file.exists(renv_path)) {
+      file.create(renv_path)
+    }
+    if (interactive() && !identical(Sys.getenv("TESTTHAT"), "true")) {
+      message("Opening .Renviron for editing. Add the following line:")
+      message(message)
+      message("Restart the R session for changes to take effect.")
+      if (requireNamespace("rstudioapi", quietly = TRUE) && 
+          rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
+        rstudioapi::navigateToFile(renv_path)
+      } else {
+        utils::file.edit(renv_path)
+      }
+    }
+    invisible(renv_path)
+}
+
+ebd_file <- function(x, exists = TRUE) {
+  p <- auk_get_ebd_path()
+  if (file.exists(x)) {
+    return(normalizePath(x))
+  } else if (!is.na(p) && file.exists(file.path(p, x))) {
+    return(normalizePath(file.path(p, x)))
+  } else {
+    stop(paste("File not found:\n", x))
+  }
+}

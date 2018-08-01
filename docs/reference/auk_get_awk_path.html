@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>OS specific path to AWK — auk_getpath • auk</title>
+<title>OS specific path to AWK executable — auk_get_awk_path • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,13 @@
 
 
 
-<meta property="og:title" content="OS specific path to AWK — auk_getpath" />
+<meta property="og:title" content="OS specific path to AWK executable — auk_get_awk_path" />
 
-<meta property="og:description" content="Return the OS specific path to AWK, or highlights if it's not installed. To
-manually set the path to AWK, set the AWK_PATH environment variable in your
-.Renviron file." />
+<meta property="og:description" content="Return the OS specific path to AWK (e.g. &quot;C:/cygwin64/bin/gawk.exe&quot; or
+&quot;/usr/bin/awk&quot;), or highlights if it's not installed. To manually set the
+path to AWK, set the AWK_PATH environment variable in your .Renviron
+file, which can be accomplished with the helper function
+auk_set_awk_path(path)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -96,20 +98,22 @@ manually set the path to AWK, set the AWK_PATH environment variable in your
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>OS specific path to AWK</h1>
-    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-getpath.r'><code>R/auk-getpath.r</code></a></small>
-    <div class="hidden name"><code>auk_getpath.Rd</code></div>
+    <h1>OS specific path to AWK executable</h1>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-get-awk-path.r'><code>R/auk-get-awk-path.r</code></a></small>
+    <div class="hidden name"><code>auk_get_awk_path.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return the OS specific path to AWK, or highlights if it's not installed. To
-manually set the path to AWK, set the <code>AWK_PATH</code> environment variable in your
-<code>.Renviron</code> file.</p>
+    <p>Return the OS specific path to AWK (e.g. <code>"C:/cygwin64/bin/gawk.exe"</code> or
+<code>"/usr/bin/awk"</code>), or highlights if it's not installed. To manually set the
+path to AWK, set the <code>AWK_PATH</code> environment variable in your <code>.Renviron</code>
+file, which can be accomplished with the helper function
+<code><a href='auk_set_awk_path.html'>auk_set_awk_path(path)</a></code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>auk_getpath</span>()</pre>
+    <pre class="usage"><span class='fu'>auk_get_awk_path</span>()</pre>
         
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -117,12 +121,13 @@ manually set the path to AWK, set the <code>AWK_PATH</code> environment variable
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other helpers: <code><a href='auk_version_date.html'>auk_version_date</a></code>,
-  <code><a href='ebird_species.html'>ebird_species</a></code></p></div>
+    <div class='dont-index'><p>Other paths: <code><a href='auk_get_ebd_path.html'>auk_get_ebd_path</a></code>,
+  <code><a href='auk_set_awk_path.html'>auk_set_awk_path</a></code>,
+  <code><a href='auk_set_ebd_path.html'>auk_set_ebd_path</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>auk_getpath</span>()</div><div class='output co'>#&gt; [1] "/usr/bin/awk"</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>auk_get_awk_path</span>()</div><div class='output co'>#&gt; [1] "/usr/bin/awk"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

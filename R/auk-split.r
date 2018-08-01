@@ -36,7 +36,7 @@
 #' }
 auk_split <- function(file, species, prefix = "", ext = "txt", sep = "\t",
                       overwrite = FALSE) {
-  awk_path <- auk_getpath()
+  awk_path <- auk_get_awk_path()
   if (is.na(awk_path)) {
     stop("auk_clean() requires a valid AWK install.")
   }

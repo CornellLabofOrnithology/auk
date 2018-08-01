@@ -154,7 +154,7 @@ drops these erroneous records and removes the blank column.
     f_out <- tempfile()
     # remove problem records
     auk_clean(f, f_out)
-    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpxLkvHS/fileb200246496a4"
+    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpd5J5Bg/file10d466e2ac957"
     # number of lines in input
     length(readLines(f))
     #> [1] 51
