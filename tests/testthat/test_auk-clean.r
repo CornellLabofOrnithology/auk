@@ -2,7 +2,7 @@ context("auk_clean")
 
 test_that("auk_clean cleans out unreadable records", {
   skip_on_cran()
-  skip_on_os("windows")
+  #skip_on_os("windows")
 
   f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
   tmp <- tempfile()
@@ -21,7 +21,7 @@ test_that("auk_clean cleans out unreadable records", {
 
 test_that("auk_clean throws error for bad input", {
   skip_on_cran()
-  skip_on_os("windows")
+  #skip_on_os("windows")
 
   f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
   tmp <- tempfile()
@@ -38,7 +38,7 @@ test_that("auk_clean throws error for bad input", {
 
 test_that("auk_clean won't overwrite an existing file", {
   skip_on_cran()
-  skip_on_os("windows")
+  #skip_on_os("windows")
 
   f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
   tmp <- tempfile()
