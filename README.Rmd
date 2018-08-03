@@ -128,7 +128,7 @@ length(readLines(f_out))
 - `auk_country()`: filter by country using the standard English names or [ISO 2-letter country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 - `auk_state()`: filter by state using eBird state codes, see `?ebird_states`.
 - `auk_bcr()`: filter by [Bird Conservation Region (BCR)](http://nabci-us.org/resources/bird-conservation-regions/) using BCR codes, see `?bcr_codes`.
-- `auk_extent()`: filter by spatial extent, i.e. a range of latitudes and longitudes in decimal degrees.
+- `auk_extent()`: filter by spatial extent (bounding box), i.e. a range of latitudes and longitudes in decimal degrees.
 - `auk_date()`: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard "`*`" in place of the year, e.g. `date = c("*-05-01", "*-06-30")` for observations from May and June of any year.
 - `auk_last_edited()`: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.
 - `auk_protocol()`: filter to checklists that following a specific search protocol, either stationary, traveling, or casual.

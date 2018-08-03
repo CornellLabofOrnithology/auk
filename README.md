@@ -154,7 +154,7 @@ drops these erroneous records and removes the blank column.
     f_out <- tempfile()
     # remove problem records
     auk_clean(f, f_out)
-    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmpd5J5Bg/file10d466e2ac957"
+    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp4CeNPq/file55eb83bb481"
     # number of lines in input
     length(readLines(f))
     #> [1] 51
@@ -178,8 +178,8 @@ Users should start by defining a reference to the dataset file with
 -   `auk_bcr()`: filter by [Bird Conservation Region
     (BCR)](http://nabci-us.org/resources/bird-conservation-regions/)
     using BCR codes, see `?bcr_codes`.
--   `auk_extent()`: filter by spatial extent, i.e. a range of latitudes
-    and longitudes in decimal degrees.
+-   `auk_extent()`: filter by spatial extent (bounding box), i.e. a
+    range of latitudes and longitudes in decimal degrees.
 -   `auk_date()`: filter to checklists from a range of dates. To extract
     observations from a range of dates, regardless of year, use the
     wildcard “`*`” in place of the year, e.g.

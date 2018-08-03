@@ -2,7 +2,7 @@
 % Please edit documentation in R/auk-extent.r
 \name{auk_extent}
 \alias{auk_extent}
-\title{Filter the eBird data by spatial extent}
+\title{Filter the eBird data by spatial extent (bounding box)}
 \usage{
 auk_extent(x, extent)
 }
@@ -10,18 +10,17 @@ auk_extent(x, extent)
 \item{x}{\code{auk_ebd} or \code{auk_sampling} object; reference to file created by
 \code{\link[=auk_ebd]{auk_ebd()}} or \code{\link[=auk_sampling]{auk_sampling()}}.}
 
-\item{extent}{numeric; spatial extent expressed as the range of latitudes
-and longitudes in decimal degrees: \code{c(lng_min, lat_min, lng_max, lat_max)}.
-Note that longitudes in the Western Hemisphere and latitudes sound of the
-equator should be given as negative numbers.}
+\item{extent}{numeric; spatial extent (bounding box) expressed as the range
+of latitudes and longitudes in decimal degrees: \code{c(lng_min, lat_min, lng_max, lat_max)}. Note that longitudes in the Western Hemisphere and
+latitudes sound of the equator should be given as negative numbers.}
 }
 \value{
 An \code{auk_ebd} object.
 }
 \description{
-Define a filter for the eBird Basic Dataset (EBD) based on spatial extent.
-This function only defines the filter and, once all filters have been
-defined, \code{\link[=auk_filter]{auk_filter()}} should be used to call AWK and perform the
+Define a filter for the eBird Basic Dataset (EBD) based on spatial extent
+(bounding box). This function only defines the filter and, once all filters
+have been defined, \code{\link[=auk_filter]{auk_filter()}} should be used to call AWK and perform the
 filtering.
 }
 \details{
