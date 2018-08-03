@@ -2,7 +2,6 @@ context("auk_filter")
 
 test_that("auk_filter filter an ebd", {
   skip_on_cran()
-  skip_on_os("windows")
 
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
@@ -64,7 +63,6 @@ test_that("auk_filter filter an ebd", {
 
 test_that("auk_filter filter sampling and ebd files", {
   skip_on_cran()
-  skip_on_os("windows")
 
   # set up filters
   f <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
@@ -99,7 +97,6 @@ test_that("auk_filter filter sampling and ebd files", {
 
 test_that("auk_filter turn off filtering of sampling event data", {
   skip_on_cran()
-  skip_on_os("windows")
 
   # set up filters
   f <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
@@ -117,7 +114,6 @@ test_that("auk_filter turn off filtering of sampling event data", {
 
 test_that("auk_filter won't overwrite files", {
   skip_on_cran()
-  skip_on_os("windows")
 
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
@@ -153,7 +149,6 @@ test_that("auk_filter can save awk file on any system", {
 
 test_that("auk_filter filter an auk_sampling object", {
   skip_on_cran()
-  skip_on_os("windows")
   
   # set up filters
   f <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
@@ -183,7 +178,6 @@ test_that("auk_filter filter an auk_sampling object", {
 
 test_that("auk_filter works with wildcard dates", {
   skip_on_cran()
-  skip_on_os("windows")
   
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")

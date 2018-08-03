@@ -3,7 +3,6 @@ library(dplyr)
 
 test_that("auk_split splits correctly", {
   skip_on_cran()
-  skip_on_os("windows")
   
   # split into two species files
   species <- c("Perisoreus canadensis", "Cyanocitta stelleri")
@@ -27,7 +26,6 @@ test_that("auk_split splits correctly", {
 
 test_that("auk_split throws error for bad input", {
   skip_on_cran()
-  skip_on_os("windows")
   
   species <- c("Perisoreus canadensis", "Cyanocitta stelleri")
   prefix <- file.path(tempdir(), "ebd_")
@@ -44,7 +42,6 @@ test_that("auk_split throws error for bad input", {
 
 test_that("auk_split won't overwrite an existing file", {
   skip_on_cran()
-  skip_on_os("windows")
   
   # split into two species files
   species <- c("Perisoreus canadensis", "Cyanocitta stelleri")

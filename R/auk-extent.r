@@ -1,16 +1,16 @@
-#' Filter the eBird data by spatial extent
+#' Filter the eBird data by spatial extent (bounding box)
 #'
-#' Define a filter for the eBird Basic Dataset (EBD) based on spatial extent.
-#' This function only defines the filter and, once all filters have been
-#' defined, [auk_filter()] should be used to call AWK and perform the
+#' Define a filter for the eBird Basic Dataset (EBD) based on spatial extent
+#' (bounding box). This function only defines the filter and, once all filters
+#' have been defined, [auk_filter()] should be used to call AWK and perform the
 #' filtering.
 #'
 #' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
 #'   [auk_ebd()] or [auk_sampling()].
-#' @param extent numeric; spatial extent expressed as the range of latitudes
-#'   and longitudes in decimal degrees: `c(lng_min, lat_min, lng_max, lat_max)`. 
-#'   Note that longitudes in the Western Hemisphere and latitudes sound of the 
-#'   equator should be given as negative numbers.
+#' @param extent numeric; spatial extent (bounding box) expressed as the range
+#'   of latitudes and longitudes in decimal degrees: `c(lng_min, lat_min,
+#'   lng_max, lat_max)`. Note that longitudes in the Western Hemisphere and
+#'   latitudes sound of the equator should be given as negative numbers.
 #' 
 #' @details This function can also work with on an `auk_sampling` object if the 
 #'   user only wishes to filter the sampling event data.

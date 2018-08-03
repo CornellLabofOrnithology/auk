@@ -2,7 +2,6 @@ context("auk_select")
 
 test_that("auk_select works on ebd", {
   skip_on_cran()
-  skip_on_os("windows")
   
   # columns
   cols <- c("latitude", "LONGITUDE",
@@ -27,7 +26,6 @@ test_that("auk_select works on ebd", {
 
 test_that("auk_select works on sampling events", {
   skip_on_cran()
-  skip_on_os("windows")
   
   # columns
   cols <- c("latitude", "LONGITUDE",
