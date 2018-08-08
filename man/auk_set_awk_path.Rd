@@ -4,21 +4,24 @@
 \alias{auk_set_awk_path}
 \title{Set a custom path to AWK executable}
 \usage{
-auk_set_awk_path(path)
+auk_set_awk_path(path, overwrite = FALSE)
 }
 \arguments{
 \item{path}{character; path to the AWK executable on your system, e.g.
 \code{"C:/cygwin64/bin/gawk.exe"} or \code{"/usr/bin/awk"}.}
+
+\item{overwrite}{logical; should the existing \code{AWK_PATH} be overwritten if it
+has already been set in .Renviron.}
 }
 \value{
-Opens .Renviron for editing and returns the AWK path invisibly.
+Edits .Renviron, then returns the AWK path invisibly.
 }
 \description{
 If AWK has been installed in a non-standard location, the environment
 variable \code{AWK_PATH} must be set to specify the location of the executable.
-This function is a helper for editing the .Renviron file to add this path.
-\strong{Most users should NOT set \code{AWK_PATH}, only do so if you have installed AWK
-in non-standard location and \code{auk} cannot find it.}
+Use this function to set \code{AWK_PATH} in your .Renviron file. \strong{Most users
+should NOT set \code{AWK_PATH}, only do so if you have installed AWK in
+non-standard location and \code{auk} cannot find it.}
 }
 \examples{
 \dontrun{

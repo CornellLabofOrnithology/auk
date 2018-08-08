@@ -34,8 +34,7 @@ Suggests:
     knitr,
     readr,
     rmarkdown,
-    testthat,
-    rstudioapi
+    testthat
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true

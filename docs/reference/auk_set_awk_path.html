@@ -34,9 +34,9 @@
 
 <meta property="og:description" content="If AWK has been installed in a non-standard location, the environment
 variable AWK_PATH must be set to specify the location of the executable.
-This function is a helper for editing the .Renviron file to add this path.
-Most users should NOT set AWK_PATH, only do so if you have installed AWK
-in non-standard location and auk cannot find it." />
+Use this function to set AWK_PATH in your .Renviron file. Most users
+should NOT set AWK_PATH, only do so if you have installed AWK in
+non-standard location and auk cannot find it." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -107,13 +107,13 @@ in non-standard location and auk cannot find it." />
     
     <p>If AWK has been installed in a non-standard location, the environment
 variable <code>AWK_PATH</code> must be set to specify the location of the executable.
-This function is a helper for editing the .Renviron file to add this path.
-<strong>Most users should NOT set <code>AWK_PATH</code>, only do so if you have installed AWK
-in non-standard location and <code>auk</code> cannot find it.</strong></p>
+Use this function to set <code>AWK_PATH</code> in your .Renviron file. <strong>Most users
+should NOT set <code>AWK_PATH</code>, only do so if you have installed AWK in
+non-standard location and <code>auk</code> cannot find it.</strong></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>auk_set_awk_path</span>(<span class='no'>path</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_set_awk_path</span>(<span class='no'>path</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -123,11 +123,16 @@ in non-standard location and <code>auk</code> cannot find it.</strong></p>
       <td><p>character; path to the AWK executable on your system, e.g.
 <code>"C:/cygwin64/bin/gawk.exe"</code> or <code>"/usr/bin/awk"</code>.</p></td>
     </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>logical; should the existing <code>AWK_PATH</code> be overwritten if it
+has already been set in .Renviron.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Opens .Renviron for editing and returns the AWK path invisibly.</p>
+    <p>Edits .Renviron, then returns the AWK path invisibly.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
