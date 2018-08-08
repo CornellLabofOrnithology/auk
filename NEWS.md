@@ -6,6 +6,7 @@
 - Added `auk_set_ebd_path()` and `auk_get_ebd_path()` to set and get the 
 `EBD_PATH` environment variable. Now users only need to set this once and just 
 refer to the file name, rather than specifying the full path every time.
+- "Area" protocol added to `auk_protocol()` filter.
 
 # auk 0.2.2
 
