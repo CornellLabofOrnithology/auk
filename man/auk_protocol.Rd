@@ -10,9 +10,10 @@ auk_protocol(x, protocol)
 \item{x}{\code{auk_ebd} or \code{auk_sampling} object; reference to file created by
 \code{\link[=auk_ebd]{auk_ebd()}} or \code{\link[=auk_sampling]{auk_sampling()}}.}
 
-\item{protocol}{character; "Stationary", "Traveling", or "Incidental". Other
-protocols exist in the database, however, this function only extracts these
-three standard protocols. Multiple protocols are accepted.}
+\item{protocol}{character; "Stationary", "Traveling", "Area", or
+"Incidental". Other protocols exist in the database, however, this function
+only extracts these three standard protocols. Multiple protocols are
+accepted.}
 }
 \value{
 An \code{auk_ebd} object.
