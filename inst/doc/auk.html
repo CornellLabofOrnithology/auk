@@ -393,7 +393,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;   Countries: all</span></a>
 <a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;   States: all</span></a>
 <a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;   BCRs: all</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;   Spatial extent: full extent</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;   Bounding box: full extent</span></a>
 <a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt;   Date: all</span></a>
 <a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt;   Start time: all</span></a>
 <a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;   Last edited date: all</span></a>
@@ -412,7 +412,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><code>auk_country()</code>: filter by country using the standard English names or <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country codes</a>.</li>
 <li><code>auk_state()</code>: filter by state using the eBird state codes, see <code>?ebird_states</code>.</li>
 <li><code>auk_bcr()</code>: filter by <a href="http://nabci-us.org/resources/bird-conservation-regions/">Bird Conservation Region (BCR)</a> using BCR codes, see <code>?bcr_codes</code>.</li>
-<li><code>auk_extent()</code>: filter by spatial extent (bounding box), i.e. a range of latitudes and longitudes in decimal degrees.</li>
+<li><code>auk_bbox()</code>: filter by spatial bounding box, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li><code>auk_date()</code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code>*</code>” in place of the year, e.g. <code>date = c(&quot;*-05-01&quot;, &quot;*-06-30&quot;)</code> for observations from May and June of any year.</li>
 <li><code>auk_last_edited()</code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
 <li><code>auk_protocol()</code>: filter to checklists that following a specific search protocol, either stationary, traveling, or casual.</li>
@@ -429,9 +429,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw">auk_species</span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">&quot;Gray Jay&quot;</span>, <span class="st">&quot;Cyanocitta cristata&quot;</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">  </span><span class="co"># country: codes and names can be mixed; case insensitive</span></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">  </span><span class="kw">auk_country</span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">&quot;US&quot;</span>, <span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;mexico&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="st">  </span><span class="co"># extent: long and lat in decimal degrees</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="st">  </span><span class="co"># bbox: long and lat in decimal degrees</span></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="st">  </span><span class="co"># formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="st">  </span><span class="kw">auk_extent</span>(<span class="dt">extent =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="dv">-80</span>, <span class="dv">52</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="st">  </span><span class="kw">auk_bbox</span>(<span class="dt">bbox =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="dv">-80</span>, <span class="dv">52</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="st">  </span><span class="co"># date: use standard ISO date format `&quot;YYYY-MM-DD&quot;`</span></a>
 <a class="sourceLine" id="cb9-10" data-line-number="10"><span class="st">  </span><span class="kw">auk_date</span>(<span class="dt">date =</span> <span class="kw">c</span>(<span class="st">&quot;2012-01-01&quot;</span>, <span class="st">&quot;2012-12-31&quot;</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="st">  </span><span class="co"># time: 24h format</span></a>
@@ -452,7 +452,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb9-26" data-line-number="26"><span class="co">#&gt;   Countries: CA, MX, US</span></a>
 <a class="sourceLine" id="cb9-27" data-line-number="27"><span class="co">#&gt;   States: all</span></a>
 <a class="sourceLine" id="cb9-28" data-line-number="28"><span class="co">#&gt;   BCRs: all</span></a>
-<a class="sourceLine" id="cb9-29" data-line-number="29"><span class="co">#&gt;   Spatial extent: Lon -100 - -80; Lat 37 - 52</span></a>
+<a class="sourceLine" id="cb9-29" data-line-number="29"><span class="co">#&gt;   Bounding box: Lon -100 - -80; Lat 37 - 52</span></a>
 <a class="sourceLine" id="cb9-30" data-line-number="30"><span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span></a>
 <a class="sourceLine" id="cb9-31" data-line-number="31"><span class="co">#&gt;   Start time: 06:00-09:00</span></a>
 <a class="sourceLine" id="cb9-32" data-line-number="32"><span class="co">#&gt;   Last edited date: all</span></a>
@@ -666,7 +666,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt;   Countries: all</span></a>
 <a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt;   States: all</span></a>
 <a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt;   BCRs: all</span></a>
-<a class="sourceLine" id="cb16-21" data-line-number="21"><span class="co">#&gt;   Spatial extent: full extent</span></a>
+<a class="sourceLine" id="cb16-21" data-line-number="21"><span class="co">#&gt;   Bounding box: full extent</span></a>
 <a class="sourceLine" id="cb16-22" data-line-number="22"><span class="co">#&gt;   Date: all</span></a>
 <a class="sourceLine" id="cb16-23" data-line-number="23"><span class="co">#&gt;   Start time: 06:00-10:00</span></a>
 <a class="sourceLine" id="cb16-24" data-line-number="24"><span class="co">#&gt;   Last edited date: all</span></a>
@@ -694,7 +694,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb17-15" data-line-number="15"><span class="co">#&gt;   Countries: all</span></a>
 <a class="sourceLine" id="cb17-16" data-line-number="16"><span class="co">#&gt;   States: all</span></a>
 <a class="sourceLine" id="cb17-17" data-line-number="17"><span class="co">#&gt;   BCRs: all</span></a>
-<a class="sourceLine" id="cb17-18" data-line-number="18"><span class="co">#&gt;   Spatial extent: full extent</span></a>
+<a class="sourceLine" id="cb17-18" data-line-number="18"><span class="co">#&gt;   Bounding box: full extent</span></a>
 <a class="sourceLine" id="cb17-19" data-line-number="19"><span class="co">#&gt;   Date: all</span></a>
 <a class="sourceLine" id="cb17-20" data-line-number="20"><span class="co">#&gt;   Start time: 06:00-10:00</span></a>
 <a class="sourceLine" id="cb17-21" data-line-number="21"><span class="co">#&gt;   Last edited date: all</span></a>

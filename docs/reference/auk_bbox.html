@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter the eBird data by duration — auk_duration • auk</title>
+<title>Filter the eBird data by spatial bounding box — auk_bbox • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,14 +30,11 @@
 
 
 
-<meta property="og:title" content="Filter the eBird data by duration — auk_duration" />
+<meta property="og:title" content="Filter the eBird data by spatial bounding box — auk_bbox" />
 
-<meta property="og:description" content="Define a filter for the eBird Basic Dataset (EBD) based on the duration of
-the checklist. This function only defines the filter and, once all filters
-have been defined, auk_filter() should be used to call AWK and perform the
-filtering. Note that checklists with no effort, such as incidental
-observations, will be excluded if this filter is used since they have no
-associated duration information." />
+<meta property="og:description" content="Define a filter for the eBird Basic Dataset (EBD) based on spatial bounding
+box. This function only defines the filter and, once all filters have been
+defined, auk_filter() should be used to call AWK and perform the filtering." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,23 +96,20 @@ associated duration information." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter the eBird data by duration</h1>
-    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-duration.r'><code>R/auk-duration.r</code></a></small>
-    <div class="hidden name"><code>auk_duration.Rd</code></div>
+    <h1>Filter the eBird data by spatial bounding box</h1>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-bbox.r'><code>R/auk-bbox.r</code></a></small>
+    <div class="hidden name"><code>auk_bbox.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Define a filter for the eBird Basic Dataset (EBD) based on the duration of
-the checklist. This function only defines the filter and, once all filters
-have been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used to call AWK and perform the
-filtering. Note that checklists with no effort, such as incidental
-observations, will be excluded if this filter is used since they have no
-associated duration information.</p>
+    <p>Define a filter for the eBird Basic Dataset (EBD) based on spatial bounding
+box. This function only defines the filter and, once all filters have been
+defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used to call AWK and perform the filtering.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>auk_duration</span>(<span class='no'>x</span>, <span class='no'>duration</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_bbox</span>(<span class='no'>x</span>, <span class='no'>bbox</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -126,9 +120,10 @@ associated duration information.</p>
 <code><a href='auk_ebd.html'>auk_ebd()</a></code> or <code><a href='auk_sampling.html'>auk_sampling()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>duration</th>
-      <td><p>integer; 2 element vector specifying the range of durations
-in minutes to filter by.</p></td>
+      <th>bbox</th>
+      <td><p>numeric; spatial bounding box expressed as the range
+of latitudes and longitudes in decimal degrees: <code>c(lng_min, lat_min, lng_max, lat_max)</code>. Note that longitudes in the Western Hemisphere and
+latitudes sound of the equator should be given as negative numbers.</p></td>
     </tr>
     </table>
     
@@ -143,10 +138,10 @@ user only wishes to filter the sampling event data.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other filter: <code><a href='auk_bbox.html'>auk_bbox</a></code>,
-  <code><a href='auk_bcr.html'>auk_bcr</a></code>, <code><a href='auk_breeding.html'>auk_breeding</a></code>,
-  <code><a href='auk_complete.html'>auk_complete</a></code>, <code><a href='auk_country.html'>auk_country</a></code>,
-  <code><a href='auk_date.html'>auk_date</a></code>, <code><a href='auk_distance.html'>auk_distance</a></code>,
+    <div class='dont-index'><p>Other filter: <code><a href='auk_bcr.html'>auk_bcr</a></code>,
+  <code><a href='auk_breeding.html'>auk_breeding</a></code>, <code><a href='auk_complete.html'>auk_complete</a></code>,
+  <code><a href='auk_country.html'>auk_country</a></code>, <code><a href='auk_date.html'>auk_date</a></code>,
+  <code><a href='auk_distance.html'>auk_distance</a></code>, <code><a href='auk_duration.html'>auk_duration</a></code>,
   <code><a href='auk_extent.html'>auk_extent</a></code>, <code><a href='auk_filter.html'>auk_filter</a></code>,
   <code><a href='auk_last_edited.html'>auk_last_edited</a></code>, <code><a href='auk_project.html'>auk_project</a></code>,
   <code><a href='auk_protocol.html'>auk_protocol</a></code>, <code><a href='auk_species.html'>auk_species</a></code>,
@@ -154,10 +149,10 @@ user only wishes to filter the sampling event data.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># only keep checklists that are less than an hour long</span>
+    <pre class="examples"><div class='input'><span class='co'># fliter to locations roughly in the Pacific Northwest</span>
 <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_duration</span>(<span class='kw'>duration</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>60</span>))</div><div class='output co'>#&gt; Input 
+  <span class='fu'>auk_bbox</span>(<span class='kw'>bbox</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>125</span>, <span class='fl'>37</span>, -<span class='fl'>120</span>, <span class='fl'>52</span>))</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -168,19 +163,19 @@ user only wishes to filter the sampling event data.</p>
 #&gt;   Countries: all
 #&gt;   States: all
 #&gt;   BCRs: all
-#&gt;   Bounding box: full extent
+#&gt;   Bounding box: Lon -125 - -120; Lat 37 - 52
 #&gt;   Date: all
 #&gt;   Start time: all
 #&gt;   Last edited date: all
 #&gt;   Protocol: all
 #&gt;   Project code: all
-#&gt;   Duration: 0-60 minutes
+#&gt;   Duration: all
 #&gt;   Distance travelled: all
 #&gt;   Records with breeding codes only: no
 #&gt;   Complete checklists only: no</div><div class='input'>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
-<span class='fu'>auk_duration</span>(<span class='no'>ebd</span>, <span class='kw'>duration</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>60</span>))</div><div class='output co'>#&gt; Input 
+<span class='fu'>auk_bbox</span>(<span class='no'>ebd</span>, <span class='kw'>bbox</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>125</span>, <span class='fl'>37</span>, -<span class='fl'>120</span>, <span class='fl'>52</span>))</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -191,13 +186,13 @@ user only wishes to filter the sampling event data.</p>
 #&gt;   Countries: all
 #&gt;   States: all
 #&gt;   BCRs: all
-#&gt;   Bounding box: full extent
+#&gt;   Bounding box: Lon -125 - -120; Lat 37 - 52
 #&gt;   Date: all
 #&gt;   Start time: all
 #&gt;   Last edited date: all
 #&gt;   Protocol: all
 #&gt;   Project code: all
-#&gt;   Duration: 0-60 minutes
+#&gt;   Duration: all
 #&gt;   Distance travelled: all
 #&gt;   Records with breeding codes only: no
 #&gt;   Complete checklists only: no</div></pre>

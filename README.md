@@ -154,7 +154,7 @@ drops these erroneous records and removes the blank column.
     f_out <- tempfile()
     # remove problem records
     auk_clean(f, f_out)
-    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpvPlZZf/filec67a6a5c1eee"
+    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpPwaUR4/filec455e8022a7"
     # number of lines in input
     length(readLines(f))
     #> [1] 51
@@ -178,8 +178,8 @@ Users should start by defining a reference to the dataset file with
 -   `auk_bcr()`: filter by [Bird Conservation Region
     (BCR)](http://nabci-us.org/resources/bird-conservation-regions/)
     using BCR codes, see `?bcr_codes`.
--   `auk_extent()`: filter by spatial extent (bounding box), i.e. a
-    range of latitudes and longitudes in decimal degrees.
+-   `auk_bbox()`: filter by spatial bounding box, i.e. a range of
+    latitudes and longitudes in decimal degrees.
 -   `auk_date()`: filter to checklists from a range of dates. To extract
     observations from a range of dates, regardless of year, use the
     wildcard “`*`” in place of the year, e.g.
@@ -218,9 +218,9 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>%
       # country: codes and names can be mixed; case insensitive
       auk_country(country = c("US", "Canada", "mexico")) %>%
-      # extent: long and lat in decimal degrees
+      # bbox: long and lat in decimal degrees
       # formatted as `c(lng_min, lat_min, lng_max, lat_max)`
-      auk_extent(extent = c(-100, 37, -80, 52)) %>%
+      auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
       # date: use standard ISO date format `"YYYY-MM-DD"`
       auk_date(date = c("2012-01-01", "2012-12-31")) %>%
       # time: 24h format
@@ -241,7 +241,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
     #>   Countries: CA, MX, US
     #>   States: all
     #>   BCRs: all
-    #>   Spatial extent: Lon -100 - -80; Lat 37 - 52
+    #>   Bounding box: Lon -100 - -80; Lat 37 - 52
     #>   Date: 2012-01-01 - 2012-12-31
     #>   Start time: 06:00-09:00
     #>   Last edited date: all

@@ -73,7 +73,7 @@ auk_sampling <- function(file, sep = "\t") {
       filters = list(
         country = character(),
         state = character(),
-        extent = numeric(),
+        bbox = numeric(),
         date = character(),
         time = character(),
         last_edited = character(),
@@ -123,9 +123,9 @@ print.auk_sampling <- function(x, ...) {
     cat(paste0(length(x$filters$state), " states"))
   }
   cat("\n")
-  # extent filter
-  cat("  Spatial extent: ")
-  e <- round(x$filters$extent, 1)
+  # bbox filter
+  cat("  Bounding box: ")
+  e <- round(x$filters$bbox, 1)
   if (length(e) == 0) {
     cat("full extent")
   } else {

@@ -129,7 +129,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         country = character(),
         state = character(),
         bcr = integer(),
-        extent = numeric(),
+        bbox = numeric(),
         date = character(),
         time = character(),
         last_edited = character(),
@@ -206,9 +206,9 @@ print.auk_ebd <- function(x, ...) {
     cat(paste0(length(x$filters$bcr), " BCRs"))
   }
   cat("\n")
-  # extent filter
-  cat("  Spatial extent: ")
-  e <- round(x$filters$extent, 1)
+  # bbox filter
+  cat("  Bounding box: ")
+  e <- round(x$filters$bbox, 1)
   if (length(e) == 0) {
     cat("full extent")
   } else {

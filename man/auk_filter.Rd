@@ -92,7 +92,7 @@ f <- system.file("extdata/ebd-sample.txt", package = "auk")
 filters <- auk_ebd(f) \%>\%
   auk_species(species = c("Gray Jay", "Blue Jay")) \%>\%
   auk_country(country = c("US", "Canada")) \%>\%
-  auk_extent(extent = c(-100, 37, -80, 52)) \%>\%
+  auk_bbox(bbox = c(-100, 37, -80, 52)) \%>\%
   auk_date(date = c("2012-01-01", "2012-12-31")) \%>\%
   auk_time(start_time = c("06:00", "09:00")) \%>\%
   auk_duration(duration = c(0, 60)) \%>\%
@@ -102,7 +102,7 @@ filters <- auk_ebd(f) \%>\%
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 filters <- auk_species(ebd, species = c("Gray Jay", "Blue Jay"))
 filters <- auk_country(filters, country = c("US", "Canada"))
-filters <- auk_extent(filters, extent = c(-100, 37, -80, 52))
+filters <- auk_bbox(filters, bbox = c(-100, 37, -80, 52))
 filters <- auk_date(filters, date = c("2012-01-01", "2012-12-31"))
 filters <- auk_time(filters, start_time = c("06:00", "09:00"))
 filters <- auk_duration(filters, duration = c(0, 60))
@@ -119,13 +119,13 @@ str(read_ebd(filtered))
 }
 }
 \seealso{
-Other filter: \code{\link{auk_bcr}},
-  \code{\link{auk_breeding}}, \code{\link{auk_complete}},
-  \code{\link{auk_country}}, \code{\link{auk_date}},
-  \code{\link{auk_distance}}, \code{\link{auk_duration}},
-  \code{\link{auk_extent}}, \code{\link{auk_last_edited}},
-  \code{\link{auk_project}}, \code{\link{auk_protocol}},
-  \code{\link{auk_species}}, \code{\link{auk_state}},
-  \code{\link{auk_time}}
+Other filter: \code{\link{auk_bbox}},
+  \code{\link{auk_bcr}}, \code{\link{auk_breeding}},
+  \code{\link{auk_complete}}, \code{\link{auk_country}},
+  \code{\link{auk_date}}, \code{\link{auk_distance}},
+  \code{\link{auk_duration}}, \code{\link{auk_extent}},
+  \code{\link{auk_last_edited}}, \code{\link{auk_project}},
+  \code{\link{auk_protocol}}, \code{\link{auk_species}},
+  \code{\link{auk_state}}, \code{\link{auk_time}}
 }
 \concept{filter}

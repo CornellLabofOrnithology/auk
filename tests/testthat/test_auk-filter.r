@@ -8,7 +8,7 @@ test_that("auk_filter filter an ebd", {
   filters <- auk_ebd(f) %>%
     auk_species(species = c("Gray Jay", "Blue Jay")) %>%
     auk_country(country = c("US", "Canada")) %>%
-    auk_extent(extent = c(-100, 37, -80, 52)) %>%
+    auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
     auk_date(date = c("2012-01-01", "2012-12-31")) %>%
     auk_time(start_time = c("06:00", "09:00")) %>%
     auk_duration(duration = c(0, 120)) %>%
@@ -33,10 +33,10 @@ test_that("auk_filter filter an ebd", {
   expect_true(all(ebd$all_species_reported))
   expect_true(all(ebd$time_observations_started >= filters$filters$time[1]))
   expect_true(all(ebd$time_observations_started <= filters$filters$time[2]))
-  expect_true(all(ebd$longitude >= filters$filters$extent[1]))
-  expect_true(all(ebd$longitude <= filters$filters$extent[3]))
-  expect_true(all(ebd$latitude >= filters$filters$extent[2]))
-  expect_true(all(ebd$latitude <= filters$filters$extent[4]))
+  expect_true(all(ebd$longitude >= filters$filters$bbox[1]))
+  expect_true(all(ebd$longitude <= filters$filters$bbox[3]))
+  expect_true(all(ebd$latitude >= filters$filters$bbox[2]))
+  expect_true(all(ebd$latitude <= filters$filters$bbox[4]))
   
   # filter again
   tmp <- tempfile()

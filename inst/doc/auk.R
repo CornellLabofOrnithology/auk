@@ -64,9 +64,9 @@ ebd_filters <- ebd %>%
   auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>%
   # country: codes and names can be mixed; case insensitive
   auk_country(country = c("US", "Canada", "mexico")) %>%
-  # extent: long and lat in decimal degrees
+  # bbox: long and lat in decimal degrees
   # formatted as `c(lng_min, lat_min, lng_max, lat_max)`
-  auk_extent(extent = c(-100, 37, -80, 52)) %>%
+  auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
   # date: use standard ISO date format `"YYYY-MM-DD"`
   auk_date(date = c("2012-01-01", "2012-12-31")) %>%
   # time: 24h format

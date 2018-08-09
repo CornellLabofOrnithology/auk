@@ -66,7 +66,7 @@ test_that("auk_ebd prints method", {
   filters <- ebd %>%
     auk_species(species = c("Gray Jay", "Blue Jay")) %>%
     auk_country(country = c("US", "Canada")) %>%
-    auk_extent(extent = c(-100, 37, -80, 52)) %>%
+    auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
     auk_date(date = c("2012-01-01", "2012-12-31")) %>%
     auk_last_edited(date = c("2010-01-01", "2017-12-31")) %>%
     auk_time(start_time = c("06:00", "09:00")) %>%

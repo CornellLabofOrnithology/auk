@@ -7,6 +7,7 @@
 `EBD_PATH` environment variable. Now users only need to set this once and just 
 refer to the file name, rather than specifying the full path every time.
 - "Area" protocol added to `auk_protocol()` filter.
+- `auk_extent()` renamed `auk_bbox()`; `auk_extent()` deprecated and redirects to `auk_bbox()`
 
 # auk 0.2.2
 

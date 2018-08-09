@@ -162,7 +162,7 @@
 <a class="sourceLine" id="cb4-8" data-line-number="8">f_out &lt;-<span class="st"> </span><span class="kw">tempfile</span>()</a>
 <a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co"># remove problem records</span></a>
 <a class="sourceLine" id="cb4-10" data-line-number="10"><span class="kw"><a href="reference/auk_clean.html">auk_clean</a></span>(f, f_out)</a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpXTDwx3/filec96c110a32a8"</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpxnAviG/file1a782808d6fb"</span></a>
 <a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co"># number of lines in input</span></a>
 <a class="sourceLine" id="cb4-13" data-line-number="13"><span class="kw">length</span>(<span class="kw">readLines</span>(f))</a>
 <a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; [1] 51</span></a>
@@ -184,7 +184,7 @@
 <li>
 <code><a href="reference/auk_bcr.html">auk_bcr()</a></code>: filter by <a href="http://nabci-us.org/resources/bird-conservation-regions/">Bird Conservation Region (BCR)</a> using BCR codes, see <code><a href="reference/bcr_codes.html">?bcr_codes</a></code>.</li>
 <li>
-<code><a href="reference/auk_extent.html">auk_extent()</a></code>: filter by spatial extent (bounding box), i.e. a range of latitudes and longitudes in decimal degrees.</li>
+<code><a href="reference/auk_bbox.html">auk_bbox()</a></code>: filter by spatial bounding box, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
 <code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code>*</code>” in place of the year, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
 <li>
@@ -213,9 +213,9 @@
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"Gray Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="co"># country: codes and names can be mixed; case insensitive</span></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="st">  </span><span class="co"># extent: long and lat in decimal degrees</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="st">  </span><span class="co"># bbox: long and lat in decimal degrees</span></a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="st">  </span><span class="co"># formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="reference/auk_extent.html">auk_extent</a></span>(<span class="dt">extent =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="dv">-80</span>, <span class="dv">52</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="reference/auk_bbox.html">auk_bbox</a></span>(<span class="dt">bbox =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="dv">-80</span>, <span class="dv">52</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="st">  </span><span class="co"># date: use standard ISO date format `"YYYY-MM-DD"`</span></a>
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="reference/auk_date.html">auk_date</a></span>(<span class="dt">date =</span> <span class="kw">c</span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-14" data-line-number="14"><span class="st">  </span><span class="co"># time: 24h format</span></a>
@@ -236,7 +236,7 @@
 <a class="sourceLine" id="cb5-29" data-line-number="29"><span class="co">#&gt;   Countries: CA, MX, US</span></a>
 <a class="sourceLine" id="cb5-30" data-line-number="30"><span class="co">#&gt;   States: all</span></a>
 <a class="sourceLine" id="cb5-31" data-line-number="31"><span class="co">#&gt;   BCRs: all</span></a>
-<a class="sourceLine" id="cb5-32" data-line-number="32"><span class="co">#&gt;   Spatial extent: Lon -100 - -80; Lat 37 - 52</span></a>
+<a class="sourceLine" id="cb5-32" data-line-number="32"><span class="co">#&gt;   Bounding box: Lon -100 - -80; Lat 37 - 52</span></a>
 <a class="sourceLine" id="cb5-33" data-line-number="33"><span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span></a>
 <a class="sourceLine" id="cb5-34" data-line-number="34"><span class="co">#&gt;   Start time: 06:00-09:00</span></a>
 <a class="sourceLine" id="cb5-35" data-line-number="35"><span class="co">#&gt;   Last edited date: all</span></a>

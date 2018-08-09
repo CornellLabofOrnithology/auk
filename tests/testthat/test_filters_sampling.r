@@ -67,30 +67,30 @@ test_that("auk_state", {
   expect_error(auk_state(sed, NA))
 })
 
-test_that("auk_extent", {
+test_that("auk_bbox", {
   sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
     auk_sampling()
   
   # works correctly
   e <- c(-125, 37, -120, 52)
-  sed <- auk_extent(sed, e)
-  expect_equal(sed$filters$extent, e)
+  sed <- auk_bbox(sed, e)
+  expect_equal(sed$filters$bbox, e)
   
   # overwrite
   e <- c(0, 0, 1, 1)
-  sed <- auk_extent(sed, e)
-  expect_equal(sed$filters$extent, e)
+  sed <- auk_bbox(sed, e)
+  expect_equal(sed$filters$bbox, e)
   
   # invalid lat
-  expect_error(auk_extent(sed, c(0, -91, 1, 1)))
-  expect_error(auk_extent(sed, c(0, -90, 1, 91)))
-  expect_error(auk_extent(sed, c(0, 1, 1, 0)))
-  expect_error(auk_extent(sed, c(0, 0, 1, 0)))
+  expect_error(auk_bbox(sed, c(0, -91, 1, 1)))
+  expect_error(auk_bbox(sed, c(0, -90, 1, 91)))
+  expect_error(auk_bbox(sed, c(0, 1, 1, 0)))
+  expect_error(auk_bbox(sed, c(0, 0, 1, 0)))
   # invalid lng
-  expect_error(auk_extent(sed, c(-181, 0, 1, 1)))
-  expect_error(auk_extent(sed, c(-180, 0, 181, 1)))
-  expect_error(auk_extent(sed, c(1, 0, 0, 1)))
-  expect_error(auk_extent(sed, c(0, 0, 0, 1)))
+  expect_error(auk_bbox(sed, c(-181, 0, 1, 1)))
+  expect_error(auk_bbox(sed, c(-180, 0, 181, 1)))
+  expect_error(auk_bbox(sed, c(1, 0, 0, 1)))
+  expect_error(auk_bbox(sed, c(0, 0, 0, 1)))
 })
 
 test_that("auk_date", {
