@@ -32,10 +32,9 @@
 auk_sampling <- function(file, sep = "\t") {
   # checks
   assertthat::assert_that(
-    file.exists(file),
     assertthat::is.string(sep), nchar(sep) == 1, sep != " "
   )
-  
+  file <- ebd_file(file)
   # read header rows
   header <- tolower(get_header(file, sep))
   header <- stringr::str_replace_all(header, "_", " ")
