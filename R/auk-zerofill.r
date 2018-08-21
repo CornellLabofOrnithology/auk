@@ -90,6 +90,14 @@ auk_zerofill.data.frame <- function(x, sampling_events, species, unique = TRUE,
       )
     }
   }
+  
+  # check that we only have complete checklists
+  if (!all(sampling_events$all_species_reported)) {
+    e <- paste0("Some checklists in sampling event data are not complete.\n",
+                "Complete checklists are required for zero-filling.\n",
+                "Try calling auk_complete() when filtering.")
+    stop(e)
+  }
 
   # check that auk_unique has been run
   if (!isTRUE(attr(x, "unique"))) {
@@ -201,13 +209,6 @@ auk_zerofill.character <- function(x, sampling_events, species, sep = "\t",
 #'   [auk_ebd()].
 auk_zerofill.auk_ebd <- function(x, species, sep = "\t",
                                  unique = TRUE, collapse = FALSE, ...) {
-  # zero-filling requires complete checklists
-  if (!x$filters$complete) {
-    e <- paste0("Sampling event data file provided, but filters have not been ",
-               "set to only return complete checklists. Complete checklists ",
-               "are required for zero-filling. Try calling auk_complete().")
-    stop(e)
-  }
   # check that output files defined
   if (is.null(x$output)) {
     stop("No output EBD file in this auk_ebd object, try calling auk_filter().")

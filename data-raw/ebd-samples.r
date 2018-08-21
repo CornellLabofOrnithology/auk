@@ -71,7 +71,8 @@ filters <- auk_ebd(f_in, s_in) %>%
   auk_species(species = c("Collared Kingfisher", "White-throated Kingfisher", 
                           "Blue-eared Kingfisher")) %>%
   auk_country(country = "Singapore") %>%
-  auk_date(date = c("2012-01-01", "2012-12-31"))
+  auk_date(date = c("2012-01-01", "2012-12-31")) %>% 
+  auk_complete()
 if (!file.exists(f_sg)) {
   auk_filter(filters, file = f_sg, file_sampling = s_sg, overwrite = TRUE)
 }
@@ -148,3 +149,11 @@ stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
 f <- "inst/extdata/ebd-sample_messy.txt"
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
 stopifnot(all(read_ebd(f, reader = "base")$scientific_name %in% ebird_taxonomy$scientific_name))
+
+
+# f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
+# f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
+# a <- c(TRUE, as.logical(read_tsv(f_ebd)[["ALL SPECIES REPORTED"]]))
+# b <- c(TRUE, as.logical(read_tsv(f_smpl)[["ALL SPECIES REPORTED"]]))
+# readLines(f_ebd)[a] %>% writeLines("inst/extdata/zerofill-ex_ebd.txt")
+# readLines(f_smpl)[b] %>% writeLines("inst/extdata/zerofill-ex_sampling.txt")
