@@ -13,7 +13,7 @@ auk_get_ebd_path <- function() {
   if (p == "") {
     return(NA_character_)
   } else if (!dir.exists(p)) {
-    stop("Directory specified by EBD_PATH does not exist.")
+    warning("Directory specified by EBD_PATH does not exist.")
   }
   return(p)
 }

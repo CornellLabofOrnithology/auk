@@ -8,6 +8,8 @@
 refer to the file name, rather than specifying the full path every time.
 - "Area" protocol added to `auk_protocol()` filter.
 - `auk_extent()` renamed `auk_bbox()`; `auk_extent()` deprecated and redirects to `auk_bbox()`
+- `auk_zerofill()` now throws an error if any checklists are not complete
+- Fixed package load error when `EBD_PATH` is invalid
 
 # auk 0.2.2
 

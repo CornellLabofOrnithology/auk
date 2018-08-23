@@ -1,5 +1,5 @@
 is_integer <- function(x) {
-  x == round(x)
+  is.integer(x) || (is.numeric(x) && all(x == as.integer(x)))
 }
 
 get_header <- function(x, sep = "\t") {
