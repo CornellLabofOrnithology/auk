@@ -90,7 +90,7 @@ have had a sampling event data file set in the original call to
 }}
 
 \examples{
-# read and zero-fill the sampling data
+# read and zero-fill the ebd data
 f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
 f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
 auk_zerofill(x = f_ebd, sampling_events = f_smpl)

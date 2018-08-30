@@ -1,5 +1,6 @@
-# auk 0.2.3
+# auk 0.3.0
 
+- Functions to prepare data for occupancy modeling: `filter_repeat_visits()` and `format_unmarked()`
 - New `auk_bcr()` function to extract data from BCRs
 - Added `bcr_codes` data frame to look up BCR names and codes
 - `auk_getpath()` renamed `auk_get_awk_path()`, and added `auk_set_awk_path()`

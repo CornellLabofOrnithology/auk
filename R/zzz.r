@@ -8,5 +8,5 @@
   } else {
     m <- paste(m, "\nEBD data directory: ", p)
   }
-  packageStartupMessage(sprintf(m, "auk 0.2.3", "March 15, 2018"))
+  packageStartupMessage(sprintf(m, "auk 0.3.0", "March 15, 2018"))
 }
