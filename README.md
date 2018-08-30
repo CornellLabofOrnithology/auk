@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-auk: eBird Data in R <img src="hex-logo/auk.svg" align="right" width=140/>
-==========================================================================
+auk: working with eBird data in R <img src="hex-logo/auk.svg" align="right" width=140/>
+=======================================================================================
 
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
@@ -154,7 +154,7 @@ drops these erroneous records and removes the blank column.
     f_out <- tempfile()
     # remove problem records
     auk_clean(f, f_out)
-    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpuOSrEH/file111b51f5bd00c"
+    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//RtmpRpJXRR/file1168d64af67c"
     # number of lines in input
     length(readLines(f))
     #> [1] 51
