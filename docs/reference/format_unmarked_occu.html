@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Format a data frame for conversion to an <code>unmarked</code> object — format_unmarked • auk</title>
+<title>Format EBD data for occupancy modeling with <code>unmarked</code> — format_unmarked_occu • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Format a data frame for conversion to an <code>unmarked</code> object — format_unmarked" />
+<meta property="og:title" content="Format EBD data for occupancy modeling with <code>unmarked</code> — format_unmarked_occu" />
 
 <meta property="og:description" content="Prepare a data frame of species observations for ingestion into the package
 unmarked for hierarchical modeling of abundance and occurrence. The
@@ -100,9 +100,9 @@ unmarked::formatWide() in which each row is a site." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Format a data frame for conversion to an <code>unmarked</code> object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/format-unmarked.r'><code>R/format-unmarked.r</code></a></small>
-    <div class="hidden name"><code>format_unmarked.Rd</code></div>
+    <h1>Format EBD data for occupancy modeling with <code>unmarked</code></h1>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/format-unmarked-occu.r'><code>R/format-unmarked-occu.r</code></a></small>
+    <div class="hidden name"><code>format_unmarked_occu.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -117,8 +117,8 @@ function converts data from a format in which each row is an observation
     
     </div>
 
-    <pre class="usage"><span class='fu'>format_unmarked</span>(<span class='no'>x</span>, <span class='kw'>site_id</span> <span class='kw'>=</span> <span class='st'>"site"</span>, <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"species_observed"</span>,
-  <span class='no'>site_covs</span>, <span class='no'>obs_covs</span>)</pre>
+    <pre class="usage"><span class='fu'>format_unmarked_occu</span>(<span class='no'>x</span>, <span class='kw'>site_id</span> <span class='kw'>=</span> <span class='st'>"site"</span>,
+  <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"species_observed"</span>, <span class='no'>site_covs</span>, <span class='no'>obs_covs</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,6 +181,11 @@ location visited by the same observer within a period of temporal closure.
 To define these sites and filter out observations that do not correspond to
 repeat visits, users should use <code><a href='filter_repeat_visits.html'>filter_repeat_visits()</a></code>, then pass the
 output to this function.</p>
+<p><code>format_unmarked_occu()</code> is designed to prepare data to be converted into
+an <code>unmarkedFrameOccu</code> object for occupancy modeling with
+<code><a href='http://www.rdocumentation.org/packages/unmarked/topics/occu'>unmarked::occu()</a></code>; however, it can also be used to prepare data for
+conversion to an <code>unmarkedFramePCount</code> object for abundance modeling with
+<code><a href='http://www.rdocumentation.org/packages/unmarked/topics/pcount'>unmarked::pcount()</a></code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -198,11 +203,11 @@ output to this function.</p>
 <span class='no'>occ</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)
 <span class='co'># format for unmarked</span>
 <span class='co'># typically one would join in habitat covariates prior to this step</span>
-<span class='no'>occ_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>format_unmarked</span>(<span class='no'>occ</span>,
-                            <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"species_observed"</span>,
-                            <span class='kw'>site_covs</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"latitude"</span>, <span class='st'>"longitude"</span>),
-                            <span class='kw'>obs_covs</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"effort_distance_km"</span>,
-                                         <span class='st'>"duration_minutes"</span>))
+<span class='no'>occ_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>format_unmarked_occu</span>(<span class='no'>occ</span>,
+                                 <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"species_observed"</span>,
+                                 <span class='kw'>site_covs</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"latitude"</span>, <span class='st'>"longitude"</span>),
+                                 <span class='kw'>obs_covs</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"effort_distance_km"</span>,
+                                              <span class='st'>"duration_minutes"</span>))
 <span class='co'># create an unmarked object</span>
 <span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"unmarked"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='no'>occ_um</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/unmarked/topics/formatWideLong'>formatWide</a></span>(<span class='no'>occ_wide</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"unmarkedFrameOccu"</span>)
@@ -235,7 +240,52 @@ output to this function.</p>
 #&gt;  Mean   : 2.48      Mean   : 92.69  
 #&gt;  3rd Qu.: 4.80      3rd Qu.:150.00  
 #&gt;  Max.   :10.00      Max.   :480.00  
-#&gt;  NA's   :433        NA's   :431     </div></pre>
+#&gt;  NA's   :433        NA's   :431     </div><div class='input'>
+<span class='co'># this function can also be used for abundance modeling</span>
+<span class='no'>abd</span> <span class='kw'>&lt;-</span> <span class='no'>ebd_zf</span> <span class='kw'>%&gt;%</span>
+  <span class='co'># convert count to integer, drop records with no count</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>observation_count</span> <span class='kw'>=</span> <span class='fu'>as.integer</span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(!<span class='fu'>is.na</span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
+  <span class='co'># filter to repeated visits</span>
+  <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='input'><span class='co'># prepare for conversion to unmarkedFramePCount object</span>
+<span class='no'>abd_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>format_unmarked_occu</span>(<span class='no'>abd</span>,
+                                 <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"observation_count"</span>,
+                                 <span class='kw'>site_covs</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"latitude"</span>, <span class='st'>"longitude"</span>),
+                                 <span class='kw'>obs_covs</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"effort_distance_km"</span>,
+                                              <span class='st'>"duration_minutes"</span>))
+<span class='co'># create an unmarked object</span>
+<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"unmarked"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+  <span class='no'>abd_um</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/unmarked/topics/formatWideLong'>formatWide</a></span>(<span class='no'>abd_wide</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"unmarkedFrameOccu"</span>)
+  <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'>summary</span>(<span class='no'>abd_um</span>)
+}</div><div class='output co'>#&gt; unmarkedFrame Object
+#&gt; 
+#&gt; 52 sites
+#&gt; Maximum number of observations per site: 10 
+#&gt; Mean number of observations per site: 4.06 
+#&gt; Sites with at least one detection: 22 
+#&gt; 
+#&gt; Tabulation of y observations:
+#&gt;    0    1    2    3    4    5   10 &lt;NA&gt; 
+#&gt;  167   22   10    2    1    7    2  309 
+#&gt; 
+#&gt; Site-level covariates:
+#&gt;     latitude       longitude    
+#&gt;  Min.   :1.206   Min.   :103.7  
+#&gt;  1st Qu.:1.308   1st Qu.:103.7  
+#&gt;  Median :1.350   Median :103.8  
+#&gt;  Mean   :1.347   Mean   :103.8  
+#&gt;  3rd Qu.:1.383   3rd Qu.:103.8  
+#&gt;  Max.   :1.446   Max.   :104.0  
+#&gt; 
+#&gt; Observation-level covariates:
+#&gt;  effort_distance_km duration_minutes
+#&gt;  Min.   : 0.1000    Min.   :  1.00  
+#&gt;  1st Qu.: 0.4265    1st Qu.: 28.75  
+#&gt;  Median : 1.8045    Median : 60.00  
+#&gt;  Mean   : 2.4607    Mean   : 91.97  
+#&gt;  3rd Qu.: 4.8000    3rd Qu.:150.00  
+#&gt;  Max.   :10.0000    Max.   :480.00  
+#&gt;  NA's   :402        NA's   :400     </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

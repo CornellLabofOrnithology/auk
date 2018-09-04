@@ -1,4 +1,4 @@
-#' Format a data frame for conversion to an `unmarked` object
+#' Format EBD data for occupancy modeling with `unmarked`
 #' 
 #' Prepare a data frame of species observations for ingestion into the package
 #' `unmarked` for hierarchical modeling of abundance and occurrence. The
@@ -34,6 +34,12 @@
 #'   To define these sites and filter out observations that do not correspond to
 #'   repeat visits, users should use [filter_repeat_visits()], then pass the
 #'   output to this function.
+#'   
+#'   [format_unmarked_occu()] is designed to prepare data to be converted into 
+#'   an `unmarkedFrameOccu` object for occupancy modeling with 
+#'   [unmarked::occu()]; however, it can also be used to prepare data for 
+#'   conversion to an `unmarkedFramePCount` object for abundance modeling with 
+#'   [unmarked::pcount()].
 #'
 #' @return A data frame that can be processed by [unmarked::formatWide()]. 
 #'   Each row will correspond to a unqiue site and, assuming there are a maximum 
@@ -59,19 +65,38 @@
 #' occ <- filter_repeat_visits(ebd_zf, n_days = 30)
 #' # format for unmarked
 #' # typically one would join in habitat covariates prior to this step
-#' occ_wide <- format_unmarked(occ,
-#'                             response = "species_observed",
-#'                             site_covs = c("latitude", "longitude"),
-#'                             obs_covs = c("effort_distance_km", 
-#'                                          "duration_minutes"))
+#' occ_wide <- format_unmarked_occu(occ,
+#'                                  response = "species_observed",
+#'                                  site_covs = c("latitude", "longitude"),
+#'                                  obs_covs = c("effort_distance_km", 
+#'                                               "duration_minutes"))
 #' # create an unmarked object
 #' if (requireNamespace("unmarked", quietly = TRUE)) {
 #'   occ_um <- unmarked::formatWide(occ_wide, type = "unmarkedFrameOccu")
 #'   unmarked::summary(occ_um)
-#' }                                        
-format_unmarked <- function(x, site_id = "site", 
-                            response = "species_observed",
-                            site_covs, obs_covs) {
+#' }
+#' 
+#' # this function can also be used for abundance modeling
+#' abd <- ebd_zf %>% 
+#'   # convert count to integer, drop records with no count
+#'   dplyr::mutate(observation_count = as.integer(observation_count)) %>% 
+#'   dplyr::filter(!is.na(observation_count)) %>% 
+#'   # filter to repeated visits
+#'   filter_repeat_visits(n_days = 30)
+#' # prepare for conversion to unmarkedFramePCount object
+#' abd_wide <- format_unmarked_occu(abd,
+#'                                  response = "observation_count",
+#'                                  site_covs = c("latitude", "longitude"),
+#'                                  obs_covs = c("effort_distance_km", 
+#'                                               "duration_minutes"))
+#' # create an unmarked object
+#' if (requireNamespace("unmarked", quietly = TRUE)) {
+#'   abd_um <- unmarked::formatWide(abd_wide, type = "unmarkedFrameOccu")
+#'   unmarked::summary(abd_um)
+#' }
+format_unmarked_occu <- function(x, site_id = "site", 
+                                 response = "species_observed",
+                                 site_covs, obs_covs) {
   # checks
   stopifnot(is.data.frame(x))
   stopifnot(is.character(site_id), length(site_id) == 1,

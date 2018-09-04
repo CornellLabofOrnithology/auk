@@ -37,11 +37,11 @@ test_that("format_unmarked works", {
                          species = "Collared Kingfisher",
                          collapse = TRUE)
   occ <- filter_repeat_visits(ebd_zf)
-  occ_wide <- format_unmarked(occ,
-                              response = "species_observed",
-                              site_covs = c("latitude", "longitude"),
-                              obs_covs = c("effort_distance_km",
-                                           "duration_minutes"))
+  occ_wide <- format_unmarked_occu(occ,
+                                   response = "species_observed",
+                                   site_covs = c("latitude", "longitude"),
+                                   obs_covs = c("effort_distance_km",
+                                                "duration_minutes"))
   occ_um <- unmarked::formatWide(occ_wide, type = "unmarkedFrameOccu")
   
   expect_is(occ_wide, "data.frame")

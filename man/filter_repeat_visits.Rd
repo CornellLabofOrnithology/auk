@@ -82,6 +82,6 @@ ebd_zf <- auk_zerofill(x = f_ebd, sampling_events = f_smpl,
 filter_repeat_visits(ebd_zf, n_days = 30)
 }
 \seealso{
-Other modeling: \code{\link{format_unmarked}}
+Other modeling: \code{\link{format_unmarked_occu}}
 }
 \concept{modeling}
