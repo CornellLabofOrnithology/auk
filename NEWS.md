@@ -11,6 +11,7 @@ refer to the file name, rather than specifying the full path every time.
 - `auk_extent()` renamed `auk_bbox()`; `auk_extent()` deprecated and redirects to `auk_bbox()`
 - `auk_zerofill()` now throws an error if any checklists are not complete
 - Fixed package load error when `EBD_PATH` is invalid
+- Fixed bug when reading files with a blank column using `readr`
 
 # auk 0.2.2
 

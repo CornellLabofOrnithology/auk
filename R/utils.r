@@ -116,7 +116,7 @@ choose_reader <- function(x) {
     }
   } else {
     m <- paste("read.delim is slow for large EBD files, for better performance",
-               "insall the readr or data.table packages.")
+               "install the readr or data.table packages.")
     warning(m)
   }
   return(reader)
