@@ -28,6 +28,8 @@
 #'   hasn't already.
 #' @param collapse logical; whether to call `collapse_zerofill()` to return a
 #'   data frame rather than an `auk_zerofill` object.
+#' @param complete logical; if `TRUE` (the default) all checklists are required 
+#'   to be complete prior to zero-filling.
 #' @param ... additional arguments passed to methods.
 #'
 #' @details
@@ -69,7 +71,7 @@ auk_zerofill <- function(x, ...) {
 #' @export
 #' @describeIn auk_zerofill EBD data frame.
 auk_zerofill.data.frame <- function(x, sampling_events, species, unique = TRUE, 
-                                    collapse = FALSE, ...) {
+                                    collapse = FALSE, complete = TRUE, ...) {
   # checks
   assertthat::assert_that(
     is.data.frame(sampling_events),
@@ -96,7 +98,11 @@ auk_zerofill.data.frame <- function(x, sampling_events, species, unique = TRUE,
     e <- paste0("Some checklists in sampling event data are not complete.\n",
                 "Complete checklists are required for zero-filling.\n",
                 "Try calling auk_complete() when filtering.")
-    stop(e)
+    if (complete) {
+      stop(e)
+    } else {
+      warning(e)
+    }
   }
 
   # check that auk_unique has been run
@@ -186,7 +192,8 @@ auk_zerofill.data.frame <- function(x, sampling_events, species, unique = TRUE,
 #' @export
 #' @describeIn auk_zerofill Filename of EBD.
 auk_zerofill.character <- function(x, sampling_events, species, sep = "\t",
-                                   unique = TRUE, collapse = FALSE, ...) {
+                                   unique = TRUE, collapse = FALSE,
+                                   complete = TRUE, ...) {
   # checks
   assertthat::assert_that(
     assertthat::is.string(x), file.exists(x),
@@ -200,15 +207,15 @@ auk_zerofill.character <- function(x, sampling_events, species, sep = "\t",
 
   # pass on to df method
   auk_zerofill(x = ebd, sampling_events = sed, species = species,
-               unique = unique, collapse = collapse)
+               unique = unique, collapse = collapse, complete = complete)
 }
 
 #' @export
 #' @describeIn auk_zerofill `auk_ebd` object output from [auk_filter()]. Must
 #'   have had a sampling event data file set in the original call to
 #'   [auk_ebd()].
-auk_zerofill.auk_ebd <- function(x, species, sep = "\t",
-                                 unique = TRUE, collapse = FALSE, ...) {
+auk_zerofill.auk_ebd <- function(x, species, sep = "\t", unique = TRUE, 
+                                 collapse = FALSE, complete = TRUE, ...) {
   # check that output files defined
   if (is.null(x$output)) {
     stop("No output EBD file in this auk_ebd object, try calling auk_filter().")
@@ -220,7 +227,7 @@ auk_zerofill.auk_ebd <- function(x, species, sep = "\t",
   # pass on to file method
   auk_zerofill(x = x$output, sampling_events = x$output_sampling,
                species = species, sep = sep, unique = unique,
-               collapse = collapse)
+               collapse = collapse, complete = complete)
 }
 
 #' @rdname auk_zerofill

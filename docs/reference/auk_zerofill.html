@@ -117,15 +117,16 @@ checklist was had a count of zero.</p>
 
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'>auk_zerofill</span>(<span class='no'>x</span>, <span class='no'>sampling_events</span>, <span class='no'>species</span>,
-  <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+  <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>complete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for character</span>
 <span class='fu'>auk_zerofill</span>(<span class='no'>x</span>, <span class='no'>sampling_events</span>, <span class='no'>species</span>,
-  <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+  <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>complete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>)
 
 <span class='co'># S3 method for auk_ebd</span>
 <span class='fu'>auk_zerofill</span>(<span class='no'>x</span>, <span class='no'>species</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+  <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>complete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='fu'>collapse_zerofill</span>(<span class='no'>x</span>)</pre>
     
@@ -171,6 +172,11 @@ hasn't already.</p></td>
       <th>collapse</th>
       <td><p>logical; whether to call <code>collapse_zerofill()</code> to return a
 data frame rather than an <code>auk_zerofill</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>complete</th>
+      <td><p>logical; if <code>TRUE</code> (the default) all checklists are required
+to be complete prior to zero-filling.</p></td>
     </tr>
     <tr>
       <th>sep</th>
