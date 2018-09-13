@@ -11,14 +11,15 @@
 auk_zerofill(x, ...)
 
 \method{auk_zerofill}{data.frame}(x, sampling_events, species,
-  unique = TRUE, collapse = FALSE, complete = TRUE, ...)
-
-\method{auk_zerofill}{character}(x, sampling_events, species,
-  sep = "\\t", unique = TRUE, collapse = FALSE, complete = TRUE,
+  collapse = FALSE, unique = TRUE, complete = TRUE, rollup = TRUE,
   ...)
 
-\method{auk_zerofill}{auk_ebd}(x, species, sep = "\\t", unique = TRUE,
-  collapse = FALSE, complete = TRUE, ...)
+\method{auk_zerofill}{character}(x, sampling_events, species,
+  collapse = FALSE, unique = TRUE, complete = TRUE, rollup = TRUE,
+  sep = "\\t", ...)
+
+\method{auk_zerofill}{auk_ebd}(x, species, collapse = FALSE,
+  unique = TRUE, complete = TRUE, rollup = TRUE, sep = "\\t", ...)
 
 collapse_zerofill(x)
 }
@@ -45,14 +46,17 @@ as scientific or English common names, or a mixture of both. These names
 must match the official eBird Taxomony (\link{ebird_taxonomy}). To include all
 species, leave this argument blank.}
 
-\item{unique}{logical; should \code{\link[=auk_unique]{auk_unique()}} be run on the input data if it
-hasn't already.}
-
 \item{collapse}{logical; whether to call \code{collapse_zerofill()} to return a
 data frame rather than an \code{auk_zerofill} object.}
 
+\item{unique}{logical; should \code{\link[=auk_unique]{auk_unique()}} be run on the input data if it
+hasn't already.}
+
 \item{complete}{logical; if \code{TRUE} (the default) all checklists are required
 to be complete prior to zero-filling.}
+
+\item{rollup}{logical; should \code{\link[=auk_rollup]{auk_rollup()}} be run on the input data if it
+hasn't already.}
 
 \item{sep}{character; single character used to separate fields within a row.}
 }
