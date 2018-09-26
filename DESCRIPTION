@@ -27,7 +27,8 @@ Imports:
     stringi,
     stringr,
     tidyr,
-    utils
+    utils,
+    httr
 Suggests: 
     covr,
     data.table,
@@ -40,4 +41,4 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.0

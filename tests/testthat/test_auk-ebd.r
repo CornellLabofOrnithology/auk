@@ -64,7 +64,7 @@ test_that("auk_ebd prints method", {
 
   # now fake apply filters
   filters <- ebd %>%
-    auk_species(species = c("Gray Jay", "Blue Jay")) %>%
+    auk_species(species = c("Canada Jay", "Blue Jay")) %>%
     auk_country(country = c("US", "Canada")) %>%
     auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
     auk_date(date = c("2012-01-01", "2012-12-31")) %>%

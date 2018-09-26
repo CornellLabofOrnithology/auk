@@ -17,7 +17,7 @@
 #' @family filter
 #' @examples
 #' # common and scientific names can be mixed
-#' species <- c("Gray Jay", "Pluvialis squatarola")
+#' species <- c("Canada Jay", "Pluvialis squatarola")
 #' system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #'   auk_ebd() %>%
 #'   auk_species(species)

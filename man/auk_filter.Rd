@@ -90,7 +90,7 @@ will likely need to install \href{https://www.cygwin.com}{Cygwin}.
 f <- system.file("extdata/ebd-sample.txt", package = "auk")
 # define filters
 filters <- auk_ebd(f) \%>\%
-  auk_species(species = c("Gray Jay", "Blue Jay")) \%>\%
+  auk_species(species = c("Canada Jay", "Blue Jay")) \%>\%
   auk_country(country = c("US", "Canada")) \%>\%
   auk_bbox(bbox = c(-100, 37, -80, 52)) \%>\%
   auk_date(date = c("2012-01-01", "2012-12-31")) \%>\%
@@ -100,7 +100,7 @@ filters <- auk_ebd(f) \%>\%
   
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
-filters <- auk_species(ebd, species = c("Gray Jay", "Blue Jay"))
+filters <- auk_species(ebd, species = c("Canada Jay", "Blue Jay"))
 filters <- auk_country(filters, country = c("US", "Canada"))
 filters <- auk_bbox(filters, bbox = c(-100, 37, -80, 52))
 filters <- auk_date(filters, date = c("2012-01-01", "2012-12-31"))

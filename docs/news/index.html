@@ -100,14 +100,16 @@
 <a href="#auk-0-3-0" class="anchor"></a>auk 0.3.0<small> Unreleased </small>
 </h1>
 <ul>
-<li>Functions to prepare data for occupancy modeling: <code><a href="../reference/filter_repeat_visits.html">filter_repeat_visits()</a></code> and <code><a href="../reference/format_unmarked_occu.html">format_unmarked_occu()</a></code>
-</li>
-<li>New <code><a href="../reference/auk_bcr.html">auk_bcr()</a></code> function to extract data from BCRs</li>
-<li>Added <code>bcr_codes</code> data frame to look up BCR names and codes</li>
+<li>Updated to 2018 taxonomy; new function <code><a href="../reference/get_ebird_taxonomy.html">get_ebird_taxonomy()</a></code> to get taxonomy via API</li>
+<li>Better handling of taxonomy versions</li>
 <li>
 <code>auk_getpath()</code> renamed <code><a href="../reference/auk_get_awk_path.html">auk_get_awk_path()</a></code>, and added <code><a href="../reference/auk_set_awk_path.html">auk_set_awk_path()</a></code>
 </li>
 <li>Added <code><a href="../reference/auk_set_ebd_path.html">auk_set_ebd_path()</a></code> and <code><a href="../reference/auk_get_ebd_path.html">auk_get_ebd_path()</a></code> to set and get the <code>EBD_PATH</code> environment variable. Now users only need to set this once and just refer to the file name, rather than specifying the full path every time.</li>
+<li>Functions to prepare data for occupancy modeling: <code><a href="../reference/filter_repeat_visits.html">filter_repeat_visits()</a></code> and <code><a href="../reference/format_unmarked_occu.html">format_unmarked_occu()</a></code>
+</li>
+<li>New <code><a href="../reference/auk_bcr.html">auk_bcr()</a></code> function to extract data from BCRs</li>
+<li>Added <code>bcr_codes</code> data frame to look up BCR names and codes</li>
 <li>“Area” protocol added to <code><a href="../reference/auk_protocol.html">auk_protocol()</a></code> filter.</li>
 <li>
 <code><a href="../reference/auk_extent.html">auk_extent()</a></code> renamed <code><a href="../reference/auk_bbox.html">auk_bbox()</a></code>; <code><a href="../reference/auk_extent.html">auk_extent()</a></code> deprecated and redirects to <code><a href="../reference/auk_bbox.html">auk_bbox()</a></code>

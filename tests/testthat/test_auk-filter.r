@@ -6,7 +6,7 @@ test_that("auk_filter filter an ebd", {
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
   filters <- auk_ebd(f) %>%
-    auk_species(species = c("Gray Jay", "Blue Jay")) %>%
+    auk_species(species = c("Canada Jay", "Blue Jay")) %>%
     auk_country(country = c("US", "Canada")) %>%
     auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
     auk_date(date = c("2012-01-01", "2012-12-31")) %>%
@@ -118,7 +118,7 @@ test_that("auk_filter won't overwrite files", {
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
   filters <- auk_ebd(f) %>%
-    auk_species(species = c("Gray Jay", "Blue Jay"))
+    auk_species(species = c("Canada Jay", "Blue Jay"))
 
   # run first time
   tmp <- tempfile()
@@ -134,7 +134,7 @@ test_that("auk_filter can save awk file on any system", {
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
   filters <- auk_ebd(f) %>%
-    auk_species(species = c("Gray Jay", "Blue Jay"))
+    auk_species(species = c("Canada Jay", "Blue Jay"))
 
   # run first time
   tmp <- tempfile()

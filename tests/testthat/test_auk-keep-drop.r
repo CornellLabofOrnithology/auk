@@ -6,7 +6,7 @@ test_that("auk_filter correctly keeps all columns by default", {
   
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
     auk_ebd() %>%
-    auk_species(species = c("Gray Jay", "Blue Jay")) %>% 
+    auk_species(species = c("Canada Jay", "Blue Jay")) %>% 
     auk_filter(file = tempfile()) %>% 
     read_ebd(unique = FALSE, rollup = FALSE)
   expect_equal(ncol(ebd), 46)
@@ -20,7 +20,7 @@ test_that("auk_filter correctly keeps columns", {
                "scientific_name", "observation_count")
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
     auk_ebd() %>%
-    auk_species(species = c("Gray Jay", "Blue Jay")) %>% 
+    auk_species(species = c("Canada Jay", "Blue Jay")) %>% 
     auk_filter(file = tempfile(), keep = to_keep) %>% 
     read_ebd(unique = FALSE, rollup = FALSE)
   expect_equal(ncol(ebd), 4)
@@ -33,7 +33,7 @@ test_that("auk_filter correctly drops columns", {
   
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
     auk_ebd() %>%
-    auk_species(species = c("Gray Jay", "Blue Jay")) %>% 
+    auk_species(species = c("Canada Jay", "Blue Jay")) %>% 
     auk_filter(file = tempfile(), drop = "species comments") %>% 
     read_ebd(unique = FALSE, rollup = FALSE)
   expect_equal(ncol(ebd), 45)
@@ -46,7 +46,7 @@ test_that("auk_filter won't drop key columns", {
   
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
     auk_ebd() %>%
-    auk_species(species = c("Gray Jay", "Blue Jay"))
+    auk_species(species = c("Canada Jay", "Blue Jay"))
   expect_error(auk_filter(ebd, file = tempfile(), drop = "scientific_name"))
   expect_error(auk_filter(ebd, file = tempfile(), keep = "state"))
 })

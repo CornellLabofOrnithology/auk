@@ -30,6 +30,8 @@ species <- c("Blackburnian Warbler", "Poecile atricapillus",
 ebird_species(species)
 }
 \seealso{
-Other helpers: \code{\link{auk_version_date}}
+Other helpers: \code{\link{auk_ebd_version}},
+  \code{\link{auk_version}},
+  \code{\link{get_ebird_taxonomy}}
 }
 \concept{helpers}

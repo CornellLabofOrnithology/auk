@@ -63,7 +63,7 @@ This package uses the command-line program AWK to extract subsets of the eBird B
 3. Filter the eBird data text file, producing a new text file with only the selected rows.
 4. Import this text file into R as a data frame.
 
-Because the eBird dataset is so large, step 3 typically takes several hours to run. Here's a simple example that extract all Gray Jay records from within Canada.
+Because the eBird dataset is so large, step 3 typically takes several hours to run. Here's a simple example that extract all Canada Jay records from within Canada.
 
 ```{r quickstart, eval = FALSE}
 library(auk)
@@ -77,7 +77,7 @@ ebird_data <- f_in %>%
   # 1. reference file
   auk_ebd() %>% 
   # 2. define filters
-  auk_species(species = "Gray Jay") %>% 
+  auk_species(species = "Canada Jay") %>% 
   auk_country(country = "Canada") %>% 
   # 3. run filtering
   auk_filter(file = f_out) %>% 
@@ -91,7 +91,7 @@ For those not familiar with the pipe operator (`%>%`), the above code could be r
 f_in <- system.file("extdata/ebd-sample.txt", package = "auk")
 f_out <- "ebd_filtered_grja.txt"
 ebd <- auk_ebd(f_in)
-ebd_filters <- auk_species(ebd, species = "Gray Jay")
+ebd_filters <- auk_species(ebd, species = "Canada Jay")
 ebd_filters <- auk_country(ebd_filters, country = "Canada")
 ebd_filtered <- auk_filter(ebd_filters, file = f_out)
 ebd_df <- read_ebd(ebd_filtered)
@@ -147,7 +147,7 @@ f <- system.file("extdata/ebd-sample.txt", package = "auk")
 # define an EBD reference and a set of filters
 ebd <- auk_ebd(f) %>% 
   # species: common and scientific names can be mixed
-  auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>%
+  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) %>%
   # country: codes and names can be mixed; case insensitive
   auk_country(country = c("US", "Canada", "mexico")) %>%
   # bbox: long and lat in decimal degrees
@@ -166,13 +166,13 @@ ebd
 
 In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official [eBird taxonomy](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy) and countries are checked using the [`countrycode`](https://github.com/vincentarelbundock/countrycode) package.
 
-Each of the functions described in the *Defining filters* section only defines a filter. Once all of the required filters have been set, `auk_filter()` should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Gray Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:
+Each of the functions described in the *Defining filters* section only defines a filter. Once all of the required filters have been set, `auk_filter()` should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:
 
 ```{r auk-complete, eval = FALSE}
 output_file <- "ebd_filtered_blja-grja.txt"
 ebd_filtered <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
   auk_ebd() %>% 
-  auk_species(species = c("Gray Jay", "Cyanocitta cristata")) %>% 
+  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) %>% 
   auk_country(country = "Canada") %>% 
   auk_filter(file = output_file)
 ```

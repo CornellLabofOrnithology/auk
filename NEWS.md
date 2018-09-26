@@ -1,12 +1,14 @@
 # auk 0.3.0
 
-- Functions to prepare data for occupancy modeling: `filter_repeat_visits()` and `format_unmarked_occu()`
-- New `auk_bcr()` function to extract data from BCRs
-- Added `bcr_codes` data frame to look up BCR names and codes
+- Updated to 2018 taxonomy; new function `get_ebird_taxonomy()` to get taxonomy via API
+- Better handling of taxonomy versions
 - `auk_getpath()` renamed `auk_get_awk_path()`, and added `auk_set_awk_path()`
 - Added `auk_set_ebd_path()` and `auk_get_ebd_path()` to set and get the 
 `EBD_PATH` environment variable. Now users only need to set this once and just 
 refer to the file name, rather than specifying the full path every time.
+- Functions to prepare data for occupancy modeling: `filter_repeat_visits()` and `format_unmarked_occu()`
+- New `auk_bcr()` function to extract data from BCRs
+- Added `bcr_codes` data frame to look up BCR names and codes
 - "Area" protocol added to `auk_protocol()` filter.
 - `auk_extent()` renamed `auk_bbox()`; `auk_extent()` deprecated and redirects to `auk_bbox()`
 - `auk_zerofill()` now checks for complete checklists and gives option to not rollup

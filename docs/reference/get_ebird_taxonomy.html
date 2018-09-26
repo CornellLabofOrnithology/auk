@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>eBird Taxonomy — ebird_taxonomy • auk</title>
+<title>Get eBird taxonomy via the eBird API — get_ebird_taxonomy • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,14 +30,9 @@
 
 
 
-<meta property="og:title" content="eBird Taxonomy — ebird_taxonomy" />
+<meta property="og:title" content="Get eBird taxonomy via the eBird API — get_ebird_taxonomy" />
 
-<meta property="og:description" content="A simplified version of the taxonomy used by eBird. Includes proper species
-as well as various other categories such as spuh (e.g. duck sp.) and
-slash (e.g. American Black Duck/Mallard). This taxonomy is based on the
-Clements Checklist, which is updated annually, typically in the late summer.
-Non-ASCII characters (e.g. those with accents) have been converted to ASCII
-equivalents in this data frame." />
+<meta property="og:description" content="Get the taxonomy used in eBird via the eBird API." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,27 +94,39 @@ equivalents in this data frame." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>eBird Taxonomy</h1>
-    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/data.r'><code>R/data.r</code></a></small>
-    <div class="hidden name"><code>ebird_taxonomy.Rd</code></div>
+    <h1>Get eBird taxonomy via the eBird API</h1>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/get-ebird-taxonomy.r'><code>R/get-ebird-taxonomy.r</code></a></small>
+    <div class="hidden name"><code>get_ebird_taxonomy.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A simplified version of the taxonomy used by eBird. Includes proper species
-as well as various other categories such as <code>spuh</code> (e.g. <em>duck sp.</em>) and
-<em>slash</em> (e.g. <em>American Black Duck/Mallard</em>). This taxonomy is based on the
-Clements Checklist, which is updated annually, typically in the late summer.
-Non-ASCII characters (e.g. those with accents) have been converted to ASCII
-equivalents in this data frame.</p>
+    <p>Get the taxonomy used in eBird via the eBird API.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>ebird_taxonomy</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <pre class="usage"><span class='fu'>get_ebird_taxonomy</span>(<span class='no'>version</span>, <span class='no'>locale</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>version</th>
+      <td><p>integer; the version (i.e. year) of the taxonomy. The eBird
+taxonomy is updated once a year in August. Leave this parameter blank to
+get the current taxonomy.</p></td>
+    </tr>
+    <tr>
+      <th>locale</th>
+      <td><p>character; the <a href='http://help.ebird.org/customer/portal/articles/1596582-common-name-translations-in-ebird'>locale for the common names</a>,
+defaults to English.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with eight variables and 16,248 rows:</p><ul>
+    <p>A data frame of all species in the eBird taxonomy, consisting of the
+following columns:</p><ul>
 <li><p><code>scientific_name</code>: scientific name.</p></li>
 <li><p><code>common_name</code>: common name, defaults to English, but different languages
 can be selected using the <code>locale</code> parameter.</p></li>
@@ -133,23 +140,30 @@ field-identifiable taxon, such as <code>spuh</code>, <code>slash</code>, <code>h
 subspecies, and recognizable forms), this field links to the corresponding
 species code. For taxa that can't be resolved, this field is <code>NA</code>.</p></li>
 </ul>
-    <p>For further details, see <a href='http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy'>http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy</a></p>
+
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other data: <code><a href='bcr_codes.html'>bcr_codes</a></code>,
-  <code><a href='ebird_states.html'>ebird_states</a></code></p></div>
+    <div class='dont-index'><p>Other helpers: <code><a href='auk_ebd_version.html'>auk_ebd_version</a></code>,
+  <code><a href='auk_version.html'>auk_version</a></code>, <code><a href='ebird_species.html'>ebird_species</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>get_ebird_taxonomy</span>()
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
+      <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

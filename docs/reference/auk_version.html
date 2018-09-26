@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>eBird Taxonomy — ebird_taxonomy • auk</title>
+<title>Versions of auk, the EBD, and the eBird taxonomy — auk_version • auk</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,14 +30,15 @@
 
 
 
-<meta property="og:title" content="eBird Taxonomy — ebird_taxonomy" />
+<meta property="og:title" content="Versions of auk, the EBD, and the eBird taxonomy — auk_version" />
 
-<meta property="og:description" content="A simplified version of the taxonomy used by eBird. Includes proper species
-as well as various other categories such as spuh (e.g. duck sp.) and
-slash (e.g. American Black Duck/Mallard). This taxonomy is based on the
-Clements Checklist, which is updated annually, typically in the late summer.
-Non-ASCII characters (e.g. those with accents) have been converted to ASCII
-equivalents in this data frame." />
+<meta property="og:description" content="This package depends on the version of the EBD and on the eBird taxonomy. Use
+this function to determine the currently installed version of auk, the
+version of the EBD that this auk version works with, and the version of the
+eBird taxonomy included in the packages. The EBD is update quarterly, in
+March, June, September, and December, while the taxonomy is updated annually
+in August or September. To ensure proper functioning, always use the latest
+version of the auk package and the EBD." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,57 +100,64 @@ equivalents in this data frame." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>eBird Taxonomy</h1>
-    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/data.r'><code>R/data.r</code></a></small>
-    <div class="hidden name"><code>ebird_taxonomy.Rd</code></div>
+    <h1>Versions of auk, the EBD, and the eBird taxonomy</h1>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-version.r'><code>R/auk-version.r</code></a></small>
+    <div class="hidden name"><code>auk_version.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A simplified version of the taxonomy used by eBird. Includes proper species
-as well as various other categories such as <code>spuh</code> (e.g. <em>duck sp.</em>) and
-<em>slash</em> (e.g. <em>American Black Duck/Mallard</em>). This taxonomy is based on the
-Clements Checklist, which is updated annually, typically in the late summer.
-Non-ASCII characters (e.g. those with accents) have been converted to ASCII
-equivalents in this data frame.</p>
+    <p>This package depends on the version of the EBD and on the eBird taxonomy. Use
+this function to determine the currently installed version of <code>auk</code>, the
+version of the EBD that this <code>auk</code> version works with, and the version of the
+eBird taxonomy included in the packages. The EBD is update quarterly, in
+March, June, September, and December, while the taxonomy is updated annually
+in August or September. To ensure proper functioning, always use the latest
+version of the auk package and the EBD.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>ebird_taxonomy</span></pre>
+    <pre class="usage"><span class='fu'>auk_version</span>()</pre>
         
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with eight variables and 16,248 rows:</p><ul>
-<li><p><code>scientific_name</code>: scientific name.</p></li>
-<li><p><code>common_name</code>: common name, defaults to English, but different languages
-can be selected using the <code>locale</code> parameter.</p></li>
-<li><p><code>species_code</code>: a unique alphanumeric code identifying each species.</p></li>
-<li><p><code>category</code>: whether the entry is for a species or another
-field-identifiable taxon, such as <code>spuh</code>, <code>slash</code>, <code>hybrid</code>, etc.</p></li>
-<li><p><code>taxon_order</code>: numeric value used to sort rows in taxonomic order.</p></li>
-<li><p><code>order</code>: the scientific name of the order that the species belongs to.</p></li>
-<li><p><code>family</code>: the scientific name of the family that the species belongs to.</p></li>
-<li><p><code>report_as</code>: for taxa that can be resolved to true species (i.e. species,
-subspecies, and recognizable forms), this field links to the corresponding
-species code. For taxa that can't be resolved, this field is <code>NA</code>.</p></li>
+    <p>A list with three elements:</p><ul>
+<li><p><code>auk_version</code>: the version of <code>auk</code>, e.g. <code>"auk 0.3.0"</code>.</p></li>
+<li><p><code>ebd_version</code>: a date object specifying the release date of the EBD
+version that this <code>auk</code> version is designed to work with.</p></li>
+<li><p><code>taxonomy_version</code>: the year of the taxonomy built in to this version of
+<code>auk</code>, i.e. the one stored in <a href='ebird_taxonomy.html'>ebird_taxonomy</a>.</p></li>
 </ul>
-    <p>For further details, see <a href='http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy'>http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy</a></p>
+
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other data: <code><a href='bcr_codes.html'>bcr_codes</a></code>,
-  <code><a href='ebird_states.html'>ebird_states</a></code></p></div>
+    <div class='dont-index'><p>Other helpers: <code><a href='auk_ebd_version.html'>auk_ebd_version</a></code>,
+  <code><a href='ebird_species.html'>ebird_species</a></code>,
+  <code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>auk_version</span>()</div><div class='output co'>#&gt; $auk_version
+#&gt; [1] "auk 0.3.0"
+#&gt; 
+#&gt; $ebd_version
+#&gt; [1] "2018-08-15"
+#&gt; 
+#&gt; $taxonomy_version
+#&gt; [1] 2018
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
-      <li><a href="#format">Format</a></li>
+      <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -3,20 +3,21 @@ library(tidyverse)
 library(stringi)
 library(stringr)
 
-ebird_dir <- "~/data/ebird/ebd_relMay-2018/"
+ebird_dir <- "~/data/ebird/"
 # ebd
-f_in <- file.path(ebird_dir, "ebd_relMay-2018.txt")
-f_subset <- file.path(ebird_dir, "ebd_relMay-2018_subset.txt")
-f_sg <- file.path(ebird_dir, "ebd_relMay-2018_SG.txt")
-f_ru <- file.path(ebird_dir, "ebd_relMay-2018_rollup.txt")
+f_in <- file.path(ebird_dir, "ebd_relAug-2018.txt")
+f_subset <- file.path(ebird_dir, "samples", "ebd_relAug-2018_subset.txt")
+f_sg <- file.path(ebird_dir, "samples", "ebd_relAug-2018_SG.txt")
+f_ru <- file.path(ebird_dir, "samples", "ebd_relAug-2018_rollup.txt")
 # sampling
-s_in <- file.path(ebird_dir, "ebd_sampling_relMay-2018.txt")
-s_subset <- file.path(ebird_dir, "ebd_sampling_relMay-2018_subset.txt")
-s_sg <- file.path(ebird_dir, "ebd_sampling_relMay-2018_SG.txt")
+s_in <- file.path(ebird_dir, "ebd_sampling_relAug-2018.txt")
+s_subset <- file.path(ebird_dir, "samples",
+                      "ebd_sampling_relAug-2018_subset.txt")
+s_sg <- file.path(ebird_dir, "samples", "ebd_sampling_relAug-2018_SG.txt")
 
 # filter
 filters <- auk_ebd(f_in) %>%
-  auk_species(species = c("Gray Jay", "Blue Jay", 
+  auk_species(species = c("Canada Jay", "Blue Jay", 
                           "Steller's Jay", "Green Jay")) %>%
   auk_country(country = c("US", "Canada", "Mexico", "Belize", 
                           "Guatemala", "Honduras", "Panama", 
@@ -64,7 +65,7 @@ readLines(f) %>%
   str_replace_all("\"", "") %>% 
   writeLines(f)
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
-stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
+stopifnot(all(read_ebd(f, reader = "base")$scientific_name %in% ebird_taxonomy$scientific_name))
 
 # filter for zero-fill example
 filters <- auk_ebd(f_in, s_in) %>%
