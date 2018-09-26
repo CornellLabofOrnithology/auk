@@ -136,19 +136,6 @@ This package contains a current (as of the time of package release) version of t
 
 The most common use of the eBird data is to produce a set of bird sightings, i.e. where and when was a given species seen. For example, this type of data could be used to produce a map of sighting locations, or to determine if a given bird has been seen in an area of interest. For more analytic work, such as species distribution modeling, presence and absence data are likely preferred (see Guillera-Arroita et al. 2015). Producing presence-absence data will be covered in the next section.
 
-### Cleaning
-
-Some rows in the eBird Basic Dataset may have an incorrect number of columns, typically from problematic characters in the comments fields, and the dataset has an extra blank column at the end. The function `auk_clean()` drops these erroneous records and removes the blank column. This process should be run on both the EBD and sampling event data. It typically takes several hours for the full EBD; however, it only needs to be run once because the output from the process is saved out to a new tab-separated text file for subsequent and potentially repeated use.
-
-```{r auk-clean, eval = FALSE}
-library(auk)
-# sample data, with intentially introduced errors
-f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
-f_out <- "ebd_cleaned.txt"
-# remove problem records
-cleaned <- auk_clean(f, f_out = f_out)
-```
-
 ### The `auk_ebd` object
 
 This package uses an `auk_ebd` object to keep track of the input data file, any filters defined, and the output file that is produced after filtering has been executed. By keeping everything wrapped up in one object, the user can keep track of exactly what set of input data and filters produced any given output data. To set up the initial `auk_ebd` object, use `auk_ebd()`:

@@ -137,31 +137,6 @@ could be rewritten:
 Usage
 -----
 
-### Cleaning
-
-Some rows in the dataset may have an incorrect number of columns,
-typically from problematic characters in the comments fields, and the
-dataset has an extra blank column at the end. The function `auk_clean()`
-drops these erroneous records and removes the blank column.
-
-    library(auk)
-    # get the path to the example data included in the package
-    # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt
-    f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
-    # output to a temp file for example -->
-    # in practice, provide path to output file -->
-    # e.g. f_out <- "output/ebd_clean.txt" -->
-    f_out <- tempfile()
-    # remove problem records
-    auk_clean(f, f_out)
-    #> [1] "/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T//Rtmp5RRL0m/filedeaea145fb9"
-    # number of lines in input
-    length(readLines(f))
-    #> [1] 51
-    # number of lines in output
-    length(readLines(f_out))
-    #> [1] 47
-
 ### Filtering
 
 `auk` uses a [pipeline-based workflow](http://r4ds.had.co.nz/pipes.html)
@@ -231,7 +206,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_complete()
     ebd
     #> Input 
-    #>   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
+    #>   EBD: /Library/Frameworks/R.framework/Versions/3.5/Resources/library/auk/extdata/ebd-sample.txt 
     #> 
     #> Output 
     #>   Filters not executed

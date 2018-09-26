@@ -2,7 +2,7 @@
 % Please edit documentation in R/auk-clean.r
 \name{auk_clean}
 \alias{auk_clean}
-\title{Clean an eBird data file}
+\title{Clean an eBird data file (Deprecated)}
 \usage{
 auk_clean(f_in, f_out, sep = "\\t", remove_text = FALSE,
   overwrite = FALSE)
@@ -25,45 +25,28 @@ increase the file size, yet are rarely valuable for analytical
 applications, so may be removed. Setting this argument to \code{TRUE} can lead
 to a significant reduction in file size.}
 
-\item{overwrite}{logical; overwrite output file if it already exists}
+\item{overwrite}{logical; overwrite output file if it already exists.}
 }
 \value{
 If AWK ran without errors, the output filename is returned, however,
 if an error was encountered the exit code is returned.
 }
 \description{
-Some rows in the eBird Basic Dataset (EBD) may have an incorrect number of
-columns, often resulting from tabs embedded in the comments field. This
-function drops these problematic records. \strong{Note that this function typically
-takes at least 3 hours to run on the full dataset}
-}
-\details{
-This function can clean a basic dataset file or a sampling file.
-
-Calling this function requires that the command line utility AWK is
-installed. Linux and Mac machines should have AWK by default, Windows users
-will likely need to install \href{https://www.cygwin.com}{Cygwin}.
+This function is no longer required by current versions of the eBird Basic
+Dataset (EBD).
 }
 \examples{
 \dontrun{
 # get the path to the example data included in the package
-# in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt
-f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
+f <- system.file("extdata/ebd-sample.txt", package = "auk")
 # output to a temp file for example
 # in practice, provide path to output file
 # e.g. f_out <- "output/ebd_clean.txt"
 f_out <- tempfile()
 
 # clean file to remove problem rows
+# note: this function is deprecated and no longer does anything
 auk_clean(f, f_out)
-# number of lines in input
-length(readLines(f))
-# number of lines in output
-length(readLines(f_out))
-
-# note that the extra blank column has also been removed
-ncol(read.delim(f, nrows = 5, quote = ""))
-ncol(read.delim(f_out, nrows = 5, quote = ""))
 }
 }
 \seealso{

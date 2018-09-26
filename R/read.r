@@ -63,6 +63,7 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
   reader <- choose_reader(reader)
   # get header
   header <- get_header(x, sep = sep)
+  blank <- (header[length(header)] == "")
 
   # read using fread, read_delim, or read.delim
   col_types <- get_col_types(header, reader = reader)
@@ -98,9 +99,9 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
       }
     }
   }
+  out <- dplyr::as.tbl(out)
 
   # remove possible blank final column
-  blank <- grepl("^[xXvV][0-9]{2}$", names(out)[ncol(out)])
   if (blank) {
     out[ncol(out)] <- NULL
   }

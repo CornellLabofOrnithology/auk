@@ -45,14 +45,6 @@ suppressPackageStartupMessages(library(dplyr))
 #  # sampling event data
 #  system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
 
-## ----auk-clean, eval = FALSE---------------------------------------------
-#  library(auk)
-#  # sample data, with intentially introduced errors
-#  f <- system.file("extdata/ebd-sample_messy.txt", package = "auk")
-#  f_out <- "ebd_cleaned.txt"
-#  # remove problem records
-#  cleaned <- auk_clean(f, f_out = f_out)
-
 ## ----auk-ebd-------------------------------------------------------------
 ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
   auk_ebd()

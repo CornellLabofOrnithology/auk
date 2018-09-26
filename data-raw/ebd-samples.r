@@ -53,19 +53,6 @@ readLines(f) %>%
   writeLines(f)
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
 stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
-# prepare a smaller sample of messy data
-y <- read_tsv(f, quote = "", 
-              col_types = cols(.default = col_character()))
-y$empty_col <- NA_character_
-names(y)[length(y)] <- ""
-y <- sample_n(y, 50)
-f <- "inst/extdata/ebd-sample_messy.txt"
-write_tsv(y, f, na = "")
-readLines(f) %>% 
-  str_replace_all("\"", "") %>% 
-  writeLines(f)
-stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
-stopifnot(all(read_ebd(f, reader = "base")$scientific_name %in% ebird_taxonomy$scientific_name))
 
 # filter for zero-fill example
 filters <- auk_ebd(f_in, s_in) %>%
@@ -144,17 +131,3 @@ readLines(f) %>%
   writeLines(f)
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
 stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
-
-# after script: edit the messy file to introduce errors, especially tabs in comment fields
-# keep top 5 rows intact
-f <- "inst/extdata/ebd-sample_messy.txt"
-stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
-stopifnot(all(read_ebd(f, reader = "base")$scientific_name %in% ebird_taxonomy$scientific_name))
-
-
-# f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
-# f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-# a <- c(TRUE, as.logical(read_tsv(f_ebd)[["ALL SPECIES REPORTED"]]))
-# b <- c(TRUE, as.logical(read_tsv(f_smpl)[["ALL SPECIES REPORTED"]]))
-# readLines(f_ebd)[a] %>% writeLines("inst/extdata/zerofill-ex_ebd.txt")
-# readLines(f_smpl)[b] %>% writeLines("inst/extdata/zerofill-ex_sampling.txt")

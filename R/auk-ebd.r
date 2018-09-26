@@ -58,7 +58,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
   file <- ebd_file(file)
   # read header rows
   header <- tolower(get_header(file, sep))
-  header <- stringr::str_replace_all(header, "_", " ")
+  header <- stringr::str_replace_all(header, "[^a-z0-9]+", " ")
   # fix for custom download
   header[header == "state province"] <- "state"
   header[header == "subnational1 code"] <- "state code"
