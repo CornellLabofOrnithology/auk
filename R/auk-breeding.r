@@ -22,6 +22,11 @@ auk_breeding <- function(x)  {
 
 #' @export
 auk_breeding.auk_ebd <- function(x) {
+  # check for breeding code column
+  if (!"breeding" %in% x$col_idx$id) {
+    stop("Breeding code column missing from EBD")
+  }
+  
   # define filter
   x$filters$breeding <- TRUE
   return(x)

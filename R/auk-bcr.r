@@ -46,6 +46,14 @@ auk_bcr.auk_ebd <- function(x, bcr, replace = FALSE) {
   )
   bcr <- as.integer(bcr)
   
+  # check for bcr column
+  if (!"bcr" %in% x$col_idx$id) {
+    stop("BCR column missing from EBD")
+  }
+  if (!is.null(x$col_idx_sampling) && !"bcr" %in% x$col_idx_sampling$id) {
+    stop("BCR column missing from sampling event data")
+  }
+  
   # set filter list
   if (replace) {
     x$filters$bcr <- bcr

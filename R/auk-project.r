@@ -37,6 +37,14 @@ auk_project.auk_ebd <- function(x, project) {
     all(nchar(project) > 0)
   )
   
+  # check for project column
+  if (!"project" %in% x$col_idx$id) {
+    stop("Project column missing from EBD")
+  }
+  if (!is.null(x$col_idx_sampling) && !"project" %in% x$col_idx_sampling$id) {
+    stop("Project column missing from sampling event data")
+  }
+  
   # check all project names are valid
   bad_projects <- grepl("[^_A-Z]", project)
   if (any(bad_projects)) {

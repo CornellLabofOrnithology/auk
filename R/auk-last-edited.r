@@ -33,6 +33,15 @@ auk_last_edited.auk_ebd <- function(x, date) {
     is.character(date) || assertthat::is.date(date),
     date[1] <= date[2]
   )
+  
+  # check for last edit date column
+  if (!"last_edited" %in% x$col_idx$id) {
+    stop("Last edited data column missing from EBD")
+  }
+  if (!is.null(x$col_idx_sampling) && 
+      !"last_edited" %in% x$col_idx_sampling$id) {
+    stop("Last edited data column missing from sampling event data")
+  }
 
   # convert to date object, then format as ISO standard date format
   date <- as.Date(date) %>%

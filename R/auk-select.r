@@ -54,8 +54,8 @@ auk_select.auk_ebd <- function(x, select, file, sep = "\t", overwrite = FALSE) {
   select <- stringr::str_replace_all(select, "_", " ")
   found <- select %in% x$col_idx$name
   if (!all(found)) {
-    missing <- paste(select[!found], collapse = ", ")
-    stop(paste("Selected variable not found in header: \n\t", missing))
+    col_miss <- paste(select[!found], collapse = ", ")
+    stop(paste("Selected variable not found in header: \n\t", col_miss))
   }
   # find column numbers
   idx <- x$col_idx$index[x$col_idx$name %in% select]

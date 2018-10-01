@@ -206,7 +206,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_complete()
     ebd
     #> Input 
-    #>   EBD: /Library/Frameworks/R.framework/Versions/3.5/Resources/library/auk/extdata/ebd-sample.txt 
+    #>   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
     #> 
     #> Output 
     #>   Filters not executed

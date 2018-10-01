@@ -43,6 +43,21 @@ auk_sampling <- function(file, sep = "\t") {
                         index = seq_along(header),
                         stringsAsFactors = FALSE)
   
+  # ensure key columns are present
+  mandatory <- c("country code", "state code",
+                 "latitude", "longitude",
+                 "observation date", "time observations started",
+                 "protocol type",
+                 "duration minutes", "effort distance km",
+                 "all species reported",
+                 "sampling event identifier", "group identifier")
+  col_miss <- mandatory[!(mandatory %in% header)]
+  if (length(col_miss) > 0) {
+    m <- sprintf("Required columns missing from the sampling file:\n\t%s",
+                 paste(col_miss, collapse = "\n\t"))
+    stop(m)
+  }
+  
   # identify columns required for filtering
   filter_cols <- data.frame(
     id = c("country", "state", "lat", "lng",
@@ -57,10 +72,7 @@ auk_sampling <- function(file, sep = "\t") {
              "duration minutes", "effort distance km",
              "all species reported"),
     stringsAsFactors = FALSE)
-  # all these columns should be in header
-  if (!all(filter_cols$name %in% col_idx$name)) {
-    stop("Problem parsing header in sampling event file.")
-  }
+  filter_cols <- filter_cols[filter_cols$name %in% col_idx$name, ]
   col_idx$id[match(filter_cols$name, col_idx$name)] <- filter_cols$id
   
   # output
