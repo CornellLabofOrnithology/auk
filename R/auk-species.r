@@ -12,11 +12,11 @@
 #'   unless `replace = FALSE`, in which case the previous list of species to 
 #'   filter by will be removed and replaced by that in the current call.
 #'   
-#' @details The list species is checked against the eBird taxonomy for validity.
-#'   If the `auk` package includes a copy of the eBird taxonomy; however, if the
-#'   version of the taxonomy doesn't match the version of the EBD (as determined
-#'   by the filename), then the eBird API will be queried to get the correct
-#'   taxonomy version.
+#' @details The list of species is checked against the eBird taxonomy for
+#'   validity. The `auk` package includes a copy of the eBird taxonomy; however,
+#'   if the version of the taxonomy doesn't match the version of the EBD (as
+#'   determined by the filename), then the eBird API will be queried to get the
+#'   correct taxonomy version.
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -44,23 +44,37 @@ auk_species.auk_ebd <- function(x, species, replace = FALSE) {
   )
   version <- auk_ebd_version(x)$taxonomy_version
   if (is.na(version)) {
-    message(
-      paste0("EBD version cannot be determined from filename\n",
-             "Using eBird taxonomy version included in package")
-    )
     version <- auk_version()$taxonomy_version
+    m <- paste0("EBD version cannot be determined from filename.\n",
+                "Assuming %i eBird taxonomy.")
+  } else {
+    message(
+      paste0("EBD version determined from filename.\n",
+             "Using %i eBird taxonomy.")
+    )
   }
-  species_clean <- ebird_species(species, type = "scientific",
-                                 version = version)
+  message(sprintf(m, version))
+  species_lookup <- ebird_species(species, type = "all", version = version)
 
   # check all species names are valid
+  species_clean <- species_lookup$scientific_name
   if (any(is.na(species_clean))) {
     stop(
       paste0("The following species were not found in the eBird taxonomy: \n\t",
-             paste(species[is.na(species_clean)], collapse =", "))
+             paste(species[is.na(species_clean)], collapse = ", "))
     )
   }
-
+  
+  # check all species names are valid
+  sub_spp <- species_lookup$category %in% c("issf", "form", "intergrade")
+  if (any(sub_spp)) {
+    stop(
+      paste0("Cannot extract taxa identified below species.\n\t",
+             "Remove the following taxa or replace with species: \n\t",
+             paste(species[sub_spp], collapse = ", "))
+    )
+  }
+  
   # add species to filter list
   if (replace) {
     x$filters$species <- species_clean

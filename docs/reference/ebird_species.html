@@ -109,7 +109,8 @@ names, or species codes. Un-matched species are returned as <code>NA</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ebird_species</span>(<span class='no'>x</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"scientific"</span>, <span class='st'>"common"</span>, <span class='st'>"code"</span>), <span class='no'>version</span>)</pre>
+    <pre class="usage"><span class='fu'>ebird_species</span>(<span class='no'>x</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"scientific"</span>, <span class='st'>"common"</span>, <span class='st'>"code"</span>, <span class='st'>"all"</span>),
+  <span class='no'>version</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -122,11 +123,14 @@ English common names, or a mixture of both. Case insensitive.</p></td>
     <tr>
       <th>type</th>
       <td><p>character; whether to return scientific names (<code>scientific</code>),
-English common names (<code>common</code>), or 6-letter eBird species codes (<code>code</code>).</p></td>
+English common names (<code>common</code>), or 6-letter eBird species codes (<code>code</code>).
+Alternatively, use <code>all</code> to return a data frame with the all the taxonomy
+information.</p></td>
     </tr>
     <tr>
       <th>version</th>
-      <td><p>integer; the version (i.e. year) of the taxonomy. See
+      <td><p>integer; the version (i.e. year) of the taxonomy. Leave empty
+to use the version of the taxonomy included in the packages. See
 <code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy()</a></code>.</p></td>
     </tr>
     </table>
@@ -134,7 +138,8 @@ English common names (<code>common</code>), or 6-letter eBird species codes (<co
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Character vector of species identified by scientific name, common
-name, or species code.</p>
+name, or species code. If <code>type = "all"</code> a data frame of the taxonomy of
+the requested species is returned.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

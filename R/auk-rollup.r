@@ -12,6 +12,9 @@
 #'
 #' @param x data.frame; data frame of eBird data, typically as imported by
 #'   [read_ebd()]
+#' @param version integer; the version (i.e. year) of the taxonomy. Leave empty 
+#'   to use the version of the taxonomy included in the packages. See 
+#'   [get_ebird_taxonomy()]. 
 #'   
 #' @details When rolling observations up to species level the observed counts
 #'   are summed across any taxa that resolve to the same species. However, if
@@ -74,7 +77,7 @@
 #' ebd_ru %>%
 #'   filter(common_name == "Yellow-rumped Warbler") %>% 
 #'   select(checklist_id, category, common_name, observation_count)
-auk_rollup <- function(x) {
+auk_rollup <- function(x, version) {
   assertthat::assert_that(
     is.data.frame(x),
     "scientific_name" %in% names(x)
@@ -92,10 +95,31 @@ auk_rollup <- function(x) {
     cid <- rlang::as_quosure(~ sampling_event_identifier)
   }
   
+  # get the correct ebird taxonomy version
+  if (missing(version) || version == auk_version()$taxonomy_version) {
+    tax <- auk::ebird_taxonomy
+  } else {
+    assertthat::assert_that(
+      is_integer(version), 
+      length(version) == 1)
+    tax <- get_ebird_taxonomy(version = version)
+  }
+  
   # remove anything not identifiable to a species
-  tax <- dplyr::filter(auk::ebird_taxonomy, .data$category == "species")
+  tax <- dplyr::filter(tax, .data$category == "species")
   tax <- dplyr::select(tax, .data$scientific_name, .data$taxon_order)
   x <- dplyr::inner_join(x, tax, by = "scientific_name")
+  
+  if (nrow(x) == 0) {
+    if ("subspecies_common_name" %in% names(x)) {
+      x$subspecies_common_name <- NULL
+    }
+    if ("subspecies_scientific_name" %in% names(x)) {
+      x$subspecies_scientific_name <- NULL
+    }
+    attr(x, "rollup") <- TRUE
+    return(dplyr::as_tibble(x))
+  }
   
   # summarize species for cases where multiple subspecies reported on same list
   sp <- dplyr::select(x, rlang::UQ(cid), .data$scientific_name,
@@ -133,6 +157,5 @@ auk_rollup <- function(x) {
   
   # attribute flag
   attr(x, "rollup") <- TRUE
-  
   dplyr::as_tibble(x)
 }

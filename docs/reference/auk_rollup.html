@@ -121,7 +121,7 @@ eBird data file.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>auk_rollup</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_rollup</span>(<span class='no'>x</span>, <span class='no'>version</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,6 +130,12 @@ eBird data file.</p>
       <th>x</th>
       <td><p>data.frame; data frame of eBird data, typically as imported by
 <code><a href='read_ebd.html'>read_ebd()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>integer; the version (i.e. year) of the taxonomy. Leave empty
+to use the version of the taxonomy included in the packages. See
+<code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy()</a></code>.</p></td>
     </tr>
     </table>
     

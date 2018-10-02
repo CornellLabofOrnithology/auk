@@ -4,11 +4,15 @@
 \alias{auk_rollup}
 \title{Roll up eBird taxonomy to species}
 \usage{
-auk_rollup(x)
+auk_rollup(x, version)
 }
 \arguments{
 \item{x}{data.frame; data frame of eBird data, typically as imported by
 \code{\link[=read_ebd]{read_ebd()}}}
+
+\item{version}{integer; the version (i.e. year) of the taxonomy. Leave empty
+to use the version of the taxonomy included in the packages. See
+\code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
 }
 \value{
 A data frame of the eBird data with taxonomic rollup applied.

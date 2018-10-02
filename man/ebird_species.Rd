@@ -4,21 +4,26 @@
 \alias{ebird_species}
 \title{Lookup species in eBird taxonomy}
 \usage{
-ebird_species(x, type = c("scientific", "common", "code"), version)
+ebird_species(x, type = c("scientific", "common", "code", "all"),
+  version)
 }
 \arguments{
 \item{x}{character; species to look up, provided as scientific or
 English common names, or a mixture of both. Case insensitive.}
 
 \item{type}{character; whether to return scientific names (\code{scientific}),
-English common names (\code{common}), or 6-letter eBird species codes (\code{code}).}
+English common names (\code{common}), or 6-letter eBird species codes (\code{code}).
+Alternatively, use \code{all} to return a data frame with the all the taxonomy
+information.}
 
-\item{version}{integer; the version (i.e. year) of the taxonomy. See
+\item{version}{integer; the version (i.e. year) of the taxonomy. Leave empty
+to use the version of the taxonomy included in the packages. See
 \code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
 }
 \value{
 Character vector of species identified by scientific name, common
-name, or species code.
+name, or species code. If \code{type = "all"} a data frame of the taxonomy of
+the requested species is returned.
 }
 \description{
 Given a list of common or scientific names, check that they appear in the

@@ -7,12 +7,16 @@
 #' @param x character; species to look up, provided as scientific or
 #'   English common names, or a mixture of both. Case insensitive.
 #' @param type character; whether to return scientific names (`scientific`),
-#'   English common names (`common`), or 6-letter eBird species codes (`code`).
-#' @param version integer; the version (i.e. year) of the taxonomy. See 
-#'   [get_ebird_taxonomy()].
+#'   English common names (`common`), or 6-letter eBird species codes (`code`). 
+#'   Alternatively, use `all` to return a data frame with the all the taxonomy 
+#'   information.
+#' @param version integer; the version (i.e. year) of the taxonomy. Leave empty 
+#'   to use the version of the taxonomy included in the packages. See 
+#'   [get_ebird_taxonomy()]. 
 #'
 #' @return Character vector of species identified by scientific name, common 
-#'   name, or species code.
+#'   name, or species code. If `type = "all"` a data frame of the taxonomy of 
+#'   the requested species is returned.
 #' @export
 #' @family helpers
 #' @examples
@@ -25,7 +29,7 @@
 #' # use version to query older taxonomy versions
 #' ebird_species("Cordillera Azul Antbird")
 #' ebird_species("Cordillera Azul Antbird", version = 2017)
-ebird_species <- function(x, type = c("scientific", "common", "code"),
+ebird_species <- function(x, type = c("scientific", "common", "code", "all"),
                           version) {
   assertthat::assert_that(is.character(x))
   type <- match.arg(type)
@@ -41,6 +45,7 @@ ebird_species <- function(x, type = c("scientific", "common", "code"),
   }
   
   # deal with case issues
+  lookup_species <- x
   x <- tolower(trimws(x))
   # convert to ascii
   x <- stringi::stri_trans_general(x, "latin-ascii")
@@ -56,7 +61,11 @@ ebird_species <- function(x, type = c("scientific", "common", "code"),
     return(tax$scientific_name[idx])
   } else if (identical(type, "common")) {
     return(tax$common_name[idx])
-  } else {
+  } else if (identical(type, "code")) {
     return(tax$species_code[idx])
+  } else {
+    ret <- dplyr::as_tibble(tax[idx, ])
+    ret$lookup_species <- lookup_species
+    return(ret)
   }
 }
