@@ -60,10 +60,10 @@ auk_ebd_version.character <- function(x, check_exists = TRUE) {
 
 #' @export
 auk_ebd_version.auk_ebd <- function(x, check_exists = TRUE) {
-  auk_ebd_version.character(x$file, check_exists = check_exists)
+  auk_ebd_version(x$file, check_exists = check_exists)
 }
 
 #' @export
 auk_ebd_version.auk_sampling <- function(x, check_exists = TRUE) {
-  auk_ebd_version.character(x$file, check_exists = check_exists)
+  auk_ebd_version(x$file, check_exists = check_exists)
 }

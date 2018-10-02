@@ -48,10 +48,8 @@ auk_species.auk_ebd <- function(x, species, replace = FALSE) {
     m <- paste0("EBD version cannot be determined from filename.\n",
                 "Assuming %i eBird taxonomy.")
   } else {
-    message(
-      paste0("EBD version determined from filename.\n",
-             "Using %i eBird taxonomy.")
-    )
+    m <- paste0("EBD version determined from filename.\n",
+                "Using %i eBird taxonomy.")
   }
   message(sprintf(m, version))
   species_lookup <- ebird_species(species, type = "all", version = version)
