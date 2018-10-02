@@ -11,6 +11,12 @@
 #' @param replace logical; multiple calls to `auk_species()` are additive, 
 #'   unless `replace = FALSE`, in which case the previous list of species to 
 #'   filter by will be removed and replaced by that in the current call.
+#'   
+#' @details The list species is checked against the eBird taxonomy for validity.
+#'   If the `auk` package includes a copy of the eBird taxonomy; however, if the
+#'   version of the taxonomy doesn't match the version of the EBD (as determined
+#'   by the filename), then the eBird API will be queried to get the correct
+#'   taxonomy version.
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -36,7 +42,16 @@ auk_species.auk_ebd <- function(x, species, replace = FALSE) {
     is.character(species),
     assertthat::is.flag(replace)
   )
-  species_clean <- ebird_species(species, type = "scientific")
+  version <- auk_ebd_version(x)$taxonomy_version
+  if (is.na(version)) {
+    message(
+      paste0("EBD version cannot be determined from filename\n",
+             "Using eBird taxonomy version included in package")
+    )
+    version <- auk_version()$taxonomy_version
+  }
+  species_clean <- ebird_species(species, type = "scientific",
+                                 version = version)
 
   # check all species names are valid
   if (any(is.na(species_clean))) {

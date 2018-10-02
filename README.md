@@ -204,6 +204,8 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_duration(duration = c(0, 60)) %>%
       # complete: all species seen or heard are recorded
       auk_complete()
+    #> EBD version cannot be determined from filename
+    #> Using eBird taxonomy version included in package
     ebd
     #> Input 
     #>   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 

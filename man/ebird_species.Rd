@@ -4,7 +4,7 @@
 \alias{ebird_species}
 \title{Lookup species in eBird taxonomy}
 \usage{
-ebird_species(x, type = c("scientific", "common", "code"))
+ebird_species(x, type = c("scientific", "common", "code"), version)
 }
 \arguments{
 \item{x}{character; species to look up, provided as scientific or
@@ -12,6 +12,9 @@ English common names, or a mixture of both. Case insensitive.}
 
 \item{type}{character; whether to return scientific names (\code{scientific}),
 English common names (\code{common}), or 6-letter eBird species codes (\code{code}).}
+
+\item{version}{integer; the version (i.e. year) of the taxonomy. See
+\code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
 }
 \value{
 Character vector of species identified by scientific name, common
@@ -28,6 +31,10 @@ species <- c("Blackburnian Warbler", "Poecile atricapillus",
              "american dipper", "Caribou")
 # note that species not in the ebird taxonomy return NA
 ebird_species(species)
+
+# use version to query older taxonomy versions
+ebird_species("Cordillera Azul Antbird")
+ebird_species("Cordillera Azul Antbird", version = 2017)
 }
 \seealso{
 Other helpers: \code{\link{auk_ebd_version}},

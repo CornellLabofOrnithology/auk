@@ -11,8 +11,8 @@
 #' @param x `data.frame`; observation data, e.g. from the eBird Basic Dataset
 #'   (EBD), for **a single species**, that has been filtered to those with 
 #'   repeat visits by [filter_repeat_visits()].
-#' @param site_id character; a unique identifer for each "site", typically 
-#'   indentifying observations from a unique location by the same observer 
+#' @param site_id character; a unique idenitifer for each "site", typically 
+#'   identifying observations from a unique location by the same observer 
 #'   within a period of temporal closure. Data output from 
 #'   [filter_repeat_visits()] will have a `.site_id` variable that meets these 
 #'   requirements.
@@ -125,7 +125,8 @@ format_unmarked_occu <- function(x, site_id = "site",
   # response to wide
   x_resp <- dplyr::select(x, rlang::UQ(rlang::sym(site_id)), .data$.obs_id, 
                           rlang::UQ(rlang::sym(response)))
-  x_resp <- tidyr::spread(x_resp, .data$.obs_id, rlang::UQ(rlang::sym(response)))
+  x_resp <- tidyr::spread(x_resp, .data$.obs_id, 
+                          rlang::UQ(rlang::sym(response)))
   names(x_resp)[-1] <- paste("y", names(x_resp)[-1], sep = ".")
   
   # site-level covariates

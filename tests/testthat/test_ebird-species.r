@@ -43,3 +43,10 @@ test_that("ebird_species works for species with non-ascii characters", {
   expect_equal(ebird_species("Ruppell's Griffon"), "Gyps rueppelli")
   expect_equal(ebird_species("R\u00FCppell's Griffon"), "Gyps rueppelli")
 })
+
+test_that("ebird_species handles versions correctly", {
+  expect_equal(ebird_species("Cordillera Azul Antbird"), "Myrmoderus eowilsoni")
+  expect_equal(ebird_species("Cordillera Azul Antbird", version = 2017), 
+               "Myrmoderus [undescribed form]")
+})
+

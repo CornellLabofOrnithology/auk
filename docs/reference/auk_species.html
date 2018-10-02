@@ -136,6 +136,14 @@ filter by will be removed and replaced by that in the current call.</p></td>
 
     <p>An <code>auk_ebd</code> object.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The list species is checked against the eBird taxonomy for validity.
+If the <code>auk</code> package includes a copy of the eBird taxonomy; however, if the
+version of the taxonomy doesn't match the version of the EBD (as determined
+by the filename), then the eBird API will be queried to get the correct
+taxonomy version.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other filter: <code><a href='auk_bbox.html'>auk_bbox</a></code>,
@@ -153,7 +161,8 @@ filter by will be removed and replaced by that in the current call.</p></td>
 <span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"Canada Jay"</span>, <span class='st'>"Pluvialis squatarola"</span>)
 <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_species</span>(<span class='no'>species</span>)</div><div class='output co'>#&gt; Input 
+  <span class='fu'>auk_species</span>(<span class='no'>species</span>)</div><div class='output co'>#&gt; <span class='message'>EBD version cannot be determined from filename</span>
+#&gt; <span class='message'>Using eBird taxonomy version included in package</span></div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -176,7 +185,8 @@ filter by will be removed and replaced by that in the current call.</p></td>
 #&gt;   Complete checklists only: no</div><div class='input'>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
-<span class='fu'>auk_species</span>(<span class='no'>ebd</span>, <span class='no'>species</span>)</div><div class='output co'>#&gt; Input 
+<span class='fu'>auk_species</span>(<span class='no'>ebd</span>, <span class='no'>species</span>)</div><div class='output co'>#&gt; <span class='message'>EBD version cannot be determined from filename</span>
+#&gt; <span class='message'>Using eBird taxonomy version included in package</span></div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -204,6 +214,8 @@ filter by will be removed and replaced by that in the current call.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

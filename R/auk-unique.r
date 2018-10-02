@@ -94,7 +94,7 @@ auk_unique <- function(x,
   x <- rbind(x[!grouped, ], x_grouped)
 
   # move id field to front
-  x <- dplyr::select(x, .data$checklist_id, dplyr::everything())#out[, c("checklist_id", setdiff(names(out), "checklist_id"))]
+  x <- dplyr::select(x, .data$checklist_id, dplyr::everything())
 
   # attribute flag
   attr(x, "unique") <- TRUE

@@ -25,7 +25,7 @@
 #' @param date_var character; column name of the variable in `x` containing the
 #'   date. This column should either be in `Date` format or convertible to
 #'   `Date` format with [as.Date()].
-#' @param site_vars charcter; names of one of more columns in `x` that define a
+#' @param site_vars character; names of one of more columns in `x` that define a
 #'   site, typically the location and observer IDs.
 #'   
 #' @details In addition to specifying the minimum and maximum number of

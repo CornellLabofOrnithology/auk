@@ -25,6 +25,13 @@ Define a filter for the eBird Basic Dataset (EBD) based on species. This
 function only defines the filter and, once all filters have been defined,
 \code{\link[=auk_filter]{auk_filter()}} should be used to call AWK and perform the filtering.
 }
+\details{
+The list species is checked against the eBird taxonomy for validity.
+If the \code{auk} package includes a copy of the eBird taxonomy; however, if the
+version of the taxonomy doesn't match the version of the EBD (as determined
+by the filename), then the eBird API will be queried to get the correct
+taxonomy version.
+}
 \examples{
 # common and scientific names can be mixed
 species <- c("Canada Jay", "Pluvialis squatarola")

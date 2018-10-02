@@ -8,6 +8,8 @@
 #'   English common names, or a mixture of both. Case insensitive.
 #' @param type character; whether to return scientific names (`scientific`),
 #'   English common names (`common`), or 6-letter eBird species codes (`code`).
+#' @param version integer; the version (i.e. year) of the taxonomy. See 
+#'   [get_ebird_taxonomy()].
 #'
 #' @return Character vector of species identified by scientific name, common 
 #'   name, or species code.
@@ -19,9 +21,24 @@
 #'              "american dipper", "Caribou")
 #' # note that species not in the ebird taxonomy return NA
 #' ebird_species(species)
-ebird_species <- function(x, type = c("scientific", "common", "code")) {
+#' 
+#' # use version to query older taxonomy versions
+#' ebird_species("Cordillera Azul Antbird")
+#' ebird_species("Cordillera Azul Antbird", version = 2017)
+ebird_species <- function(x, type = c("scientific", "common", "code"),
+                          version) {
   assertthat::assert_that(is.character(x))
   type <- match.arg(type)
+  
+  # get the correct ebird taxonomy version
+  if (missing(version) || version == auk_version()$taxonomy_version) {
+    tax <- auk::ebird_taxonomy
+  } else {
+    assertthat::assert_that(
+      is_integer(version), 
+      length(version) == 1)
+    tax <- get_ebird_taxonomy(version = version)
+  }
   
   # deal with case issues
   x <- tolower(trimws(x))
@@ -29,17 +46,17 @@ ebird_species <- function(x, type = c("scientific", "common", "code")) {
   x <- stringi::stri_trans_general(x, "latin-ascii")
   
   # first check for scientific names
-  sci <- match(x, tolower(auk::ebird_taxonomy$scientific_name))
+  sci <- match(x, tolower(tax$scientific_name))
   # then for common names
-  com <- match(x, tolower(auk::ebird_taxonomy$common_name))
+  com <- match(x, tolower(tax$common_name))
   # combine
   idx <- ifelse(is.na(sci), com, sci)
   # convert to output format, default scientific
   if (identical(type, "scientific")) {
-    return(auk::ebird_taxonomy$scientific_name[idx])
+    return(tax$scientific_name[idx])
   } else if (identical(type, "common")) {
-    return(auk::ebird_taxonomy$common_name[idx])
+    return(tax$common_name[idx])
   } else {
-    return(auk::ebird_taxonomy$species_code[idx])
+    return(tax$species_code[idx])
   }
 }

@@ -514,11 +514,12 @@ awk_translate <- function(filters, col_idx, sep, select) {
       p_idx <- col_idx$index[col_idx$id == "protocol"]
       inc_stat <- str_interp("$${idx} == \"Stationary\"",
                              list(idx = p_idx))
-      condition <- str_interp("${inc} || ($${idx} >= ${mn} && $${idx} <= ${mx})",
-                              list(idx = idx,
-                                   mn = filters$distance[1],
-                                   mx = filters$distance[2],
-                                   inc = inc_stat))
+      condition <- str_interp(
+        "${inc} || ($${idx} >= ${mn} && $${idx} <= ${mx})",
+        list(idx = idx,
+             mn = filters$distance[1],
+             mx = filters$distance[2],
+             inc = inc_stat))
     } else {
       condition <- str_interp("$${idx} >= ${mn} && $${idx} <= ${mx}",
                               list(idx = idx,

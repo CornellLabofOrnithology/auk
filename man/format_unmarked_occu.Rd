@@ -12,8 +12,8 @@ format_unmarked_occu(x, site_id = "site",
 (EBD), for \strong{a single species}, that has been filtered to those with
 repeat visits by \code{\link[=filter_repeat_visits]{filter_repeat_visits()}}.}
 
-\item{site_id}{character; a unique identifer for each "site", typically
-indentifying observations from a unique location by the same observer
+\item{site_id}{character; a unique idenitifer for each "site", typically
+identifying observations from a unique location by the same observer
 within a period of temporal closure. Data output from
 \code{\link[=filter_repeat_visits]{filter_repeat_visits()}} will have a \code{.site_id} variable that meets these
 requirements.}

@@ -31,7 +31,7 @@ one season (e.g. breeding) across multiple years.}
 date. This column should either be in \code{Date} format or convertible to
 \code{Date} format with \code{\link[=as.Date]{as.Date()}}.}
 
-\item{site_vars}{charcter; names of one of more columns in \code{x} that define a
+\item{site_vars}{character; names of one of more columns in \code{x} that define a
 site, typically the location and observer IDs.}
 }
 \value{

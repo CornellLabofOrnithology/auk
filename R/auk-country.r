@@ -88,7 +88,8 @@ auk_country.auk_sampling <- function(x, country, replace = FALSE) {
 
 missing_countries <- function(x) {
   cc <- structure(c("AC", "CP", "CS", "XX", "XK", "FM"), 
-                  .Names = c("ashmore and cartier islands", "clipperton island", 
+                  .Names = c("ashmore and cartier islands", 
+                             "clipperton island", 
                              "coral sea islands", "high seas", 
                              "kosovo", "micronesia"))
   # convert country names to codes
