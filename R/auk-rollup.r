@@ -15,6 +15,8 @@
 #' @param taxonomy_version integer; the version (i.e. year) of the taxonomy. In
 #'   most cases, this should be left empty to use the version of the taxonomy
 #'   included in the package. See [get_ebird_taxonomy()].
+#' @param drop_higher logical; whether to remove taxa above species during the 
+#'   rollup process, e.g. "spuhs" like "duck sp.".
 #'   
 #' @details When rolling observations up to species level the observed counts
 #'   are summed across any taxa that resolve to the same species. However, if
@@ -68,10 +70,13 @@
 #' ebd <- read_ebd(f, rollup = FALSE)
 #' # rollup
 #' ebd_ru <- auk_rollup(ebd)
+#' # keep higher taxa
+#' ebd_higher <- auk_rollup(ebd, drop_higher = FALSE)
 #' 
 #' # all taxa not identifiable to species are dropped
 #' unique(ebd$category)
 #' unique(ebd_ru$category)
+#' unique(ebd_higher$category)
 #' 
 #' # yellow-rump warbler subspecies rollup
 #' library(dplyr)
@@ -84,7 +89,7 @@
 #' ebd_ru %>%
 #'   filter(common_name == "Yellow-rumped Warbler") %>% 
 #'   select(checklist_id, category, common_name, observation_count)
-auk_rollup <- function(x, taxonomy_version) {
+auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
   assertthat::assert_that(
     is.data.frame(x),
     "scientific_name" %in% names(x)
@@ -112,7 +117,12 @@ auk_rollup <- function(x, taxonomy_version) {
   }
   
   # remove anything not identifiable to a species
-  tax <- dplyr::filter(tax, .data$category == "species")
+  if (drop_higher) {
+    include <- "species"
+  } else {
+    include <- c("species", "slash", "spuh", "hybrid")
+  }
+  tax <- dplyr::filter(tax, .data$category %in% include)
   tax <- dplyr::select(tax, .data$scientific_name, .data$taxon_order)
   x <- dplyr::inner_join(x, tax, by = "scientific_name")
   
@@ -152,7 +162,7 @@ auk_rollup <- function(x, taxonomy_version) {
   
   # drop subspecies fields, set category to species
   if ("category" %in% names(x)) {
-    x$category <- "species"
+    x$category <- ifelse(x$category %in% include, x$category, "species")
   }
   if ("subspecies_common_name" %in% names(x)) {
     x$subspecies_common_name <- NULL

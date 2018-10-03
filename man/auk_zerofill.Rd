@@ -12,15 +12,15 @@ auk_zerofill(x, ...)
 
 \method{auk_zerofill}{data.frame}(x, sampling_events, species,
   taxonomy_version, collapse = FALSE, unique = TRUE, rollup = TRUE,
-  complete = TRUE, ...)
+  drop_higher = TRUE, complete = TRUE, ...)
 
 \method{auk_zerofill}{character}(x, sampling_events, species,
   taxonomy_version, collapse = FALSE, unique = TRUE, rollup = TRUE,
-  complete = TRUE, sep = "\\t", ...)
+  drop_higher = TRUE, complete = TRUE, sep = "\\t", ...)
 
 \method{auk_zerofill}{auk_ebd}(x, species, taxonomy_version,
-  collapse = FALSE, unique = TRUE, rollup = TRUE, complete = TRUE,
-  sep = "\\t", ...)
+  collapse = FALSE, unique = TRUE, rollup = TRUE,
+  drop_higher = TRUE, complete = TRUE, sep = "\\t", ...)
 
 collapse_zerofill(x)
 }
@@ -59,6 +59,9 @@ hasn't already.}
 
 \item{rollup}{logical; should \code{\link[=auk_rollup]{auk_rollup()}} be run on the input data if it
 hasn't already.}
+
+\item{drop_higher}{logical; whether to remove taxa above species during the
+rollup process, e.g. "spuhs" like "duck sp.". See \code{\link[=auk_rollup]{auk_rollup()}}.}
 
 \item{complete}{logical; if \code{TRUE} (the default) all checklists are required
 to be complete prior to zero-filling.}

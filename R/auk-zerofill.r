@@ -32,6 +32,8 @@
 #'   hasn't already.
 #' @param rollup logical; should [auk_rollup()] be run on the input data if it
 #'   hasn't already.
+#' @param drop_higher logical; whether to remove taxa above species during the 
+#'   rollup process, e.g. "spuhs" like "duck sp.". See [auk_rollup()].
 #' @param complete logical; if `TRUE` (the default) all checklists are required 
 #'   to be complete prior to zero-filling.
 #' @param sep character; single character used to separate fields within a row.
@@ -85,7 +87,8 @@ auk_zerofill <- function(x, ...) {
 auk_zerofill.data.frame <- function(x, sampling_events, 
                                     species, taxonomy_version,
                                     collapse = FALSE, unique = TRUE, 
-                                    rollup = TRUE, complete = TRUE, ...) {
+                                    rollup = TRUE, drop_higher = TRUE,
+                                    complete = TRUE, ...) {
   # checks
   assertthat::assert_that(
     is.data.frame(sampling_events),
@@ -140,7 +143,7 @@ auk_zerofill.data.frame <- function(x, sampling_events,
   
   # check that auk_rollup has been run
   if (rollup && !isTRUE(attr(x, "rollup"))) {
-    x <- auk_rollup(x)
+    x <- auk_rollup(x, drop_higher = drop_higher)
   }
 
   # subset ebd to remove checklist level fields
@@ -208,8 +211,8 @@ auk_zerofill.data.frame <- function(x, sampling_events,
 auk_zerofill.character <- function(x, sampling_events, 
                                    species, taxonomy_version,
                                    collapse = FALSE, unique = TRUE, 
-                                   rollup = TRUE, complete = TRUE, 
-                                   sep = "\t", ...) {
+                                   rollup = TRUE,  drop_higher = TRUE,
+                                   complete = TRUE, sep = "\t", ...) {
   # checks
   assertthat::assert_that(
     assertthat::is.string(x), file.exists(x),
@@ -233,8 +236,8 @@ auk_zerofill.character <- function(x, sampling_events,
 #'   [auk_ebd()].
 auk_zerofill.auk_ebd <- function(x, species, taxonomy_version,
                                  collapse = FALSE, unique = TRUE, 
-                                 rollup = TRUE, complete = TRUE, 
-                                 sep = "\t", ...) {
+                                 rollup = TRUE,  drop_higher = TRUE,
+                                 complete = TRUE, sep = "\t", ...) {
   # check that output files defined
   if (is.null(x$output)) {
     stop("No output EBD file in this auk_ebd object, try calling auk_filter().")

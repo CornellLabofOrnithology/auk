@@ -118,17 +118,17 @@ a checklist was had a count of zero.</p>
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'>auk_zerofill</span>(<span class='no'>x</span>, <span class='no'>sampling_events</span>, <span class='no'>species</span>,
   <span class='no'>taxonomy_version</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>complete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+  <span class='kw'>drop_higher</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>complete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for character</span>
 <span class='fu'>auk_zerofill</span>(<span class='no'>x</span>, <span class='no'>sampling_events</span>, <span class='no'>species</span>,
   <span class='no'>taxonomy_version</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>complete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='no'>...</span>)
+  <span class='kw'>drop_higher</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>complete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for auk_ebd</span>
 <span class='fu'>auk_zerofill</span>(<span class='no'>x</span>, <span class='no'>species</span>, <span class='no'>taxonomy_version</span>,
-  <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>complete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='no'>...</span>)
+  <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>drop_higher</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>complete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='no'>...</span>)
 
 <span class='fu'>collapse_zerofill</span>(<span class='no'>x</span>)</pre>
     
@@ -185,6 +185,11 @@ hasn't already.</p></td>
       <th>rollup</th>
       <td><p>logical; should <code><a href='auk_rollup.html'>auk_rollup()</a></code> be run on the input data if it
 hasn't already.</p></td>
+    </tr>
+    <tr>
+      <th>drop_higher</th>
+      <td><p>logical; whether to remove taxa above species during the
+rollup process, e.g. "spuhs" like "duck sp.". See <code><a href='auk_rollup.html'>auk_rollup()</a></code>.</p></td>
     </tr>
     <tr>
       <th>complete</th>
