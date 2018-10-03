@@ -1,8 +1,7 @@
 # auk 0.3.0
 
 - Updated to 2018 taxonomy; new function `get_ebird_taxonomy()` to get taxonomy via the eBird API
-- Better handling of taxonomy versions now takes a version argument and uses the eBird API to get the taxonomy
-- `auk_species()` 
+- Better handling of taxonomy versions, many functions now take a `taxonomy_version` argument and use the eBird API to get the taxonomy
 - `auk_getpath()` renamed `auk_get_awk_path()`, and added `auk_set_awk_path()`
 - Added `auk_set_ebd_path()` and `auk_get_ebd_path()` to set and get the 
 `EBD_PATH` environment variable. Now users only need to set this once and just 

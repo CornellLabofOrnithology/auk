@@ -10,9 +10,9 @@
 #'   English common names (`common`), or 6-letter eBird species codes (`code`). 
 #'   Alternatively, use `all` to return a data frame with the all the taxonomy 
 #'   information.
-#' @param version integer; the version (i.e. year) of the taxonomy. Leave empty 
-#'   to use the version of the taxonomy included in the packages. See 
-#'   [get_ebird_taxonomy()]. 
+#' @param taxonomy_version integer; the version (i.e. year) of the taxonomy.
+#'   Leave empty to use the version of the taxonomy included in the package.
+#'   See [get_ebird_taxonomy()].
 #'
 #' @return Character vector of species identified by scientific name, common 
 #'   name, or species code. If `type = "all"` a data frame of the taxonomy of 
@@ -26,22 +26,21 @@
 #' # note that species not in the ebird taxonomy return NA
 #' ebird_species(species)
 #' 
-#' # use version to query older taxonomy versions
+#' # use taxonomy_version to query older taxonomy versions
 #' ebird_species("Cordillera Azul Antbird")
-#' ebird_species("Cordillera Azul Antbird", version = 2017)
+#' ebird_species("Cordillera Azul Antbird", taxonomy_version = 2017)
 ebird_species <- function(x, type = c("scientific", "common", "code", "all"),
-                          version) {
+                          taxonomy_version) {
   assertthat::assert_that(is.character(x))
   type <- match.arg(type)
   
   # get the correct ebird taxonomy version
-  if (missing(version) || version == auk_version()$taxonomy_version) {
+  if (missing(taxonomy_version) || 
+      taxonomy_version == auk_version()$taxonomy_version) {
     tax <- auk::ebird_taxonomy
   } else {
-    assertthat::assert_that(
-      is_integer(version), 
-      length(version) == 1)
-    tax <- get_ebird_taxonomy(version = version)
+    stopifnot(is_integer(taxonomy_version), length(taxonomy_version) == 1)
+    tax <- get_ebird_taxonomy(version = taxonomy_version)
   }
   
   # deal with case issues

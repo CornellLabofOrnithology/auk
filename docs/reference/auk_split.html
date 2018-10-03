@@ -111,8 +111,8 @@ be read in all at once.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>auk_split</span>(<span class='no'>file</span>, <span class='no'>species</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>ext</span> <span class='kw'>=</span> <span class='st'>"txt"</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_split</span>(<span class='no'>file</span>, <span class='no'>species</span>, <span class='no'>taxonomy_version</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>ext</span> <span class='kw'>=</span> <span class='st'>"txt"</span>,
+  <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -126,6 +126,12 @@ be read in all at once.</p>
       <td><p>species character; species to filter and split by, provided as
 scientific or English common names, or a mixture of both. These names must
 match the official eBird Taxomony (<a href='ebird_taxonomy.html'>ebird_taxonomy</a>).</p></td>
+    </tr>
+    <tr>
+      <th>taxonomy_version</th>
+      <td><p>integer; the version (i.e. year) of the taxonomy. In
+most cases, this should be left empty to use the version of the taxonomy
+included in the package. See <code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy()</a></code>.</p></td>
     </tr>
     <tr>
       <th>prefix</th>
@@ -145,13 +151,22 @@ is not allowed since spaces appear in many of the fields.</p></td>
     </tr>
     <tr>
       <th>overwrite</th>
-      <td><p>logical; overwrite output files if they already exists</p></td>
+      <td><p>logical; overwrite output files if they already exists.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A vector of output filenames, one for each species.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The list of species is checked against the eBird taxonomy for
+validity. This taxonomy is updated once a year in August. The <code>auk</code> package
+includes a copy of the eBird taxonomy, current at the time of release;
+however, if the EBD and <code>auk</code> versions are not aligned, you may need to
+explicitly specify which version of the taxonomy to use, in which case
+the eBird API will be queried to get the correct version of the taxonomy.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -161,7 +176,7 @@ is not allowed since spaces appear in many of the fields.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"Gray Jay"</span>, <span class='st'>"Cyanocitta stelleri"</span>)
+<span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"Canada Jay"</span>, <span class='st'>"Cyanocitta stelleri"</span>)
 <span class='co'># get the path to the example data included in the package</span>
 <span class='co'># in practice, provide path to a filtered ebd file</span>
 <span class='co'># e.g. f &lt;- "data/ebd_filtered.txt</span>
@@ -179,6 +194,8 @@ is not allowed since spaces appear in many of the fields.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

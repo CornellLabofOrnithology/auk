@@ -121,7 +121,7 @@ eBird data file.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>auk_rollup</span>(<span class='no'>x</span>, <span class='no'>version</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_rollup</span>(<span class='no'>x</span>, <span class='no'>taxonomy_version</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,10 +132,10 @@ eBird data file.</p>
 <code><a href='read_ebd.html'>read_ebd()</a></code></p></td>
     </tr>
     <tr>
-      <th>version</th>
-      <td><p>integer; the version (i.e. year) of the taxonomy. Leave empty
-to use the version of the taxonomy included in the packages. See
-<code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy()</a></code>.</p></td>
+      <th>taxonomy_version</th>
+      <td><p>integer; the version (i.e. year) of the taxonomy. In
+most cases, this should be left empty to use the version of the taxonomy
+included in the package. See <code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy()</a></code>.</p></td>
     </tr>
     </table>
     
@@ -175,6 +175,12 @@ Mallard (hybrid). Dropped by <code>auk_rollup()</code>.</p></li>
 free-flying (these do not count on personal lists) e.g., Mallard (Domestic
 type). Dropped by <code>auk_rollup()</code>.</p></li>
 </ul>
+    <p>The rollup process is based on the eBird taxonomy, which is updated once a
+year in August. The <code>auk</code> package includes a copy of the eBird taxonomy,
+current at the time of release; however, if the EBD and <code>auk</code> versions are
+not aligned, you may need to explicitly specify which version of the
+taxonomy to use, in which case the eBird API will be queried to get the
+correct version of the taxonomy.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 

@@ -9,6 +9,9 @@
 #' @param species species character; species to filter and split by, provided as
 #'   scientific or English common names, or a mixture of both. These names must
 #'   match the official eBird Taxomony ([ebird_taxonomy]).
+#' @param taxonomy_version integer; the version (i.e. year) of the taxonomy. In
+#'   most cases, this should be left empty to use the version of the taxonomy
+#'   included in the package. See [get_ebird_taxonomy()].
 #' @param prefix character; a file and directory prefix. For example, if 
 #'   splitting by species "A" and "B" and `prefix = "data/ebd_"`, the resulting 
 #'   files will be "data/ebd_A.txt" and "data/ebd_B.txt".
@@ -16,14 +19,21 @@
 #' @param sep character; the input field separator, the eBird file is tab
 #'   separated by default. Must only be a single character and space delimited
 #'   is not allowed since spaces appear in many of the fields.
-#' @param overwrite logical; overwrite output files if they already exists
+#' @param overwrite logical; overwrite output files if they already exists.
+#'   
+#' @details The list of species is checked against the eBird taxonomy for
+#'   validity. This taxonomy is updated once a year in August. The `auk` package 
+#'   includes a copy of the eBird taxonomy, current at the time of release; 
+#'   however, if the EBD and `auk` versions are not aligned, you may need to 
+#'   explicitly specify which version of the taxonomy to use, in which case 
+#'   the eBird API will be queried to get the correct version of the taxonomy.
 #'
 #' @return A vector of output filenames, one for each species.
 #' @export
 #' @family text
 #' @examples
 #' \dontrun{
-#' species <- c("Gray Jay", "Cyanocitta stelleri")
+#' species <- c("Canada Jay", "Cyanocitta stelleri")
 #' # get the path to the example data included in the package
 #' # in practice, provide path to a filtered ebd file
 #' # e.g. f <- "data/ebd_filtered.txt
@@ -34,7 +44,8 @@
 #' prefix <- file.path(tempdir(), "ebd_")
 #' species_files <- auk_split(f, species = species, prefix = prefix)
 #' }
-auk_split <- function(file, species, prefix = "", ext = "txt", sep = "\t",
+auk_split <- function(file, species, taxonomy_version, 
+                      prefix = "", ext = "txt", sep = "\t",
                       overwrite = FALSE) {
   awk_path <- auk_get_awk_path()
   if (is.na(awk_path)) {
@@ -51,11 +62,11 @@ auk_split <- function(file, species, prefix = "", ext = "txt", sep = "\t",
   file <- normalizePath(file)
   
   # check all species names are valid and convert to scientific
-  species_clean <- ebird_species(species)
+  species_clean <- ebird_species(species, taxonomy_version = taxonomy_version)
   if (any(is.na(species_clean))) {
     stop(
       paste0("The following species were not found in the eBird taxonomy: \n\t",
-             paste(species[is.na(species_clean)], collapse =", "))
+             paste(species[is.na(species_clean)], collapse = ", "))
     )
   }
   if (length(species_clean) < 1) {

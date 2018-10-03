@@ -8,15 +8,19 @@
 #' @param species character; species to filter by, provided as scientific or
 #'   English common names, or a mixture of both. These names must match the
 #'   official eBird Taxomony ([ebird_taxonomy]).
+#' @param taxonomy_version integer; the version (i.e. year) of the taxonomy. In
+#'   most cases, this should be left empty to use the version of the taxonomy
+#'   included in the package. See [get_ebird_taxonomy()].
 #' @param replace logical; multiple calls to `auk_species()` are additive, 
 #'   unless `replace = FALSE`, in which case the previous list of species to 
 #'   filter by will be removed and replaced by that in the current call.
 #'   
 #' @details The list of species is checked against the eBird taxonomy for
-#'   validity. The `auk` package includes a copy of the eBird taxonomy; however,
-#'   if the version of the taxonomy doesn't match the version of the EBD (as
-#'   determined by the filename), then the eBird API will be queried to get the
-#'   correct taxonomy version.
+#'   validity. This taxonomy is updated once a year in August. The `auk` package 
+#'   includes a copy of the eBird taxonomy, current at the time of release; 
+#'   however, if the EBD and `auk` versions are not aligned, you may need to 
+#'   explicitly specify which version of the taxonomy to use, in which case 
+#'   the eBird API will be queried to get the correct version of the taxonomy. 
 #'
 #' @return An `auk_ebd` object.
 #' @export
@@ -31,28 +35,30 @@
 #' # alternatively, without pipes
 #' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 #' auk_species(ebd, species)
-auk_species <- function(x, species, replace)  {
+auk_species <- function(x, species, taxonomy_version, replace = FALSE)  {
   UseMethod("auk_species")
 }
 
 #' @export
-auk_species.auk_ebd <- function(x, species, replace = FALSE) {
+auk_species.auk_ebd <- function(x, species, taxonomy_version, replace = FALSE) {
   # checks
   assertthat::assert_that(
     is.character(species),
     assertthat::is.flag(replace)
   )
-  version <- auk_ebd_version(x)$taxonomy_version
-  if (is.na(version)) {
-    version <- auk_version()$taxonomy_version
-    m <- paste0("EBD version cannot be determined from filename.\n",
-                "Assuming %i eBird taxonomy.")
+  if (missing(taxonomy_version)) {
+    taxonomy_version <- auk_version()$taxonomy_version
   } else {
-    m <- paste0("EBD version determined from filename.\n",
-                "Using %i eBird taxonomy.")
+    stopifnot(is_integer(taxonomy_version), length(taxonomy_version) == 1)
   }
-  message(sprintf(m, version))
-  species_lookup <- ebird_species(species, type = "all", version = version)
+  v <- auk_ebd_version(x, check_exists = FALSE)$taxonomy_version
+  if (!is.na(v) && taxonomy_version != v) {
+    m <- paste0("Based on the EBD filename, it appears you should use ",
+                "taxonomy_version = %i")
+    warning(sprintf(m, v))
+  }
+  species_lookup <- ebird_species(species, type = "all", 
+                                  taxonomy_version = taxonomy_version)
 
   # check all species names are valid
   species_clean <- species_lookup$scientific_name

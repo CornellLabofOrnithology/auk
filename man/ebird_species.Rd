@@ -5,7 +5,7 @@
 \title{Lookup species in eBird taxonomy}
 \usage{
 ebird_species(x, type = c("scientific", "common", "code", "all"),
-  version)
+  taxonomy_version)
 }
 \arguments{
 \item{x}{character; species to look up, provided as scientific or
@@ -16,9 +16,9 @@ English common names (\code{common}), or 6-letter eBird species codes (\code{cod
 Alternatively, use \code{all} to return a data frame with the all the taxonomy
 information.}
 
-\item{version}{integer; the version (i.e. year) of the taxonomy. Leave empty
-to use the version of the taxonomy included in the packages. See
-\code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
+\item{taxonomy_version}{integer; the version (i.e. year) of the taxonomy.
+Leave empty to use the version of the taxonomy included in the package.
+See \code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
 }
 \value{
 Character vector of species identified by scientific name, common
@@ -37,9 +37,9 @@ species <- c("Blackburnian Warbler", "Poecile atricapillus",
 # note that species not in the ebird taxonomy return NA
 ebird_species(species)
 
-# use version to query older taxonomy versions
+# use taxonomy_version to query older taxonomy versions
 ebird_species("Cordillera Azul Antbird")
-ebird_species("Cordillera Azul Antbird", version = 2017)
+ebird_species("Cordillera Azul Antbird", taxonomy_version = 2017)
 }
 \seealso{
 Other helpers: \code{\link{auk_ebd_version}},

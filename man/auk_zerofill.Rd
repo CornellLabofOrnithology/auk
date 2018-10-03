@@ -11,15 +11,16 @@
 auk_zerofill(x, ...)
 
 \method{auk_zerofill}{data.frame}(x, sampling_events, species,
-  collapse = FALSE, unique = TRUE, complete = TRUE, rollup = TRUE,
-  ...)
+  taxonomy_version, collapse = FALSE, unique = TRUE, rollup = TRUE,
+  complete = TRUE, ...)
 
 \method{auk_zerofill}{character}(x, sampling_events, species,
-  collapse = FALSE, unique = TRUE, complete = TRUE, rollup = TRUE,
-  sep = "\\t", ...)
+  taxonomy_version, collapse = FALSE, unique = TRUE, rollup = TRUE,
+  complete = TRUE, sep = "\\t", ...)
 
-\method{auk_zerofill}{auk_ebd}(x, species, collapse = FALSE,
-  unique = TRUE, complete = TRUE, rollup = TRUE, sep = "\\t", ...)
+\method{auk_zerofill}{auk_ebd}(x, species, taxonomy_version,
+  collapse = FALSE, unique = TRUE, rollup = TRUE, complete = TRUE,
+  sep = "\\t", ...)
 
 collapse_zerofill(x)
 }
@@ -46,17 +47,21 @@ as scientific or English common names, or a mixture of both. These names
 must match the official eBird Taxomony (\link{ebird_taxonomy}). To include all
 species, leave this argument blank.}
 
+\item{taxonomy_version}{integer; the version (i.e. year) of the taxonomy. In
+most cases, this should be left empty to use the version of the taxonomy
+included in the package. See \code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
+
 \item{collapse}{logical; whether to call \code{collapse_zerofill()} to return a
 data frame rather than an \code{auk_zerofill} object.}
 
 \item{unique}{logical; should \code{\link[=auk_unique]{auk_unique()}} be run on the input data if it
 hasn't already.}
 
-\item{complete}{logical; if \code{TRUE} (the default) all checklists are required
-to be complete prior to zero-filling.}
-
 \item{rollup}{logical; should \code{\link[=auk_rollup]{auk_rollup()}} be run on the input data if it
 hasn't already.}
+
+\item{complete}{logical; if \code{TRUE} (the default) all checklists are required
+to be complete prior to zero-filling.}
 
 \item{sep}{character; single character used to separate fields within a row.}
 }
@@ -64,11 +69,11 @@ hasn't already.}
 By default, an \code{auk_zerofill} object, or a data frame if \code{collapse = TRUE}.
 }
 \description{
-Read an eBird Basic Dataset (EBD) file, and associated sampling event data file, to
-produce a zero-filled, presence-absence dataset. The EBD contains bird
-sightings and the sampling event data is a set of all checklists, they can be
-combined to infer absence data by assuming any species not reported on a
-checklist was had a count of zero.
+Read an eBird Basic Dataset (EBD) file, and associated sampling event data
+file, to produce a zero-filled, presence-absence dataset. The EBD contains
+bird sightings and the sampling event data is a set of all checklists, they
+can be combined to infer absence data by assuming any species not reported on
+a checklist was had a count of zero.
 }
 \details{
 \code{auk_zerofill()} generates an \code{auk_zerofill} object consisting of a list with
@@ -85,6 +90,13 @@ To return a data frame, set \code{collapse = TRUE}. Alternatively,
 by joining the two data frames together to produce a single data frame in
 which each row provides both checklist and species information for a
 sighting.
+
+The list of species is checked against the eBird taxonomy for validity. This
+taxonomy is updated once a year in August. The \code{auk} package includes a copy
+of the eBird taxonomy, current at the time of release; however, if the EBD
+and \code{auk} versions are not aligned, you may need to explicitly specify which
+version of the taxonomy to use, in which case the eBird API will be queried
+to get the correct version of the taxonomy.
 }
 \section{Methods (by class)}{
 \itemize{

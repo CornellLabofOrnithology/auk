@@ -4,15 +4,15 @@
 \alias{auk_rollup}
 \title{Roll up eBird taxonomy to species}
 \usage{
-auk_rollup(x, version)
+auk_rollup(x, taxonomy_version)
 }
 \arguments{
 \item{x}{data.frame; data frame of eBird data, typically as imported by
 \code{\link[=read_ebd]{read_ebd()}}}
 
-\item{version}{integer; the version (i.e. year) of the taxonomy. Leave empty
-to use the version of the taxonomy included in the packages. See
-\code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
+\item{taxonomy_version}{integer; the version (i.e. year) of the taxonomy. In
+most cases, this should be left empty to use the version of the taxonomy
+included in the package. See \code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
 }
 \value{
 A data frame of the eBird data with taxonomic rollup applied.
@@ -61,6 +61,13 @@ Mallard (hybrid). Dropped by \code{auk_rollup()}.
 free-flying (these do not count on personal lists) e.g., Mallard (Domestic
 type). Dropped by \code{auk_rollup()}.
 }
+
+The rollup process is based on the eBird taxonomy, which is updated once a
+year in August. The \code{auk} package includes a copy of the eBird taxonomy,
+current at the time of release; however, if the EBD and \code{auk} versions are
+not aligned, you may need to explicitly specify which version of the
+taxonomy to use, in which case the eBird API will be queried to get the
+correct version of the taxonomy.
 }
 \examples{
 # get the path to the example data included in the package

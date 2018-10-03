@@ -110,7 +110,7 @@ names, or species codes. Un-matched species are returned as <code>NA</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ebird_species</span>(<span class='no'>x</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"scientific"</span>, <span class='st'>"common"</span>, <span class='st'>"code"</span>, <span class='st'>"all"</span>),
-  <span class='no'>version</span>)</pre>
+  <span class='no'>taxonomy_version</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -128,10 +128,10 @@ Alternatively, use <code>all</code> to return a data frame with the all the taxo
 information.</p></td>
     </tr>
     <tr>
-      <th>version</th>
-      <td><p>integer; the version (i.e. year) of the taxonomy. Leave empty
-to use the version of the taxonomy included in the packages. See
-<code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy()</a></code>.</p></td>
+      <th>taxonomy_version</th>
+      <td><p>integer; the version (i.e. year) of the taxonomy.
+Leave empty to use the version of the taxonomy included in the package.
+See <code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy()</a></code>.</p></td>
     </tr>
     </table>
     
@@ -155,8 +155,8 @@ the requested species is returned.</p>
 <span class='co'># note that species not in the ebird taxonomy return NA</span>
 <span class='fu'>ebird_species</span>(<span class='no'>species</span>)</div><div class='output co'>#&gt; [1] "Setophaga fusca"      "Poecile atricapillus" "Cinclus mexicanus"   
 #&gt; [4] NA                    </div><div class='input'>
-<span class='co'># use version to query older taxonomy versions</span>
-<span class='fu'>ebird_species</span>(<span class='st'>"Cordillera Azul Antbird"</span>)</div><div class='output co'>#&gt; [1] "Myrmoderus eowilsoni"</div><div class='input'><span class='fu'>ebird_species</span>(<span class='st'>"Cordillera Azul Antbird"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='fl'>2017</span>)</div><div class='output co'>#&gt; [1] "Myrmoderus [undescribed form]"</div></pre>
+<span class='co'># use taxonomy_version to query older taxonomy versions</span>
+<span class='fu'>ebird_species</span>(<span class='st'>"Cordillera Azul Antbird"</span>)</div><div class='output co'>#&gt; [1] "Myrmoderus eowilsoni"</div><div class='input'><span class='fu'>ebird_species</span>(<span class='st'>"Cordillera Azul Antbird"</span>, <span class='kw'>taxonomy_version</span> <span class='kw'>=</span> <span class='fl'>2017</span>)</div><div class='output co'>#&gt; [1] "Myrmoderus [undescribed form]"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

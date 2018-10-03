@@ -29,6 +29,13 @@ test_that("auk_species", {
   expect_error(auk_species(ebd, "bluejay"))
   expect_error(auk_species(ebd, ""))
   expect_error(auk_species(ebd, NA))
+  
+  # taxonomy versions
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd()
+  ebd$file <- "ebd_relAug-2016.txt"
+  expect_warning(auk_species(ebd, "Canada Jay"))
+  expect_silent(auk_species(ebd, "Canada Jay", taxonomy_version = 2016))
 })
 
 test_that("auk_country", {

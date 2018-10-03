@@ -4,7 +4,7 @@
 \alias{auk_species}
 \title{Filter the eBird data by species}
 \usage{
-auk_species(x, species, replace)
+auk_species(x, species, taxonomy_version, replace = FALSE)
 }
 \arguments{
 \item{x}{\code{auk_ebd} object; reference to object created by \code{\link[=auk_ebd]{auk_ebd()}}.}
@@ -12,6 +12,10 @@ auk_species(x, species, replace)
 \item{species}{character; species to filter by, provided as scientific or
 English common names, or a mixture of both. These names must match the
 official eBird Taxomony (\link{ebird_taxonomy}).}
+
+\item{taxonomy_version}{integer; the version (i.e. year) of the taxonomy. In
+most cases, this should be left empty to use the version of the taxonomy
+included in the package. See \code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
 
 \item{replace}{logical; multiple calls to \code{auk_species()} are additive,
 unless \code{replace = FALSE}, in which case the previous list of species to
@@ -27,10 +31,11 @@ function only defines the filter and, once all filters have been defined,
 }
 \details{
 The list of species is checked against the eBird taxonomy for
-validity. The \code{auk} package includes a copy of the eBird taxonomy; however,
-if the version of the taxonomy doesn't match the version of the EBD (as
-determined by the filename), then the eBird API will be queried to get the
-correct taxonomy version.
+validity. This taxonomy is updated once a year in August. The \code{auk} package
+includes a copy of the eBird taxonomy, current at the time of release;
+however, if the EBD and \code{auk} versions are not aligned, you may need to
+explicitly specify which version of the taxonomy to use, in which case
+the eBird API will be queried to get the correct version of the taxonomy.
 }
 \examples{
 # common and scientific names can be mixed

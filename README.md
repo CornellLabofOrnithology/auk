@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-auk: working with eBird data in R <img src="hex-logo/auk.svg" align="right" width=140/>
-=======================================================================================
+auk: eBird Data Extraction and Processing in R <img src="hex-logo/auk.svg" align="right" width=140/>
+====================================================================================================
 
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
@@ -204,8 +204,6 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_duration(duration = c(0, 60)) %>%
       # complete: all species seen or heard are recorded
       auk_complete()
-    #> EBD version cannot be determined from filename.
-    #> Assuming 2018 eBird taxonomy.
     ebd
     #> Input 
     #>   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 

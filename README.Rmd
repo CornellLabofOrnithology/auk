@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# auk: working with eBird data in R  <img src="hex-logo/auk.svg" align="right" width=140/>
+# auk: eBird Data Extraction and Processing in R  <img src="hex-logo/auk.svg" align="right" width=140/>
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 [![Travis-CI Build Status](https://img.shields.io/travis/CornellLabofOrnithology/auk/master.svg?label=Mac%20OSX%20%26%20Linux)](https://travis-ci.org/CornellLabofOrnithology/auk)

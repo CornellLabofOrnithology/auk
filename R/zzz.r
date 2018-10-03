@@ -1,5 +1,5 @@
 .onAttach <- function(libname, pkgname) {
-  m <- paste0("%s functions with EBD files downloaded after %s.")
+  m <- paste0("%s is designed for EBD files downloaded after %s.")
   p <- auk_get_ebd_path()
   v <- auk_version()
   if (is.na(p)) {

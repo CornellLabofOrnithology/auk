@@ -4,8 +4,8 @@
 \alias{auk_split}
 \title{Split an eBird data file by species}
 \usage{
-auk_split(file, species, prefix = "", ext = "txt", sep = "\\t",
-  overwrite = FALSE)
+auk_split(file, species, taxonomy_version, prefix = "", ext = "txt",
+  sep = "\\t", overwrite = FALSE)
 }
 \arguments{
 \item{file}{character; input file.}
@@ -13,6 +13,10 @@ auk_split(file, species, prefix = "", ext = "txt", sep = "\\t",
 \item{species}{species character; species to filter and split by, provided as
 scientific or English common names, or a mixture of both. These names must
 match the official eBird Taxomony (\link{ebird_taxonomy}).}
+
+\item{taxonomy_version}{integer; the version (i.e. year) of the taxonomy. In
+most cases, this should be left empty to use the version of the taxonomy
+included in the package. See \code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
 
 \item{prefix}{character; a file and directory prefix. For example, if
 splitting by species "A" and "B" and \code{prefix = "data/ebd_"}, the resulting
@@ -24,7 +28,7 @@ files will be "data/ebd_A.txt" and "data/ebd_B.txt".}
 separated by default. Must only be a single character and space delimited
 is not allowed since spaces appear in many of the fields.}
 
-\item{overwrite}{logical; overwrite output files if they already exists}
+\item{overwrite}{logical; overwrite output files if they already exists.}
 }
 \value{
 A vector of output filenames, one for each species.
@@ -35,9 +39,17 @@ multiple text files, one for each species. This function is typically used
 after \code{\link[=auk_filter]{auk_filter()}} has been applied if the resulting file is too large to
 be read in all at once.
 }
+\details{
+The list of species is checked against the eBird taxonomy for
+validity. This taxonomy is updated once a year in August. The \code{auk} package
+includes a copy of the eBird taxonomy, current at the time of release;
+however, if the EBD and \code{auk} versions are not aligned, you may need to
+explicitly specify which version of the taxonomy to use, in which case
+the eBird API will be queried to get the correct version of the taxonomy.
+}
 \examples{
 \dontrun{
-species <- c("Gray Jay", "Cyanocitta stelleri")
+species <- c("Canada Jay", "Cyanocitta stelleri")
 # get the path to the example data included in the package
 # in practice, provide path to a filtered ebd file
 # e.g. f <- "data/ebd_filtered.txt

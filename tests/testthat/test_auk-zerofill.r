@@ -90,7 +90,8 @@ test_that("auk_zerofill lack of complete checklists throws error", {
   ebd <- read_ebd(f_ebd)
   smpl <- read_sampling(f_smpl)
   smpl$all_species_reported[sample(1:nrow(smpl), 3)] <- FALSE
-  expect_error(auk_zerofill(ebd))
+  expect_error(auk_zerofill(ebd, smpl))
+  expect_warning(auk_zerofill(ebd, smpl, complete = FALSE))
 })
 
 test_that("auk_zerofill throws errors with bad input data", {

@@ -109,7 +109,7 @@ function only defines the filter and, once all filters have been defined,
     
     </div>
 
-    <pre class="usage"><span class='fu'>auk_species</span>(<span class='no'>x</span>, <span class='no'>species</span>, <span class='no'>replace</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_species</span>(<span class='no'>x</span>, <span class='no'>species</span>, <span class='no'>taxonomy_version</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -123,6 +123,12 @@ function only defines the filter and, once all filters have been defined,
       <td><p>character; species to filter by, provided as scientific or
 English common names, or a mixture of both. These names must match the
 official eBird Taxomony (<a href='ebird_taxonomy.html'>ebird_taxonomy</a>).</p></td>
+    </tr>
+    <tr>
+      <th>taxonomy_version</th>
+      <td><p>integer; the version (i.e. year) of the taxonomy. In
+most cases, this should be left empty to use the version of the taxonomy
+included in the package. See <code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy()</a></code>.</p></td>
     </tr>
     <tr>
       <th>replace</th>
@@ -139,10 +145,11 @@ filter by will be removed and replaced by that in the current call.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The list of species is checked against the eBird taxonomy for
-validity. The <code>auk</code> package includes a copy of the eBird taxonomy; however,
-if the version of the taxonomy doesn't match the version of the EBD (as
-determined by the filename), then the eBird API will be queried to get the
-correct taxonomy version.</p>
+validity. This taxonomy is updated once a year in August. The <code>auk</code> package
+includes a copy of the eBird taxonomy, current at the time of release;
+however, if the EBD and <code>auk</code> versions are not aligned, you may need to
+explicitly specify which version of the taxonomy to use, in which case
+the eBird API will be queried to get the correct version of the taxonomy.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -161,8 +168,7 @@ correct taxonomy version.</p>
 <span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"Canada Jay"</span>, <span class='st'>"Pluvialis squatarola"</span>)
 <span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_species</span>(<span class='no'>species</span>)</div><div class='output co'>#&gt; <span class='message'>EBD version cannot be determined from filename.</span>
-#&gt; <span class='message'>Assuming 2018 eBird taxonomy.</span></div><div class='output co'>#&gt; Input 
+  <span class='fu'>auk_species</span>(<span class='no'>species</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -185,8 +191,7 @@ correct taxonomy version.</p>
 #&gt;   Complete checklists only: no</div><div class='input'>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
-<span class='fu'>auk_species</span>(<span class='no'>ebd</span>, <span class='no'>species</span>)</div><div class='output co'>#&gt; <span class='message'>EBD version cannot be determined from filename.</span>
-#&gt; <span class='message'>Assuming 2018 eBird taxonomy.</span></div><div class='output co'>#&gt; Input 
+<span class='fu'>auk_species</span>(<span class='no'>ebd</span>, <span class='no'>species</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
