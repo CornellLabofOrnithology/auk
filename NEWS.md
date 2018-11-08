@@ -1,3 +1,7 @@
+# auk 0.3.1
+
+- `rlang::UQ()` and `rlang::UQS()` deprecated, switching to `!!` and `!!!`
+
 # auk 0.3.0
 
 - Updated to 2018 taxonomy; new function `get_ebird_taxonomy()` to get taxonomy via the eBird API

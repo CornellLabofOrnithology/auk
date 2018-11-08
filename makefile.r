@@ -6,7 +6,7 @@ devtools::document()
 
 devtools::build()
 f <- list.files("..", "auk.*gz$", full.names = TRUE)
-devtools::install_local("../auk")
+devtools::install_local("../auk", force = TRUE)
 unlink(f)
 
 devtools::test()

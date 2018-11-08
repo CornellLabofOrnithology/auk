@@ -1,6 +1,6 @@
 Package: auk
 Title: eBird Data Extraction and Processing in R
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
   person("Matthew", "Strimas-Mackey", email = "mes335@cornell.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-8929-7776")),
   person("Eliot", "Miller", role = "aut"),

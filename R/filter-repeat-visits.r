@@ -111,7 +111,7 @@ filter_repeat_visits <- function(x, min_obs = 2L, max_obs = 10L,
   
   # output
   sort_vars <- rlang::syms(c(site_vars, date_var))
-  x_out <- dplyr::arrange(x_out, rlang::UQS(sort_vars))
+  x_out <- dplyr::arrange(x_out, !!!sort_vars)
   dplyr::select(x_out, .data$site, .data$closure_id, .data$n_observations,
                 dplyr::everything())
 }

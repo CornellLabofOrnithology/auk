@@ -138,11 +138,10 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
   }
   
   # summarize species for cases where multiple subspecies reported on same list
-  sp <- dplyr::select(x, rlang::UQ(cid), .data$scientific_name,
-                      .data$observation_count)
+  sp <- dplyr::select(x, !!cid, .data$scientific_name, .data$observation_count)
   sp <- dplyr::mutate(sp, count = suppressWarnings(
     as.integer(.data$observation_count)))
-  sp <- dplyr::group_by(sp, rlang::UQ(cid), .data$scientific_name)
+  sp <- dplyr::group_by(sp, !!cid, .data$scientific_name)
   sp <- dplyr::summarise(sp, count = sum(.data$count))
   sp <- dplyr::ungroup(sp)
   sp <- dplyr::mutate(sp,
@@ -150,7 +149,7 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
                       count = dplyr::coalesce(.data$count, "X"))
   
   # drop any duplicate species records
-  x <- dplyr::group_by(x, rlang::UQ(cid), .data$scientific_name)
+  x <- dplyr::group_by(x, !!cid, .data$scientific_name)
   # give precedence to true species records
   x <- dplyr::filter(x, dplyr::row_number(.data$taxon_order) == 1)
   x <- dplyr::ungroup(x)

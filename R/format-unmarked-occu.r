@@ -123,15 +123,13 @@ format_unmarked_occu <- function(x, site_id = "site",
   x <- dplyr::ungroup(x)
   
   # response to wide
-  x_resp <- dplyr::select(x, rlang::UQ(rlang::sym(site_id)), .data$.obs_id, 
-                          rlang::UQ(rlang::sym(response)))
-  x_resp <- tidyr::spread(x_resp, .data$.obs_id, 
-                          rlang::UQ(rlang::sym(response)))
+  x_resp <- dplyr::select(x, !!rlang::sym(site_id), .data$.obs_id, 
+                          !!rlang::sym(response))
+  x_resp <- tidyr::spread(x_resp, .data$.obs_id, !!rlang::sym(response))
   names(x_resp)[-1] <- paste("y", names(x_resp)[-1], sep = ".")
   
   # site-level covariates
-  x_site <- dplyr::select(x, rlang::UQ(rlang::sym(site_id)), 
-                          rlang::UQS(rlang::syms(site_covs)))
+  x_site <- dplyr::select(x, !!rlang::sym(site_id), !!!rlang::syms(site_covs))
   # collapse to one row per site
   x_site <- dplyr::group_by_at(x_site, site_id)
   x_site <- dplyr::distinct(x_site)
@@ -146,9 +144,9 @@ format_unmarked_occu <- function(x, site_id = "site",
   obs_covs_dfs <- list()
   for (vr in obs_covs) {
     # convert to wide
-    x_obs <- dplyr::select(x, rlang::UQ(rlang::sym(site_id)), .data$.obs_id, 
-                           rlang::UQ(rlang::sym(vr)))
-    x_obs <- tidyr::spread(x_obs, .data$.obs_id, rlang::UQ(rlang::sym(vr)))
+    x_obs <- dplyr::select(x, !!rlang::sym(site_id), .data$.obs_id, 
+                           !!rlang::sym(vr))
+    x_obs <- tidyr::spread(x_obs, .data$.obs_id, !!rlang::sym(vr))
     names(x_obs)[-1] <- paste(vr, names(x_obs)[-1], sep = ".")
     obs_covs_dfs[[vr]] <- x_obs
   }
