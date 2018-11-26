@@ -161,7 +161,7 @@ user only wishes to filter the sampling event data.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># bcr codes can be looked up in bcr_codes</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>bcr_codes</span>, <span class='no'>bcr_name</span> <span class='kw'>==</span> <span class='st'>"Central Hardwoods"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>bcr_codes</span>, <span class='no'>bcr_name</span> <span class='kw'>==</span> <span class='st'>"Central Hardwoods"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;   bcr_code bcr_name         
 #&gt;      &lt;int&gt; &lt;chr&gt;            
 #&gt; 1       24 Central Hardwoods</div><div class='input'><span class='fu'>system.file</span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>

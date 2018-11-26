@@ -153,7 +153,8 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
   }
   
   # pick columns to retain
-  must_keep <- c("group identifier", "sampling event identifier", 
+  must_keep <- c("group identifier", "sampling event identifier",
+                 "observer id",
                  "scientific name", "observation count")
   if (!missing(keep)) {
     keep <- tolower(keep)
@@ -291,7 +292,7 @@ auk_filter.auk_sampling <- function(x, file, keep, drop, awk_file,
   }
   
   # pick columns to retain
-  must_keep <- c("group identifier", "sampling event identifier")
+  must_keep <- c("group identifier", "sampling event identifier", "observer id")
   if (!missing(keep)) {
     keep <- tolower(keep)
     keep <- stringr::str_replace_all(keep, "_", " ")

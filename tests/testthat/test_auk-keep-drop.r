@@ -17,13 +17,14 @@ test_that("auk_filter correctly keeps columns", {
   skip_on_os("windows")
   
   to_keep <- c("group_identifier", "sampling_event_identifier", 
+               "observer_id",
                "scientific_name", "observation_count")
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
     auk_ebd() %>%
     auk_species(species = c("Canada Jay", "Blue Jay")) %>% 
     auk_filter(file = tempfile(), keep = to_keep) %>% 
     read_ebd(unique = FALSE, rollup = FALSE)
-  expect_equal(ncol(ebd), 4)
+  expect_equal(ncol(ebd), 5)
   expect_equal(names(ebd) %>% sort(), to_keep %>% sort())
 })
 
@@ -66,6 +67,7 @@ test_that("auk_filter correctly keeps sampling event data columns", {
   
   # run filters
   to_keep <- c("group_identifier", "sampling_event_identifier", 
+               "observer_id",
                "scientific_name", "observation_count")
   tmp <- tempfile()
   tmp_smp <- tempfile()
@@ -76,6 +78,6 @@ test_that("auk_filter correctly keeps sampling event data columns", {
   ebd_df <- read_ebd(ebd)
   smp_df <- read_sampling(ebd)
   
-  expect_equal(ncol(ebd_df), 5)
-  expect_equal(ncol(smp_df), 3)
+  expect_equal(ncol(ebd_df), 6)
+  expect_equal(ncol(smp_df), 4)
 })

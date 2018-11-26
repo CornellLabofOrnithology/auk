@@ -209,7 +209,7 @@ population can reasonably be assumed to be closed.</p>
 <span class='no'>ebd_zf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>,
                        <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"Collared Kingfisher"</span>,
                        <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>filter_repeat_visits</span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; # A tibble: 191 x 37
+<span class='fu'>filter_repeat_visits</span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; # A tibble: 181 x 37
 #&gt;    site  closure_id n_observations checklist_id last_edited_date country
 #&gt;    &lt;chr&gt;      &lt;dbl&gt;          &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;  
 #&gt;  1 L105…          9              2 S11680564    2017-10-19 12:4… Singap…
@@ -222,7 +222,7 @@ population can reasonably be assumed to be closed.</p>
 #&gt;  8 L136…          0             10 S9635686     2013-09-11 12:2… Singap…
 #&gt;  9 L136…          0             10 S9642108     2017-05-27 10:3… Singap…
 #&gt; 10 L136…          0             10 S9663623     2013-09-11 12:2… Singap…
-#&gt; # ... with 181 more rows, and 31 more variables: country_code &lt;chr&gt;,
+#&gt; # ... with 171 more rows, and 31 more variables: country_code &lt;chr&gt;,
 #&gt; #   state &lt;chr&gt;, state_code &lt;chr&gt;, county &lt;chr&gt;, county_code &lt;chr&gt;,
 #&gt; #   iba_code &lt;chr&gt;, bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;,
 #&gt; #   locality &lt;chr&gt;, locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;,

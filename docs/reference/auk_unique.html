@@ -117,7 +117,8 @@ observations. This function is called automatically by <code><a href='read_ebd.h
 
     <pre class="usage"><span class='fu'>auk_unique</span>(<span class='no'>x</span>, <span class='kw'>group_id</span> <span class='kw'>=</span> <span class='st'>"group_identifier"</span>,
   <span class='kw'>checklist_id</span> <span class='kw'>=</span> <span class='st'>"sampling_event_identifier"</span>,
-  <span class='kw'>species_id</span> <span class='kw'>=</span> <span class='st'>"scientific_name"</span>, <span class='kw'>checklists_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>species_id</span> <span class='kw'>=</span> <span class='st'>"scientific_name"</span>, <span class='kw'>observer_id</span> <span class='kw'>=</span> <span class='st'>"observer_id"</span>,
+  <span class='kw'>checklists_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -136,7 +137,8 @@ observations. This function is called automatically by <code><a href='read_ebd.h
       <td><p>character; the name of the checklist ID column, each
 checklist within a group will get a unique value for this field. The record
 with the lowest <code>checklist_id</code> will be picked as the unique record within
-each group.</p></td>
+each group. In the output dataset, this field will be updated to have a
+full list of the checklist IDs that went into this group checklist.</p></td>
     </tr>
     <tr>
       <th>species_id</th>
@@ -148,11 +150,19 @@ generate a column uniquely identifying species and subspecies and pass that
 column's name to this argument.</p></td>
     </tr>
     <tr>
+      <th>observer_id</th>
+      <td><p>character; the name of the column identifying the owner
+of this instance of the group checklist. In the output dataset, the full
+list of observer IDs will be stored (comma separated) in the new
+<code>observer_id</code> field. The order of these IDs will match the order of the
+comma separated checklist IDs.</p></td>
+    </tr>
+    <tr>
       <th>checklists_only</th>
       <td><p>logical; whether the dataset provided only contains
 checklist information as with the sampling event data file. If this
 argument is <code>TRUE</code>, then the <code>species_id</code> argument is ignored and removing
-of duplicated is done at the checklist level not the species level.</p></td>
+of duplicated records is done at the checklist level not the species level.</p></td>
     </tr>
     </table>
     
@@ -168,6 +178,9 @@ lowest value for the field specified by <code>checklist_id</code>. A new column 
 also created, <code>checklist_id</code>, whose value is the taken from the field
 specified in the <code>checklist_id</code> parameter for non-group checklists and from
 the field specified by the <code>group_id</code> parameter for grouped checklists.</p>
+<p>All the checklist and observer IDs for the checklists that comprise a given
+group checklist will be retained as a comma separated string ordered by
+checklist ID.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

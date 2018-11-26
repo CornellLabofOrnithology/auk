@@ -6,7 +6,8 @@
 \usage{
 auk_unique(x, group_id = "group_identifier",
   checklist_id = "sampling_event_identifier",
-  species_id = "scientific_name", checklists_only = FALSE)
+  species_id = "scientific_name", observer_id = "observer_id",
+  checklists_only = FALSE)
 }
 \arguments{
 \item{x}{data.frame; the EBD data frame, typically as imported by
@@ -17,7 +18,8 @@ auk_unique(x, group_id = "group_identifier",
 \item{checklist_id}{character; the name of the checklist ID column, each
 checklist within a group will get a unique value for this field. The record
 with the lowest \code{checklist_id} will be picked as the unique record within
-each group.}
+each group. In the output dataset, this field will be updated to have a
+full list of the checklist IDs that went into this group checklist.}
 
 \item{species_id}{character; the name of the column identifying species
 uniquely. This is required to ensure that removing duplicates is done
@@ -26,10 +28,16 @@ independently and, if that behavior is desired, the user will have to
 generate a column uniquely identifying species and subspecies and pass that
 column's name to this argument.}
 
+\item{observer_id}{character; the name of the column identifying the owner
+of this instance of the group checklist. In the output dataset, the full
+list of observer IDs will be stored (comma separated) in the new
+\code{observer_id} field. The order of these IDs will match the order of the
+comma separated checklist IDs.}
+
 \item{checklists_only}{logical; whether the dataset provided only contains
 checklist information as with the sampling event data file. If this
 argument is \code{TRUE}, then the \code{species_id} argument is ignored and removing
-of duplicated is done at the checklist level not the species level.}
+of duplicated records is done at the checklist level not the species level.}
 }
 \value{
 A data frame with unique observations, and an additional field,
@@ -49,6 +57,10 @@ lowest value for the field specified by \code{checklist_id}. A new column is
 also created, \code{checklist_id}, whose value is the taken from the field
 specified in the \code{checklist_id} parameter for non-group checklists and from
 the field specified by the \code{group_id} parameter for grouped checklists.
+
+All the checklist and observer IDs for the checklists that comprise a given
+group checklist will be retained as a comma separated string ordered by
+checklist ID.
 }
 \examples{
 # read in an ebd file and don't automatically remove duplicates

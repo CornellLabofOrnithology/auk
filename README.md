@@ -20,7 +20,7 @@ Overview
 
 [eBird](http://www.ebird.org) is an online tool for recording bird
 observations. Since its inception, nearly 500 million records of bird
-sightings (i.e. combinations of location, date, time, and bird species)
+sightings (i.e. combinations of location, date, time, and bird species)
 have been collected, making eBird one of the largest citizen science
 projects in history and an extremely valuable resource for bird research
 and conservation. The full eBird database is packaged as a text file and
@@ -63,12 +63,12 @@ Those interested in eBird data may also want to consider
 [`rebird`](https://github.com/ropensci/rebird), an R package that
 provides an interface to the [eBird
 APIs](https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs). The
-functions in `rebird` are mostly limited to accessing recent
-(i.e. within the last 30 days) observations, although `ebirdfreq()` does
+functions in `rebird` are mostly limited to accessing recent (i.e.
+within the last 30 days) observations, although `ebirdfreq()` does
 provide historical frequency of observation data. In contrast, `auk`
 gives access to the full set of ~ 500 million eBird observations. For
 most ecological applications, users will require `auk`; however, for
-some use cases, e.g. building tools for birders, `rebird` provides a
+some use cases, e.g. building tools for birders, `rebird` provides a
 quick and easy way to access data.
 
 A note on versions
@@ -81,8 +81,8 @@ This taxonomy determines the species that can be reported in eBird and
 therefore the species that users of `auk` can extract. eBird releases an
 updated taxonomy once a year, typically in August, at which time `auk`
 will be updated to include the current taxonomy. When using `auk`, users
-should be careful to ensure that the version they’re using is in sync
-with the eBird Basic Dataset they’re working with. This is most easily
+should be careful to ensure that the version they're using is in sync
+with the eBird Basic Dataset they're working with. This is most easily
 accomplished by always using the must recent version of `auk` and the
 most recent release of the dataset.
 
@@ -102,7 +102,7 @@ eBird Basic Dataset for use in R. This is a multi-step process:
 4.  Import this text file into R as a data frame.
 
 Because the eBird dataset is so large, step 3 typically takes several
-hours to run. Here’s a simple example that extract all Canada Jay
+hours to run. Here's a simple example that extract all Canada Jay
 records from within Canada.
 
     library(auk)
@@ -153,11 +153,11 @@ Users should start by defining a reference to the dataset file with
 -   `auk_bcr()`: filter by [Bird Conservation Region
     (BCR)](http://nabci-us.org/resources/bird-conservation-regions/)
     using BCR codes, see `?bcr_codes`.
--   `auk_bbox()`: filter by spatial bounding box, i.e. a range of
+-   `auk_bbox()`: filter by spatial bounding box, i.e. a range of
     latitudes and longitudes in decimal degrees.
 -   `auk_date()`: filter to checklists from a range of dates. To extract
     observations from a range of dates, regardless of year, use the
-    wildcard “`*`” in place of the year, e.g.
+    wildcard "`*`" in place of the year, e.g.
     `date = c("*-05-01", "*-06-30")` for observations from May and June
     of any year.
 -   `auk_last_edited()`: filter to checklists from a range of last
@@ -166,7 +166,7 @@ Users should start by defining a reference to the dataset file with
 -   `auk_protocol()`: filter to checklists that following a specific
     search protocol, either stationary, traveling, or casual.
 -   `auk_project()`: filter to checklists collected as part of a
-    specific project (e.g. a breeding bird survey).
+    specific project (e.g. a breeding bird survey).
 -   `auk_time()`: filter to checklists started during a range of
     times-of-day.
 -   `auk_duration()`: filter to checklists with observation durations
@@ -178,7 +178,7 @@ Users should start by defining a reference to the dataset file with
 -   `auk_complete()`: only retain checklists in which the observer has
     specified that they recorded all species seen or heard. It is
     necessary to retain only complete records for the creation of
-    presence-absence data, because the “absence”" information is
+    presence-absence data, because the "absence"" information is
     inferred by the lack of reporting of a species on checklists.
 
 Note that all of the functions listed above only modify the `auk_ebd`

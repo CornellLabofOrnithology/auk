@@ -1,6 +1,7 @@
 # auk 0.3.1
 
 - `rlang::UQ()` and `rlang::UQS()` deprecated, switching to `!!` and `!!!`
+- `auk_unique()` now keeps track of all sampling event and observer IDs that comprise a group checklist
 
 # auk 0.3.0
 
