@@ -221,8 +221,8 @@ page for further details.</p>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='co'># without rollup, there are three observations</span>
 <span class='no'>ebd</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>common_name</span> <span class='kw'>==</span> <span class='st'>"Yellow-rumped Warbler"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/select'>select</a></span>(<span class='no'>checklist_id</span>, <span class='no'>category</span>, <span class='no'>common_name</span>, <span class='no'>subspecies_common_name</span>,
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>common_name</span> <span class='kw'>==</span> <span class='st'>"Yellow-rumped Warbler"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>checklist_id</span>, <span class='no'>category</span>, <span class='no'>common_name</span>, <span class='no'>subspecies_common_name</span>,
          <span class='no'>observation_count</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 5
 #&gt;   checklist_id category common_name     subspecies_common_name observation_cou…
 #&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;                  &lt;chr&gt;           
@@ -230,8 +230,8 @@ page for further details.</p>
 #&gt; 2 S8949407     issf     Yellow-rumped … Yellow-rumped Warbler… 13              
 #&gt; 3 S8949407     issf     Yellow-rumped … Yellow-rumped Warbler… 17              </div><div class='input'><span class='co'># with rollup, they have been combined</span>
 <span class='no'>ebd_ru</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>common_name</span> <span class='kw'>==</span> <span class='st'>"Yellow-rumped Warbler"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/select'>select</a></span>(<span class='no'>checklist_id</span>, <span class='no'>category</span>, <span class='no'>common_name</span>, <span class='no'>observation_count</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>common_name</span> <span class='kw'>==</span> <span class='st'>"Yellow-rumped Warbler"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>checklist_id</span>, <span class='no'>category</span>, <span class='no'>common_name</span>, <span class='no'>observation_count</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;   checklist_id category common_name           observation_count
 #&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;            
 #&gt; 1 S8949407     species  Yellow-rumped Warbler 31               </div></pre>

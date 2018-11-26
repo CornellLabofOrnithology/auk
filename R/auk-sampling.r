@@ -60,12 +60,14 @@ auk_sampling <- function(file, sep = "\t") {
   
   # identify columns required for filtering
   filter_cols <- data.frame(
-    id = c("country", "state", "lat", "lng",
+    id = c("country", "state", "bcr", 
+           "lat", "lng",
            "date", "time", "last_edited",
            "protocol", "project", 
            "duration", "distance", 
            "complete"),
-    name = c("country code", "state code", "latitude", "longitude",
+    name = c("country code", "state code", "bcr code",
+             "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
              "protocol type", "project code",

@@ -244,8 +244,8 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class='co'># this function can also be used for abundance modeling</span>
 <span class='no'>abd</span> <span class='kw'>&lt;-</span> <span class='no'>ebd_zf</span> <span class='kw'>%&gt;%</span>
   <span class='co'># convert count to integer, drop records with no count</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/mutate'>mutate</a></span>(<span class='kw'>observation_count</span> <span class='kw'>=</span> <span class='fu'>as.integer</span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(!<span class='fu'>is.na</span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>observation_count</span> <span class='kw'>=</span> <span class='fu'>as.integer</span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(!<span class='fu'>is.na</span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
   <span class='co'># filter to repeated visits</span>
   <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='input'><span class='co'># prepare for conversion to unmarkedFramePCount object</span>
 <span class='no'>abd_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>format_unmarked_occu</span>(<span class='no'>abd</span>,

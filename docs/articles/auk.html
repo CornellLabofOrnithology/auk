@@ -289,7 +289,7 @@ ebd_jays &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span
 <p>eBird Basic Dataset files can be read with <code><a href="../reference/read_ebd.html">read_ebd()</a></code>. This is a wrapper around <code><a href="http://www.rdocumentation.org/packages/data.table/topics/fread">data.table::fread()</a></code>, <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_delim()</a></code>, or <code>read.delim()</code>, depending on which packages are installed. <code><a href="../reference/read_ebd.html">read_ebd()</a></code> uses <code>stringsAsFactors = FALSE</code>, <code>quote = ""</code>, sets column classes, and converts variable names to <code>snake_case</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/read_ebd.html">read_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/reexports">glimpse</a></span>()
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>()
 <span class="co">#&gt; Observations: 494</span>
 <span class="co">#&gt; Variables: 45</span>
 <span class="co">#&gt; $ checklist_id                 &lt;chr&gt; "S6852862", "S14432467", "S390335...</span>
@@ -427,8 +427,8 @@ ebd_ru &lt;-<span class="st"> </span><span class="kw"><a href="../reference/auk_
 <span class="co"># yellow-rump warbler subspecies rollup</span>
 <span class="co"># without rollup, there are three observations</span>
 ebd <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(common_name <span class="op">==</span><span class="st"> "Yellow-rumped Warbler"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(checklist_id, category, common_name, subspecies_common_name,
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(common_name <span class="op">==</span><span class="st"> "Yellow-rumped Warbler"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(checklist_id, category, common_name, subspecies_common_name,
          observation_count)
 <span class="co">#&gt; # A tibble: 3 x 5</span>
 <span class="co">#&gt;   checklist_id category common_name   subspecies_common_… observation_cou…</span>
@@ -438,8 +438,8 @@ ebd <span class="op">%&gt;%</span>
 <span class="co">#&gt; 3 S8949407     issf     Yellow-rumpe… Yellow-rumped Warb… 17</span>
 <span class="co"># with rollup, they have been combined</span>
 ebd_ru <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(common_name <span class="op">==</span><span class="st"> "Yellow-rumped Warbler"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(checklist_id, category, common_name, observation_count)
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(common_name <span class="op">==</span><span class="st"> "Yellow-rumped Warbler"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(checklist_id, category, common_name, observation_count)
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   checklist_id category common_name           observation_count</span>
 <span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;            </span>
@@ -539,7 +539,7 @@ ebd_zf
 <span class="co">#&gt; 4 G2469960     Todiramphus chloris 1                 TRUE            </span>
 <span class="co">#&gt; 5 G2469973     Todiramphus chloris 1                 TRUE            </span>
 <span class="co">#&gt; 6 G2470208     Todiramphus chloris 0                 FALSE</span>
-<span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/reexports">glimpse</a></span>(ebd_zf<span class="op">$</span>sampling_events)
+<span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(ebd_zf<span class="op">$</span>sampling_events)
 <span class="co">#&gt; Observations: 168</span>
 <span class="co">#&gt; Variables: 31</span>
 <span class="co">#&gt; $ checklist_id              &lt;chr&gt; "S11332512", "S13581013", "S38296538...</span>
