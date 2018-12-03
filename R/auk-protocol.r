@@ -8,9 +8,15 @@
 #' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
 #'   [auk_ebd()] or [auk_sampling()].
 #' @param protocol character; "Stationary", "Traveling", "Area", or
-#'   "Incidental". Other protocols exist in the database, however, this function
-#'   only extracts these three standard protocols. Multiple protocols are
-#'   accepted.
+#'   "Incidental". Many protocols exist in the database, however, this function
+#'   only extracts the following protocols. Multiple protocols are
+#'   allowed at the same time:
+#'   
+#'   - Stationary
+#'   - Traveling
+#'   - Area
+#'   - Incidental
+#'   - Nocturnal Flight Call Count
 #' 
 #' @details This function can also work with on an `auk_sampling` object if the 
 #'   user only wishes to filter the sampling event data.
@@ -33,7 +39,9 @@ auk_protocol <- function(x, protocol)  {
 #' @export
 auk_protocol.auk_ebd <- function(x, protocol) {
   assertthat::assert_that(
-    all(protocol %in% c("Stationary", "Traveling", "Area", "Incidental"))
+    all(protocol %in% c("Stationary", "Traveling", "Area", 
+                        "Incidental",
+                        "Nocturnal Flight Call Count"))
   )
   
   # set filter list

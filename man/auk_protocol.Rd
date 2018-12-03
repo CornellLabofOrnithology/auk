@@ -11,9 +11,16 @@ auk_protocol(x, protocol)
 \code{\link[=auk_ebd]{auk_ebd()}} or \code{\link[=auk_sampling]{auk_sampling()}}.}
 
 \item{protocol}{character; "Stationary", "Traveling", "Area", or
-"Incidental". Other protocols exist in the database, however, this function
-only extracts these three standard protocols. Multiple protocols are
-accepted.}
+"Incidental". Many protocols exist in the database, however, this function
+only extracts the following protocols. Multiple protocols are
+allowed at the same time:
+\itemize{
+\item Stationary
+\item Traveling
+\item Area
+\item Incidental
+\item Nocturnal Flight Call Count
+}}
 }
 \value{
 An \code{auk_ebd} object.
