@@ -22,11 +22,11 @@ Depends:
 Imports: 
     assertthat,
     countrycode (>= 1.0.0),
-    dplyr (>= 0.7.0),
-    rlang,
+    dplyr (>= 0.7.8),
+    rlang (>= 0.3.0),
     stringi,
     stringr,
-    tidyr,
+    tidyr (>= 0.8.0),
     utils,
     httr
 Suggests: 
