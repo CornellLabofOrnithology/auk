@@ -3,7 +3,7 @@
 #' Given an eBird Basic Dataset (EBD) and a list of species, split the file into 
 #' multiple text files, one for each species. This function is typically used 
 #' after [auk_filter()] has been applied if the resulting file is too large to 
-#' be read in all at once. **`auk_split()` does not work on Windows.**
+#' be read in all at once.
 #'
 #' @param file character; input file.
 #' @param species species character; species to filter and split by, provided as

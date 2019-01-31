@@ -1,6 +1,6 @@
 # auk 0.3.1
 
-- Work around for bug in system2(): https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508
+- Work around for bug in system2() in some R versions: https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508
 - Adding a filter for PROALAS checklists to `auk_protocol()`
 
 # auk 0.3.1
