@@ -39,8 +39,8 @@ Installation
     install.packages("auk")
 
     # or install the development version from github
-    # install.packages("devtools")
-    devtools::install_github("CornellLabofOrnithology/auk")
+    # install.packages("remotes")
+    remotes::install_github("CornellLabofOrnithology/auk")
 
 `auk` requires the Unix utility AWK, which is available on most Linux
 and Mac OS X machines. Windows users will first need to install

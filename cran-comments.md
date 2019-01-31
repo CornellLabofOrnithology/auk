@@ -1,13 +1,13 @@
-# auk 0.3.1
+# auk 0.3.2
 
-This version includes important new features for handling group checklists and makes changes needed to conform to the new approach to NSE in rlang.
+This version address a bug in `system2()` that was breaking several critical functions in `auk` on Windows
 
 # Test environments
 
-- local OS X install, R 3.5.1
-- OS X (travis-ci), R 3.5.1
-- ubuntu 14.04 (travis-ci), R 3.5.0
-- Windows (appveyor), R 3.5.1
+- local OS X install, R 3.5.2
+- OS X (travis-ci), R 3.5.2
+- ubuntu 14.04 (travis-ci), R 3.5.2
+- Windows (appveyor), R 3.5.2
 - win-builder
 
 # R CMD check results

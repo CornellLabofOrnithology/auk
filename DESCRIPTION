@@ -1,34 +1,46 @@
 Package: auk
 Title: eBird Data Extraction and Processing in R
 Version: 0.3.2
-Authors@R: c(
-  person("Matthew", "Strimas-Mackey", email = "mes335@cornell.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-8929-7776")),
-  person("Eliot", "Miller", role = "aut"),
-  person("Wesley", "Hochachka", role = "aut"),
-  person("Cornell Lab of Ornithology", role = "cph")
-  )
-Description: Extract and process bird sightings records from eBird 
-    (<http://ebird.org>), an online tool for recording bird observations. 
-    Public access to the full eBird database is via the eBird Basic Dataset 
-    (EBD; see <http://ebird.org/ebird/data/download> for access), a downloadable 
-    text file. This package is an interface to AWK for extracting data from the 
-    EBD based on taxonomic, spatial, or temporal filters, to produce a 
-    manageable file size that can be imported into R.
+Authors@R: 
+    c(person(given = "Matthew",
+             family = "Strimas-Mackey",
+             role = c("aut", "cre"),
+             email = "mes335@cornell.edu",
+             comment = c(ORCID = "0000-0001-8929-7776")),
+      person(given = "Eliot",
+             family = "Miller",
+             role = "aut"),
+      person(given = "Wesley",
+             family = "Hochachka",
+             role = "aut"),
+      person(given = "Cornell Lab of Ornithology",
+             role = "cph"))
+Description: Extract and process bird sightings records from
+    eBird (<http://ebird.org>), an online tool for recording bird
+    observations.  Public access to the full eBird database is via the
+    eBird Basic Dataset (EBD; see <http://ebird.org/ebird/data/download>
+    for access), a downloadable text file. This package is an interface to
+    AWK for extracting data from the EBD based on taxonomic, spatial, or
+    temporal filters, to produce a manageable file size that can be
+    imported into R.
 License: GPL-3
-URL: https://github.com/CornellLabofOrnithology/auk, http://CornellLabofOrnithology.github.io/auk/
-BugReports: https://github.com/CornellLabofOrnithology/auk/issues
+URL: https://github.com/CornellLabofOrnithology/auk,
+    http://CornellLabofOrnithology.github.io/auk/
+BugReports: 
+    https://github.com/CornellLabofOrnithology/auk/issues
 Depends: 
     R (>= 3.1.2)
 Imports: 
     assertthat,
     countrycode (>= 1.0.0),
     dplyr (>= 0.7.8),
+    httr,
+    magrittr,
     rlang (>= 0.3.0),
     stringi,
     stringr,
     tidyr (>= 0.8.0),
-    utils,
-    httr
+    utils
 Suggests: 
     covr,
     data.table,
@@ -37,7 +49,8 @@ Suggests:
     rmarkdown,
     testthat,
     unmarked
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
