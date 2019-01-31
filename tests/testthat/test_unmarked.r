@@ -31,6 +31,7 @@ test_that("filter_repeat_visits works", {
 })
 
 test_that("format_unmarked works", {
+  skip_if_not_installed("unmarked")
   f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
   ebd_zf <- auk_zerofill(x = f_ebd, sampling_events = f_smpl,

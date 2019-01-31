@@ -121,7 +121,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     if (!overwrite && file.exists(file) && execute) {
       stop("Output file already exists, use overwrite = TRUE.")
     }
-    file <- normalizePath(file, mustWork = FALSE)
+    file <- normalizePath(file, winslash = "/", mustWork = FALSE)
   }
   # check output awk file
   if (!missing(awk_file) && !dir.exists(dirname(awk_file))) {
@@ -141,7 +141,8 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     if (!overwrite && file.exists(file_sampling) && execute) {
       stop("Output sampling file already exists, use overwrite = TRUE.")
     }
-    file_sampling <- normalizePath(file_sampling, mustWork = FALSE)
+    file_sampling <- normalizePath(file_sampling, winslash = "/", 
+                                   mustWork = FALSE)
   }
   # zero-filling requires complete checklists
   if (filter_sampling && !x$filters$complete) {
@@ -218,35 +219,31 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
   if (!missing(awk_file)) {
     writeLines(awk_script, awk_file)
     if (!execute) {
-      return(normalizePath(awk_file, mustWork = FALSE))
+      return(normalizePath(awk_file, winslash = "/", mustWork = FALSE))
     }
   }
 
   # run awk
   # ebd
-  err <- tempfile()
   exit_code <- system2(awk_path,
                        args = paste0("'", awk_script, "' '", x$file, "'"),
-                       stdout = file, stderr = err)
-  unlink(err)
+                       stdout = file, stderr = FALSE)
   if (exit_code != 0) {
     stop("Error running AWK command.")
   } else {
-    x$output <- normalizePath(file)
+    x$output <- normalizePath(file, winslash = "/")
   }
 
   # ebd sampling
   if (filter_sampling) {
-    err <- tempfile()
     exit_code <- system2(awk_path,
                          args = paste0("'", awk_script_sampling, "' '",
                                        x$file_sampling, "'"),
-                         stdout = file_sampling, stderr = err)
-    unlink(err)
+                         stdout = file_sampling, stderr = FALSE)
     if (exit_code != 0) {
       stop("Error running AWK command.")
     } else {
-      x$output_sampling <- normalizePath(file_sampling)
+      x$output_sampling <- normalizePath(file_sampling, winslash = "/")
     }
   }
   return(x)
@@ -284,7 +281,7 @@ auk_filter.auk_sampling <- function(x, file, keep, drop, awk_file,
     if (!overwrite && file.exists(file)) {
       stop("Output file already exists, use overwrite = TRUE.")
     }
-    file <- normalizePath(file, mustWork = FALSE)
+    file <- normalizePath(file, winslash = "/", mustWork = FALSE)
   }
   # check output awk file
   if (!missing(awk_file) && !dir.exists(dirname(awk_file))) {
@@ -329,21 +326,19 @@ auk_filter.auk_sampling <- function(x, file, keep, drop, awk_file,
   if (!missing(awk_file)) {
     writeLines(awk_script, awk_file)
     if (!execute) {
-      return(normalizePath(awk_file))
+      return(normalizePath(awk_file, winslash = "/"))
     }
   }
   
   # run awk
   # ebd
-  err <- tempfile()
   exit_code <- system2(awk_path,
                        args = paste0("'", awk_script, "' '", x$file, "'"),
-                       stdout = file, stderr = err)
-  unlink(err)
+                       stdout = file, stderr = FALSE)
   if (exit_code != 0) {
     stop("Error running AWK command.")
   } else {
-    x$output <- normalizePath(file)
+    x$output <- normalizePath(file, winslash = "/")
   }
   return(x)
 }

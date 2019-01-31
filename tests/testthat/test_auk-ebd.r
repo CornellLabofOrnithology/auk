@@ -5,8 +5,8 @@ test_that("auk_ebd refrence ebd file", {
   ebd <- auk_ebd(f)
 
   expect_is(ebd, "auk_ebd")
-  expect_equal(ebd$file, normalizePath(f))
-  expect_equal(ebd$file, normalizePath(f))
+  expect_equal(ebd$file, normalizePath(f, winslash = "/"))
+  expect_equal(ebd$file, normalizePath(f, winslash = "/"))
   expect_null(ebd$file_sampling)
   expect_null(ebd$output)
   expect_null(ebd$output_sampling)
@@ -22,8 +22,8 @@ test_that("auk_ebd refrence ebd and sampling files", {
   ebd <- auk_ebd(f_ebd, file_sampling = f_smpl)
 
   expect_is(ebd, "auk_ebd")
-  expect_equal(ebd$file, normalizePath(f_ebd))
-  expect_equal(ebd$file_sampling, normalizePath(f_smpl))
+  expect_equal(ebd$file, normalizePath(f_ebd, winslash = "/"))
+  expect_equal(ebd$file_sampling, normalizePath(f_smpl, winslash = "/"))
   expect_null(ebd$output)
   expect_null(ebd$output_sampling)
   expect_is(ebd$col_idx, "data.frame")
@@ -57,8 +57,10 @@ test_that("auk_ebd prints method", {
   f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
   ebd <- auk_ebd(f_ebd, file_sampling = f_smpl)
 
-  expect_output(print(ebd), normalizePath(f_ebd), fixed = TRUE)
-  expect_output(print(ebd), normalizePath(f_smpl), fixed = TRUE)
+  expect_output(print(ebd), normalizePath(f_ebd, winslash = "/"), 
+                fixed = TRUE)
+  expect_output(print(ebd), normalizePath(f_smpl, winslash = "/"),
+                fixed = TRUE)
   expect_output(print(ebd), "Filters not executed")
   expect_output(print(ebd), "Complete checklists only: no")
 

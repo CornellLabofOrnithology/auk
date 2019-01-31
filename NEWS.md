@@ -1,5 +1,10 @@
 # auk 0.3.1
 
+- Work around for bug in system2(): https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508
+- Adding a filter for PROALAS checklists to `auk_protocol()`
+
+# auk 0.3.1
+
 - `rlang::UQ()` and `rlang::UQS()` deprecated, switching to `!!` and `!!!`
 - `auk_unique()` now keeps track of all sampling event and observer IDs that comprise a group checklist
 

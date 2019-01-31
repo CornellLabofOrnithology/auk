@@ -25,7 +25,7 @@ auk_set_ebd_path <- function(path, overwrite = FALSE) {
     assertthat::is.string(path),
     dir.exists(path)
   )
-  path <- normalizePath(path, mustWork = TRUE)
+  path <- normalizePath(path, winslash = "/", mustWork = TRUE)
   
   # find .Renviron
   renv_path <- path.expand(file.path("~", ".Renviron"))

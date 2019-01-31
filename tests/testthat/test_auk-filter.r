@@ -18,7 +18,7 @@ test_that("auk_filter filter an ebd", {
   ebd <- auk_filter(filters, file = tmp)
 
   expect_is(ebd, "auk_ebd")
-  expect_equal(ebd$output, normalizePath(tmp))
+  expect_equal(ebd$output, normalizePath(tmp, winslash = "/"))
   expect_null(ebd$output_sampling)
 
   # read in results
@@ -78,8 +78,9 @@ test_that("auk_filter filter sampling and ebd files", {
   ebd <- auk_filter(filters, file = tmp, file_sampling = tmp_smp)
 
   expect_is(ebd, "auk_ebd")
-  expect_equal(ebd$output, normalizePath(tmp))
-  expect_equal(ebd$output_sampling, normalizePath(tmp_smp))
+  expect_equal(ebd$output, normalizePath(tmp, winslash = "/"))
+  expect_equal(ebd$output_sampling,
+               normalizePath(tmp_smp, winslash = "/"))
 
   # read in results
   ebd_df <- read_ebd(ebd)
@@ -106,7 +107,7 @@ test_that("auk_filter turn off filtering of sampling event data", {
     auk_species(species = "Collared Kingfisher") %>%
     auk_filter(file = f_tmp, filter_sampling = FALSE)
 
-  expect_equal(ebd$output, normalizePath(f_tmp))
+  expect_equal(ebd$output, normalizePath(f_tmp, winslash = "/"))
   expect_null(ebd$output_sampling)
 
   unlink(f_tmp)
@@ -161,7 +162,7 @@ test_that("auk_filter filter an auk_sampling object", {
   sampling <- auk_filter(filters, file = tmp)
   
   expect_is(sampling, "auk_sampling")
-  expect_equal(sampling$output, normalizePath(tmp))
+  expect_equal(sampling$output, normalizePath(tmp, winslash = "/"))
   
   # read in results
   s_df <- read_sampling(sampling)

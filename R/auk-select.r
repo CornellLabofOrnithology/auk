@@ -48,7 +48,7 @@ auk_select.auk_ebd <- function(x, select, file, sep = "\t", overwrite = FALSE) {
   if (!overwrite && file.exists(file)) {
     stop("Output file already exists, use overwrite = TRUE.")
   }
-  file <- path.expand(file)
+  file <- normalizePath(file, winslash = "/", mustWork = FALSE)
   # selected columns
   select <- tolower(select)
   select <- stringr::str_replace_all(select, "_", " ")
@@ -66,7 +66,7 @@ auk_select.auk_ebd <- function(x, select, file, sep = "\t", overwrite = FALSE) {
   # run
   exit_code <- system2(awk_path,
                        args = paste0("'", awk_script, "' '", x$file, "'"),
-                       stdout = file)
+                       stdout = file, stderr = FALSE)
   if (exit_code != 0) {
     stop("Error running AWK command.")
   }

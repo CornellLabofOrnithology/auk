@@ -23,7 +23,7 @@ auk_set_awk_path <- function(path, overwrite = FALSE) {
     assertthat::is.string(path),
     file.exists(path)
   )
-  path <- normalizePath(path, mustWork = TRUE)
+  path <- normalizePath(path, winslash = "/", mustWork = TRUE)
   # make sure awk executable is there
   awk_test <- tryCatch(
     list(result = system(paste(path, "--version"),

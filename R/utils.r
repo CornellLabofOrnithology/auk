@@ -125,9 +125,9 @@ choose_reader <- function(x) {
 ebd_file <- function(x, exists = TRUE) {
   p <- auk_get_ebd_path()
   if (file.exists(x)) {
-    return(normalizePath(x))
+    return(normalizePath(x, winslash = "/"))
   } else if (!is.na(p) && file.exists(file.path(p, x))) {
-    return(normalizePath(file.path(p, x)))
+    return(normalizePath(file.path(p, x), winslash = "/"))
   } else {
     stop(paste("File not found:\n", x))
   }
