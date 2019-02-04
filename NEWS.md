@@ -1,3 +1,7 @@
+# auk 0.3.3
+
+- Dates can now wrap in `auk_date()`, e.g. use `date = c("*-12-01", "*-01-31")` for records from December or January
+
 # auk 0.3.2
 
 - Work around for bug in system2() in some R versions: https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508

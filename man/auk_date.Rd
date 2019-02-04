@@ -47,6 +47,12 @@ system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
   auk_ebd() \%>\%
   # may-june records from all years
   auk_date(date = c("*-05-01", "*-06-30"))
+  
+# dates can also wrap around the end of the year
+system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
+  auk_ebd() \%>\%
+  # dec-jan records from all years
+  auk_date(date = c("*-01-01", "*-01-31"))
 }
 \seealso{
 Other filter: \code{\link{auk_bbox}},

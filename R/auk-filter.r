@@ -436,8 +436,10 @@ awk_translate <- function(filters, col_idx, sep, select) {
     filter_strings$date_substr <- sprintf("monthday = substr($%i, 6, 5)", idx)
     # remove the wildcard part of date
     dates <- stringr::str_replace(filters$date, "^\\*-", "")
-    condition <- str_interp("monthday >= \"${mn}\" && monthday <= \"${mx}\"",
-                            list(mn = dates[1], mx = dates[2]))
+    lo_wrap = if (attr(filters$date, "wrap")) "||" else "&&"
+    condition <- str_interp("monthday >= \"${mn}\" ${lo} monthday <= \"${mx}\"",
+                            list(mn = dates[1], mx = dates[2],
+                                 lo = lo_wrap))
     filter_strings$date <- str_interp(awk_if, list(condition = condition))
   } else {
     filter_strings$date_substr <- ""

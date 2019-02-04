@@ -66,7 +66,7 @@ filtering." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
       </span>
     </div>
 
@@ -221,6 +221,31 @@ wishes to filter the sampling event data.</p>
 #&gt;   BCRs: all
 #&gt;   Bounding box: full extent
 #&gt;   Date: *-05-01 - *-06-30
+#&gt;   Start time: all
+#&gt;   Last edited date: all
+#&gt;   Protocol: all
+#&gt;   Project code: all
+#&gt;   Duration: all
+#&gt;   Distance travelled: all
+#&gt;   Records with breeding codes only: no
+#&gt;   Complete checklists only: no</div><div class='input'>
+<span class='co'># dates can also wrap around the end of the year</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='co'># dec-jan records from all years</span>
+  <span class='fu'>auk_date</span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"*-01-01"</span>, <span class='st'>"*-01-31"</span>))</div><div class='output co'>#&gt; Input 
+#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
+#&gt; 
+#&gt; Output 
+#&gt;   Filters not executed
+#&gt; 
+#&gt; Filters 
+#&gt;   Species: all
+#&gt;   Countries: all
+#&gt;   States: all
+#&gt;   BCRs: all
+#&gt;   Bounding box: full extent
+#&gt;   Date: *-01-01 - *-01-31
 #&gt;   Start time: all
 #&gt;   Last edited date: all
 #&gt;   Protocol: all

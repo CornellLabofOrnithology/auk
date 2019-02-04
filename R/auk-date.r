@@ -37,6 +37,12 @@
 #'   auk_ebd() %>%
 #'   # may-june records from all years
 #'   auk_date(date = c("*-05-01", "*-06-30"))
+#'   
+#' # dates can also wrap around the end of the year
+#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
+#'   auk_ebd() %>%
+#'   # dec-jan records from all years
+#'   auk_date(date = c("*-01-01", "*-01-31"))
 auk_date <- function(x, date)  {
   UseMethod("auk_date")
 }
@@ -46,8 +52,7 @@ auk_date.auk_ebd <- function(x, date) {
   # checks
   assertthat::assert_that(
     length(date) == 2,
-    is.character(date) || assertthat::is.date(date),
-    date[1] <= date[2]
+    is.character(date) || assertthat::is.date(date)
   )
   
   # check for wildcard in year
@@ -55,17 +60,17 @@ auk_date.auk_ebd <- function(x, date) {
   if (all(has_wildcard)) {
     # temporarily replace wildcard with 2016
     date <- stringr::str_replace(date, "^\\*", "2016")
-  } else if (!all(!has_wildcard)) {
+  } else if (all(!has_wildcard)) {
+    assertthat::assert_that(date[1] <= date[2])
+  } else {
     stop("Cannot mix wildcard dates with non-wildcard dates.")
   }
 
   # convert to date object, then format as ISO standard date format
-  date <- as.Date(date) %>%
-    format("%Y-%m-%d")
+  date <- format(as.Date(date), "%Y-%m-%d")
   
   assertthat::assert_that(
     all(!is.na(date)),
-    date[1] <= date[2],
     date[1] >= "1850-01-01",
     date[2] >= "1850-01-01"
   )
@@ -74,9 +79,11 @@ auk_date.auk_ebd <- function(x, date) {
   if (all(has_wildcard)) {
     x$filters$date <- stringr::str_replace(date, "^2016", "*")
     attr(x$filters$date, "wildcard") <- TRUE
+    attr(x$filters$date, "wrap") <- (date[1] > date[2])
   } else {
     x$filters$date <- date
     attr(x$filters$date, "wildcard") <- FALSE
+    attr(x$filters$date, "wrap") <- FALSE
   }
   
   return(x)
