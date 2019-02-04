@@ -28,7 +28,7 @@ filtering.
 To select observations from a range of dates, regardless of year,
 the  wildcard \code{"*"} can be used in place of the year. For example, using
 \code{date = c("*-05-01", "*-06-30")} will return observations from May and June
-of \emph{any year}.
+of \emph{any year}. When using wildcards, dates can wrap around the year end.
 
 This function can also work with on an \code{auk_sampling} object if the user only
 wishes to filter the sampling event data.

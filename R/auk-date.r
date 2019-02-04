@@ -15,7 +15,7 @@
 #' @details To select observations from a range of dates, regardless of year, 
 #' the  wildcard `"*"` can be used in place of the year. For example, using 
 #' `date = c("*-05-01", "*-06-30")` will return observations from May and June 
-#' of *any year*.
+#' of *any year*. When using wildcards, dates can wrap around the year end.
 #' 
 #' This function can also work with on an `auk_sampling` object if the user only 
 #' wishes to filter the sampling event data.
