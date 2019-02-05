@@ -18,6 +18,7 @@
     AWK for extracting data from the EBD based on taxonomic, spatial, or
     temporal filters, to produce a manageable file size that can be
     imported into R.">
+<meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -75,13 +76,13 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="auk-ebird-data-extraction-and-processing-in-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#auk-ebird-data-extraction-and-processing-in-r" class="anchor"></a>auk: eBird Data Extraction and Processing in R <img src="hex-logo/auk.svg" align="right" width="140/">
+<a href="#auk-ebird-data-extraction-and-processing-in-r" class="anchor"></a>auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width="140/">
 </h1></div>
 <p><a href="http://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a> <a href="https://travis-ci.org/CornellLabofOrnithology/auk"><img src="https://img.shields.io/travis/CornellLabofOrnithology/auk/master.svg?label=Mac%20OSX%20%26%20Linux" alt="Travis-CI Build Status"></a> <a href="https://ci.appveyor.com/project/mstrimas/auk"><img src="https://img.shields.io/appveyor/ci/mstrimas/auk/master.svg?label=Windows" alt="AppVeyor Build Status"></a> <a href="https://codecov.io/github/CornellLabofOrnithology/auk?branch=master"><img src="https://img.shields.io/codecov/c/github/CornellLabofOrnithology/auk/master.svg" alt="Coverage Status"></a> <br><a href="https://github.com/ropensci/onboarding/issues/136"><img src="https://badges.ropensci.org/136_status.svg" alt="rOpenSci"></a> <a href="https://cran.r-project.org/package=auk"><img src="http://www.r-pkg.org/badges/version/auk" alt="CRAN_Status_Badge"></a> <a href="http://www.r-pkg.org/pkg/auk"><img src="http://cranlogs.r-pkg.org/badges/grand-total/auk?color=brightgreen" alt="Downloads"></a></p>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p><a href="http://www.ebird.org">eBird</a> is an online tool for recording bird observations. Since its inception, nearly 500 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
+<p><a href="http://www.ebird.org">eBird</a> is an online tool for recording bird observations. Since its inception, over 600 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">

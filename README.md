@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-auk: eBird Data Extraction and Processing in R <img src="hex-logo/auk.svg" align="right" width=140/>
-====================================================================================================
+auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width=140/>
+============================================================================================
 
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
@@ -19,7 +19,7 @@ Overview
 --------
 
 [eBird](http://www.ebird.org) is an online tool for recording bird
-observations. Since its inception, nearly 500 million records of bird
+observations. Since its inception, over 600 million records of bird
 sightings (i.e. combinations of location, date, time, and bird species)
 have been collected, making eBird one of the largest citizen science
 projects in history and an extremely valuable resource for bird research
