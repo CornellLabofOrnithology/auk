@@ -171,6 +171,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
   } else if (!missing(drop)) {
     drop <- tolower(drop)
     drop <- stringr::str_replace_all(drop, "_", " ")
+    drop <- stringr::str_replace_all(drop, "/", " ")
     stopifnot(all(drop %in% x$col_idx$name))
     if (any(must_keep %in% drop)) {
       m <- paste("The following columns must be retained:",
