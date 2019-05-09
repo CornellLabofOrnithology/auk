@@ -57,3 +57,10 @@
 #' - `bcr_name`: name of BCR.
 #' @family data
 "bcr_codes"
+
+#' Valid Protocols
+#' 
+#' A vector of valid protocol names, e.g. "Traveling", "Stationary", etc.
+#' 
+#' @format A vector with 42 elements.
+"valid_protocols"

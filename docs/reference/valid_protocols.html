@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Versions of auk, the EBD, and the eBird taxonomy — auk_version • auk</title>
+<title>Valid Protocols — valid_protocols • auk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,15 +30,9 @@
 
 
 
-<meta property="og:title" content="Versions of auk, the EBD, and the eBird taxonomy — auk_version" />
+<meta property="og:title" content="Valid Protocols — valid_protocols" />
 
-<meta property="og:description" content="This package depends on the version of the EBD and on the eBird taxonomy. Use
-this function to determine the currently installed version of auk, the
-version of the EBD that this auk version works with, and the version of the
-eBird taxonomy included in the packages. The EBD is update quarterly, in
-March, June, September, and December, while the taxonomy is updated annually
-in August or September. To ensure proper functioning, always use the latest
-version of the auk package and the EBD." />
+<meta property="og:description" content="A vector of valid protocol names, e.g. &quot;Traveling&quot;, &quot;Stationary&quot;, etc." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -104,64 +98,31 @@ version of the auk package and the EBD." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Versions of auk, the EBD, and the eBird taxonomy</h1>
-    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-version.r'><code>R/auk-version.r</code></a></small>
-    <div class="hidden name"><code>auk_version.Rd</code></div>
+    <h1>Valid Protocols</h1>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/data.r'><code>R/data.r</code></a></small>
+    <div class="hidden name"><code>valid_protocols.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This package depends on the version of the EBD and on the eBird taxonomy. Use
-this function to determine the currently installed version of <code>auk</code>, the
-version of the EBD that this <code>auk</code> version works with, and the version of the
-eBird taxonomy included in the packages. The EBD is update quarterly, in
-March, June, September, and December, while the taxonomy is updated annually
-in August or September. To ensure proper functioning, always use the latest
-version of the auk package and the EBD.</p>
+    <p>A vector of valid protocol names, e.g. "Traveling", "Stationary", etc.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>auk_version</span>()</pre>
+    <pre class="usage"><span class='no'>valid_protocols</span></pre>
         
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A list with three elements:</p><ul>
-<li><p><code>auk_version</code>: the version of <code>auk</code>, e.g. <code>"auk 0.3.3"</code>.</p></li>
-<li><p><code>ebd_version</code>: a date object specifying the release date of the EBD
-version that this <code>auk</code> version is designed to work with.</p></li>
-<li><p><code>taxonomy_version</code>: the year of the taxonomy built in to this version of
-<code>auk</code>, i.e. the one stored in <a href='ebird_taxonomy.html'>ebird_taxonomy</a>.</p></li>
-</ul>
-
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other helpers: <code><a href='auk_ebd_version.html'>auk_ebd_version</a></code>,
-  <code><a href='ebird_species.html'>ebird_species</a></code>,
-  <code><a href='get_ebird_taxonomy.html'>get_ebird_taxonomy</a></code></p></div>
+    <p>A vector with 42 elements.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>auk_version</span>()</div><div class='output co'>#&gt; $auk_version
-#&gt; [1] "auk 0.3.3"
-#&gt; 
-#&gt; $ebd_version
-#&gt; [1] "2018-08-15"
-#&gt; 
-#&gt; $taxonomy_version
-#&gt; [1] 2018
-#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#format">Format</a></li>
+          </ul>
 
   </div>
 </div>

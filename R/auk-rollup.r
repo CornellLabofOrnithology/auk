@@ -155,7 +155,7 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
   x <- dplyr::ungroup(x)
   
   # update counts with summary
-  x <- dplyr::inner_join(x, sp, by = c(as.character(cid)[2], "scientific_name"))
+  x <- dplyr::inner_join(x, sp, by = c(rlang::quo_text(cid), "scientific_name"))
   x <- dplyr::mutate(x, observation_count = .data$count)
   x <- dplyr::select(x, -.data$count, -.data$taxon_order)
   

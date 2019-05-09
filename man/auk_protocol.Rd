@@ -10,18 +10,18 @@ auk_protocol(x, protocol)
 \item{x}{\code{auk_ebd} or \code{auk_sampling} object; reference to file created by
 \code{\link[=auk_ebd]{auk_ebd()}} or \code{\link[=auk_sampling]{auk_sampling()}}.}
 
-\item{protocol}{character. Many protocols exist in the database, however, this function
-only extracts the following protocols:
+\item{protocol}{character. Many protocols exist in the database, however, the
+most commonly used are:
 \itemize{
 \item Stationary
 \item Traveling
 \item Area
 \item Incidental
-\item Nocturnal Flight Call Count
-\item PROALAS
 }
 
-Multiple protocols are allowed at the same time.}
+A complete list of valid protocols is contained within the vector
+\code{valid_protocols} within this package. Multiple protocols are allowed at
+the same time.}
 }
 \value{
 An \code{auk_ebd} object.

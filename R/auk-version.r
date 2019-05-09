@@ -10,7 +10,7 @@
 #'
 #' @return A list with three elements:
 #'   
-#'   - `auk_version`: the version of `auk`, e.g. `"auk 0.3.0"`.
+#'   - `auk_version`: the version of `auk`, e.g. `"auk 0.3.3"`.
 #'   - `ebd_version`: a date object specifying the release date of the EBD 
 #'   version that this `auk` version is designed to work with.
 #'   - `taxonomy_version`: the year of the taxonomy built in to this version of 
@@ -21,7 +21,7 @@
 #' @examples
 #' auk_version()
 auk_version <- function() {
-  list(auk_version = "auk 0.3.2",
+  list(auk_version = "auk 0.3.3",
        ebd_version = as.Date("2018-08-15", "%Y-%m-%d"), 
        taxonomy_version = 2018)
 }

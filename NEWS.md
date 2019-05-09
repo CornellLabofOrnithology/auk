@@ -2,6 +2,8 @@
 
 - Dates can now wrap in `auk_date()`, e.g. use `date = c("*-12-01", "*-01-31")` for records from December or January
 - Fixed bug preventing dropping of `age/sex` column
+- Allow for a wider variety of protocols in `auk_protocol()`
+- Addresing some deprecated functions from rlang
 
 # auk 0.3.2
 

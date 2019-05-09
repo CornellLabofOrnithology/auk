@@ -9,7 +9,7 @@ auk_version()
 \value{
 A list with three elements:
 \itemize{
-\item \code{auk_version}: the version of \code{auk}, e.g. \code{"auk 0.3.0"}.
+\item \code{auk_version}: the version of \code{auk}, e.g. \code{"auk 0.3.3"}.
 \item \code{ebd_version}: a date object specifying the release date of the EBD
 version that this \code{auk} version is designed to work with.
 \item \code{taxonomy_version}: the year of the taxonomy built in to this version of

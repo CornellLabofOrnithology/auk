@@ -8,7 +8,7 @@ This version address a bug in `system2()` that was breaking several critical fun
 - OS X (travis-ci), R 3.5.2
 - ubuntu 14.04 (travis-ci), R 3.5.2
 - Windows (appveyor), R 3.5.2
-- win-builder
+- win-builder (devel and release)
 
 # R CMD check results
 
