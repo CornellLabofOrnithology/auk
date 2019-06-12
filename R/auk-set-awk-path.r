@@ -55,7 +55,7 @@ auk_set_awk_path <- function(path, overwrite = FALSE) {
     }
   }
   # set path in .Renviron
-  write(paste0("AWK_PATH=", path, "\n"), renv_path, append = TRUE)
+  write(paste0("AWK_PATH='", path, "'\n"), renv_path, append = TRUE)
   message(paste("AWK_PATH set to", path))
   invisible(path)
 }

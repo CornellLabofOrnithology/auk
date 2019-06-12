@@ -4,6 +4,7 @@
 - Fixed bug preventing dropping of `age/sex` column
 - Allow for a wider variety of protocols in `auk_protocol()`
 - Addresing some deprecated functions from rlang
+- Fixed bug causing `auk_set_awk_path()` to fail
 
 # auk 0.3.2
 

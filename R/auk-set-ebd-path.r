@@ -47,7 +47,7 @@ auk_set_ebd_path <- function(path, overwrite = FALSE) {
     }
   }
   # set path in .Renviron
-  write(paste0("EBD_PATH=", path, "\n"), renv_path, append = TRUE)
+  write(paste0("EBD_PATH='", path, "'\n"), renv_path, append = TRUE)
   message(paste("EBD_PATH set to", path))
   invisible(path)
 }
