@@ -38,7 +38,8 @@ out_file <- tempfile()
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 cols <- c("latitude", "longitude",
           "group identifier", "sampling event identifier", 
-          "scientific name", "observation count")
+          "scientific name", "observation count",
+          "observer_id")
 selected <- auk_select(ebd, select = cols, file = out_file)
 str(read_ebd(selected))
 }

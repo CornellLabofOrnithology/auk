@@ -162,7 +162,8 @@ is not allowed since spaces appear in many of the fields.</p></td>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
 <span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"latitude"</span>, <span class='st'>"longitude"</span>,
           <span class='st'>"group identifier"</span>, <span class='st'>"sampling event identifier"</span>,
-          <span class='st'>"scientific name"</span>, <span class='st'>"observation count"</span>)
+          <span class='st'>"scientific name"</span>, <span class='st'>"observation count"</span>,
+          <span class='st'>"observer_id"</span>)
 <span class='no'>selected</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_select</span>(<span class='no'>ebd</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>cols</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>out_file</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='fu'><a href='read_ebd.html'>read_ebd</a></span>(<span class='no'>selected</span>))
 <span class='co'># }</span></pre>
