@@ -38,8 +38,10 @@ species <- c("Blackburnian Warbler", "Poecile atricapillus",
 ebird_species(species)
 
 # use taxonomy_version to query older taxonomy versions
+\dontrun{
 ebird_species("Cordillera Azul Antbird")
 ebird_species("Cordillera Azul Antbird", taxonomy_version = 2017)
+}
 }
 \seealso{
 Other helpers: \code{\link{auk_ebd_version}},

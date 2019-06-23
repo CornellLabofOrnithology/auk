@@ -1,5 +1,6 @@
 context("ebird_species")
 
+
 test_that("ebird_species mixing both scientific and common names", {
   expect_equal(ebird_species(c("Blackburnian Warbler", "Poecile atricapillus")),
                c("Setophaga fusca", "Poecile atricapillus"))
@@ -45,6 +46,7 @@ test_that("ebird_species works for species with non-ascii characters", {
 })
 
 test_that("ebird_species handles versions correctly", {
+  skip_if_offline()
   expect_equal(ebird_species("Cordillera Azul Antbird"), "Myrmoderus eowilsoni")
   expect_equal(ebird_species("Cordillera Azul Antbird", 
                              taxonomy_version = 2017), 

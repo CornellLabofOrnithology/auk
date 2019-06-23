@@ -27,8 +27,10 @@
 #' ebird_species(species)
 #' 
 #' # use taxonomy_version to query older taxonomy versions
+#' \dontrun{
 #' ebird_species("Cordillera Azul Antbird")
 #' ebird_species("Cordillera Azul Antbird", taxonomy_version = 2017)
+#' }
 ebird_species <- function(x, type = c("scientific", "common", "code", "all"),
                           taxonomy_version) {
   assertthat::assert_that(is.character(x))

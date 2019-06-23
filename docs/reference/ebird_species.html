@@ -159,8 +159,11 @@ the requested species is returned.</p>
 <span class='co'># note that species not in the ebird taxonomy return NA</span>
 <span class='fu'>ebird_species</span>(<span class='no'>species</span>)</div><div class='output co'>#&gt; [1] "Setophaga fusca"      "Poecile atricapillus" "Cinclus mexicanus"   
 #&gt; [4] NA                    </div><div class='input'>
-<span class='co'># use taxonomy_version to query older taxonomy versions</span>
-<span class='fu'>ebird_species</span>(<span class='st'>"Cordillera Azul Antbird"</span>)</div><div class='output co'>#&gt; [1] "Myrmoderus eowilsoni"</div><div class='input'><span class='fu'>ebird_species</span>(<span class='st'>"Cordillera Azul Antbird"</span>, <span class='kw'>taxonomy_version</span> <span class='kw'>=</span> <span class='fl'>2017</span>)</div><div class='output co'>#&gt; [1] "Myrmoderus [undescribed form]"</div></pre>
+# use taxonomy_version to query older taxonomy versions
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>ebird_species</span>(<span class='st'>"Cordillera Azul Antbird"</span>)
+<span class='fu'>ebird_species</span>(<span class='st'>"Cordillera Azul Antbird"</span>, <span class='kw'>taxonomy_version</span> <span class='kw'>=</span> <span class='fl'>2017</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

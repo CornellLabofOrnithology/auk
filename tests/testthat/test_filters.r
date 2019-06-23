@@ -31,6 +31,7 @@ test_that("auk_species", {
   expect_error(auk_species(ebd, NA))
   
   # taxonomy versions
+  skip_if_offline()
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
     auk_ebd()
   ebd$file <- "ebd_relAug-2016.txt"
