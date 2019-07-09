@@ -65,14 +65,16 @@ auk_sampling <- function(file, sep = "\t") {
            "date", "time", "last_edited",
            "protocol", "project", 
            "duration", "distance", 
-           "complete"),
+           "complete",
+           "observer"),
     name = c("country code", "state code", "bcr code",
              "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
              "protocol type", "project code",
              "duration minutes", "effort distance km",
-             "all species reported"),
+             "all species reported",
+             "observer id"),
     stringsAsFactors = FALSE)
   filter_cols <- filter_cols[filter_cols$name %in% col_idx$name, ]
   col_idx$id[match(filter_cols$name, col_idx$name)] <- filter_cols$id
@@ -94,7 +96,8 @@ auk_sampling <- function(file, sep = "\t") {
         project = character(),
         duration = numeric(),
         distance = numeric(),
-        complete = FALSE
+        complete = FALSE,
+        observer = character()
       )
     ),
     class = "auk_sampling"

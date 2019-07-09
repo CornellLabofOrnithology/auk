@@ -543,6 +543,23 @@ awk_translate <- function(filters, col_idx, sep, select) {
   } else {
     filter_strings$complete <- ""
   }
+  # observer filter
+  if (length(filters$observer) == 0) {
+    filter_strings$observer_array <- ""
+    filter_strings$observer <- ""
+  } else {
+    # generate list
+    observer_list <- paste(filters$observer, collapse = "\t")
+    observer_array <- "
+    split(\"%s\", observerValues, \"\t\")
+    for (i in observerValues) observers[observerValues[i]] = 1"
+    filter_strings$observer_array <- sprintf(observer_array, observer_list)
+    
+    # check in list
+    idx <- col_idx$index[col_idx$id == "observer"]
+    condition <- paste0("$", idx, " in observers")
+    filter_strings$observer <- str_interp(awk_if, list(condition = condition))
+  }
 
   # generate awk script
   str_interp(awk_filter, filter_strings)
@@ -556,6 +573,7 @@ BEGIN {
   ${species_array}
   ${country_array}
   ${state_array}
+  ${observer_array}
 }
 {
   keep = 1
@@ -576,6 +594,7 @@ BEGIN {
   ${distance}
   ${breeding}
   ${complete}
+  ${observer}
 
   # keeps header
   if (NR == 1) {

@@ -42,7 +42,7 @@
 #' system.file("extdata/ebd-sample.txt", package = "auk") %>%
 #'   auk_ebd() %>%
 #'   # dec-jan records from all years
-#'   auk_date(date = c("*-01-01", "*-01-31"))
+#'   auk_date(date = c("*-12-01", "*-01-31"))
 auk_date <- function(x, date)  {
   UseMethod("auk_date")
 }

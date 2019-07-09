@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter the eBird data by project code — auk_project • auk</title>
+<title>Filter the eBird data by observer — auk_observer • auk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,13 +30,12 @@
 
 
 
-<meta property="og:title" content="Filter the eBird data by project code — auk_project" />
+<meta property="og:title" content="Filter the eBird data by observer — auk_observer" />
 
-<meta property="og:description" content="Some eBird records are collected as part of a particular project (e.g. the
-Virginia Breeding Bird Survey) and have an associated project code in the
-eBird dataset (e.g. EBIRD_ATL_VA). This function only defines the filter and,
-once all filters have been defined, auk_filter() should be used to call AWK
-and perform the filtering." />
+<meta property="og:description" content="Define a filter for the eBird Basic Dataset (EBD) based on a set of
+observer IDs This function only defines the filter and, once all filters have
+been defined, auk_filter() should be used to call AWK and perform the
+filtering." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -102,22 +101,21 @@ and perform the filtering." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter the eBird data by project code</h1>
-    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-project.r'><code>R/auk-project.r</code></a></small>
-    <div class="hidden name"><code>auk_project.Rd</code></div>
+    <h1>Filter the eBird data by observer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-observer.R'><code>R/auk-observer.R</code></a></small>
+    <div class="hidden name"><code>auk_observer.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Some eBird records are collected as part of a particular project (e.g. the
-Virginia Breeding Bird Survey) and have an associated project code in the
-eBird dataset (e.g. EBIRD_ATL_VA). This function only defines the filter and,
-once all filters have been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used to call AWK
-and perform the filtering.</p>
+    <p>Define a filter for the eBird Basic Dataset (EBD) based on a set of
+observer IDs This function only defines the filter and, once all filters have
+been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used to call AWK and perform the
+filtering.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>auk_project</span>(<span class='no'>x</span>, <span class='no'>project</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_observer</span>(<span class='no'>x</span>, <span class='no'>observer_id</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -128,20 +126,16 @@ and perform the filtering.</p>
 <code><a href='auk_ebd.html'>auk_ebd()</a></code> or <code><a href='auk_sampling.html'>auk_sampling()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>project</th>
-      <td><p>character; project code to filter by (e.g. <code>"EBIRD_MEX"</code>).
-Multiple codes are accepted.</p></td>
+      <th>observer_id</th>
+      <td><p>character or integer; observers to filter by. Observer IDs
+can be provided either as integer (e.g. 12345) or character with the "obsr"
+prefix as they appear in the EBD (e.g. "obsr12345").</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>auk_ebd</code> object.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function can also work with on an <code>auk_sampling</code> object if the
-user only wishes to filter the sampling event data.</p>
+    <p>An <code>auk_ebd</code> or `auk_sampling`` object.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -151,7 +145,7 @@ user only wishes to filter the sampling event data.</p>
   <code><a href='auk_date.html'>auk_date</a></code>, <code><a href='auk_distance.html'>auk_distance</a></code>,
   <code><a href='auk_duration.html'>auk_duration</a></code>, <code><a href='auk_extent.html'>auk_extent</a></code>,
   <code><a href='auk_filter.html'>auk_filter</a></code>, <code><a href='auk_last_edited.html'>auk_last_edited</a></code>,
-  <code><a href='auk_observer.html'>auk_observer</a></code>, <code><a href='auk_protocol.html'>auk_protocol</a></code>,
+  <code><a href='auk_project.html'>auk_project</a></code>, <code><a href='auk_protocol.html'>auk_protocol</a></code>,
   <code><a href='auk_species.html'>auk_species</a></code>, <code><a href='auk_state.html'>auk_state</a></code>,
   <code><a href='auk_time.html'>auk_time</a></code></p></div>
     
@@ -159,7 +153,7 @@ user only wishes to filter the sampling event data.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_project</span>(<span class='st'>"EBIRD_MEX"</span>)</div><div class='output co'>#&gt; Input 
+  <span class='fu'>auk_observer</span>(<span class='st'>"obsr313215"</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -175,14 +169,14 @@ user only wishes to filter the sampling event data.</p>
 #&gt;   Start time: all
 #&gt;   Last edited date: all
 #&gt;   Protocol: all
-#&gt;   Project code: EBIRD_MEX
+#&gt;   Project code: all
 #&gt;   Duration: all
 #&gt;   Distance travelled: all
 #&gt;   Records with breeding codes only: no
 #&gt;   Complete checklists only: no</div><div class='input'>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
-<span class='fu'>auk_project</span>(<span class='no'>ebd</span>, <span class='st'>"EBIRD_MEX"</span>)</div><div class='output co'>#&gt; Input 
+<span class='fu'>auk_observer</span>(<span class='no'>ebd</span>, <span class='kw'>observer</span> <span class='kw'>=</span> <span class='fl'>313215</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -198,7 +192,7 @@ user only wishes to filter the sampling event data.</p>
 #&gt;   Start time: all
 #&gt;   Last edited date: all
 #&gt;   Protocol: all
-#&gt;   Project code: EBIRD_MEX
+#&gt;   Project code: all
 #&gt;   Duration: all
 #&gt;   Distance travelled: all
 #&gt;   Records with breeding codes only: no
@@ -210,8 +204,6 @@ user only wishes to filter the sampling event data.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

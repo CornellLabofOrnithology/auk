@@ -75,6 +75,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
                  "protocol type",
                  "duration minutes", "effort distance km",
                  "all species reported",
+                 "observer id",
                  "sampling event identifier", "group identifier")
   col_miss <- mandatory[!(mandatory %in% header)]
   if (length(col_miss) > 0) {
@@ -91,7 +92,8 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
            "date", "time", "last_edited",
            "protocol", "project", 
            "duration", "distance", 
-           "breeding", "complete"),
+           "breeding", "complete",
+           "observer"),
     name = c("scientific name",
              "country code", "state code", "bcr code",
              "latitude", "longitude",
@@ -100,7 +102,8 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
              "protocol type", "project code",
              "duration minutes", "effort distance km",
              "breeding bird atlas code",
-             "all species reported"),
+             "all species reported",
+             "observer id"),
     stringsAsFactors = FALSE)
   filter_cols <- filter_cols[filter_cols$name %in% col_idx$name, ]
   col_idx$id[match(filter_cols$name, col_idx$name)] <- filter_cols$id
@@ -158,7 +161,8 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         duration = numeric(),
         distance = numeric(),
         breeding = FALSE,
-        complete = FALSE
+        complete = FALSE,
+        observer = character()
       )
     ),
     class = "auk_ebd"

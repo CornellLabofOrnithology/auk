@@ -400,3 +400,18 @@ test_that("auk_breeding", {
   ebd <- auk_complete(ebd)
   expect_equal(ebd$filters$complete, TRUE)
 })
+
+test_that("auk_observer", {
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd()
+  
+  # works with character
+  obs <- "obsr313215"
+  ebd <- auk_observer(ebd, obs)
+  expect_equal(ebd$filters$observer, obs)
+  
+  # works with integer
+  obs_int <- 313215
+  ebd <- auk_observer(ebd, obs_int)
+  expect_equal(ebd$filters$observer, obs)
+})
