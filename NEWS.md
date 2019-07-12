@@ -1,3 +1,7 @@
+# auk 0.3.4
+
+- `auk_observer()` filter added
+
 # auk 0.3.3
 
 - Dates can now wrap in `auk_date()`, e.g. use `date = c("*-12-01", "*-01-31")` for records from December or January

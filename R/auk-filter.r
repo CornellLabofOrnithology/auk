@@ -210,6 +210,9 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     s_filters <- x$filters
     s_filters$species <- character()
     s_filters$breeding <- FALSE
+    # fix observer filter
+    s_filters$observer <- stringr::str_replace(s_filters$observer, 
+                                               "^obsr", "obs")
     awk_script_sampling <- awk_translate(filters = s_filters,
                                          col_idx = x$col_idx_sampling,
                                          sep = sep,
@@ -225,16 +228,6 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
   }
 
   # run awk
-  # ebd
-  exit_code <- system2(awk_path,
-                       args = paste0("'", awk_script, "' '", x$file, "'"),
-                       stdout = file, stderr = FALSE)
-  if (exit_code != 0) {
-    stop("Error running AWK command.")
-  } else {
-    x$output <- normalizePath(file, winslash = "/")
-  }
-
   # ebd sampling
   if (filter_sampling) {
     exit_code <- system2(awk_path,
@@ -246,6 +239,16 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     } else {
       x$output_sampling <- normalizePath(file_sampling, winslash = "/")
     }
+  }
+  
+  # ebd
+  exit_code <- system2(awk_path,
+                       args = paste0("'", awk_script, "' '", x$file, "'"),
+                       stdout = file, stderr = FALSE)
+  if (exit_code != 0) {
+    stop("Error running AWK command.")
+  } else {
+    x$output <- normalizePath(file, winslash = "/")
   }
   return(x)
 }
@@ -316,6 +319,10 @@ auk_filter.auk_sampling <- function(x, file, keep, drop, awk_file,
   } else {
     select_cols <- "$0"
   }
+  
+  # fix observer filter
+  x$filters$observer <- stringr::str_replace(x$filters$observer, 
+                                             "^obsr", "obs")
   
   # create awk script for the sampling event file
   awk_script <- awk_translate(filters = x$filters,
