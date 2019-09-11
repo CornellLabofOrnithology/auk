@@ -1,20 +1,18 @@
-# auk 0.3.3
+# auk 0.4.0
 
-Fixes several two important bugs and a couple new features added:
-
-- Dates can now wrap in `auk_date()`, e.g. use `date = c("*-12-01", "*-01-31")` for records from December or January
-- Fixed bug preventing dropping of `age/sex` column
-- Allow for a wider variety of protocols in `auk_protocol()`
-- Addresing some deprecated functions from rlang
-- Fixed bug causing `auk_set_awk_path()` to fail
+Updated to use the 2019 eBird taxonomy.
 
 # Test environments
 
-- local OS X install, R 3.6.0
-- OS X (travis-ci), R 3.6.0
-- ubuntu 14.04 (travis-ci), R 3.6.0
-- Windows (appveyor), R 3.6.0
+- local OS X install, R 3.6.1
+- OS X (travis-ci), R 3.6.1
+- ubuntu 14.04 (travis-ci), R 3.6.1
+- Windows (appveyor), R 3.6.1
 - win-builder (devel and release)
+- Rhub
+  - Windows Server 2008 R2 SP1, R-devel, 32/64 bit
+  - Ubuntu Linux 16.04 LTS, R-release, GCC
+  - Fedora Linux, R-devel, clang, gfortran
 
 # R CMD check results
 

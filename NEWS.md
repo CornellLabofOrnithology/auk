@@ -1,5 +1,6 @@
-# auk 0.3.4
+# auk 0.4.0
 
+- Updated to 2019 eBird taxonomy
 - `auk_observer()` filter added
 
 # auk 0.3.3
