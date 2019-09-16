@@ -8,21 +8,32 @@
 
 <title>Filter observations to repeat visits for hierarchical modeling — filter_repeat_visits • auk</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +41,8 @@
 
 
 
-<meta property="og:title" content="Filter observations to repeat visits for hierarchical modeling — filter_repeat_visits" />
 
+<meta property="og:title" content="Filter observations to repeat visits for hierarchical modeling — filter_repeat_visits" />
 <meta property="og:description" content="Hierarchical modeling of abundance and occurrence requires repeat visits to
 sites to estimate detectability. These visits should be all be within a
 period of closure, i.e. when the population can be assumed to be closed.
@@ -40,9 +51,9 @@ protocol; however, subsets of the data can be extracted to produce data
 suitable for hierarchical modeling. This function extracts a subset of
 observation data that have a desired number of repeat visits within a period
 of closure." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -54,6 +65,7 @@ of closure." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -85,11 +97,10 @@ of closure." />
   <a href="../reference/index.html">Function Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/CornellLabofOrnithology/auk">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -100,6 +111,7 @@ of closure." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -111,7 +123,6 @@ of closure." />
     </div>
 
     <div class="ref-description">
-    
     <p>Hierarchical modeling of abundance and occurrence requires repeat visits to
 sites to estimate detectability. These visits should be all be within a
 period of closure, i.e. when the population can be assumed to be closed.
@@ -120,13 +131,12 @@ protocol; however, subsets of the data can be extracted to produce data
 suitable for hierarchical modeling. This function extracts a subset of
 observation data that have a desired number of repeat visits within a period
 of closure.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>filter_repeat_visits</span>(<span class='no'>x</span>, <span class='kw'>min_obs</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>max_obs</span> <span class='kw'>=</span> <span class='fl'>10L</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>14L</span>,
   <span class='kw'>annual_closure</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>date_var</span> <span class='kw'>=</span> <span class='st'>"observation_date"</span>,
-  <span class='kw'>site_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"locality_id"</span>, <span class='st'>"observer_id"</span>))</pre>
-    
+  <span class='kw'>site_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"locality_id"</span>, <span class='st'>"observer_id"</span>))</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -162,7 +172,7 @@ one season (e.g. breeding) across multiple years.</p></td>
       <th>date_var</th>
       <td><p>character; column name of the variable in <code>x</code> containing the
 date. This column should either be in <code>Date</code> format or convertible to
-<code>Date</code> format with <code><a href='https://www.rdocumentation.org/packages/base/topics/as.Date'>as.Date()</a></code>.</p></td>
+<code>Date</code> format with <code><a href='https://rdrr.io/r/base/as.Date.html'>as.Date()</a></code>.</p></td>
     </tr>
     <tr>
       <th>site_vars</th>
@@ -170,7 +180,7 @@ date. This column should either be in <code>Date</code> format or convertible to
 site, typically the location and observer IDs.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>data.frame</code> filtered to only retain observations from sites with
@@ -188,7 +198,6 @@ in this latter case, there may be gaps in the IDs.</p></li>
 filtering.</p></li>
 </ul>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>In addition to specifying the minimum and maximum number of
@@ -199,34 +208,32 @@ conducted by the same observer). Finally, the number of days defining the
 period of closure is required. A default value of 14 days is used; however,
 users should choose a suitable period for their species within which the
 population can reasonably be assumed to be closed.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other modeling: <code><a href='format_unmarked_occu.html'>format_unmarked_occu</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># read and zero-fill the ebd data</span>
-<span class='no'>f_ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
-<span class='no'>f_smpl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='no'>f_ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='no'>f_smpl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
 <span class='co'># data must be for a single species</span>
 <span class='no'>ebd_zf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>,
                        <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"Collared Kingfisher"</span>,
                        <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>filter_repeat_visits</span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 181 x 37</span><span>
+<span class='fu'>filter_repeat_visits</span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 66 x 37</span><span>
 #&gt;    site  closure_id n_observations checklist_id last_edited_date country
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'> 1</span><span> L105…          9              2 S11680564    2017-10-19 12:4… Singap…
-#&gt; </span><span style='color: #555555;'> 2</span><span> L105…          9              2 S11718518    2018-02-01 09:2… Singap…
-#&gt; </span><span style='color: #555555;'> 3</span><span> L127…          8              3 S11664225    2017-05-27 11:0… Singap…
-#&gt; </span><span style='color: #555555;'> 4</span><span> L127…          8              3 S11675087    2017-05-27 11:0… Singap…
-#&gt; </span><span style='color: #555555;'> 5</span><span> L127…          8              3 S11668164    2017-05-27 10:2… Singap…
-#&gt; </span><span style='color: #555555;'> 6</span><span> L136…          0             10 S9492400     2017-05-27 10:3… Singap…
-#&gt; </span><span style='color: #555555;'> 7</span><span> L136…          0             10 S9503604     2017-05-27 10:3… Singap…
-#&gt; </span><span style='color: #555555;'> 8</span><span> L136…          0             10 S9513531     2017-05-27 10:3… Singap…
-#&gt; </span><span style='color: #555555;'> 9</span><span> L136…          0             10 S9629042     2017-05-27 10:4… Singap…
-#&gt; </span><span style='color: #555555;'>10</span><span> L136…          0             10 S9652476     2017-05-27 10:3… Singap…
-#&gt; </span><span style='color: #555555;'># … with 171 more rows, and 31 more variables: country_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, state </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; </span><span style='color: #555555;'> 1</span><span> L136…          0              6 S9629042     2017-05-27 10:4… Singap…
+#&gt; </span><span style='color: #555555;'> 2</span><span> L136…          0              6 S9681492     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'> 3</span><span> L136…          0              6 S9693022     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'> 4</span><span> L136…          0              6 S9718259     2018-04-15 11:3… Singap…
+#&gt; </span><span style='color: #555555;'> 5</span><span> L136…          0              6 S9727212     2018-04-15 11:3… Singap…
+#&gt; </span><span style='color: #555555;'> 6</span><span> L136…          0              6 S9747362     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'> 7</span><span> L136…          1             10 S9760762     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'> 8</span><span> L136…          1             10 S9769836     2012-03-20 03:2… Singap…
+#&gt; </span><span style='color: #555555;'> 9</span><span> L136…          1             10 S9776533     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'>10</span><span> L136…          1             10 S9791113     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'># … with 56 more rows, and 31 more variables: country_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, state </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   state_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, county </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, county_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, iba_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   bcr_code </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, usfws_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, atlas_block </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, locality </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   locality_id </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, locality_type </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, latitude </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, longitude </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
@@ -241,18 +248,15 @@ population can reasonably be assumed to be closed.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -260,13 +264,16 @@ population can reasonably be assumed to be closed.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

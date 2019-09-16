@@ -6,9 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>eBird Data Extraction and Processing in R • auk</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="eBird Data Extraction and Processing in R">
 <meta property="og:description" content="Extract and process bird sightings records from
     eBird (&lt;http://ebird.org&gt;), an online tool for recording bird
@@ -26,7 +33,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -54,7 +61,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/CornellLabofOrnithology/auk">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -67,13 +74,9 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+      </header><div class="row">
+  <div class="contents col-md-9">
 <div id="auk-ebird-data-extraction-and-processing-in-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#auk-ebird-data-extraction-and-processing-in-r" class="anchor"></a>auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width="140/">
@@ -87,12 +90,12 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># cran release</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"auk"</span>)</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># cran release</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"auk"</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># or install the development version from github</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># install.packages("remotes")</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"CornellLabofOrnithology/auk"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-6" data-line-number="6">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"CornellLabofOrnithology/auk"</span>)</a></code></pre></div>
 <p><code>auk</code> requires the Unix utility AWK, which is available on most Linux and Mac OS X machines. Windows users will first need to install <a href="https://www.cygwin.com">Cygwin</a> before using this package. Note that <strong>Cygwin must be installed in the default location</strong> (<code>C:/cygwin/bin/gawk.exe</code> or <code>C:/cygwin64/bin/gawk.exe</code>) in order for <code>auk</code> to work.</p>
 </div>
 <div id="vignette" class="section level2">
@@ -115,18 +118,18 @@
 <h2 class="hasAnchor">
 <a href="#quick-start" class="anchor"></a>Quick start</h2>
 <p>This package uses the command-line program AWK to extract subsets of the eBird Basic Dataset for use in R. This is a multi-step process:</p>
-<ol style="list-style-type: decimal">
+<ol>
 <li>Define a reference to the eBird data file.</li>
 <li>Define a set of spatial, temporal, or taxonomic filters. Each type of filter corresponds to a different function, e.g. <code>auk_species</code> to filter by species. At this stage the filters are only set up, no actual filtering is done until the next step.</li>
 <li>Filter the eBird data text file, producing a new text file with only the selected rows.</li>
 <li>Import this text file into R as a data frame.</li>
 </ol>
 <p>Because the eBird dataset is so large, step 3 typically takes several hours to run. Here’s a simple example that extract all Canada Jay records from within Canada.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auk)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auk)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># path to the ebird data file, here a sample included in the package</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># get the path to the example data included in the package</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># in practice, provide path to ebd, e.g. f_in &lt;- "data/ebd_relFeb-2018.txt</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">f_in &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">f_in &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># output text file</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7">f_out &lt;-<span class="st"> "ebd_filtered_grja.txt"</span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8">ebird_data &lt;-<span class="st"> </span>f_in <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -139,8 +142,8 @@
 <a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> f_out) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb2-16" data-line-number="16"><span class="st">  </span><span class="co"># 4. read text file into r data frame</span></a>
 <a class="sourceLine" id="cb2-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>()</a></code></pre></div>
-<p>For those not familiar with the pipe operator (<code>%&gt;%</code>), the above code could be rewritten:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">f_in &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</a>
+<p>For those not familiar with the pipe operator (<code><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></code>), the above code could be rewritten:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">f_in &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">f_out &lt;-<span class="st"> "ebd_filtered_grja.txt"</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">ebd &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>(f_in)</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4">ebd_filters &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(ebd, <span class="dt">species =</span> <span class="st">"Canada Jay"</span>)</a>
@@ -167,7 +170,7 @@
 <li>
 <code><a href="reference/auk_bbox.html">auk_bbox()</a></code>: filter by spatial bounding box, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
-<code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code>*</code>” in place of the year, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
+<code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code>” in place of the year, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
 <li>
 <code><a href="reference/auk_last_edited.html">auk_last_edited()</a></code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
 <li>
@@ -186,28 +189,28 @@
 <code><a href="reference/auk_complete.html">auk_complete()</a></code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the “absence”" information is inferred by the lack of reporting of a species on checklists.</li>
 </ul>
 <p>Note that all of the functions listed above only modify the <code>auk_ebd</code> object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using <code><a href="reference/auk_filter.html">auk_filter()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># sample data</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">f &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># sample data</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">f &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co"># define an EBD reference and a set of filters</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">ebd &lt;-<span class="st"> </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>(f) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">  </span><span class="co"># species: common and scientific names can be mixed</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-7" data-line-number="7"><span class="st">  </span><span class="co"># country: codes and names can be mixed; case insensitive</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-9" data-line-number="9"><span class="st">  </span><span class="co"># bbox: long and lat in decimal degrees</span></a>
 <a class="sourceLine" id="cb4-10" data-line-number="10"><span class="st">  </span><span class="co"># formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="reference/auk_bbox.html">auk_bbox</a></span>(<span class="dt">bbox =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="dv">-80</span>, <span class="dv">52</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="reference/auk_bbox.html">auk_bbox</a></span>(<span class="dt">bbox =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="dv">-80</span>, <span class="dv">52</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-12" data-line-number="12"><span class="st">  </span><span class="co"># date: use standard ISO date format `"YYYY-MM-DD"`</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="reference/auk_date.html">auk_date</a></span>(<span class="dt">date =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="reference/auk_date.html">auk_date</a></span>(<span class="dt">date =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-14" data-line-number="14"><span class="st">  </span><span class="co"># time: 24h format</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="reference/auk_time.html">auk_time</a></span>(<span class="dt">start_time =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="reference/auk_time.html">auk_time</a></span>(<span class="dt">start_time =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-16" data-line-number="16"><span class="st">  </span><span class="co"># duration: length in minutes of checklists</span></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="reference/auk_duration.html">auk_duration</a></span>(<span class="dt">duration =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">60</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="reference/auk_duration.html">auk_duration</a></span>(<span class="dt">duration =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">60</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-18" data-line-number="18"><span class="st">  </span><span class="co"># complete: all species seen or heard are recorded</span></a>
 <a class="sourceLine" id="cb4-19" data-line-number="19"><span class="st">  </span><span class="kw"><a href="reference/auk_complete.html">auk_complete</a></span>()</a>
 <a class="sourceLine" id="cb4-20" data-line-number="20">ebd</a>
 <a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; Input </span></a>
-<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt;   EBD: /Users/mes335/Library/R/3.6/library/auk/extdata/ebd-sample.txt </span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt </span></a>
 <a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; Output </span></a>
 <a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt;   Filters not executed</span></a>
@@ -229,10 +232,10 @@
 <a class="sourceLine" id="cb4-41" data-line-number="41"><span class="co">#&gt;   Complete checklists only: yes</span></a></code></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package.</p>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">ebd_filtered &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">ebd_filtered &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/auk_ebd.html">auk_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/auk_species.html">auk_species</a></span>(<span class="dt">species =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/auk_country.html">auk_country</a></span>(<span class="dt">country =</span> <span class="st">"Canada"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/auk_filter.html">auk_filter</a></span>(<span class="dt">file =</span> output_file)</a></code></pre></div>
 <p><strong>Filtering the full dataset typically takes at least a couple hours</strong>, so set it running then go grab lunch!</p>
@@ -241,9 +244,9 @@
 <h3 class="hasAnchor">
 <a href="#reading" class="anchor"></a>Reading</h3>
 <p>eBird Basic Dataset files can be read with <code><a href="reference/read_ebd.html">read_ebd()</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/read_ebd.html">read_ebd</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>()</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>()</a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    494 obs. of  45 variables:</span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;  $ checklist_id                : chr  "S6852862" "S14432467" "S39033556" "S38303088" ...</span></a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;  $ global_unique_identifier    : chr  "URN:CornellLabOfOrnithology:EBIRD:OBS97935965" "URN:CornellLabOfOrnithology:EBIRD:OBS201605886" "URN:CornellLabOfOrnithology:EBIRD:OBS530638734" "URN:CornellLabOfOrnithology:EBIRD:OBS520887169" ...</span></a>
@@ -312,7 +315,7 @@
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<pre><code>eBird Basic Dataset. Version: ebd_relFeb-2018. Cornell Lab of Ornithology, Ithaca, New York. May 2013.</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">eBird Basic Dataset. Version<span class="op">:</span><span class="st"> </span>ebd_relFeb<span class="fl">-2018.</span> Cornell Lab of Ornithology, Ithaca, New York. May <span class="fl">2013.</span></a></code></pre></div>
 <p><a href="http://ropensci.org"><img src="http://www.ropensci.org/public_images/github_footer.png"></a></p>
 </div>
 </div>
@@ -338,6 +341,12 @@
 <li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+</ul>
+</div>
 <div class="citation">
 <h2>Citation</h2>
 <ul class="list-unstyled">
@@ -348,7 +357,7 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="http://strimas.com">Matthew Strimas-Mackey</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8929-7776" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<a href="http://strimas.com">Matthew Strimas-Mackey</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8929-7776" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 <li>
 <a href="http://eliotmiller.weebly.com/">Eliot Miller</a> <br><small class="roles"> Author </small>  </li>
 <li>Wesley Hochachka <br><small class="roles"> Author </small>  </li>
@@ -356,8 +365,7 @@
 </ul>
 </div>
 
-      </div>
-
+  </div>
 </div>
 
 
@@ -366,12 +374,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

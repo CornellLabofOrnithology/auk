@@ -2,6 +2,7 @@
 
 - Updated to 2019 eBird taxonomy
 - `auk_observer()` filter added
+- `tidyr::complete_()` deprecated, stopped using
 
 # auk 0.3.3
 

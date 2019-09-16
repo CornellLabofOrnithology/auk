@@ -186,10 +186,9 @@ auk_zerofill.data.frame <- function(x, sampling_events,
   x <- x[x$species_observed == 1, ]
 
   # fill in implicit missing values
-  x <- tidyr::complete_(
+  x2 <- tidyr::complete(
     x,
-    cols = list(checklist_id = ~ sampling_events$checklist_id,
-                "scientific_name"),
+    checklist_id = sampling_events$checklist_id, .data$scientific_name,
     fill = list(observation_count = "0", species_observed = FALSE)
   )
 
