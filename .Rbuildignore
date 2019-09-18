@@ -1,6 +1,7 @@
 ^CRAN-RELEASE$
 ^Meta$
 ^doc$
+^pkgdown$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$

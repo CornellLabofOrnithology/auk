@@ -225,33 +225,33 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
   <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'>summary</span>(<span class='no'>occ_um</span>)
 }</div><div class='output co'>#&gt; unmarkedFrame Object
 #&gt; 
-#&gt; 15 sites
+#&gt; 47 sites
 #&gt; Maximum number of observations per site: 10 
-#&gt; Mean number of observations per site: 4.4 
-#&gt; Sites with at least one detection: 15 
+#&gt; Mean number of observations per site: 3.85 
+#&gt; Sites with at least one detection: 25 
 #&gt; 
 #&gt; Tabulation of y observations:
-#&gt; TRUE &lt;NA&gt; 
-#&gt;   66   84 
+#&gt; FALSE  TRUE  &lt;NA&gt; 
+#&gt;   129    52   289 
 #&gt; 
 #&gt; Site-level covariates:
 #&gt;     latitude       longitude    
-#&gt;  Min.   :1.315   Min.   :103.7  
-#&gt;  1st Qu.:1.348   1st Qu.:103.7  
-#&gt;  Median :1.351   Median :103.7  
-#&gt;  Mean   :1.368   Mean   :103.8  
-#&gt;  3rd Qu.:1.379   3rd Qu.:103.8  
+#&gt;  Min.   :1.206   Min.   :103.7  
+#&gt;  1st Qu.:1.315   1st Qu.:103.7  
+#&gt;  Median :1.351   Median :103.8  
+#&gt;  Mean   :1.348   Mean   :103.8  
+#&gt;  3rd Qu.:1.369   3rd Qu.:103.8  
 #&gt;  Max.   :1.446   Max.   :104.0  
 #&gt; 
 #&gt; Observation-level covariates:
 #&gt;  effort_distance_km duration_minutes
-#&gt;  Min.   : 0.100     Min.   :  1.0   
-#&gt;  1st Qu.: 0.200     1st Qu.: 15.0   
-#&gt;  Median : 1.000     Median : 30.0   
-#&gt;  Mean   : 2.073     Mean   :118.9   
-#&gt;  3rd Qu.: 3.000     3rd Qu.:180.0   
-#&gt;  Max.   :10.000     Max.   :480.0   
-#&gt;  NA's   :128        NA's   :128     </div><div class='input'>
+#&gt;  Min.   : 0.100     Min.   :  1.00  
+#&gt;  1st Qu.: 0.200     1st Qu.: 15.00  
+#&gt;  Median : 1.000     Median : 30.00  
+#&gt;  Mean   : 1.579     Mean   : 66.49  
+#&gt;  3rd Qu.: 2.000     3rd Qu.: 86.25  
+#&gt;  Max.   :10.000     Max.   :480.00  
+#&gt;  NA's   :393        NA's   :392     </div><div class='input'>
 <span class='co'># this function can also be used for abundance modeling</span>
 <span class='no'>abd</span> <span class='kw'>&lt;-</span> <span class='no'>ebd_zf</span> <span class='kw'>%&gt;%</span>
   <span class='co'># convert count to integer, drop records with no count</span>
@@ -270,33 +270,33 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
   <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'>summary</span>(<span class='no'>abd_um</span>)
 }</div><div class='output co'>#&gt; unmarkedFrame Object
 #&gt; 
-#&gt; 12 sites
+#&gt; 44 sites
 #&gt; Maximum number of observations per site: 10 
-#&gt; Mean number of observations per site: 4.75 
-#&gt; Sites with at least one detection: 12 
+#&gt; Mean number of observations per site: 3.89 
+#&gt; Sites with at least one detection: 21 
 #&gt; 
 #&gt; Tabulation of y observations:
-#&gt;    1    2    3    4    5   10   15 &lt;NA&gt; 
-#&gt;   36    9    2    1    6    2    1   63 
+#&gt;    0    1    2    3    5   10 &lt;NA&gt; 
+#&gt;  125   27    8    2    7    2  269 
 #&gt; 
 #&gt; Site-level covariates:
 #&gt;     latitude       longitude    
-#&gt;  Min.   :1.315   Min.   :103.7  
-#&gt;  1st Qu.:1.348   1st Qu.:103.7  
-#&gt;  Median :1.348   Median :103.7  
-#&gt;  Mean   :1.367   Mean   :103.8  
-#&gt;  3rd Qu.:1.379   3rd Qu.:103.8  
+#&gt;  Min.   :1.206   Min.   :103.7  
+#&gt;  1st Qu.:1.315   1st Qu.:103.7  
+#&gt;  Median :1.349   Median :103.8  
+#&gt;  Mean   :1.347   Mean   :103.8  
+#&gt;  3rd Qu.:1.364   3rd Qu.:103.8  
 #&gt;  Max.   :1.446   Max.   :104.0  
 #&gt; 
 #&gt; Observation-level covariates:
 #&gt;  effort_distance_km duration_minutes
-#&gt;  Min.   : 0.100     Min.   :  1.00  
-#&gt;  1st Qu.: 0.200     1st Qu.: 16.25  
-#&gt;  Median : 1.000     Median : 30.00  
-#&gt;  Mean   : 2.077     Mean   :119.82  
-#&gt;  3rd Qu.: 3.000     3rd Qu.:180.00  
-#&gt;  Max.   :10.000     Max.   :480.00  
-#&gt;  NA's   :98         NA's   :98      </div></pre>
+#&gt;  Min.   : 0.100     Min.   :  1.0   
+#&gt;  1st Qu.: 0.200     1st Qu.: 15.0   
+#&gt;  Median : 1.000     Median : 30.0   
+#&gt;  Mean   : 1.587     Mean   : 68.3   
+#&gt;  3rd Qu.: 2.000     3rd Qu.: 90.0   
+#&gt;  Max.   :10.000     Max.   :480.0   
+#&gt;  NA's   :362        NA's   :361     </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
