@@ -1,3 +1,7 @@
+# auk 0.4.1
+
+- Family common names now included in eBird taxonomy
+
 # auk 0.4.0
 
 - Updated to 2019 eBird taxonomy
