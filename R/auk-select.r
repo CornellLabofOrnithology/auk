@@ -58,6 +58,15 @@ auk_select.auk_ebd <- function(x, select, file, sep = "\t", overwrite = FALSE) {
     col_miss <- paste(select[!found], collapse = ", ")
     stop(paste("Selected variable not found in header: \n\t", col_miss))
   }
+  # certain columns must be kept
+  must_keep <- c("group identifier", "sampling event identifier",
+                 "scientific name", "observation count")
+  must_keep <- intersect(must_keep, x$col_idx$name)
+  if (!all(must_keep %in% select)) {
+    m <- paste("The following columns must be retained:",
+               paste(setdiff(must_keep, select), collapse = ", "))
+    stop(m)
+  }
   # find column numbers
   idx <- x$col_idx$index[x$col_idx$name %in% select]
   select_cols <- paste0("$", idx, collapse = ", ")

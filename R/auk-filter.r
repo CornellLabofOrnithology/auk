@@ -163,7 +163,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     stopifnot(all(keep %in% x$col_idx$name))
     if (!all(must_keep %in% keep)) {
       m <- paste("The following columns must be retained:",
-                 paste(must_keep, collapse = ", "))
+                 paste(setdiff(must_keep, keep), collapse = ", "))
       stop(m)
     }
     idx <- x$col_idx$index[x$col_idx$name %in% keep]
@@ -175,7 +175,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     stopifnot(all(drop %in% x$col_idx$name))
     if (any(must_keep %in% drop)) {
       m <- paste("The following columns must be retained:",
-                 paste(must_keep, collapse = ", "))
+                 paste(intersect(must_keep, drop), collapse = ", "))
       stop(m)
     }
     idx <- x$col_idx$index[!x$col_idx$name %in% drop]

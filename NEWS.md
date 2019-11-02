@@ -1,6 +1,7 @@
 # auk 0.4.1
 
 - Family common names now included in eBird taxonomy
+- `auk_select()` now requires certain columns to be kept
 
 # auk 0.4.0
 
