@@ -8,12 +8,31 @@
 \usage{
 auk_filter(x, file, ...)
 
-\method{auk_filter}{auk_ebd}(x, file, file_sampling, keep, drop, awk_file,
-  sep = "\\t", filter_sampling = TRUE, execute = TRUE,
-  overwrite = FALSE, ...)
+\method{auk_filter}{auk_ebd}(
+  x,
+  file,
+  file_sampling,
+  keep,
+  drop,
+  awk_file,
+  sep = "\\t",
+  filter_sampling = TRUE,
+  execute = TRUE,
+  overwrite = FALSE,
+  ...
+)
 
-\method{auk_filter}{auk_sampling}(x, file, keep, drop, awk_file,
-  sep = "\\t", execute = TRUE, overwrite = FALSE, ...)
+\method{auk_filter}{auk_sampling}(
+  x,
+  file,
+  keep,
+  drop,
+  awk_file,
+  sep = "\\t",
+  execute = TRUE,
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{auk_ebd} or \code{auk_sampling} object; reference to file created by
@@ -119,14 +138,22 @@ str(read_ebd(filtered))
 }
 }
 \seealso{
-Other filter: \code{\link{auk_bbox}},
-  \code{\link{auk_bcr}}, \code{\link{auk_breeding}},
-  \code{\link{auk_complete}}, \code{\link{auk_country}},
-  \code{\link{auk_date}}, \code{\link{auk_distance}},
-  \code{\link{auk_duration}}, \code{\link{auk_extent}},
-  \code{\link{auk_last_edited}},
-  \code{\link{auk_observer}}, \code{\link{auk_project}},
-  \code{\link{auk_protocol}}, \code{\link{auk_species}},
-  \code{\link{auk_state}}, \code{\link{auk_time}}
+Other filter: 
+\code{\link{auk_bbox}()},
+\code{\link{auk_bcr}()},
+\code{\link{auk_breeding}()},
+\code{\link{auk_complete}()},
+\code{\link{auk_country}()},
+\code{\link{auk_date}()},
+\code{\link{auk_distance}()},
+\code{\link{auk_duration}()},
+\code{\link{auk_extent}()},
+\code{\link{auk_last_edited}()},
+\code{\link{auk_observer}()},
+\code{\link{auk_project}()},
+\code{\link{auk_protocol}()},
+\code{\link{auk_species}()},
+\code{\link{auk_state}()},
+\code{\link{auk_time}()}
 }
 \concept{filter}

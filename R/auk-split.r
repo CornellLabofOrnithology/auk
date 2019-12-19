@@ -6,16 +6,15 @@
 #' be read in all at once.
 #'
 #' @param file character; input file.
-#' @param species species character; species to filter and split by, provided as
+#' @param species character; species to filter and split by, provided as
 #'   scientific or English common names, or a mixture of both. These names must
 #'   match the official eBird Taxomony ([ebird_taxonomy]).
-#' @param taxonomy_version integer; the version (i.e. year) of the taxonomy. In
-#'   most cases, this should be left empty to use the version of the taxonomy
-#'   included in the package. See [get_ebird_taxonomy()].
 #' @param prefix character; a file and directory prefix. For example, if 
 #'   splitting by species "A" and "B" and `prefix = "data/ebd_"`, the resulting 
 #'   files will be "data/ebd_A.txt" and "data/ebd_B.txt".
-#' @param ext character; file extension, typically "txt".
+#' @param taxonomy_version integer; the version (i.e. year) of the taxonomy. In
+#'   most cases, this should be left empty to use the version of the taxonomy
+#'   included in the package. See [get_ebird_taxonomy()].
 #' @param sep character; the input field separator, the eBird file is tab
 #'   separated by default. Must only be a single character and space delimited
 #'   is not allowed since spaces appear in many of the fields.
@@ -44,18 +43,17 @@
 #' prefix <- file.path(tempdir(), "ebd_")
 #' species_files <- auk_split(f, species = species, prefix = prefix)
 #' }
-auk_split <- function(file, species, taxonomy_version, 
-                      prefix = "", ext = "txt", sep = "\t",
+auk_split <- function(file, species, prefix, taxonomy_version, 
+                      sep = "\t",
                       overwrite = FALSE) {
   awk_path <- auk_get_awk_path()
   if (is.na(awk_path)) {
-    stop("auk_clean() requires a valid AWK install.")
+    stop("auk_split() requires a valid AWK install.")
   }
   assertthat::assert_that(
     file.exists(file),
     is.character(species),
-    assertthat::is.string(prefix),
-    assertthat::is.string(ext),
+    missing(prefix) || assertthat::is.string(prefix),
     assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
     assertthat::is.flag(overwrite)
   )
@@ -74,13 +72,24 @@ auk_split <- function(file, species, taxonomy_version,
   }
   
   # check output files
-  if (!dir.exists(dirname(prefix))) {
+  if (missing(prefix)) {
+    save_dir <- getwd()
+    file_name <- ""
+  } else if (grepl("/$", prefix)) {
+    save_dir <- prefix
+    file_name <- ""
+  } else{
+    save_dir <- dirname(prefix)
+    file_name <- basename(prefix)
+  }
+  if (!dir.exists(save_dir)) {
     stop("Output directory doesn't exist.")
   }
-  prefix <- normalizePath(prefix, winslash = "/", mustWork = FALSE)
+  save_dir <- normalizePath(save_dir, winslash = "/", mustWork = FALSE)
+  prefix <- file.path(save_dir, file_name)
   f_sp <- paste0(prefix,
                  stringr::str_replace_all(species_clean, "[^a-zA-Z]", "_"),
-                 ".", ext)
+                 ".txt")
   for (f in f_sp) {
     if (file.exists(f)) {
       if (overwrite) {
@@ -109,7 +118,7 @@ auk_split <- function(file, species, taxonomy_version,
   # construct awk command
   awk <- str_interp(awk_split,
                     list(sep = sep, col = sp_col, condition = sp_condition,
-                         prefix = prefix, ext = ext))
+                         prefix = prefix))
   
   # run command
   exit_code <- system2(awk_path, args = paste0("'", awk, "' ", file), 
@@ -130,7 +139,7 @@ BEGIN {
   if (${condition}) {
     species = $${col}
     gsub(/[^a-zA-Z]/, \"_\", species)
-    species = \"${prefix}\"species\".${ext}\"
+    species = \"${prefix}\"species\".txt\"
     print >> species
     close (species)
   }

@@ -4,8 +4,7 @@
 \alias{auk_clean}
 \title{Clean an eBird data file (Deprecated)}
 \usage{
-auk_clean(f_in, f_out, sep = "\\t", remove_text = FALSE,
-  overwrite = FALSE)
+auk_clean(f_in, f_out, sep = "\\t", remove_text = FALSE, overwrite = FALSE)
 }
 \arguments{
 \item{f_in}{character; input file. If file is not found as specified, it will
@@ -50,7 +49,8 @@ auk_clean(f, f_out)
 }
 }
 \seealso{
-Other text: \code{\link{auk_select}},
-  \code{\link{auk_split}}
+Other text: 
+\code{\link{auk_select}()},
+\code{\link{auk_split}()}
 }
 \concept{text}

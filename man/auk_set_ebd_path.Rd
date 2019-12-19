@@ -31,8 +31,9 @@ auk_set_ebd_path("/home/matt/ebd")
 }
 }
 \seealso{
-Other paths: \code{\link{auk_get_awk_path}},
-  \code{\link{auk_get_ebd_path}},
-  \code{\link{auk_set_awk_path}}
+Other paths: 
+\code{\link{auk_get_awk_path}()},
+\code{\link{auk_get_ebd_path}()},
+\code{\link{auk_set_awk_path}()}
 }
 \concept{paths}

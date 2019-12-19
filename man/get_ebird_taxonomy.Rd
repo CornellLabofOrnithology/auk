@@ -41,7 +41,9 @@ get_ebird_taxonomy()
 }
 }
 \seealso{
-Other helpers: \code{\link{auk_ebd_version}},
-  \code{\link{auk_version}}, \code{\link{ebird_species}}
+Other helpers: 
+\code{\link{auk_ebd_version}()},
+\code{\link{auk_version}()},
+\code{\link{ebird_species}()}
 }
 \concept{helpers}

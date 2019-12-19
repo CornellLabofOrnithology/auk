@@ -4,10 +4,14 @@
 \alias{auk_unique}
 \title{Remove duplicate group checklists}
 \usage{
-auk_unique(x, group_id = "group_identifier",
+auk_unique(
+  x,
+  group_id = "group_identifier",
   checklist_id = "sampling_event_identifier",
-  species_id = "scientific_name", observer_id = "observer_id",
-  checklists_only = FALSE)
+  species_id = "scientific_name",
+  observer_id = "observer_id",
+  checklists_only = FALSE
+)
 }
 \arguments{
 \item{x}{data.frame; the EBD data frame, typically as imported by
@@ -72,6 +76,7 @@ nrow(ebd)
 nrow(ebd_unique)
 }
 \seealso{
-Other pre: \code{\link{auk_rollup}}
+Other pre: 
+\code{\link{auk_rollup}()}
 }
 \concept{pre}

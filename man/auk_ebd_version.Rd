@@ -34,8 +34,9 @@ August.
 auk_ebd_version("ebd_relAug-2018.txt", check_exists = FALSE)
 }
 \seealso{
-Other helpers: \code{\link{auk_version}},
-  \code{\link{ebird_species}},
-  \code{\link{get_ebird_taxonomy}}
+Other helpers: 
+\code{\link{auk_version}()},
+\code{\link{ebird_species}()},
+\code{\link{get_ebird_taxonomy}()}
 }
 \concept{helpers}

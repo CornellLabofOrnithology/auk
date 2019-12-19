@@ -45,7 +45,8 @@ str(read_ebd(selected))
 }
 }
 \seealso{
-Other text: \code{\link{auk_clean}},
-  \code{\link{auk_split}}
+Other text: 
+\code{\link{auk_clean}()},
+\code{\link{auk_split}()}
 }
 \concept{text}

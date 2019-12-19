@@ -20,8 +20,9 @@ file, which can be accomplished with the helper function
 auk_get_awk_path()
 }
 \seealso{
-Other paths: \code{\link{auk_get_ebd_path}},
-  \code{\link{auk_set_awk_path}},
-  \code{\link{auk_set_ebd_path}}
+Other paths: 
+\code{\link{auk_get_ebd_path}()},
+\code{\link{auk_set_awk_path}()},
+\code{\link{auk_set_ebd_path}()}
 }
 \concept{paths}

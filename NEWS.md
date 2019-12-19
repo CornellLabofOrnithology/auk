@@ -2,6 +2,7 @@
 
 - Family common names now included in eBird taxonomy
 - `auk_select()` now requires certain columns to be kept
+- Better handling of file paths with `prefix` argument in `auk_split()`
 
 # auk 0.4.0
 

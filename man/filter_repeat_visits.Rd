@@ -4,9 +4,15 @@
 \alias{filter_repeat_visits}
 \title{Filter observations to repeat visits for hierarchical modeling}
 \usage{
-filter_repeat_visits(x, min_obs = 2L, max_obs = 10L, n_days = 14L,
-  annual_closure = FALSE, date_var = "observation_date",
-  site_vars = c("locality_id", "observer_id"))
+filter_repeat_visits(
+  x,
+  min_obs = 2L,
+  max_obs = 10L,
+  n_days = 14L,
+  annual_closure = FALSE,
+  date_var = "observation_date",
+  site_vars = c("locality_id", "observer_id")
+)
 }
 \arguments{
 \item{x}{\code{data.frame}; observation data, e.g. data from the eBird Basic
@@ -82,6 +88,7 @@ ebd_zf <- auk_zerofill(x = f_ebd, sampling_events = f_smpl,
 filter_repeat_visits(ebd_zf, n_days = 30)
 }
 \seealso{
-Other modeling: \code{\link{format_unmarked_occu}}
+Other modeling: 
+\code{\link{format_unmarked_occu}()}
 }
 \concept{modeling}

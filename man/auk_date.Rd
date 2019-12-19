@@ -55,14 +55,22 @@ system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
   auk_date(date = c("*-12-01", "*-01-31"))
 }
 \seealso{
-Other filter: \code{\link{auk_bbox}},
-  \code{\link{auk_bcr}}, \code{\link{auk_breeding}},
-  \code{\link{auk_complete}}, \code{\link{auk_country}},
-  \code{\link{auk_distance}}, \code{\link{auk_duration}},
-  \code{\link{auk_extent}}, \code{\link{auk_filter}},
-  \code{\link{auk_last_edited}},
-  \code{\link{auk_observer}}, \code{\link{auk_project}},
-  \code{\link{auk_protocol}}, \code{\link{auk_species}},
-  \code{\link{auk_state}}, \code{\link{auk_time}}
+Other filter: 
+\code{\link{auk_bbox}()},
+\code{\link{auk_bcr}()},
+\code{\link{auk_breeding}()},
+\code{\link{auk_complete}()},
+\code{\link{auk_country}()},
+\code{\link{auk_distance}()},
+\code{\link{auk_duration}()},
+\code{\link{auk_extent}()},
+\code{\link{auk_filter}()},
+\code{\link{auk_last_edited}()},
+\code{\link{auk_observer}()},
+\code{\link{auk_project}()},
+\code{\link{auk_protocol}()},
+\code{\link{auk_species}()},
+\code{\link{auk_state}()},
+\code{\link{auk_time}()}
 }
 \concept{filter}

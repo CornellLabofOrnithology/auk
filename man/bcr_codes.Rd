@@ -19,8 +19,9 @@ and resource management issues. These codes are required to filter by BCR
 using \code{\link[=auk_bcr]{auk_bcr()}}.
 }
 \seealso{
-Other data: \code{\link{ebird_states}},
-  \code{\link{ebird_taxonomy}}
+Other data: 
+\code{\link{ebird_states}},
+\code{\link{ebird_taxonomy}}
 }
 \concept{data}
 \keyword{datasets}

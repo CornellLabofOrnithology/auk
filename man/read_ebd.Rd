@@ -12,21 +12,17 @@
 \usage{
 read_ebd(x, reader, sep = "\\t", unique = TRUE, rollup = TRUE)
 
-\method{read_ebd}{character}(x, reader, sep = "\\t", unique = TRUE,
-  rollup = TRUE)
+\method{read_ebd}{character}(x, reader, sep = "\\t", unique = TRUE, rollup = TRUE)
 
-\method{read_ebd}{auk_ebd}(x, reader, sep = "\\t", unique = TRUE,
-  rollup = TRUE)
+\method{read_ebd}{auk_ebd}(x, reader, sep = "\\t", unique = TRUE, rollup = TRUE)
 
 read_sampling(x, reader, sep = "\\t", unique = TRUE)
 
-\method{read_sampling}{character}(x, reader, sep = "\\t",
-  unique = TRUE)
+\method{read_sampling}{character}(x, reader, sep = "\\t", unique = TRUE)
 
 \method{read_sampling}{auk_ebd}(x, reader, sep = "\\t", unique = TRUE)
 
-\method{read_sampling}{auk_sampling}(x, reader, sep = "\\t",
-  unique = TRUE)
+\method{read_sampling}{auk_sampling}(x, reader, sep = "\\t", unique = TRUE)
 }
 \arguments{
 \item{x}{filename or \code{auk_ebd} object with associated output
@@ -95,6 +91,7 @@ x <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") \%>\%
   read_sampling()
 }
 \seealso{
-Other import: \code{\link{auk_zerofill}}
+Other import: 
+\code{\link{auk_zerofill}()}
 }
 \concept{import}

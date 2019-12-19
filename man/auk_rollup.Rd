@@ -105,6 +105,7 @@ Consult the \href{https://ebird.org/science/the-ebird-taxonomy}{eBird taxonomy}
 page for further details.
 }
 \seealso{
-Other pre: \code{\link{auk_unique}}
+Other pre: 
+\code{\link{auk_unique}()}
 }
 \concept{pre}

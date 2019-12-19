@@ -75,5 +75,4 @@ test_that("read_ebd throws errors for invalid separator", {
 
   expect_error(read_ebd(f_ebd, sep = ",,,"))
   expect_error(read_ebd(f_ebd, sep = " "))
-  expect_error(read_ebd(f_ebd, sep = ","))
 })

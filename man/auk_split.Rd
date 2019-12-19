@@ -4,25 +4,29 @@
 \alias{auk_split}
 \title{Split an eBird data file by species}
 \usage{
-auk_split(file, species, taxonomy_version, prefix = "", ext = "txt",
-  sep = "\\t", overwrite = FALSE)
+auk_split(
+  file,
+  species,
+  prefix,
+  taxonomy_version,
+  sep = "\\t",
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{file}{character; input file.}
 
-\item{species}{species character; species to filter and split by, provided as
+\item{species}{character; species to filter and split by, provided as
 scientific or English common names, or a mixture of both. These names must
 match the official eBird Taxomony (\link{ebird_taxonomy}).}
-
-\item{taxonomy_version}{integer; the version (i.e. year) of the taxonomy. In
-most cases, this should be left empty to use the version of the taxonomy
-included in the package. See \code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
 
 \item{prefix}{character; a file and directory prefix. For example, if
 splitting by species "A" and "B" and \code{prefix = "data/ebd_"}, the resulting
 files will be "data/ebd_A.txt" and "data/ebd_B.txt".}
 
-\item{ext}{character; file extension, typically "txt".}
+\item{taxonomy_version}{integer; the version (i.e. year) of the taxonomy. In
+most cases, this should be left empty to use the version of the taxonomy
+included in the package. See \code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}.}
 
 \item{sep}{character; the input field separator, the eBird file is tab
 separated by default. Must only be a single character and space delimited
@@ -62,7 +66,8 @@ species_files <- auk_split(f, species = species, prefix = prefix)
 }
 }
 \seealso{
-Other text: \code{\link{auk_clean}},
-  \code{\link{auk_select}}
+Other text: 
+\code{\link{auk_clean}()},
+\code{\link{auk_select}()}
 }
 \concept{text}

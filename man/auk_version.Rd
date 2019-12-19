@@ -29,8 +29,9 @@ version of the auk package and the EBD.
 auk_version()
 }
 \seealso{
-Other helpers: \code{\link{auk_ebd_version}},
-  \code{\link{ebird_species}},
-  \code{\link{get_ebird_taxonomy}}
+Other helpers: 
+\code{\link{auk_ebd_version}()},
+\code{\link{ebird_species}()},
+\code{\link{get_ebird_taxonomy}()}
 }
 \concept{helpers}

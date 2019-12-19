@@ -4,8 +4,11 @@
 \alias{ebird_species}
 \title{Lookup species in eBird taxonomy}
 \usage{
-ebird_species(x, type = c("scientific", "common", "code", "all"),
-  taxonomy_version)
+ebird_species(
+  x,
+  type = c("scientific", "common", "code", "all"),
+  taxonomy_version
+)
 }
 \arguments{
 \item{x}{character; species to look up, provided as scientific or
@@ -44,8 +47,9 @@ ebird_species("Cordillera Azul Antbird", taxonomy_version = 2017)
 }
 }
 \seealso{
-Other helpers: \code{\link{auk_ebd_version}},
-  \code{\link{auk_version}},
-  \code{\link{get_ebird_taxonomy}}
+Other helpers: 
+\code{\link{auk_ebd_version}()},
+\code{\link{auk_version}()},
+\code{\link{get_ebird_taxonomy}()}
 }
 \concept{helpers}

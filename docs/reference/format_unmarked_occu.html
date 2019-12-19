@@ -131,8 +131,13 @@ function converts data from a format in which each row is an observation
 <code><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>unmarked::formatWide()</a></code> in which each row is a site.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>format_unmarked_occu</span>(<span class='no'>x</span>, <span class='kw'>site_id</span> <span class='kw'>=</span> <span class='st'>"site"</span>,
-  <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"species_observed"</span>, <span class='no'>site_covs</span>, <span class='no'>obs_covs</span>)</pre>
+    <pre class="usage"><span class='fu'>format_unmarked_occu</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>site_id</span> <span class='kw'>=</span> <span class='st'>"site"</span>,
+  <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"species_observed"</span>,
+  <span class='no'>site_covs</span>,
+  <span class='no'>obs_covs</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,7 +206,8 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <code><a href='https://rdrr.io/pkg/unmarked/man/pcount.html'>unmarked::pcount()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other modeling: <code><a href='filter_repeat_visits.html'>filter_repeat_visits</a></code></p></div>
+    <div class='dont-index'><p>Other modeling: 
+<code><a href='filter_repeat_visits.html'>filter_repeat_visits</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># read and zero-fill the ebd data</span>

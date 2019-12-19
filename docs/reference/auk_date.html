@@ -157,21 +157,29 @@ of <em>any year</em>. When using wildcards, dates can wrap around the year end.<
 wishes to filter the sampling event data.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other filter: <code><a href='auk_bbox.html'>auk_bbox</a></code>,
-  <code><a href='auk_bcr.html'>auk_bcr</a></code>, <code><a href='auk_breeding.html'>auk_breeding</a></code>,
-  <code><a href='auk_complete.html'>auk_complete</a></code>, <code><a href='auk_country.html'>auk_country</a></code>,
-  <code><a href='auk_distance.html'>auk_distance</a></code>, <code><a href='auk_duration.html'>auk_duration</a></code>,
-  <code><a href='auk_extent.html'>auk_extent</a></code>, <code><a href='auk_filter.html'>auk_filter</a></code>,
-  <code><a href='auk_last_edited.html'>auk_last_edited</a></code>,
-  <code><a href='auk_observer.html'>auk_observer</a></code>, <code><a href='auk_project.html'>auk_project</a></code>,
-  <code><a href='auk_protocol.html'>auk_protocol</a></code>, <code><a href='auk_species.html'>auk_species</a></code>,
-  <code><a href='auk_state.html'>auk_state</a></code>, <code><a href='auk_time.html'>auk_time</a></code></p></div>
+    <div class='dont-index'><p>Other filter: 
+<code><a href='auk_bbox.html'>auk_bbox</a>()</code>,
+<code><a href='auk_bcr.html'>auk_bcr</a>()</code>,
+<code><a href='auk_breeding.html'>auk_breeding</a>()</code>,
+<code><a href='auk_complete.html'>auk_complete</a>()</code>,
+<code><a href='auk_country.html'>auk_country</a>()</code>,
+<code><a href='auk_distance.html'>auk_distance</a>()</code>,
+<code><a href='auk_duration.html'>auk_duration</a>()</code>,
+<code><a href='auk_extent.html'>auk_extent</a>()</code>,
+<code><a href='auk_filter.html'>auk_filter</a>()</code>,
+<code><a href='auk_last_edited.html'>auk_last_edited</a>()</code>,
+<code><a href='auk_observer.html'>auk_observer</a>()</code>,
+<code><a href='auk_project.html'>auk_project</a>()</code>,
+<code><a href='auk_protocol.html'>auk_protocol</a>()</code>,
+<code><a href='auk_species.html'>auk_species</a>()</code>,
+<code><a href='auk_state.html'>auk_state</a>()</code>,
+<code><a href='auk_time.html'>auk_time</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>auk_date</span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2010-01-01"</span>, <span class='st'>"2010-12-31"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpZD6Yr7/temp_libpathb8c45688bd67/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpv95eOP/temp_libpath8b03788243c9/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -194,7 +202,7 @@ wishes to filter the sampling event data.</p>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
 <span class='fu'>auk_date</span>(<span class='no'>ebd</span>, <span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2010-01-01"</span>, <span class='st'>"2010-12-31"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpZD6Yr7/temp_libpathb8c45688bd67/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpv95eOP/temp_libpath8b03788243c9/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -219,7 +227,7 @@ wishes to filter the sampling event data.</p>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># may-june records from all years</span>
   <span class='fu'>auk_date</span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"*-05-01"</span>, <span class='st'>"*-06-30"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpZD6Yr7/temp_libpathb8c45688bd67/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpv95eOP/temp_libpath8b03788243c9/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -244,7 +252,7 @@ wishes to filter the sampling event data.</p>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># dec-jan records from all years</span>
   <span class='fu'>auk_date</span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"*-12-01"</span>, <span class='st'>"*-01-31"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpZD6Yr7/temp_libpathb8c45688bd67/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpv95eOP/temp_libpath8b03788243c9/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed

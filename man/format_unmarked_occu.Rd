@@ -4,8 +4,13 @@
 \alias{format_unmarked_occu}
 \title{Format EBD data for occupancy modeling with \code{unmarked}}
 \usage{
-format_unmarked_occu(x, site_id = "site",
-  response = "species_observed", site_covs, obs_covs)
+format_unmarked_occu(
+  x,
+  site_id = "site",
+  response = "species_observed",
+  site_covs,
+  obs_covs
+)
 }
 \arguments{
 \item{x}{\code{data.frame}; observation data, e.g. from the eBird Basic Dataset
@@ -110,6 +115,7 @@ if (requireNamespace("unmarked", quietly = TRUE)) {
 }
 }
 \seealso{
-Other modeling: \code{\link{filter_repeat_visits}}
+Other modeling: 
+\code{\link{filter_repeat_visits}()}
 }
 \concept{modeling}

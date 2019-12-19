@@ -10,17 +10,45 @@
 \usage{
 auk_zerofill(x, ...)
 
-\method{auk_zerofill}{data.frame}(x, sampling_events, species,
-  taxonomy_version, collapse = FALSE, unique = TRUE, rollup = TRUE,
-  drop_higher = TRUE, complete = TRUE, ...)
+\method{auk_zerofill}{data.frame}(
+  x,
+  sampling_events,
+  species,
+  taxonomy_version,
+  collapse = FALSE,
+  unique = TRUE,
+  rollup = TRUE,
+  drop_higher = TRUE,
+  complete = TRUE,
+  ...
+)
 
-\method{auk_zerofill}{character}(x, sampling_events, species,
-  taxonomy_version, collapse = FALSE, unique = TRUE, rollup = TRUE,
-  drop_higher = TRUE, complete = TRUE, sep = "\\t", ...)
+\method{auk_zerofill}{character}(
+  x,
+  sampling_events,
+  species,
+  taxonomy_version,
+  collapse = FALSE,
+  unique = TRUE,
+  rollup = TRUE,
+  drop_higher = TRUE,
+  complete = TRUE,
+  sep = "\\t",
+  ...
+)
 
-\method{auk_zerofill}{auk_ebd}(x, species, taxonomy_version,
-  collapse = FALSE, unique = TRUE, rollup = TRUE,
-  drop_higher = TRUE, complete = TRUE, sep = "\\t", ...)
+\method{auk_zerofill}{auk_ebd}(
+  x,
+  species,
+  taxonomy_version,
+  collapse = FALSE,
+  unique = TRUE,
+  rollup = TRUE,
+  drop_higher = TRUE,
+  complete = TRUE,
+  sep = "\\t",
+  ...
+)
 
 collapse_zerofill(x)
 }
@@ -126,6 +154,7 @@ auk_zerofill(x = f_ebd, sampling_events = f_smpl,
 ebd_df <- auk_zerofill(x = f_ebd, sampling_events = f_smpl, collapse = TRUE)
 }
 \seealso{
-Other import: \code{\link{read_ebd}}
+Other import: 
+\code{\link{read_ebd}()}
 }
 \concept{import}
