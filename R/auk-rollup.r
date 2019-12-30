@@ -122,7 +122,11 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
   } else {
     include <- c("species", "slash", "spuh", "hybrid")
   }
+  # include forms that don't roll up to a species
+  # these are mostly undescribed species
+  undesc <- dplyr::filter(tax, .data$category == "form", is.na(.data$report_as))
   tax <- dplyr::filter(tax, .data$category %in% include)
+  tax <- rbind(tax, undesc)
   tax <- dplyr::select(tax, .data$scientific_name, .data$taxon_order)
   x <- dplyr::inner_join(x, tax, by = "scientific_name")
   

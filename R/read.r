@@ -118,9 +118,9 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
   }
   # taxonomic rollup
   if (rollup) {
-  if (!"scientific_name" %in% names(out)) {
-    stop("rollup = TRUE used but scientific_name not found in data.")
-  }
+    if (!"scientific_name" %in% names(out)) {
+      stop("rollup = TRUE used but scientific_name not found in data.")
+    }
     out <- auk_rollup(out)
   }
   row.names(out) <- NULL
