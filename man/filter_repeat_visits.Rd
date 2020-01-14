@@ -11,7 +11,8 @@ filter_repeat_visits(
   n_days = 14L,
   annual_closure = FALSE,
   date_var = "observation_date",
-  site_vars = c("locality_id", "observer_id")
+  site_vars = c("locality_id", "observer_id"),
+  ll_digits = 6L
 )
 }
 \arguments{
@@ -38,7 +39,15 @@ date. This column should either be in \code{Date} format or convertible to
 \code{Date} format with \code{\link[=as.Date]{as.Date()}}.}
 
 \item{site_vars}{character; names of one of more columns in \code{x} that define a
-site, typically the location and observer IDs.}
+site, typically the location (e.g. latitude/longitude) and observer ID.}
+
+\item{ll_digits}{integer; the number of digits to round latitude and longitude
+to. If latitude and/or longitude are used as \code{site_vars}, it's usually best
+to round them prior to identifying sites, otherwise locations that are only
+slightly offset (e.g. a few centimeters) will be treated as different. This
+argument can also be used to group sites together that are close but not
+identical. Note that 1 degree of latitude is approximately 100 km, so the
+default value of 6 for \code{ll_digits} is equivalent to about 10 cm.}
 }
 \value{
 A \code{data.frame} filtered to only retain observations from sites with

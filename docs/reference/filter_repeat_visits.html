@@ -140,7 +140,8 @@ of closure.</p>
   <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>14L</span>,
   <span class='kw'>annual_closure</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>date_var</span> <span class='kw'>=</span> <span class='st'>"observation_date"</span>,
-  <span class='kw'>site_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"locality_id"</span>, <span class='st'>"observer_id"</span>)
+  <span class='kw'>site_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"locality_id"</span>, <span class='st'>"observer_id"</span>),
+  <span class='kw'>ll_digits</span> <span class='kw'>=</span> <span class='fl'>6L</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -183,7 +184,17 @@ date. This column should either be in <code>Date</code> format or convertible to
     <tr>
       <th>site_vars</th>
       <td><p>character; names of one of more columns in <code>x</code> that define a
-site, typically the location and observer IDs.</p></td>
+site, typically the location (e.g. latitude/longitude) and observer ID.</p></td>
+    </tr>
+    <tr>
+      <th>ll_digits</th>
+      <td><p>integer; the number of digits to round latitude and longitude
+to. If latitude and/or longitude are used as <code>site_vars</code>, it's usually best
+to round them prior to identifying sites, otherwise locations that are only
+slightly offset (e.g. a few centimeters) will be treated as different. This
+argument can also be used to group sites together that are close but not
+identical. Note that 1 degree of latitude is approximately 100 km, so the
+default value of 6 for <code>ll_digits</code> is equivalent to about 10 cm.</p></td>
     </tr>
     </table>
 

@@ -4,6 +4,7 @@
 - `auk_select()` now requires certain columns to be kept
 - Better handling of file paths with `prefix` argument in `auk_split()`
 - Fixed bug causing undescribed species to be dropped by `auk_rollup()`
+- Add a `ll_digits` argument to `filter_repeat_visits()` to round lat/lng prior to identifying sites
 
 # auk 0.4.0
 

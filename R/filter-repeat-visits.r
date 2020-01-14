@@ -26,7 +26,14 @@
 #'   date. This column should either be in `Date` format or convertible to
 #'   `Date` format with [as.Date()].
 #' @param site_vars character; names of one of more columns in `x` that define a
-#'   site, typically the location and observer IDs.
+#'   site, typically the location (e.g. latitude/longitude) and observer ID.
+#' @param ll_digits integer; the number of digits to round latitude and longitude
+#'   to. If latitude and/or longitude are used as `site_vars`, it's usually best
+#'   to round them prior to identifying sites, otherwise locations that are only
+#'   slightly offset (e.g. a few centimeters) will be treated as different. This
+#'   argument can also be used to group sites together that are close but not
+#'   identical. Note that 1 degree of latitude is approximately 100 km, so the
+#'   default value of 6 for `ll_digits` is equivalent to about 10 cm.
 #'   
 #' @details In addition to specifying the minimum and maximum number of
 #'   observations per site, users must specify the variables in the dataset that
@@ -66,7 +73,8 @@
 filter_repeat_visits <- function(x, min_obs = 2L, max_obs = 10L, 
                                  n_days = 14L, annual_closure = FALSE,
                                  date_var = "observation_date",
-                                 site_vars = c("locality_id", "observer_id")) {
+                                 site_vars = c("locality_id", "observer_id"),
+                                 ll_digits = 6L) {
   # checks
   if (inherits(x, "auk_zerofill")) {
     x <- collapse_zerofill(x)
@@ -79,6 +87,8 @@ filter_repeat_visits <- function(x, min_obs = 2L, max_obs = 10L,
   stopifnot(is.character(date_var), length(date_var) == 1,
             date_var %in% names(x))
   stopifnot(is.character(site_vars), all(site_vars %in% names(x)))
+  stopifnot(is_integer(ll_digits), length(ll_digits) == 1,
+            isTRUE(ll_digits > 0))
   # can't have variables overlapping with added variables
   prohibit <- c("site", "closure_id", "n_observations")
   if (any(prohibit %in% names(x))) {
@@ -95,9 +105,17 @@ filter_repeat_visits <- function(x, min_obs = 2L, max_obs = 10L,
     x$closure_id <- x$closure_id %/% n_days
   }
   
+  # round latitude and longitude
+  if ("latitude" %in% site_vars) {
+    x[["latitude"]] <- round(x[["latitude"]], digits = ll_digits)
+  }
+  if ("longitude" %in% site_vars) {
+    x[["longitude"]] <- round(x[["longitude"]], digits = ll_digits)
+  }
+  
   # group by site_vars and closure_id
   block_vars <- c(site_vars, "closure_id")
-  x <- tidyr::unite_(x, "site", block_vars, remove = FALSE)
+  x <- tidyr::unite(x, "site", dplyr::one_of(block_vars), remove = FALSE)
   
   # get rid of blocks with fewer than min_obs observations
   x_out <- dplyr::group_by(x, .data$site)
