@@ -4,7 +4,9 @@
 \name{valid_protocols}
 \alias{valid_protocols}
 \title{Valid Protocols}
-\format{A vector with 42 elements.}
+\format{
+A vector with 42 elements.
+}
 \usage{
 valid_protocols
 }

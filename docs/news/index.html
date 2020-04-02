@@ -113,9 +113,9 @@
       <small>Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="auk-0-4-1" class="section level1">
+    <div id="auk-041" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-4-1" class="anchor"></a>auk 0.4.1<small> Unreleased </small>
+<a href="#auk-041" class="anchor"></a>auk 0.4.1<small> Unreleased </small>
 </h1>
 <ul>
 <li>Family common names now included in eBird taxonomy</li>
@@ -126,11 +126,15 @@
 <li>Fixed bug causing undescribed species to be dropped by <code><a href="../reference/auk_rollup.html">auk_rollup()</a></code>
 </li>
 <li>Add a <code>ll_digits</code> argument to <code><a href="../reference/filter_repeat_visits.html">filter_repeat_visits()</a></code> to round lat/lng prior to identifying sites</li>
+<li>Change of default parameters to <code><a href="../reference/filter_repeat_visits.html">filter_repeat_visits()</a></code>
+</li>
+<li>
+<code><a href="../reference/auk_bbox.html">auk_bbox()</a></code> now takes sf/raster spatial objects and grabs bbox from them</li>
 </ul>
 </div>
-    <div id="auk-0-4-0" class="section level1">
+    <div id="auk-040" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-4-0" class="anchor"></a>auk 0.4.0<small> 2019-09-23 </small>
+<a href="#auk-040" class="anchor"></a>auk 0.4.0<small> 2019-09-23 </small>
 </h1>
 <ul>
 <li>Updated to 2019 eBird taxonomy</li>
@@ -140,9 +144,9 @@
 <code><a href="https://tidyr.tidyverse.org/reference/deprecated-se.html">tidyr::complete_()</a></code> deprecated, stopped using</li>
 </ul>
 </div>
-    <div id="auk-0-3-3" class="section level1">
+    <div id="auk-033" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-3-3" class="anchor"></a>auk 0.3.3<small> 2019-06-23 </small>
+<a href="#auk-033" class="anchor"></a>auk 0.3.3<small> 2019-06-23 </small>
 </h1>
 <ul>
 <li>Dates can now wrap in <code><a href="../reference/auk_date.html">auk_date()</a></code>, e.g. use <code>date = c("*-12-01", "*-01-31")</code> for records from December or January</li>
@@ -153,9 +157,9 @@
 <li>Fixed bug causing <code><a href="../reference/auk_set_awk_path.html">auk_set_awk_path()</a></code> to fail</li>
 </ul>
 </div>
-    <div id="auk-0-3-2" class="section level1">
+    <div id="auk-032" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-3-2" class="anchor"></a>auk 0.3.2<small> 2019-02-04 </small>
+<a href="#auk-032" class="anchor"></a>auk 0.3.2<small> 2019-02-04 </small>
 </h1>
 <ul>
 <li>Work around for bug in system2() in some R versions: <a href="https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508" class="uri">https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508</a>
@@ -164,9 +168,9 @@
 </li>
 </ul>
 </div>
-    <div id="auk-0-3-1" class="section level1">
+    <div id="auk-031" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-3-1" class="anchor"></a>auk 0.3.1<small> 2018-12-07 </small>
+<a href="#auk-031" class="anchor"></a>auk 0.3.1<small> 2018-12-07 </small>
 </h1>
 <ul>
 <li>
@@ -176,9 +180,9 @@
 <code><a href="../reference/auk_unique.html">auk_unique()</a></code> now keeps track of all sampling event and observer IDs that comprise a group checklist</li>
 </ul>
 </div>
-    <div id="auk-0-3-0" class="section level1">
+    <div id="auk-030" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-3-0" class="anchor"></a>auk 0.3.0<small> 2018-10-04 </small>
+<a href="#auk-030" class="anchor"></a>auk 0.3.0<small> 2018-10-04 </small>
 </h1>
 <ul>
 <li>Updated to 2018 taxonomy; new function <code><a href="../reference/get_ebird_taxonomy.html">get_ebird_taxonomy()</a></code> to get taxonomy via the eBird API</li>
@@ -206,9 +210,9 @@
 </li>
 </ul>
 </div>
-    <div id="auk-0-2-2" class="section level1">
+    <div id="auk-022" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-2-2" class="anchor"></a>auk 0.2.2<small> 2018-07-23 </small>
+<a href="#auk-022" class="anchor"></a>auk 0.2.2<small> 2018-07-23 </small>
 </h1>
 <ul>
 <li>Updated to work with EDB version 1.9</li>
@@ -220,9 +224,9 @@
 <li>Fixed bug with <code><a href="https://rdrr.io/r/base/system2.html">system2()</a></code> on Windows</li>
 </ul>
 </div>
-    <div id="auk-0-2-1" class="section level1">
+    <div id="auk-021" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-2-1" class="anchor"></a>auk 0.2.1<small> 2018-03-28 </small>
+<a href="#auk-021" class="anchor"></a>auk 0.2.1<small> 2018-03-28 </small>
 </h1>
 <ul>
 <li>Patch release fixing a couple bugs</li>
@@ -232,16 +236,16 @@
 </li>
 </ul>
 </div>
-    <div id="auk-0-2-0" class="section level1">
+    <div id="auk-020" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-2-0" class="anchor"></a>auk 0.2.0<small> 2018-03-20 </small>
+<a href="#auk-020" class="anchor"></a>auk 0.2.0<small> 2018-03-20 </small>
 </h1>
 <ul>
 <li>New function, <code><a href="../reference/auk_split.html">auk_split()</a></code>, splits EBD up into multiple files by species</li>
 <li>New object, <code>auk_sampling</code>, and associated methods for working with the sampling data only</li>
 <li>New function, <code><a href="../reference/auk_select.html">auk_select()</a></code>, for selecting a subset of columns</li>
 <li>
-<code><a href="../reference/auk_date.html">auk_date()</a></code> now allows filtering date ranges across years using wildcards, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year</li>
+<code><a href="../reference/auk_date.html">auk_date()</a></code> now allows filtering date ranges across years using wildcards, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year</li>
 <li>New function, <code><a href="../reference/auk_state.html">auk_state()</a></code> for filtering by state</li>
 <li>Now using AWK arrays to speed up country and species filtering; ~20% speed up when filtering on many species/countries</li>
 <li>Allow selection of a subset of columns when filtering</li>
@@ -250,9 +254,9 @@
 <li>Fixed broken dependency on <code>countrycode</code> package</li>
 </ul>
 </div>
-    <div id="auk-0-1-0" class="section level1">
+    <div id="auk-010" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-1-0" class="anchor"></a>auk 0.1.0<small> 2017-10-21 </small>
+<a href="#auk-010" class="anchor"></a>auk 0.1.0<small> 2017-10-21 </small>
 </h1>
 <ul>
 <li>eBird taxonomy update to August 2017 version, users should download the most recent EBD to ensure the taxonomy is in sync with the new package</li>
@@ -264,17 +268,17 @@
 <li>New vignette added to aid those wanting to contribute to package development</li>
 </ul>
 </div>
-    <div id="auk-0-0-2" class="section level1">
+    <div id="auk-002" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-0-2" class="anchor"></a>auk 0.0.2<small> 2017-07-05 </small>
+<a href="#auk-002" class="anchor"></a>auk 0.0.2<small> 2017-07-05 </small>
 </h1>
 <ul>
 <li>Patch release converting ebird_taxonomy to ASCII to pass CRAN checks</li>
 </ul>
 </div>
-    <div id="auk-0-0-1" class="section level1">
+    <div id="auk-001" class="section level1">
 <h1 class="page-header">
-<a href="#auk-0-0-1" class="anchor"></a>auk 0.0.1<small> 2017-07-05 </small>
+<a href="#auk-001" class="anchor"></a>auk 0.0.1<small> 2017-07-05 </small>
 </h1>
 <ul>
 <li>First CRAN release</li>
@@ -286,18 +290,18 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#auk-0-4-1">0.4.1</a></li>
-        <li><a href="#auk-0-4-0">0.4.0</a></li>
-        <li><a href="#auk-0-3-3">0.3.3</a></li>
-        <li><a href="#auk-0-3-2">0.3.2</a></li>
-        <li><a href="#auk-0-3-1">0.3.1</a></li>
-        <li><a href="#auk-0-3-0">0.3.0</a></li>
-        <li><a href="#auk-0-2-2">0.2.2</a></li>
-        <li><a href="#auk-0-2-1">0.2.1</a></li>
-        <li><a href="#auk-0-2-0">0.2.0</a></li>
-        <li><a href="#auk-0-1-0">0.1.0</a></li>
-        <li><a href="#auk-0-0-2">0.0.2</a></li>
-        <li><a href="#auk-0-0-1">0.0.1</a></li>
+        <li><a href="#auk-041">0.4.1</a></li>
+        <li><a href="#auk-040">0.4.0</a></li>
+        <li><a href="#auk-033">0.3.3</a></li>
+        <li><a href="#auk-032">0.3.2</a></li>
+        <li><a href="#auk-031">0.3.1</a></li>
+        <li><a href="#auk-030">0.3.0</a></li>
+        <li><a href="#auk-022">0.2.2</a></li>
+        <li><a href="#auk-021">0.2.1</a></li>
+        <li><a href="#auk-020">0.2.0</a></li>
+        <li><a href="#auk-010">0.1.0</a></li>
+        <li><a href="#auk-002">0.0.2</a></li>
+        <li><a href="#auk-001">0.0.1</a></li>
       </ul>
     </div>
   </div>

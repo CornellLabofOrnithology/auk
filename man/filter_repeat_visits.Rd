@@ -8,8 +8,8 @@ filter_repeat_visits(
   x,
   min_obs = 2L,
   max_obs = 10L,
-  n_days = 14L,
-  annual_closure = FALSE,
+  annual_closure = TRUE,
+  n_days = NULL,
   date_var = "observation_date",
   site_vars = c("locality_id", "observer_id"),
   ll_digits = 6L
@@ -27,12 +27,13 @@ site.}
 
 \item{max_obs}{integer; maximum number of observations allowed for each site.}
 
+\item{annual_closure}{logical; whether the entire year should be treated as
+the period of closure (the default). This can be useful, for example, if
+the data have been subset to a period of closure prior to calling
+\code{\link[=filter_repeat_visits]{filter_repeat_visits()}}.}
+
 \item{n_days}{integer; number of days defining the temporal length of
 closure. Ignored if \code{annual_closure = TRUE}.}
-
-\item{annual_closure}{logical; whether the entire year should be treated as
-the period of closure. This can be useful, for example, if data are from
-one season (e.g. breeding) across multiple years.}
 
 \item{date_var}{character; column name of the variable in \code{x} containing the
 date. This column should either be in \code{Date} format or convertible to

@@ -1,4 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width=140/>
 ============================================================================================
 
@@ -56,7 +57,7 @@ Full details on using `auk` to produce both presence-only and
 presence-absence data are outlined in the vignette, which can be
 accessed with `vignette("auk")`.
 
-`auk` vs. `rebird`
+`auk` vs. `rebird`
 ------------------
 
 Those interested in eBird data may also want to consider
@@ -94,7 +95,7 @@ eBird Basic Dataset for use in R. This is a multi-step process:
 
 1.  Define a reference to the eBird data file.
 2.  Define a set of spatial, temporal, or taxonomic filters. Each type
-    of filter corresponds to a different function, e.g. `auk_species` to
+    of filter corresponds to a different function, e.g. `auk_species` to
     filter by species. At this stage the filters are only set up, no
     actual filtering is done until the next step.
 3.  Filter the eBird data text file, producing a new text file with only
@@ -157,9 +158,9 @@ Users should start by defining a reference to the dataset file with
     latitudes and longitudes in decimal degrees.
 -   `auk_date()`: filter to checklists from a range of dates. To extract
     observations from a range of dates, regardless of year, use the
-    wildcard “`*`” in place of the year, e.g.
-    `date = c("*-05-01", "*-06-30")` for observations from May and June
-    of any year.
+    wildcard “`*`” in place of the year,
+    e.g. `date = c("*-05-01", "*-06-30")` for observations from May and
+    June of any year.
 -   `auk_last_edited()`: filter to checklists from a range of last
     edited dates, useful for extracting just new or recently edited
     data.
@@ -286,7 +287,7 @@ eBird Basic Dataset files can be read with `read_ebd()`:
     #>  $ locality_type               : chr  "P" "P" "P" "P" ...
     #>  $ latitude                    : num  20.7 15.8 15.8 15.8 15.7 ...
     #>  $ longitude                   : num  -88.6 -93 -93 -92.9 -92.9 ...
-    #>  $ observation_date            : Date, format: "2010-09-05" "2011-08-18" "2012-02-02" ...
+    #>  $ observation_date            : Date, format: "2010-09-05" "2011-08-18" "2012-02-02" "2011-12-29" ...
     #>  $ time_observations_started   : chr  "06:30:00" "08:00:00" "09:13:00" "06:40:00" ...
     #>  $ observer_id                 : chr  "obsr55719" "obsr313215" "obsr313215" "obsr313215" ...
     #>  $ sampling_event_identifier   : chr  "S6852862" "S14432467" "S39033556" "S38303088" ...

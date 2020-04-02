@@ -135,9 +135,13 @@ defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used 
     </tr>
     <tr>
       <th>bbox</th>
-      <td><p>numeric; spatial bounding box expressed as the range
-of latitudes and longitudes in decimal degrees: <code><a href='https://rdrr.io/r/base/c.html'>c(lng_min, lat_min, lng_max, lat_max)</a></code>. Note that longitudes in the Western Hemisphere and
-latitudes sound of the equator should be given as negative numbers.</p></td>
+      <td><p>numeric or <code>sf</code> or <code>Raster*</code> object; spatial bounding box
+expressed as the range of latitudes and longitudes in decimal degrees:
+<code><a href='https://rdrr.io/r/base/c.html'>c(lng_min, lat_min, lng_max, lat_max)</a></code>. Note that longitudes in the
+Western Hemisphere and latitudes sound of the equator should be given as
+negative numbers. Alternatively, a spatial object from either the <code>sf</code> or
+<code>raster</code> packages can be provided and the bounding box will be extracted
+from this object.</p></td>
     </tr>
     </table>
 
@@ -173,7 +177,7 @@ user only wishes to filter the sampling event data.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>auk_bbox</span>(<span class='kw'>bbox</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, <span class='fl'>37</span>, -<span class='fl'>120</span>, <span class='fl'>52</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmp7kLnxh/temp_libpathe77837fde506/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpaJIDep/temp_libpathb8e56db0d58/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -196,7 +200,7 @@ user only wishes to filter the sampling event data.</p>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
 <span class='fu'>auk_bbox</span>(<span class='no'>ebd</span>, <span class='kw'>bbox</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, <span class='fl'>37</span>, -<span class='fl'>120</span>, <span class='fl'>52</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmp7kLnxh/temp_libpathe77837fde506/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpaJIDep/temp_libpathb8e56db0d58/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed

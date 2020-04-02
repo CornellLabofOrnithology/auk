@@ -4,11 +4,13 @@
 \name{bcr_codes}
 \alias{bcr_codes}
 \title{BCR Codes}
-\format{A data frame with two variables and 66 rows:
+\format{
+A data frame with two variables and 66 rows:
 \itemize{
 \item \code{bcr_code}: integer code from 1 to 66.
 \item \code{bcr_name}: name of BCR.
-}}
+}
+}
 \usage{
 bcr_codes
 }

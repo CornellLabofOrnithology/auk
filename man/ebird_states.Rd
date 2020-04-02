@@ -4,13 +4,15 @@
 \name{ebird_states}
 \alias{ebird_states}
 \title{eBird States}
-\format{A data frame with four variables and 3,145 rows:
+\format{
+A data frame with four variables and 3,145 rows:
 \itemize{
 \item \code{country}: short form of English country name.
 \item \code{country_code}: 2-letter ISO country code.
 \item \code{state}: state name.
 \item \code{state_code}: 4 to 6 character state code.
-}}
+}
+}
 \usage{
 ebird_states
 }

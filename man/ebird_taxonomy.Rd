@@ -4,7 +4,8 @@
 \name{ebird_taxonomy}
 \alias{ebird_taxonomy}
 \title{eBird Taxonomy}
-\format{A data frame with eight variables and 16,248 rows:
+\format{
+A data frame with eight variables and 16,248 rows:
 \itemize{
 \item \code{scientific_name}: scientific name.
 \item \code{common_name}: common name, defaults to English, but different languages
@@ -20,7 +21,8 @@ subspecies, and recognizable forms), this field links to the corresponding
 species code. For taxa that can't be resolved, this field is \code{NA}.
 }
 
-For further details, see \url{http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy}}
+For further details, see \url{http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy}
+}
 \usage{
 ebird_taxonomy
 }

@@ -217,8 +217,7 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class='no'>ebd_zf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>,
                        <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"Collared Kingfisher"</span>,
                        <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>occ</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)
-<span class='co'># format for unmarked</span>
+<span class='no'>occ</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: n_days = 30 but will be ignored because annual_closure is TRUE</span></div><div class='input'><span class='co'># format for unmarked</span>
 <span class='co'># typically one would join in habitat covariates prior to this step</span>
 <span class='no'>occ_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>format_unmarked_occu</span>(<span class='no'>occ</span>,
                                  <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"species_observed"</span>,
@@ -231,40 +230,40 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
   <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'>summary</span>(<span class='no'>occ_um</span>)
 }</div><div class='output co'>#&gt; unmarkedFrame Object
 #&gt; 
-#&gt; 47 sites
+#&gt; 51 sites
 #&gt; Maximum number of observations per site: 10 
-#&gt; Mean number of observations per site: 3.85 
-#&gt; Sites with at least one detection: 25 
+#&gt; Mean number of observations per site: 3.65 
+#&gt; Sites with at least one detection: 24 
 #&gt; 
 #&gt; Tabulation of y observations:
 #&gt; FALSE  TRUE  &lt;NA&gt; 
-#&gt;   129    52   289 
+#&gt;   131    55   324 
 #&gt; 
 #&gt; Site-level covariates:
 #&gt;     latitude       longitude    
 #&gt;  Min.   :1.206   Min.   :103.7  
 #&gt;  1st Qu.:1.315   1st Qu.:103.7  
-#&gt;  Median :1.351   Median :103.8  
-#&gt;  Mean   :1.348   Mean   :103.8  
-#&gt;  3rd Qu.:1.369   3rd Qu.:103.8  
+#&gt;  Median :1.352   Median :103.8  
+#&gt;  Mean   :1.351   Mean   :103.8  
+#&gt;  3rd Qu.:1.391   3rd Qu.:103.9  
 #&gt;  Max.   :1.446   Max.   :104.0  
 #&gt; 
 #&gt; Observation-level covariates:
 #&gt;  effort_distance_km duration_minutes
-#&gt;  Min.   : 0.100     Min.   :  1.00  
-#&gt;  1st Qu.: 0.200     1st Qu.: 15.00  
-#&gt;  Median : 1.000     Median : 30.00  
-#&gt;  Mean   : 1.579     Mean   : 66.49  
-#&gt;  3rd Qu.: 2.000     3rd Qu.: 86.25  
-#&gt;  Max.   :10.000     Max.   :480.00  
-#&gt;  NA's   :393        NA's   :392     </div><div class='input'>
+#&gt;  Min.   : 0.100     Min.   :  1.0   
+#&gt;  1st Qu.: 0.300     1st Qu.: 15.0   
+#&gt;  Median : 1.000     Median : 60.0   
+#&gt;  Mean   : 2.454     Mean   :100.8   
+#&gt;  3rd Qu.: 3.219     3rd Qu.:172.5   
+#&gt;  Max.   :20.000     Max.   :480.0   
+#&gt;  NA's   :404        NA's   :400     </div><div class='input'>
 <span class='co'># this function can also be used for abundance modeling</span>
 <span class='no'>abd</span> <span class='kw'>&lt;-</span> <span class='no'>ebd_zf</span> <span class='kw'>%&gt;%</span>
   <span class='co'># convert count to integer, drop records with no count</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>observation_count</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(!<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
   <span class='co'># filter to repeated visits</span>
-  <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='input'><span class='co'># prepare for conversion to unmarkedFramePCount object</span>
+  <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='output co'>#&gt; <span class='warning'>Warning: n_days = 30 but will be ignored because annual_closure is TRUE</span></div><div class='input'><span class='co'># prepare for conversion to unmarkedFramePCount object</span>
 <span class='no'>abd_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>format_unmarked_occu</span>(<span class='no'>abd</span>,
                                  <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"observation_count"</span>,
                                  <span class='kw'>site_covs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"latitude"</span>, <span class='st'>"longitude"</span>),
@@ -276,33 +275,33 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
   <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'>summary</span>(<span class='no'>abd_um</span>)
 }</div><div class='output co'>#&gt; unmarkedFrame Object
 #&gt; 
-#&gt; 44 sites
+#&gt; 48 sites
 #&gt; Maximum number of observations per site: 10 
-#&gt; Mean number of observations per site: 3.89 
+#&gt; Mean number of observations per site: 3.6 
 #&gt; Sites with at least one detection: 21 
 #&gt; 
 #&gt; Tabulation of y observations:
-#&gt;    0    1    2    3    5   10 &lt;NA&gt; 
-#&gt;  125   27    8    2    7    2  269 
+#&gt;    0    1    2    3    4    5    6    9   10   13   15 &lt;NA&gt; 
+#&gt;  129   12   11    4    4    7    1    1    2    1    1  307 
 #&gt; 
 #&gt; Site-level covariates:
 #&gt;     latitude       longitude    
 #&gt;  Min.   :1.206   Min.   :103.7  
 #&gt;  1st Qu.:1.315   1st Qu.:103.7  
-#&gt;  Median :1.349   Median :103.8  
-#&gt;  Mean   :1.347   Mean   :103.8  
-#&gt;  3rd Qu.:1.364   3rd Qu.:103.8  
+#&gt;  Median :1.352   Median :103.8  
+#&gt;  Mean   :1.351   Mean   :103.8  
+#&gt;  3rd Qu.:1.393   3rd Qu.:103.8  
 #&gt;  Max.   :1.446   Max.   :104.0  
 #&gt; 
 #&gt; Observation-level covariates:
 #&gt;  effort_distance_km duration_minutes
 #&gt;  Min.   : 0.100     Min.   :  1.0   
-#&gt;  1st Qu.: 0.200     1st Qu.: 15.0   
-#&gt;  Median : 1.000     Median : 30.0   
-#&gt;  Mean   : 1.587     Mean   : 68.3   
-#&gt;  3rd Qu.: 2.000     3rd Qu.: 90.0   
-#&gt;  Max.   :10.000     Max.   :480.0   
-#&gt;  NA's   :362        NA's   :361     </div></pre>
+#&gt;  1st Qu.: 0.300     1st Qu.: 15.0   
+#&gt;  Median : 1.000     Median : 60.0   
+#&gt;  Mean   : 2.458     Mean   :100.8   
+#&gt;  3rd Qu.: 3.219     3rd Qu.:172.5   
+#&gt;  Max.   :20.000     Max.   :480.0   
+#&gt;  NA's   :376        NA's   :374     </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

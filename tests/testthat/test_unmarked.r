@@ -7,7 +7,8 @@ test_that("filter_repeat_visits works", {
   ebd_zf <- auk_zerofill(x = f_ebd, sampling_events = f_smpl,
                          species = "Collared Kingfisher",
                          collapse = TRUE)
-  occ <- filter_repeat_visits(ebd_zf, n_days = 30, min_obs = 2, max_obs = 10)
+  expect_warning(filter_repeat_visits(ebd_zf, n_days = 30))
+  occ <- filter_repeat_visits(ebd_zf, annual_closure = FALSE, n_days = 30)
   
   expect_is(occ, "data.frame")
   expect_true(all(c("site", "closure_id", "n_observations") %in% names(occ)))
@@ -21,7 +22,7 @@ test_that("filter_repeat_visits works", {
     pull(drange) %>% 
     max()
   expect_lte(days_bt_first_last_obs, 30)
-  occ_10 <- filter_repeat_visits(ebd_zf, n_days = 10)
+  occ_10 <- filter_repeat_visits(ebd_zf, annual_closure = FALSE, n_days = 10)
   days_bt_first_last_obs <- occ_10 %>% 
     group_by(site) %>% 
     mutate(drange = as.integer(diff(range(observation_date)))) %>% 

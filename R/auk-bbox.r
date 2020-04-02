@@ -6,10 +6,13 @@
 #'
 #' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
 #'   [auk_ebd()] or [auk_sampling()].
-#' @param bbox numeric; spatial bounding box expressed as the range
-#'   of latitudes and longitudes in decimal degrees: `c(lng_min, lat_min,
-#'   lng_max, lat_max)`. Note that longitudes in the Western Hemisphere and
-#'   latitudes sound of the equator should be given as negative numbers.
+#' @param bbox numeric or `sf` or `Raster*` object; spatial bounding box
+#'   expressed as the range of latitudes and longitudes in decimal degrees:
+#'   `c(lng_min, lat_min, lng_max, lat_max)`. Note that longitudes in the
+#'   Western Hemisphere and latitudes sound of the equator should be given as
+#'   negative numbers. Alternatively, a spatial object from either the `sf` or 
+#'   `raster` packages can be provided and the bounding box will be extracted 
+#'   from this object.
 #' 
 #' @details This function can also work with on an `auk_sampling` object if the 
 #'   user only wishes to filter the sampling event data.
@@ -32,6 +35,17 @@ auk_bbox <- function(x, bbox)  {
 
 #' @export
 auk_bbox.auk_ebd <- function(x, bbox) {
+  # process spatial objects
+  if (inherits(bbox, c("sf", "sfc", "Raster"))) {
+    if (requireNamespace("sf", quietly = TRUE)) {
+      bb <- sf::st_as_sfc(sf::st_bbox(bbox))
+      bb <- sf::st_set_crs(bb, value = sf::st_crs(bbox))
+      bb <- sf::st_bbox(sf::st_transform(bb, crs = 4326))
+      bbox <- c(bb["xmin"], bb["ymin"], bb["xmax"], bb["ymax"]) 
+    } else {
+      stop("To use sf or raster objects as bbox, install the sf package.")
+    } 
+  }
   # checks
   assertthat::assert_that(
     is.numeric(bbox),
