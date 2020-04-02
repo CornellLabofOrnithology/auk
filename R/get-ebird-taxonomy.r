@@ -5,7 +5,7 @@
 #' @param version integer; the version (i.e. year) of the taxonomy. The eBird 
 #'   taxonomy is updated once a year in August. Leave this parameter blank to 
 #'   get the current taxonomy.
-#' @param locale character; the [locale for the common names](http://help.ebird.org/customer/portal/articles/1596582-common-name-translations-in-ebird), 
+#' @param locale character; the [locale for the common names](https://support.ebird.org/support/solutions/articles/48000804865-bird-names-in-ebird), 
 #'   defaults to English.
 #'
 #' @return A data frame of all species in the eBird taxonomy, consisting of the 

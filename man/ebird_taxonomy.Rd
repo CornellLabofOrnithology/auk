@@ -21,7 +21,7 @@ subspecies, and recognizable forms), this field links to the corresponding
 species code. For taxa that can't be resolved, this field is \code{NA}.
 }
 
-For further details, see \url{http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy}
+For further details, see \url{https://support.ebird.org/support/solutions/articles/48000837816-the-ebird-taxonomy}
 }
 \usage{
 ebird_taxonomy

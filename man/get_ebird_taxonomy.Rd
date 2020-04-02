@@ -11,7 +11,7 @@ get_ebird_taxonomy(version, locale)
 taxonomy is updated once a year in August. Leave this parameter blank to
 get the current taxonomy.}
 
-\item{locale}{character; the \href{http://help.ebird.org/customer/portal/articles/1596582-common-name-translations-in-ebird}{locale for the common names},
+\item{locale}{character; the \href{https://support.ebird.org/support/solutions/articles/48000804865-bird-names-in-ebird}{locale for the common names},
 defaults to English.}
 }
 \value{
