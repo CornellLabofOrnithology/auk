@@ -134,7 +134,7 @@
 <h2 class="hasAnchor">
 <a href="#auk-vs--rebird" class="anchor"></a><code>auk</code> vs. <code>rebird</code>
 </h2>
-<p>Those interested in eBird data may also want to consider <a href="https://github.com/ropensci/rebird"><code>rebird</code></a>, an R package that provides an interface to the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs">eBird APIs</a>. The functions in <code>rebird</code> are mostly limited to accessing recent (i.e. within the last 30 days) observations, although <code>ebirdfreq()</code> does provide historical frequency of observation data. In contrast, <code>auk</code> gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require <code>auk</code>; however, for some use cases, e.g. building tools for birders, <code>rebird</code> provides a quick and easy way to access data.</p>
+<p>Those interested in eBird data may also want to consider <a href="https://docs.ropensci.org/rebird/"><code>rebird</code></a>, an R package that provides an interface to the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs">eBird APIs</a>. The functions in <code>rebird</code> are mostly limited to accessing recent (i.e. within the last 30 days) observations, although <code>ebirdfreq()</code> does provide historical frequency of observation data. In contrast, <code>auk</code> gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require <code>auk</code>; however, for some use cases, e.g. building tools for birders, <code>rebird</code> provides a quick and easy way to access data.</p>
 <div id="data-access" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-access" class="anchor"></a>Data access</h3>
@@ -170,7 +170,7 @@
 <div id="a-note-on-versions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-note-on-versions" class="anchor"></a>A note on versions</h3>
-<p>This package contains a current (as of the time of package release) version of the <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract from the EBD. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the EBD file they’re working with. This is most easily accomplished by always using the most recent version of <code>auk</code> and the most recent release of the eBird Basic Dataset</p>
+<p>This package contains a current (as of the time of package release) version of the <a href="https://ebird.org/science/the-ebird-taxonomy">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract from the EBD. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the EBD file they’re working with. This is most easily accomplished by always using the most recent version of <code>auk</code> and the most recent release of the eBird Basic Dataset</p>
 </div>
 </div>
 <div id="presence-data" class="section level2">
@@ -185,7 +185,7 @@
 <span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw"><a href="../reference/auk_ebd.html">auk_ebd</a></span>()</span>
 <span id="cb7-3"><a href="#cb7-3"></a>ebd</span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; Input </span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpBkzdtm/temp_libpathda4524b1d9a5/auk/extdata/ebd-sample.txt </span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfRy7QZ/temp_libpathe5f72b70af5b/auk/extdata/ebd-sample.txt </span></span>
 <span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; </span></span>
 <span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; Output </span></span>
 <span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;   Filters not executed</span></span>
@@ -259,7 +259,7 @@
 <span id="cb8-16"><a href="#cb8-16"></a><span class="st">  </span><span class="kw"><a href="../reference/auk_complete.html">auk_complete</a></span>()</span>
 <span id="cb8-17"><a href="#cb8-17"></a>ebd_filters</span>
 <span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt; Input </span></span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpBkzdtm/temp_libpathda4524b1d9a5/auk/extdata/ebd-sample.txt </span></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfRy7QZ/temp_libpathe5f72b70af5b/auk/extdata/ebd-sample.txt </span></span>
 <span id="cb8-20"><a href="#cb8-20"></a><span class="co">#&gt; </span></span>
 <span id="cb8-21"><a href="#cb8-21"></a><span class="co">#&gt; Output </span></span>
 <span id="cb8-22"><a href="#cb8-22"></a><span class="co">#&gt;   Filters not executed</span></span>
@@ -279,7 +279,7 @@
 <span id="cb8-36"><a href="#cb8-36"></a><span class="co">#&gt;   Distance travelled: all</span></span>
 <span id="cb8-37"><a href="#cb8-37"></a><span class="co">#&gt;   Records with breeding codes only: no</span></span>
 <span id="cb8-38"><a href="#cb8-38"></a><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
-<p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package. This is particularly important because filtering is a time consuming process, so catching errors in advance can avoid several hours of wasted time.</p>
+<p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="https://ebird.org/science/the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package. This is particularly important because filtering is a time consuming process, so catching errors in advance can avoid several hours of wasted time.</p>
 </div>
 <div id="executing-filters" class="section level3">
 <h3 class="hasAnchor">
@@ -475,8 +475,8 @@
 <span id="cb15-7"><a href="#cb15-7"></a><span class="st">  </span><span class="kw"><a href="../reference/auk_complete.html">auk_complete</a></span>()</span>
 <span id="cb15-8"><a href="#cb15-8"></a>filters</span>
 <span id="cb15-9"><a href="#cb15-9"></a><span class="co">#&gt; Input </span></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpBkzdtm/temp_libpathda4524b1d9a5/auk/extdata/zerofill-ex_ebd.txt </span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpBkzdtm/temp_libpathda4524b1d9a5/auk/extdata/zerofill-ex_sampling.txt </span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfRy7QZ/temp_libpathe5f72b70af5b/auk/extdata/zerofill-ex_ebd.txt </span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfRy7QZ/temp_libpathe5f72b70af5b/auk/extdata/zerofill-ex_sampling.txt </span></span>
 <span id="cb15-12"><a href="#cb15-12"></a><span class="co">#&gt; </span></span>
 <span id="cb15-13"><a href="#cb15-13"></a><span class="co">#&gt; Output </span></span>
 <span id="cb15-14"><a href="#cb15-14"></a><span class="co">#&gt;   Filters not executed</span></span>
@@ -502,8 +502,8 @@
 <span id="cb16-3"><a href="#cb16-3"></a><span class="co">##                                file_sampling = "sampling-filtered.txt")</span></span>
 <span id="cb16-4"><a href="#cb16-4"></a>ebd_sed_filtered</span>
 <span id="cb16-5"><a href="#cb16-5"></a><span class="co">#&gt; Input </span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpBkzdtm/temp_libpathda4524b1d9a5/auk/extdata/zerofill-ex_ebd.txt </span></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpBkzdtm/temp_libpathda4524b1d9a5/auk/extdata/zerofill-ex_sampling.txt </span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfRy7QZ/temp_libpathe5f72b70af5b/auk/extdata/zerofill-ex_ebd.txt </span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfRy7QZ/temp_libpathe5f72b70af5b/auk/extdata/zerofill-ex_sampling.txt </span></span>
 <span id="cb16-8"><a href="#cb16-8"></a><span class="co">#&gt; </span></span>
 <span id="cb16-9"><a href="#cb16-9"></a><span class="co">#&gt; Output </span></span>
 <span id="cb16-10"><a href="#cb16-10"></a><span class="co">#&gt;   EBD: ebd-filtered.txt </span></span>
