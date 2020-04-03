@@ -46,6 +46,7 @@ test_that("ebird_species works for species with non-ascii characters", {
 })
 
 test_that("ebird_species handles versions correctly", {
+  skip_on_cran()
   skip_if_offline()
   expect_equal(ebird_species("Cordillera Azul Antbird"), "Myrmoderus eowilsoni")
   expect_equal(ebird_species("Cordillera Azul Antbird", 
