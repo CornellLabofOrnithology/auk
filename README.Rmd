@@ -50,9 +50,11 @@ Full details on using `auk` to produce both presence-only and presence-absence d
 
 An `auk` cheatsheet was developed by [Mickayla Johnston](https://www.linkedin.com/in/mickayla-johnston/):
 
-<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.png"><img src="cheatsheet/auk-cheatsheet.png" align="left" width=400/></a>
+<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="cheatsheet/auk-cheatsheet.png" width=400/></a>
 
-## `auk` vs. `rebird`
+
+
+## `auk` and `rebird`
 
 Those interested in eBird data may also want to consider [`rebird`](https://github.com/ropensci/rebird), an R package that provides an interface to the [eBird APIs](https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs). The functions in `rebird` are mostly limited to accessing recent (i.e. within the last 30 days) observations, although `ebirdfreq()` does provide historical frequency of observation data. In contrast, `auk` gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require `auk`; however, for some use cases, e.g. building tools for birders, `rebird` provides a quick and easy way to access data.
 

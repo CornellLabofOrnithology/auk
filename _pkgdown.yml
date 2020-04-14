@@ -7,7 +7,7 @@ navbar:
   - text: Function Reference
     href: reference/index.html
   - text: Cheatsheet
-    href: https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.png
+    href: https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf
 
 authors:
   Matthew Strimas-Mackey:

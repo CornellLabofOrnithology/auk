@@ -15,6 +15,8 @@ devtools::check()
 rmarkdown::render("README.Rmd")
 devtools::build_vignettes()
 pkgdown::build_site()
+dir.create("docs/cheatsheet/")
+file.copy("cheatsheet/auk-cheatsheet.png", "docs/cheatsheet/auk-cheatsheet.png")
 
 # checks
 devtools::check_win_devel()

@@ -63,9 +63,9 @@ Cheatsheet
 An `auk` cheatsheet was developed by [Mickayla
 Johnston](https://www.linkedin.com/in/mickayla-johnston/):
 
-<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.png"><img src="cheatsheet/auk-cheatsheet.png" align="left" width=400/></a>
+<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="cheatsheet/auk-cheatsheet.png" width=400/></a>
 
-`auk` vs. `rebird`
+`auk` and `rebird`
 ------------------
 
 Those interested in eBird data may also want to consider
