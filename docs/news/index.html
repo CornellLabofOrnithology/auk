@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,7 +48,6 @@
 
 <meta property="og:title" content="Changelog" />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -88,10 +91,13 @@
 <li>
   <a href="../reference/index.html">Function Reference</a>
 </li>
+<li>
+  <a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.png">Cheatsheet</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/CornellLabofOrnithology/auk">
+  <a href="https://github.com/CornellLabofOrnithology/auk/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -109,13 +115,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="auk-041" class="section level1">
-<h1 class="page-header">
-<a href="#auk-041" class="anchor"></a>auk 0.4.1<small> Unreleased </small>
+<h1 class="page-header" data-toc-text="0.4.1">
+<a href="#auk-041" class="anchor"></a>auk 0.4.1<small> 2020-04-03 </small>
 </h1>
 <ul>
 <li>Family common names now included in eBird taxonomy</li>
@@ -133,7 +139,7 @@
 </ul>
 </div>
     <div id="auk-040" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.0">
 <a href="#auk-040" class="anchor"></a>auk 0.4.0<small> 2019-09-23 </small>
 </h1>
 <ul>
@@ -145,11 +151,11 @@
 </ul>
 </div>
     <div id="auk-033" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.3">
 <a href="#auk-033" class="anchor"></a>auk 0.3.3<small> 2019-06-23 </small>
 </h1>
 <ul>
-<li>Dates can now wrap in <code><a href="../reference/auk_date.html">auk_date()</a></code>, e.g. use <code>date = c("*-12-01", "*-01-31")</code> for records from December or January</li>
+<li>Dates can now wrap in <code><a href="../reference/auk_date.html">auk_date()</a></code>, e.g.Â use <code>date = c("*-12-01", "*-01-31")</code> for records from December or January</li>
 <li>Fixed bug preventing dropping of <code>age/sex</code> column</li>
 <li>Allow for a wider variety of protocols in <code><a href="../reference/auk_protocol.html">auk_protocol()</a></code>
 </li>
@@ -158,7 +164,7 @@
 </ul>
 </div>
     <div id="auk-032" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.2">
 <a href="#auk-032" class="anchor"></a>auk 0.3.2<small> 2019-02-04 </small>
 </h1>
 <ul>
@@ -169,7 +175,7 @@
 </ul>
 </div>
     <div id="auk-031" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.1">
 <a href="#auk-031" class="anchor"></a>auk 0.3.1<small> 2018-12-07 </small>
 </h1>
 <ul>
@@ -181,7 +187,7 @@
 </ul>
 </div>
     <div id="auk-030" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.0">
 <a href="#auk-030" class="anchor"></a>auk 0.3.0<small> 2018-10-04 </small>
 </h1>
 <ul>
@@ -195,7 +201,7 @@
 </li>
 <li>New <code><a href="../reference/auk_bcr.html">auk_bcr()</a></code> function to extract data from BCRs</li>
 <li>Added <code>bcr_codes</code> data frame to look up BCR names and codes</li>
-<li>“Area” protocol added to <code><a href="../reference/auk_protocol.html">auk_protocol()</a></code> filter.</li>
+<li>âAreaâ protocol added to <code><a href="../reference/auk_protocol.html">auk_protocol()</a></code> filter.</li>
 <li>
 <code><a href="../reference/auk_extent.html">auk_extent()</a></code> renamed <code><a href="../reference/auk_bbox.html">auk_bbox()</a></code>; <code><a href="../reference/auk_extent.html">auk_extent()</a></code> deprecated and redirects to <code><a href="../reference/auk_bbox.html">auk_bbox()</a></code>
 </li>
@@ -211,7 +217,7 @@
 </ul>
 </div>
     <div id="auk-022" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.2">
 <a href="#auk-022" class="anchor"></a>auk 0.2.2<small> 2018-07-23 </small>
 </h1>
 <ul>
@@ -225,7 +231,7 @@
 </ul>
 </div>
     <div id="auk-021" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.1">
 <a href="#auk-021" class="anchor"></a>auk 0.2.1<small> 2018-03-28 </small>
 </h1>
 <ul>
@@ -237,7 +243,7 @@
 </ul>
 </div>
     <div id="auk-020" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.0">
 <a href="#auk-020" class="anchor"></a>auk 0.2.0<small> 2018-03-20 </small>
 </h1>
 <ul>
@@ -245,7 +251,7 @@
 <li>New object, <code>auk_sampling</code>, and associated methods for working with the sampling data only</li>
 <li>New function, <code><a href="../reference/auk_select.html">auk_select()</a></code>, for selecting a subset of columns</li>
 <li>
-<code><a href="../reference/auk_date.html">auk_date()</a></code> now allows filtering date ranges across years using wildcards, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year</li>
+<code><a href="../reference/auk_date.html">auk_date()</a></code> now allows filtering date ranges across years using wildcards, e.g.Â <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year</li>
 <li>New function, <code><a href="../reference/auk_state.html">auk_state()</a></code> for filtering by state</li>
 <li>Now using AWK arrays to speed up country and species filtering; ~20% speed up when filtering on many species/countries</li>
 <li>Allow selection of a subset of columns when filtering</li>
@@ -255,7 +261,7 @@
 </ul>
 </div>
     <div id="auk-010" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.0">
 <a href="#auk-010" class="anchor"></a>auk 0.1.0<small> 2017-10-21 </small>
 </h1>
 <ul>
@@ -269,7 +275,7 @@
 </ul>
 </div>
     <div id="auk-002" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.0.2">
 <a href="#auk-002" class="anchor"></a>auk 0.0.2<small> 2017-07-05 </small>
 </h1>
 <ul>
@@ -277,7 +283,7 @@
 </ul>
 </div>
     <div id="auk-001" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.0.1">
 <a href="#auk-001" class="anchor"></a>auk 0.0.1<small> 2017-07-05 </small>
 </h1>
 <ul>
@@ -286,24 +292,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#auk-041">0.4.1</a></li>
-        <li><a href="#auk-040">0.4.0</a></li>
-        <li><a href="#auk-033">0.3.3</a></li>
-        <li><a href="#auk-032">0.3.2</a></li>
-        <li><a href="#auk-031">0.3.1</a></li>
-        <li><a href="#auk-030">0.3.0</a></li>
-        <li><a href="#auk-022">0.2.2</a></li>
-        <li><a href="#auk-021">0.2.1</a></li>
-        <li><a href="#auk-020">0.2.0</a></li>
-        <li><a href="#auk-010">0.1.0</a></li>
-        <li><a href="#auk-002">0.0.2</a></li>
-        <li><a href="#auk-001">0.0.1</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -311,11 +303,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://strimas.com'>Matthew Strimas-Mackey</a>, <a href='http://eliotmiller.weebly.com/'>Eliot Miller</a>, Wesley Hochachka.</p>
+  <p>Developed by <a href='http://strimas.com'>Matthew Strimas-Mackey</a>, <a href='http://eliotmiller.weebly.com/'>Eliot Miller</a>, <a href='https://www.birds.cornell.edu/hochachka/'>Wesley Hochachka</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

@@ -6,12 +6,16 @@ navbar:
     href: articles/auk.html
   - text: Function Reference
     href: reference/index.html
+  - text: Cheatsheet
+    href: https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.png
 
 authors:
   Matthew Strimas-Mackey:
     href: http://strimas.com
   Eliot Miller:
     href: http://eliotmiller.weebly.com/
+  Wesley Hochachka:
+    href: https://www.birds.cornell.edu/hochachka/
     
 reference:
 - title: EBD Objects

@@ -44,7 +44,13 @@ remotes::install_github("CornellLabofOrnithology/auk")
 
 ## Vignette
 
-Full details on using `auk` to produce both presence-only and presence-absence data are outlined in the vignette, which can be accessed with `vignette("auk")`.
+Full details on using `auk` to produce both presence-only and presence-absence data are outlined in the [vignette](https://cornelllabofornithology.github.io/auk/articles/auk.html).
+
+## Cheatsheet
+
+An `auk` cheatsheet was developed by [Mickayla Johnston](https://www.linkedin.com/in/mickayla-johnston/):
+
+<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.png"><img src="cheatsheet/auk-cheatsheet.png" align="left" width=400/></a>
 
 ## `auk` vs. `rebird`
 
