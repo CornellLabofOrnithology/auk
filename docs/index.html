@@ -151,7 +151,7 @@
 <span id="cb2-15"><a href="#cb2-15"></a><span class="st">  </span><span class="kw">auk_filter</span>(<span class="dt">file =</span> f_out) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb2-16"><a href="#cb2-16"></a><span class="st">  </span><span class="co"># 4. read text file into r data frame</span></span>
 <span id="cb2-17"><a href="#cb2-17"></a><span class="st">  </span><span class="kw">read_ebd</span>()</span></code></pre></div>
-<p>For those not familiar with the pipe operator (<code>%&gt;%</code>), the above code could be rewritten:</p>
+<p>For those not familiar with the pipe operator (<code><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></code>), the above code could be rewritten:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>f_in &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>f_out &lt;-<span class="st"> "ebd_filtered_grja.txt"</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>ebd &lt;-<span class="st"> </span><span class="kw">auk_ebd</span>(f_in)</span>
@@ -166,38 +166,38 @@
 <div id="filtering" class="section level3">
 <h3 class="hasAnchor">
 <a href="#filtering" class="anchor"></a>Filtering</h3>
-<p><code>auk</code> uses a <a href="http://r4ds.had.co.nz/pipes.html">pipeline-based workflow</a> for defining filters, which can then be compiled into an AWK script. Users should start by defining a reference to the dataset file with <code>auk_ebd()</code>. Then any of the following filters can be applied:</p>
+<p><code>auk</code> uses a <a href="http://r4ds.had.co.nz/pipes.html">pipeline-based workflow</a> for defining filters, which can then be compiled into an AWK script. Users should start by defining a reference to the dataset file with <code><a href="reference/auk_ebd.html">auk_ebd()</a></code>. Then any of the following filters can be applied:</p>
 <ul>
 <li>
-<code>auk_species()</code>: filter by species using common or scientific names.</li>
+<code><a href="reference/auk_species.html">auk_species()</a></code>: filter by species using common or scientific names.</li>
 <li>
-<code>auk_country()</code>: filter by country using the standard English names or <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country codes</a>.</li>
+<code><a href="reference/auk_country.html">auk_country()</a></code>: filter by country using the standard English names or <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country codes</a>.</li>
 <li>
-<code>auk_state()</code>: filter by state using eBird state codes, see <code>?ebird_states</code>.</li>
+<code><a href="reference/auk_state.html">auk_state()</a></code>: filter by state using eBird state codes, see <code><a href="reference/ebird_states.html">?ebird_states</a></code>.</li>
 <li>
-<code>auk_bcr()</code>: filter by <a href="http://nabci-us.org/resources/bird-conservation-regions/">Bird Conservation Region (BCR)</a> using BCR codes, see <code>?bcr_codes</code>.</li>
+<code><a href="reference/auk_bcr.html">auk_bcr()</a></code>: filter by <a href="http://nabci-us.org/resources/bird-conservation-regions/">Bird Conservation Region (BCR)</a> using BCR codes, see <code><a href="reference/bcr_codes.html">?bcr_codes</a></code>.</li>
 <li>
-<code>auk_bbox()</code>: filter by spatial bounding box, i.e.Â a range of latitudes and longitudes in decimal degrees.</li>
+<code><a href="reference/auk_bbox.html">auk_bbox()</a></code>: filter by spatial bounding box, i.e.Â a range of latitudes and longitudes in decimal degrees.</li>
 <li>
-<code>auk_date()</code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard â<code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code>â in place of the year, e.g.Â <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
+<code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard â<code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code>â in place of the year, e.g.Â <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
 <li>
-<code>auk_last_edited()</code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
+<code><a href="reference/auk_last_edited.html">auk_last_edited()</a></code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
 <li>
-<code>auk_protocol()</code>: filter to checklists that following a specific search protocol, either stationary, traveling, or casual.</li>
+<code><a href="reference/auk_protocol.html">auk_protocol()</a></code>: filter to checklists that following a specific search protocol, either stationary, traveling, or casual.</li>
 <li>
-<code>auk_project()</code>: filter to checklists collected as part of a specific project (e.g.Â a breeding bird survey).</li>
+<code><a href="reference/auk_project.html">auk_project()</a></code>: filter to checklists collected as part of a specific project (e.g.Â a breeding bird survey).</li>
 <li>
-<code>auk_time()</code>: filter to checklists started during a range of times-of-day.</li>
+<code><a href="reference/auk_time.html">auk_time()</a></code>: filter to checklists started during a range of times-of-day.</li>
 <li>
-<code>auk_duration()</code>: filter to checklists with observation durations within a given range.</li>
+<code><a href="reference/auk_duration.html">auk_duration()</a></code>: filter to checklists with observation durations within a given range.</li>
 <li>
-<code>auk_distance()</code>: filter to checklists with distances travelled within a given range.</li>
+<code><a href="reference/auk_distance.html">auk_distance()</a></code>: filter to checklists with distances travelled within a given range.</li>
 <li>
-<code>auk_breeding()</code>: only retain observations that have an associate breeding bird atlas code.</li>
+<code><a href="reference/auk_breeding.html">auk_breeding()</a></code>: only retain observations that have an associate breeding bird atlas code.</li>
 <li>
-<code>auk_complete()</code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the âabsenceâ" information is inferred by the lack of reporting of a species on checklists.</li>
+<code><a href="reference/auk_complete.html">auk_complete()</a></code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the âabsenceâ" information is inferred by the lack of reporting of a species on checklists.</li>
 </ul>
-<p>Note that all of the functions listed above only modify the <code>auk_ebd</code> object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using <code>auk_filter()</code>.</p>
+<p>Note that all of the functions listed above only modify the <code>auk_ebd</code> object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using <code><a href="reference/auk_filter.html">auk_filter()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># sample data</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co"># define an EBD reference and a set of filters</span></span>
@@ -240,7 +240,7 @@
 <span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt;   Records with breeding codes only: no</span></span>
 <span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package.</p>
-<p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code>auk_filter()</code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
+<p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>ebd_filtered &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">auk_ebd</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -252,7 +252,7 @@
 <div id="reading" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reading" class="anchor"></a>Reading</h3>
-<p>eBird Basic Dataset files can be read with <code>read_ebd()</code>:</p>
+<p>eBird Basic Dataset files can be read with <code><a href="reference/read_ebd.html">read_ebd()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">read_ebd</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="st">  </span><span class="kw">str</span>()</span>
