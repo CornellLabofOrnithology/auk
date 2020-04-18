@@ -33,7 +33,9 @@ the data have been subset to a period of closure prior to calling
 \code{\link[=filter_repeat_visits]{filter_repeat_visits()}}.}
 
 \item{n_days}{integer; number of days defining the temporal length of
-closure. Ignored if \code{annual_closure = TRUE}.}
+closure. If \code{annual_closure = TRUE} closure periods will be split at year
+boundaries. If \code{annual_closure = FALSE} the closure periods will ignore
+year boundaries.}
 
 \item{date_var}{character; column name of the variable in \code{x} containing the
 date. This column should either be in \code{Date} format or convertible to
@@ -59,10 +61,9 @@ order. The following variables are added to the data frame:
 \item \code{site}: a unique identifier for each "site" corresponding to all the
 variables in \code{site_vars} and \code{closure_id} concatenated together with
 underscore separators.
-\item \code{closure_id}: a unique ID for each closure period. If
-\code{annual_closure = TRUE}, this will be the year. Otherwise, it will be the
-number of blocks of \code{n_days} days since the earliest observation. Note that
-in this latter case, there may be gaps in the IDs.
+\item \code{closure_id}: a unique ID for each closure period. If \code{annual_closure =   TRUE} this ID will include the year. If \code{n_days} is used an index given the
+number of blocks of \code{n_days} days since the earliest observation will be
+included. Note that in this case, there may be gaps in the IDs.
 \item \code{n_observations}: number of observations at each site after all
 filtering.
 }
@@ -82,10 +83,10 @@ In addition to specifying the minimum and maximum number of
 observations per site, users must specify the variables in the dataset that
 define a "site". This is typically a combination of IDs defining the
 geographic site and the unique observer (repeat visits are meant to be
-conducted by the same observer). Finally, the number of days defining the
-period of closure is required. A default value of 14 days is used; however,
-users should choose a suitable period for their species within which the
-population can reasonably be assumed to be closed.
+conducted by the same observer). Finally, the closure period must be
+defined, which is a period within which the population of the focal species
+can reasonably be assumed to be closed. This can be done using a
+combination of the \code{n_days} and \code{annual_closure} arguments.
 }
 \examples{
 # read and zero-fill the ebd data

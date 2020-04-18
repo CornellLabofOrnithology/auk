@@ -180,7 +180,9 @@ the data have been subset to a period of closure prior to calling
     <tr>
       <th>n_days</th>
       <td><p>integer; number of days defining the temporal length of
-closure. Ignored if <code>annual_closure = TRUE</code>.</p></td>
+closure. If <code>annual_closure = TRUE</code> closure periods will be split at year
+boundaries. If <code>annual_closure = FALSE</code> the closure periods will ignore
+year boundaries.</p></td>
     </tr>
     <tr>
       <th>date_var</th>
@@ -214,10 +216,9 @@ order. The following variables are added to the data frame:</p><ul>
 <li><p><code>site</code>: a unique identifier for each "site" corresponding to all the
 variables in <code>site_vars</code> and <code>closure_id</code> concatenated together with
 underscore separators.</p></li>
-<li><p><code>closure_id</code>: a unique ID for each closure period. If
-<code>annual_closure = TRUE</code>, this will be the year. Otherwise, it will be the
-number of blocks of <code>n_days</code> days since the earliest observation. Note that
-in this latter case, there may be gaps in the IDs.</p></li>
+<li><p><code>closure_id</code>: a unique ID for each closure period. If <code>annual_closure =   TRUE</code> this ID will include the year. If <code>n_days</code> is used an index given the
+number of blocks of <code>n_days</code> days since the earliest observation will be
+included. Note that in this case, there may be gaps in the IDs.</p></li>
 <li><p><code>n_observations</code>: number of observations at each site after all
 filtering.</p></li>
 </ul>
@@ -228,10 +229,10 @@ filtering.</p></li>
 observations per site, users must specify the variables in the dataset that
 define a "site". This is typically a combination of IDs defining the
 geographic site and the unique observer (repeat visits are meant to be
-conducted by the same observer). Finally, the number of days defining the
-period of closure is required. A default value of 14 days is used; however,
-users should choose a suitable period for their species within which the
-population can reasonably be assumed to be closed.</p>
+conducted by the same observer). Finally, the closure period must be
+defined, which is a period within which the population of the focal species
+can reasonably be assumed to be closed. This can be done using a
+combination of the <code>n_days</code> and <code>annual_closure</code> arguments.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other modeling: 
@@ -245,20 +246,20 @@ population can reasonably be assumed to be closed.</p>
 <span class='no'>ebd_zf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>,
                        <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"Collared Kingfisher"</span>,
                        <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>filter_repeat_visits</span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: n_days = 30 but will be ignored because annual_closure is TRUE</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 186 x 37</span><span>
+<span class='fu'>filter_repeat_visits</span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 181 x 37</span><span>
 #&gt;    site  closure_id n_observations checklist_id last_edited_date country
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'> 1</span><span> L105… 2012                    2 S11680564    2017-10-19 12:4… Singap…
-#&gt; </span><span style='color: #555555;'> 2</span><span> L105… 2012                    2 S11718518    2018-02-01 09:2… Singap…
-#&gt; </span><span style='color: #555555;'> 3</span><span> L105… 2012                    2 S10138184    2018-03-21 09:3… Singap…
-#&gt; </span><span style='color: #555555;'> 4</span><span> L105… 2012                    2 S11848362    2017-10-19 12:4… Singap…
-#&gt; </span><span style='color: #555555;'> 5</span><span> L127… 2012                    4 S9995316     2017-05-27 11:0… Singap…
-#&gt; </span><span style='color: #555555;'> 6</span><span> L127… 2012                    4 S11664225    2017-05-27 11:0… Singap…
-#&gt; </span><span style='color: #555555;'> 7</span><span> L127… 2012                    4 S11675087    2017-05-27 11:0… Singap…
-#&gt; </span><span style='color: #555555;'> 8</span><span> L127… 2012                    4 S11668164    2017-05-27 10:2… Singap…
-#&gt; </span><span style='color: #555555;'> 9</span><span> L136… 2012                   10 S9747351     2012-03-20 03:2… Singap…
-#&gt; </span><span style='color: #555555;'>10</span><span> L136… 2012                   10 S9811577     2017-10-19 12:4… Singap…
-#&gt; </span><span style='color: #555555;'># … with 176 more rows, and 31 more variables: country_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, state </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> L105… 2012-9                  2 S11680564    2017-10-19 12:4… Singap…
+#&gt; </span><span style='color: #555555;'> 2</span><span> L105… 2012-9                  2 S11718518    2018-02-01 09:2… Singap…
+#&gt; </span><span style='color: #555555;'> 3</span><span> L127… 2012-8                  3 S11664225    2017-05-27 11:0… Singap…
+#&gt; </span><span style='color: #555555;'> 4</span><span> L127… 2012-8                  3 S11675087    2017-05-27 11:0… Singap…
+#&gt; </span><span style='color: #555555;'> 5</span><span> L127… 2012-8                  3 S11668164    2017-05-27 10:2… Singap…
+#&gt; </span><span style='color: #555555;'> 6</span><span> L136… 2012-0                 10 S9492400     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'> 7</span><span> L136… 2012-0                 10 S9503604     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'> 8</span><span> L136… 2012-0                 10 S9513531     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'> 9</span><span> L136… 2012-0                 10 S9629042     2017-05-27 10:4… Singap…
+#&gt; </span><span style='color: #555555;'>10</span><span> L136… 2012-0                 10 S9652476     2017-05-27 10:3… Singap…
+#&gt; </span><span style='color: #555555;'># … with 171 more rows, and 31 more variables: country_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, state </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   state_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, county </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, county_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, iba_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   bcr_code </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, usfws_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, atlas_block </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, locality </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   locality_id </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, locality_type </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, latitude </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, longitude </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>

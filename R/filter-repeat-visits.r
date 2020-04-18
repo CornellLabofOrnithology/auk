@@ -22,7 +22,9 @@
 #'   the data have been subset to a period of closure prior to calling 
 #'   [filter_repeat_visits()].
 #' @param n_days integer; number of days defining the temporal length of
-#'   closure. Ignored if `annual_closure = TRUE`.
+#'   closure. If `annual_closure = TRUE` closure periods will be split at year
+#'   boundaries. If `annual_closure = FALSE` the closure periods will ignore 
+#'   year boundaries.
 #' @param date_var character; column name of the variable in `x` containing the
 #'   date. This column should either be in `Date` format or convertible to
 #'   `Date` format with [as.Date()].
@@ -40,10 +42,10 @@
 #'   observations per site, users must specify the variables in the dataset that
 #'   define a "site". This is typically a combination of IDs defining the
 #'   geographic site and the unique observer (repeat visits are meant to be
-#'   conducted by the same observer). Finally, the number of days defining the 
-#'   period of closure is required. A default value of 14 days is used; however, 
-#'   users should choose a suitable period for their species within which the 
-#'   population can reasonably be assumed to be closed.
+#'   conducted by the same observer). Finally, the closure period must be
+#'   defined, which is a period within which the population of the focal species
+#'   can reasonably be assumed to be closed. This can be done using a
+#'   combination of the `n_days` and `annual_closure` arguments.
 #'
 #' @return A `data.frame` filtered to only retain observations from sites with
 #'   the allowed number of observations within the period of closure. The
@@ -53,10 +55,10 @@
 #'   - `site`: a unique identifier for each "site" corresponding to all the 
 #'   variables in `site_vars` and `closure_id` concatenated together with 
 #'   underscore separators.
-#'   - `closure_id`: a unique ID for each closure period. If
-#'   `annual_closure = TRUE`, this will be the year. Otherwise, it will be the 
-#'   number of blocks of `n_days` days since the earliest observation. Note that 
-#'   in this latter case, there may be gaps in the IDs.
+#'   - `closure_id`: a unique ID for each closure period. If `annual_closure =
+#'   TRUE` this ID will include the year. If `n_days` is used an index given the
+#'   number of blocks of `n_days` days since the earliest observation will be
+#'   included. Note that in this case, there may be gaps in the IDs.
 #'   - `n_observations`: number of observations at each site after all 
 #'   filtering.
 #'   
@@ -90,16 +92,13 @@ filter_repeat_visits <- function(x, min_obs = 2L, max_obs = 10L,
   stopifnot(is_integer(ll_digits), length(ll_digits) == 1,
             isTRUE(ll_digits > 0))
   # must define period of closure if annual_closure = FALE
-  if (isTRUE(annual_closure)) {
-    if (!is.null(n_days)) {
-      warning(sprintf("n_days = %i but will be ignored %s", n_days,
-                      "because annual_closure is TRUE"))
-    }
-  } else {
+  if (isFALSE(annual_closure)) {
     if (is.null(n_days)) {
       stop(paste("When annual_closure is FALSE, n_days must be used to specify",
                  "the length of the period of closure."))
     }
+  }
+  if (!missing(n_days)) {
     stopifnot(is_integer(n_days), length(n_days) == 1, isTRUE(n_days > 0))
   }
   # can't have variables overlapping with added variables
@@ -112,6 +111,12 @@ filter_repeat_visits <- function(x, min_obs = 2L, max_obs = 10L,
   # date blocks - groups of length n_days
   if (annual_closure) {
     x$closure_id <- format(as.Date(x[[date_var]]), "%Y")
+    if (!missing(n_days)) {
+      yday <- format(as.Date(x[[date_var]]), "%j")
+      yday <- as.integer(yday)
+      day_idx <- (yday - min(yday) + 1) %/% n_days
+      x$closure_id <- paste(x$closure_id, day_idx, sep = "-")
+    }
   } else {
     x$closure_id <- as.integer(as.Date(x[[date_var]]))
     x$closure_id <- x$closure_id - min(x$closure_id) + 1
