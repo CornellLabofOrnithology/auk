@@ -84,7 +84,7 @@ and perform the filtering." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -165,6 +165,7 @@ user only wishes to filter the sampling event data.</p>
 <code><a href='auk_breeding.html'>auk_breeding</a>()</code>,
 <code><a href='auk_complete.html'>auk_complete</a>()</code>,
 <code><a href='auk_country.html'>auk_country</a>()</code>,
+<code><a href='auk_county.html'>auk_county</a>()</code>,
 <code><a href='auk_date.html'>auk_date</a>()</code>,
 <code><a href='auk_distance.html'>auk_distance</a>()</code>,
 <code><a href='auk_duration.html'>auk_duration</a>()</code>,
@@ -181,7 +182,7 @@ user only wishes to filter the sampling event data.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>auk_project</span>(<span class='st'>"EBIRD_MEX"</span>)</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpmoNiCi/temp_libpath4ab448275434/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -190,6 +191,7 @@ user only wishes to filter the sampling event data.</p>
 #&gt;   Species: all
 #&gt;   Countries: all
 #&gt;   States: all
+#&gt;   Counties: all
 #&gt;   BCRs: all
 #&gt;   Bounding box: full extent
 #&gt;   Date: all
@@ -204,7 +206,7 @@ user only wishes to filter the sampling event data.</p>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
 <span class='fu'>auk_project</span>(<span class='no'>ebd</span>, <span class='st'>"EBIRD_MEX"</span>)</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpmoNiCi/temp_libpath4ab448275434/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -213,6 +215,7 @@ user only wishes to filter the sampling event data.</p>
 #&gt;   Species: all
 #&gt;   Countries: all
 #&gt;   States: all
+#&gt;   Counties: all
 #&gt;   BCRs: all
 #&gt;   Bounding box: full extent
 #&gt;   Date: all

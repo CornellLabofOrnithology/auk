@@ -60,14 +60,14 @@ auk_sampling <- function(file, sep = "\t") {
   
   # identify columns required for filtering
   filter_cols <- data.frame(
-    id = c("country", "state", "bcr", 
+    id = c("country", "state", "county", "bcr", 
            "lat", "lng",
            "date", "time", "last_edited",
            "protocol", "project", 
            "duration", "distance", 
            "complete",
            "observer"),
-    name = c("country code", "state code", "bcr code",
+    name = c("country code", "state code", "county code", "bcr code",
              "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
@@ -88,6 +88,7 @@ auk_sampling <- function(file, sep = "\t") {
       filters = list(
         country = character(),
         state = character(),
+        county = character(),
         bbox = numeric(),
         date = character(),
         time = character(),
@@ -137,6 +138,16 @@ print.auk_sampling <- function(x, ...) {
     cat(paste(x$filters$state, collapse = ", "))
   } else {
     cat(paste0(length(x$filters$state), " states"))
+  }
+  cat("\n")
+  # state filter
+  cat("  Counties: ")
+  if (length(x$filters$county) == 0) {
+    cat("all")
+  } else if (length(x$filters$county) <= 10) {
+    cat(paste(x$filters$county, collapse = ", "))
+  } else {
+    cat(paste0(length(x$filters$county), " counties"))
   }
   cat("\n")
   # bbox filter

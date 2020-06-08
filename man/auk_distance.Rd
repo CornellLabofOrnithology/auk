@@ -50,6 +50,7 @@ Other filter:
 \code{\link{auk_breeding}()},
 \code{\link{auk_complete}()},
 \code{\link{auk_country}()},
+\code{\link{auk_county}()},
 \code{\link{auk_date}()},
 \code{\link{auk_duration}()},
 \code{\link{auk_extent}()},

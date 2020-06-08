@@ -31,6 +31,7 @@ Other filter:
 \code{\link{auk_bcr}()},
 \code{\link{auk_complete}()},
 \code{\link{auk_country}()},
+\code{\link{auk_county}()},
 \code{\link{auk_date}()},
 \code{\link{auk_distance}()},
 \code{\link{auk_duration}()},

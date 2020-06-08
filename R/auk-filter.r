@@ -410,6 +410,23 @@ awk_translate <- function(filters, col_idx, sep, select) {
     condition <- paste0("$", idx, " in states")
     filter_strings$state <- str_interp(awk_if, list(condition = condition))
   }
+  # county filter
+  if (length(filters$county) == 0) {
+    filter_strings$county_array <- ""
+    filter_strings$county <- ""
+  } else {
+    # generate list
+    county_list <- paste(filters$county, collapse = "\t")
+    county_array <- "
+    split(\"%s\", countyValues, \"\t\")
+    for (i in countyValues) county[countyValues[i]] = 1"
+    filter_strings$county_array <- sprintf(county_array, county_list)
+    
+    # check in list
+    idx <- col_idx$index[col_idx$id == "county"]
+    condition <- paste0("$", idx, " in county")
+    filter_strings$county <- str_interp(awk_if, list(condition = condition))
+  }
   # bcr filter
   if (length(filters$bcr) == 0) {
     filter_strings$bcr <- ""
@@ -580,6 +597,7 @@ BEGIN {
   ${species_array}
   ${country_array}
   ${state_array}
+  ${county_array}
   ${observer_array}
 }
 {
@@ -589,6 +607,7 @@ BEGIN {
   ${species}
   ${country}
   ${state}
+  ${county}
   ${bcr}
   ${bbox}
   ${date_substr}

@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -119,6 +119,14 @@
       <small>Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="auk-042" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.2">
+<a href="#auk-042" class="anchor"></a>auk 0.4.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>new <code><a href="../reference/auk_county.html">auk_county()</a></code> filter</li>
+</ul>
+</div>
     <div id="auk-041" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.1">
 <a href="#auk-041" class="anchor"></a>auk 0.4.1<small> 2020-04-03 </small>
@@ -155,7 +163,7 @@
 <a href="#auk-033" class="anchor"></a>auk 0.3.3<small> 2019-06-23 </small>
 </h1>
 <ul>
-<li>Dates can now wrap in <code><a href="../reference/auk_date.html">auk_date()</a></code>, e.g.Â use <code>date = c("*-12-01", "*-01-31")</code> for records from December or January</li>
+<li>Dates can now wrap in <code><a href="../reference/auk_date.html">auk_date()</a></code>, e.g. use <code>date = c("*-12-01", "*-01-31")</code> for records from December or January</li>
 <li>Fixed bug preventing dropping of <code>age/sex</code> column</li>
 <li>Allow for a wider variety of protocols in <code><a href="../reference/auk_protocol.html">auk_protocol()</a></code>
 </li>
@@ -201,7 +209,7 @@
 </li>
 <li>New <code><a href="../reference/auk_bcr.html">auk_bcr()</a></code> function to extract data from BCRs</li>
 <li>Added <code>bcr_codes</code> data frame to look up BCR names and codes</li>
-<li>âAreaâ protocol added to <code><a href="../reference/auk_protocol.html">auk_protocol()</a></code> filter.</li>
+<li>“Area” protocol added to <code><a href="../reference/auk_protocol.html">auk_protocol()</a></code> filter.</li>
 <li>
 <code><a href="../reference/auk_extent.html">auk_extent()</a></code> renamed <code><a href="../reference/auk_bbox.html">auk_bbox()</a></code>; <code><a href="../reference/auk_extent.html">auk_extent()</a></code> deprecated and redirects to <code><a href="../reference/auk_bbox.html">auk_bbox()</a></code>
 </li>
@@ -251,7 +259,7 @@
 <li>New object, <code>auk_sampling</code>, and associated methods for working with the sampling data only</li>
 <li>New function, <code><a href="../reference/auk_select.html">auk_select()</a></code>, for selecting a subset of columns</li>
 <li>
-<code><a href="../reference/auk_date.html">auk_date()</a></code> now allows filtering date ranges across years using wildcards, e.g.Â <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year</li>
+<code><a href="../reference/auk_date.html">auk_date()</a></code> now allows filtering date ranges across years using wildcards, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year</li>
 <li>New function, <code><a href="../reference/auk_state.html">auk_state()</a></code> for filtering by state</li>
 <li>Now using AWK arrays to speed up country and species filtering; ~20% speed up when filtering on many species/countries</li>
 <li>Allow selection of a subset of columns when filtering</li>

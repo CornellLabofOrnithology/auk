@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p><a href="http://www.ebird.org">eBird</a> is an online tool for recording bird observations. Since its inception, over 600 million records of bird sightings (i.e.Â combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
+<p><a href="http://www.ebird.org">eBird</a> is an online tool for recording bird observations. Since its inception, over 600 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -116,12 +116,12 @@
 <h2 class="hasAnchor">
 <a href="#auk-and-rebird" class="anchor"></a><code>auk</code> and <code>rebird</code>
 </h2>
-<p>Those interested in eBird data may also want to consider <a href="https://github.com/ropensci/rebird"><code>rebird</code></a>, an R package that provides an interface to the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs">eBird APIs</a>. The functions in <code>rebird</code> are mostly limited to accessing recent (i.e.Â within the last 30 days) observations, although <code>ebirdfreq()</code> does provide historical frequency of observation data. In contrast, <code>auk</code> gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require <code>auk</code>; however, for some use cases, e.g.Â building tools for birders, <code>rebird</code> provides a quick and easy way to access data.</p>
+<p>Those interested in eBird data may also want to consider <a href="https://github.com/ropensci/rebird"><code>rebird</code></a>, an R package that provides an interface to the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs">eBird APIs</a>. The functions in <code>rebird</code> are mostly limited to accessing recent (i.e. within the last 30 days) observations, although <code>ebirdfreq()</code> does provide historical frequency of observation data. In contrast, <code>auk</code> gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require <code>auk</code>; however, for some use cases, e.g. building tools for birders, <code>rebird</code> provides a quick and easy way to access data.</p>
 </div>
 <div id="a-note-on-versions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#a-note-on-versions" class="anchor"></a>A note on versions</h2>
-<p>This package contains a current (as of the time of package release) version of the <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version theyâre using is in sync with the eBird Basic Dataset theyâre working with. This is most easily accomplished by always using the must recent version of <code>auk</code> and the most recent release of the dataset.</p>
+<p>This package contains a current (as of the time of package release) version of the <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the eBird Basic Dataset they’re working with. This is most easily accomplished by always using the must recent version of <code>auk</code> and the most recent release of the dataset.</p>
 </div>
 <div id="quick-start" class="section level2">
 <h2 class="hasAnchor">
@@ -129,11 +129,11 @@
 <p>This package uses the command-line program AWK to extract subsets of the eBird Basic Dataset for use in R. This is a multi-step process:</p>
 <ol>
 <li>Define a reference to the eBird data file.</li>
-<li>Define a set of spatial, temporal, or taxonomic filters. Each type of filter corresponds to a different function, e.g.Â <code>auk_species</code> to filter by species. At this stage the filters are only set up, no actual filtering is done until the next step.</li>
+<li>Define a set of spatial, temporal, or taxonomic filters. Each type of filter corresponds to a different function, e.g. <code>auk_species</code> to filter by species. At this stage the filters are only set up, no actual filtering is done until the next step.</li>
 <li>Filter the eBird data text file, producing a new text file with only the selected rows.</li>
 <li>Import this text file into R as a data frame.</li>
 </ol>
-<p>Because the eBird dataset is so large, step 3 typically takes several hours to run. Hereâs a simple example that extract all Canada Jay records from within Canada.</p>
+<p>Because the eBird dataset is so large, step 3 typically takes several hours to run. Here’s a simple example that extract all Canada Jay records from within Canada.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(auk)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co"># path to the ebird data file, here a sample included in the package</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co"># get the path to the example data included in the package</span></span>
@@ -177,15 +177,15 @@
 <li>
 <code><a href="reference/auk_bcr.html">auk_bcr()</a></code>: filter by <a href="http://nabci-us.org/resources/bird-conservation-regions/">Bird Conservation Region (BCR)</a> using BCR codes, see <code><a href="reference/bcr_codes.html">?bcr_codes</a></code>.</li>
 <li>
-<code><a href="reference/auk_bbox.html">auk_bbox()</a></code>: filter by spatial bounding box, i.e.Â a range of latitudes and longitudes in decimal degrees.</li>
+<code><a href="reference/auk_bbox.html">auk_bbox()</a></code>: filter by spatial bounding box, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
-<code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard â<code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code>â in place of the year, e.g.Â <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
+<code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code>” in place of the year, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
 <li>
 <code><a href="reference/auk_last_edited.html">auk_last_edited()</a></code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
 <li>
 <code><a href="reference/auk_protocol.html">auk_protocol()</a></code>: filter to checklists that following a specific search protocol, either stationary, traveling, or casual.</li>
 <li>
-<code><a href="reference/auk_project.html">auk_project()</a></code>: filter to checklists collected as part of a specific project (e.g.Â a breeding bird survey).</li>
+<code><a href="reference/auk_project.html">auk_project()</a></code>: filter to checklists collected as part of a specific project (e.g. a breeding bird survey).</li>
 <li>
 <code><a href="reference/auk_time.html">auk_time()</a></code>: filter to checklists started during a range of times-of-day.</li>
 <li>
@@ -195,7 +195,7 @@
 <li>
 <code><a href="reference/auk_breeding.html">auk_breeding()</a></code>: only retain observations that have an associate breeding bird atlas code.</li>
 <li>
-<code><a href="reference/auk_complete.html">auk_complete()</a></code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the âabsenceâ" information is inferred by the lack of reporting of a species on checklists.</li>
+<code><a href="reference/auk_complete.html">auk_complete()</a></code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the “absence”" information is inferred by the lack of reporting of a species on checklists.</li>
 </ul>
 <p>Note that all of the functions listed above only modify the <code>auk_ebd</code> object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using <code><a href="reference/auk_filter.html">auk_filter()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># sample data</span></span>
@@ -228,17 +228,18 @@
 <span id="cb4-28"><a href="#cb4-28"></a><span class="co">#&gt;   Species: Cyanocitta cristata, Perisoreus canadensis</span></span>
 <span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt;   Countries: CA, MX, US</span></span>
 <span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt;   States: all</span></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt;   BCRs: all</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt;   Bounding box: Lon -100 - -80; Lat 37 - 52</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt;   Start time: 06:00-09:00</span></span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt;   Last edited date: all</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt;   Protocol: all</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt;   Project code: all</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt;   Duration: 0-60 minutes</span></span>
-<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt;   Distance travelled: all</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt;   Records with breeding codes only: no</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
+<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt;   Counties: all</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt;   BCRs: all</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt;   Bounding box: Lon -100 - -80; Lat 37 - 52</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt;   Start time: 06:00-09:00</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt;   Last edited date: all</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt;   Protocol: all</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt;   Project code: all</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt;   Duration: 0-60 minutes</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt;   Distance travelled: all</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt;   Records with breeding codes only: no</span></span>
+<span id="cb4-42"><a href="#cb4-42"></a><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package.</p>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span></span>
@@ -256,7 +257,7 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="dt">package =</span> <span class="st">"auk"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">read_ebd</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="st">  </span><span class="kw">str</span>()</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; tibble [494 Ã 45] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; tibble [494 × 45] (S3: tbl_df/tbl/data.frame)</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt;  $ checklist_id                : chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...</span></span>
 <span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;  $ global_unique_identifier    : chr [1:494] "URN:CornellLabOfOrnithology:EBIRD:OBS97935965" "URN:CornellLabOfOrnithology:EBIRD:OBS201605886" "URN:CornellLabOfOrnithology:EBIRD:OBS530638734" "URN:CornellLabOfOrnithology:EBIRD:OBS520887169" ...</span></span>
 <span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;  $ last_edited_date            : chr [1:494] "2016-02-22 14:59:49" "2013-06-16 17:34:19" "2017-09-06 13:13:34" "2017-07-24 15:17:16" ...</span></span>
@@ -283,7 +284,7 @@
 <span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt;  $ locality_type               : chr [1:494] "P" "P" "P" "P" ...</span></span>
 <span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt;  $ latitude                    : num [1:494] 20.7 15.8 15.8 15.8 15.7 ...</span></span>
 <span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt;  $ longitude                   : num [1:494] -88.6 -93 -93 -92.9 -92.9 ...</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt;  $ observation_date            : Date[1:494], format: "2010-09-05" "2011-08-18" "2012-02-02" ...</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt;  $ observation_date            : Date[1:494], format: "2010-09-05" "2011-08-18" "2012-02-02" "2011-12-29" ...</span></span>
 <span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt;  $ time_observations_started   : chr [1:494] "06:30:00" "08:00:00" "09:13:00" "06:40:00" ...</span></span>
 <span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt;  $ observer_id                 : chr [1:494] "obsr55719" "obsr313215" "obsr313215" "obsr313215" ...</span></span>
 <span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt;  $ sampling_event_identifier   : chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...</span></span>

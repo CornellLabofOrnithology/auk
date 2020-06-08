@@ -1,3 +1,7 @@
+# auk 0.4.2
+
+- new `auk_county()` filter
+
 # auk 0.4.1
 
 - Family common names now included in eBird taxonomy

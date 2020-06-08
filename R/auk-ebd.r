@@ -87,7 +87,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
   # identify columns required for filtering
   filter_cols <- data.frame(
     id = c("species",
-           "country", "state", "bcr",
+           "country", "state", "county", "bcr",
            "lat", "lng", 
            "date", "time", "last_edited",
            "protocol", "project", 
@@ -95,7 +95,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
            "breeding", "complete",
            "observer"),
     name = c("scientific name",
-             "country code", "state code", "bcr code",
+             "country code", "state code", "county code", "bcr code", 
              "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
@@ -151,6 +151,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         species = character(),
         country = character(),
         state = character(),
+        county = character(),
         bcr = integer(),
         bbox = numeric(),
         date = character(),
@@ -218,6 +219,16 @@ print.auk_ebd <- function(x, ...) {
     cat(paste(x$filters$state, collapse = ", "))
   } else {
     cat(paste0(length(x$filters$state), " states"))
+  }
+  cat("\n")
+  # county filter
+  cat("  Counties: ")
+  if (length(x$filters$county) == 0) {
+    cat("all")
+  } else if (length(x$filters$county) <= 10) {
+    cat(paste(x$filters$county, collapse = ", "))
+  } else {
+    cat(paste0(length(x$filters$county), " counties"))
   }
   cat("\n")
   # bcr filter
