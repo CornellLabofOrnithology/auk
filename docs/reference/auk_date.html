@@ -180,13 +180,14 @@ wishes to filter the sampling event data.</p>
 <code><a href='auk_protocol.html'>auk_protocol</a>()</code>,
 <code><a href='auk_species.html'>auk_species</a>()</code>,
 <code><a href='auk_state.html'>auk_state</a>()</code>,
-<code><a href='auk_time.html'>auk_time</a>()</code></p></div>
+<code><a href='auk_time.html'>auk_time</a>()</code>,
+<code><a href='auk_year.html'>auk_year</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>auk_date</span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2010-01-01"</span>, <span class='st'>"2010-12-31"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -198,6 +199,7 @@ wishes to filter the sampling event data.</p>
 #&gt;   Counties: all
 #&gt;   BCRs: all
 #&gt;   Bounding box: full extent
+#&gt;   Years: all
 #&gt;   Date: 2010-01-01 - 2010-12-31
 #&gt;   Start time: all
 #&gt;   Last edited date: all
@@ -210,7 +212,7 @@ wishes to filter the sampling event data.</p>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
 <span class='fu'>auk_date</span>(<span class='no'>ebd</span>, <span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2010-01-01"</span>, <span class='st'>"2010-12-31"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -222,6 +224,7 @@ wishes to filter the sampling event data.</p>
 #&gt;   Counties: all
 #&gt;   BCRs: all
 #&gt;   Bounding box: full extent
+#&gt;   Years: all
 #&gt;   Date: 2010-01-01 - 2010-12-31
 #&gt;   Start time: all
 #&gt;   Last edited date: all
@@ -236,7 +239,7 @@ wishes to filter the sampling event data.</p>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># may-june records from all years</span>
   <span class='fu'>auk_date</span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"*-05-01"</span>, <span class='st'>"*-06-30"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -248,6 +251,7 @@ wishes to filter the sampling event data.</p>
 #&gt;   Counties: all
 #&gt;   BCRs: all
 #&gt;   Bounding box: full extent
+#&gt;   Years: all
 #&gt;   Date: *-05-01 - *-06-30
 #&gt;   Start time: all
 #&gt;   Last edited date: all
@@ -262,7 +266,7 @@ wishes to filter the sampling event data.</p>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># dec-jan records from all years</span>
   <span class='fu'>auk_date</span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"*-12-01"</span>, <span class='st'>"*-01-31"</span>))</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/ebd-sample.txt 
+#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -274,6 +278,7 @@ wishes to filter the sampling event data.</p>
 #&gt;   Counties: all
 #&gt;   BCRs: all
 #&gt;   Bounding box: full extent
+#&gt;   Years: all
 #&gt;   Date: *-12-01 - *-01-31
 #&gt;   Start time: all
 #&gt;   Last edited date: all

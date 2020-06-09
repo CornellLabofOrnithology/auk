@@ -78,6 +78,7 @@ auk_country.auk_ebd <- function(x, country, replace = FALSE) {
   }
   x$filters$country <- sort(unique(x$filters$country))
   x$filters$state <- character()
+  x$filters$county <- character()
   return(x)
 }
 

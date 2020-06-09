@@ -451,6 +451,18 @@ awk_translate <- function(filters, col_idx, sep, select) {
                       ymn = filters$bbox[2], ymx = filters$bbox[4]))
     filter_strings$bbox <- str_interp(awk_if, list(condition = condition))
   }
+  # year filter
+  if (length(filters$year) == 0) {
+    filter_strings$year_substr <- ""
+    filter_strings$year <- ""
+  } else {
+    # extract just the year with awk
+    idx <- col_idx$index[col_idx$id == "date"]
+    filter_strings$year_substr <- sprintf("yr = substr($%i, 1, 4)", idx)
+    # subset to set of years
+    condition <- paste0("yr == ", filters$year, collapse = " || ")
+    filter_strings$year <- str_interp(awk_if, list(condition = condition))
+  }
   # date filter
   if (length(filters$date) == 0) {
     filter_strings$date_substr <- ""
@@ -610,6 +622,8 @@ BEGIN {
   ${county}
   ${bcr}
   ${bbox}
+  ${year_substr}
+  ${year}
   ${date_substr}
   ${date}
   ${time}

@@ -63,6 +63,7 @@ Other filter:
 \code{\link{auk_protocol}()},
 \code{\link{auk_species}()},
 \code{\link{auk_state}()},
-\code{\link{auk_time}()}
+\code{\link{auk_time}()},
+\code{\link{auk_year}()}
 }
 \concept{filter}

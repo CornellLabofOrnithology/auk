@@ -106,7 +106,33 @@ test_that("auk_state", {
   expect_error(auk_state(ebd, NA))
 })
 
-test_that("auk_state/country mutually exclusive", {
+test_that("auk_county", {
+  county <- c("CA-ON-NG", "US-NY-109")
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd() %>%
+    auk_county(county)
+  
+  # works correctly
+  expect_equal(ebd$filters$county, county)
+  
+  # add
+  ebd <- auk_county(ebd, "US-TX-505")
+  expect_equal(ebd$filters$county, c("CA-ON-NG", "US-NY-109", "US-TX-505"))
+  
+  # no duplication
+  ebd <- auk_county(ebd, rep(county, 2))
+  expect_equal(ebd$filters$county, c("CA-ON-NG", "US-NY-109", "US-TX-505"))
+  
+  # overwrite
+  ebd <- auk_county(ebd, "US-NY-109", replace = TRUE)
+  expect_equal(ebd$filters$county, "US-NY-109")
+  
+  # raises error for bad counties
+  expect_error(auk_county(ebd, NA))
+})
+
+test_that("auk_country/state/county mutually exclusive", {
+  county <- "US-NY-109"
   state <- c("CR-P", "US-TX")
   country <- c("Costa Rica", "US")
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
@@ -115,12 +141,19 @@ test_that("auk_state/country mutually exclusive", {
   
   expect_length(ebd$filters$country, 0)
   expect_length(ebd$filters$state, 2)
+  expect_length(ebd$filters$county, 0)
   ebd <- auk_country(ebd, country)
   expect_length(ebd$filters$country, 2)
   expect_length(ebd$filters$state, 0)
+  expect_length(ebd$filters$county, 0)
+  ebd <- auk_county(ebd, county)
+  expect_length(ebd$filters$country, 0)
+  expect_length(ebd$filters$state, 0)
+  expect_length(ebd$filters$county, 1)
   ebd <- auk_state(ebd, state)
   expect_length(ebd$filters$country, 0)
   expect_length(ebd$filters$state, 2)
+  expect_length(ebd$filters$county, 0)
 })
 
 test_that("auk_bcr", {
@@ -166,6 +199,22 @@ test_that("auk_bbox", {
   expect_error(auk_bbox(ebd, c(-180, 0, 181, 1)))
   expect_error(auk_bbox(ebd, c(1, 0, 0, 1)))
   expect_error(auk_bbox(ebd, c(0, 0, 0, 1)))
+})
+
+test_that("auk_year", {
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd()
+  
+  # character input
+  y <- c(2010, 2012)
+  ebd <- auk_year(ebd, y)
+  expect_equivalent(ebd$filters$year, y)
+  
+  # invalid year format
+  expect_error(auk_year(ebd, 1000))
+  expect_error(auk_date(ebd, "2010"))
+  expect_error(auk_date(ebd, NA))
+  expect_error(auk_date(ebd, 2010.1))
 })
 
 test_that("auk_date", {

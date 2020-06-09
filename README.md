@@ -227,6 +227,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
     #>   Counties: all
     #>   BCRs: all
     #>   Bounding box: Lon -100 - -80; Lat 37 - 52
+    #>   Years: all
     #>   Date: 2012-01-01 - 2012-12-31
     #>   Start time: 06:00-09:00
     #>   Last edited date: all

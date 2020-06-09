@@ -154,6 +154,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         county = character(),
         bcr = integer(),
         bbox = numeric(),
+        year = integer(),
         date = character(),
         time = character(),
         last_edited = character(),
@@ -249,6 +250,16 @@ print.auk_ebd <- function(x, ...) {
   } else {
     cat(paste0("Lon ", e[1], " - ", e[3], "; "))
     cat(paste0("Lat ", e[2], " - ", e[4]))
+  }
+  cat("\n")
+  # year filter
+  cat("  Years: ")
+  if (length(x$filters$year) == 0) {
+    cat("all")
+  } else if (length(x$filters$year) <= 10) {
+    cat(paste(x$filters$year, collapse = ", "))
+  } else {
+    cat(paste0(length(x$filters$year), " years"))
   }
   cat("\n")
   # date filter

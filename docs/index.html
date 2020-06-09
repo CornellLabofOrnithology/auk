@@ -231,15 +231,16 @@
 <span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt;   Counties: all</span></span>
 <span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt;   BCRs: all</span></span>
 <span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt;   Bounding box: Lon -100 - -80; Lat 37 - 52</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span></span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt;   Start time: 06:00-09:00</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt;   Last edited date: all</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt;   Protocol: all</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt;   Project code: all</span></span>
-<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt;   Duration: 0-60 minutes</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt;   Distance travelled: all</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt;   Records with breeding codes only: no</span></span>
-<span id="cb4-42"><a href="#cb4-42"></a><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
+<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt;   Years: all</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt;   Start time: 06:00-09:00</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt;   Last edited date: all</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt;   Protocol: all</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt;   Project code: all</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt;   Duration: 0-60 minutes</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt;   Distance travelled: all</span></span>
+<span id="cb4-42"><a href="#cb4-42"></a><span class="co">#&gt;   Records with breeding codes only: no</span></span>
+<span id="cb4-43"><a href="#cb4-43"></a><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package.</p>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>output_file &lt;-<span class="st"> "ebd_filtered_blja-grja.txt"</span></span>

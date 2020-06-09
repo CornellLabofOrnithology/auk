@@ -99,7 +99,7 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
       }
     }
   }
-  out <- dplyr::as.tbl(out)
+  out <- dplyr::as_tibble(out)
 
   # remove possible blank final column
   if (blank) {

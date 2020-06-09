@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter the eBird data by observer — auk_observer • auk</title>
+<title>Filter the eBird data to a set of years — auk_year • auk</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="Filter the eBird data by observer — auk_observer" />
+<meta property="og:title" content="Filter the eBird data to a set of years — auk_year" />
 <meta property="og:description" content="Define a filter for the eBird Basic Dataset (EBD) based on a set of
-observer IDs This function only defines the filter and, once all filters have
+years. This function only defines the filter and, once all filters have
 been defined, auk_filter() should be used to call AWK and perform the
 filtering." />
 <meta property="og:image" content="/logo.png" />
@@ -119,19 +119,19 @@ filtering." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter the eBird data by observer</h1>
-    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-observer.R'><code>R/auk-observer.R</code></a></small>
-    <div class="hidden name"><code>auk_observer.Rd</code></div>
+    <h1>Filter the eBird data to a set of years</h1>
+    <small class="dont-index">Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/R/auk-year.r'><code>R/auk-year.r</code></a></small>
+    <div class="hidden name"><code>auk_year.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Define a filter for the eBird Basic Dataset (EBD) based on a set of
-observer IDs This function only defines the filter and, once all filters have
+years. This function only defines the filter and, once all filters have
 been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be used to call AWK and perform the
 filtering.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>auk_observer</span>(<span class='no'>x</span>, <span class='no'>observer_id</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_year</span>(<span class='no'>x</span>, <span class='no'>year</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,16 +142,31 @@ filtering.</p>
 <code><a href='auk_ebd.html'>auk_ebd()</a></code> or <code><a href='auk_sampling.html'>auk_sampling()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>observer_id</th>
-      <td><p>character or integer; observers to filter by. Observer IDs
-can be provided either as integer (e.g. 12345) or character with the "obsr"
-prefix as they appear in the EBD (e.g. "obsr12345").</p></td>
+      <th>year</th>
+      <td><p>integer; years to filter to.</p></td>
+    </tr>
+    <tr>
+      <th>replace</th>
+      <td><p>logical; multiple calls to <code>auk_year()</code> are additive,
+unless <code>replace = FALSE</code>, in which case the previous list of years to
+filter by will be removed and replaced by that in the current call.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>auk_ebd</code> or `auk_sampling`` object.</p>
+    <p>An <code>auk_ebd</code> object.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For filtering to a range of dates use <code><a href='auk_date.html'>auk_date()</a></code>; however,
+sometimes the goal is to extract data for a given year or set of years, in
+which case <code>auk_year()</code> is simpler. In addition, <code>auk_year()</code> can be used
+to get data from discontiguous sets of years (e.g. 2010 and 2012, but not
+2011), which is not possible with <code><a href='auk_date.html'>auk_date()</a></code>. Finally, <code>auk_year()</code> can
+be used in conjunction with <code><a href='auk_date.html'>auk_date()</a></code> to extract data from a given range
+of dates within a set of years (see example below).</p>
+<p>This function can also work with on an <code>auk_sampling</code> object if the user
+only wishes to filter the sampling event data.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other filter: 
@@ -167,17 +182,20 @@ prefix as they appear in the EBD (e.g. "obsr12345").</p></td>
 <code><a href='auk_extent.html'>auk_extent</a>()</code>,
 <code><a href='auk_filter.html'>auk_filter</a>()</code>,
 <code><a href='auk_last_edited.html'>auk_last_edited</a>()</code>,
+<code><a href='auk_observer.html'>auk_observer</a>()</code>,
 <code><a href='auk_project.html'>auk_project</a>()</code>,
 <code><a href='auk_protocol.html'>auk_protocol</a>()</code>,
 <code><a href='auk_species.html'>auk_species</a>()</code>,
 <code><a href='auk_state.html'>auk_state</a>()</code>,
-<code><a href='auk_time.html'>auk_time</a>()</code>,
-<code><a href='auk_year.html'>auk_year</a>()</code></p></div>
+<code><a href='auk_time.html'>auk_time</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='co'># years to filter to</span>
+<span class='no'>years</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2010</span>, <span class='fl'>2012</span>)
+<span class='co'># set up filter</span>
+<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_observer</span>(<span class='st'>"obsr313215"</span>)</div><div class='output co'>#&gt; Input 
+  <span class='fu'>auk_year</span>(<span class='kw'>year</span> <span class='kw'>=</span> <span class='no'>years</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -190,7 +208,7 @@ prefix as they appear in the EBD (e.g. "obsr12345").</p></td>
 #&gt;   Counties: all
 #&gt;   BCRs: all
 #&gt;   Bounding box: full extent
-#&gt;   Years: all
+#&gt;   Years: 2010, 2012
 #&gt;   Date: all
 #&gt;   Start time: all
 #&gt;   Last edited date: all
@@ -202,7 +220,7 @@ prefix as they appear in the EBD (e.g. "obsr12345").</p></td>
 #&gt;   Complete checklists only: no</div><div class='input'>
 <span class='co'># alternatively, without pipes</span>
 <span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
-<span class='fu'>auk_observer</span>(<span class='no'>ebd</span>, <span class='kw'>observer</span> <span class='kw'>=</span> <span class='fl'>313215</span>)</div><div class='output co'>#&gt; Input 
+<span class='fu'>auk_year</span>(<span class='no'>ebd</span>, <span class='no'>years</span>)</div><div class='output co'>#&gt; Input 
 #&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
@@ -215,8 +233,35 @@ prefix as they appear in the EBD (e.g. "obsr12345").</p></td>
 #&gt;   Counties: all
 #&gt;   BCRs: all
 #&gt;   Bounding box: full extent
-#&gt;   Years: all
+#&gt;   Years: 2010, 2012
 #&gt;   Date: all
+#&gt;   Start time: all
+#&gt;   Last edited date: all
+#&gt;   Protocol: all
+#&gt;   Project code: all
+#&gt;   Duration: all
+#&gt;   Distance travelled: all
+#&gt;   Records with breeding codes only: no
+#&gt;   Complete checklists only: no</div><div class='input'>
+<span class='co'># filter to may and june of 2010 and 2012</span>
+<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>auk_year</span>(<span class='kw'>year</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2010</span>, <span class='fl'>2012</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='auk_date.html'>auk_date</a></span>(<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"*-05-01"</span>, <span class='st'>"*-06-30"</span>))</div><div class='output co'>#&gt; Input 
+#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/ebd-sample.txt 
+#&gt; 
+#&gt; Output 
+#&gt;   Filters not executed
+#&gt; 
+#&gt; Filters 
+#&gt;   Species: all
+#&gt;   Countries: all
+#&gt;   States: all
+#&gt;   Counties: all
+#&gt;   BCRs: all
+#&gt;   Bounding box: full extent
+#&gt;   Years: 2010, 2012
+#&gt;   Date: *-05-01 - *-06-30
 #&gt;   Start time: all
 #&gt;   Last edited date: all
 #&gt;   Protocol: all

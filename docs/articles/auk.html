@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>auk: eBird Data Extraction with AWK • auk</title>
+<title>Introduction to auk • auk</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="auk: eBird Data Extraction with AWK">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to auk">
 <meta property="og:description" content="auk">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -74,7 +74,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>auk: eBird Data Extraction with AWK</h1>
+      <h1 data-toc-skip>Introduction to auk</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/CornellLabofOrnithology/auk/blob/master/vignettes/auk.Rmd"><code>vignettes/auk.Rmd</code></a></small>
@@ -188,7 +188,7 @@
   <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span>()
 <span class="no">ebd</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -200,6 +200,7 @@
 <span class="co">#&gt;   Counties: all</span>
 <span class="co">#&gt;   BCRs: all</span>
 <span class="co">#&gt;   Bounding box: full extent</span>
+<span class="co">#&gt;   Years: all</span>
 <span class="co">#&gt;   Date: all</span>
 <span class="co">#&gt;   Start time: all</span>
 <span class="co">#&gt;   Last edited date: all</span>
@@ -263,7 +264,7 @@
   <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span>()
 <span class="no">ebd_filters</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -275,6 +276,7 @@
 <span class="co">#&gt;   Counties: all</span>
 <span class="co">#&gt;   BCRs: all</span>
 <span class="co">#&gt;   Bounding box: Lon -100 - -80; Lat 37 - 52</span>
+<span class="co">#&gt;   Years: all</span>
 <span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span>
 <span class="co">#&gt;   Start time: 06:00-09:00</span>
 <span class="co">#&gt;   Last edited date: all</span>
@@ -480,8 +482,8 @@
   <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span>()
 <span class="no">filters</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -493,6 +495,7 @@
 <span class="co">#&gt;   Counties: all</span>
 <span class="co">#&gt;   BCRs: all</span>
 <span class="co">#&gt;   Bounding box: full extent</span>
+<span class="co">#&gt;   Years: all</span>
 <span class="co">#&gt;   Date: all</span>
 <span class="co">#&gt;   Start time: 06:00-10:00</span>
 <span class="co">#&gt;   Last edited date: all</span>
@@ -508,8 +511,8 @@
 <span class="co">##                                file_sampling = "sampling-filtered.txt")</span>
 <span class="no">ebd_sed_filtered</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpbhonDo/temp_libpath908c1f9c840f/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /private/var/folders/_n/xby76_dj79j3nw_4pcmphbf40000gn/T/RtmpFXgStY/temp_libpathf9ab3947a337/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   EBD: ebd-filtered.txt </span>
@@ -522,6 +525,7 @@
 <span class="co">#&gt;   Counties: all</span>
 <span class="co">#&gt;   BCRs: all</span>
 <span class="co">#&gt;   Bounding box: full extent</span>
+<span class="co">#&gt;   Years: all</span>
 <span class="co">#&gt;   Date: all</span>
 <span class="co">#&gt;   Start time: 06:00-10:00</span>
 <span class="co">#&gt;   Last edited date: all</span>

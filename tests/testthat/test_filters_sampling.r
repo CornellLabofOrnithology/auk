@@ -67,6 +67,31 @@ test_that("auk_state", {
   expect_error(auk_state(sed, NA))
 })
 
+test_that("auk_county", {
+  county <- c("CA-ON-NG", "US-NY-109")
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+    auk_sampling() %>%
+    auk_county(county)
+  
+  # works correctly
+  expect_equal(sed$filters$county, county)
+  
+  # add
+  sed <- auk_county(sed, "US-TX-505")
+  expect_equal(sed$filters$county, c("CA-ON-NG", "US-NY-109", "US-TX-505"))
+  
+  # no duplication
+  sed <- auk_county(sed, rep(county, 2))
+  expect_equal(sed$filters$county, c("CA-ON-NG", "US-NY-109", "US-TX-505"))
+  
+  # overwrite
+  sed <- auk_county(sed, "US-NY-109", replace = TRUE)
+  expect_equal(sed$filters$county, "US-NY-109")
+  
+  # raises error for bad counties
+  expect_error(auk_county(sed, NA))
+})
+
 test_that("auk_bbox", {
   sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
     auk_sampling()
@@ -91,6 +116,22 @@ test_that("auk_bbox", {
   expect_error(auk_bbox(sed, c(-180, 0, 181, 1)))
   expect_error(auk_bbox(sed, c(1, 0, 0, 1)))
   expect_error(auk_bbox(sed, c(0, 0, 0, 1)))
+})
+
+test_that("auk_year", {
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+    auk_sampling()
+  
+  # character input
+  y <- c(2010, 2012)
+  sed <- auk_year(sed, y)
+  expect_equivalent(sed$filters$year, y)
+  
+  # invalid year format
+  expect_error(auk_year(sed, 1000))
+  expect_error(auk_date(sed, "2010"))
+  expect_error(auk_date(sed, NA))
+  expect_error(auk_date(sed, 2010.1))
 })
 
 test_that("auk_date", {

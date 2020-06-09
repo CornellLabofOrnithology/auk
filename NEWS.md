@@ -1,6 +1,7 @@
 # auk 0.4.2
 
 - new `auk_county()` filter
+- new `auk_year()` filter
 
 # auk 0.4.1
 
