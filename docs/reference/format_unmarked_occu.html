@@ -270,7 +270,9 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>observation_count</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(!<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
   <span class='co'># filter to repeated visits</span>
-  <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='input'><span class='co'># prepare for conversion to unmarkedFramePCount object</span>
+  <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem with `mutate()` input `observation_count`.</span>
+#&gt; <span class='warning'><span style='color: #0000BB;'>ℹ</span><span> NAs introduced by coercion</span>
+#&gt; <span class='warning'></span><span style='color: #0000BB;'>ℹ</span><span> Input `observation_count` is `as.integer(observation_count)`.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='input'><span class='co'># prepare for conversion to unmarkedFramePCount object</span>
 <span class='no'>abd_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>format_unmarked_occu</span>(<span class='no'>abd</span>,
                                  <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"observation_count"</span>,
                                  <span class='kw'>site_covs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"latitude"</span>, <span class='st'>"longitude"</span>),
@@ -308,7 +310,7 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 #&gt;  Mean   : 1.587     Mean   : 68.3   
 #&gt;  3rd Qu.: 2.000     3rd Qu.: 90.0   
 #&gt;  Max.   :10.000     Max.   :480.0   
-#&gt;  NA's   :362        NA's   :361     </div></pre>
+#&gt;  NA's   :362        NA's   :361     </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

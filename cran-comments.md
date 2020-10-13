@@ -1,3 +1,9 @@
+# auk 0.4.2
+
+- new `auk_county()` filter
+- new `auk_year()` filter
+- Drop taxonomy warnings since there was no taxonomy update this year
+
 # auk 0.4.1
 
 - Family common names now included in eBird taxonomy

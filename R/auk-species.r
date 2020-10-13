@@ -52,7 +52,7 @@ auk_species.auk_ebd <- function(x, species, taxonomy_version, replace = FALSE) {
     stopifnot(is_integer(taxonomy_version), length(taxonomy_version) == 1)
   }
   v <- auk_ebd_version(x, check_exists = FALSE)$taxonomy_version
-  if (!is.na(v) && taxonomy_version != v) {
+  if (!is.na(v) && (taxonomy_version != v || v == 2020)) {
     m <- paste0("Based on the EBD filename, it appears you should use ",
                 "taxonomy_version = %i")
     warning(sprintf(m, v))
