@@ -163,7 +163,7 @@
 <h3 class="hasAnchor">
 <a href="#unit-tests" class="anchor"></a>4. Unit tests</h3>
 <p>Now that you’ve successfully created the filter, play around with it a bit to make sure it works as expected. Once you feel the filter is working, it’s time to formalize this testing process by defining unit tests. Open the file <code>tests/testthat/test_filters.r</code> and you’ll notice a series of calls like <code>test_that("auk_species", ...</code>, each of which contains tests for a specific filter.</p>
-<p>Using an existing test block as an example, define a new block (again, put it in the correct order relative to the other filters). Consult the <a href="http://r-pkgs.had.co.nz/tests.html">Testing chapter</a> of Hadley Wickham’s <a href="http://r-pkgs.had.co.nz/">R packages book</a> for details on defining good unit tests. At the very least, define tests to make sure that typical use works as expected, that errors are caught when input is invalid, and that edge cases are correctly handled.</p>
+<p>Using an existing test block as an example, define a new block (again, put it in the correct order relative to the other filters). Consult the <a href="https://r-pkgs.org/tests.html">Testing chapter</a> of Hadley Wickham’s <a href="https://r-pkgs.org/">R packages book</a> for details on defining good unit tests. At the very least, define tests to make sure that typical use works as expected, that errors are caught when input is invalid, and that edge cases are correctly handled.</p>
 </div>
 <div id="update-vignette-and-readme" class="section level3">
 <h3 class="hasAnchor">
@@ -190,7 +190,7 @@
 <div id="cran-submission" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cran-submission" class="anchor"></a>CRAN submission</h2>
-<p>Minor updates to <code>auk</code> can be pushed to GitHub giving users the option of installing the development version from there. However, at least once a year, when a new eBird taxonomy is released, a new version of <code>auk</code> should be released on CRAN. For full details on this process, consult Hadley Wickham’s <a href="http://r-pkgs.had.co.nz/release.html">R Packages book</a>, however, I’ll provide a quick guide here. Once The package has been updated following the instructions from the above sections:</p>
+<p>Minor updates to <code>auk</code> can be pushed to GitHub giving users the option of installing the development version from there. However, at least once a year, when a new eBird taxonomy is released, a new version of <code>auk</code> should be released on CRAN. For full details on this process, consult Hadley Wickham’s <a href="https://r-pkgs.org/release.html">R Packages book</a>, however, I’ll provide a quick guide here. Once The package has been updated following the instructions from the above sections:</p>
 <ol style="list-style-type: decimal">
 <li>Check the package. Run <code><a href="https://devtools.r-lib.org//reference/check.html">devtools::check()</a></code> to run <code>R CMD check</code> locally. Check that a Windows binary can be built by running <code>devtools::build_win()</code>. The results will be emailed to you within about 30 minutes. Also, this package uses continuous integration to automatically check the package on Linux, Mac, and Windows whenever it’s pushed to GitHub. Check the badges at the top of the GitHub repo to ensure the builds are passing. Any NOTEs, ERRORs, or WARNINGs returned by R CMD check must be fixed before submission to CRAN.</li>
 <li>Increment the version number in the <code>DESCRIPTION</code> file.</li>

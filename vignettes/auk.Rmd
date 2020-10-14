@@ -148,7 +148,7 @@ ebd
 
 ### Defining filters
 
-`auk` uses a [pipeline-based workflow](http://r4ds.had.co.nz/pipes.html) for defining filters, which can then be compiled into an AWK script. Any of the following filters can be applied:
+`auk` uses a [pipeline-based workflow](https://r4ds.had.co.nz/pipes.html) for defining filters, which can then be compiled into an AWK script. Any of the following filters can be applied:
 
 - `auk_species()`: filter by species using common or scientific names.
 - `auk_country()`: filter by country using the standard English names or [ISO 2-letter country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).

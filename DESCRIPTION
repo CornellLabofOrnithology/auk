@@ -25,7 +25,7 @@ Description: Extract and process bird sightings records from
     imported into R.
 License: GPL-3
 URL: https://github.com/CornellLabofOrnithology/auk,
-    http://cornelllabofornithology.github.io/auk/
+    https://cornelllabofornithology.github.io/auk/
 BugReports: 
     https://github.com/CornellLabofOrnithology/auk/issues
 Depends: 

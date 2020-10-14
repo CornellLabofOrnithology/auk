@@ -22,7 +22,7 @@ An \code{auk_ebd} object.
 }
 \description{
 Define a filter for the eBird Basic Dataset (EBD) to extract data for a set
-of \href{http://nabci-us.org/resources/bird-conservation-regions/}{Bird Conservation Regions} (BCRs).
+of \href{https://nabci-us.org/resources/bird-conservation-regions/}{Bird Conservation Regions} (BCRs).
 BCRs are ecologically distinct regions in North America with similar bird
 communities, habitats, and resource management issues. This function only
 defines the filter and, once all filters have been defined, \code{\link[=auk_filter]{auk_filter()}}

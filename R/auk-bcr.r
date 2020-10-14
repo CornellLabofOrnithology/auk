@@ -2,7 +2,7 @@
 #'
 #' Define a filter for the eBird Basic Dataset (EBD) to extract data for a set
 #' of [Bird Conservation
-#' Regions](http://nabci-us.org/resources/bird-conservation-regions/) (BCRs).
+#' Regions](https://nabci-us.org/resources/bird-conservation-regions/) (BCRs).
 #' BCRs are ecologically distinct regions in North America with similar bird
 #' communities, habitats, and resource management issues. This function only
 #' defines the filter and, once all filters have been defined, [auk_filter()]
