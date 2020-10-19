@@ -71,7 +71,7 @@
 
       
 
-      </header><script src="auk_files/header-attrs-2.3/header-attrs.js"></script><script src="auk_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="auk_files/header-attrs-2.4/header-attrs.js"></script><script src="auk_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to auk</h1>
@@ -97,30 +97,32 @@
 <li>Import this text file into R as a data frame.</li>
 </ol>
 <p>Because the eBird dataset is so large, step 3 typically takes several hours to run. Here’s a simple example that extract all Canada Jay records from within Canada.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">auk</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/CornellLabofOrnithology/auk">auk</a></span><span class="op">)</span>
 <span class="co"># path to the ebird data file, here a sample included in the package</span>
 <span class="co"># in practice, provide path to ebd, e.g. input_file &lt;- "data/ebd_relFeb-2018.txt"</span>
-<span class="no">input_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>)
+<span class="va">input_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span>
 <span class="co"># output text file</span>
-<span class="no">output_file</span> <span class="kw">&lt;-</span> <span class="st">"ebd_filtered_grja.txt"</span>
-<span class="no">ebird_data</span> <span class="kw">&lt;-</span> <span class="no">input_file</span> <span class="kw">%&gt;%</span>
+<span class="va">output_file</span> <span class="op">&lt;-</span> <span class="st">"ebd_filtered_grja.txt"</span>
+<span class="va">ebird_data</span> <span class="op">&lt;-</span> <span class="va">input_file</span> <span class="op">%&gt;%</span> 
   <span class="co"># 1. reference file</span>
-  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="co"># 2. define filters</span>
-  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="kw">species</span> <span class="kw">=</span> <span class="st">"Canada Jay"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="kw">country</span> <span class="kw">=</span> <span class="st">"Canada"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"Canada Jay"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Canada"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="co"># 3. run filtering</span>
-  <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="kw">file</span> <span class="kw">=</span> <span class="no">output_file</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">output_file</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="co"># 4. read text file into r data frame</span>
-  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span>()</pre></body></html></div>
+  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>For those not familiar with the pipe operator (<code><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></code>), the above code could be rewritten:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">input_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>)
-<span class="no">output_file</span> <span class="kw">&lt;-</span> <span class="st">"ebd_filtered_grja.txt"</span>
-<span class="no">ebd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span>(<span class="no">input_file</span>)
-<span class="no">ebd_filters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="no">ebd</span>, <span class="kw">species</span> <span class="kw">=</span> <span class="st">"Canada Jay"</span>)
-<span class="no">ebd_filters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="no">ebd_filters</span>, <span class="kw">country</span> <span class="kw">=</span> <span class="st">"Canada"</span>)
-<span class="no">ebd_filtered</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="no">ebd_filters</span>, <span class="kw">file</span> <span class="kw">=</span> <span class="no">output_file</span>)
-<span class="no">ebd_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span>(<span class="no">ebd_filtered</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="va">input_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span>
+<span class="va">output_file</span> <span class="op">&lt;-</span> <span class="st">"ebd_filtered_grja.txt"</span>
+<span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="va">input_file</span><span class="op">)</span>
+<span class="va">ebd_filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span><span class="op">(</span><span class="va">ebd</span>, species <span class="op">=</span> <span class="st">"Canada Jay"</span><span class="op">)</span>
+<span class="va">ebd_filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span><span class="op">(</span><span class="va">ebd_filters</span>, country <span class="op">=</span> <span class="st">"Canada"</span><span class="op">)</span>
+<span class="va">ebd_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span><span class="op">(</span><span class="va">ebd_filters</span>, file <span class="op">=</span> <span class="va">output_file</span><span class="op">)</span>
+<span class="va">ebd_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">ebd_filtered</span><span class="op">)</span></pre></div>
 </div>
 <div id="background" class="section level2">
 <h2 class="hasAnchor">
@@ -148,14 +150,16 @@
 <h3 class="hasAnchor">
 <a href="#example-data" class="anchor"></a>Example data</h3>
 <p>This package comes with two example datasets. The first is suitable for practicing filtering the EBD and producing presence-only data. It’s a sample of 500 records from the EBD. It contains data from North and Central America from 2010-2012 on 4 jay species: Canada Jay, Blue Jay, Steller’s Jay, and Green Jay. It can be accessed with:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">auk</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/CornellLabofOrnithology/auk">auk</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></pre></div>
 <p>The second is suitable for producing zero-filled, presence-absence data. It contains every sighting from Singapore in 2012 of Collared Kingfisher, White-throated Kingfisher, and Blue-eared Kingfisher. The full Sampling Event Data file is also included, and contains all checklists from Singapore in 2012. These files can be accessed with:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># ebd</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/zerofill-ex_ebd.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="co"># ebd</span>
+<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_ebd.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span>
 <span class="co"># sampling event data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/zerofill-ex_sampling.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></pre></div>
 <p><strong>Important note:</strong> in this vignette, <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code> is used to return the path to the example data included in this package. When using <code>auk</code> in practice, provide the path to the location of the EBD on your computer, this could be a relative path, e.g. <code>"data/ebd_relFeb-2018.txt"</code>, or an absolute path, e.g. <code>"~/ebird/ebd_relFeb-2018/ebd_relFeb-2018.txt"</code>.</p>
 </div>
 <div id="awk" class="section level3">
@@ -184,11 +188,12 @@
 <h3 class="hasAnchor">
 <a href="#the-auk_ebd-object" class="anchor"></a>The <code>auk_ebd</code> object</h3>
 <p>This package uses an <code>auk_ebd</code> object to keep track of the input data file, any filters defined, and the output file that is produced after filtering has been executed. By keeping everything wrapped up in one object, the user can keep track of exactly what set of input data and filters produced any given output data. To set up the initial <code>auk_ebd</code> object, use <code><a href="../reference/auk_ebd.html">auk_ebd()</a></code>:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">ebd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span>()
-<span class="no">ebd</span>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">ebd</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpYZK5dw/temp_libpath16766420ee0d7/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpS44pWl/temp_libpath1fa975f1d47f/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -209,7 +214,7 @@
 <span class="co">#&gt;   Duration: all</span>
 <span class="co">#&gt;   Distance travelled: all</span>
 <span class="co">#&gt;   Records with breeding codes only: no</span>
-<span class="co">#&gt;   Complete checklists only: no</span></pre></body></html></div>
+<span class="co">#&gt;   Complete checklists only: no</span></pre></div>
 </div>
 <div id="defining-filters" class="section level3">
 <h3 class="hasAnchor">
@@ -223,7 +228,7 @@
 <li>
 <code><a href="../reference/auk_state.html">auk_state()</a></code>: filter by state using the eBird state codes, see <code><a href="../reference/ebird_states.html">?ebird_states</a></code>.</li>
 <li>
-<code><a href="../reference/auk_bcr.html">auk_bcr()</a></code>: filter by <a href="http://nabci-us.org/resources/bird-conservation-regions/">Bird Conservation Region (BCR)</a> using BCR codes, see <code><a href="../reference/bcr_codes.html">?bcr_codes</a></code>.</li>
+<code><a href="../reference/auk_bcr.html">auk_bcr()</a></code>: filter by <a href="https://nabci-us.org/resources/bird-conservation-regions/">Bird Conservation Region (BCR)</a> using BCR codes, see <code><a href="../reference/bcr_codes.html">?bcr_codes</a></code>.</li>
 <li>
 <code><a href="../reference/auk_bbox.html">auk_bbox()</a></code>: filter by spatial bounding box, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
@@ -246,25 +251,26 @@
 <code><a href="../reference/auk_complete.html">auk_complete()</a></code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the “absence” information is inferred by the lack of reporting of a species on checklists.</li>
 </ul>
 <p>Note that all of the functions listed above only modify the <code>auk_ebd</code> object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using <code><a href="../reference/auk_filter.html">auk_filter()</a></code>.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">ebd_filters</span> <span class="kw">&lt;-</span> <span class="no">ebd</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="va">ebd_filters</span> <span class="op">&lt;-</span> <span class="va">ebd</span> <span class="op">%&gt;%</span> 
   <span class="co"># species: common and scientific names can be mixed</span>
-  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="kw">species</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># country: codes and names can be mixed; case insensitive</span>
-  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="kw">country</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># bbox: long and lat in decimal degrees</span>
   <span class="co"># formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span>
-  <span class="fu"><a href="../reference/auk_bbox.html">auk_bbox</a></span>(<span class="kw">bbox</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">100</span>, <span class="fl">37</span>, -<span class="fl">80</span>, <span class="fl">52</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/auk_bbox.html">auk_bbox</a></span><span class="op">(</span>bbox <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">37</span>, <span class="op">-</span><span class="fl">80</span>, <span class="fl">52</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># date: use standard ISO date format `"YYYY-MM-DD"`</span>
-  <span class="fu"><a href="../reference/auk_date.html">auk_date</a></span>(<span class="kw">date</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/auk_date.html">auk_date</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># time: 24h format</span>
-  <span class="fu"><a href="../reference/auk_time.html">auk_time</a></span>(<span class="kw">start_time</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/auk_time.html">auk_time</a></span><span class="op">(</span>start_time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"06:00"</span>, <span class="st">"09:00"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># duration: length in minutes of checklists</span>
-  <span class="fu"><a href="../reference/auk_duration.html">auk_duration</a></span>(<span class="kw">duration</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">60</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/auk_duration.html">auk_duration</a></span><span class="op">(</span>duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># complete: all species seen or heard are recorded</span>
-  <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span>()
-<span class="no">ebd_filters</span>
+  <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">ebd_filters</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpYZK5dw/temp_libpath16766420ee0d7/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpS44pWl/temp_libpath1fa975f1d47f/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -285,28 +291,30 @@
 <span class="co">#&gt;   Duration: 0-60 minutes</span>
 <span class="co">#&gt;   Distance travelled: all</span>
 <span class="co">#&gt;   Records with breeding codes only: no</span>
-<span class="co">#&gt;   Complete checklists only: yes</span></pre></body></html></div>
+<span class="co">#&gt;   Complete checklists only: yes</span></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="https://ebird.org/science/the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package. This is particularly important because filtering is a time consuming process, so catching errors in advance can avoid several hours of wasted time.</p>
 </div>
 <div id="executing-filters" class="section level3">
 <h3 class="hasAnchor">
 <a href="#executing-filters" class="anchor"></a>Executing filters</h3>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="../reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">output_file</span> <span class="kw">&lt;-</span> <span class="st">"ebd_filtered_blja-grja.txt"</span>
-<span class="no">ebd_jays</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="kw">species</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="kw">country</span> <span class="kw">=</span> <span class="st">"Canada"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="kw">file</span> <span class="kw">=</span> <span class="no">output_file</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="va">output_file</span> <span class="op">&lt;-</span> <span class="st">"ebd_filtered_blja-grja.txt"</span>
+<span class="va">ebd_jays</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Canada"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">output_file</span><span class="op">)</span></pre></div>
 <p><strong>Filtering the full EBD typically takes at least a couple hours</strong>, so set it running then go grab lunch!</p>
 </div>
 <div id="reading" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reading" class="anchor"></a>Reading</h3>
 <p>eBird Basic Dataset files can be read with <code><a href="../reference/read_ebd.html">read_ebd()</a></code>. This is a wrapper around <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">data.table::fread()</a></code>, <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_delim()</a></code>, or <code><a href="https://rdrr.io/r/utils/read.table.html">read.delim()</a></code>, depending on which packages are installed. <code><a href="../reference/read_ebd.html">read_ebd()</a></code> uses <code>stringsAsFactors = FALSE</code>, <code>quote = ""</code>, sets column classes, and converts variable names to <code>snake_case</code>.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>()
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 494</span>
 <span class="co">#&gt; Columns: 45</span>
 <span class="co">#&gt; $ checklist_id                 &lt;chr&gt; "S6852862", "S14432467", "S39033556", "S…</span>
@@ -353,31 +361,33 @@
 <span class="co">#&gt; $ reviewed                     &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE…</span>
 <span class="co">#&gt; $ reason                       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
 <span class="co">#&gt; $ trip_comments                &lt;chr&gt; NA, "Alonso Gomez Hdz Monitoreo Comunita…</span>
-<span class="co">#&gt; $ species_comments             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></pre></body></html></div>
+<span class="co">#&gt; $ species_comments             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></pre></div>
 <p><code><a href="../reference/auk_filter.html">auk_filter()</a></code> returns an <code>auk_ebd</code> object with the output file paths stored in it. This <code>auk_ebd</code> object can then be passed directly to <code>auk_read()</code>, allowing for a complete pipeline. For example, we can create an <code>auk_ebd</code> object, define filters, filter with AWK, and read in the results all at once.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">output_file</span> <span class="kw">&lt;-</span> <span class="st">"ebd_filtered_blja-grja.txt"</span>
-<span class="no">ebd_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="kw">species</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="kw">country</span> <span class="kw">=</span> <span class="st">"Canada"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="kw">file</span> <span class="kw">=</span> <span class="no">output_file</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="va">output_file</span> <span class="op">&lt;-</span> <span class="st">"ebd_filtered_blja-grja.txt"</span>
+<span class="va">ebd_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Canada"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">output_file</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 </div>
 <div id="saving-the-awk-command" class="section level3">
 <h3 class="hasAnchor">
 <a href="#saving-the-awk-command" class="anchor"></a>Saving the AWK command</h3>
 <p>The AWK script can be saved for future reference by providing an output filename to <code>awk_file</code>. In addition, by setting <code>execute = FALSE</code> the AWK script will be generated but not run.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">awk_script</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="kw">species</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span>(<span class="kw">country</span> <span class="kw">=</span> <span class="st">"Canada"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span>(<span class="kw">awk_file</span> <span class="kw">=</span> <span class="st">"awk-script.txt"</span>, <span class="kw">execute</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="va">awk_script</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_country.html">auk_country</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Canada"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span><span class="op">(</span>awk_file <span class="op">=</span> <span class="st">"awk-script.txt"</span>, execute <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co"># read back in and prepare for printing</span>
-<span class="no">awk_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="no">awk_script</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span>(<span class="st">"awk-script.txt"</span>)
-<span class="no">awk_file</span>[!<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"^[[:space:]]*$"</span>, <span class="no">awk_file</span>)] <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="kw">collapse</span> <span class="kw">=</span> <span class="st">"\n"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>()
+<span class="va">awk_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">awk_script</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="st">"awk-script.txt"</span><span class="op">)</span>
+<span class="va">awk_file</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"^[[:space:]]*$"</span>, <span class="va">awk_file</span><span class="op">)</span><span class="op">]</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; BEGIN {</span>
 <span class="co">#&gt;   FS = OFS = "   "</span>
 <span class="co">#&gt;     split("Cyanocitta cristata   Perisoreus canadensis", speciesValues, "    ")</span>
@@ -405,48 +415,50 @@
 <span class="co">#&gt;   if (keep == 1) {</span>
 <span class="co">#&gt;     print $0</span>
 <span class="co">#&gt;   }</span>
-<span class="co">#&gt; }</span></pre></body></html></div>
+<span class="co">#&gt; }</span></pre></div>
 </div>
 <div id="group-checklists" class="section level3">
 <h3 class="hasAnchor">
 <a href="#group-checklists" class="anchor"></a>Group checklists</h3>
 <p>eBird allows observers birding together to share checklists. This process creates a new copy of the original checklist for each observer with whom the original checklist was shared; these copies can then be tweaked to add or remove some species that weren’t seen by the entire group, or altering the sampling-event data. For most applications, it’s best to remove these duplicate (or near-duplicate) checklists. <code><a href="../reference/auk_unique.html">auk_unique()</a></code> removes duplicates resulting from group checklists by selecting the observation with the lowest <code>sampling_event_identifier</code> (a unique ID for each checklist); this is the original checklists from which shared copies were generated. In addition to removing duplicates, a <code>checklist_id</code> field is added, which is equal to the <code>sampling_event_identifier</code> for non-group checklists and the <code>group_identifier</code> for grouped checklists. After running <code><a href="../reference/auk_unique.html">auk_unique()</a></code>, every species will have a single entry for each <code>checklist_id</code>.</p>
 <p><code><a href="../reference/read_ebd.html">read_ebd()</a></code> automatically runs <code><a href="../reference/auk_unique.html">auk_unique()</a></code>, however, we can use <code>unique = FALSE</code> then manually run <code><a href="../reference/auk_unique.html">auk_unique()</a></code>.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># read in an ebd file and don't automatically remove duplicates</span>
-<span class="no">ebd_dupes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span>(<span class="kw">unique</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="co"># read in an ebd file and don't automatically remove duplicates</span>
+<span class="va">ebd_dupes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span><span class="op">(</span>unique <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co"># remove duplicates</span>
-<span class="no">ebd_unique</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/auk_unique.html">auk_unique</a></span>(<span class="no">ebd_dupes</span>)
+<span class="va">ebd_unique</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_unique.html">auk_unique</a></span><span class="op">(</span><span class="va">ebd_dupes</span><span class="op">)</span>
 <span class="co"># compare number of rows</span>
-<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">ebd_dupes</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ebd_dupes</span><span class="op">)</span>
 <span class="co">#&gt; [1] 500</span>
-<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">ebd_unique</span>)
-<span class="co">#&gt; [1] 494</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ebd_unique</span><span class="op">)</span>
+<span class="co">#&gt; [1] 494</span></pre></div>
 </div>
 <div id="taxonomic-rollup" class="section level3">
 <h3 class="hasAnchor">
 <a href="#taxonomic-rollup" class="anchor"></a>Taxonomic rollup</h3>
 <p>The eBird Basic Dataset includes both true species and other taxa, including domestics, hybrids, subspecies, “spuhs”, and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon’s and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, “warbler sp.”. For most use cases, a single record for each species on each checklist is desired. The function <code>ebd_rollup()</code> addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co"># read in sample data without rolling up</span>
-<span class="no">ebd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/ebd-rollup-ex.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span>(<span class="kw">rollup</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="co"># read in sample data without rolling up</span>
+<span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-rollup-ex.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span><span class="op">(</span>rollup <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co"># apply roll up</span>
-<span class="no">ebd_ru</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/auk_rollup.html">auk_rollup</a></span>(<span class="no">ebd</span>)
+<span class="va">ebd_ru</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_rollup.html">auk_rollup</a></span><span class="op">(</span><span class="va">ebd</span><span class="op">)</span>
 
 <span class="co"># all taxa not identifiable to species are dropped</span>
 <span class="co"># taxa below species have been rolled up to species</span>
-<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">ebd</span>$<span class="no">category</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ebd</span><span class="op">$</span><span class="va">category</span><span class="op">)</span>
 <span class="co">#&gt; [1] "domestic"   "form"       "hybrid"     "intergrade" "slash"     </span>
 <span class="co">#&gt; [6] "spuh"       "species"    "issf"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">ebd_ru</span>$<span class="no">category</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ebd_ru</span><span class="op">$</span><span class="va">category</span><span class="op">)</span>
 <span class="co">#&gt; [1] "species"</span>
 
 <span class="co"># yellow-rump warbler subspecies rollup</span>
 <span class="co"># without rollup, there are three observations</span>
-<span class="no">ebd</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">common_name</span> <span class="kw">==</span> <span class="st">"Yellow-rumped Warbler"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">checklist_id</span>, <span class="no">category</span>, <span class="no">common_name</span>, <span class="no">subspecies_common_name</span>,
-         <span class="no">observation_count</span>)
+<span class="va">ebd</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">subspecies_common_name</span>,
+         <span class="va">observation_count</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 3 x 5</span>
 <span class="co">#&gt;   checklist_id category common_name     subspecies_common_name  observation_cou…</span>
 <span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;                   &lt;chr&gt;           </span>
@@ -454,13 +466,13 @@
 <span class="co">#&gt; 2 S8949407     issf     Yellow-rumped … Yellow-rumped Warbler … 13              </span>
 <span class="co">#&gt; 3 S8949407     issf     Yellow-rumped … Yellow-rumped Warbler … 17</span>
 <span class="co"># with rollup, they have been combined</span>
-<span class="no">ebd_ru</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">common_name</span> <span class="kw">==</span> <span class="st">"Yellow-rumped Warbler"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">checklist_id</span>, <span class="no">category</span>, <span class="no">common_name</span>, <span class="no">observation_count</span>)
+<span class="va">ebd_ru</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">observation_count</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   checklist_id category common_name           observation_count</span>
 <span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;            </span>
-<span class="co">#&gt; 1 S8949407     species  Yellow-rumped Warbler 31</span></pre></body></html></div>
+<span class="co">#&gt; 1 S8949407     species  Yellow-rumped Warbler 31</span></pre></div>
 <p>By default, <code><a href="../reference/read_ebd.html">read_ebd()</a></code> calls <code>ebd_rollup()</code> when importing an eBird Basic Dataset file. To avoid this, and retain subspecies, use <code><a href="../reference/read_ebd.html">read_ebd(rollup = FALSE)</a></code>.</p>
 </div>
 </div>
@@ -473,17 +485,18 @@
 <a href="#filtering" class="anchor"></a>Filtering</h3>
 <p>When preparing to create zero-filled data, the eBird Basic Dataset and sampling event data must be filtered to the same set of checklists to ensure consistency. To ensure these two datasets are synced, provide <em>both</em> to <code>auk_ebd</code>, then filter as described in the previous section. This will ensure that all the filters applied to the ebd (except species) will be applied to the sampling event data so that we’ll be working with the same set of checklists. It is critical that <code>auk_compete()</code> is called, since complete checklists are a requirement for zero-filling.</p>
 <p>For example, the following filters to only include sightings of Collared Kingfisher between 6 and 10am:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="co"># to produce zero-filled data, provide an EBD and sampling event data file</span>
-<span class="no">f_ebd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/zerofill-ex_ebd.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>)
-<span class="no">f_smp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/zerofill-ex_sampling.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"auk"</span>)
-<span class="no">filters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span>(<span class="no">f_ebd</span>, <span class="kw">file_sampling</span> <span class="kw">=</span> <span class="no">f_smp</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span>(<span class="st">"Collared Kingfisher"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_time.html">auk_time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"06:00"</span>, <span class="st">"10:00"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span>()
-<span class="no">filters</span>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="co"># to produce zero-filled data, provide an EBD and sampling event data file</span>
+<span class="va">f_ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_ebd.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span>
+<span class="va">f_smp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span>
+<span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="va">f_ebd</span>, file_sampling <span class="op">=</span> <span class="va">f_smp</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_species.html">auk_species</a></span><span class="op">(</span><span class="st">"Collared Kingfisher"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_time.html">auk_time</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"06:00"</span>, <span class="st">"10:00"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">filters</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpYZK5dw/temp_libpath16766420ee0d7/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpYZK5dw/temp_libpath16766420ee0d7/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpS44pWl/temp_libpath1fa975f1d47f/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpS44pWl/temp_libpath1fa975f1d47f/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -504,15 +517,16 @@
 <span class="co">#&gt;   Duration: all</span>
 <span class="co">#&gt;   Distance travelled: all</span>
 <span class="co">#&gt;   Records with breeding codes only: no</span>
-<span class="co">#&gt;   Complete checklists only: yes</span></pre></body></html></div>
+<span class="co">#&gt;   Complete checklists only: yes</span></pre></div>
 <p>As with presence-only data, call <code><a href="../reference/auk_filter.html">auk_filter()</a></code> to actually run AWK. Output files must be provided for both the EBD and sampling event data.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="co">## ebd_sed_filtered &lt;- auk_filter(filters, </span>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="co">## ebd_sed_filtered &lt;- auk_filter(filters, </span>
 <span class="co">##                                file = "ebd-filtered.txt",</span>
 <span class="co">##                                file_sampling = "sampling-filtered.txt")</span>
-<span class="no">ebd_sed_filtered</span>
+<span class="va">ebd_sed_filtered</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpYZK5dw/temp_libpath16766420ee0d7/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpYZK5dw/temp_libpath16766420ee0d7/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpS44pWl/temp_libpath1fa975f1d47f/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpS44pWl/temp_libpath1fa975f1d47f/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   EBD: ebd-filtered.txt </span>
@@ -534,15 +548,16 @@
 <span class="co">#&gt;   Duration: all</span>
 <span class="co">#&gt;   Distance travelled: all</span>
 <span class="co">#&gt;   Records with breeding codes only: no</span>
-<span class="co">#&gt;   Complete checklists only: yes</span></pre></body></html></div>
+<span class="co">#&gt;   Complete checklists only: yes</span></pre></div>
 </div>
 <div id="reading-and-zero-filling" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reading-and-zero-filling" class="anchor"></a>Reading and zero-filling</h3>
 <p>The filtered datasets can now be combined into a zero-filled, presence-absence dataset using <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code>.</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="co">## ebd_zf &lt;- auk_zerofill(ebd_sed_filtered)</span>
-<span class="no">ebd_zf</span>
-<span class="co">#&gt; Zero-filled EBD: 168 unique checklists, for 1 species.</span></pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="co">## ebd_zf &lt;- auk_zerofill(ebd_sed_filtered)</span>
+<span class="va">ebd_zf</span>
+<span class="co">#&gt; Zero-filled EBD: 168 unique checklists, for 1 species.</span></pre></div>
 <p>Filenames or data frames of the basic dataset and sampling event data can also be passed to <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code>; see the documentation for these cases. By default, <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code> returns an <code>auk_zerofill</code> object consisting of two data frames that can be linked by a common <code>checklist_id</code> field:</p>
 <ul>
 <li>
@@ -550,7 +565,8 @@
 <li>
 <code>ebd_zf$observations</code> contains the species counts and a binary presence-absence variable</li>
 </ul>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ebd_zf</span>$<span class="no">observations</span>)
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ebd_zf</span><span class="op">$</span><span class="va">observations</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 4</span>
 <span class="co">#&gt;   checklist_id scientific_name     observation_count species_observed</span>
 <span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;             &lt;lgl&gt;           </span>
@@ -560,7 +576,7 @@
 <span class="co">#&gt; 4 G2469960     Todiramphus chloris 1                 TRUE            </span>
 <span class="co">#&gt; 5 G2469973     Todiramphus chloris 1                 TRUE            </span>
 <span class="co">#&gt; 6 G2470208     Todiramphus chloris 0                 FALSE</span>
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(<span class="no">ebd_zf</span>$<span class="no">sampling_events</span>)
+<span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">ebd_zf</span><span class="op">$</span><span class="va">sampling_events</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 168</span>
 <span class="co">#&gt; Columns: 31</span>
 <span class="co">#&gt; $ checklist_id              &lt;chr&gt; "S11332512", "S13581013", "S38296538", "S38…</span>
@@ -593,13 +609,14 @@
 <span class="co">#&gt; $ number_observers          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3…</span>
 <span class="co">#&gt; $ all_species_reported      &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, T…</span>
 <span class="co">#&gt; $ group_identifier          &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</span>
-<span class="co">#&gt; $ trip_comments             &lt;chr&gt; NA, NA, NA, NA, "Trip report;--http://redga…</span></pre></body></html></div>
+<span class="co">#&gt; $ trip_comments             &lt;chr&gt; NA, NA, NA, NA, "Trip report;--http://redga…</span></pre></div>
 <p>This format is efficient for storage because the checklist information isn’t duplicated, however, a single flat data frame is often required for analysis. To collapse the two data frames together use <code><a href="../reference/auk_zerofill.html">collapse_zerofill()</a></code>, or call <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code> with <code>collapse = TRUE</code>.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co">## ebd_zf_df &lt;- auk_zerofill(ebd_filtered, collapse = TRUE)</span>
-<span class="no">ebd_zf_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/auk_zerofill.html">collapse_zerofill</a></span>(<span class="no">ebd_zf</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span>(<span class="no">ebd_zf_df</span>)
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="co">## ebd_zf_df &lt;- auk_zerofill(ebd_filtered, collapse = TRUE)</span>
+<span class="va">ebd_zf_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_zerofill.html">collapse_zerofill</a></span><span class="op">(</span><span class="va">ebd_zf</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ebd_zf_df</span><span class="op">)</span>
 <span class="co">#&gt; [1] "tbl_df"     "tbl"        "data.frame"</span>
-<span class="no">ebd_zf_df</span>
+<span class="va">ebd_zf_df</span>
 <span class="co">#&gt; # A tibble: 168 x 34</span>
 <span class="co">#&gt;    checklist_id last_edited_date country country_code state state_code county</span>
 <span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; </span>
@@ -621,7 +638,7 @@
 <span class="co">#&gt; #   protocol_code &lt;chr&gt;, project_code &lt;chr&gt;, duration_minutes &lt;int&gt;,</span>
 <span class="co">#&gt; #   effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;,</span>
 <span class="co">#&gt; #   all_species_reported &lt;lgl&gt;, group_identifier &lt;chr&gt;, trip_comments &lt;chr&gt;,</span>
-<span class="co">#&gt; #   scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;, species_observed &lt;lgl&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;, species_observed &lt;lgl&gt;</span></pre></div>
 </div>
 </div>
 <div id="acknowledgements" class="section level2">
@@ -654,7 +671,7 @@ Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. L
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

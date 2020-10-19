@@ -131,7 +131,7 @@ only use <code>auk_sampling()</code> if you intend to only work with checklist-l
 data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>auk_sampling</span>(<span class='no'>file</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_sampling</span><span class='op'>(</span><span class='va'>file</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,9 +171,10 @@ function creates an R object to reference only the sampling data.</p>
     <pre class="examples"><div class='input'><span class='co'># get the path to the example data included in the package</span>
 <span class='co'># in practice, provide path to the sampling event data</span>
 <span class='co'># e.g. f &lt;- "data/ebd_sampling_relFeb-2018.txt"</span>
-<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
-<span class='fu'>auk_sampling</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; Input 
-#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpYZK5dw/temp_libpath16766420ee0d7/auk/extdata/zerofill-ex_sampling.txt 
+<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
+<span class='fu'>auk_sampling</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Input 
+#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpS44pWl/temp_libpath1fa975f1d47f/auk/extdata/zerofill-ex_sampling.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -207,7 +208,7 @@ function creates an R object to reference only the sampling data.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

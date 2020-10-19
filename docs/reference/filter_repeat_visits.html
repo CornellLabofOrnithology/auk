@@ -139,16 +139,16 @@ observation data that have a desired number of repeat visits within a period
 of closure.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>filter_repeat_visits</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>min_obs</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
-  <span class='kw'>max_obs</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
-  <span class='kw'>annual_closure</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>date_var</span> <span class='kw'>=</span> <span class='st'>"observation_date"</span>,
-  <span class='kw'>site_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"locality_id"</span>, <span class='st'>"observer_id"</span>),
-  <span class='kw'>ll_digits</span> <span class='kw'>=</span> <span class='fl'>6L</span>
-)</pre>
+    <pre class="usage"><span class='fu'>filter_repeat_visits</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  min_obs <span class='op'>=</span> <span class='fl'>2L</span>,
+  max_obs <span class='op'>=</span> <span class='fl'>10L</span>,
+  annual_closure <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  n_days <span class='op'>=</span> <span class='cn'>NULL</span>,
+  date_var <span class='op'>=</span> <span class='st'>"observation_date"</span>,
+  site_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"locality_id"</span>, <span class='st'>"observer_id"</span><span class='op'>)</span>,
+  ll_digits <span class='op'>=</span> <span class='fl'>6L</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,13 +240,14 @@ combination of the <code>n_days</code> and <code>annual_closure</code> arguments
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># read and zero-fill the ebd data</span>
-<span class='no'>f_ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
-<span class='no'>f_smpl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='va'>f_ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
+<span class='va'>f_smpl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
 <span class='co'># data must be for a single species</span>
-<span class='no'>ebd_zf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>,
-                       <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"Collared Kingfisher"</span>,
-                       <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>filter_repeat_visits</span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 181 x 37</span><span>
+<span class='va'>ebd_zf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>f_ebd</span>, sampling_events <span class='op'>=</span> <span class='va'>f_smpl</span>,
+                       species <span class='op'>=</span> <span class='st'>"Collared Kingfisher"</span>,
+                       collapse <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>filter_repeat_visits</span><span class='op'>(</span><span class='va'>ebd_zf</span>, n_days <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 181 x 37</span><span>
 #&gt;    site  closure_id n_observations checklist_id last_edited_date country
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #555555;'> 1</span><span> L105… 2012-9                  2 S11680564    2017-10-19 12:4… Singap…
@@ -284,7 +285,7 @@ combination of the <code>n_days</code> and <code>annual_closure</code> arguments
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

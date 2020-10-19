@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Format EBD data for occupancy modeling with <code>unmarked</code> — format_unmarked_occu • auk</title>
+<title>Format EBD data for occupancy modeling with unmarked — format_unmarked_occu • auk</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Format EBD data for occupancy modeling with <code>unmarked</code> — format_unmarked_occu" />
+<meta property="og:title" content="Format EBD data for occupancy modeling with unmarked — format_unmarked_occu" />
 <meta property="og:description" content="Prepare a data frame of species observations for ingestion into the package
 unmarked for hierarchical modeling of abundance and occurrence. The
 function unmarked::formatWide() takes a data frame and converts it to one
@@ -137,13 +137,13 @@ function converts data from a format in which each row is an observation
 <code><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>unmarked::formatWide()</a></code> in which each row is a site.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>format_unmarked_occu</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>site_id</span> <span class='kw'>=</span> <span class='st'>"site"</span>,
-  <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"species_observed"</span>,
-  <span class='no'>site_covs</span>,
-  <span class='no'>obs_covs</span>
-)</pre>
+    <pre class="usage"><span class='fu'>format_unmarked_occu</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  site_id <span class='op'>=</span> <span class='st'>"site"</span>,
+  response <span class='op'>=</span> <span class='st'>"species_observed"</span>,
+  <span class='va'>site_covs</span>,
+  <span class='va'>obs_covs</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,25 +217,26 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># read and zero-fill the ebd data</span>
-<span class='no'>f_ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
-<span class='no'>f_smpl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='va'>f_ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
+<span class='va'>f_smpl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
 <span class='co'># data must be for a single species</span>
-<span class='no'>ebd_zf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>f_ebd</span>, <span class='kw'>sampling_events</span> <span class='kw'>=</span> <span class='no'>f_smpl</span>,
-                       <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"Collared Kingfisher"</span>,
-                       <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>occ</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='no'>ebd_zf</span>, <span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)
+<span class='va'>ebd_zf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>f_ebd</span>, sampling_events <span class='op'>=</span> <span class='va'>f_smpl</span>,
+                       species <span class='op'>=</span> <span class='st'>"Collared Kingfisher"</span>,
+                       collapse <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>occ</span> <span class='op'>&lt;-</span> <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span><span class='op'>(</span><span class='va'>ebd_zf</span>, n_days <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
 <span class='co'># format for unmarked</span>
 <span class='co'># typically one would join in habitat covariates prior to this step</span>
-<span class='no'>occ_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>format_unmarked_occu</span>(<span class='no'>occ</span>,
-                                 <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"species_observed"</span>,
-                                 <span class='kw'>site_covs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"latitude"</span>, <span class='st'>"longitude"</span>),
-                                 <span class='kw'>obs_covs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"effort_distance_km"</span>,
-                                              <span class='st'>"duration_minutes"</span>))
+<span class='va'>occ_wide</span> <span class='op'>&lt;-</span> <span class='fu'>format_unmarked_occu</span><span class='op'>(</span><span class='va'>occ</span>,
+                                 response <span class='op'>=</span> <span class='st'>"species_observed"</span>,
+                                 site_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"latitude"</span>, <span class='st'>"longitude"</span><span class='op'>)</span>,
+                                 obs_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"effort_distance_km"</span>, 
+                                              <span class='st'>"duration_minutes"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'># create an unmarked object</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"unmarked"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='no'>occ_um</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>formatWide</a></span>(<span class='no'>occ_wide</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"unmarkedFrameOccu"</span>)
-  <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'>summary</span>(<span class='no'>occ_um</span>)
-}</div><div class='output co'>#&gt; unmarkedFrame Object
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"unmarked"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>occ_um</span> <span class='op'>&lt;-</span> <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>formatWide</a></span><span class='op'>(</span><span class='va'>occ_wide</span>, type <span class='op'>=</span> <span class='st'>"unmarkedFrameOccu"</span><span class='op'>)</span>
+  <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'>summary</span><span class='op'>(</span><span class='va'>occ_um</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; unmarkedFrame Object
 #&gt; 
 #&gt; 47 sites
 #&gt; Maximum number of observations per site: 10 
@@ -265,24 +266,26 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 #&gt;  Max.   :10.000     Max.   :480.00  
 #&gt;  NA's   :393        NA's   :392     </div><div class='input'>
 <span class='co'># this function can also be used for abundance modeling</span>
-<span class='no'>abd</span> <span class='kw'>&lt;-</span> <span class='no'>ebd_zf</span> <span class='kw'>%&gt;%</span>
+<span class='va'>abd</span> <span class='op'>&lt;-</span> <span class='va'>ebd_zf</span> <span class='op'>%&gt;%</span> 
   <span class='co'># convert count to integer, drop records with no count</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>observation_count</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(!<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>observation_count</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>observation_count <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>observation_count</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>observation_count</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='co'># filter to repeated visits</span>
-  <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span>(<span class='kw'>n_days</span> <span class='kw'>=</span> <span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem with `mutate()` input `observation_count`.</span>
+  <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span><span class='op'>(</span>n_days <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem with `mutate()` input `observation_count`.</span>
 #&gt; <span class='warning'><span style='color: #0000BB;'>ℹ</span><span> NAs introduced by coercion</span>
 #&gt; <span class='warning'></span><span style='color: #0000BB;'>ℹ</span><span> Input `observation_count` is `as.integer(observation_count)`.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='input'><span class='co'># prepare for conversion to unmarkedFramePCount object</span>
-<span class='no'>abd_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>format_unmarked_occu</span>(<span class='no'>abd</span>,
-                                 <span class='kw'>response</span> <span class='kw'>=</span> <span class='st'>"observation_count"</span>,
-                                 <span class='kw'>site_covs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"latitude"</span>, <span class='st'>"longitude"</span>),
-                                 <span class='kw'>obs_covs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"effort_distance_km"</span>,
-                                              <span class='st'>"duration_minutes"</span>))
+<span class='va'>abd_wide</span> <span class='op'>&lt;-</span> <span class='fu'>format_unmarked_occu</span><span class='op'>(</span><span class='va'>abd</span>,
+                                 response <span class='op'>=</span> <span class='st'>"observation_count"</span>,
+                                 site_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"latitude"</span>, <span class='st'>"longitude"</span><span class='op'>)</span>,
+                                 obs_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"effort_distance_km"</span>, 
+                                              <span class='st'>"duration_minutes"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'># create an unmarked object</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"unmarked"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='no'>abd_um</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>formatWide</a></span>(<span class='no'>abd_wide</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"unmarkedFrameOccu"</span>)
-  <span class='kw pkg'>unmarked</span><span class='kw ns'>::</span><span class='fu'>summary</span>(<span class='no'>abd_um</span>)
-}</div><div class='output co'>#&gt; unmarkedFrame Object
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"unmarked"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>abd_um</span> <span class='op'>&lt;-</span> <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>formatWide</a></span><span class='op'>(</span><span class='va'>abd_wide</span>, type <span class='op'>=</span> <span class='st'>"unmarkedFrameOccu"</span><span class='op'>)</span>
+  <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'>summary</span><span class='op'>(</span><span class='va'>abd_um</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; unmarkedFrame Object
 #&gt; 
 #&gt; 44 sites
 #&gt; Maximum number of observations per site: 10 
@@ -326,7 +329,7 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

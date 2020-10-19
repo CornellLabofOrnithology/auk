@@ -131,24 +131,24 @@ installed. <code>read_ebd()</code> reads the EBD itself, while read_sampling()` 
 sampling event data file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_ebd</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>read_ebd</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span>, rollup <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>read_ebd</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>read_ebd</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span>, rollup <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for auk_ebd</span>
-<span class='fu'>read_ebd</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rollup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>read_ebd</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span>, rollup <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>read_sampling</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>read_sampling</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for auk_ebd</span>
-<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>read_sampling</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for auk_sampling</span>
-<span class='fu'>read_sampling</span>(<span class='no'>x</span>, <span class='no'>reader</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>read_sampling</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -220,8 +220,9 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
 <code><a href='auk_zerofill.html'>auk_zerofill</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
-<span class='fu'>read_ebd</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 494 x 45</span><span>
+    <pre class="examples"><div class='input'><span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
+<span class='fu'>read_ebd</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 494 x 45</span><span>
 #&gt;    checklist_id global_unique_i… last_edited_date taxonomic_order category
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   
 #&gt; </span><span style='color: #555555;'> 1</span><span> S6852862     URN:CornellLabO… 2016-02-22 14:5…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
@@ -248,8 +249,9 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
 #&gt; </span><span style='color: #555555;'>#   all_species_reported </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, group_identifier </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, has_media </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   approved </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, reviewed </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, reason </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, trip_comments </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   species_comments </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='co'># read a sampling event data file</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>read_sampling</span>()</div></span></pre>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>read_sampling</span><span class='op'>(</span><span class='op'>)</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -265,7 +267,7 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

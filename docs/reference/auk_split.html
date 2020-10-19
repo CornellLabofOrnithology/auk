@@ -131,14 +131,14 @@ after <code><a href='auk_filter.html'>auk_filter()</a></code> has been applied i
 be read in all at once.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>auk_split</span>(
-  <span class='no'>file</span>,
-  <span class='no'>species</span>,
-  <span class='no'>prefix</span>,
-  <span class='no'>taxonomy_version</span>,
-  <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>auk_split</span><span class='op'>(</span>
+  <span class='va'>file</span>,
+  <span class='va'>species</span>,
+  <span class='va'>prefix</span>,
+  <span class='va'>taxonomy_version</span>,
+  sep <span class='op'>=</span> <span class='st'>"\t"</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,18 +195,19 @@ the eBird API will be queried to get the correct version of the taxonomy.</p>
 <code><a href='auk_select.html'>auk_select</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Canada Jay"</span>, <span class='st'>"Cyanocitta stelleri"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>species</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Canada Jay"</span>, <span class='st'>"Cyanocitta stelleri"</span><span class='op'>)</span>
 <span class='co'># get the path to the example data included in the package</span>
 <span class='co'># in practice, provide path to a filtered ebd file</span>
 <span class='co'># e.g. f &lt;- "data/ebd_filtered.txt</span>
-<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>)
+<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
 <span class='co'># output to a temporary directory for example</span>
 <span class='co'># in practice, provide the path to the output location</span>
 <span class='co'># e.g. prefix &lt;- "output/ebd_"</span>
-<span class='no'>prefix</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"ebd_"</span>)
-<span class='no'>species_files</span> <span class='kw'>&lt;-</span> <span class='fu'>auk_split</span>(<span class='no'>f</span>, <span class='kw'>species</span> <span class='kw'>=</span> <span class='no'>species</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='no'>prefix</span>)
-}</div></pre>
+<span class='va'>prefix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"ebd_"</span><span class='op'>)</span>
+<span class='va'>species_files</span> <span class='op'>&lt;-</span> <span class='fu'>auk_split</span><span class='op'>(</span><span class='va'>f</span>, species <span class='op'>=</span> <span class='va'>species</span>, prefix <span class='op'>=</span> <span class='va'>prefix</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -222,7 +223,7 @@ the eBird API will be queried to get the correct version of the taxonomy.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

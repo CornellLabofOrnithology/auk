@@ -131,7 +131,7 @@ been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be 
 filtering.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>auk_state</span>(<span class='no'>x</span>, <span class='no'>state</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>state</span>, replace <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,7 +190,8 @@ wishes to filter the sampling event data.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># state codes for a given country can be looked up in ebird_states</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>ebird_states</span>, <span class='no'>country</span> <span class='kw'>==</span> <span class='st'>"Costa Rica"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 4</span><span>
+<span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ebird_states</span>, <span class='va'>country</span> <span class='op'>==</span> <span class='st'>"Costa Rica"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 4</span><span>
 #&gt;   country    country_code state      state_code
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
 #&gt; </span><span style='color: #555555;'>1</span><span> Costa Rica CR           Alajuela   CR-A      
@@ -200,11 +201,12 @@ wishes to filter the sampling event data.</p>
 #&gt; </span><span style='color: #555555;'>5</span><span> Costa Rica CR           Limón      CR-L      
 #&gt; </span><span style='color: #555555;'>6</span><span> Costa Rica CR           Puntarenas CR-P      
 #&gt; </span><span style='color: #555555;'>7</span><span> Costa Rica CR           San José   CR-SJ     </div><div class='input'><span class='co'># choose texas, united states and puntarenas, cost rica</span>
-<span class='no'>states</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"US-TX"</span>, <span class='st'>"CR-P"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>auk_state</span>(<span class='no'>states</span>)</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpYZK5dw/temp_libpath16766420ee0d7/auk/extdata/ebd-sample.txt 
+<span class='va'>states</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"US-TX"</span>, <span class='st'>"CR-P"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>states</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Input 
+#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpS44pWl/temp_libpath1fa975f1d47f/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -225,11 +227,12 @@ wishes to filter the sampling event data.</p>
 #&gt;   Duration: all
 #&gt;   Distance travelled: all
 #&gt;   Records with breeding codes only: no
-#&gt;   Complete checklists only: no</div><div class='input'>
+#&gt;   Complete checklists only: no</div><div class='input'>  
 <span class='co'># alternatively, without pipes</span>
-<span class='no'>ebd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/ebd-sample.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"auk"</span>))
-<span class='fu'>auk_state</span>(<span class='no'>ebd</span>, <span class='no'>states</span>)</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpYZK5dw/temp_libpath16766420ee0d7/auk/extdata/ebd-sample.txt 
+<span class='va'>ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>ebd</span>, <span class='va'>states</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Input 
+#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpS44pWl/temp_libpath1fa975f1d47f/auk/extdata/ebd-sample.txt 
 #&gt; 
 #&gt; Output 
 #&gt;   Filters not executed
@@ -266,7 +269,7 @@ wishes to filter the sampling event data.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
