@@ -10,7 +10,7 @@
 #'
 #' @param path character; directory where the EBD text files are stored, e.g. 
 #'   `"/home/matt/ebd"`.
-#' @param overwrite logical; should the existing `EDB_PATH` be overwritten if it
+#' @param overwrite logical; should the existing `EBD_PATH` be overwritten if it
 #'   has already been set in .Renviron.
 #'
 #' @return Edits .Renviron, then returns the AWK path invisibly.
