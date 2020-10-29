@@ -10,7 +10,7 @@ auk_set_ebd_path(path, overwrite = FALSE)
 \item{path}{character; directory where the EBD text files are stored, e.g.
 \code{"/home/matt/ebd"}.}
 
-\item{overwrite}{logical; should the existing \code{EDB_PATH} be overwritten if it
+\item{overwrite}{logical; should the existing \code{EBD_PATH} be overwritten if it
 has already been set in .Renviron.}
 }
 \value{
