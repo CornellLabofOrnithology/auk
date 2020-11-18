@@ -1,3 +1,7 @@
+# auk 0.4.3
+
+- `get_ebird_taxonomy()` now fails gracefully when eBird API is not accessible, fixing the CRAN check errors https://cran.r-project.org/web/checks/check_results_auk.html
+
 # auk 0.4.2
 
 - new `auk_county()` filter

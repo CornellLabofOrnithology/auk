@@ -1,5 +1,11 @@
 context("get_ebird_taxonomy")
 
+# check that taxonomy api is accessible
+e <- tryCatch(get_ebird_taxonomy(), error = function(e) e)
+if (inherits(e, "error")) {
+  skip("eBird API inaccessible")
+}
+
 test_that("get_ebird_taxonomy works", {
   skip_on_cran()
   

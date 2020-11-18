@@ -56,7 +56,7 @@ auk_select.auk_ebd <- function(x, select, file, sep = "\t", overwrite = FALSE) {
   found <- select %in% x$col_idx$name
   if (!all(found)) {
     col_miss <- paste(select[!found], collapse = ", ")
-    stop(paste("Selected variable not found in header: \n\t", col_miss))
+    stop("Selected variable not found in header: \n\t ", col_miss)
   }
   # certain columns must be kept
   must_keep <- c("group identifier", "sampling event identifier",

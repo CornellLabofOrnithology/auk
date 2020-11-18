@@ -45,14 +45,19 @@ get_ebird_taxonomy <- function(version, locale) {
   httr::stop_for_status(response)
   # read to data frame
   tax <- readBin(response$content, "character")
-  tax <- readr::read_csv(tax)
+  tax <- suppressWarnings(readr::read_csv(tax))
   names(tax) <- tolower(names(tax))
   # tidy up
   keep_names <- c("scientific_name", "common_name", "species_code", 
                   "category", "taxon_order",
                   "order", "family_sci_name", 
                   "report_as")
-  out <- dplyr::select(tax, dplyr::one_of(intersect(keep_names, names(tax))))
+  keep_names <- intersect(keep_names, names(tax))
+  if (length(keep_names) == 0) {
+    stop("eBird taxonomy API cannont be accessed, visit https://ebird.org/ ",
+         "to see if eBird is currently down.")
+  }
+  out <- dplyr::select(tax, dplyr::one_of(keep_names))
   names(out)[names(out) == "family_sci_name"] <- "family"
   out
 }

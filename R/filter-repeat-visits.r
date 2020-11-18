@@ -94,8 +94,8 @@ filter_repeat_visits <- function(x, min_obs = 2L, max_obs = 10L,
   # must define period of closure if annual_closure = FALE
   if (isFALSE(annual_closure)) {
     if (is.null(n_days)) {
-      stop(paste("When annual_closure is FALSE, n_days must be used to specify",
-                 "the length of the period of closure."))
+      stop("When annual_closure is FALSE, n_days must be used to specify ",
+           "the length of the period of closure.")
     }
   }
   if (!missing(n_days)) {

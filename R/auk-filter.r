@@ -112,7 +112,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
   if (!execute && missing(awk_file)) {
     stop("awk_file must be set when execute is FALSE.")
   }
-
+  
   # check output file
   if (!missing(file)) {
     if (!dir.exists(dirname(file))) {
@@ -132,8 +132,8 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     filter_sampling <- FALSE
   }
   if (filter_sampling && missing(file_sampling)) {
-    stop(paste0("An output file for the sampling data must be provided, ",
-                "unless filter_sampling is FALSE."))
+    stop("An output file for the sampling data must be provided, ",
+         "unless filter_sampling is FALSE.")
   } else if (filter_sampling) {
     if (!dir.exists(dirname(file_sampling))) {
       stop("Output directory for sampling file doesn't exist.")
@@ -183,7 +183,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
   } else {
     select_cols <- "$0"
   }
-
+  
   # create awk script for the ebd
   awk_script <- awk_translate(filters = x$filters,
                               col_idx = x$col_idx,
@@ -218,7 +218,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
                                          sep = sep,
                                          select = select_cols)
   }
-
+  
   # output awk file
   if (!missing(awk_file)) {
     writeLines(awk_script, awk_file)
@@ -226,7 +226,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
       return(normalizePath(awk_file, winslash = "/", mustWork = FALSE))
     }
   }
-
+  
   # run awk
   # ebd sampling
   if (filter_sampling) {
@@ -596,7 +596,7 @@ awk_translate <- function(filters, col_idx, sep, select) {
     condition <- paste0("$", idx, " in observers")
     filter_strings$observer <- str_interp(awk_if, list(condition = condition))
   }
-
+  
   # generate awk script
   str_interp(awk_filter, filter_strings)
 }

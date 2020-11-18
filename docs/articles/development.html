@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
       </span>
     </div>
 
@@ -71,7 +71,7 @@
 
       
 
-      </header><script src="development_files/header-attrs-2.4/header-attrs.js"></script><script src="development_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="development_files/header-attrs-2.4/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>auk development</h1>
@@ -131,7 +131,7 @@
 <ol style="list-style-type: decimal">
 <li>Extensive checks on the incoming arguments. Remember that filtering with AWK takes multiple hours, so it’s best to catch any errors early, prior to running <code><a href="../reference/auk_filter.html">auk_filter()</a></code>. At the very least, check data types and, where possible, check that values are valid (e.g. <code>color</code> should be in <code><a href="https://rdrr.io/r/base/c.html">c("red", "green", "blue", ...)</a></code>). Provide informative error or warning messages where appropriate.</li>
 <li>Setting the filter criteria in the <code>auk_ebd</code> object. This is generally as simple as <code>x$filters$color = color</code>.</li>
-<li>Thorough documentation. Document all the arguments and provide examples with and without the pipe operator (<code><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></code>).</li>
+<li>Thorough documentation. Document all the arguments and provide examples with and without the pipe operator (<code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code>).</li>
 </ol>
 </div>
 <div id="update-auk_filter" class="section level3">

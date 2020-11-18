@@ -94,7 +94,7 @@ auk_zerofill.data.frame <- function(x, sampling_events,
     is.data.frame(sampling_events),
     missing(species) || is.character(species),
     assertthat::is.flag(unique))
-
+  
   # process species names
   # first check for scientific names
   if (!missing(species)) {
@@ -121,13 +121,12 @@ auk_zerofill.data.frame <- function(x, sampling_events,
       warning(e)
     }
   }
-
+  
   # check that auk_unique has been run
   if (!isTRUE(attr(x, "unique"))) {
     if (!unique){
-      stop(paste(
-        "The EBD doesn't appear to have been run through auk_unique().",
-        "Set unique = TRUE."))
+      stop("The EBD doesn't appear to have been run through auk_unique(). ",
+           "Set unique = TRUE.")
     } else {
       x <- auk_unique(x)
     }
@@ -145,7 +144,7 @@ auk_zerofill.data.frame <- function(x, sampling_events,
   if (rollup && !isTRUE(attr(x, "rollup"))) {
     x <- auk_rollup(x, drop_higher = drop_higher)
   }
-
+  
   # subset ebd to remove checklist level fields
   species_cols <- c("checklist_id", "scientific_name", "observation_count")
   if (any(!species_cols %in% names(x))) {
@@ -155,12 +154,12 @@ auk_zerofill.data.frame <- function(x, sampling_events,
     )
   }
   x <- dplyr::select(x, dplyr::one_of(species_cols))
-
+  
   # ensure all checklist in ebd are in sampling file
   if (!all(x$checklist_id %in% sampling_events$checklist_id)) {
     stop("Some checklists in EBD are missing from sampling event data.")
   }
-
+  
   # subset ebd by species
   if (!missing(species)) {
     in_ebd <- (species_clean %in% x$scientific_name)
@@ -175,23 +174,23 @@ auk_zerofill.data.frame <- function(x, sampling_events,
     species_clean <- species_clean[in_ebd]
     x <- x[x$scientific_name %in% species_clean, ]
   }
-
+  
   # add presence absence column
   x$species_observed <- x$observation_count
   x$species_observed[x$species_observed == "X"] <- "1"
   x$species_observed <- (as.numeric(x$species_observed) >= 1)
-
+  
   # remove absences that may have sneaked through
   # there shouldn't be any of these, but just in case...
   x <- x[x$species_observed, ]
-
+  
   # fill in implicit missing values
   x <- tidyr::complete(
     x,
     checklist_id = sampling_events$checklist_id, .data$scientific_name,
     fill = list(observation_count = "0", species_observed = FALSE)
   )
-
+  
   out <- structure(
     list(observations = dplyr::as_tibble(x),
          sampling_events = dplyr::as_tibble(sampling_events)),
@@ -218,11 +217,11 @@ auk_zerofill.character <- function(x, sampling_events,
     assertthat::is.string(sampling_events), file.exists(sampling_events),
     missing(species) || is.character(species),
     assertthat::is.string(sep), nchar(sep) == 1, sep != " ")
-
+  
   # read in the two files
   ebd <- read_ebd(x = x, sep = sep, unique = FALSE, rollup = FALSE)
   sed <- read_sampling(x = sampling_events, sep = sep, unique = FALSE)
-
+  
   # pass on to df method
   auk_zerofill(x = ebd, sampling_events = sed, species = species, 
                collapse = collapse, unique = unique, complete = complete,
@@ -244,7 +243,7 @@ auk_zerofill.auk_ebd <- function(x, species, taxonomy_version,
   if (is.null(x$output_sampling)) {
     stop("No output sampling event data file in this auk_ebd object.")
   }
-
+  
   # pass on to file method
   auk_zerofill(x = x$output, sampling_events = x$output_sampling,
                species = species, collapse = collapse, 

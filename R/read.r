@@ -55,7 +55,7 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
     missing(reader) || is.character(reader),
     assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
     length(readLines(x, 2)) > 1)
-
+  
   # pick reader
   if (missing(reader)) {
     reader <- NULL
@@ -64,7 +64,7 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
   # get header
   header <- get_header(x, sep = sep)
   blank <- (header[length(header)] == "")
-
+  
   # read using fread, read_delim, or read.delim
   col_types <- get_col_types(header, reader = reader)
   if (reader == "fread") {
@@ -100,15 +100,15 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
     }
   }
   out <- dplyr::as_tibble(out)
-
+  
   # remove possible blank final column
   if (blank) {
     out[ncol(out)] <- NULL
   }
-
+  
   # names to snake case
   names(out) <- clean_names(names(out))
-
+  
   # remove duplicate group checklists
   if (unique) {
     if (!"group_identifier" %in% names(out)) {
@@ -173,8 +173,8 @@ read_sampling.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE) {
 #' @describeIn read_ebd `auk_sampling` object output from [auk_filter()].
 read_sampling.auk_sampling <- function(x, reader, sep = "\t", unique = TRUE) {
   if (is.null(x$output)) {
-    stop(paste("No output sampling file in this auk_ebd object,",
-               "try calling auk_filter()."))
+    stop("No output sampling file in this auk_ebd object, ",
+         "try calling auk_filter().")
   }
   read_sampling(x$output, reader = reader, sep = sep, unique = unique)
 }
