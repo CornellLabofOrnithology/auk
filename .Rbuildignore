@@ -8,9 +8,6 @@
 ^README\.Rmd$
 ^README\.md$
 ^README-.*\.png$
-^\.travis\.yml$
-^codecov\.yml$
-^appveyor\.yml$
 ^docs$
 ^_pkgdown\.yml$
 ^cran-comments\.md$
@@ -21,3 +18,4 @@
 ^hex-logo$
 ^logo\.png
 ^cheatsheet
+^\.github$

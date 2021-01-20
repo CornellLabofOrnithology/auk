@@ -3,18 +3,15 @@
 auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width=140/>
 ============================================================================================
 
+<!-- badges: start -->
+
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![Travis-CI Build
-Status](https://img.shields.io/travis/CornellLabofOrnithology/auk/master.svg?label=Mac%20OSX%20%26%20Linux)](https://travis-ci.org/CornellLabofOrnithology/auk)
-[![AppVeyor Build
-Status](https://img.shields.io/appveyor/ci/mstrimas/auk/master.svg?label=Windows)](https://ci.appveyor.com/project/mstrimas/auk)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/CornellLabofOrnithology/auk/master.svg)](https://codecov.io/github/CornellLabofOrnithology/auk?branch=master)
-<br/>
-[![rOpenSci](https://badges.ropensci.org/136_status.svg)](https://github.com/ropensci/onboarding/issues/136)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/auk)](https://cran.r-project.org/package=auk)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/auk?color=brightgreen)](http://www.r-pkg.org/pkg/auk)
+[![R-CMD-check](https://github.com/CornellLabofOrnithology/auk/workflows/R-CMD-check/badge.svg)](https://github.com/CornellLabofOrnithology/auk/actions)
+[![rOpenSci](https://badges.ropensci.org/136_status.svg)](https://github.com/ropensci/onboarding/issues/136)
+<!-- badges: end -->
 
 Overview
 --------
@@ -297,7 +294,7 @@ eBird Basic Dataset files can be read with `read_ebd()`:
     #>  $ locality_type               : chr [1:494] "P" "P" "P" "P" ...
     #>  $ latitude                    : num [1:494] 20.7 15.8 15.8 15.8 15.7 ...
     #>  $ longitude                   : num [1:494] -88.6 -93 -93 -92.9 -92.9 ...
-    #>  $ observation_date            : Date[1:494], format: "2010-09-05" "2011-08-18" ...
+    #>  $ observation_date            : Date[1:494], format: "2010-09-05" "2011-08-18" "2012-02-02" ...
     #>  $ time_observations_started   : chr [1:494] "06:30:00" "08:00:00" "09:13:00" "06:40:00" ...
     #>  $ observer_id                 : chr [1:494] "obsr55719" "obsr313215" "obsr313215" "obsr313215" ...
     #>  $ sampling_event_identifier   : chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...

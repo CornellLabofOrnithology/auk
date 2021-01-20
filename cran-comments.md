@@ -5,9 +5,9 @@
 # Test environments
 
 - local OS X install, R 4.0.3
-- OS X (travis-ci), R 4.0.3
-- ubuntu 14.04 (travis-ci), R 4.0.3
-- Windows (appveyor), R 4.0.3
+- OS X (github actions), R 4.0.3
+- Windows (github actions), R 4.0.3
+- ubuntu 14.04 (github actions), R 4.0.3
 - win-builder (devel and release)
 
 # R CMD check results
