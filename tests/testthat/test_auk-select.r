@@ -1,8 +1,9 @@
 context("auk_select")
 
+skip_on_cran()
+skip_on_os("windows")
+
 test_that("auk_select works on ebd", {
-  skip_on_cran()
-  
   # columns
   cols <- c("latitude", "LONGITUDE",
             "group_identifier", "sampling event identifier",
@@ -25,8 +26,6 @@ test_that("auk_select works on ebd", {
 })
 
 test_that("auk_select works on sampling events", {
-  skip_on_cran()
-  
   # columns
   cols <- c("latitude", "LONGITUDE",
             "group_identifier", "sampling event identifier")

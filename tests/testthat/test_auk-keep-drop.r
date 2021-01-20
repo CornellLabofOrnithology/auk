@@ -1,9 +1,9 @@
 context("auk_keep_drop")
 
+skip_on_cran()
+skip_on_os("windows")
+
 test_that("auk_filter correctly keeps all columns by default", {
-  skip_on_cran()
-  skip_on_os("windows")
-  
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
     auk_ebd() %>%
     auk_species(species = c("Canada Jay", "Blue Jay")) %>% 
@@ -13,9 +13,6 @@ test_that("auk_filter correctly keeps all columns by default", {
 })
 
 test_that("auk_filter correctly keeps columns", {
-  skip_on_cran()
-  skip_on_os("windows")
-  
   to_keep <- c("group_identifier", "sampling_event_identifier", 
                "observer_id",
                "scientific_name", "observation_count")
@@ -29,9 +26,6 @@ test_that("auk_filter correctly keeps columns", {
 })
 
 test_that("auk_filter correctly drops columns", {
-  skip_on_cran()
-  skip_on_os("windows")
-  
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
     auk_ebd() %>%
     auk_species(species = c("Canada Jay", "Blue Jay")) %>% 
@@ -42,9 +36,6 @@ test_that("auk_filter correctly drops columns", {
 })
 
 test_that("auk_filter won't drop key columns", {
-  skip_on_cran()
-  skip_on_os("windows")
-  
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
     auk_ebd() %>%
     auk_species(species = c("Canada Jay", "Blue Jay"))
@@ -53,9 +44,6 @@ test_that("auk_filter won't drop key columns", {
 })
 
 test_that("auk_filter correctly keeps sampling event data columns", {
-  skip_on_cran()
-  skip_on_os("windows")
-  
   # set up filters
   f <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")

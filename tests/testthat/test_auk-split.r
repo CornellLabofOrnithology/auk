@@ -1,9 +1,10 @@
 context("auk_split")
 library(dplyr)
 
+skip_on_cran()
+skip_on_os("windows")
+
 test_that("auk_split splits correctly", {
-  skip_on_cran()
-  
   # split into two species files
   species <- c("Perisoreus canadensis", "Cyanocitta stelleri")
   prefix <- file.path(tempdir(), "ebd_")
@@ -25,8 +26,6 @@ test_that("auk_split splits correctly", {
 })
 
 test_that("auk_split throws error for bad input", {
-  skip_on_cran()
-  
   species <- c("Perisoreus canadensis", "Cyanocitta stelleri")
   prefix <- file.path(tempdir(), "ebd_")
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
@@ -41,8 +40,6 @@ test_that("auk_split throws error for bad input", {
 })
 
 test_that("auk_split won't overwrite an existing file", {
-  skip_on_cran()
-  
   # split into two species files
   species <- c("Perisoreus canadensis", "Cyanocitta stelleri")
   prefix <- file.path(tempdir(), "ebd_")
