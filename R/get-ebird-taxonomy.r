@@ -45,7 +45,7 @@ get_ebird_taxonomy <- function(version, locale) {
   httr::stop_for_status(response)
   # read to data frame
   tax <- readBin(response$content, "character")
-  tax <- suppressWarnings(readr::read_csv(tax))
+  tax <- suppressWarnings(readr::read_csv(I(tax), col_types = list(), lazy = FALSE))
   names(tax) <- tolower(names(tax))
   # tidy up
   keep_names <- c("scientific_name", "common_name", "species_code", 
