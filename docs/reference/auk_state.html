@@ -56,6 +56,8 @@ filtering." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -67,9 +69,15 @@ filtering." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -83,7 +91,7 @@ filtering." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -131,7 +139,7 @@ been defined, <code><a href='auk_filter.html'>auk_filter()</a></code> should be 
 filtering.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>state</span>, replace <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>state</span>, replace <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,71 +197,74 @@ wishes to filter the sampling event data.</p>
 <code><a href='auk_year.html'>auk_year</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># state codes for a given country can be looked up in ebird_states</span>
-<span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ebird_states</span>, <span class='va'>country</span> <span class='op'>==</span> <span class='st'>"Costa Rica"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 4</span><span>
-#&gt;   country    country_code state      state_code
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #555555;'>1</span><span> Costa Rica CR           Alajuela   CR-A      
-#&gt; </span><span style='color: #555555;'>2</span><span> Costa Rica CR           Cartago    CR-C      
-#&gt; </span><span style='color: #555555;'>3</span><span> Costa Rica CR           Guanacaste CR-G      
-#&gt; </span><span style='color: #555555;'>4</span><span> Costa Rica CR           Heredia    CR-H      
-#&gt; </span><span style='color: #555555;'>5</span><span> Costa Rica CR           Limón      CR-L      
-#&gt; </span><span style='color: #555555;'>6</span><span> Costa Rica CR           Puntarenas CR-P      
-#&gt; </span><span style='color: #555555;'>7</span><span> Costa Rica CR           San José   CR-SJ     </div><div class='input'><span class='co'># choose texas, united states and puntarenas, cost rica</span>
-<span class='va'>states</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"US-TX"</span>, <span class='st'>"CR-P"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>states</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpUgESgc/temp_libpathd7a9140551ce/auk/extdata/ebd-sample.txt 
-#&gt; 
-#&gt; Output 
-#&gt;   Filters not executed
-#&gt; 
-#&gt; Filters 
-#&gt;   Species: all
-#&gt;   Countries: all
-#&gt;   States: CR-P, US-TX
-#&gt;   Counties: all
-#&gt;   BCRs: all
-#&gt;   Bounding box: full extent
-#&gt;   Years: all
-#&gt;   Date: all
-#&gt;   Start time: all
-#&gt;   Last edited date: all
-#&gt;   Protocol: all
-#&gt;   Project code: all
-#&gt;   Duration: all
-#&gt;   Distance travelled: all
-#&gt;   Records with breeding codes only: no
-#&gt;   Complete checklists only: no</div><div class='input'>  
-<span class='co'># alternatively, without pipes</span>
-<span class='va'>ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>ebd</span>, <span class='va'>states</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Input 
-#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpUgESgc/temp_libpathd7a9140551ce/auk/extdata/ebd-sample.txt 
-#&gt; 
-#&gt; Output 
-#&gt;   Filters not executed
-#&gt; 
-#&gt; Filters 
-#&gt;   Species: all
-#&gt;   Countries: all
-#&gt;   States: CR-P, US-TX
-#&gt;   Counties: all
-#&gt;   BCRs: all
-#&gt;   Bounding box: full extent
-#&gt;   Years: all
-#&gt;   Date: all
-#&gt;   Start time: all
-#&gt;   Last edited date: all
-#&gt;   Protocol: all
-#&gt;   Project code: all
-#&gt;   Duration: all
-#&gt;   Distance travelled: all
-#&gt;   Records with breeding codes only: no
-#&gt;   Complete checklists only: no</div></span></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># state codes for a given country can be looked up in ebird_states</span></span>
+<span class='r-in'><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ebird_states</span>, <span class='va'>country</span> <span class='op'>==</span> <span class='st'>"Costa Rica"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 7 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   country    country_code state      state_code</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Costa Rica CR           Alajuela   CR-A      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Costa Rica CR           Cartago    CR-C      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Costa Rica CR           Guanacaste CR-G      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Costa Rica CR           Heredia    CR-H      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Costa Rica CR           Limón      CR-L      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Costa Rica CR           Puntarenas CR-P      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>7</span> Costa Rica CR           San José   CR-SJ     </span>
+<span class='r-in'><span class='co'># choose texas, united states and puntarenas, cost rica</span></span>
+<span class='r-in'><span class='va'>states</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"US-TX"</span>, <span class='st'>"CR-P"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>states</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Input </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmp1XnNbd/temp_libpath113567e8fa6b9/auk/extdata/ebd-sample.txt </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Output </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Filters not executed</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Filters </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Species: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Countries: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   States: CR-P, US-TX</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Counties: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   BCRs: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Bounding box: full extent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Years: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Date: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Start time: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Last edited date: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Protocol: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Project code: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Duration: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Distance travelled: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Records with breeding codes only: no</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Complete checklists only: no</span>
+<span class='r-in'>  </span>
+<span class='r-in'><span class='co'># alternatively, without pipes</span></span>
+<span class='r-in'><span class='va'>ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>ebd</span>, <span class='va'>states</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Input </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmp1XnNbd/temp_libpath113567e8fa6b9/auk/extdata/ebd-sample.txt </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Output </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Filters not executed</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Filters </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Species: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Countries: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   States: CR-P, US-TX</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Counties: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   BCRs: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Bounding box: full extent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Years: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Date: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Start time: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Last edited date: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Protocol: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Project code: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Duration: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Distance travelled: all</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Records with breeding codes only: no</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Complete checklists only: no</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -265,11 +276,11 @@ wishes to filter the sampling event data.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://strimas.com'>Matthew Strimas-Mackey</a>, <a href='http://eliotmiller.weebly.com/'>Eliot Miller</a>, <a href='https://www.birds.cornell.edu/hochachka/'>Wesley Hochachka</a>.</p>
+  <p><p>Developed by <a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -277,6 +288,8 @@ wishes to filter the sampling event data.</p>
 
   
 
+
+  
 
   </body>
 </html>

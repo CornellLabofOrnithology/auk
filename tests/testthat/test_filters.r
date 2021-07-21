@@ -1,5 +1,7 @@
 context("filter definition")
 
+skip_on_cran()
+
 test_that("auk_species", {
   species <- c("Canada Jay", "Pluvialis squatarola")
   ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%

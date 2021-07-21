@@ -7,3 +7,5 @@ doc
 .DS_Store
 inst/doc
 pkgdown/
+/doc/
+/Meta/

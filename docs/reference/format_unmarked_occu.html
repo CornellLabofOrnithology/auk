@@ -59,6 +59,8 @@ unmarked::formatWide() in which each row is a site." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -70,9 +72,15 @@ unmarked::formatWide() in which each row is a site." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -86,7 +94,7 @@ unmarked::formatWide() in which each row is a site." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -137,13 +145,13 @@ function converts data from a format in which each row is an observation
 <code><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>unmarked::formatWide()</a></code> in which each row is a site.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>format_unmarked_occu</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>format_unmarked_occu</span><span class='op'>(</span>
   <span class='va'>x</span>,
   site_id <span class='op'>=</span> <span class='st'>"site"</span>,
   response <span class='op'>=</span> <span class='st'>"species_observed"</span>,
   <span class='va'>site_covs</span>,
   <span class='va'>obs_covs</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,104 +224,105 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <code><a href='filter_repeat_visits.html'>filter_repeat_visits</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># read and zero-fill the ebd data</span>
-<span class='va'>f_ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
-<span class='va'>f_smpl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
-<span class='co'># data must be for a single species</span>
-<span class='va'>ebd_zf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>f_ebd</span>, sampling_events <span class='op'>=</span> <span class='va'>f_smpl</span>,
-                       species <span class='op'>=</span> <span class='st'>"Collared Kingfisher"</span>,
-                       collapse <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>occ</span> <span class='op'>&lt;-</span> <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span><span class='op'>(</span><span class='va'>ebd_zf</span>, n_days <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
-<span class='co'># format for unmarked</span>
-<span class='co'># typically one would join in habitat covariates prior to this step</span>
-<span class='va'>occ_wide</span> <span class='op'>&lt;-</span> <span class='fu'>format_unmarked_occu</span><span class='op'>(</span><span class='va'>occ</span>,
-                                 response <span class='op'>=</span> <span class='st'>"species_observed"</span>,
-                                 site_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"latitude"</span>, <span class='st'>"longitude"</span><span class='op'>)</span>,
-                                 obs_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"effort_distance_km"</span>, 
-                                              <span class='st'>"duration_minutes"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># create an unmarked object</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"unmarked"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>occ_um</span> <span class='op'>&lt;-</span> <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>formatWide</a></span><span class='op'>(</span><span class='va'>occ_wide</span>, type <span class='op'>=</span> <span class='st'>"unmarkedFrameOccu"</span><span class='op'>)</span>
-  <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'>summary</span><span class='op'>(</span><span class='va'>occ_um</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; unmarkedFrame Object
-#&gt; 
-#&gt; 47 sites
-#&gt; Maximum number of observations per site: 10 
-#&gt; Mean number of observations per site: 3.85 
-#&gt; Sites with at least one detection: 25 
-#&gt; 
-#&gt; Tabulation of y observations:
-#&gt; FALSE  TRUE  &lt;NA&gt; 
-#&gt;   129    52   289 
-#&gt; 
-#&gt; Site-level covariates:
-#&gt;     latitude       longitude    
-#&gt;  Min.   :1.206   Min.   :103.7  
-#&gt;  1st Qu.:1.315   1st Qu.:103.7  
-#&gt;  Median :1.351   Median :103.8  
-#&gt;  Mean   :1.348   Mean   :103.8  
-#&gt;  3rd Qu.:1.369   3rd Qu.:103.8  
-#&gt;  Max.   :1.446   Max.   :104.0  
-#&gt; 
-#&gt; Observation-level covariates:
-#&gt;  effort_distance_km duration_minutes
-#&gt;  Min.   : 0.100     Min.   :  1.00  
-#&gt;  1st Qu.: 0.200     1st Qu.: 15.00  
-#&gt;  Median : 1.000     Median : 30.00  
-#&gt;  Mean   : 1.579     Mean   : 66.49  
-#&gt;  3rd Qu.: 2.000     3rd Qu.: 86.25  
-#&gt;  Max.   :10.000     Max.   :480.00  
-#&gt;  NA's   :393        NA's   :392     </div><div class='input'>
-<span class='co'># this function can also be used for abundance modeling</span>
-<span class='va'>abd</span> <span class='op'>&lt;-</span> <span class='va'>ebd_zf</span> <span class='op'>%&gt;%</span> 
-  <span class='co'># convert count to integer, drop records with no count</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>observation_count <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>observation_count</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>observation_count</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='co'># filter to repeated visits</span>
-  <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span><span class='op'>(</span>n_days <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem with `mutate()` input `observation_count`.</span>
-#&gt; <span class='warning'><span style='color: #0000BB;'>ℹ</span><span> NAs introduced by coercion</span>
-#&gt; <span class='warning'></span><span style='color: #0000BB;'>ℹ</span><span> Input `observation_count` is `as.integer(observation_count)`.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='input'><span class='co'># prepare for conversion to unmarkedFramePCount object</span>
-<span class='va'>abd_wide</span> <span class='op'>&lt;-</span> <span class='fu'>format_unmarked_occu</span><span class='op'>(</span><span class='va'>abd</span>,
-                                 response <span class='op'>=</span> <span class='st'>"observation_count"</span>,
-                                 site_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"latitude"</span>, <span class='st'>"longitude"</span><span class='op'>)</span>,
-                                 obs_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"effort_distance_km"</span>, 
-                                              <span class='st'>"duration_minutes"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># create an unmarked object</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"unmarked"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>abd_um</span> <span class='op'>&lt;-</span> <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>formatWide</a></span><span class='op'>(</span><span class='va'>abd_wide</span>, type <span class='op'>=</span> <span class='st'>"unmarkedFrameOccu"</span><span class='op'>)</span>
-  <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'>summary</span><span class='op'>(</span><span class='va'>abd_um</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; unmarkedFrame Object
-#&gt; 
-#&gt; 44 sites
-#&gt; Maximum number of observations per site: 10 
-#&gt; Mean number of observations per site: 3.89 
-#&gt; Sites with at least one detection: 21 
-#&gt; 
-#&gt; Tabulation of y observations:
-#&gt;    0    1    2    3    5   10 &lt;NA&gt; 
-#&gt;  125   27    8    2    7    2  269 
-#&gt; 
-#&gt; Site-level covariates:
-#&gt;     latitude       longitude    
-#&gt;  Min.   :1.206   Min.   :103.7  
-#&gt;  1st Qu.:1.315   1st Qu.:103.7  
-#&gt;  Median :1.349   Median :103.8  
-#&gt;  Mean   :1.347   Mean   :103.8  
-#&gt;  3rd Qu.:1.364   3rd Qu.:103.8  
-#&gt;  Max.   :1.446   Max.   :104.0  
-#&gt; 
-#&gt; Observation-level covariates:
-#&gt;  effort_distance_km duration_minutes
-#&gt;  Min.   : 0.100     Min.   :  1.0   
-#&gt;  1st Qu.: 0.200     1st Qu.: 15.0   
-#&gt;  Median : 1.000     Median : 30.0   
-#&gt;  Mean   : 1.587     Mean   : 68.3   
-#&gt;  3rd Qu.: 2.000     3rd Qu.: 90.0   
-#&gt;  Max.   :10.000     Max.   :480.0   
-#&gt;  NA's   :362        NA's   :361     </div></span></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># read and zero-fill the ebd data</span></span>
+<span class='r-in'><span class='va'>f_ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>f_smpl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># data must be for a single species</span></span>
+<span class='r-in'><span class='va'>ebd_zf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>f_ebd</span>, sampling_events <span class='op'>=</span> <span class='va'>f_smpl</span>,</span>
+<span class='r-in'>                       species <span class='op'>=</span> <span class='st'>"Collared Kingfisher"</span>,</span>
+<span class='r-in'>                       collapse <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>occ</span> <span class='op'>&lt;-</span> <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span><span class='op'>(</span><span class='va'>ebd_zf</span>, n_days <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># format for unmarked</span></span>
+<span class='r-in'><span class='co'># typically one would join in habitat covariates prior to this step</span></span>
+<span class='r-in'><span class='va'>occ_wide</span> <span class='op'>&lt;-</span> <span class='fu'>format_unmarked_occu</span><span class='op'>(</span><span class='va'>occ</span>,</span>
+<span class='r-in'>                                 response <span class='op'>=</span> <span class='st'>"species_observed"</span>,</span>
+<span class='r-in'>                                 site_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"latitude"</span>, <span class='st'>"longitude"</span><span class='op'>)</span>,</span>
+<span class='r-in'>                                 obs_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"effort_distance_km"</span>, </span>
+<span class='r-in'>                                              <span class='st'>"duration_minutes"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># create an unmarked object</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"unmarked"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>occ_um</span> <span class='op'>&lt;-</span> <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>formatWide</a></span><span class='op'>(</span><span class='va'>occ_wide</span>, type <span class='op'>=</span> <span class='st'>"unmarkedFrameOccu"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'>summary</span><span class='op'>(</span><span class='va'>occ_um</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> unmarkedFrame Object</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 47 sites</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Maximum number of observations per site: 10 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mean number of observations per site: 3.85 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sites with at least one detection: 24 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Tabulation of y observations:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> FALSE  TRUE  &lt;NA&gt; </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   130    51   289 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Site-level covariates:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     latitude       longitude    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Min.   :1.206   Min.   :103.7  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1st Qu.:1.315   1st Qu.:103.7  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Median :1.351   Median :103.8  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Mean   :1.348   Mean   :103.8  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3rd Qu.:1.369   3rd Qu.:103.8  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Max.   :1.446   Max.   :104.0  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Observation-level covariates:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  effort_distance_km duration_minutes</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Min.   : 0.100     Min.   :  1.00  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1st Qu.: 0.200     1st Qu.: 15.00  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Median : 1.000     Median : 30.00  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Mean   : 1.564     Mean   : 65.89  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3rd Qu.: 2.000     3rd Qu.: 78.75  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Max.   :10.000     Max.   :480.00  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  NA's   :391        NA's   :390     </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># this function can also be used for abundance modeling</span></span>
+<span class='r-in'><span class='va'>abd</span> <span class='op'>&lt;-</span> <span class='va'>ebd_zf</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span class='r-in'>  <span class='co'># convert count to integer, drop records with no count</span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>observation_count <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>observation_count</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>observation_count</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span class='r-in'>  <span class='co'># filter to repeated visits</span></span>
+<span class='r-in'>  <span class='fu'><a href='filter_repeat_visits.html'>filter_repeat_visits</a></span><span class='op'>(</span>n_days <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>NAs introduced by coercion</span>
+<span class='r-in'><span class='co'># prepare for conversion to unmarkedFramePCount object</span></span>
+<span class='r-in'><span class='va'>abd_wide</span> <span class='op'>&lt;-</span> <span class='fu'>format_unmarked_occu</span><span class='op'>(</span><span class='va'>abd</span>,</span>
+<span class='r-in'>                                 response <span class='op'>=</span> <span class='st'>"observation_count"</span>,</span>
+<span class='r-in'>                                 site_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"latitude"</span>, <span class='st'>"longitude"</span><span class='op'>)</span>,</span>
+<span class='r-in'>                                 obs_covs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"effort_distance_km"</span>, </span>
+<span class='r-in'>                                              <span class='st'>"duration_minutes"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># create an unmarked object</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"unmarked"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>abd_um</span> <span class='op'>&lt;-</span> <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/unmarked/man/formatWideLong.html'>formatWide</a></span><span class='op'>(</span><span class='va'>abd_wide</span>, type <span class='op'>=</span> <span class='st'>"unmarkedFrameOccu"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>unmarked</span><span class='fu'>::</span><span class='fu'>summary</span><span class='op'>(</span><span class='va'>abd_um</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> unmarkedFrame Object</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 44 sites</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Maximum number of observations per site: 10 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mean number of observations per site: 3.89 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sites with at least one detection: 20 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Tabulation of y observations:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    0    1    2    3    5   10 &lt;NA&gt; </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  123   28    9    2    7    2  269 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Site-level covariates:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     latitude       longitude    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Min.   :1.206   Min.   :103.7  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1st Qu.:1.315   1st Qu.:103.7  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Median :1.349   Median :103.8  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Mean   :1.347   Mean   :103.8  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3rd Qu.:1.364   3rd Qu.:103.8  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Max.   :1.446   Max.   :104.0  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Observation-level covariates:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  effort_distance_km duration_minutes</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Min.   : 0.100     Min.   :  1.00  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1st Qu.: 0.200     1st Qu.: 15.00  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Median : 1.000     Median : 30.00  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Mean   : 1.553     Mean   : 65.39  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3rd Qu.: 2.000     3rd Qu.: 78.75  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Max.   :10.000     Max.   :480.00  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  NA's   :361        NA's   :360     </span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -325,11 +334,11 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://strimas.com'>Matthew Strimas-Mackey</a>, <a href='http://eliotmiller.weebly.com/'>Eliot Miller</a>, <a href='https://www.birds.cornell.edu/hochachka/'>Wesley Hochachka</a>.</p>
+  <p><p>Developed by <a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -337,6 +346,8 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 
   
 
+
+  
 
   </body>
 </html>

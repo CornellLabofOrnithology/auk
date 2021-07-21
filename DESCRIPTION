@@ -1,6 +1,6 @@
 Package: auk
 Title: eBird Data Extraction and Processing in R
-Version: 0.4.3
+Version: 0.4.4
 Authors@R: 
     c(person(given = "Matthew",
              family = "Strimas-Mackey",

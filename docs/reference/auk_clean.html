@@ -54,6 +54,8 @@ Dataset (EBD)." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -65,9 +67,15 @@ Dataset (EBD)." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -81,7 +89,7 @@ Dataset (EBD)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -127,7 +135,7 @@ Dataset (EBD)." />
 Dataset (EBD).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>auk_clean</span><span class='op'>(</span><span class='va'>f_in</span>, <span class='va'>f_out</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, remove_text <span class='op'>=</span> <span class='cn'>FALSE</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>auk_clean</span><span class='op'>(</span><span class='va'>f_in</span>, <span class='va'>f_out</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, remove_text <span class='op'>=</span> <span class='cn'>FALSE</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,19 +182,19 @@ if an error was encountered the exit code is returned.</p>
 <code><a href='auk_split.html'>auk_split</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># get the path to the example data included in the package</span>
-<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
-<span class='co'># output to a temp file for example</span>
-<span class='co'># in practice, provide path to output file</span>
-<span class='co'># e.g. f_out &lt;- "output/ebd_clean.txt"</span>
-<span class='va'>f_out</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'># clean file to remove problem rows</span>
-<span class='co'># note: this function is deprecated and no longer does anything</span>
-<span class='fu'>auk_clean</span><span class='op'>(</span><span class='va'>f</span>, <span class='va'>f_out</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># get the path to the example data included in the package</span></span>
+<span class='r-in'><span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># output to a temp file for example</span></span>
+<span class='r-in'><span class='co'># in practice, provide path to output file</span></span>
+<span class='r-in'><span class='co'># e.g. f_out &lt;- "output/ebd_clean.txt"</span></span>
+<span class='r-in'><span class='va'>f_out</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># clean file to remove problem rows</span></span>
+<span class='r-in'><span class='co'># note: this function is deprecated and no longer does anything</span></span>
+<span class='r-in'><span class='fu'>auk_clean</span><span class='op'>(</span><span class='va'>f</span>, <span class='va'>f_out</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -198,11 +206,11 @@ if an error was encountered the exit code is returned.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://strimas.com'>Matthew Strimas-Mackey</a>, <a href='http://eliotmiller.weebly.com/'>Eliot Miller</a>, <a href='https://www.birds.cornell.edu/hochachka/'>Wesley Hochachka</a>.</p>
+  <p><p>Developed by <a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -210,6 +218,8 @@ if an error was encountered the exit code is returned.</p>
 
   
 
+
+  
 
   </body>
 </html>

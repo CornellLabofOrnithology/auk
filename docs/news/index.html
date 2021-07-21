@@ -52,6 +52,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -63,9 +65,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -119,32 +127,31 @@
       <small>Source: <a href='https://github.com/CornellLabofOrnithology/auk/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="auk-044" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.4">
+<a href="#auk-044" class="anchor" aria-hidden="true"></a>auk 0.4.4<small> Unreleased </small></h1>
+<ul><li>
+<code><a href="../reference/get_ebird_taxonomy.html">get_ebird_taxonomy()</a></code> now fails even more gracefully when eBird API is not accessible, fixing the CRAN check errors <a href="https://cran.r-project.org/web/checks/check_results_auk.html" class="external-link uri">https://cran.r-project.org/web/checks/check_results_auk.html</a>
+</li>
+</ul></div>
     <div id="auk-043" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.3">
-<a href="#auk-043" class="anchor"></a>auk 0.4.3<small> 2020-11-23 </small>
-</h1>
-<ul>
-<li>
-<code><a href="../reference/get_ebird_taxonomy.html">get_ebird_taxonomy()</a></code> now fails gracefully when eBird API is not accessible, fixing the CRAN check errors <a href="https://cran.r-project.org/web/checks/check_results_auk.html" class="uri">https://cran.r-project.org/web/checks/check_results_auk.html</a>
+<a href="#auk-043" class="anchor" aria-hidden="true"></a>auk 0.4.3<small> 2020-11-23 </small></h1>
+<ul><li>
+<code><a href="../reference/get_ebird_taxonomy.html">get_ebird_taxonomy()</a></code> now fails gracefully when eBird API is not accessible, fixing the CRAN check errors <a href="https://cran.r-project.org/web/checks/check_results_auk.html" class="external-link uri">https://cran.r-project.org/web/checks/check_results_auk.html</a>
 </li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-042" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.2">
-<a href="#auk-042" class="anchor"></a>auk 0.4.2<small> 2020-10-19 </small>
-</h1>
-<ul>
-<li>new <code><a href="../reference/auk_county.html">auk_county()</a></code> filter</li>
+<a href="#auk-042" class="anchor" aria-hidden="true"></a>auk 0.4.2<small> 2020-10-19 </small></h1>
+<ul><li>new <code><a href="../reference/auk_county.html">auk_county()</a></code> filter</li>
 <li>new <code><a href="../reference/auk_year.html">auk_year()</a></code> filter</li>
 <li>Drop taxonomy warnings since there was no taxonomy update this year</li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-041" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.1">
-<a href="#auk-041" class="anchor"></a>auk 0.4.1<small> 2020-04-03 </small>
-</h1>
-<ul>
-<li>Family common names now included in eBird taxonomy</li>
+<a href="#auk-041" class="anchor" aria-hidden="true"></a>auk 0.4.1<small> 2020-04-03 </small></h1>
+<ul><li>Family common names now included in eBird taxonomy</li>
 <li>
 <code><a href="../reference/auk_select.html">auk_select()</a></code> now requires certain columns to be kept</li>
 <li>Better handling of file paths with <code>prefix</code> argument in <code><a href="../reference/auk_split.html">auk_split()</a></code>
@@ -156,62 +163,47 @@
 </li>
 <li>
 <code><a href="../reference/auk_bbox.html">auk_bbox()</a></code> now takes sf/raster spatial objects and grabs bbox from them</li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-040" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.0">
-<a href="#auk-040" class="anchor"></a>auk 0.4.0<small> 2019-09-23 </small>
-</h1>
-<ul>
-<li>Updated to 2019 eBird taxonomy</li>
+<a href="#auk-040" class="anchor" aria-hidden="true"></a>auk 0.4.0<small> 2019-09-23 </small></h1>
+<ul><li>Updated to 2019 eBird taxonomy</li>
 <li>
 <code><a href="../reference/auk_observer.html">auk_observer()</a></code> filter added</li>
 <li>
-<code><a href="https://tidyr.tidyverse.org/reference/deprecated-se.html">tidyr::complete_()</a></code> deprecated, stopped using</li>
-</ul>
-</div>
+<code><a href="https://tidyr.tidyverse.org/reference/deprecated-se.html" class="external-link">tidyr::complete_()</a></code> deprecated, stopped using</li>
+</ul></div>
     <div id="auk-033" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.3">
-<a href="#auk-033" class="anchor"></a>auk 0.3.3<small> 2019-06-23 </small>
-</h1>
-<ul>
-<li>Dates can now wrap in <code><a href="../reference/auk_date.html">auk_date()</a></code>, e.g. use <code>date = c("*-12-01", "*-01-31")</code> for records from December or January</li>
+<a href="#auk-033" class="anchor" aria-hidden="true"></a>auk 0.3.3<small> 2019-06-23 </small></h1>
+<ul><li>Dates can now wrap in <code><a href="../reference/auk_date.html">auk_date()</a></code>, e.g. use <code>date = c("*-12-01", "*-01-31")</code> for records from December or January</li>
 <li>Fixed bug preventing dropping of <code>age/sex</code> column</li>
 <li>Allow for a wider variety of protocols in <code><a href="../reference/auk_protocol.html">auk_protocol()</a></code>
 </li>
 <li>Addresing some deprecated functions from rlang</li>
 <li>Fixed bug causing <code><a href="../reference/auk_set_awk_path.html">auk_set_awk_path()</a></code> to fail</li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-032" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.2">
-<a href="#auk-032" class="anchor"></a>auk 0.3.2<small> 2019-02-04 </small>
-</h1>
-<ul>
-<li>Work around for bug in system2() in some R versions: <a href="https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508" class="uri">https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508</a>
+<a href="#auk-032" class="anchor" aria-hidden="true"></a>auk 0.3.2<small> 2019-02-04 </small></h1>
+<ul><li>Work around for bug in system2() in some R versions: <a href="https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508" class="external-link uri">https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17508</a>
 </li>
 <li>Adding a filter for PROALAS checklists to <code><a href="../reference/auk_protocol.html">auk_protocol()</a></code>
 </li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-031" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.1">
-<a href="#auk-031" class="anchor"></a>auk 0.3.1<small> 2018-12-07 </small>
-</h1>
-<ul>
-<li>
-<code><a href="https://rlang.r-lib.org/reference/nse-force.html">rlang::UQ()</a></code> and <code><a href="https://rlang.r-lib.org/reference/nse-force.html">rlang::UQS()</a></code> deprecated, switching to <code>!!</code> and <code>!!!</code>
+<a href="#auk-031" class="anchor" aria-hidden="true"></a>auk 0.3.1<small> 2018-12-07 </small></h1>
+<ul><li>
+<code><a href="https://rlang.r-lib.org/reference/nse-force.html" class="external-link">rlang::UQ()</a></code> and <code><a href="https://rlang.r-lib.org/reference/nse-force.html" class="external-link">rlang::UQS()</a></code> deprecated, switching to <code>!!</code> and <code>!!!</code>
 </li>
 <li>
 <code><a href="../reference/auk_unique.html">auk_unique()</a></code> now keeps track of all sampling event and observer IDs that comprise a group checklist</li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
-<a href="#auk-030" class="anchor"></a>auk 0.3.0<small> 2018-10-04 </small>
-</h1>
-<ul>
-<li>Updated to 2018 taxonomy; new function <code><a href="../reference/get_ebird_taxonomy.html">get_ebird_taxonomy()</a></code> to get taxonomy via the eBird API</li>
+<a href="#auk-030" class="anchor" aria-hidden="true"></a>auk 0.3.0<small> 2018-10-04 </small></h1>
+<ul><li>Updated to 2018 taxonomy; new function <code><a href="../reference/get_ebird_taxonomy.html">get_ebird_taxonomy()</a></code> to get taxonomy via the eBird API</li>
 <li>Better handling of taxonomy versions, many functions now take a <code>taxonomy_version</code> argument and use the eBird API to get the taxonomy</li>
 <li>
 <code>auk_getpath()</code> renamed <code><a href="../reference/auk_get_awk_path.html">auk_get_awk_path()</a></code>, and added <code><a href="../reference/auk_set_awk_path.html">auk_set_awk_path()</a></code>
@@ -234,40 +226,31 @@
 <li>Fixed package load error when <code>EBD_PATH</code> is invalid</li>
 <li>Fixed bug when reading files with a blank column using <code>readr</code>
 </li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-022" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.2">
-<a href="#auk-022" class="anchor"></a>auk 0.2.2<small> 2018-07-23 </small>
-</h1>
-<ul>
-<li>Updated to work with EDB version 1.9</li>
+<a href="#auk-022" class="anchor" aria-hidden="true"></a>auk 0.2.2<small> 2018-07-23 </small></h1>
+<ul><li>Updated to work with EDB version 1.9</li>
 <li>Modified tests to be more general to all sample data</li>
 <li>
 <code><a href="../reference/ebird_species.html">ebird_species()</a></code> now returns 6-letter species codes</li>
 <li>Fixed bug causing auk to fail on files downloaded via custom download form</li>
-<li>Fixed bug with <code><a href="https://rdrr.io/r/base/normalizePath.html">normalizePath()</a></code> use on Windows</li>
-<li>Fixed bug with <code><a href="https://rdrr.io/r/base/system2.html">system2()</a></code> on Windows</li>
-</ul>
-</div>
+<li>Fixed bug with <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code> use on Windows</li>
+<li>Fixed bug with <code><a href="https://rdrr.io/r/base/system2.html" class="external-link">system2()</a></code> on Windows</li>
+</ul></div>
     <div id="auk-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
-<a href="#auk-021" class="anchor"></a>auk 0.2.1<small> 2018-03-28 </small>
-</h1>
-<ul>
-<li>Patch release fixing a couple bugs</li>
-<li>Removed all non-ASCII characters from example files, closes <a href="https://github.com/CornellLabofOrnithology/auk/issues/14">issue <a href='https://github.com/CornellLabofOrnithology/auk/issues/14'>#14</a></a>
+<a href="#auk-021" class="anchor" aria-hidden="true"></a>auk 0.2.1<small> 2018-03-28 </small></h1>
+<ul><li>Patch release fixing a couple bugs</li>
+<li>Removed all non-ASCII characters from example files, closes <a href="https://github.com/CornellLabofOrnithology/auk/issues/14" class="external-link">issue <a href='https://github.com/CornellLabofOrnithology/auk/issues/14'>#14</a></a>
 </li>
-<li>Fixed issue with state filtering not working, closes <a href="https://github.com/CornellLabofOrnithology/auk/issues/16">issue $16</a>
+<li>Fixed issue with state filtering not working, closes <a href="https://github.com/CornellLabofOrnithology/auk/issues/16" class="external-link">issue $16</a>
 </li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#auk-020" class="anchor"></a>auk 0.2.0<small> 2018-03-20 </small>
-</h1>
-<ul>
-<li>New function, <code><a href="../reference/auk_split.html">auk_split()</a></code>, splits EBD up into multiple files by species</li>
+<a href="#auk-020" class="anchor" aria-hidden="true"></a>auk 0.2.0<small> 2018-03-20 </small></h1>
+<ul><li>New function, <code><a href="../reference/auk_split.html">auk_split()</a></code>, splits EBD up into multiple files by species</li>
 <li>New object, <code>auk_sampling</code>, and associated methods for working with the sampling data only</li>
 <li>New function, <code><a href="../reference/auk_select.html">auk_select()</a></code>, for selecting a subset of columns</li>
 <li>
@@ -278,38 +261,28 @@
 <li>Remove free text columns in <code><a href="../reference/auk_clean.html">auk_clean()</a></code> to decrease file size</li>
 <li>Updated to work with Feb 2018 version of EBD</li>
 <li>Fixed broken dependency on <code>countrycode</code> package</li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-010" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">
-<a href="#auk-010" class="anchor"></a>auk 0.1.0<small> 2017-10-21 </small>
-</h1>
-<ul>
-<li>eBird taxonomy update to August 2017 version, users should download the most recent EBD to ensure the taxonomy is in sync with the new package</li>
+<a href="#auk-010" class="anchor" aria-hidden="true"></a>auk 0.1.0<small> 2017-10-21 </small></h1>
+<ul><li>eBird taxonomy update to August 2017 version, users should download the most recent EBD to ensure the taxonomy is in sync with the new package</li>
 <li>Manually set AWK path with environment variable <code>AWK_PATH</code> in <code>.Renviron</code> file</li>
 <li>
 <code>auk_distance</code>, <code>auk_breeding</code>, <code>auk_protocol</code>, and <code>auk_project</code> filters added</li>
 <li>Users can now specify a subset of columns to return when calling auk_filter using the keep and drop arguments</li>
-<li>Many changes suggested by rOpenSci package peer review process, see <a href="https://github.com/ropensci/onboarding/issues/136" class="uri">https://github.com/ropensci/onboarding/issues/136</a> for details</li>
+<li>Many changes suggested by rOpenSci package peer review process, see <a href="https://github.com/ropensci/onboarding/issues/136" class="external-link uri">https://github.com/ropensci/onboarding/issues/136</a> for details</li>
 <li>New vignette added to aid those wanting to contribute to package development</li>
-</ul>
-</div>
+</ul></div>
     <div id="auk-002" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.2">
-<a href="#auk-002" class="anchor"></a>auk 0.0.2<small> 2017-07-05 </small>
-</h1>
-<ul>
-<li>Patch release converting ebird_taxonomy to ASCII to pass CRAN checks</li>
-</ul>
-</div>
+<a href="#auk-002" class="anchor" aria-hidden="true"></a>auk 0.0.2<small> 2017-07-05 </small></h1>
+<ul><li>Patch release converting ebird_taxonomy to ASCII to pass CRAN checks</li>
+</ul></div>
     <div id="auk-001" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.1">
-<a href="#auk-001" class="anchor"></a>auk 0.0.1<small> 2017-07-05 </small>
-</h1>
-<ul>
-<li>First CRAN release</li>
-</ul>
-</div>
+<a href="#auk-001" class="anchor" aria-hidden="true"></a>auk 0.0.1<small> 2017-07-05 </small></h1>
+<ul><li>First CRAN release</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -323,11 +296,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://strimas.com'>Matthew Strimas-Mackey</a>, <a href='http://eliotmiller.weebly.com/'>Eliot Miller</a>, <a href='https://www.birds.cornell.edu/hochachka/'>Wesley Hochachka</a>.</p>
+  <p><p>Developed by <a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -335,6 +308,8 @@
 
   
 
+
+  
 
   </body>
 </html>

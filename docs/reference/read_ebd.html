@@ -56,6 +56,8 @@ sampling event data file." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -67,9 +69,15 @@ sampling event data file." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -83,7 +91,7 @@ sampling event data file." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -131,7 +139,7 @@ installed. <code>read_ebd()</code> reads the EBD itself, while read_sampling()` 
 sampling event data file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_ebd</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span>, rollup <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>read_ebd</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span>, rollup <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for character</span>
 <span class='fu'>read_ebd</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span>, rollup <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
@@ -148,7 +156,7 @@ sampling event data file.</p>
 <span class='fu'>read_sampling</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for auk_sampling</span>
-<span class='fu'>read_sampling</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+<span class='fu'>read_sampling</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>reader</span>, sep <span class='op'>=</span> <span class='st'>"\t"</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -220,38 +228,39 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
 <code><a href='auk_zerofill.html'>auk_zerofill</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
-<span class='fu'>read_ebd</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 494 x 45</span><span>
-#&gt;    checklist_id global_unique_i… last_edited_date taxonomic_order category
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'> 1</span><span> S6852862     URN:CornellLabO… 2016-02-22 14:5…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'> 2</span><span> S14432467    URN:CornellLabO… 2013-06-16 17:3…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'> 3</span><span> S39033556    URN:CornellLabO… 2017-09-06 13:1…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'> 4</span><span> S38303088    URN:CornellLabO… 2017-07-24 15:1…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'> 5</span><span> S14439180    URN:CornellLabO… 2013-06-16 22:2…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'> 6</span><span> S32118689    URN:CornellLabO… 2016-10-19 20:3…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'> 7</span><span> S30663744    URN:CornellLabO… 2016-11-16 13:5…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'> 8</span><span> S39245968    URN:CornellLabO… 2017-09-18 05:2…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'> 9</span><span> S9816729     URN:CornellLabO… 2012-02-12 17:2…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'>10</span><span> S30669718    URN:CornellLabO… 2016-07-13 13:0…           </span><span style='text-decoration: underline;'>20</span><span>145 species 
-#&gt; </span><span style='color: #555555;'># … with 484 more rows, and 40 more variables: common_name </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   scientific_name </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, observation_count </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   breeding_bird_atlas_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, breeding_bird_atlas_category </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   age_sex </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, country </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, country_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, state </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   state_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, county </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, county_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, iba_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   bcr_code </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, usfws_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, atlas_block </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, locality </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   locality_id </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, locality_type </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, latitude </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, longitude </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   observation_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, time_observations_started </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   observer_id </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, sampling_event_identifier </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, protocol_type </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   protocol_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, project_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, duration_minutes </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   effort_distance_km </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, effort_area_ha </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, number_observers </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   all_species_reported </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, group_identifier </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, has_media </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   approved </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, reviewed </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, reason </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, trip_comments </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   species_comments </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='co'># read a sampling event data file</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>read_sampling</span><span class='op'>(</span><span class='op'>)</span>
-</div></span></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>read_ebd</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 494 x 45</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    checklist_id global_unique_identif… last_edited_date taxonomic_order category</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> S6852862     URN:CornellLabOfOrnit… 2016-02-22 14:5…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> S14432467    URN:CornellLabOfOrnit… 2013-06-16 17:3…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> S39033556    URN:CornellLabOfOrnit… 2017-09-06 13:1…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> S38303088    URN:CornellLabOfOrnit… 2017-07-24 15:1…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> S14439180    URN:CornellLabOfOrnit… 2013-06-16 22:2…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> S32118689    URN:CornellLabOfOrnit… 2016-10-19 20:3…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> S30663744    URN:CornellLabOfOrnit… 2016-11-16 13:5…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> S39245968    URN:CornellLabOfOrnit… 2017-09-18 05:2…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> S9816729     URN:CornellLabOfOrnit… 2012-02-12 17:2…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> S30669718    URN:CornellLabOfOrnit… 2016-07-13 13:0…           <span style='text-decoration: underline;'>20</span>145 species </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 484 more rows, and 40 more variables: common_name &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   breeding_bird_atlas_code &lt;chr&gt;, breeding_bird_atlas_category &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   age_sex &lt;chr&gt;, country &lt;chr&gt;, country_code &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   state_code &lt;chr&gt;, county &lt;chr&gt;, county_code &lt;chr&gt;, iba_code &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   observer_id &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   protocol_code &lt;chr&gt;, project_code &lt;chr&gt;, duration_minutes &lt;int&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   all_species_reported &lt;lgl&gt;, group_identifier &lt;chr&gt;, has_media &lt;lgl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   approved &lt;lgl&gt;, reviewed &lt;lgl&gt;, reason &lt;chr&gt;, trip_comments &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   species_comments &lt;chr&gt;</span></span>
+<span class='r-in'><span class='co'># read a sampling event data file</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>read_sampling</span><span class='op'>(</span><span class='op'>)</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -263,11 +272,11 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://strimas.com'>Matthew Strimas-Mackey</a>, <a href='http://eliotmiller.weebly.com/'>Eliot Miller</a>, <a href='https://www.birds.cornell.edu/hochachka/'>Wesley Hochachka</a>.</p>
+  <p><p>Developed by <a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -275,6 +284,8 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
 
   
 
+
+  
 
   </body>
 </html>

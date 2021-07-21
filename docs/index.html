@@ -33,6 +33,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -82,53 +84,53 @@
   <div class="contents col-md-9">
 <div id="auk-ebird-data-extraction-and-processing-in-r-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#auk-ebird-data-extraction-and-processing-in-r-" class="anchor"></a>auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width="140/">
+<a href="#auk-ebird-data-extraction-and-processing-in-r-" class="anchor" aria-hidden="true"></a>auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width="140/">
 </h1></div>
 <!-- badges: start -->
 
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<p><a href="http://www.ebird.org">eBird</a> is an online tool for recording bird observations. Since its inception, over 600 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
+<a href="#overview" class="anchor" aria-hidden="true"></a>Overview</h2>
+<p><a href="http://www.ebird.org" class="external-link">eBird</a> is an online tool for recording bird observations. Since its inception, over 600 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download" class="external-link">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cran release</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"auk"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># or install the development version from github</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("remotes")</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"CornellLabofOrnithology/auk"</span>)</span></code></pre></div>
-<p><code>auk</code> requires the Unix utility AWK, which is available on most Linux and Mac OS X machines. Windows users will first need to install <a href="https://www.cygwin.com">Cygwin</a> before using this package. Note that <strong>Cygwin must be installed in the default location</strong> (<code>C:/cygwin/bin/gawk.exe</code> or <code>C:/cygwin64/bin/gawk.exe</code>) in order for <code>auk</code> to work.</p>
+<p><code>auk</code> requires the Unix utility AWK, which is available on most Linux and Mac OS X machines. Windows users will first need to install <a href="https://www.cygwin.com" class="external-link">Cygwin</a> before using this package. Note that <strong>Cygwin must be installed in the default location</strong> (<code>C:/cygwin/bin/gawk.exe</code> or <code>C:/cygwin64/bin/gawk.exe</code>) in order for <code>auk</code> to work.</p>
 </div>
 <div id="vignette" class="section level2">
 <h2 class="hasAnchor">
-<a href="#vignette" class="anchor"></a>Vignette</h2>
-<p>Full details on using <code>auk</code> to produce both presence-only and presence-absence data are outlined in the <a href="https://cornelllabofornithology.github.io/auk/articles/auk.html">vignette</a>.</p>
+<a href="#vignette" class="anchor" aria-hidden="true"></a>Vignette</h2>
+<p>Full details on using <code>auk</code> to produce both presence-only and presence-absence data are outlined in the <a href="https://cornelllabofornithology.github.io/auk/articles/auk.html" class="external-link">vignette</a>.</p>
 </div>
 <div id="cheatsheet" class="section level2">
 <h2 class="hasAnchor">
-<a href="#cheatsheet" class="anchor"></a>Cheatsheet</h2>
-<p>An <code>auk</code> cheatsheet was developed by <a href="https://www.linkedin.com/in/mickayla-johnston/">Mickayla Johnston</a>:</p>
-<p><a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="cheatsheet/auk-cheatsheet.png" width="400/"></a></p>
+<a href="#cheatsheet" class="anchor" aria-hidden="true"></a>Cheatsheet</h2>
+<p>An <code>auk</code> cheatsheet was developed by <a href="https://www.linkedin.com/in/mickayla-johnston/" class="external-link">Mickayla Johnston</a>:</p>
+<p><a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf" class="external-link"><img src="cheatsheet/auk-cheatsheet.png" width="400/"></a></p>
 </div>
 <div id="auk-and-rebird" class="section level2">
 <h2 class="hasAnchor">
-<a href="#auk-and-rebird" class="anchor"></a><code>auk</code> and <code>rebird</code>
+<a href="#auk-and-rebird" class="anchor" aria-hidden="true"></a><code>auk</code> and <code>rebird</code>
 </h2>
-<p>Those interested in eBird data may also want to consider <a href="https://github.com/ropensci/rebird"><code>rebird</code></a>, an R package that provides an interface to the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs">eBird APIs</a>. The functions in <code>rebird</code> are mostly limited to accessing recent (i.e. within the last 30 days) observations, although <code>ebirdfreq()</code> does provide historical frequency of observation data. In contrast, <code>auk</code> gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require <code>auk</code>; however, for some use cases, e.g. building tools for birders, <code>rebird</code> provides a quick and easy way to access data.</p>
+<p>Those interested in eBird data may also want to consider <a href="https://github.com/ropensci/rebird" class="external-link"><code>rebird</code></a>, an R package that provides an interface to the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs" class="external-link">eBird APIs</a>. The functions in <code>rebird</code> are mostly limited to accessing recent (i.e. within the last 30 days) observations, although <code>ebirdfreq()</code> does provide historical frequency of observation data. In contrast, <code>auk</code> gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require <code>auk</code>; however, for some use cases, e.g. building tools for birders, <code>rebird</code> provides a quick and easy way to access data.</p>
 </div>
 <div id="a-note-on-versions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#a-note-on-versions" class="anchor"></a>A note on versions</h2>
-<p>This package contains a current (as of the time of package release) version of the <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the eBird Basic Dataset they’re working with. This is most easily accomplished by always using the must recent version of <code>auk</code> and the most recent release of the dataset.</p>
+<a href="#a-note-on-versions" class="anchor" aria-hidden="true"></a>A note on versions</h2>
+<p>This package contains a current (as of the time of package release) version of the <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy" class="external-link">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the eBird Basic Dataset they’re working with. This is most easily accomplished by always using the must recent version of <code>auk</code> and the most recent release of the dataset.</p>
 </div>
 <div id="quick-start" class="section level2">
 <h2 class="hasAnchor">
-<a href="#quick-start" class="anchor"></a>Quick start</h2>
+<a href="#quick-start" class="anchor" aria-hidden="true"></a>Quick start</h2>
 <p>This package uses the command-line program AWK to extract subsets of the eBird Basic Dataset for use in R. This is a multi-step process:</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>Define a reference to the eBird data file.</li>
 <li>Define a set of spatial, temporal, or taxonomic filters. Each type of filter corresponds to a different function, e.g. <code>auk_species</code> to filter by species. At this stage the filters are only set up, no actual filtering is done until the next step.</li>
 <li>Filter the eBird data text file, producing a new text file with only the selected rows.</li>
@@ -152,7 +154,7 @@
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_filter</span>(<span class="at">file =</span> f_out) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. read text file into r data frame</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_ebd</span>()</span></code></pre></div>
-<p>For those not familiar with the pipe operator (<code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code>), the above code could be rewritten:</p>
+<p>For those not familiar with the pipe operator (<code>%&gt;%</code>), the above code could be rewritten:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>f_in <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>f_out <span class="ot">&lt;-</span> <span class="st">"ebd_filtered_grja.txt"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ebd <span class="ot">&lt;-</span> <span class="fu">auk_ebd</span>(f_in)</span>
@@ -163,24 +165,24 @@
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<a href="#usage" class="anchor" aria-hidden="true"></a>Usage</h2>
 <div id="filtering" class="section level3">
 <h3 class="hasAnchor">
-<a href="#filtering" class="anchor"></a>Filtering</h3>
-<p><code>auk</code> uses a <a href="http://r4ds.had.co.nz/pipes.html">pipeline-based workflow</a> for defining filters, which can then be compiled into an AWK script. Users should start by defining a reference to the dataset file with <code><a href="reference/auk_ebd.html">auk_ebd()</a></code>. Then any of the following filters can be applied:</p>
+<a href="#filtering" class="anchor" aria-hidden="true"></a>Filtering</h3>
+<p><code>auk</code> uses a <a href="http://r4ds.had.co.nz/pipes.html" class="external-link">pipeline-based workflow</a> for defining filters, which can then be compiled into an AWK script. Users should start by defining a reference to the dataset file with <code><a href="reference/auk_ebd.html">auk_ebd()</a></code>. Then any of the following filters can be applied:</p>
 <ul>
 <li>
 <code><a href="reference/auk_species.html">auk_species()</a></code>: filter by species using common or scientific names.</li>
 <li>
-<code><a href="reference/auk_country.html">auk_country()</a></code>: filter by country using the standard English names or <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country codes</a>.</li>
+<code><a href="reference/auk_country.html">auk_country()</a></code>: filter by country using the standard English names or <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" class="external-link">ISO 2-letter country codes</a>.</li>
 <li>
 <code><a href="reference/auk_state.html">auk_state()</a></code>: filter by state using eBird state codes, see <code><a href="reference/ebird_states.html">?ebird_states</a></code>.</li>
 <li>
-<code><a href="reference/auk_bcr.html">auk_bcr()</a></code>: filter by <a href="http://nabci-us.org/resources/bird-conservation-regions/">Bird Conservation Region (BCR)</a> using BCR codes, see <code><a href="reference/bcr_codes.html">?bcr_codes</a></code>.</li>
+<code><a href="reference/auk_bcr.html">auk_bcr()</a></code>: filter by <a href="http://nabci-us.org/resources/bird-conservation-regions/" class="external-link">Bird Conservation Region (BCR)</a> using BCR codes, see <code><a href="reference/bcr_codes.html">?bcr_codes</a></code>.</li>
 <li>
 <code><a href="reference/auk_bbox.html">auk_bbox()</a></code>: filter by spatial bounding box, i.e. a range of latitudes and longitudes in decimal degrees.</li>
 <li>
-<code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code>” in place of the year, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
+<code><a href="reference/auk_date.html">auk_date()</a></code>: filter to checklists from a range of dates. To extract observations from a range of dates, regardless of year, use the wildcard “<code>*</code>” in place of the year, e.g. <code>date = c("*-05-01", "*-06-30")</code> for observations from May and June of any year.</li>
 <li>
 <code><a href="reference/auk_last_edited.html">auk_last_edited()</a></code>: filter to checklists from a range of last edited dates, useful for extracting just new or recently edited data.</li>
 <li>
@@ -242,7 +244,7 @@
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distance travelled: all</span></span>
 <span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Records with breeding codes only: no</span></span>
 <span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
-<p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode"><code>countrycode</code></a> package.</p>
+<p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy" class="external-link">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode" class="external-link"><code>countrycode</code></a> package.</p>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">&lt;-</span> <span class="st">"ebd_filtered_blja-grja.txt"</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ebd_filtered <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>) <span class="sc">%&gt;%</span> </span>
@@ -254,7 +256,7 @@
 </div>
 <div id="reading" class="section level3">
 <h3 class="hasAnchor">
-<a href="#reading" class="anchor"></a>Reading</h3>
+<a href="#reading" class="anchor" aria-hidden="true"></a>Reading</h3>
 <p>eBird Basic Dataset files can be read with <code><a href="reference/read_ebd.html">read_ebd()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_ebd</span>() <span class="sc">%&gt;%</span> </span>
@@ -286,7 +288,7 @@
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ locality_type               : chr [1:494] "P" "P" "P" "P" ...</span></span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ latitude                    : num [1:494] 20.7 15.8 15.8 15.8 15.7 ...</span></span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ longitude                   : num [1:494] -88.6 -93 -93 -92.9 -92.9 ...</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ observation_date            : Date[1:494], format: "2010-09-05" "2011-08-18" "2012-02-02" ...</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ observation_date            : Date[1:494], format: "2010-09-05" "2011-08-18" "2012-02-02" "2011-12-29" ...</span></span>
 <span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ time_observations_started   : chr [1:494] "06:30:00" "08:00:00" "09:13:00" "06:40:00" ...</span></span>
 <span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ observer_id                 : chr [1:494] "obsr55719" "obsr313215" "obsr313215" "obsr313215" ...</span></span>
 <span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ sampling_event_identifier   : chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...</span></span>
@@ -310,32 +312,32 @@
 </div>
 <div id="presence-absence-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#presence-absence-data" class="anchor"></a>Presence-absence data</h2>
+<a href="#presence-absence-data" class="anchor" aria-hidden="true"></a>Presence-absence data</h2>
 <p>For many applications, presence-only data are sufficient; however, for modeling and analysis, presence-absence data are required. <code>auk</code> includes functionality to produce presence-absence data from eBird checklists. For full details, consult the vignette: <code><a href="articles/auk.html">vignette("auk")</a></code>.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of Conduct</h2>
 <p>Please note that this project is released with a <a href="CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
-<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
+<a href="#acknowledgements" class="anchor" aria-hidden="true"></a>Acknowledgements</h2>
 <p>This package is based on AWK scripts provided as part of the eBird Data Workshop given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC on August 15, 2016.</p>
-<p><code>auk</code> benefited significantly from the <a href="https://ropensci.org/">rOpenSci</a> review process, including helpful suggestions from <a href="https://github.com/aurielfournier">Auriel Fournier</a> and <a href="https://github.com/emhart">Edmund Hart</a>.</p>
+<p><code>auk</code> benefited significantly from the <a href="https://ropensci.org/" class="external-link">rOpenSci</a> review process, including helpful suggestions from <a href="https://github.com/aurielfournier" class="external-link">Auriel Fournier</a> and <a href="https://github.com/emhart" class="external-link">Edmund Hart</a>.</p>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<a href="#references" class="anchor" aria-hidden="true"></a>References</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>eBird Basic Dataset. Version<span class="sc">:</span> ebd_relFeb<span class="fl">-2018.</span> Cornell Lab of Ornithology, Ithaca, New York. May <span class="fl">2013.</span></span></code></pre></div>
-<p><a href="http://ropensci.org"><img src="http://www.ropensci.org/public_images/github_footer.png"></a></p>
+<p><a href="http://ropensci.org" class="external-link"><img src="http://www.ropensci.org/public_images/github_footer.png"></a></p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=auk">https://​cloud.r-project.org/​package=auk</a>
 </li>
@@ -346,27 +348,31 @@
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 </ul>
 </div>
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html">Citing auk</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
 <a href="http://strimas.com">Matthew Strimas-Mackey</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8929-7776" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
@@ -374,30 +380,33 @@
 <a href="http://eliotmiller.weebly.com/">Eliot Miller</a> <br><small class="roles"> Author </small>  </li>
 <li>
 <a href="https://www.birds.cornell.edu/hochachka/">Wesley Hochachka</a> <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="http://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a></li>
-<li><a href="https://cran.r-project.org/package=auk"><img src="http://www.r-pkg.org/badges/version/auk" alt="CRAN_Status_Badge"></a></li>
-<li><a href="http://www.r-pkg.org/pkg/auk"><img src="http://cranlogs.r-pkg.org/badges/grand-total/auk?color=brightgreen" alt="Downloads"></a></li>
-<li><a href="https://github.com/CornellLabofOrnithology/auk/actions"><img src="https://github.com/CornellLabofOrnithology/auk/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://github.com/ropensci/onboarding/issues/136"><img src="https://badges.ropensci.org/136_status.svg" alt="rOpenSci"></a></li>
+<li><a href="http://www.gnu.org/licenses/gpl-3.0" class="external-link"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a></li>
+<li><a href="https://cran.r-project.org/package=auk" class="external-link"><img src="http://www.r-pkg.org/badges/version/auk" alt="CRAN_Status_Badge"></a></li>
+<li><a href="http://www.r-pkg.org/pkg/auk" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/auk?color=brightgreen" alt="Downloads"></a></li>
+<li><a href="https://github.com/CornellLabofOrnithology/auk/actions" class="external-link"><img src="https://github.com/CornellLabofOrnithology/auk/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/ropensci/onboarding/issues/136" class="external-link"><img src="https://badges.ropensci.org/136_status.svg" alt="rOpenSci"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://strimas.com">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/">Wesley Hochachka</a>.</p>
+  <p></p>
+<p>Developed by <a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -405,6 +414,8 @@
 
   
 
+
+  
 
   </body>
 </html>

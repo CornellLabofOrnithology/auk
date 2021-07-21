@@ -1,7 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width=140/>
-============================================================================================
+# auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width=140/>
 
 <!-- badges: start -->
 
@@ -13,8 +12,7 @@ v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/
 [![rOpenSci](https://badges.ropensci.org/136_status.svg)](https://github.com/ropensci/onboarding/issues/136)
 <!-- badges: end -->
 
-Overview
---------
+## Overview
 
 [eBird](http://www.ebird.org) is an online tool for recording bird
 observations. Since its inception, over 600 million records of bird
@@ -30,8 +28,7 @@ done using AWK, a Unix utility and programming language for processing
 column formatted text data. This package acts as a front end for AWK,
 allowing users to filter eBird data before import into R.
 
-Installation
-------------
+## Installation
 
     # cran release
     install.packages("auk")
@@ -47,23 +44,20 @@ and Mac OS X machines. Windows users will first need to install
 (`C:/cygwin/bin/gawk.exe` or `C:/cygwin64/bin/gawk.exe`) in order for
 `auk` to work.
 
-Vignette
---------
+## Vignette
 
 Full details on using `auk` to produce both presence-only and
 presence-absence data are outlined in the
 [vignette](https://cornelllabofornithology.github.io/auk/articles/auk.html).
 
-Cheatsheet
-----------
+## Cheatsheet
 
 An `auk` cheatsheet was developed by [Mickayla
 Johnston](https://www.linkedin.com/in/mickayla-johnston/):
 
 <a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="cheatsheet/auk-cheatsheet.png" width=400/></a>
 
-`auk` and `rebird`
-------------------
+## `auk` and `rebird`
 
 Those interested in eBird data may also want to consider
 [`rebird`](https://github.com/ropensci/rebird), an R package that
@@ -77,8 +71,7 @@ most ecological applications, users will require `auk`; however, for
 some use cases, e.g. building tools for birders, `rebird` provides a
 quick and easy way to access data.
 
-A note on versions
-------------------
+## A note on versions
 
 This package contains a current (as of the time of package release)
 version of the [bird taxonomy used by
@@ -92,8 +85,7 @@ with the eBird Basic Dataset they’re working with. This is most easily
 accomplished by always using the must recent version of `auk` and the
 most recent release of the dataset.
 
-Quick start
------------
+## Quick start
 
 This package uses the command-line program AWK to extract subsets of the
 eBird Basic Dataset for use in R. This is a multi-step process:
@@ -140,8 +132,7 @@ could be rewritten:
     ebd_filtered <- auk_filter(ebd_filters, file = f_out)
     ebd_df <- read_ebd(ebd_filtered)
 
-Usage
------
+## Usage
 
 ### Filtering
 
@@ -294,7 +285,7 @@ eBird Basic Dataset files can be read with `read_ebd()`:
     #>  $ locality_type               : chr [1:494] "P" "P" "P" "P" ...
     #>  $ latitude                    : num [1:494] 20.7 15.8 15.8 15.8 15.7 ...
     #>  $ longitude                   : num [1:494] -88.6 -93 -93 -92.9 -92.9 ...
-    #>  $ observation_date            : Date[1:494], format: "2010-09-05" "2011-08-18" "2012-02-02" ...
+    #>  $ observation_date            : Date[1:494], format: "2010-09-05" "2011-08-18" "2012-02-02" "2011-12-29" ...
     #>  $ time_observations_started   : chr [1:494] "06:30:00" "08:00:00" "09:13:00" "06:40:00" ...
     #>  $ observer_id                 : chr [1:494] "obsr55719" "obsr313215" "obsr313215" "obsr313215" ...
     #>  $ sampling_event_identifier   : chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...
@@ -315,23 +306,20 @@ eBird Basic Dataset files can be read with `read_ebd()`:
     #>  $ species_comments            : chr [1:494] NA NA NA NA ...
     #>  - attr(*, "rollup")= logi TRUE
 
-Presence-absence data
----------------------
+## Presence-absence data
 
 For many applications, presence-only data are sufficient; however, for
 modeling and analysis, presence-absence data are required. `auk`
 includes functionality to produce presence-absence data from eBird
 checklists. For full details, consult the vignette: `vignette("auk")`.
 
-Code of Conduct
----------------
+## Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
 Conduct](CONDUCT.md). By participating in this project you agree to
 abide by its terms.
 
-Acknowledgements
-----------------
+## Acknowledgements
 
 This package is based on AWK scripts provided as part of the eBird Data
 Workshop given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La
@@ -342,8 +330,7 @@ review process, including helpful suggestions from [Auriel
 Fournier](https://github.com/aurielfournier) and [Edmund
 Hart](https://github.com/emhart).
 
-References
-----------
+## References
 
     eBird Basic Dataset. Version: ebd_relFeb-2018. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
 

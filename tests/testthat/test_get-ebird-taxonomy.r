@@ -28,7 +28,7 @@ test_that("get_ebird_taxonomy locale works", {
   expect_is(tax_es, "data.frame")
   expect_is(tax_es$scientific_name, "character")
   expect_is(tax_es$species_code, "character")
-  expect_true("Arrendajo canadiense" %in% tax_es$common_name)
+  expect_true("Arrendajo Canadiense" %in% tax_es$common_name)
   expect_false("Canada Jay" %in% tax_es$common_name)
 })
 

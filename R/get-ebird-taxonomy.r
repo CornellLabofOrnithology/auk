@@ -41,7 +41,12 @@ get_ebird_taxonomy <- function(version, locale) {
     q <- c(q, locale = locale)
   }
   # query
-  response <- httr::GET(url, query = q)
+  response <- tryCatch(httr::GET(url, query = q),
+                       error = function(e) NULL)
+  if (is.null(response)) {
+    stop("eBird taxonomy API cannont be accessed, visit https://ebird.org/ ",
+         "to see if eBird is currently down.")
+  }
   httr::stop_for_status(response)
   # read to data frame
   tax <- readBin(response$content, "character")

@@ -60,6 +60,8 @@ of closure." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -71,9 +73,15 @@ of closure." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -87,7 +95,7 @@ of closure." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -139,7 +147,7 @@ observation data that have a desired number of repeat visits within a period
 of closure.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>filter_repeat_visits</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>filter_repeat_visits</span><span class='op'>(</span>
   <span class='va'>x</span>,
   min_obs <span class='op'>=</span> <span class='fl'>2L</span>,
   max_obs <span class='op'>=</span> <span class='fl'>10L</span>,
@@ -148,7 +156,7 @@ of closure.</p>
   date_var <span class='op'>=</span> <span class='st'>"observation_date"</span>,
   site_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"locality_id"</span>, <span class='st'>"observer_id"</span><span class='op'>)</span>,
   ll_digits <span class='op'>=</span> <span class='fl'>6L</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -239,37 +247,38 @@ combination of the <code>n_days</code> and <code>annual_closure</code> arguments
 <code><a href='format_unmarked_occu.html'>format_unmarked_occu</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># read and zero-fill the ebd data</span>
-<span class='va'>f_ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
-<span class='va'>f_smpl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span>
-<span class='co'># data must be for a single species</span>
-<span class='va'>ebd_zf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>f_ebd</span>, sampling_events <span class='op'>=</span> <span class='va'>f_smpl</span>,
-                       species <span class='op'>=</span> <span class='st'>"Collared Kingfisher"</span>,
-                       collapse <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'>filter_repeat_visits</span><span class='op'>(</span><span class='va'>ebd_zf</span>, n_days <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 181 x 37</span><span>
-#&gt;    site  closure_id n_observations checklist_id last_edited_date country
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'> 1</span><span> L105… 2012-9                  2 S11680564    2017-10-19 12:4… Singap…
-#&gt; </span><span style='color: #555555;'> 2</span><span> L105… 2012-9                  2 S11718518    2018-02-01 09:2… Singap…
-#&gt; </span><span style='color: #555555;'> 3</span><span> L127… 2012-8                  3 S11664225    2017-05-27 11:0… Singap…
-#&gt; </span><span style='color: #555555;'> 4</span><span> L127… 2012-8                  3 S11675087    2017-05-27 11:0… Singap…
-#&gt; </span><span style='color: #555555;'> 5</span><span> L127… 2012-8                  3 S11668164    2017-05-27 10:2… Singap…
-#&gt; </span><span style='color: #555555;'> 6</span><span> L136… 2012-0                 10 S9492400     2017-05-27 10:3… Singap…
-#&gt; </span><span style='color: #555555;'> 7</span><span> L136… 2012-0                 10 S9503604     2017-05-27 10:3… Singap…
-#&gt; </span><span style='color: #555555;'> 8</span><span> L136… 2012-0                 10 S9513531     2017-05-27 10:3… Singap…
-#&gt; </span><span style='color: #555555;'> 9</span><span> L136… 2012-0                 10 S9629042     2017-05-27 10:4… Singap…
-#&gt; </span><span style='color: #555555;'>10</span><span> L136… 2012-0                 10 S9652476     2017-05-27 10:3… Singap…
-#&gt; </span><span style='color: #555555;'># … with 171 more rows, and 31 more variables: country_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, state </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   state_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, county </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, county_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, iba_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   bcr_code </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, usfws_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, atlas_block </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, locality </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   locality_id </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, locality_type </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, latitude </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, longitude </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   observation_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, time_observations_started </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   observer_id </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, sampling_event_identifier </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, protocol_type </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   protocol_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, project_code </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, duration_minutes </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   effort_distance_km </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, effort_area_ha </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, number_observers </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   all_species_reported </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, group_identifier </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, trip_comments </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   scientific_name </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, observation_count </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, species_observed </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span></div></span></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># read and zero-fill the ebd data</span></span>
+<span class='r-in'><span class='va'>f_ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_ebd.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>f_smpl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># data must be for a single species</span></span>
+<span class='r-in'><span class='va'>ebd_zf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_zerofill.html'>auk_zerofill</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>f_ebd</span>, sampling_events <span class='op'>=</span> <span class='va'>f_smpl</span>,</span>
+<span class='r-in'>                       species <span class='op'>=</span> <span class='st'>"Collared Kingfisher"</span>,</span>
+<span class='r-in'>                       collapse <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>filter_repeat_visits</span><span class='op'>(</span><span class='va'>ebd_zf</span>, n_days <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 181 x 37</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    site         closure_id n_observations checklist_id last_edited_date  country</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>               <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> L1055540_ob… 2012-9                  2 S11680564    2017-10-19 12:47… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> L1055540_ob… 2012-9                  2 S11718518    2018-02-01 09:27… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> L1277940_ob… 2012-8                  3 S11664225    2017-05-27 11:00… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> L1277940_ob… 2012-8                  3 S11675087    2017-05-27 11:00… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> L1277940_ob… 2012-8                  3 S11668164    2017-05-27 10:25… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> L1361109_ob… 2012-0                 10 S9492400     2017-05-27 10:37… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> L1361109_ob… 2012-0                 10 S9503604     2017-05-27 10:37… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> L1361109_ob… 2012-0                 10 S9513531     2017-05-27 10:37… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> L1361109_ob… 2012-0                 10 S9629042     2017-05-27 10:46… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> L1361109_ob… 2012-0                 10 S9652476     2017-05-27 10:36… Singap…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 171 more rows, and 31 more variables: country_code &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   state_code &lt;chr&gt;, county &lt;chr&gt;, county_code &lt;chr&gt;, iba_code &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   observer_id &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   protocol_code &lt;chr&gt;, project_code &lt;chr&gt;, duration_minutes &lt;int&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   all_species_reported &lt;lgl&gt;, group_identifier &lt;chr&gt;, trip_comments &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;, species_observed &lt;lgl&gt;</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -281,11 +290,11 @@ combination of the <code>n_days</code> and <code>annual_closure</code> arguments
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://strimas.com'>Matthew Strimas-Mackey</a>, <a href='http://eliotmiller.weebly.com/'>Eliot Miller</a>, <a href='https://www.birds.cornell.edu/hochachka/'>Wesley Hochachka</a>.</p>
+  <p><p>Developed by <a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -293,6 +302,8 @@ combination of the <code>n_days</code> and <code>annual_closure</code> arguments
 
   
 
+
+  
 
   </body>
 </html>
