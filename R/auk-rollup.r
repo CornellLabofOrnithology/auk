@@ -58,7 +58,7 @@
 #'   correct version of the taxonomy.
 #'   
 #' @return A data frame of the eBird data with taxonomic rollup applied.
-#' @references Consult the [eBird taxonomy](https://ebird.org/science/the-ebird-taxonomy) 
+#' @references Consult the [eBird taxonomy](https://ebird.org/science/use-ebird-data/the-ebird-taxonomy) 
 #'   page for further details.
 #' @export
 #' @family pre

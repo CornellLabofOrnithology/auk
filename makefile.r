@@ -5,7 +5,7 @@ pkgdown::clean_site()
 
 # rebuild docs and install
 devtools::document()
-pak::pkg_install(".")
+pak::pkg_install(".", ask = FALSE)
 
 # local tests and checks
 devtools::test()
@@ -13,7 +13,7 @@ devtools::check()
 
 # vignettes, readme, site
 rmarkdown::render("README.Rmd")
-devtools::build_vignettes()
+#devtools::build_vignettes()
 pkgdown::build_site()
 dir.create("docs/cheatsheet/")
 file.copy("cheatsheet/auk-cheatsheet.png", "docs/cheatsheet/auk-cheatsheet.png")

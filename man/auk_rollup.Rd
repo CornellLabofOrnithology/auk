@@ -101,7 +101,7 @@ ebd_ru \%>\%
   select(checklist_id, category, common_name, observation_count)
 }
 \references{
-Consult the \href{https://ebird.org/science/the-ebird-taxonomy}{eBird taxonomy}
+Consult the \href{https://ebird.org/science/use-ebird-data/the-ebird-taxonomy}{eBird taxonomy}
 page for further details.
 }
 \seealso{

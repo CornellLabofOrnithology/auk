@@ -39,10 +39,10 @@ test_that("auk_species", {
   ebd$file <- "ebd_relAug-2016.txt"
   expect_warning(auk_species(ebd, "Canada Jay"))
   # assuming ebird api is accessible, using 2016 taxonomy should work
-  e <- tryCatch(auk_species(ebd, "Canada Jay", taxonomy_version = 2016), 
-                error = function(e) e)
-  if (!inherits(e, "error")) {
-    expect_silent(auk_species(ebd, "Canada Jay", taxonomy_version = 2016))
+  res <- tryCatch(auk_species(ebd, "Canada Jay", taxonomy_version = 2016), 
+                  error = function(e) e)
+  if (!inherits(res, "error")) {
+    expect_s3_class(res, "auk_ebd")
   }
 })
 
