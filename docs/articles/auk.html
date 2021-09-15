@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@
 
       
 
-      </header><script src="auk_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="auk_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to auk</h1>
@@ -195,7 +195,7 @@
   <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">ebd</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpJw2WY2/temp_libpath11c8d2ab807c5/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpdDhD2W/temp_libpath4c2431649f2e/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -272,7 +272,7 @@
   <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">ebd_filters</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpJw2WY2/temp_libpath11c8d2ab807c5/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpdDhD2W/temp_libpath4c2431649f2e/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -461,17 +461,17 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">subspecies_common_name</span>,
          <span class="va">observation_count</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 x 5</span>
-<span class="co">#&gt;   checklist_id category common_name     subspecies_common_name  observation_cou…</span>
-<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;                   &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 S8949407     species  Yellow-rumped … &lt;NA&gt;                    1               </span>
-<span class="co">#&gt; 2 S8949407     issf     Yellow-rumped … Yellow-rumped Warbler … 13              </span>
-<span class="co">#&gt; 3 S8949407     issf     Yellow-rumped … Yellow-rumped Warbler … 17</span>
+<span class="co">#&gt; # A tibble: 3 × 5</span>
+<span class="co">#&gt;   checklist_id category common_name           subspecies_commo… observation_cou…</span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;             &lt;chr&gt;           </span>
+<span class="co">#&gt; 1 S8949407     species  Yellow-rumped Warbler &lt;NA&gt;              1               </span>
+<span class="co">#&gt; 2 S8949407     issf     Yellow-rumped Warbler Yellow-rumped Wa… 13              </span>
+<span class="co">#&gt; 3 S8949407     issf     Yellow-rumped Warbler Yellow-rumped Wa… 17</span>
 <span class="co"># with rollup, they have been combined</span>
 <span class="va">ebd_ru</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">observation_count</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 1 x 4</span>
+<span class="co">#&gt; # A tibble: 1 × 4</span>
 <span class="co">#&gt;   checklist_id category common_name           observation_count</span>
 <span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;            </span>
 <span class="co">#&gt; 1 S8949407     species  Yellow-rumped Warbler 31</span></code></pre></div>
@@ -497,8 +497,8 @@
   <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">filters</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpJw2WY2/temp_libpath11c8d2ab807c5/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpJw2WY2/temp_libpath11c8d2ab807c5/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpdDhD2W/temp_libpath4c2431649f2e/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpdDhD2W/temp_libpath4c2431649f2e/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -527,8 +527,8 @@
 <span class="co">##                                file_sampling = "sampling-filtered.txt")</span>
 <span class="va">ebd_sed_filtered</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpJw2WY2/temp_libpath11c8d2ab807c5/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpJw2WY2/temp_libpath11c8d2ab807c5/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpdDhD2W/temp_libpath4c2431649f2e/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpdDhD2W/temp_libpath4c2431649f2e/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   EBD: ebd-filtered.txt </span>
@@ -569,7 +569,7 @@
 </ul>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ebd_zf</span><span class="op">$</span><span class="va">observations</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 4</span>
+<span class="co">#&gt; # A tibble: 6 × 4</span>
 <span class="co">#&gt;   checklist_id scientific_name     observation_count species_observed</span>
 <span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;             &lt;lgl&gt;           </span>
 <span class="co">#&gt; 1 G1733362     Todiramphus chloris X                 TRUE            </span>
@@ -619,7 +619,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">ebd_zf_df</span><span class="op">)</span>
 <span class="co">#&gt; [1] "tbl_df"     "tbl"        "data.frame"</span>
 <span class="va">ebd_zf_df</span>
-<span class="co">#&gt; # A tibble: 168 x 34</span>
+<span class="co">#&gt; # A tibble: 168 × 34</span>
 <span class="co">#&gt;    checklist_id last_edited_date  country  country_code state  state_code county</span>
 <span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; </span>
 <span class="co">#&gt;  1 S11332512    2017-05-27 10:25… Singapo… SG           Singa… SG-        &lt;NA&gt;  </span>
@@ -638,9 +638,7 @@
 <span class="co">#&gt; #   longitude &lt;dbl&gt;, observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,</span>
 <span class="co">#&gt; #   observer_id &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,</span>
 <span class="co">#&gt; #   protocol_code &lt;chr&gt;, project_code &lt;chr&gt;, duration_minutes &lt;int&gt;,</span>
-<span class="co">#&gt; #   effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;,</span>
-<span class="co">#&gt; #   all_species_reported &lt;lgl&gt;, group_identifier &lt;chr&gt;, trip_comments &lt;chr&gt;,</span>
-<span class="co">#&gt; #   scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;, species_observed &lt;lgl&gt;</span></code></pre></div>
+<span class="co">#&gt; #   effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;, …</span></code></pre></div>
 </div>
 </div>
 <div id="acknowledgements" class="section level2">

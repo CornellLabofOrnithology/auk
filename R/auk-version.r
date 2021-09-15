@@ -21,7 +21,7 @@
 #' @examples
 #' auk_version()
 auk_version <- function() {
-  list(auk_version = "auk 0.4.2",
-       ebd_version = as.Date("2019-08-15", "%Y-%m-%d"), 
-       taxonomy_version = 2019)
+  list(auk_version = "auk 0.5.0",
+       ebd_version = as.Date("2021-08-15", "%Y-%m-%d"), 
+       taxonomy_version = 2021)
 }

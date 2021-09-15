@@ -91,7 +91,7 @@ filtering." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -199,7 +199,7 @@ wishes to filter the sampling event data.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># state codes for a given country can be looked up in ebird_states</span></span>
 <span class='r-in'><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ebird_states</span>, <span class='va'>country</span> <span class='op'>==</span> <span class='st'>"Costa Rica"</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 7 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 7 × 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   country    country_code state      state_code</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Costa Rica CR           Alajuela   CR-A      </span>
@@ -215,7 +215,7 @@ wishes to filter the sampling event data.</p>
 <span class='r-in'>  <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span class='r-in'>  <span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>states</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Input </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpJw2WY2/temp_libpath11c8d2ab807c5/auk/extdata/ebd-sample.txt </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpdDhD2W/temp_libpath4c2431649f2e/auk/extdata/ebd-sample.txt </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Output </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   Filters not executed</span>
@@ -242,7 +242,7 @@ wishes to filter the sampling event data.</p>
 <span class='r-in'><span class='va'>ebd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='auk_ebd.html'>auk_ebd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ebd-sample.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>auk_state</span><span class='op'>(</span><span class='va'>ebd</span>, <span class='va'>states</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Input </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpJw2WY2/temp_libpath11c8d2ab807c5/auk/extdata/ebd-sample.txt </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpdDhD2W/temp_libpath4c2431649f2e/auk/extdata/ebd-sample.txt </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Output </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   Filters not executed</span>

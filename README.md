@@ -175,7 +175,7 @@ Users should start by defining a reference to the dataset file with
 -   `auk_complete()`: only retain checklists in which the observer has
     specified that they recorded all species seen or heard. It is
     necessary to retain only complete records for the creation of
-    presence-absence data, because the “absence”" information is
+    presence-absence data, because the “absence”” information is
     inferred by the lack of reporting of a species on checklists.
 
 Note that all of the functions listed above only modify the `auk_ebd`

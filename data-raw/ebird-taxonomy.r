@@ -22,7 +22,7 @@ filter(ebird_taxonomy, scientific_name == "Gyps rueppelli")
 extract_family <- function(x) {
   str_match(x, "\\((.*)\\)")[, 2, drop = TRUE]
 }
-ebird_taxonomy <- read_csv("data-raw/eBird_Taxonomy_v2019.csv") %>% 
+ebird_taxonomy <- read_csv("data-raw/eBird_Taxonomy_v2021.csv") %>% 
   rename_all(tolower) %>% 
   mutate(common_name = stri_trans_general(primary_com_name, "latin-ascii"),
          family_common = extract_family(family)) %>% 
