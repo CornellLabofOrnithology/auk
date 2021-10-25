@@ -206,7 +206,7 @@ ebd_jays <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
 
 ### Reading
 
-eBird Basic Dataset files can be read with `read_ebd()`. This is a wrapper around `data.table::fread()`, `readr::read_delim()`, or `read.delim()`, depending on which packages are installed. `read_ebd()` uses `stringsAsFactors = FALSE`, `quote = ""`, sets column classes, and converts variable names to `snake_case`.
+eBird Basic Dataset files can be read with `read_ebd()`. This is a wrapper around `readr::read_delim()`. `read_ebd()` uses `stringsAsFactors = FALSE`, `quote = ""`, sets column classes, and converts variable names to `snake_case`.
 
 ```{r read}
 system.file("extdata/ebd-sample.txt", package = "auk") %>% 

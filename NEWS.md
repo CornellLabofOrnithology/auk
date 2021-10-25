@@ -1,3 +1,7 @@
+# auk 0.5.1
+
+- drop `data.table` dependency, no longer needed with `readr` speed improvements
+
 # auk 0.5.0
 
 - update to align with 2021 eBird taxonomy

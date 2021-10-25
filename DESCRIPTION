@@ -1,6 +1,6 @@
 Package: auk
 Title: eBird Data Extraction and Processing in R
-Version: 0.5.0
+Version: 0.5.1
 Authors@R: 
     c(person(given = "Matthew",
              family = "Strimas-Mackey",
@@ -36,6 +36,7 @@ Imports:
     dplyr (>= 0.7.8),
     httr,
     magrittr,
+    readr (>= 2.0.0),
     rlang (>= 0.3.0),
     stringi,
     stringr,
@@ -43,9 +44,7 @@ Imports:
     utils
 Suggests: 
     covr,
-    data.table,
     knitr,
-    readr,
     rmarkdown,
     sf,
     testthat,

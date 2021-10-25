@@ -1,17 +1,11 @@
 #' Read an EBD file
 #'
-#' Read an eBird Basic Dataset file using [data.table::fread()],
-#' [readr::read_delim()], or [read.delim()] depending on which packages are
-#' installed. `read_ebd()` reads the EBD itself, while read_sampling()` reads a
-#' sampling event data file.
-#'
+#' Read an eBird Basic Dataset file using [readr::read_delim()]. `read_ebd()`
+#' reads the EBD itself, while read_sampling()` reads a sampling event data
+#' file.
+#' 
 #' @param x filename or `auk_ebd` object with associated output
 #'   files as created by [auk_filter()].
-#' @param reader character; the function to use for reading the input file,
-#'   options are `"fread"`, `"readr"`, or `"base"`, for [data.table::fread()],
-#'   [readr::read_delim()], or [read.delim()], respectively. This argument should
-#'   typically be left empty to have the function choose the best reader based
-#'   on the installed packages.
 #' @param sep character; single character used to separate fields within a row.
 #' @param unique logical; should duplicate grouped checklists be removed. If
 #'   `unique = TRUE`, [auk_unique()] is called on the EBD before returning.
@@ -40,64 +34,31 @@
 #' @examples
 #' f <- system.file("extdata/ebd-sample.txt", package = "auk")
 #' read_ebd(f)
-read_ebd <- function(x, reader, sep = "\t", unique = TRUE, rollup = TRUE) {
+read_ebd <- function(x, sep = "\t", unique = TRUE, rollup = TRUE) {
   UseMethod("read_ebd")
 }
 
 #' @export
 #' @describeIn read_ebd Filename of EBD.
-read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE, 
+read_ebd.character <- function(x, sep = "\t", unique = TRUE, 
                                rollup = TRUE) {
   # checks
   assertthat::assert_that(
     assertthat::is.string(x),
     file.exists(x),
-    missing(reader) || is.character(reader),
     assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
     length(readLines(x, 2)) > 1)
   
-  # pick reader
-  if (missing(reader)) {
-    reader <- NULL
-  }
-  reader <- choose_reader(reader)
   # get header
   header <- get_header(x, sep = sep)
   blank <- (header[length(header)] == "")
   
   # read using fread, read_delim, or read.delim
-  col_types <- get_col_types(header, reader = reader)
-  if (reader == "fread") {
-    out <- data.table::fread(x, sep = sep, quote = "", na.strings = "",
-                             colClasses = col_types)
-    # convert columns to logical
-    tf_cols <- c("ALL SPECIES REPORTED", "HAS MEDIA", "APPROVED", "REVIEWED")
-    for (i in tf_cols) {
-      if (i %in% names(out)) {
-        out[[i]] <- as.logical(out[[i]])
-      }
-    }
-    # convert date column
-    if ("OBSERVATION DATE" %in% names(out)) {
-      out[["OBSERVATION DATE"]] <- as.Date(out[["OBSERVATION DATE"]],
-                                           format = "%Y-%m-%d")
-    }
-  } else if (reader == "readr") {
-    out <- readr::read_delim(x, delim = sep, quote = "", na = "",
-                             col_types = col_types)
-    if ("spec" %in% names(attributes(out))) {
-      attr(out, "spec") <- NULL
-    }
-  } else {
-    out <- utils::read.delim(x, sep = sep, quote = "", na.strings = "",
-                             stringsAsFactors = FALSE, colClasses = col_types)
-    # convert columns to logical
-    tf_cols <- c("ALL.SPECIES.REPORTED", "HAS.MEDIA", "APPROVED", "REVIEWED")
-    for (i in tf_cols) {
-      if (i %in% names(out)) {
-        out[[i]] <- as.logical(out[[i]])
-      }
-    }
+  col_types <- get_col_types(header)
+  out <- readr::read_delim(x, delim = sep, quote = "", na = "",
+                           col_types = col_types)
+  if ("spec" %in% names(attributes(out))) {
+    attr(out, "spec") <- NULL
   }
   out <- dplyr::as_tibble(out)
   
@@ -129,12 +90,12 @@ read_ebd.character <- function(x, reader, sep = "\t", unique = TRUE,
 
 #' @export
 #' @describeIn read_ebd `auk_ebd` object output from [auk_filter()]
-read_ebd.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE, 
+read_ebd.auk_ebd <- function(x, sep = "\t", unique = TRUE, 
                              rollup = TRUE) {
   if (is.null(x$output)) {
     stop("No output EBD file in this auk_ebd object, try calling auk_filter().")
   }
-  read_ebd(x$output, reader = reader, sep = sep, unique = unique, 
+  read_ebd(x$output, sep = sep, unique = unique, 
            rollup = rollup)
 }
 
@@ -144,14 +105,14 @@ read_ebd.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE,
 #' # read a sampling event data file
 #' x <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
 #'   read_sampling()
-read_sampling <- function(x, reader, sep = "\t", unique = TRUE) {
+read_sampling <- function(x, sep = "\t", unique = TRUE) {
   UseMethod("read_sampling")
 }
 
 #' @export
 #' @describeIn read_ebd Filename of sampling event data file
-read_sampling.character <- function(x, reader, sep = "\t", unique = TRUE) {
-  out <- read_ebd(x = x, reader = reader, sep = sep, unique = FALSE, 
+read_sampling.character <- function(x, sep = "\t", unique = TRUE) {
+  out <- read_ebd(x = x, sep = sep, unique = FALSE, 
                   rollup = FALSE)
   if (unique) {
     out <- auk_unique(out, checklists_only = TRUE)
@@ -162,19 +123,19 @@ read_sampling.character <- function(x, reader, sep = "\t", unique = TRUE) {
 #' @export
 #' @describeIn read_ebd `auk_ebd` object output from [auk_filter()]. Must have
 #'   had a sampling event data file set in the original call to [auk_ebd()].
-read_sampling.auk_ebd <- function(x, reader, sep = "\t", unique = TRUE) {
+read_sampling.auk_ebd <- function(x, sep = "\t", unique = TRUE) {
   if (is.null(x$output_sampling)) {
     stop("No output sampling event data file in this auk_ebd object.")
   }
-  read_sampling(x$output_sampling, reader = reader, sep = sep, unique = unique)
+  read_sampling(x$output_sampling, sep = sep, unique = unique)
 }
 
 #' @export
 #' @describeIn read_ebd `auk_sampling` object output from [auk_filter()].
-read_sampling.auk_sampling <- function(x, reader, sep = "\t", unique = TRUE) {
+read_sampling.auk_sampling <- function(x, sep = "\t", unique = TRUE) {
   if (is.null(x$output)) {
     stop("No output sampling file in this auk_ebd object, ",
          "try calling auk_filter().")
   }
-  read_sampling(x$output, reader = reader, sep = sep, unique = unique)
+  read_sampling(x$output, sep = sep, unique = unique)
 }

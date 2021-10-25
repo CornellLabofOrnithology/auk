@@ -34,41 +34,6 @@ test_that("reads a sampling file correctly", {
   expect_true(all(grepl("^[_a-z]+$", nm)))
 })
 
-test_that("read_ebd using different reader functions", {
-  f <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
-  ebd_fr <- read_ebd(f, reader = "fread")
-  ebd_rd <- read_ebd(f, reader = "readr")
-  ebd_bs <- suppressWarnings(read_ebd(f, reader = "base"))
-
-  expect_is(ebd_fr, "data.frame")
-  expect_is(ebd_rd, "data.frame")
-  expect_is(ebd_bs, "data.frame")
-
-  expect_equal(nrow(ebd_fr), nrow(ebd_rd))
-  expect_equal(nrow(ebd_rd), nrow(ebd_bs))
-  expect_equal(ncol(ebd_fr), ncol(ebd_rd))
-  expect_equal(ncol(ebd_rd), ncol(ebd_bs))
-
-  expect_equal(ebd_fr[[1]], ebd_rd[[1]])
-  expect_equal(ebd_rd[[1]], ebd_bs[[1]])
-
-  expect_warning(read_ebd(f, reader = "base"))
-})
-
-test_that("read_ebd data frames identical for different read functions", {
-  skip_on_os("windows")
-
-  f <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
-  ebd_fr <- read_ebd(f, reader = "fread")
-  ebd_rd <- read_ebd(f, reader = "readr")
-  ebd_bs <- suppressWarnings(read_ebd(f, reader = "base"))
-
-  expect_equal(ebd_fr$global_unique_identifier,
-               ebd_rd$global_unique_identifier)
-  expect_equal(ebd_rd$global_unique_identifier,
-               ebd_bs$global_unique_identifier)
-})
-
 test_that("read_ebd throws errors for invalid separator", {
   f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
