@@ -51,21 +51,17 @@ read_ebd.character <- function(x, sep = "\t", unique = TRUE,
   
   # get header
   header <- get_header(x, sep = sep)
-  blank <- (header[length(header)] == "")
-  
+
   # read using fread, read_delim, or read.delim
   col_types <- get_col_types(header)
   out <- readr::read_delim(x, delim = sep, quote = "", na = "",
-                           col_types = col_types)
+                           col_types = col_types,
+                           col_select = which(header != ""),
+                           name_repair = "minimal")
   if ("spec" %in% names(attributes(out))) {
     attr(out, "spec") <- NULL
   }
   out <- dplyr::as_tibble(out)
-  
-  # remove possible blank final column
-  if (blank) {
-    out[ncol(out)] <- NULL
-  }
   
   # names to snake case
   names(out) <- clean_names(names(out))

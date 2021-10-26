@@ -59,7 +59,7 @@ test_that("auk_filter filter an ebd", {
     auk_breeding() %>% 
     auk_filter(file = tmp) %>% 
     read_ebd()
-  expect_true(all(!is.na(ebd$breeding_bird_atlas_code)))
+  expect_true(all(!is.na(ebd$breeding_code)))
 })
 
 test_that("auk_filter filter sampling and ebd files", {

@@ -234,12 +234,12 @@ had a sampling event data file set in the original call to <code><a href='auk_eb
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> S9816729     URN:CornellLabOfOrnit… 2012-02-12 17:2…           <span style='text-decoration: underline;'>20</span>145 species </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> S30669718    URN:CornellLabOfOrnit… 2016-07-13 13:0…           <span style='text-decoration: underline;'>20</span>145 species </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 484 more rows, and 40 more variables: common_name &lt;chr&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   breeding_bird_atlas_code &lt;chr&gt;, breeding_bird_atlas_category &lt;chr&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   age_sex &lt;chr&gt;, country &lt;chr&gt;, country_code &lt;chr&gt;, state &lt;chr&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   state_code &lt;chr&gt;, county &lt;chr&gt;, county_code &lt;chr&gt;, iba_code &lt;chr&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, …</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   scientific_name &lt;chr&gt;, observation_count &lt;chr&gt;, breeding_code &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   breeding_category &lt;chr&gt;, age_sex &lt;chr&gt;, country &lt;chr&gt;, country_code &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   state &lt;chr&gt;, state_code &lt;chr&gt;, county &lt;chr&gt;, county_code &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   iba_code &lt;chr&gt;, bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   locality &lt;chr&gt;, locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   longitude &lt;dbl&gt;, observation_date &lt;date&gt;, …</span></span>
 <span class='r-in'><span class='co'># read a sampling event data file</span></span>
 <span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/zerofill-ex_sampling.txt"</span>, package <span class='op'>=</span> <span class='st'>"auk"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span class='r-in'>  <span class='fu'>read_sampling</span><span class='op'>(</span><span class='op'>)</span></span>

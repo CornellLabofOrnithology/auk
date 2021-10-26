@@ -101,7 +101,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
              "last edited date", 
              "protocol type", "project code",
              "duration minutes", "effort distance km",
-             "breeding bird atlas code",
+             "breeding code",
              "all species reported",
              "observer id"),
     stringsAsFactors = FALSE)
