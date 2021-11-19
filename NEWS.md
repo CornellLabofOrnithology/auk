@@ -1,3 +1,7 @@
+# auk 0.5.2
+
+- rename branch master to main
+
 # auk 0.5.1
 
 - drop `data.table` dependency, no longer needed with `readr` speed improvements
