@@ -92,6 +92,7 @@
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor" aria-hidden="true"></a>Overview</h2>
 <p><a href="http://www.ebird.org" class="external-link">eBird</a> is an online tool for recording bird observations. Since its inception, over 600 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download" class="external-link">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
+<p>For a comprehensive resource on using eBird data for modeling species distributions, consult the free online book <a href="https://cornelllabofornithology.github.io/ebird-best-practices/" class="external-link">Best Practices for Using eBird Data</a> and the association paper <em>Analytical guidelines to increase the value of community science data: An example using eBird data to estimate species distributions</em> (<a href="https://onlinelibrary.wiley.com/doi/10.1111/ddi.13271" class="external-link">Johnston et al. 2021</a>).</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -288,7 +289,7 @@
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ locality_type            : chr [1:494] "P" "P" "P" "P" ...</span></span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ latitude                 : num [1:494] 20.7 15.8 15.8 15.8 15.7 ...</span></span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ longitude                : num [1:494] -88.6 -93 -93 -92.9 -92.9 ...</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ observation_date         : Date[1:494], format: "2010-09-05" "2011-08-18" ...</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ observation_date         : Date[1:494], format: "2010-09-05" "2011-08-18" "2012-02-02" ...</span></span>
 <span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ time_observations_started: chr [1:494] "06:30:00" "08:00:00" "09:13:00" "06:40:00" ...</span></span>
 <span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ observer_id              : chr [1:494] "obsr55719" "obsr313215" "obsr313215" "obsr313215" ...</span></span>
 <span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ sampling_event_identifier: chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...</span></span>

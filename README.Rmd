@@ -28,6 +28,8 @@ knitr::opts_chunk$set(
 
 [eBird](http://www.ebird.org) is an online tool for recording bird observations. Since its inception, over 600 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the [eBird Basic Dataset (EBD)](http://ebird.org/ebird/data/download). Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.
 
+For a comprehensive resource on using eBird data for modeling species distributions, consult the free online book [Best Practices for Using eBird Data](https://cornelllabofornithology.github.io/ebird-best-practices/) and the association paper _Analytical guidelines to increase the value of community science data: An example using eBird data to estimate species distributions_ ([Johnston et al. 2021](https://onlinelibrary.wiley.com/doi/10.1111/ddi.13271)).
+
 ## Installation
 
 ```{r gh-install, eval=FALSE}
