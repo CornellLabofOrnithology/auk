@@ -1,8 +1,8 @@
 pandoc: 2.14.0.3
-pkgdown: 1.6.1.9001
-pkgdown_sha: ce9781a15c7ea07df9fb17a11295ba4abec0b54b
+pkgdown: 2.0.2
+pkgdown_sha: ~
 articles:
   auk: auk.html
   development: development.html
-last_built: 2021-12-06T17:22Z
+last_built: 2022-02-27T01:42Z
 

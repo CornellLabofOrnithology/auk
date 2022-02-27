@@ -1,7 +1,6 @@
-# auk 0.5.1
+# auk 0.5.2
 
-- drop `data.table` dependency, no longer needed with `readr` speed improvements
-- fix bug arising from 'breeding bird atlas code' being renamed to 'breeding code' (issue #58)
+- added an `extinct` column to taxonomy
 
 # Test environments
 

@@ -38,7 +38,7 @@ covariates, i.e. covariates that vary within sites, at the level of
 observations, for example, time or length of observation.}
 }
 \value{
-A data frame that can be processed by \code{\link[unmarked:formatWideLong]{unmarked::formatWide()}}.
+A data frame that can be processed by \code{\link[unmarked:formatWide]{unmarked::formatWide()}}.
 Each row will correspond to a unqiue site and, assuming there are a maximum
 of \code{N} observations per site, columns will be as follows:
 \enumerate{
@@ -53,11 +53,11 @@ covariate per observation, names "covariate_name.1", ...,
 \description{
 Prepare a data frame of species observations for ingestion into the package
 \code{unmarked} for hierarchical modeling of abundance and occurrence. The
-function \code{\link[unmarked:formatWideLong]{unmarked::formatWide()}} takes a data frame and converts it to one
+function \code{\link[unmarked:formatWide]{unmarked::formatWide()}} takes a data frame and converts it to one
 of several \code{unmarked} objects, which can then be used for modeling. This
 function converts data from a format in which each row is an observation
 (e.g. as in the eBird Basic Dataset) to the esoteric format required by
-\code{\link[unmarked:formatWideLong]{unmarked::formatWide()}} in which each row is a site.
+\code{\link[unmarked:formatWide]{unmarked::formatWide()}} in which each row is a site.
 }
 \details{
 Hierarchical modeling requires repeat observations at each "site" to

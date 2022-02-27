@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.5.2</span>
       </span>
     </div>
 
@@ -73,13 +73,13 @@
 
       
 
-      </header><script src="auk_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to auk</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/CornellLabofOrnithology/auk/blob/master/vignettes/auk.Rmd" class="external-link"><code>vignettes/auk.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/CornellLabofOrnithology/auk/blob/HEAD/vignettes/auk.Rmd" class="external-link"><code>vignettes/auk.Rmd</code></a></small>
       <div class="hidden name"><code>auk.Rmd</code></div>
 
     </div>
@@ -88,9 +88,9 @@
     
 <p><a href="http://www.ebird.org" class="external-link">eBird</a> is an online tool for recording bird observations. Since its inception, nearly 500 million records of bird sightings (i.e. combinations of location, date, time, and bird species) have been collected, making eBird one of the largest citizen science projects in history and an extremely valuable resource for bird research and conservation. The full eBird database is packaged as a text file and available for download as the <a href="http://ebird.org/ebird/data/download" class="external-link">eBird Basic Dataset (EBD)</a>. Due to the large size of this dataset, it must be filtered to a smaller subset of desired observations before reading into R. This filtering is most efficiently done using AWK, a Unix utility and programming language for processing column formatted text data. This package acts as a front end for AWK, allowing users to filter eBird data before import into R.</p>
 <p>This vignette is divided into three sections. The first section provides background on the eBird data and motivation for the development of this package. The second section outlines the use of <code>auk</code> for filtering text file to produce a presence-only dataset. The final section demonstrates how <code>auk</code> can be used to produce zero-filled, presence-absence (or more correctly presence–non-detection) data, a necessity for many modeling and analysis applications.</p>
-<div id="quick-start" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quick-start" class="anchor" aria-hidden="true"></a>Quick start</h2>
+<div class="section level2">
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
 <p>This package uses the command-line program AWK to extract subsets of the eBird Basic Dataset for use in R. This is a multi-step process:</p>
 <ol style="list-style-type: decimal">
 <li>Define a reference to the eBird data file.</li>
@@ -126,31 +126,31 @@
 <span class="va">ebd_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span><span class="op">(</span><span class="va">ebd_filters</span>, file <span class="op">=</span> <span class="va">output_file</span><span class="op">)</span>
 <span class="va">ebd_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">ebd_filtered</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="background" class="section level2">
-<h2 class="hasAnchor">
-<a href="#background" class="anchor" aria-hidden="true"></a>Background</h2>
-<div id="the-ebird-basic-dataset" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-ebird-basic-dataset" class="anchor" aria-hidden="true"></a>The eBird Basic Dataset</h3>
+<div class="section level2">
+<h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
+</h2>
+<div class="section level3">
+<h3 id="the-ebird-basic-dataset">The eBird Basic Dataset<a class="anchor" aria-label="anchor" href="#the-ebird-basic-dataset"></a>
+</h3>
 <p>The eBird database currently contains nearly 500 million bird observations, and this rate of increase is accelerating as new users join eBird. These data are an extremely valuable tool both for basic science and conservation; however, given the sheer amount of data, accessing eBird data poses a unique challenge. Currently, access to the complete set of eBird observations is provided via the eBird Basic Dataset (EBD). This is a tab-separated text file, released quarterly, containing all validated bird sightings in the eBird database at the time of release. Each row corresponds to the sighting of a single species within a checklist and, in addition to the species and number of individuals reported, information is provided at the checklist level (location, time, date, search effort, etc.).</p>
 <p>In addition, eBird provides a Sampling Event Data file that contains the checklist-level data for every valid checklist submitted to eBird, including checklists for which no species of birds were reported. In this file, each row corresponds to a checklist and only the checklist-level variables are included, not the associated bird data. While the eBird Basic Dataset provides presence-only data, it can be combined with the Sampling Event Data file to produce presence-absence data. This process is described below.</p>
 <p>For full metadata on the both datasets, consult the documentation provided when the <a href="http://ebird.org/ebird/data/download" class="external-link">files are downloaded</a>.</p>
 </div>
 </div>
-<div id="auk-vs--rebird" class="section level2">
-<h2 class="hasAnchor">
-<a href="#auk-vs--rebird" class="anchor" aria-hidden="true"></a><code>auk</code> vs. <code>rebird</code>
+<div class="section level2">
+<h2 id="auk-vs--rebird">
+<code>auk</code> vs. <code>rebird</code><a class="anchor" aria-label="anchor" href="#auk-vs--rebird"></a>
 </h2>
 <p>Those interested in eBird data may also want to consider <a href="https://docs.ropensci.org/rebird/" class="external-link"><code>rebird</code></a>, an R package that provides an interface to the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBirdAPIs" class="external-link">eBird APIs</a>. The functions in <code>rebird</code> are mostly limited to accessing recent (i.e. within the last 30 days) observations, although <code>ebirdfreq()</code> does provide historical frequency of observation data. In contrast, <code>auk</code> gives access to the full set of ~ 500 million eBird observations. For most ecological applications, users will require <code>auk</code>; however, for some use cases, e.g. building tools for birders, <code>rebird</code> provides a quick and easy way to access data.</p>
-<div id="data-access" class="section level3">
-<h3 class="hasAnchor">
-<a href="#data-access" class="anchor" aria-hidden="true"></a>Data access</h3>
+<div class="section level3">
+<h3 id="data-access">Data access<a class="anchor" aria-label="anchor" href="#data-access"></a>
+</h3>
 <p>To access eBird data, begin by <a href="https://secure.birds.cornell.edu/cassso/login" class="external-link">creating an eBird account and signing in</a>. Then visit the <a href="http://ebird.org/ebird/data/download" class="external-link">Download Data</a> page. eBird data access is free; however, you will need to <a href="http://ebird.org/ebird/data/request" class="external-link">request access</a> in order to obtain access to the EBD. Filling out the access request form allows eBird to keep track of the number of people using the data and obtain information on the applications for which the data are used</p>
 <p>Once you have access to the data, proceed to the <a href="http://ebird.org/ebird/data/download/ebd" class="external-link">download page</a>. There are two download options: prepackage download and custom download. Downloading the prepackaged option gives you access to the full global dataset. If you choose this route, you’ll likely want to download both the EBD (~ 25 GB) and corresponding Sampling Event Data (~ 2.5 GB). If you know you’re likely to only need data for a single species, or a small region, you can request a custom download be prepared consisting of only a subset of the data. This will result in significantly smaller files; however, note that custom requests that would result in huge numbers of checklists (e.g. all records from the US) won’t work. In either case, download and decompress the files.</p>
 </div>
-<div id="example-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#example-data" class="anchor" aria-hidden="true"></a>Example data</h3>
+<div class="section level3">
+<h3 id="example-data">Example data<a class="anchor" aria-label="anchor" href="#example-data"></a>
+</h3>
 <p>This package comes with two example datasets. The first is suitable for practicing filtering the EBD and producing presence-only data. It’s a sample of 500 records from the EBD. It contains data from North and Central America from 2010-2012 on 4 jay species: Canada Jay, Blue Jay, Steller’s Jay, and Green Jay. It can be accessed with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/CornellLabofOrnithology/auk" class="external-link">auk</a></span><span class="op">)</span>
@@ -164,9 +164,9 @@
 <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></code></pre></div>
 <p><strong>Important note:</strong> in this vignette, <code><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file()</a></code> is used to return the path to the example data included in this package. When using <code>auk</code> in practice, provide the path to the location of the EBD on your computer, this could be a relative path, e.g. <code>"data/ebd_relFeb-2018.txt"</code>, or an absolute path, e.g. <code>"~/ebird/ebd_relFeb-2018/ebd_relFeb-2018.txt"</code>.</p>
 </div>
-<div id="awk" class="section level3">
-<h3 class="hasAnchor">
-<a href="#awk" class="anchor" aria-hidden="true"></a>AWK</h3>
+<div class="section level3">
+<h3 id="awk">AWK<a class="anchor" aria-label="anchor" href="#awk"></a>
+</h3>
 <p>R typically works with objects in memory and, as a result, there is a hard limit on the size of objects that can be brought into R. Because eBird contains nearly 500 million sightings, the eBird Basic Dataset is an inherently large file (~150 GB uncompressed) and therefore impossible to manipulate directly in R. Thus it is generally necessary to create a subset of the file outside of R, then import this smaller subset for analysis.</p>
 <p>AWK is a Unix utility and programming language for processing column formatted text data. It is highly flexible and extremely fast, making it a valuable tool for pre-processing the eBird data in order to create the smaller subset of data that is required. Users of the data can use AWK to produce a smaller file, subsetting the full text file taxonomically, spatially, or temporally, in order to produce a smaller file that can then be loaded in to R for visualization, analysis, and modelling.</p>
 <p>Although AWK is a powerful tool, it has three disadvantages: it requires learning the syntax of a new language, it is only accessible via the command line, and it results in a portion of your workflow existing outside of R. This package is a wrapper for AWK specifically designed for filtering eBird data The goal is to ease the use of the this data by removing the hurdle of learning and using AWK.</p>
@@ -176,26 +176,26 @@
 <p>while Windows users might add:</p>
 <pre><code>AWK_PATH=C:/cygwin64/bin/gawk.exe</code></pre>
 </div>
-<div id="a-note-on-versions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#a-note-on-versions" class="anchor" aria-hidden="true"></a>A note on versions</h3>
+<div class="section level3">
+<h3 id="a-note-on-versions">A note on versions<a class="anchor" aria-label="anchor" href="#a-note-on-versions"></a>
+</h3>
 <p>This package contains a current (as of the time of package release) version of the <a href="https://ebird.org/science/use-ebird-data/the-ebird-taxonomy" class="external-link">bird taxonomy used by eBird</a>. This taxonomy determines the species that can be reported in eBird and therefore the species that users of <code>auk</code> can extract from the EBD. eBird releases an updated taxonomy once a year, typically in August, at which time <code>auk</code> will be updated to include the current taxonomy. When using <code>auk</code>, users should be careful to ensure that the version they’re using is in sync with the EBD file they’re working with. This is most easily accomplished by always using the most recent version of <code>auk</code> and the most recent release of the eBird Basic Dataset</p>
 </div>
 </div>
-<div id="presence-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#presence-data" class="anchor" aria-hidden="true"></a>Presence data</h2>
+<div class="section level2">
+<h2 id="presence-data">Presence data<a class="anchor" aria-label="anchor" href="#presence-data"></a>
+</h2>
 <p>The most common use of the eBird data is to produce a set of bird sightings, i.e. where and when was a given species seen. For example, this type of data could be used to produce a map of sighting locations, or to determine if a given bird has been seen in an area of interest. For more analytic work, such as species distribution modeling, presence and absence data are likely preferred (see Guillera-Arroita et al. 2015). Producing presence-absence data will be covered in the next section.</p>
-<div id="the-auk_ebd-object" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-auk_ebd-object" class="anchor" aria-hidden="true"></a>The <code>auk_ebd</code> object</h3>
+<div class="section level3">
+<h3 id="the-auk_ebd-object">The <code>auk_ebd</code> object<a class="anchor" aria-label="anchor" href="#the-auk_ebd-object"></a>
+</h3>
 <p>This package uses an <code>auk_ebd</code> object to keep track of the input data file, any filters defined, and the output file that is produced after filtering has been executed. By keeping everything wrapped up in one object, the user can keep track of exactly what set of input data and filters produced any given output data. To set up the initial <code>auk_ebd</code> object, use <code><a href="../reference/auk_ebd.html">auk_ebd()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">ebd</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmputCmm9/temp_libpath10fe84cded18b/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -218,9 +218,9 @@
 <span class="co">#&gt;   Records with breeding codes only: no</span>
 <span class="co">#&gt;   Complete checklists only: no</span></code></pre></div>
 </div>
-<div id="defining-filters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#defining-filters" class="anchor" aria-hidden="true"></a>Defining filters</h3>
+<div class="section level3">
+<h3 id="defining-filters">Defining filters<a class="anchor" aria-label="anchor" href="#defining-filters"></a>
+</h3>
 <p><code>auk</code> uses a <a href="https://r4ds.had.co.nz/pipes.html" class="external-link">pipeline-based workflow</a> for defining filters, which can then be compiled into an AWK script. Any of the following filters can be applied:</p>
 <ul>
 <li>
@@ -272,7 +272,7 @@
   <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">ebd_filters</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmputCmm9/temp_libpath10fe84cded18b/auk/extdata/ebd-sample.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/ebd-sample.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -296,9 +296,9 @@
 <span class="co">#&gt;   Complete checklists only: yes</span></code></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="https://ebird.org/science/use-ebird-data/the-ebird-taxonomy" class="external-link">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode" class="external-link"><code>countrycode</code></a> package. This is particularly important because filtering is a time consuming process, so catching errors in advance can avoid several hours of wasted time.</p>
 </div>
-<div id="executing-filters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#executing-filters" class="anchor" aria-hidden="true"></a>Executing filters</h3>
+<div class="section level3">
+<h3 id="executing-filters">Executing filters<a class="anchor" aria-label="anchor" href="#executing-filters"></a>
+</h3>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="../reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">output_file</span> <span class="op">&lt;-</span> <span class="st">"ebd_filtered_blja-grja.txt"</span>
@@ -309,9 +309,9 @@
   <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">output_file</span><span class="op">)</span></code></pre></div>
 <p><strong>Filtering the full EBD typically takes at least a couple hours</strong>, so set it running then go grab lunch!</p>
 </div>
-<div id="reading" class="section level3">
-<h3 class="hasAnchor">
-<a href="#reading" class="anchor" aria-hidden="true"></a>Reading</h3>
+<div class="section level3">
+<h3 id="reading">Reading<a class="anchor" aria-label="anchor" href="#reading"></a>
+</h3>
 <p>eBird Basic Dataset files can be read with <code><a href="../reference/read_ebd.html">read_ebd()</a></code>. This is a wrapper around <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>. <code><a href="../reference/read_ebd.html">read_ebd()</a></code> uses <code>stringsAsFactors = FALSE</code>, <code>quote = ""</code>, sets column classes, and converts variable names to <code>snake_case</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -319,51 +319,51 @@
   <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 494</span>
 <span class="co">#&gt; Columns: 45</span>
-<span class="co">#&gt; $ checklist_id              &lt;chr&gt; "S6852862", "S14432467", "S39033556", "S3830…</span>
-<span class="co">#&gt; $ global_unique_identifier  &lt;chr&gt; "URN:CornellLabOfOrnithology:EBIRD:OBS979359…</span>
-<span class="co">#&gt; $ last_edited_date          &lt;chr&gt; "2016-02-22 14:59:49", "2013-06-16 17:34:19"…</span>
-<span class="co">#&gt; $ taxonomic_order           &lt;dbl&gt; 20145, 20145, 20145, 20145, 20145, 20145, 20…</span>
-<span class="co">#&gt; $ category                  &lt;chr&gt; "species", "species", "species", "species", …</span>
-<span class="co">#&gt; $ common_name               &lt;chr&gt; "Green Jay", "Green Jay", "Green Jay", "Gree…</span>
-<span class="co">#&gt; $ scientific_name           &lt;chr&gt; "Cyanocorax yncas", "Cyanocorax yncas", "Cya…</span>
-<span class="co">#&gt; $ observation_count         &lt;chr&gt; "4", "2", "1", "1", "2", "X", "6", "3", "3",…</span>
-<span class="co">#&gt; $ breeding_code             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ breeding_category         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ age_sex                   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ country                   &lt;chr&gt; "Mexico", "Mexico", "Mexico", "Mexico", "Mex…</span>
-<span class="co">#&gt; $ country_code              &lt;chr&gt; "MX", "MX", "MX", "MX", "MX", "MX", "MX", "M…</span>
-<span class="co">#&gt; $ state                     &lt;chr&gt; "Yucatan", "Chiapas", "Chiapas", "Chiapas", …</span>
-<span class="co">#&gt; $ state_code                &lt;chr&gt; "MX-YUC", "MX-CHP", "MX-CHP", "MX-CHP", "MX-…</span>
-<span class="co">#&gt; $ county                    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ county_code               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ iba_code                  &lt;chr&gt; NA, NA, NA, NA, "MX_169", NA, NA, NA, "MX_17…</span>
-<span class="co">#&gt; $ bcr_code                  &lt;int&gt; 56, 60, 60, 60, 60, 55, 55, 60, 56, 55, 55, …</span>
-<span class="co">#&gt; $ usfws_code                &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ atlas_block               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ locality                  &lt;chr&gt; "Yuc. Hacienda Chichen", "Berlin2_Punto_06",…</span>
-<span class="co">#&gt; $ locality_id               &lt;chr&gt; "L989845", "L2224225", "L6247542", "L6120049…</span>
-<span class="co">#&gt; $ locality_type             &lt;chr&gt; "P", "P", "P", "P", "P", "H", "P", "P", "P",…</span>
-<span class="co">#&gt; $ latitude                  &lt;dbl&gt; 20.67682, 15.77522, 15.77360, 15.82947, 15.7…</span>
-<span class="co">#&gt; $ longitude                 &lt;dbl&gt; -88.56896, -92.96472, -93.00260, -92.92293, …</span>
-<span class="co">#&gt; $ observation_date          &lt;date&gt; 2010-09-05, 2011-08-18, 2012-02-02, 2011-12…</span>
-<span class="co">#&gt; $ time_observations_started &lt;chr&gt; "06:30:00", "08:00:00", "09:13:00", "06:40:0…</span>
-<span class="co">#&gt; $ observer_id               &lt;chr&gt; "obsr55719", "obsr313215", "obsr313215", "ob…</span>
-<span class="co">#&gt; $ sampling_event_identifier &lt;chr&gt; "S6852862", "S14432467", "S39033556", "S3830…</span>
-<span class="co">#&gt; $ protocol_type             &lt;chr&gt; "Traveling", "Traveling", "Stationary", "Sta…</span>
-<span class="co">#&gt; $ protocol_code             &lt;chr&gt; "P22", "P22", "P21", "P21", "P22", "P62", "P…</span>
-<span class="co">#&gt; $ project_code              &lt;chr&gt; "EBIRD", "EBIRD_MEX", "EBIRD_MEX", "EBIRD", …</span>
-<span class="co">#&gt; $ duration_minutes          &lt;int&gt; 90, 10, 10, 10, 10, 120, 30, 10, 80, 30, 30,…</span>
-<span class="co">#&gt; $ effort_distance_km        &lt;dbl&gt; 1.000, 0.257, NA, NA, 0.257, NA, NA, NA, 1.2…</span>
-<span class="co">#&gt; $ effort_area_ha            &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ number_observers          &lt;int&gt; 3, 1, 1, 1, 1, 2, 2, 1, 13, 2, 1, 1, 1, 1, 1…</span>
-<span class="co">#&gt; $ all_species_reported      &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</span>
-<span class="co">#&gt; $ group_identifier          &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ has_media                 &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…</span>
-<span class="co">#&gt; $ approved                  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</span>
-<span class="co">#&gt; $ reviewed                  &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…</span>
-<span class="co">#&gt; $ reason                    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ trip_comments             &lt;chr&gt; NA, "Alonso Gomez Hdz Monitoreo Comunitario,…</span>
-<span class="co">#&gt; $ species_comments          &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></code></pre></div>
+<span class="co">#&gt; $ checklist_id              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S6852862", "S14432467", "S39033556", "S3830…</span>
+<span class="co">#&gt; $ global_unique_identifier  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "URN:CornellLabOfOrnithology:EBIRD:OBS979359…</span>
+<span class="co">#&gt; $ last_edited_date          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2016-02-22 14:59:49", "2013-06-16 17:34:19"…</span>
+<span class="co">#&gt; $ taxonomic_order           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 20145, 20145, 20145, 20145, 20145, 20145, 20…</span>
+<span class="co">#&gt; $ category                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "species", "species", "species", "species", …</span>
+<span class="co">#&gt; $ common_name               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Green Jay", "Green Jay", "Green Jay", "Gree…</span>
+<span class="co">#&gt; $ scientific_name           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Cyanocorax yncas", "Cyanocorax yncas", "Cya…</span>
+<span class="co">#&gt; $ observation_count         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "4", "2", "1", "1", "2", "X", "6", "3", "3",…</span>
+<span class="co">#&gt; $ breeding_code             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ breeding_category         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ age_sex                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ country                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Mexico", "Mexico", "Mexico", "Mexico", "Mex…</span>
+<span class="co">#&gt; $ country_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MX", "MX", "MX", "MX", "MX", "MX", "MX", "M…</span>
+<span class="co">#&gt; $ state                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yucatan", "Chiapas", "Chiapas", "Chiapas", …</span>
+<span class="co">#&gt; $ state_code                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MX-YUC", "MX-CHP", "MX-CHP", "MX-CHP", "MX-…</span>
+<span class="co">#&gt; $ county                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ county_code               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ iba_code                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, "MX_169", NA, NA, NA, "MX_17…</span>
+<span class="co">#&gt; $ bcr_code                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 56, 60, 60, 60, 60, 55, 55, 60, 56, 55, 55, …</span>
+<span class="co">#&gt; $ usfws_code                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ atlas_block               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ locality                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yuc. Hacienda Chichen", "Berlin2_Punto_06",…</span>
+<span class="co">#&gt; $ locality_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "L989845", "L2224225", "L6247542", "L6120049…</span>
+<span class="co">#&gt; $ locality_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P", "P", "P", "P", "P", "H", "P", "P", "P",…</span>
+<span class="co">#&gt; $ latitude                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 20.67682, 15.77522, 15.77360, 15.82947, 15.7…</span>
+<span class="co">#&gt; $ longitude                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -88.56896, -92.96472, -93.00260, -92.92293, …</span>
+<span class="co">#&gt; $ observation_date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2010-09-05, 2011-08-18, 2012-02-02, 2011-12…</span>
+<span class="co">#&gt; $ time_observations_started <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "06:30:00", "08:00:00", "09:13:00", "06:40:0…</span>
+<span class="co">#&gt; $ observer_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "obsr55719", "obsr313215", "obsr313215", "ob…</span>
+<span class="co">#&gt; $ sampling_event_identifier <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S6852862", "S14432467", "S39033556", "S3830…</span>
+<span class="co">#&gt; $ protocol_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Traveling", "Traveling", "Stationary", "Sta…</span>
+<span class="co">#&gt; $ protocol_code             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P22", "P22", "P21", "P21", "P22", "P62", "P…</span>
+<span class="co">#&gt; $ project_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EBIRD", "EBIRD_MEX", "EBIRD_MEX", "EBIRD", …</span>
+<span class="co">#&gt; $ duration_minutes          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 90, 10, 10, 10, 10, 120, 30, 10, 80, 30, 30,…</span>
+<span class="co">#&gt; $ effort_distance_km        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.000, 0.257, NA, NA, 0.257, NA, NA, NA, 1.2…</span>
+<span class="co">#&gt; $ effort_area_ha            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ number_observers          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 3, 1, 1, 1, 1, 2, 2, 1, 13, 2, 1, 1, 1, 1, 1…</span>
+<span class="co">#&gt; $ all_species_reported      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</span>
+<span class="co">#&gt; $ group_identifier          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ has_media                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…</span>
+<span class="co">#&gt; $ approved                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</span>
+<span class="co">#&gt; $ reviewed                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…</span>
+<span class="co">#&gt; $ reason                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ trip_comments             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "Alonso Gomez Hdz Monitoreo Comunitario,…</span>
+<span class="co">#&gt; $ species_comments          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></code></pre></div>
 <p><code><a href="../reference/auk_filter.html">auk_filter()</a></code> returns an <code>auk_ebd</code> object with the output file paths stored in it. This <code>auk_ebd</code> object can then be passed directly to <code>auk_read()</code>, allowing for a complete pipeline. For example, we can create an <code>auk_ebd</code> object, define filters, filter with AWK, and read in the results all at once.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">output_file</span> <span class="op">&lt;-</span> <span class="st">"ebd_filtered_blja-grja.txt"</span>
@@ -374,9 +374,9 @@
   <span class="fu"><a href="../reference/auk_filter.html">auk_filter</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">output_file</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="saving-the-awk-command" class="section level3">
-<h3 class="hasAnchor">
-<a href="#saving-the-awk-command" class="anchor" aria-hidden="true"></a>Saving the AWK command</h3>
+<div class="section level3">
+<h3 id="saving-the-awk-command">Saving the AWK command<a class="anchor" aria-label="anchor" href="#saving-the-awk-command"></a>
+</h3>
 <p>The AWK script can be saved for future reference by providing an output filename to <code>awk_file</code>. In addition, by setting <code>execute = FALSE</code> the AWK script will be generated but not run.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">awk_script</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -419,9 +419,9 @@
 <span class="co">#&gt;   }</span>
 <span class="co">#&gt; }</span></code></pre></div>
 </div>
-<div id="group-checklists" class="section level3">
-<h3 class="hasAnchor">
-<a href="#group-checklists" class="anchor" aria-hidden="true"></a>Group checklists</h3>
+<div class="section level3">
+<h3 id="group-checklists">Group checklists<a class="anchor" aria-label="anchor" href="#group-checklists"></a>
+</h3>
 <p>eBird allows observers birding together to share checklists. This process creates a new copy of the original checklist for each observer with whom the original checklist was shared; these copies can then be tweaked to add or remove some species that weren’t seen by the entire group, or altering the sampling-event data. For most applications, it’s best to remove these duplicate (or near-duplicate) checklists. <code><a href="../reference/auk_unique.html">auk_unique()</a></code> removes duplicates resulting from group checklists by selecting the observation with the lowest <code>sampling_event_identifier</code> (a unique ID for each checklist); this is the original checklists from which shared copies were generated. In addition to removing duplicates, a <code>checklist_id</code> field is added, which is equal to the <code>sampling_event_identifier</code> for non-group checklists and the <code>group_identifier</code> for grouped checklists. After running <code><a href="../reference/auk_unique.html">auk_unique()</a></code>, every species will have a single entry for each <code>checklist_id</code>.</p>
 <p><code><a href="../reference/read_ebd.html">read_ebd()</a></code> automatically runs <code><a href="../reference/auk_unique.html">auk_unique()</a></code>, however, we can use <code>unique = FALSE</code> then manually run <code><a href="../reference/auk_unique.html">auk_unique()</a></code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -436,9 +436,9 @@
 <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ebd_unique</span><span class="op">)</span>
 <span class="co">#&gt; [1] 494</span></code></pre></div>
 </div>
-<div id="taxonomic-rollup" class="section level3">
-<h3 class="hasAnchor">
-<a href="#taxonomic-rollup" class="anchor" aria-hidden="true"></a>Taxonomic rollup</h3>
+<div class="section level3">
+<h3 id="taxonomic-rollup">Taxonomic rollup<a class="anchor" aria-label="anchor" href="#taxonomic-rollup"></a>
+</h3>
 <p>The eBird Basic Dataset includes both true species and other taxa, including domestics, hybrids, subspecies, “spuhs”, and recognizable forms. In some cases, a checklist may contain multiple records for the same species, for example, both Audubon’s and Myrtle Yellow-rumped Warblers, as well as some records that are not resolvable to species, for example, “warbler sp.”. For most use cases, a single record for each species on each checklist is desired. The function <code>ebd_rollup()</code> addresses these cases by removing taxa not identifiable to species and rolling up taxa identified below species level to a single record for each species in each checklist.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in sample data without rolling up</span>
@@ -461,30 +461,30 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">subspecies_common_name</span>,
          <span class="va">observation_count</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 × 5</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span>
 <span class="co">#&gt;   checklist_id category common_name           subspecies_commo… observation_cou…</span>
-<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;             &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 S8949407     species  Yellow-rumped Warbler &lt;NA&gt;              1               </span>
-<span class="co">#&gt; 2 S8949407     issf     Yellow-rumped Warbler Yellow-rumped Wa… 13              </span>
-<span class="co">#&gt; 3 S8949407     issf     Yellow-rumped Warbler Yellow-rumped Wa… 17</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S8949407     species  Yellow-rumped Warbler <span style="color: #BB0000;">NA</span>                1               </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> S8949407     issf     Yellow-rumped Warbler Yellow-rumped Wa… 13              </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> S8949407     issf     Yellow-rumped Warbler Yellow-rumped Wa… 17</span>
 <span class="co"># with rollup, they have been combined</span>
 <span class="va">ebd_ru</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">observation_count</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 1 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span>
 <span class="co">#&gt;   checklist_id category common_name           observation_count</span>
-<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;            </span>
-<span class="co">#&gt; 1 S8949407     species  Yellow-rumped Warbler 31</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S8949407     species  Yellow-rumped Warbler 31</span></code></pre></div>
 <p>By default, <code><a href="../reference/read_ebd.html">read_ebd()</a></code> calls <code>ebd_rollup()</code> when importing an eBird Basic Dataset file. To avoid this, and retain subspecies, use <code>read_ebd(rollup = FALSE)</code>.</p>
 </div>
 </div>
-<div id="zero-filled-presence-absence-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#zero-filled-presence-absence-data" class="anchor" aria-hidden="true"></a>Zero-filled, presence-absence data</h2>
+<div class="section level2">
+<h2 id="zero-filled-presence-absence-data">Zero-filled, presence-absence data<a class="anchor" aria-label="anchor" href="#zero-filled-presence-absence-data"></a>
+</h2>
 <p>For many applications, presence-only data are sufficient; however, for modeling and analysis, presence-absence data are required. eBird observers only explicitly collect presence data, but they have the option of flagging their checklist as “complete” meaning that they are reporting all the species they saw or heard, and identified. Therefore, given a list of positive sightings (the basic dataset) and a list of all checklists (the sampling event data) it is possible to infer absences by filling zeros for all species not explicitly reported. This section of the vignette describes functions for producing zero-filled, presence-absence data.</p>
-<div id="filtering" class="section level3">
-<h3 class="hasAnchor">
-<a href="#filtering" class="anchor" aria-hidden="true"></a>Filtering</h3>
+<div class="section level3">
+<h3 id="filtering">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a>
+</h3>
 <p>When preparing to create zero-filled data, the eBird Basic Dataset and sampling event data must be filtered to the same set of checklists to ensure consistency. To ensure these two datasets are synced, provide <em>both</em> to <code>auk_ebd</code>, then filter as described in the previous section. This will ensure that all the filters applied to the ebd (except species) will be applied to the sampling event data so that we’ll be working with the same set of checklists. It is critical that <code>auk_compete()</code> is called, since complete checklists are a requirement for zero-filling.</p>
 <p>For example, the following filters to only include sightings of Collared Kingfisher between 6 and 10am:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -497,8 +497,8 @@
   <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">filters</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmputCmm9/temp_libpath10fe84cded18b/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmputCmm9/temp_libpath10fe84cded18b/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   Filters not executed</span>
@@ -527,8 +527,8 @@
 <span class="co">##                                file_sampling = "sampling-filtered.txt")</span>
 <span class="va">ebd_sed_filtered</span>
 <span class="co">#&gt; Input </span>
-<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmputCmm9/temp_libpath10fe84cded18b/auk/extdata/zerofill-ex_ebd.txt </span>
-<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmputCmm9/temp_libpath10fe84cded18b/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/zerofill-ex_ebd.txt </span>
+<span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Output </span>
 <span class="co">#&gt;   EBD: ebd-filtered.txt </span>
@@ -552,9 +552,9 @@
 <span class="co">#&gt;   Records with breeding codes only: no</span>
 <span class="co">#&gt;   Complete checklists only: yes</span></code></pre></div>
 </div>
-<div id="reading-and-zero-filling" class="section level3">
-<h3 class="hasAnchor">
-<a href="#reading-and-zero-filling" class="anchor" aria-hidden="true"></a>Reading and zero-filling</h3>
+<div class="section level3">
+<h3 id="reading-and-zero-filling">Reading and zero-filling<a class="anchor" aria-label="anchor" href="#reading-and-zero-filling"></a>
+</h3>
 <p>The filtered datasets can now be combined into a zero-filled, presence-absence dataset using <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## ebd_zf &lt;- auk_zerofill(ebd_sed_filtered)</span>
@@ -569,49 +569,49 @@
 </ul>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ebd_zf</span><span class="op">$</span><span class="va">observations</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span>
 <span class="co">#&gt;   checklist_id scientific_name     observation_count species_observed</span>
-<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;             &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 G1733362     Todiramphus chloris X                 TRUE            </span>
-<span class="co">#&gt; 2 G2469935     Todiramphus chloris 0                 FALSE           </span>
-<span class="co">#&gt; 3 G2469959     Todiramphus chloris 0                 FALSE           </span>
-<span class="co">#&gt; 4 G2469960     Todiramphus chloris 1                 TRUE            </span>
-<span class="co">#&gt; 5 G2469973     Todiramphus chloris 1                 TRUE            </span>
-<span class="co">#&gt; 6 G2470208     Todiramphus chloris 0                 FALSE</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> G1733362     Todiramphus chloris X                 TRUE            </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> G2469935     Todiramphus chloris 0                 FALSE           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> G2469959     Todiramphus chloris 0                 FALSE           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> G2469960     Todiramphus chloris 1                 TRUE            </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> G2469973     Todiramphus chloris 1                 TRUE            </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> G2470208     Todiramphus chloris 0                 FALSE</span>
 <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">ebd_zf</span><span class="op">$</span><span class="va">sampling_events</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 168</span>
 <span class="co">#&gt; Columns: 31</span>
-<span class="co">#&gt; $ checklist_id              &lt;chr&gt; "S11332512", "S13581013", "S38296538", "S382…</span>
-<span class="co">#&gt; $ last_edited_date          &lt;chr&gt; "2017-05-27 10:25:40", "2017-05-27 09:21:26"…</span>
-<span class="co">#&gt; $ country                   &lt;chr&gt; "Singapore", "Singapore", "Singapore", "Sing…</span>
-<span class="co">#&gt; $ country_code              &lt;chr&gt; "SG", "SG", "SG", "SG", "SG", "SG", "SG", "S…</span>
-<span class="co">#&gt; $ state                     &lt;chr&gt; "Singapore", "Singapore", "Singapore", "Sing…</span>
-<span class="co">#&gt; $ state_code                &lt;chr&gt; "SG-", "SG-", "SG-", "SG-", "SG-", "SG-", "S…</span>
-<span class="co">#&gt; $ county                    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ county_code               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ iba_code                  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ bcr_code                  &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ usfws_code                &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ atlas_block               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ locality                  &lt;chr&gt; "Singapore - Esplanade", "Boat Quay, Singapo…</span>
-<span class="co">#&gt; $ locality_id               &lt;chr&gt; "L1654642", "L2090485", "L3901781", "L399969…</span>
-<span class="co">#&gt; $ locality_type             &lt;chr&gt; "P", "P", "H", "P", "H", "H", "H", "H", "H",…</span>
-<span class="co">#&gt; $ latitude                  &lt;dbl&gt; 1.289548, 1.287985, 1.395726, 1.407224, 1.37…</span>
-<span class="co">#&gt; $ longitude                 &lt;dbl&gt; 103.8632, 103.8506, 103.9257, 103.8595, 103.…</span>
-<span class="co">#&gt; $ observation_date          &lt;date&gt; 2012-08-12, 2012-01-15, 2012-07-11, 2012-12…</span>
-<span class="co">#&gt; $ time_observations_started &lt;chr&gt; "09:30:00", "09:00:00", "07:30:00", "07:00:0…</span>
-<span class="co">#&gt; $ observer_id               &lt;chr&gt; "obs160139", "obs286526", "obs524811", "obs5…</span>
-<span class="co">#&gt; $ sampling_event_identifier &lt;chr&gt; "S11332512", "S13581013", "S38296538", "S382…</span>
-<span class="co">#&gt; $ protocol_type             &lt;chr&gt; "Traveling", "Traveling", "Stationary", "Sta…</span>
-<span class="co">#&gt; $ protocol_code             &lt;chr&gt; "P22", "P22", "P21", "P21", "P22", "P22", "P…</span>
-<span class="co">#&gt; $ project_code              &lt;chr&gt; "EBIRD", "EBIRD", "EBIRD", "EBIRD", "EBIRD",…</span>
-<span class="co">#&gt; $ duration_minutes          &lt;int&gt; 90, 60, 60, 90, 300, 300, 75, 300, 420, 510,…</span>
-<span class="co">#&gt; $ effort_distance_km        &lt;dbl&gt; 1.609, 3.219, NA, NA, 3.219, 3.219, 0.805, 4…</span>
-<span class="co">#&gt; $ effort_area_ha            &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ number_observers          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,…</span>
-<span class="co">#&gt; $ all_species_reported      &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</span>
-<span class="co">#&gt; $ group_identifier          &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ trip_comments             &lt;chr&gt; NA, NA, NA, NA, "Trip report;--http://redgan…</span></code></pre></div>
+<span class="co">#&gt; $ checklist_id              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S11332512", "S13581013", "S38296538", "S382…</span>
+<span class="co">#&gt; $ last_edited_date          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-05-27 10:25:40", "2017-05-27 09:21:26"…</span>
+<span class="co">#&gt; $ country                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Singapore", "Singapore", "Singapore", "Sing…</span>
+<span class="co">#&gt; $ country_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SG", "SG", "SG", "SG", "SG", "SG", "SG", "S…</span>
+<span class="co">#&gt; $ state                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Singapore", "Singapore", "Singapore", "Sing…</span>
+<span class="co">#&gt; $ state_code                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SG-", "SG-", "SG-", "SG-", "SG-", "SG-", "S…</span>
+<span class="co">#&gt; $ county                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ county_code               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ iba_code                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ bcr_code                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ usfws_code                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ atlas_block               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ locality                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Singapore - Esplanade", "Boat Quay, Singapo…</span>
+<span class="co">#&gt; $ locality_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "L1654642", "L2090485", "L3901781", "L399969…</span>
+<span class="co">#&gt; $ locality_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P", "P", "H", "P", "H", "H", "H", "H", "H",…</span>
+<span class="co">#&gt; $ latitude                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.289548, 1.287985, 1.395726, 1.407224, 1.37…</span>
+<span class="co">#&gt; $ longitude                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 103.8632, 103.8506, 103.9257, 103.8595, 103.…</span>
+<span class="co">#&gt; $ observation_date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2012-08-12, 2012-01-15, 2012-07-11, 2012-12…</span>
+<span class="co">#&gt; $ time_observations_started <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "09:30:00", "09:00:00", "07:30:00", "07:00:0…</span>
+<span class="co">#&gt; $ observer_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "obs160139", "obs286526", "obs524811", "obs5…</span>
+<span class="co">#&gt; $ sampling_event_identifier <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S11332512", "S13581013", "S38296538", "S382…</span>
+<span class="co">#&gt; $ protocol_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Traveling", "Traveling", "Stationary", "Sta…</span>
+<span class="co">#&gt; $ protocol_code             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P22", "P22", "P21", "P21", "P22", "P22", "P…</span>
+<span class="co">#&gt; $ project_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EBIRD", "EBIRD", "EBIRD", "EBIRD", "EBIRD",…</span>
+<span class="co">#&gt; $ duration_minutes          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 90, 60, 60, 90, 300, 300, 75, 300, 420, 510,…</span>
+<span class="co">#&gt; $ effort_distance_km        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.609, 3.219, NA, NA, 3.219, 3.219, 0.805, 4…</span>
+<span class="co">#&gt; $ effort_area_ha            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ number_observers          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,…</span>
+<span class="co">#&gt; $ all_species_reported      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</span>
+<span class="co">#&gt; $ group_identifier          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
+<span class="co">#&gt; $ trip_comments             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, "Trip report;--http://redgan…</span></code></pre></div>
 <p>This format is efficient for storage because the checklist information isn’t duplicated, however, a single flat data frame is often required for analysis. To collapse the two data frames together use <code><a href="../reference/auk_zerofill.html">collapse_zerofill()</a></code>, or call <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code> with <code>collapse = TRUE</code>.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## ebd_zf_df &lt;- auk_zerofill(ebd_filtered, collapse = TRUE)</span>
@@ -619,37 +619,37 @@
 <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">ebd_zf_df</span><span class="op">)</span>
 <span class="co">#&gt; [1] "tbl_df"     "tbl"        "data.frame"</span>
 <span class="va">ebd_zf_df</span>
-<span class="co">#&gt; # A tibble: 168 × 34</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 168 × 34</span></span>
 <span class="co">#&gt;    checklist_id last_edited_date    country country_code state state_code county</span>
-<span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; </span>
-<span class="co">#&gt;  1 S11332512    2017-05-27 10:25:40 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt;  2 S13581013    2017-05-27 09:21:26 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt;  3 S38296538    2017-08-10 11:26:23 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt;  4 S38296842    2017-07-27 06:26:57 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt;  5 S10708009    2017-07-05 13:17:16 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt;  6 S10708011    2017-07-05 13:17:16 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt;  7 S10926976    2017-07-05 13:20:48 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt;  8 S10708018    2018-08-30 12:51:05 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt;  9 S10708012    2017-05-28 05:54:20 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt; 10 S16642917    2017-10-19 12:47:02 Singap… SG           Sing… SG-        &lt;NA&gt;  </span>
-<span class="co">#&gt; # … with 158 more rows, and 27 more variables: county_code &lt;chr&gt;,</span>
-<span class="co">#&gt; #   iba_code &lt;chr&gt;, bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;,</span>
-<span class="co">#&gt; #   locality &lt;chr&gt;, locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   longitude &lt;dbl&gt;, observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,</span>
-<span class="co">#&gt; #   observer_id &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,</span>
-<span class="co">#&gt; #   protocol_code &lt;chr&gt;, project_code &lt;chr&gt;, duration_minutes &lt;int&gt;,</span>
-<span class="co">#&gt; #   effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;, …</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> S11332512    2017-05-27 10:25:40 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> S13581013    2017-05-27 09:21:26 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> S38296538    2017-08-10 11:26:23 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> S38296842    2017-07-27 06:26:57 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> S10708009    2017-07-05 13:17:16 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> S10708011    2017-07-05 13:17:16 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> S10926976    2017-07-05 13:20:48 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> S10708018    2018-08-30 12:51:05 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> S10708012    2017-05-28 05:54:20 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> S16642917    2017-10-19 12:47:02 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 158 more rows, and 27 more variables: county_code &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   iba_code &lt;chr&gt;, bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   locality &lt;chr&gt;, locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   longitude &lt;dbl&gt;, observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   observer_id &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   protocol_code &lt;chr&gt;, project_code &lt;chr&gt;, duration_minutes &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;, …</span></span></code></pre></div>
 </div>
 </div>
-<div id="acknowledgements" class="section level2">
-<h2 class="hasAnchor">
-<a href="#acknowledgements" class="anchor" aria-hidden="true"></a>Acknowledgements</h2>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+</h2>
 <p>This package is based on the AWK scripts provided in a presentation given by Wesley Hochachka, Daniel Fink, Tom Auer, and Frank La Sorte at the 2016 NAOC eBird Data Workshop on August 15, 2016.</p>
 <p><code>auk</code> benefited significantly from the <a href="https://ropensci.org/" class="external-link">rOpenSci</a> review process, including helpful suggestions from <a href="https://github.com/aurielfournier" class="external-link">Auriel Fournier</a> and <a href="https://github.com/emhart" class="external-link">Edmund Hart</a>.</p>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor" aria-hidden="true"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <pre><code>eBird Basic Dataset. Version: ebd_relFeb-2018. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
 
 Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. Lentini, M.A. McCarthy, R. Tingley, and B.A. Wintle. 2015. Is my species distribution model fit for purpose? Matching data and models to applications. Global Ecology and Biogeography 24:276-292.</code></pre>
@@ -668,12 +668,12 @@ Guillera-Arroita, G., J.J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P.E. L
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="http://strimas.com" class="external-link external-link">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/" class="external-link external-link">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/" class="external-link external-link">Wesley Hochachka</a>.</p>
+<p>Developed by <a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a>, <a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a>, <a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a>.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
