@@ -28,7 +28,8 @@ ebird_taxonomy <- paste0("https://www.birds.cornell.edu/",
   read_csv() %>% 
   rename_all(tolower) %>% 
   mutate(common_name = stri_trans_general(primary_com_name, "latin-ascii"),
-         family_common = extract_family(family)) %>% 
+         family_common = extract_family(family),
+         family = str_remove(family, " \\(.+\\)")) %>% 
   select(species_code, scientific_name = sci_name, common_name,
          order = order1, family, family_common,
          category, taxon_order, report_as) %>% 
