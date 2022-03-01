@@ -100,7 +100,6 @@ auk_unique <- function(x,
   }
   
   # generate list of checklist and observer ids
-  # get max number of birds observed
   ids <- dplyr::select(x_grouped, 
                        dplyr::one_of(c(cols, checklist_id, observer_id)))
   ids <- dplyr::group_by_at(ids, cols)
@@ -110,7 +109,7 @@ auk_unique <- function(x,
                           .oid = paste(.data[[observer_id]], collapse = ","))
   ids <- dplyr::ungroup(ids)
   
-  # add the collapsed ids and max count
+  # add the collapsed ids
   x_grouped <- dplyr::inner_join(x_grouped, ids, by = cols)
   x_grouped[[checklist_id]] <- x_grouped$.cid
   x_grouped[[observer_id]] <- x_grouped$.oid
