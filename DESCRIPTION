@@ -40,8 +40,7 @@ Imports:
     rlang (>= 0.3.0),
     stringi,
     stringr,
-    tidyr (>= 0.8.0),
-    utils
+    tidyr (>= 0.8.0)
 Suggests: 
     covr,
     knitr,
@@ -54,4 +53,4 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1

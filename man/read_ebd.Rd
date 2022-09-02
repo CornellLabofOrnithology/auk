@@ -64,18 +64,21 @@ function used.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{character}: Filename of EBD.
+\item \code{read_ebd(character)}: Filename of EBD.
 
-\item \code{auk_ebd}: \code{auk_ebd} object output from \code{\link[=auk_filter]{auk_filter()}}
+\item \code{read_ebd(auk_ebd)}: \code{auk_ebd} object output from \code{\link[=auk_filter]{auk_filter()}}
 
-\item \code{character}: Filename of sampling event data file
+}}
+\section{Functions}{
+\itemize{
+\item \code{read_sampling(character)}: Filename of sampling event data file
 
-\item \code{auk_ebd}: \code{auk_ebd} object output from \code{\link[=auk_filter]{auk_filter()}}. Must have
+\item \code{read_sampling(auk_ebd)}: \code{auk_ebd} object output from \code{\link[=auk_filter]{auk_filter()}}. Must have
 had a sampling event data file set in the original call to \code{\link[=auk_ebd]{auk_ebd()}}.
 
-\item \code{auk_sampling}: \code{auk_sampling} object output from \code{\link[=auk_filter]{auk_filter()}}.
-}}
+\item \code{read_sampling(auk_sampling)}: \code{auk_sampling} object output from \code{\link[=auk_filter]{auk_filter()}}.
 
+}}
 \examples{
 f <- system.file("extdata/ebd-sample.txt", package = "auk")
 read_ebd(f)

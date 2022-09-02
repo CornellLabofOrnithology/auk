@@ -72,7 +72,7 @@ eBird data file.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_rollup</span><span class="op">(</span><span class="va">x</span>, <span class="va">taxonomy_version</span>, drop_higher <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_rollup</span><span class="op">(</span><span class="va">x</span>, <span class="va">taxonomy_version</span>, drop_higher <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -80,17 +80,24 @@ eBird data file.</p>
     <dl><dt>x</dt>
 <dd><p>data.frame; data frame of eBird data, typically as imported by
 <code><a href="read_ebd.html">read_ebd()</a></code></p></dd>
+
+
 <dt>taxonomy_version</dt>
 <dd><p>integer; the version (i.e. year) of the taxonomy. In
 most cases, this should be left empty to use the version of the taxonomy
 included in the package. See <code><a href="get_ebird_taxonomy.html">get_ebird_taxonomy()</a></code>.</p></dd>
+
+
 <dt>drop_higher</dt>
 <dd><p>logical; whether to remove taxa above species during the
 rollup process, e.g. "spuhs" like "duck sp.".</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame of the eBird data with taxonomic rollup applied.</p>
+    
+
+<p>A data frame of the eBird data with taxonomic rollup applied.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -142,27 +149,27 @@ page for further details.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># get the path to the example data included in the package</span></span>
-<span class="r-in"><span class="co"># in practice, provide path to ebd, e.g. f &lt;- "data/ebd_relFeb-2018.txt</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-rollup-ex.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># read in data without rolling up</span></span>
-<span class="r-in"><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">f</span>, rollup <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># rollup</span></span>
-<span class="r-in"><span class="va">ebd_ru</span> <span class="op">&lt;-</span> <span class="fu">auk_rollup</span><span class="op">(</span><span class="va">ebd</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># keep higher taxa</span></span>
-<span class="r-in"><span class="va">ebd_higher</span> <span class="op">&lt;-</span> <span class="fu">auk_rollup</span><span class="op">(</span><span class="va">ebd</span>, drop_higher <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># all taxa not identifiable to species are dropped</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ebd</span><span class="op">$</span><span class="va">category</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># get the path to the example data included in the package</span></span></span>
+<span class="r-in"><span><span class="co"># in practice, provide path to ebd, e.g. f &lt;- "data/ebd_relFeb-2018.txt</span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-rollup-ex.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># read in data without rolling up</span></span></span>
+<span class="r-in"><span><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">f</span>, rollup <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># rollup</span></span></span>
+<span class="r-in"><span><span class="va">ebd_ru</span> <span class="op">&lt;-</span> <span class="fu">auk_rollup</span><span class="op">(</span><span class="va">ebd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># keep higher taxa</span></span></span>
+<span class="r-in"><span><span class="va">ebd_higher</span> <span class="op">&lt;-</span> <span class="fu">auk_rollup</span><span class="op">(</span><span class="va">ebd</span>, drop_higher <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># all taxa not identifiable to species are dropped</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ebd</span><span class="op">$</span><span class="va">category</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "domestic"   "form"       "hybrid"     "intergrade" "slash"     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] "spuh"       "species"    "issf"      </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ebd_ru</span><span class="op">$</span><span class="va">category</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ebd_ru</span><span class="op">$</span><span class="va">category</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "species"</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ebd_higher</span><span class="op">$</span><span class="va">category</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ebd_higher</span><span class="op">$</span><span class="va">category</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "species" "hybrid"  "slash"   "spuh"   </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># yellow-rump warbler subspecies rollup</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># yellow-rump warbler subspecies rollup</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘dplyr’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
@@ -171,21 +178,22 @@ page for further details.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
-<span class="r-in"><span class="co"># without rollup, there are three observations</span></span>
-<span class="r-in"><span class="va">ebd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">subspecies_common_name</span>, </span>
-<span class="r-in">         <span class="va">observation_count</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># without rollup, there are three observations</span></span></span>
+<span class="r-in"><span><span class="va">ebd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">subspecies_common_name</span>, </span></span>
+<span class="r-in"><span>         <span class="va">observation_count</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   checklist_id category common_name           subspecies_commo… observation_cou…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> S8949407     species  Yellow-rumped Warbler <span style="color: #BB0000;">NA</span>                1               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> S8949407     issf     Yellow-rumped Warbler Yellow-rumped Wa… 13              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> S8949407     issf     Yellow-rumped Warbler Yellow-rumped Wa… 17              </span>
-<span class="r-in"><span class="co"># with rollup, they have been combined</span></span>
-<span class="r-in"><span class="va">ebd_ru</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">observation_count</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   checklist_id category common_name           subspecies_common_name     obser…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> S8949407     species  Yellow-rumped Warbler <span style="color: #BB0000;">NA</span>                         1      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> S8949407     issf     Yellow-rumped Warbler Yellow-rumped Warbler (My… 13     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> S8949407     issf     Yellow-rumped Warbler Yellow-rumped Warbler (Au… 17     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​observation_count</span></span>
+<span class="r-in"><span><span class="co"># with rollup, they have been combined</span></span></span>
+<span class="r-in"><span><span class="va">ebd_ru</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">observation_count</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   checklist_id category common_name           observation_count</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
@@ -204,7 +212,7 @@ page for further details.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

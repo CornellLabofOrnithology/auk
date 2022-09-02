@@ -1,8 +1,8 @@
-pandoc: 2.14.0.3
-pkgdown: 2.0.2
+pandoc: '2.18'
+pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
   auk: auk.html
   development: development.html
-last_built: 2022-02-27T01:42Z
+last_built: 2022-09-02T17:26Z
 

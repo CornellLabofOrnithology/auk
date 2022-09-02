@@ -62,7 +62,7 @@ data.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_sampling</span><span class="op">(</span><span class="va">file</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_sampling</span><span class="op">(</span><span class="va">file</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -70,15 +70,20 @@ data.</p>
     <dl><dt>file</dt>
 <dd><p>character; input sampling event data file, which contains
 checklist data from eBird.</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>character; the input field separator, the eBird data are tab
 separated so this should generally not be modified. Must only be a single
 character and space delimited is not allowed since spaces appear in many of
 the fields.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>auk_sampling</code> object storing the file reference and the desired
+    
+
+<p>An <code>auk_sampling</code> object storing the file reference and the desired
 filters once created with other package functions.</p>
     </div>
     <div id="details">
@@ -98,13 +103,13 @@ function creates an R object to reference only the sampling data.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># get the path to the example data included in the package</span></span>
-<span class="r-in"><span class="co"># in practice, provide path to the sampling event data</span></span>
-<span class="r-in"><span class="co"># e.g. f &lt;- "data/ebd_sampling_relFeb-2018.txt"</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">auk_sampling</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># get the path to the example data included in the package</span></span></span>
+<span class="r-in"><span><span class="co"># in practice, provide path to the sampling event data</span></span></span>
+<span class="r-in"><span><span class="co"># e.g. f &lt;- "data/ebd_sampling_relFeb-2018.txt"</span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">auk_sampling</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/zerofill-ex_sampling.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpvjq429/temp_libpatha3e5bdd71eb/auk/extdata/zerofill-ex_sampling.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -137,7 +142,7 @@ function creates an R object to reference only the sampling data.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

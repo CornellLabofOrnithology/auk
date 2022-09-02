@@ -30,7 +30,8 @@ not appear in this data frame.
 \seealso{
 Other data: 
 \code{\link{bcr_codes}},
-\code{\link{ebird_taxonomy}}
+\code{\link{ebird_taxonomy}},
+\code{\link{valid_protocols}}
 }
 \concept{data}
 \keyword{datasets}

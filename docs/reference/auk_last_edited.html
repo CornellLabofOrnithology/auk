@@ -64,7 +64,7 @@ perform the filtering.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_last_edited</span><span class="op">(</span><span class="va">x</span>, <span class="va">date</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_last_edited</span><span class="op">(</span><span class="va">x</span>, <span class="va">date</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,13 +72,18 @@ perform the filtering.</p>
     <dl><dt>x</dt>
 <dd><p><code>auk_ebd</code> or <code>auk_sampling</code> object; reference to file created by
 <code><a href="auk_ebd.html">auk_ebd()</a></code> or <code><a href="auk_sampling.html">auk_sampling()</a></code>.</p></dd>
+
+
 <dt>date</dt>
 <dd><p>character or date; date range to filter by, provided either as a
 character vector in the format <code>"2015-12-31"</code> or a vector of Date objects.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>auk_ebd</code> object.</p>
+    
+
+<p>An <code>auk_ebd</code> object.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -110,11 +115,11 @@ user only wishes to filter the sampling event data.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">auk_last_edited</span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2010-01-01"</span>, <span class="st">"2010-12-31"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">auk_last_edited</span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2010-01-01"</span>, <span class="st">"2010-12-31"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpvjq429/temp_libpatha3e5bdd71eb/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -150,7 +155,7 @@ user only wishes to filter the sampling event data.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

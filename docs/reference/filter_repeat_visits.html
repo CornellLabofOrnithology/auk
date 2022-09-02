@@ -70,16 +70,16 @@ of closure.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">filter_repeat_visits</span><span class="op">(</span>
-  <span class="va">x</span>,
-  min_obs <span class="op">=</span> <span class="fl">2L</span>,
-  max_obs <span class="op">=</span> <span class="fl">10L</span>,
-  annual_closure <span class="op">=</span> <span class="cn">TRUE</span>,
-  n_days <span class="op">=</span> <span class="cn">NULL</span>,
-  date_var <span class="op">=</span> <span class="st">"observation_date"</span>,
-  site_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"locality_id"</span>, <span class="st">"observer_id"</span><span class="op">)</span>,
-  ll_digits <span class="op">=</span> <span class="fl">6L</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">filter_repeat_visits</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  min_obs <span class="op">=</span> <span class="fl">2L</span>,</span>
+<span>  max_obs <span class="op">=</span> <span class="fl">10L</span>,</span>
+<span>  annual_closure <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  n_days <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  date_var <span class="op">=</span> <span class="st">"observation_date"</span>,</span>
+<span>  site_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"locality_id"</span>, <span class="st">"observer_id"</span><span class="op">)</span>,</span>
+<span>  ll_digits <span class="op">=</span> <span class="fl">6L</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -90,28 +90,42 @@ Dataset (EBD) zero-filled with <code><a href="auk_zerofill.html">auk_zerofill()<
 work with an <code>auk_zerofill</code> object, in which case it will be converted to
 a data frame with <code><a href="auk_zerofill.html">collapse_zerofill()</a></code>.
 <strong>Note that these data must for a single species</strong>.</p></dd>
+
+
 <dt>min_obs</dt>
 <dd><p>integer; minimum number of observations required for each
 site.</p></dd>
+
+
 <dt>max_obs</dt>
 <dd><p>integer; maximum number of observations allowed for each site.</p></dd>
+
+
 <dt>annual_closure</dt>
 <dd><p>logical; whether the entire year should be treated as
 the period of closure (the default). This can be useful, for example, if
 the data have been subset to a period of closure prior to calling
 <code>filter_repeat_visits()</code>.</p></dd>
+
+
 <dt>n_days</dt>
 <dd><p>integer; number of days defining the temporal length of
 closure. If <code>annual_closure = TRUE</code> closure periods will be split at year
 boundaries. If <code>annual_closure = FALSE</code> the closure periods will ignore
 year boundaries.</p></dd>
+
+
 <dt>date_var</dt>
 <dd><p>character; column name of the variable in <code>x</code> containing the
 date. This column should either be in <code>Date</code> format or convertible to
 <code>Date</code> format with <code><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date()</a></code>.</p></dd>
+
+
 <dt>site_vars</dt>
 <dd><p>character; names of one of more columns in <code>x</code> that define a
 site, typically the location (e.g. latitude/longitude) and observer ID.</p></dd>
+
+
 <dt>ll_digits</dt>
 <dd><p>integer; the number of digits to round latitude and longitude
 to. If latitude and/or longitude are used as <code>site_vars</code>, it's usually best
@@ -120,10 +134,13 @@ slightly offset (e.g. a few centimeters) will be treated as different. This
 argument can also be used to group sites together that are close but not
 identical. Note that 1 degree of latitude is approximately 100 km, so the
 default value of 6 for <code>ll_digits</code> is equivalent to about 10 cm.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>data.frame</code> filtered to only retain observations from sites with
+    
+
+<p>A <code>data.frame</code> filtered to only retain observations from sites with
 the allowed number of observations within the period of closure. The
 results will be sorted such that sites are together and in chronological
 order. The following variables are added to the data frame:</p><ul><li><p><code>site</code>: a unique identifier for each "site" corresponding to all the
@@ -154,34 +171,35 @@ combination of the <code>n_days</code> and <code>annual_closure</code> arguments
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># read and zero-fill the ebd data</span></span>
-<span class="r-in"><span class="va">f_ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_ebd.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">f_smpl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># data must be for a single species</span></span>
-<span class="r-in"><span class="va">ebd_zf</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_zerofill.html">auk_zerofill</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_ebd</span>, sampling_events <span class="op">=</span> <span class="va">f_smpl</span>,</span>
-<span class="r-in">                       species <span class="op">=</span> <span class="st">"Collared Kingfisher"</span>,</span>
-<span class="r-in">                       collapse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">filter_repeat_visits</span><span class="op">(</span><span class="va">ebd_zf</span>, n_days <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># read and zero-fill the ebd data</span></span></span>
+<span class="r-in"><span><span class="va">f_ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_ebd.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">f_smpl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># data must be for a single species</span></span></span>
+<span class="r-in"><span><span class="va">ebd_zf</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_zerofill.html">auk_zerofill</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_ebd</span>, sampling_events <span class="op">=</span> <span class="va">f_smpl</span>,</span></span>
+<span class="r-in"><span>                       species <span class="op">=</span> <span class="st">"Collared Kingfisher"</span>,</span></span>
+<span class="r-in"><span>                       collapse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">filter_repeat_visits</span><span class="op">(</span><span class="va">ebd_zf</span>, n_days <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 181 × 37</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    site         closure_id n_observations checklist_id last_edited_date  country</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> L1055540_ob… 2012-9                  2 S11680564    2017-10-19 12:47… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> L1055540_ob… 2012-9                  2 S11718518    2018-02-01 09:27… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> L1277940_ob… 2012-8                  3 S11664225    2017-05-27 11:00… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> L1277940_ob… 2012-8                  3 S11675087    2017-05-27 11:00… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> L1277940_ob… 2012-8                  3 S11668164    2017-05-27 10:25… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> L1361109_ob… 2012-0                 10 S9502932     2012-03-20 03:23… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> L1361109_ob… 2012-0                 10 S9598822     2017-05-27 10:37… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> L1361109_ob… 2012-0                 10 S9640246     2012-03-20 03:23… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> L1361109_ob… 2012-0                 10 S9663623     2013-09-11 12:29… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> L1361109_ob… 2012-0                 10 S9664006     2017-05-27 10:36… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 171 more rows, and 31 more variables: country_code &lt;chr&gt;, state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_code &lt;chr&gt;, county &lt;chr&gt;, county_code &lt;chr&gt;, iba_code &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    site     closu…¹ n_obs…² check…³ last_…⁴ country count…⁵ state state…⁶ county</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> L105554… 2012-9        2 S11680… 2017-1… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> L105554… 2012-9        2 S11718… 2018-0… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> L127794… 2012-8        3 S11664… 2017-0… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> L127794… 2012-8        3 S11675… 2017-0… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> L127794… 2012-8        3 S11668… 2017-0… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> L136110… 2012-0       10 S94921… 2017-0… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> L136110… 2012-0       10 S96280… 2017-0… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> L136110… 2012-0       10 S96356… 2013-0… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> L136110… 2012-0       10 S96636… 2013-0… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> L136110… 2012-0       10 S96640… 2017-0… Singap… SG      Sing… SG-     <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 171 more rows, 27 more variables: county_code &lt;chr&gt;, iba_code &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   observer_id &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   protocol_code &lt;chr&gt;, project_code &lt;chr&gt;, duration_minutes &lt;int&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   protocol_code &lt;chr&gt;, project_code &lt;chr&gt;, duration_minutes &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   effort_distance_km &lt;dbl&gt;, effort_area_ha &lt;dbl&gt;, number_observers &lt;int&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -196,7 +214,7 @@ combination of the <code>n_days</code> and <code>annual_closure</code> arguments
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

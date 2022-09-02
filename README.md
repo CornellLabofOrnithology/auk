@@ -64,7 +64,7 @@ presence-absence data are outlined in the
 An `auk` cheatsheet was developed by [Mickayla
 Johnston](https://www.linkedin.com/in/mickayla-johnston/):
 
-<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="cheatsheet/auk-cheatsheet.png" width=400/></a>
+<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="man/figures/auk-cheatsheet.png" width=400/></a>
 
 ## `auk` and `rebird`
 

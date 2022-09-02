@@ -66,7 +66,7 @@ should be used to call AWK and perform the filtering.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_bcr</span><span class="op">(</span><span class="va">x</span>, <span class="va">bcr</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_bcr</span><span class="op">(</span><span class="va">x</span>, <span class="va">bcr</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -74,17 +74,24 @@ should be used to call AWK and perform the filtering.</p>
     <dl><dt>x</dt>
 <dd><p><code>auk_ebd</code> or <code>auk_sampling</code> object; reference to file created by
 <code><a href="auk_ebd.html">auk_ebd()</a></code> or <code><a href="auk_sampling.html">auk_sampling()</a></code>.</p></dd>
+
+
 <dt>bcr</dt>
 <dd><p>integer; BCRs to filter by. BCRs are identified by an integer,
 from 1 to 66, that can be looked up in the <a href="bcr_codes.html">bcr_codes</a> table.</p></dd>
+
+
 <dt>replace</dt>
 <dd><p>logical; multiple calls to <code><a href="auk_state.html">auk_state()</a></code> are additive,
 unless <code>replace = FALSE</code>, in which case the previous list of states to
 filter by will be removed and replaced by that in the current call.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>auk_ebd</code> object.</p>
+    
+
+<p>An <code>auk_ebd</code> object.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -116,17 +123,17 @@ user only wishes to filter the sampling event data.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># bcr codes can be looked up in bcr_codes</span></span>
-<span class="r-in"><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">bcr_codes</span>, <span class="va">bcr_name</span> <span class="op">==</span> <span class="st">"Central Hardwoods"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># bcr codes can be looked up in bcr_codes</span></span></span>
+<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">bcr_codes</span>, <span class="va">bcr_name</span> <span class="op">==</span> <span class="st">"Central Hardwoods"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   bcr_code bcr_name         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>       24 Central Hardwoods</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">auk_bcr</span><span class="op">(</span>bcr <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">auk_bcr</span><span class="op">(</span>bcr <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpvjq429/temp_libpatha3e5bdd71eb/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -148,12 +155,12 @@ user only wishes to filter the sampling event data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Distance travelled: all</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Records with breeding codes only: no</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Complete checklists only: no</span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="co"># alternatively, without pipes</span></span>
-<span class="r-in"><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">auk_bcr</span><span class="op">(</span><span class="va">ebd</span>, bcr <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="co"># alternatively, without pipes</span></span></span>
+<span class="r-in"><span><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">auk_bcr</span><span class="op">(</span><span class="va">ebd</span>, bcr <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpvjq429/temp_libpatha3e5bdd71eb/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -189,7 +196,7 @@ user only wishes to filter the sampling event data.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

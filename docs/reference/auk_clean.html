@@ -58,7 +58,7 @@ Dataset (EBD).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_clean</span><span class="op">(</span><span class="va">f_in</span>, <span class="va">f_out</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, remove_text <span class="op">=</span> <span class="cn">FALSE</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_clean</span><span class="op">(</span><span class="va">f_in</span>, <span class="va">f_out</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, remove_text <span class="op">=</span> <span class="cn">FALSE</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -67,12 +67,18 @@ Dataset (EBD).</p>
 <dd><p>character; input file. If file is not found as specified, it will
 be looked for in the directory specified by the <code>EBD_PATH</code> environment
 variable.</p></dd>
+
+
 <dt>f_out</dt>
 <dd><p>character; output file.</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>character; the input field separator, the basic dataset is tab
 separated by default. Must only be a single character and space delimited
 is not allowed since spaces appear in many of the fields.</p></dd>
+
+
 <dt>remove_text</dt>
 <dd><p>logical; whether all free text entry columns should be
 removed. These columns include comments, location names, and observer
@@ -80,12 +86,17 @@ names. These columns cause import errors due to special characters and
 increase the file size, yet are rarely valuable for analytical
 applications, so may be removed. Setting this argument to <code>TRUE</code> can lead
 to a significant reduction in file size.</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>logical; overwrite output file if it already exists.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>If AWK ran without errors, the output filename is returned, however,
+    
+
+<p>If AWK ran without errors, the output filename is returned, however,
 if an error was encountered the exit code is returned.</p>
     </div>
     <div id="see-also">
@@ -97,18 +108,18 @@ if an error was encountered the exit code is returned.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># get the path to the example data included in the package</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># output to a temp file for example</span></span>
-<span class="r-in"><span class="co"># in practice, provide path to output file</span></span>
-<span class="r-in"><span class="co"># e.g. f_out &lt;- "output/ebd_clean.txt"</span></span>
-<span class="r-in"><span class="va">f_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># clean file to remove problem rows</span></span>
-<span class="r-in"><span class="co"># note: this function is deprecated and no longer does anything</span></span>
-<span class="r-in"><span class="fu">auk_clean</span><span class="op">(</span><span class="va">f</span>, <span class="va">f_out</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># get the path to the example data included in the package</span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># output to a temp file for example</span></span></span>
+<span class="r-in"><span><span class="co"># in practice, provide path to output file</span></span></span>
+<span class="r-in"><span><span class="co"># e.g. f_out &lt;- "output/ebd_clean.txt"</span></span></span>
+<span class="r-in"><span><span class="va">f_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># clean file to remove problem rows</span></span></span>
+<span class="r-in"><span><span class="co"># note: this function is deprecated and no longer does anything</span></span></span>
+<span class="r-in"><span><span class="fu">auk_clean</span><span class="op">(</span><span class="va">f</span>, <span class="va">f_out</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -123,7 +134,7 @@ if an error was encountered the exit code is returned.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

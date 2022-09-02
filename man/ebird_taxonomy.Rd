@@ -37,7 +37,8 @@ equivalents in this data frame.
 \seealso{
 Other data: 
 \code{\link{bcr_codes}},
-\code{\link{ebird_states}}
+\code{\link{ebird_states}},
+\code{\link{valid_protocols}}
 }
 \concept{data}
 \keyword{datasets}

@@ -66,14 +66,14 @@ observations. This function is called automatically by <code><a href="read_ebd.h
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_unique</span><span class="op">(</span>
-  <span class="va">x</span>,
-  group_id <span class="op">=</span> <span class="st">"group_identifier"</span>,
-  checklist_id <span class="op">=</span> <span class="st">"sampling_event_identifier"</span>,
-  species_id <span class="op">=</span> <span class="st">"scientific_name"</span>,
-  observer_id <span class="op">=</span> <span class="st">"observer_id"</span>,
-  checklists_only <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_unique</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  group_id <span class="op">=</span> <span class="st">"group_identifier"</span>,</span>
+<span>  checklist_id <span class="op">=</span> <span class="st">"sampling_event_identifier"</span>,</span>
+<span>  species_id <span class="op">=</span> <span class="st">"scientific_name"</span>,</span>
+<span>  observer_id <span class="op">=</span> <span class="st">"observer_id"</span>,</span>
+<span>  checklists_only <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -81,14 +81,20 @@ observations. This function is called automatically by <code><a href="read_ebd.h
     <dl><dt>x</dt>
 <dd><p>data.frame; the EBD data frame, typically as imported by
 <code><a href="read_ebd.html">read_ebd()</a></code>.</p></dd>
+
+
 <dt>group_id</dt>
 <dd><p>character; the name of the group ID column.</p></dd>
+
+
 <dt>checklist_id</dt>
 <dd><p>character; the name of the checklist ID column, each
 checklist within a group will get a unique value for this field. The record
 with the lowest <code>checklist_id</code> will be picked as the unique record within
 each group. In the output dataset, this field will be updated to have a
 full list of the checklist IDs that went into this group checklist.</p></dd>
+
+
 <dt>species_id</dt>
 <dd><p>character; the name of the column identifying species
 uniquely. This is required to ensure that removing duplicates is done
@@ -96,21 +102,28 @@ independently for each species. Note that this will not treat sub-species
 independently and, if that behavior is desired, the user will have to
 generate a column uniquely identifying species and subspecies and pass that
 column's name to this argument.</p></dd>
+
+
 <dt>observer_id</dt>
 <dd><p>character; the name of the column identifying the owner
 of this instance of the group checklist. In the output dataset, the full
 list of observer IDs will be stored (comma separated) in the new
 <code>observer_id</code> field. The order of these IDs will match the order of the
 comma separated checklist IDs.</p></dd>
+
+
 <dt>checklists_only</dt>
 <dd><p>logical; whether the dataset provided only contains
 checklist information as with the sampling event data file. If this
 argument is <code>TRUE</code>, then the <code>species_id</code> argument is ignored and removing
 of duplicated records is done at the checklist level not the species level.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame with unique observations, and an additional field,
+    
+
+<p>A data frame with unique observations, and an additional field,
 <code>checklist_id</code>, which is a combination of the sampling event and group IDs.</p>
     </div>
     <div id="details">
@@ -132,14 +145,14 @@ checklist ID.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># read in an ebd file and don't automatically remove duplicates</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">f</span>, unique <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># remove duplicates</span></span>
-<span class="r-in"><span class="va">ebd_unique</span> <span class="op">&lt;-</span> <span class="fu">auk_unique</span><span class="op">(</span><span class="va">ebd</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ebd</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># read in an ebd file and don't automatically remove duplicates</span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">f</span>, unique <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># remove duplicates</span></span></span>
+<span class="r-in"><span><span class="va">ebd_unique</span> <span class="op">&lt;-</span> <span class="fu">auk_unique</span><span class="op">(</span><span class="va">ebd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ebd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 500</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ebd_unique</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ebd_unique</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 494</span>
 </code></pre></div>
     </div>
@@ -155,7 +168,7 @@ checklist ID.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

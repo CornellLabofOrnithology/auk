@@ -131,15 +131,15 @@ to get the correct version of the taxonomy.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{data.frame}: EBD data frame.
+\item \code{auk_zerofill(data.frame)}: EBD data frame.
 
-\item \code{character}: Filename of EBD.
+\item \code{auk_zerofill(character)}: Filename of EBD.
 
-\item \code{auk_ebd}: \code{auk_ebd} object output from \code{\link[=auk_filter]{auk_filter()}}. Must
+\item \code{auk_zerofill(auk_ebd)}: \code{auk_ebd} object output from \code{\link[=auk_filter]{auk_filter()}}. Must
 have had a sampling event data file set in the original call to
 \code{\link[=auk_ebd]{auk_ebd()}}.
-}}
 
+}}
 \examples{
 # read and zero-fill the ebd data
 f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")

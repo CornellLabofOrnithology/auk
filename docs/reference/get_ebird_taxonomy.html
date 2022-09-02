@@ -56,7 +56,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_ebird_taxonomy</span><span class="op">(</span><span class="va">version</span>, <span class="va">locale</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_ebird_taxonomy</span><span class="op">(</span><span class="va">version</span>, <span class="va">locale</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -65,13 +65,18 @@
 <dd><p>integer; the version (i.e. year) of the taxonomy. The eBird
 taxonomy is updated once a year in August. Leave this parameter blank to
 get the current taxonomy.</p></dd>
+
+
 <dt>locale</dt>
 <dd><p>character; the <a href="https://support.ebird.org/support/solutions/articles/48000804865-bird-names-in-ebird" class="external-link">locale for the common names</a>,
 defaults to English.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame of all species in the eBird taxonomy, consisting of the
+    
+
+<p>A data frame of all species in the eBird taxonomy, consisting of the
 following columns:</p><ul><li><p><code>scientific_name</code>: scientific name.</p></li>
 <li><p><code>common_name</code>: common name, defaults to English, but different languages
 can be selected using the <code>locale</code> parameter.</p></li>
@@ -95,9 +100,9 @@ species code. For taxa that can't be resolved, this field is <code>NA</code>.</p
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">get_ebird_taxonomy</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">get_ebird_taxonomy</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -112,7 +117,7 @@ species code. For taxa that can't be resolved, this field is <code>NA</code>.</p
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -23,7 +23,8 @@ using \code{\link[=auk_bcr]{auk_bcr()}}.
 \seealso{
 Other data: 
 \code{\link{ebird_states}},
-\code{\link{ebird_taxonomy}}
+\code{\link{ebird_taxonomy}},
+\code{\link{valid_protocols}}
 }
 \concept{data}
 \keyword{datasets}

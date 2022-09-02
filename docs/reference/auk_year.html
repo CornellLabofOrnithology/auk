@@ -62,7 +62,7 @@ filtering.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_year</span><span class="op">(</span><span class="va">x</span>, <span class="va">year</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_year</span><span class="op">(</span><span class="va">x</span>, <span class="va">year</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -70,16 +70,23 @@ filtering.</p>
     <dl><dt>x</dt>
 <dd><p><code>auk_ebd</code> or <code>auk_sampling</code> object; reference to file created by
 <code><a href="auk_ebd.html">auk_ebd()</a></code> or <code><a href="auk_sampling.html">auk_sampling()</a></code>.</p></dd>
+
+
 <dt>year</dt>
 <dd><p>integer; years to filter to.</p></dd>
+
+
 <dt>replace</dt>
 <dd><p>logical; multiple calls to <code>auk_year()</code> are additive,
 unless <code>replace = FALSE</code>, in which case the previous list of years to
 filter by will be removed and replaced by that in the current call.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>auk_ebd</code> object.</p>
+    
+
+<p>An <code>auk_ebd</code> object.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -118,14 +125,14 @@ only wishes to filter the sampling event data.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># years to filter to</span></span>
-<span class="r-in"><span class="va">years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2010</span>, <span class="fl">2012</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># set up filter</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">auk_year</span><span class="op">(</span>year <span class="op">=</span> <span class="va">years</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># years to filter to</span></span></span>
+<span class="r-in"><span><span class="va">years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2010</span>, <span class="fl">2012</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># set up filter</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">auk_year</span><span class="op">(</span>year <span class="op">=</span> <span class="va">years</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpvjq429/temp_libpatha3e5bdd71eb/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -147,12 +154,12 @@ only wishes to filter the sampling event data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Distance travelled: all</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Records with breeding codes only: no</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Complete checklists only: no</span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="co"># alternatively, without pipes</span></span>
-<span class="r-in"><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">auk_year</span><span class="op">(</span><span class="va">ebd</span>, <span class="va">years</span><span class="op">)</span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="co"># alternatively, without pipes</span></span></span>
+<span class="r-in"><span><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">auk_year</span><span class="op">(</span><span class="va">ebd</span>, <span class="va">years</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpvjq429/temp_libpatha3e5bdd71eb/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -174,14 +181,14 @@ only wishes to filter the sampling event data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Distance travelled: all</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Records with breeding codes only: no</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Complete checklists only: no</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># filter to may and june of 2010 and 2012</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">auk_year</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2010</span>, <span class="fl">2012</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span class="r-in">  <span class="fu"><a href="auk_date.html">auk_date</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*-05-01"</span>, <span class="st">"*-06-30"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># filter to may and june of 2010 and 2012</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">auk_year</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2010</span>, <span class="fl">2012</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_date.html">auk_date</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*-05-01"</span>, <span class="st">"*-06-30"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpfD4wrN/temp_libpath17a9d3e85f5e3/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpvjq429/temp_libpatha3e5bdd71eb/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -217,7 +224,7 @@ only wishes to filter the sampling event data.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

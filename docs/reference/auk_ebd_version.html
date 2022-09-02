@@ -62,7 +62,7 @@ August.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_ebd_version</span><span class="op">(</span><span class="va">x</span>, check_exists <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_ebd_version</span><span class="op">(</span><span class="va">x</span>, check_exists <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -70,14 +70,19 @@ August.</p>
     <dl><dt>x</dt>
 <dd><p>filename of EBD of sampling event data file, <code>auk_ebd</code> object, or
 <code>auk_sampling</code> object.</p></dd>
+
+
 <dt>check_exists</dt>
 <dd><p>logical; should the file be checked for existence before
 processing. If <code>check_exists = TRUE</code> and the file does not exists, the
 function will raise an error.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list with two elements:</p><ul><li><p><code>ebd_version</code>: a date object specifying the release date of the EBD.</p></li>
+    
+
+<p>A list with two elements:</p><ul><li><p><code>ebd_version</code>: a date object specifying the release date of the EBD.</p></li>
 <li><p><code>taxonomy_version</code>: the year of the taxonomy used in this EBD.</p></li>
 </ul><p>Both elements will be NA if an EBD version cannot be extracted from the
 filename.</p>
@@ -92,7 +97,7 @@ filename.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">auk_ebd_version</span><span class="op">(</span><span class="st">"ebd_relAug-2018.txt"</span>, check_exists <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">auk_ebd_version</span><span class="op">(</span><span class="st">"ebd_relAug-2018.txt"</span>, check_exists <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ebd_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2018-08-01"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -113,7 +118,7 @@ filename.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -64,52 +64,52 @@ a checklist was had a count of zero.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_zerofill</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for data.frame</span>
-<span class="fu">auk_zerofill</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">sampling_events</span>,
-  <span class="va">species</span>,
-  <span class="va">taxonomy_version</span>,
-  collapse <span class="op">=</span> <span class="cn">FALSE</span>,
-  unique <span class="op">=</span> <span class="cn">TRUE</span>,
-  rollup <span class="op">=</span> <span class="cn">TRUE</span>,
-  drop_higher <span class="op">=</span> <span class="cn">TRUE</span>,
-  complete <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for character</span>
-<span class="fu">auk_zerofill</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">sampling_events</span>,
-  <span class="va">species</span>,
-  <span class="va">taxonomy_version</span>,
-  collapse <span class="op">=</span> <span class="cn">FALSE</span>,
-  unique <span class="op">=</span> <span class="cn">TRUE</span>,
-  rollup <span class="op">=</span> <span class="cn">TRUE</span>,
-  drop_higher <span class="op">=</span> <span class="cn">TRUE</span>,
-  complete <span class="op">=</span> <span class="cn">TRUE</span>,
-  sep <span class="op">=</span> <span class="st">"\t"</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for auk_ebd</span>
-<span class="fu">auk_zerofill</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">species</span>,
-  <span class="va">taxonomy_version</span>,
-  collapse <span class="op">=</span> <span class="cn">FALSE</span>,
-  unique <span class="op">=</span> <span class="cn">TRUE</span>,
-  rollup <span class="op">=</span> <span class="cn">TRUE</span>,
-  drop_higher <span class="op">=</span> <span class="cn">TRUE</span>,
-  complete <span class="op">=</span> <span class="cn">TRUE</span>,
-  sep <span class="op">=</span> <span class="st">"\t"</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">collapse_zerofill</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_zerofill</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.frame</span></span>
+<span><span class="fu">auk_zerofill</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">sampling_events</span>,</span>
+<span>  <span class="va">species</span>,</span>
+<span>  <span class="va">taxonomy_version</span>,</span>
+<span>  collapse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rollup <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  drop_higher <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  complete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for character</span></span>
+<span><span class="fu">auk_zerofill</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">sampling_events</span>,</span>
+<span>  <span class="va">species</span>,</span>
+<span>  <span class="va">taxonomy_version</span>,</span>
+<span>  collapse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rollup <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  drop_higher <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  complete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for auk_ebd</span></span>
+<span><span class="fu">auk_zerofill</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">species</span>,</span>
+<span>  <span class="va">taxonomy_version</span>,</span>
+<span>  collapse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  unique <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rollup <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  drop_higher <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  complete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">collapse_zerofill</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -122,8 +122,12 @@ point to the sampling event data file. If a <code>data.frame</code> is provided 
 should have been imported with <code><a href="read_ebd.html">read_ebd()</a></code>, to ensure the variables names
 have been set correctly, and it must have been passed through
 <code><a href="auk_unique.html">auk_unique()</a></code> to ensure duplicate group checklists have been removed.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed to methods.</p></dd>
+
+
 <dt>sampling_events</dt>
 <dd><p>character or <code>data.frame</code>; filename for the sampling
 event data or a <code>data.frame</code> of the same data. If a <code>data.frame</code> is
@@ -131,36 +135,55 @@ provided it should have been imported with <code><a href="read_ebd.html">read_sa
 variables names have been set correctly, and it must have been passed
 through <code><a href="auk_unique.html">auk_unique()</a></code> to ensure duplicate group checklists have been
 removed.</p></dd>
+
+
 <dt>species</dt>
 <dd><p>character; species to include in zero-filled dataset, provided
 as scientific or English common names, or a mixture of both. These names
 must match the official eBird Taxomony (<a href="ebird_taxonomy.html">ebird_taxonomy</a>). To include all
 species, leave this argument blank.</p></dd>
+
+
 <dt>taxonomy_version</dt>
 <dd><p>integer; the version (i.e. year) of the taxonomy. In
 most cases, this should be left empty to use the version of the taxonomy
 included in the package. See <code><a href="get_ebird_taxonomy.html">get_ebird_taxonomy()</a></code>.</p></dd>
+
+
 <dt>collapse</dt>
 <dd><p>logical; whether to call <code>collapse_zerofill()</code> to return a
 data frame rather than an <code>auk_zerofill</code> object.</p></dd>
+
+
 <dt>unique</dt>
 <dd><p>logical; should <code><a href="auk_unique.html">auk_unique()</a></code> be run on the input data if it
 hasn't already.</p></dd>
+
+
 <dt>rollup</dt>
 <dd><p>logical; should <code><a href="auk_rollup.html">auk_rollup()</a></code> be run on the input data if it
 hasn't already.</p></dd>
+
+
 <dt>drop_higher</dt>
 <dd><p>logical; whether to remove taxa above species during the
 rollup process, e.g. "spuhs" like "duck sp.". See <code><a href="auk_rollup.html">auk_rollup()</a></code>.</p></dd>
+
+
 <dt>complete</dt>
 <dd><p>logical; if <code>TRUE</code> (the default) all checklists are required
 to be complete prior to zero-filling.</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>character; single character used to separate fields within a row.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>By default, an <code>auk_zerofill</code> object, or a data frame if <code>collapse = TRUE</code>.</p>
+    
+
+<p>By default, an <code>auk_zerofill</code> object, or a data frame if <code>collapse = TRUE</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -187,9 +210,9 @@ to get the correct version of the taxonomy.</p>
     <div id="methods-by-class-">
     <h2>Methods (by class)</h2>
     
-<ul><li><p><code>data.frame</code>: EBD data frame.</p></li>
-<li><p><code>character</code>: Filename of EBD.</p></li>
-<li><p><code>auk_ebd</code>: <code>auk_ebd</code> object output from <code><a href="auk_filter.html">auk_filter()</a></code>. Must
+<ul><li><p><code>auk_zerofill(data.frame)</code>: EBD data frame.</p></li>
+<li><p><code>auk_zerofill(character)</code>: Filename of EBD.</p></li>
+<li><p><code>auk_zerofill(auk_ebd)</code>: <code>auk_ebd</code> object output from <code><a href="auk_filter.html">auk_filter()</a></code>. Must
 have had a sampling event data file set in the original call to
 <code><a href="auk_ebd.html">auk_ebd()</a></code>.</p></li>
 </ul></div>
@@ -201,19 +224,19 @@ have had a sampling event data file set in the original call to
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># read and zero-fill the ebd data</span></span>
-<span class="r-in"><span class="va">f_ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_ebd.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">f_smpl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">auk_zerofill</span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_ebd</span>, sampling_events <span class="op">=</span> <span class="va">f_smpl</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># read and zero-fill the ebd data</span></span></span>
+<span class="r-in"><span><span class="va">f_ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_ebd.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">f_smpl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">auk_zerofill</span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_ebd</span>, sampling_events <span class="op">=</span> <span class="va">f_smpl</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Zero-filled EBD: 619 unique checklists, for 3 species.</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># use the species argument to only include a subset of species</span></span>
-<span class="r-in"><span class="fu">auk_zerofill</span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_ebd</span>, sampling_events <span class="op">=</span> <span class="va">f_smpl</span>,</span>
-<span class="r-in">             species <span class="op">=</span> <span class="st">"Collared Kingfisher"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># use the species argument to only include a subset of species</span></span></span>
+<span class="r-in"><span><span class="fu">auk_zerofill</span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_ebd</span>, sampling_events <span class="op">=</span> <span class="va">f_smpl</span>,</span></span>
+<span class="r-in"><span>             species <span class="op">=</span> <span class="st">"Collared Kingfisher"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Zero-filled EBD: 619 unique checklists, for 1 species.</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># to return a data frame use collapse = TRUE</span></span>
-<span class="r-in"><span class="va">ebd_df</span> <span class="op">&lt;-</span> <span class="fu">auk_zerofill</span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_ebd</span>, sampling_events <span class="op">=</span> <span class="va">f_smpl</span>, collapse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># to return a data frame use collapse = TRUE</span></span></span>
+<span class="r-in"><span><span class="va">ebd_df</span> <span class="op">&lt;-</span> <span class="fu">auk_zerofill</span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_ebd</span>, sampling_events <span class="op">=</span> <span class="va">f_smpl</span>, collapse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -228,7 +251,7 @@ have had a sampling event data file set in the original call to
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

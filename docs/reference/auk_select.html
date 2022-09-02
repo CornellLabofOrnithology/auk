@@ -58,7 +58,7 @@ events file. Subsetting the columns can significantly decrease file size.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_select</span><span class="op">(</span><span class="va">x</span>, <span class="va">select</span>, <span class="va">file</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_select</span><span class="op">(</span><span class="va">x</span>, <span class="va">select</span>, <span class="va">file</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -66,24 +66,35 @@ events file. Subsetting the columns can significantly decrease file size.</p>
     <dl><dt>x</dt>
 <dd><p><code>auk_ebd</code> or <code>auk_sampling</code> object; reference to file created by
 <code><a href="auk_ebd.html">auk_ebd()</a></code> or <code><a href="auk_sampling.html">auk_sampling()</a></code>.</p></dd>
+
+
 <dt>select</dt>
 <dd><p>character; a character vector specifying the names of the
 columns to select. Columns should be as they appear in the header of the
 EBD; however, names are not case sensitive and spaces may be replaced by
 underscores, e.g. <code>"COMMON NAME"</code>, <code>"common name"</code>, and <code>"common_NAME"</code> are
 all valid.</p></dd>
+
+
 <dt>file</dt>
 <dd><p>character; output file.</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>character; the input field separator, the eBird file is tab
 separated by default. Must only be a single character and space delimited
 is not allowed since spaces appear in many of the fields.</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>logical; overwrite output file if it already exists</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Invisibly returns the filename of the output file.</p>
+    
+
+<p>Invisibly returns the filename of the output file.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -94,17 +105,17 @@ is not allowed since spaces appear in many of the fields.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># select a minimal set of columns</span></span>
-<span class="r-in"><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"latitude"</span>, <span class="st">"longitude"</span>,</span>
-<span class="r-in">          <span class="st">"group identifier"</span>, <span class="st">"sampling event identifier"</span>, </span>
-<span class="r-in">          <span class="st">"scientific name"</span>, <span class="st">"observation count"</span>,</span>
-<span class="r-in">          <span class="st">"observer_id"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">selected</span> <span class="op">&lt;-</span> <span class="fu">auk_select</span><span class="op">(</span><span class="va">ebd</span>, select <span class="op">=</span> <span class="va">cols</span>, file <span class="op">=</span> <span class="va">out_file</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">selected</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># select a minimal set of columns</span></span></span>
+<span class="r-in"><span><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"latitude"</span>, <span class="st">"longitude"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"group identifier"</span>, <span class="st">"sampling event identifier"</span>, </span></span>
+<span class="r-in"><span>          <span class="st">"scientific name"</span>, <span class="st">"observation count"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"observer_id"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">selected</span> <span class="op">&lt;-</span> <span class="fu">auk_select</span><span class="op">(</span><span class="va">ebd</span>, select <span class="op">=</span> <span class="va">cols</span>, file <span class="op">=</span> <span class="va">out_file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">selected</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -119,7 +130,7 @@ is not allowed since spaces appear in many of the fields.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

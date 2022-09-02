@@ -63,4 +63,5 @@
 #' A vector of valid protocol names, e.g. "Traveling", "Stationary", etc.
 #' 
 #' @format A vector with 42 elements.
+#' @family data
 "valid_protocols"

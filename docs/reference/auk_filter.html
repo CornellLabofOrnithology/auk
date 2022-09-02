@@ -66,35 +66,35 @@ at least a couple hours to run on the full dataset</strong></p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">auk_filter</span><span class="op">(</span><span class="va">x</span>, <span class="va">file</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for auk_ebd</span>
-<span class="fu">auk_filter</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">file</span>,
-  <span class="va">file_sampling</span>,
-  <span class="va">keep</span>,
-  <span class="va">drop</span>,
-  <span class="va">awk_file</span>,
-  sep <span class="op">=</span> <span class="st">"\t"</span>,
-  filter_sampling <span class="op">=</span> <span class="cn">TRUE</span>,
-  execute <span class="op">=</span> <span class="cn">TRUE</span>,
-  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for auk_sampling</span>
-<span class="fu">auk_filter</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">file</span>,
-  <span class="va">keep</span>,
-  <span class="va">drop</span>,
-  <span class="va">awk_file</span>,
-  sep <span class="op">=</span> <span class="st">"\t"</span>,
-  execute <span class="op">=</span> <span class="cn">TRUE</span>,
-  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auk_filter</span><span class="op">(</span><span class="va">x</span>, <span class="va">file</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for auk_ebd</span></span>
+<span><span class="fu">auk_filter</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">file</span>,</span>
+<span>  <span class="va">file_sampling</span>,</span>
+<span>  <span class="va">keep</span>,</span>
+<span>  <span class="va">drop</span>,</span>
+<span>  <span class="va">awk_file</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
+<span>  filter_sampling <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  execute <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for auk_sampling</span></span>
+<span><span class="fu">auk_filter</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">file</span>,</span>
+<span>  <span class="va">keep</span>,</span>
+<span>  <span class="va">drop</span>,</span>
+<span>  <span class="va">awk_file</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
+<span>  execute <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -102,40 +102,63 @@ at least a couple hours to run on the full dataset</strong></p>
     <dl><dt>x</dt>
 <dd><p><code>auk_ebd</code> or <code>auk_sampling</code> object; reference to file created by
 <code><a href="auk_ebd.html">auk_ebd()</a></code> or <code><a href="auk_sampling.html">auk_sampling()</a></code>.</p></dd>
+
+
 <dt>file</dt>
 <dd><p>character; output file.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>arguments passed on to methods.</p></dd>
+
+
 <dt>file_sampling</dt>
 <dd><p>character; optional output file for sampling data.</p></dd>
+
+
 <dt>keep</dt>
 <dd><p>character; a character vector specifying the names of the columns
 to keep in the output file. Columns should be as they appear in the header
 of the EBD; however, names are not case sensitive and spaces may be
 replaced by underscores, e.g. <code>"COMMON NAME"</code>, <code>"common name"</code>, and
 <code>"common_NAME"</code> are all valid.</p></dd>
+
+
 <dt>drop</dt>
 <dd><p>character; a character vector of columns to drop in the same
 format as <code>keep</code>. Ignored if <code>keep</code> is supplied.</p></dd>
+
+
 <dt>awk_file</dt>
 <dd><p>character; output file to optionally save the awk script to.</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>character; the input field separator, the eBird file is tab
 separated by default. Must only be a single character and space delimited
 is not allowed since spaces appear in many of the fields.</p></dd>
+
+
 <dt>filter_sampling</dt>
 <dd><p>logical; whether the sampling event data should also
 be filtered.</p></dd>
+
+
 <dt>execute</dt>
 <dd><p>logical; whether to execute the awk script, or output it to a
 file for manual execution. If this flag is <code>FALSE</code>, <code>awk_file</code> must be
 provided.</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>logical; overwrite output file if it already exists</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>auk_ebd</code> object with the output files set. If <code>execute = FALSE</code>,
+    
+
+<p>An <code>auk_ebd</code> object with the output files set. If <code>execute = FALSE</code>,
 then the path to the AWK script is returned instead.</p>
     </div>
     <div id="details">
@@ -156,8 +179,8 @@ will likely need to install <a href="https://www.cygwin.com" class="external-lin
     <div id="methods-by-class-">
     <h2>Methods (by class)</h2>
     
-<ul><li><p><code>auk_ebd</code>: <code>auk_ebd</code> object</p></li>
-<li><p><code>auk_sampling</code>: <code>auk_sampling</code> object</p></li>
+<ul><li><p><code>auk_filter(auk_ebd)</code>: <code>auk_ebd</code> object</p></li>
+<li><p><code>auk_filter(auk_sampling)</code>: <code>auk_sampling</code> object</p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -184,38 +207,38 @@ will likely need to install <a href="https://www.cygwin.com" class="external-lin
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># get the path to the example data included in the package</span></span>
-<span class="r-in"><span class="co"># in practice, provide path to ebd, e.g. f &lt;- "data/ebd_relFeb-2018.txt"</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># define filters</span></span>
-<span class="r-in"><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_species.html">auk_species</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Canada Jay"</span>, <span class="st">"Blue Jay"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_country.html">auk_country</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="st">"Canada"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_bbox.html">auk_bbox</a></span><span class="op">(</span>bbox <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">37</span>, <span class="op">-</span><span class="fl">80</span>, <span class="fl">52</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_date.html">auk_date</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_time.html">auk_time</a></span><span class="op">(</span>start_time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"06:00"</span>, <span class="st">"09:00"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_duration.html">auk_duration</a></span><span class="op">(</span>duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="co"># alternatively, without pipes</span></span>
-<span class="r-in"><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_species.html">auk_species</a></span><span class="op">(</span><span class="va">ebd</span>, species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Canada Jay"</span>, <span class="st">"Blue Jay"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_country.html">auk_country</a></span><span class="op">(</span><span class="va">filters</span>, country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="st">"Canada"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_bbox.html">auk_bbox</a></span><span class="op">(</span><span class="va">filters</span>, bbox <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">37</span>, <span class="op">-</span><span class="fl">80</span>, <span class="fl">52</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_date.html">auk_date</a></span><span class="op">(</span><span class="va">filters</span>, date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_time.html">auk_time</a></span><span class="op">(</span><span class="va">filters</span>, start_time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"06:00"</span>, <span class="st">"09:00"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_duration.html">auk_duration</a></span><span class="op">(</span><span class="va">filters</span>, duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="va">filters</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># apply filters</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># output to a temp file for example</span></span>
-<span class="r-in"><span class="co"># in practice, provide path to output file</span></span>
-<span class="r-in"><span class="co"># e.g. f_out &lt;- "output/ebd_filtered.txt"</span></span>
-<span class="r-in"><span class="va">f_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filtered</span> <span class="op">&lt;-</span> <span class="fu">auk_filter</span><span class="op">(</span><span class="va">filters</span>, file <span class="op">=</span> <span class="va">f_out</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">filtered</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># get the path to the example data included in the package</span></span></span>
+<span class="r-in"><span><span class="co"># in practice, provide path to ebd, e.g. f &lt;- "data/ebd_relFeb-2018.txt"</span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># define filters</span></span></span>
+<span class="r-in"><span><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_species.html">auk_species</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Canada Jay"</span>, <span class="st">"Blue Jay"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_country.html">auk_country</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="st">"Canada"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_bbox.html">auk_bbox</a></span><span class="op">(</span>bbox <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">37</span>, <span class="op">-</span><span class="fl">80</span>, <span class="fl">52</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_date.html">auk_date</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_time.html">auk_time</a></span><span class="op">(</span>start_time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"06:00"</span>, <span class="st">"09:00"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_duration.html">auk_duration</a></span><span class="op">(</span>duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="co"># alternatively, without pipes</span></span></span>
+<span class="r-in"><span><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_species.html">auk_species</a></span><span class="op">(</span><span class="va">ebd</span>, species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Canada Jay"</span>, <span class="st">"Blue Jay"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_country.html">auk_country</a></span><span class="op">(</span><span class="va">filters</span>, country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="st">"Canada"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_bbox.html">auk_bbox</a></span><span class="op">(</span><span class="va">filters</span>, bbox <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">37</span>, <span class="op">-</span><span class="fl">80</span>, <span class="fl">52</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_date.html">auk_date</a></span><span class="op">(</span><span class="va">filters</span>, date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_time.html">auk_time</a></span><span class="op">(</span><span class="va">filters</span>, start_time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"06:00"</span>, <span class="st">"09:00"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_duration.html">auk_duration</a></span><span class="op">(</span><span class="va">filters</span>, duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filters</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="va">filters</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># apply filters</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># output to a temp file for example</span></span></span>
+<span class="r-in"><span><span class="co"># in practice, provide path to output file</span></span></span>
+<span class="r-in"><span><span class="co"># e.g. f_out &lt;- "output/ebd_filtered.txt"</span></span></span>
+<span class="r-in"><span><span class="va">f_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filtered</span> <span class="op">&lt;-</span> <span class="fu">auk_filter</span><span class="op">(</span><span class="va">filters</span>, file <span class="op">=</span> <span class="va">f_out</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="va">filtered</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -230,7 +253,7 @@ will likely need to install <a href="https://www.cygwin.com" class="external-lin
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

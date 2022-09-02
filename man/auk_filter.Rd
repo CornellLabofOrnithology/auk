@@ -98,11 +98,11 @@ will likely need to install \href{https://www.cygwin.com}{Cygwin}.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{auk_ebd}: \code{auk_ebd} object
+\item \code{auk_filter(auk_ebd)}: \code{auk_ebd} object
 
-\item \code{auk_sampling}: \code{auk_sampling} object
+\item \code{auk_filter(auk_sampling)}: \code{auk_sampling} object
+
 }}
-
 \examples{
 # get the path to the example data included in the package
 # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt"

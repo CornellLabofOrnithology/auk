@@ -7,4 +7,5 @@
 #' @docType package
 #' @importFrom stringr str_interp
 #' @importFrom rlang .data
+#' @keywords internal
 NULL
