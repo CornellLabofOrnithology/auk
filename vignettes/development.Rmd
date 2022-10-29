@@ -99,7 +99,7 @@ Finally, at the end of the `auk-filter.r` file, there's a string named `awk_filt
 
 Now that you've successfully created the filter, play around with it a bit to make sure it works as expected. Once you feel the filter is working, it's time to formalize this testing process by defining unit tests. Open the file `tests/testthat/test_filters.r` and you'll notice a series of calls like `test_that("auk_species", ...`, each of which contains tests for a specific filter.
 
-Using an existing test block as an example, define a new block (again, put it in the correct order relative to the other filters). Consult the [Testing chapter](https://r-pkgs.org/tests.html) of Hadley Wickham's [R packages book](https://r-pkgs.org/) for details on defining good unit tests. At the very least, define tests to make sure that typical use works as expected, that errors are caught when input is invalid, and that edge cases are correctly handled.
+Using an existing test block as an example, define a new block (again, put it in the correct order relative to the other filters). Consult the [Testing chapter](https://r-pkgs.org/testing-basics.html) of Hadley Wickham's [R packages book](https://r-pkgs.org/) for details on defining good unit tests. At the very least, define tests to make sure that typical use works as expected, that errors are caught when input is invalid, and that edge cases are correctly handled.
 
 ### 5. Update vignette and README
 
