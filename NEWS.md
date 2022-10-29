@@ -1,3 +1,7 @@
+# auk 0.6.0
+
+- update for 2022 eBird taxonomy
+
 # auk 0.5.2
 
 - added an `extinct` column to taxonomy
