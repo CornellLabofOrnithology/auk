@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
       </span>
     </div>
 
@@ -96,12 +96,12 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cran release</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"auk"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># or install the development version from github</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("remotes")</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"CornellLabofOrnithology/auk"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># cran release</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"auk"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># or install the development version from github</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># install.packages("remotes")</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"CornellLabofOrnithology/auk"</span>)</span></code></pre></div>
 <p><code>auk</code> requires the Unix utility AWK, which is available on most Linux and Mac OS X machines. Windows users will first need to install <a href="https://www.cygwin.com" class="external-link">Cygwin</a> before using this package. Note that <strong>Cygwin must be installed in the default location</strong> (<code>C:/cygwin/bin/gawk.exe</code> or <code>C:/cygwin64/bin/gawk.exe</code>) in order for <code>auk</code> to work.</p>
 </div>
 <div class="section level2">
@@ -138,31 +138,31 @@
 <li>Import this text file into R as a data frame.</li>
 </ol>
 <p>Because the eBird dataset is so large, step 3 typically takes several hours to run. Here’s a simple example that extract all Canada Jay records from within Canada.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(auk)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># path to the ebird data file, here a sample included in the package</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get the path to the example data included in the package</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># in practice, provide path to ebd, e.g. f_in &lt;- "data/ebd_relFeb-2018.txt</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>f_in <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># output text file</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>f_out <span class="ot">&lt;-</span> <span class="st">"ebd_filtered_grja.txt"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ebird_data <span class="ot">&lt;-</span> f_in <span class="sc">%&gt;%</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. reference file</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_ebd</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. define filters</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_species</span>(<span class="at">species =</span> <span class="st">"Canada Jay"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_country</span>(<span class="at">country =</span> <span class="st">"Canada"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3. run filtering</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_filter</span>(<span class="at">file =</span> f_out) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. read text file into r data frame</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_ebd</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(auk)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co"># path to the ebird data file, here a sample included in the package</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># get the path to the example data included in the package</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># in practice, provide path to ebd, e.g. f_in &lt;- "data/ebd_relFeb-2018.txt</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>f_in <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co"># output text file</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>f_out <span class="ot">&lt;-</span> <span class="st">"ebd_filtered_grja.txt"</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>ebird_data <span class="ot">&lt;-</span> f_in <span class="sc">%&gt;%</span> </span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  <span class="co"># 1. reference file</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="fu">auk_ebd</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  <span class="co"># 2. define filters</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>  <span class="fu">auk_species</span>(<span class="at">species =</span> <span class="st">"Canada Jay"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  <span class="fu">auk_country</span>(<span class="at">country =</span> <span class="st">"Canada"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  <span class="co"># 3. run filtering</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  <span class="fu">auk_filter</span>(<span class="at">file =</span> f_out) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  <span class="co"># 4. read text file into r data frame</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  <span class="fu">read_ebd</span>()</span></code></pre></div>
 <p>For those not familiar with the pipe operator (<code>%&gt;%</code>), the above code could be rewritten:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>f_in <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>f_out <span class="ot">&lt;-</span> <span class="st">"ebd_filtered_grja.txt"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ebd <span class="ot">&lt;-</span> <span class="fu">auk_ebd</span>(f_in)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ebd_filters <span class="ot">&lt;-</span> <span class="fu">auk_species</span>(ebd, <span class="at">species =</span> <span class="st">"Canada Jay"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ebd_filters <span class="ot">&lt;-</span> <span class="fu">auk_country</span>(ebd_filters, <span class="at">country =</span> <span class="st">"Canada"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ebd_filtered <span class="ot">&lt;-</span> <span class="fu">auk_filter</span>(ebd_filters, <span class="at">file =</span> f_out)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ebd_df <span class="ot">&lt;-</span> <span class="fu">read_ebd</span>(ebd_filtered)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>f_in <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>f_out <span class="ot">&lt;-</span> <span class="st">"ebd_filtered_grja.txt"</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>ebd <span class="ot">&lt;-</span> <span class="fu">auk_ebd</span>(f_in)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>ebd_filters <span class="ot">&lt;-</span> <span class="fu">auk_species</span>(ebd, <span class="at">species =</span> <span class="st">"Canada Jay"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>ebd_filters <span class="ot">&lt;-</span> <span class="fu">auk_country</span>(ebd_filters, <span class="at">country =</span> <span class="st">"Canada"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>ebd_filtered <span class="ot">&lt;-</span> <span class="fu">auk_filter</span>(ebd_filters, <span class="at">file =</span> f_out)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>ebd_df <span class="ot">&lt;-</span> <span class="fu">read_ebd</span>(ebd_filtered)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -202,113 +202,113 @@
 <code><a href="reference/auk_complete.html">auk_complete()</a></code>: only retain checklists in which the observer has specified that they recorded all species seen or heard. It is necessary to retain only complete records for the creation of presence-absence data, because the “absence”” information is inferred by the lack of reporting of a species on checklists.</li>
 </ul>
 <p>Note that all of the functions listed above only modify the <code>auk_ebd</code> object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using <code><a href="reference/auk_filter.html">auk_filter()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample data</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># define an EBD reference and a set of filters</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>ebd <span class="ot">&lt;-</span> <span class="fu">auk_ebd</span>(f) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># species: common and scientific names can be mixed</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_species</span>(<span class="at">species =</span> <span class="fu">c</span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># country: codes and names can be mixed; case insensitive</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_country</span>(<span class="at">country =</span> <span class="fu">c</span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># bbox: long and lat in decimal degrees</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_bbox</span>(<span class="at">bbox =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="sc">-</span><span class="dv">80</span>, <span class="dv">52</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># date: use standard ISO date format `"YYYY-MM-DD"`</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_date</span>(<span class="at">date =</span> <span class="fu">c</span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># time: 24h format</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_time</span>(<span class="at">start_time =</span> <span class="fu">c</span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># duration: length in minutes of checklists</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_duration</span>(<span class="at">duration =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">60</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># complete: all species seen or heard are recorded</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_complete</span>()</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>ebd</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Input </span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt </span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Output </span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Filters not executed</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Filters </span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Species: Cyanocitta cristata, Perisoreus canadensis</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Countries: CA, MX, US</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   States: all</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Counties: all</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   BCRs: all</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Bounding box: Lon -100 - -80; Lat 37 - 52</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Years: all</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Start time: 06:00-09:00</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Last edited date: all</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Protocol: all</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Project code: all</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Duration: 0-60 minutes</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distance travelled: all</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Records with breeding codes only: no</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># sample data</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co"># define an EBD reference and a set of filters</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>ebd <span class="ot">&lt;-</span> <span class="fu">auk_ebd</span>(f) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="co"># species: common and scientific names can be mixed</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="fu">auk_species</span>(<span class="at">species =</span> <span class="fu">c</span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  <span class="co"># country: codes and names can be mixed; case insensitive</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  <span class="fu">auk_country</span>(<span class="at">country =</span> <span class="fu">c</span>(<span class="st">"US"</span>, <span class="st">"Canada"</span>, <span class="st">"mexico"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="co"># bbox: long and lat in decimal degrees</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  <span class="co"># formatted as `c(lng_min, lat_min, lng_max, lat_max)`</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="fu">auk_bbox</span>(<span class="at">bbox =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">37</span>, <span class="sc">-</span><span class="dv">80</span>, <span class="dv">52</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  <span class="co"># date: use standard ISO date format `"YYYY-MM-DD"`</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  <span class="fu">auk_date</span>(<span class="at">date =</span> <span class="fu">c</span>(<span class="st">"2012-01-01"</span>, <span class="st">"2012-12-31"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  <span class="co"># time: 24h format</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  <span class="fu">auk_time</span>(<span class="at">start_time =</span> <span class="fu">c</span>(<span class="st">"06:00"</span>, <span class="st">"09:00"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  <span class="co"># duration: length in minutes of checklists</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  <span class="fu">auk_duration</span>(<span class="at">duration =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">60</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>  <span class="co"># complete: all species seen or heard are recorded</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>  <span class="fu">auk_complete</span>()</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>ebd</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; Input </span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt;   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt </span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; Output </span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt;   Filters not executed</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt; Filters </span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co">#&gt;   Species: Cyanocitta cristata, Perisoreus canadensis</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co">#&gt;   Countries: CA, MX, US</span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="co">#&gt;   States: all</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="co">#&gt;   Counties: all</span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="co">#&gt;   BCRs: all</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="co">#&gt;   Bounding box: Lon -100 - -80; Lat 37 - 52</span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="co">#&gt;   Years: all</span></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="co">#&gt;   Date: 2012-01-01 - 2012-12-31</span></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="co">#&gt;   Start time: 06:00-09:00</span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="co">#&gt;   Last edited date: all</span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="co">#&gt;   Protocol: all</span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="co">#&gt;   Project code: all</span></span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="co">#&gt;   Duration: 0-60 minutes</span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="co">#&gt;   Distance travelled: all</span></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="co">#&gt;   Records with breeding codes only: no</span></span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are valid. For example, species are checked against the official <a href="http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy" class="external-link">eBird taxonomy</a> and countries are checked using the <a href="https://github.com/vincentarelbundock/countrycode" class="external-link"><code>countrycode</code></a> package.</p>
 <p>Each of the functions described in the <em>Defining filters</em> section only defines a filter. Once all of the required filters have been set, <code><a href="reference/auk_filter.html">auk_filter()</a></code> should be used to compile them into an AWK script and execute it to produce an output file. So, as an example of bringing all of these steps together, the following commands will extract all Canada Jay and Blue Jay records from Canada and save the results to a tab-separated text file for subsequent use:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">&lt;-</span> <span class="st">"ebd_filtered_blja-grja.txt"</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ebd_filtered <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_ebd</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_species</span>(<span class="at">species =</span> <span class="fu">c</span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_country</span>(<span class="at">country =</span> <span class="st">"Canada"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">auk_filter</span>(<span class="at">file =</span> output_file)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>output_file <span class="ot">&lt;-</span> <span class="st">"ebd_filtered_blja-grja.txt"</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>ebd_filtered <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="fu">auk_ebd</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">auk_species</span>(<span class="at">species =</span> <span class="fu">c</span>(<span class="st">"Canada Jay"</span>, <span class="st">"Cyanocitta cristata"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">auk_country</span>(<span class="at">country =</span> <span class="st">"Canada"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">auk_filter</span>(<span class="at">file =</span> output_file)</span></code></pre></div>
 <p><strong>Filtering the full dataset typically takes at least a couple hours</strong>, so set it running then go grab lunch!</p>
 </div>
 <div class="section level3">
 <h3 id="reading">Reading<a class="anchor" aria-label="anchor" href="#reading"></a>
 </h3>
 <p>eBird Basic Dataset files can be read with <code><a href="reference/read_ebd.html">read_ebd()</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_ebd</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str</span>()</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tibble [494 × 45] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ checklist_id             : chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ global_unique_identifier : chr [1:494] "URN:CornellLabOfOrnithology:EBIRD:OBS97935965" "URN:CornellLabOfOrnithology:EBIRD:OBS201605886" "URN:CornellLabOfOrnithology:EBIRD:OBS530638734" "URN:CornellLabOfOrnithology:EBIRD:OBS520887169" ...</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ last_edited_date         : chr [1:494] "2016-02-22 14:59:49" "2013-06-16 17:34:19" "2017-09-06 13:13:34" "2017-07-24 15:17:16" ...</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ taxonomic_order          : num [1:494] 20145 20145 20145 20145 20145 ...</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ category                 : chr [1:494] "species" "species" "species" "species" ...</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ common_name              : chr [1:494] "Green Jay" "Green Jay" "Green Jay" "Green Jay" ...</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ scientific_name          : chr [1:494] "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" ...</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ observation_count        : chr [1:494] "4" "2" "1" "1" ...</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ breeding_code            : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ breeding_category        : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ age_sex                  : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ country                  : chr [1:494] "Mexico" "Mexico" "Mexico" "Mexico" ...</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ country_code             : chr [1:494] "MX" "MX" "MX" "MX" ...</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ state                    : chr [1:494] "Yucatan" "Chiapas" "Chiapas" "Chiapas" ...</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ state_code               : chr [1:494] "MX-YUC" "MX-CHP" "MX-CHP" "MX-CHP" ...</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ county                   : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ county_code              : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ iba_code                 : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ bcr_code                 : int [1:494] 56 60 60 60 60 55 55 60 56 55 ...</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ usfws_code               : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ atlas_block              : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ locality                 : chr [1:494] "Yuc. Hacienda Chichen" "Berlin2_Punto_06" "07_020_LaConcordia_SanFrancsco_Magallanes_P01" "07_020_CerroBola_BuenaVista_tr3_trad_P03" ...</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ locality_id              : chr [1:494] "L989845" "L2224225" "L6247542" "L6120049" ...</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ locality_type            : chr [1:494] "P" "P" "P" "P" ...</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ latitude                 : num [1:494] 20.7 15.8 15.8 15.8 15.7 ...</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ longitude                : num [1:494] -88.6 -93 -93 -92.9 -92.9 ...</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ observation_date         : Date[1:494], format: "2010-09-05" "2011-08-18" "2012-02-02" ...</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ time_observations_started: chr [1:494] "06:30:00" "08:00:00" "09:13:00" "06:40:00" ...</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ observer_id              : chr [1:494] "obsr55719" "obsr313215" "obsr313215" "obsr313215" ...</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ sampling_event_identifier: chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ protocol_type            : chr [1:494] "Traveling" "Traveling" "Stationary" "Stationary" ...</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ protocol_code            : chr [1:494] "P22" "P22" "P21" "P21" ...</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ project_code             : chr [1:494] "EBIRD" "EBIRD_MEX" "EBIRD_MEX" "EBIRD" ...</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ duration_minutes         : int [1:494] 90 10 10 10 10 120 30 10 80 30 ...</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ effort_distance_km       : num [1:494] 1 0.257 NA NA 0.257 ...</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ effort_area_ha           : num [1:494] NA NA NA NA NA NA NA NA NA NA ...</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ number_observers         : int [1:494] 3 1 1 1 1 2 2 1 13 2 ...</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ all_species_reported     : logi [1:494] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ group_identifier         : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ has_media                : logi [1:494] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ approved                 : logi [1:494] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ reviewed                 : logi [1:494] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ reason                   : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ trip_comments            : chr [1:494] NA "Alonso Gomez Hdz Monitoreo Comunitario, Transectos en Bosque de Pino Encino, La Concordia,1098 msnm" "Miguel Mndez Lpez" "Rogelio Lpez Encino" ...</span></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ species_comments         : chr [1:494] NA NA NA NA ...</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - attr(*, "rollup")= logi TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">system.file</span>(<span class="st">"extdata/ebd-sample.txt"</span>, <span class="at">package =</span> <span class="st">"auk"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">read_ebd</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">str</span>()</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; tibble [494 × 45] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;  $ checklist_id             : chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt;  $ global_unique_identifier : chr [1:494] "URN:CornellLabOfOrnithology:EBIRD:OBS97935965" "URN:CornellLabOfOrnithology:EBIRD:OBS201605886" "URN:CornellLabOfOrnithology:EBIRD:OBS530638734" "URN:CornellLabOfOrnithology:EBIRD:OBS520887169" ...</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt;  $ last_edited_date         : chr [1:494] "2016-02-22 14:59:49" "2013-06-16 17:34:19" "2017-09-06 13:13:34" "2017-07-24 15:17:16" ...</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;  $ taxonomic_order          : num [1:494] 20145 20145 20145 20145 20145 ...</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;  $ category                 : chr [1:494] "species" "species" "species" "species" ...</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;  $ common_name              : chr [1:494] "Green Jay" "Green Jay" "Green Jay" "Green Jay" ...</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt;  $ scientific_name          : chr [1:494] "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" "Cyanocorax yncas" ...</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt;  $ observation_count        : chr [1:494] "4" "2" "1" "1" ...</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt;  $ breeding_code            : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt;  $ breeding_category        : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt;  $ age_sex                  : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt;  $ country                  : chr [1:494] "Mexico" "Mexico" "Mexico" "Mexico" ...</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt;  $ country_code             : chr [1:494] "MX" "MX" "MX" "MX" ...</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt;  $ state                    : chr [1:494] "Yucatan" "Chiapas" "Chiapas" "Chiapas" ...</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt;  $ state_code               : chr [1:494] "MX-YUC" "MX-CHP" "MX-CHP" "MX-CHP" ...</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt;  $ county                   : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt;  $ county_code              : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt;  $ iba_code                 : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt;  $ bcr_code                 : int [1:494] 56 60 60 60 60 55 55 60 56 55 ...</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt;  $ usfws_code               : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co">#&gt;  $ atlas_block              : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt;  $ locality                 : chr [1:494] "Yuc. Hacienda Chichen" "Berlin2_Punto_06" "07_020_LaConcordia_SanFrancsco_Magallanes_P01" "07_020_CerroBola_BuenaVista_tr3_trad_P03" ...</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="co">#&gt;  $ locality_id              : chr [1:494] "L989845" "L2224225" "L6247542" "L6120049" ...</span></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="co">#&gt;  $ locality_type            : chr [1:494] "P" "P" "P" "P" ...</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co">#&gt;  $ latitude                 : num [1:494] 20.7 15.8 15.8 15.8 15.7 ...</span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="co">#&gt;  $ longitude                : num [1:494] -88.6 -93 -93 -92.9 -92.9 ...</span></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a><span class="co">#&gt;  $ observation_date         : Date[1:494], format: "2010-09-05" "2011-08-18" ...</span></span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a><span class="co">#&gt;  $ time_observations_started: chr [1:494] "06:30:00" "08:00:00" "09:13:00" "06:40:00" ...</span></span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a><span class="co">#&gt;  $ observer_id              : chr [1:494] "obsr55719" "obsr313215" "obsr313215" "obsr313215" ...</span></span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a><span class="co">#&gt;  $ sampling_event_identifier: chr [1:494] "S6852862" "S14432467" "S39033556" "S38303088" ...</span></span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="co">#&gt;  $ protocol_type            : chr [1:494] "Traveling" "Traveling" "Stationary" "Stationary" ...</span></span>
+<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="co">#&gt;  $ protocol_code            : chr [1:494] "P22" "P22" "P21" "P21" ...</span></span>
+<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a><span class="co">#&gt;  $ project_code             : chr [1:494] "EBIRD" "EBIRD_MEX" "EBIRD_MEX" "EBIRD" ...</span></span>
+<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a><span class="co">#&gt;  $ duration_minutes         : int [1:494] 90 10 10 10 10 120 30 10 80 30 ...</span></span>
+<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a><span class="co">#&gt;  $ effort_distance_km       : num [1:494] 1 0.257 NA NA 0.257 ...</span></span>
+<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a><span class="co">#&gt;  $ effort_area_ha           : num [1:494] NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a><span class="co">#&gt;  $ number_observers         : int [1:494] 3 1 1 1 1 2 2 1 13 2 ...</span></span>
+<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a><span class="co">#&gt;  $ all_species_reported     : logi [1:494] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
+<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a><span class="co">#&gt;  $ group_identifier         : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a><span class="co">#&gt;  $ has_media                : logi [1:494] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a><span class="co">#&gt;  $ approved                 : logi [1:494] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
+<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a><span class="co">#&gt;  $ reviewed                 : logi [1:494] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a><span class="co">#&gt;  $ reason                   : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a><span class="co">#&gt;  $ trip_comments            : chr [1:494] NA "Alonso Gomez Hdz Monitoreo Comunitario, Transectos en Bosque de Pino Encino, La Concordia,1098 msnm" "Miguel Mndez Lpez" "Rogelio Lpez Encino" ...</span></span>
+<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a><span class="co">#&gt;  $ species_comments         : chr [1:494] NA NA NA NA ...</span></span>
+<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a><span class="co">#&gt;  - attr(*, "rollup")= logi TRUE</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -330,7 +330,7 @@
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>eBird Basic Dataset. Version<span class="sc">:</span> ebd_relFeb<span class="fl">-2018.</span> Cornell Lab of Ornithology, Ithaca, New York. May <span class="fl">2013.</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>eBird Basic Dataset. Version<span class="sc">:</span> ebd_relFeb<span class="fl">-2018.</span> Cornell Lab of Ornithology, Ithaca, New York. May <span class="fl">2013.</span></span></code></pre></div>
 <p><a href="http://ropensci.org" class="external-link"><img src="http://www.ropensci.org/public_images/github_footer.png"></a></p>
 </div>
 </div>
@@ -403,7 +403,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

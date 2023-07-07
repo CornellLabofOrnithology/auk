@@ -123,7 +123,7 @@ format_unmarked_occu <- function(x, site_id = "site",
   x <- dplyr::ungroup(x)
   
   # response to wide
-  x_resp <- dplyr::select(x, !!rlang::sym(site_id), .data$.obs_id, 
+  x_resp <- dplyr::select(x, !!rlang::sym(site_id), ".obs_id", 
                           !!rlang::sym(response))
   x_resp <- tidyr::spread(x_resp, .data$.obs_id, !!rlang::sym(response))
   names(x_resp)[-1] <- paste("y", names(x_resp)[-1], sep = ".")
@@ -144,7 +144,7 @@ format_unmarked_occu <- function(x, site_id = "site",
   obs_covs_dfs <- list()
   for (vr in obs_covs) {
     # convert to wide
-    x_obs <- dplyr::select(x, !!rlang::sym(site_id), .data$.obs_id, 
+    x_obs <- dplyr::select(x, !!rlang::sym(site_id), ".obs_id", 
                            !!rlang::sym(vr))
     x_obs <- tidyr::spread(x_obs, .data$.obs_id, !!rlang::sym(vr))
     names(x_obs)[-1] <- paste(vr, names(x_obs)[-1], sep = ".")

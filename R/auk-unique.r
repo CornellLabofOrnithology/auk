@@ -101,7 +101,7 @@ auk_unique <- function(x,
   
   # generate list of checklist and observer ids
   ids <- dplyr::select(x_grouped, 
-                       dplyr::one_of(c(cols, checklist_id, observer_id)))
+                       dplyr::all_of(c(cols, checklist_id, observer_id)))
   ids <- dplyr::group_by_at(ids, cols)
   ids <- dplyr::arrange_at(ids, checklist_id)
   ids <- dplyr::summarize(ids, 
@@ -127,7 +127,7 @@ auk_unique <- function(x,
   x <- rbind(x[!grouped, ], x_grouped)
 
   # move id field to front
-  x <- dplyr::select(x, .data$checklist_id, dplyr::everything())
+  x <- dplyr::select(x, "checklist_id", dplyr::everything())
 
   # attribute flag
   attr(x, "unique") <- TRUE

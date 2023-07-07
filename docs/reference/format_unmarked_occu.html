@@ -23,7 +23,7 @@ unmarked::formatWide() in which each row is a site."><meta property="og:image" c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
       </span>
     </div>
 
@@ -173,11 +173,11 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 sites</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maximum number of observations per site: 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mean number of observations per site: 3.85 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sites with at least one detection: 25 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sites with at least one detection: 24 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Tabulation of y observations:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> FALSE  TRUE  &lt;NA&gt; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   128    53   289 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   132    49   289 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Site-level covariates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     latitude       longitude    </span>
@@ -190,13 +190,13 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Observation-level covariates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  effort_distance_km duration_minutes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   : 0.100     Min.   :  1.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.: 0.200     1st Qu.: 15.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median : 1.000     Median : 30.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   : 1.582     Mean   : 66.70  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.: 2.000     3rd Qu.: 78.75  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :10.000     Max.   :480.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :391        NA's   :390     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   : 0.100     Min.   :  1.0   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.: 0.200     1st Qu.: 15.0   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median : 1.000     Median : 30.0   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   : 1.574     Mean   : 68.3   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.: 2.000     3rd Qu.: 90.0   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :10.000     Max.   :480.0   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :392        NA's   :391     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># this function can also be used for abundance modeling</span></span></span>
 <span class="r-in"><span><span class="va">abd</span> <span class="op">&lt;-</span> <span class="va">ebd_zf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
@@ -205,7 +205,10 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">observation_count</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
 <span class="r-in"><span>  <span class="co"># filter to repeated visits</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="filter_repeat_visits.html">filter_repeat_visits</a></span><span class="op">(</span>n_days <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There was 1 warning in `dplyr::mutate()`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `observation_count = as.integer(observation_count)`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> NAs introduced by coercion</span>
 <span class="r-in"><span><span class="co"># prepare for conversion to unmarkedFramePCount object</span></span></span>
 <span class="r-in"><span><span class="va">abd_wide</span> <span class="op">&lt;-</span> <span class="fu">format_unmarked_occu</span><span class="op">(</span><span class="va">abd</span>,</span></span>
 <span class="r-in"><span>                                 response <span class="op">=</span> <span class="st">"observation_count"</span>,</span></span>
@@ -226,7 +229,7 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Tabulation of y observations:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    0    1    2    3    5   10 &lt;NA&gt; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  124   26    9    3    7    2  269 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  132   18    9    3    7    2  269 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Site-level covariates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     latitude       longitude    </span>
@@ -242,10 +245,10 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   : 0.100     Min.   :  1.00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.: 0.200     1st Qu.: 15.00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Median : 1.000     Median : 30.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   : 1.565     Mean   : 65.91  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.: 2.000     3rd Qu.: 86.25  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   : 1.595     Mean   : 68.24  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.: 2.000     3rd Qu.: 90.00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :10.000     Max.   :480.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :363        NA's   :362     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :362        NA's   :361     </span>
 </code></pre></div>
     </div>
   </div>
@@ -260,7 +263,7 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

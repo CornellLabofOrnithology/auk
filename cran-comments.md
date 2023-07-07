@@ -1,13 +1,14 @@
-# auk 0.6.0
+# auk 0.6.1
 
-- update for 2022 eBird taxonomy
+- retain breeding codes in `auk_zerofill()`
+- changes to conform with deprecation of `.data$` in tidyselect expressions
 
 # Test environments
 
-- local OS X install, R 4.2
-- OS X (github actions), R 4.2
-- Windows (github actions), R 4.2
-- ubuntu 14.04 (github actions), R 4.2
+- local OS X install, R 4.3
+- OS X (github actions), R 4.3
+- Windows (github actions), R 4.3
+- ubuntu 14.04 (github actions), R 4.3
 - win-builder (devel and release)
 
 # R CMD check results

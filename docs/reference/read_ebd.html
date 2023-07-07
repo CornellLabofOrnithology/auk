@@ -19,7 +19,7 @@ file."><meta property="og:image" content="/logo.png"><!-- mathjax --><script src
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
       </span>
     </div>
 
@@ -148,26 +148,25 @@ had a sampling event data file set in the original call to <code><a href="auk_eb
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">read_ebd</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 494 × 45</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    checklist_id global…¹ last_…² taxon…³ categ…⁴ commo…⁵ scien…⁶ obser…⁷ breed…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> S6852862     URN:Cor… 2016-0…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… 4       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> S14432467    URN:Cor… 2013-0…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… 2       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> S39033556    URN:Cor… 2017-0…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… 1       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> S38303088    URN:Cor… 2017-0…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… 1       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> S14439180    URN:Cor… 2013-0…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… 2       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> S32118689    URN:Cor… 2016-1…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… X       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> S30663744    URN:Cor… 2016-1…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… 6       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> S39245968    URN:Cor… 2017-0…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… 3       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> S9816729     URN:Cor… 2012-0…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… 3       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> S30669718    URN:Cor… 2016-0…   <span style="text-decoration: underline;">20</span>145 species Green … Cyanoc… 2       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 484 more rows, 36 more variables: breeding_category &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    checklist_id global_unique_identi…¹ last_edited_date taxonomic_order category</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> S6852862     URN:CornellLabOfOrnit… 2016-02-22 14:5…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> S14432467    URN:CornellLabOfOrnit… 2013-06-16 17:3…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> S39033556    URN:CornellLabOfOrnit… 2017-09-06 13:1…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> S38303088    URN:CornellLabOfOrnit… 2017-07-24 15:1…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> S14439180    URN:CornellLabOfOrnit… 2013-06-16 22:2…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> S32118689    URN:CornellLabOfOrnit… 2016-10-19 20:3…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> S30663744    URN:CornellLabOfOrnit… 2016-11-16 13:5…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> S39245968    URN:CornellLabOfOrnit… 2017-09-18 05:2…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> S9816729     URN:CornellLabOfOrnit… 2012-02-12 17:2…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> S30669718    URN:CornellLabOfOrnit… 2016-07-13 13:0…           <span style="text-decoration: underline;">20</span>145 species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 484 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​global_unique_identifier</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 40 more variables: common_name &lt;chr&gt;, scientific_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   observation_count &lt;chr&gt;, breeding_code &lt;chr&gt;, breeding_category &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   age_sex &lt;chr&gt;, country &lt;chr&gt;, country_code &lt;chr&gt;, state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_code &lt;chr&gt;, county &lt;chr&gt;, county_code &lt;chr&gt;, iba_code &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   locality_id &lt;chr&gt;, locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   observer_id &lt;chr&gt;, sampling_event_identifier &lt;chr&gt;, protocol_type &lt;chr&gt;, …</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bcr_code &lt;int&gt;, usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;, …</span></span>
 <span class="r-in"><span><span class="co"># read a sampling event data file</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_sampling.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">read_sampling</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -185,7 +184,7 @@ had a sampling event data file set in the original call to <code><a href="auk_eb
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

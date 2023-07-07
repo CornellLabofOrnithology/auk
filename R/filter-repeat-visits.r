@@ -133,7 +133,7 @@ filter_repeat_visits <- function(x, min_obs = 2L, max_obs = 10L,
   
   # group by site_vars and closure_id
   block_vars <- c(site_vars, "closure_id")
-  x <- tidyr::unite(x, "site", dplyr::one_of(block_vars), remove = FALSE)
+  x <- tidyr::unite(x, "site", dplyr::all_of(block_vars), remove = FALSE)
   
   # get rid of blocks with fewer than min_obs observations
   x_out <- dplyr::group_by(x, .data$site)
@@ -148,6 +148,6 @@ filter_repeat_visits <- function(x, min_obs = 2L, max_obs = 10L,
   # output
   sort_vars <- rlang::syms(c(site_vars, date_var))
   x_out <- dplyr::arrange(x_out, !!!sort_vars)
-  dplyr::select(x_out, .data$site, .data$closure_id, .data$n_observations,
+  dplyr::select(x_out, "site", "closure_id", "n_observations",
                 dplyr::everything())
 }

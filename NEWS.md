@@ -1,3 +1,8 @@
+# auk 0.6.1
+
+- retain breeding codes in `auk_zerofill()`
+- changes to conform with deprecation of `.data$` in tidyselect expressions
+
 # auk 0.6.0
 
 - update for 2022 eBird taxonomy

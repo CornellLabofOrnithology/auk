@@ -52,7 +52,6 @@ read_ebd.character <- function(x, sep = "\t", unique = TRUE,
   # get header
   header <- get_header(x, sep = sep)
 
-  # read using fread, read_delim, or read.delim
   col_types <- get_col_types(header)
   out <- readr::read_delim(x, delim = sep, quote = "", na = "",
                            col_types = col_types,

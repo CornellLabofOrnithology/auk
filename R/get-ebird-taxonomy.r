@@ -62,7 +62,7 @@ get_ebird_taxonomy <- function(version, locale) {
     stop("eBird taxonomy API cannont be accessed, visit https://ebird.org/ ",
          "to see if eBird is currently down.")
   }
-  out <- dplyr::select(tax, dplyr::one_of(keep_names))
+  out <- dplyr::select(tax, dplyr::all_of(keep_names))
   names(out)[names(out) == "family_sci_name"] <- "family"
   out
 }

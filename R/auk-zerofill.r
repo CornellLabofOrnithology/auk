@@ -146,14 +146,18 @@ auk_zerofill.data.frame <- function(x, sampling_events,
   }
   
   # subset ebd to remove checklist level fields
-  species_cols <- c("checklist_id", "scientific_name", "observation_count")
+  optional_fields <- c("breeding_code", "breeding_category", 
+                       "behavior_code", "age_sex")
+  species_cols <- c("checklist_id", "scientific_name", 
+                    intersect(optional_fields, names(x)),
+                    "observation_count")
   if (any(!species_cols %in% names(x))) {
     stop(
       paste0("The following fields must appear in the EBD: \n\t",
              paste(species_cols, collapse =", "))
     )
   }
-  x <- dplyr::select(x, dplyr::one_of(species_cols))
+  x <- dplyr::select(x, dplyr::all_of(species_cols))
   
   # ensure all checklist in ebd are in sampling file
   if (!all(x$checklist_id %in% sampling_events$checklist_id)) {
