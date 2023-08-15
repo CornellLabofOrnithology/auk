@@ -123,15 +123,16 @@ format_unmarked_occu <- function(x, site_id = "site",
   x <- dplyr::ungroup(x)
   
   # response to wide
-  x_resp <- dplyr::select(x, !!rlang::sym(site_id), ".obs_id", 
-                          !!rlang::sym(response))
-  x_resp <- tidyr::spread(x_resp, .data$.obs_id, !!rlang::sym(response))
+  x_resp <- dplyr::select(x, dplyr::all_of(c(site_id, ".obs_id", response)))
+  x_resp <- tidyr::pivot_wider(x_resp, 
+                               names_from = ".obs_id", 
+                               values_from = dplyr::all_of(response))
   names(x_resp)[-1] <- paste("y", names(x_resp)[-1], sep = ".")
   
   # site-level covariates
-  x_site <- dplyr::select(x, !!rlang::sym(site_id), !!!rlang::syms(site_covs))
+  x_site <- dplyr::select(x, dplyr::all_of(c(site_id, site_covs)))
   # collapse to one row per site
-  x_site <- dplyr::group_by_at(x_site, site_id)
+  x_site <- dplyr::group_by(x_site, .data[[site_id]])
   x_site <- dplyr::distinct(x_site)
   # check covariates are constant across site
   n_unique <- dplyr::count(dplyr::distinct(x_site))$n
@@ -144,9 +145,10 @@ format_unmarked_occu <- function(x, site_id = "site",
   obs_covs_dfs <- list()
   for (vr in obs_covs) {
     # convert to wide
-    x_obs <- dplyr::select(x, !!rlang::sym(site_id), ".obs_id", 
-                           !!rlang::sym(vr))
-    x_obs <- tidyr::spread(x_obs, .data$.obs_id, !!rlang::sym(vr))
+    x_obs <- dplyr::select(x, dplyr::all_of(c(site_id, ".obs_id", vr)))
+    x_obs <- tidyr::pivot_wider(x_obs, 
+                                names_from = ".obs_id", 
+                                values_from = dplyr::all_of(vr))
     names(x_obs)[-1] <- paste(vr, names(x_obs)[-1], sep = ".")
     obs_covs_dfs[[vr]] <- x_obs
   }
