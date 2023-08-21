@@ -2,6 +2,7 @@
 
 - retain breeding codes in `auk_zerofill()`
 - changes to conform with deprecation of `.data$` in tidyselect expressions
+- changes to package-level documentation in roxygen2
 
 # Test environments
 
