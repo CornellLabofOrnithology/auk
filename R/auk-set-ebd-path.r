@@ -13,7 +13,7 @@
 #' @param overwrite logical; should the existing `EBD_PATH` be overwritten if it
 #'   has already been set in .Renviron.
 #'
-#' @return Edits .Renviron, then returns the AWK path invisibly.
+#' @return Edits .Renviron, then returns the EBD path invisibly.
 #' @export
 #' @family paths
 #' @examples
@@ -50,4 +50,6 @@ auk_set_ebd_path <- function(path, overwrite = FALSE) {
   write(paste0("EBD_PATH='", path, "'\n"), renv_path, append = TRUE)
   message(paste("EBD_PATH set to", path))
   invisible(path)
+  # set EBD_PATH for this session, so user doesn't have to reload
+  Sys.setenv(EBD_PATH = path)
 }
