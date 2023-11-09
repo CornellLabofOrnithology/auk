@@ -58,4 +58,6 @@ auk_set_awk_path <- function(path, overwrite = FALSE) {
   write(paste0("AWK_PATH='", path, "'\n"), renv_path, append = TRUE)
   message(paste("AWK_PATH set to", path))
   invisible(path)
+  # set AWK_PATH for this session, so user doesn't have to reload
+  Sys.setenv(AWK_PATH = path)
 }
