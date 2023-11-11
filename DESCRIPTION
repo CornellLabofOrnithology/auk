@@ -1,6 +1,6 @@
 Package: auk
 Title: eBird Data Extraction and Processing in R
-Version: 0.6.1
+Version: 0.7.0
 Authors@R: 
     c(person(given = "Matthew",
              family = "Strimas-Mackey",
@@ -47,7 +47,8 @@ Suggests:
     rmarkdown,
     sf,
     testthat,
-    unmarked
+    unmarked,
+    withr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

@@ -571,6 +571,15 @@ awk_translate <- function(filters, col_idx, sep, select) {
   } else {
     filter_strings$breeding <- ""
   }
+  # exotic codes
+  if (length(filters$exotic) == 0) {
+    filter_strings$exotic <- ""
+  } else {
+    idx <- col_idx$index[col_idx$id == "exotic"]
+    condition <- paste0("$", idx, " == \"", filters$exotic, "\"",
+                        collapse = " || ")
+    filter_strings$exotic <- str_interp(awk_if, list(condition = condition))
+  }
   # complete checklists only
   if (filters$complete) {
     idx <- col_idx$index[col_idx$id == "complete"]
@@ -633,6 +642,7 @@ BEGIN {
   ${duration}
   ${distance}
   ${breeding}
+  ${exotic}
   ${complete}
   ${observer}
 

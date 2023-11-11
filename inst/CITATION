@@ -8,13 +8,13 @@ citEntry(
                    as.person("Eliot Miller"),
                    as.person("Wesley Hochachka")
                  ),
-  year         = "2018",
-  note         = "R package version 0.3.0",
+  year         = "2023",
+  note         = "R package version 0.7.0",
   url          = "https://cornelllabofornithology.github.io/auk/",
 
   textVersion  =
-  paste("Matthew Strimas-Mackey, Eliot Miller, and Wesley Hochachka (2018).",
+  paste("Matthew Strimas-Mackey, Eliot Miller, and Wesley Hochachka (2023).",
         "auk: eBird Data Extraction and Processing with AWK.",
-        "R package version 0.3.0.",
+        "R package version 0.7.0.",
         "https://cornelllabofornithology.github.io/auk/")
 )

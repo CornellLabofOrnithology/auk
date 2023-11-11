@@ -23,22 +23,22 @@ extract_family <- function(x) {
   str_match(x, "\\((.*)\\)")[, 2, drop = TRUE]
 }
 ebird_taxonomy <- paste0("https://www.birds.cornell.edu/",
-                         "clementschecklist/wp-content/uploads/2022/10/",
-                         "ebird_taxonomy_v2022.csv") %>% 
+                         "clementschecklist/wp-content/uploads/2023/10/",
+                         "ebird_taxonomy_v2023.csv") %>% 
   read_csv() %>% 
   rename_all(tolower) %>% 
   mutate(common_name = stri_trans_general(primary_com_name, "latin-ascii"),
          family_common = extract_family(family),
          family = str_remove(family, " \\(.+\\)")) %>% 
   select(species_code, scientific_name = sci_name, common_name,
-         order = order1, family, family_common,
+         order, family, family_common,
          category, taxon_order, report_as) %>% 
   as.data.frame(stringsAsFactors = FALSE)
 
 # extinct species
 ebird_taxonomy <- paste0("https://www.birds.cornell.edu/",
-                         "clementschecklist/wp-content/uploads/2022/10/",
-                         "Clements-v2022-October-2022-2.csv") %>% 
+                         "clementschecklist/wp-content/uploads/2023/10/",
+                         "Clements-v2023-October-2023.csv") %>% 
   read_csv() %>% 
   filter(category == "species") %>% 
   transmute(scientific_name = `scientific name`,

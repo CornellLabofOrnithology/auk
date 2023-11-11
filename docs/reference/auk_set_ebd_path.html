@@ -4,8 +4,9 @@ eBird Basic Dataset (EBD) text files in the EBD_PATH environment variable.
 All functions referencing the EBD or sampling event data files will check in
 this directory to find the files, thus avoiding the need to specify the full
 path every time. This will increase the portability of your code. Use this
-function to set EBD_PATH in your .Renviron file; it is
-also possible to manually edit the file."><meta property="og:image" content="/logo.png"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+function to set EBD_PATH in your .Renviron file; it is also possible to
+manually edit the file. This function first looks for for an .Renviron
+location defined by R_ENVIRON_USER, then defaults to ~/.Renviron."><meta property="og:image" content="/logo.png"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -23,7 +24,7 @@ also possible to manually edit the file."><meta property="og:image" content="/lo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
       </span>
     </div>
 
@@ -53,7 +54,7 @@ also possible to manually edit the file."><meta property="og:image" content="/lo
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Set the path to EBD text files</h1>
-    <small class="dont-index">Source: <a href="https://github.com/CornellLabofOrnithology/auk/blob/HEAD/R/auk-set-ebd-path.R" class="external-link"><code>R/auk-set-ebd-path.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/CornellLabofOrnithology/auk/blob/HEAD/R/auk-set-ebd-path.r" class="external-link"><code>R/auk-set-ebd-path.r</code></a></small>
     <div class="hidden name"><code>auk_set_ebd_path.Rd</code></div>
     </div>
 
@@ -63,8 +64,9 @@ eBird Basic Dataset (EBD) text files in the <code>EBD_PATH</code> environment va
 All functions referencing the EBD or sampling event data files will check in
 this directory to find the files, thus avoiding the need to specify the full
 path every time. This will increase the portability of your code. Use this
-function to set <code>EBD_PATH</code> in your .Renviron file; it is
-also possible to manually edit the file.</p>
+function to set <code>EBD_PATH</code> in your .Renviron file; it is also possible to
+manually edit the file. This function first looks for for an .Renviron
+location defined by <code>R_ENVIRON_USER</code>, then defaults to ~/.Renviron.</p>
     </div>
 
     <div id="ref-usage">
@@ -87,7 +89,8 @@ has already been set in .Renviron.</p></dd>
     <h2>Value</h2>
     
 
-<p>Edits .Renviron, then returns the AWK path invisibly.</p>
+<p>Edits .Renviron, sets <code>EBD_PATH</code> for the current session, then
+returns the EBD path invisibly.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>

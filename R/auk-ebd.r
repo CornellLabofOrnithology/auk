@@ -73,6 +73,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
                  "latitude", "longitude",
                  "observation date", "time observations started",
                  "protocol type",
+                 "exotic code",
                  "duration minutes", "effort distance km",
                  "all species reported",
                  "observer id",
@@ -92,7 +93,8 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
            "date", "time", "last_edited",
            "protocol", "project", 
            "duration", "distance", 
-           "breeding", "complete",
+           "breeding", "exotic", 
+           "complete",
            "observer"),
     name = c("scientific name",
              "country code", "state code", "county code", "bcr code", 
@@ -102,6 +104,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
              "protocol type", "project code",
              "duration minutes", "effort distance km",
              "breeding code",
+             "exotic code",
              "all species reported",
              "observer id"),
     stringsAsFactors = FALSE)
@@ -112,7 +115,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
   if (!missing(file_sampling)) {
     file_sampling <- ebd_file(file_sampling)
     # variables not in sampling data
-    not_in_sampling <- c("species", "breeding")
+    not_in_sampling <- c("species", "breeding", "exotic")
     filter_cols_sampling <- filter_cols[!filter_cols$id %in% not_in_sampling, ]
     # read header rows
     header_sampling <- tolower(get_header(file_sampling, sep))
@@ -163,6 +166,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         duration = numeric(),
         distance = numeric(),
         breeding = FALSE,
+        exotic = character(),
         complete = FALSE,
         observer = character()
       )
@@ -324,6 +328,19 @@ print.auk_ebd <- function(x, ...) {
     cat("yes")
   } else {
     cat("no")
+  }
+  cat("\n")
+  # exotic code
+  cat("  Exotic Codes: ")
+  if (length(x$filters$exotic) %in% c(0, 4)) {
+    cat("all")
+  } else {
+    ex_codes <- dplyr::recode(x$filters$exotic,
+                              "N" = "Naturalized",
+                              "P" = "Provisional",
+                              "X" = "Escapee")
+    ex_codes <- ifelse(ex_codes == "", "Native", ex_codes)
+    cat(paste(ex_codes, collapse = ", "))
   }
   cat("\n")
   # complete checklists only

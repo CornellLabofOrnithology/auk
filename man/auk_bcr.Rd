@@ -13,7 +13,7 @@ auk_bcr(x, bcr, replace = FALSE)
 \item{bcr}{integer; BCRs to filter by. BCRs are identified by an integer,
 from 1 to 66, that can be looked up in the \link{bcr_codes} table.}
 
-\item{replace}{logical; multiple calls to \code{auk_state()} are additive,
+\item{replace}{logical; multiple calls to \code{auk_bcr()} are additive,
 unless \code{replace = FALSE}, in which case the previous list of states to
 filter by will be removed and replaced by that in the current call.}
 }
@@ -39,7 +39,7 @@ system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
   auk_ebd() \%>\%
   auk_bcr(bcr = 24)
   
-# alternatively, without pipes
+# filter to bcr 24
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 auk_bcr(ebd, bcr = 24)
 }
@@ -53,6 +53,7 @@ Other filter:
 \code{\link{auk_date}()},
 \code{\link{auk_distance}()},
 \code{\link{auk_duration}()},
+\code{\link{auk_exotic}()},
 \code{\link{auk_extent}()},
 \code{\link{auk_filter}()},
 \code{\link{auk_last_edited}()},

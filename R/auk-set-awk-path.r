@@ -4,14 +4,17 @@
 #' variable `AWK_PATH` must be set to specify the location of the executable.
 #' Use this function to set `AWK_PATH` in your .Renviron file. **Most users
 #' should NOT set `AWK_PATH`, only do so if you have installed AWK in
-#' non-standard location and `auk` cannot find it.**
+#' non-standard location and `auk` cannot find it.** This function first looks
+#' for for an .Renviron location defined by `R_ENVIRON_USER`, then defaults to
+#' ~/.Renviron.
 #'
 #' @param path character; path to the AWK executable on your system, e.g. 
 #'   `"C:/cygwin64/bin/gawk.exe"` or `"/usr/bin/awk"`.
 #' @param overwrite logical; should the existing `AWK_PATH` be overwritten if it
 #'   has already been set in .Renviron.
 #'
-#' @return Edits .Renviron, then returns the AWK path invisibly.
+#' @return Edits .Renviron, sets `AWK_PATH` for the current session, then
+#'   returns the EBD path invisibly.
 #' @export
 #' @family paths
 #' @examples
@@ -36,10 +39,7 @@ auk_set_awk_path <- function(path, overwrite = FALSE) {
   }
   
   # find .Renviron
-  renv_path <- path.expand(file.path("~", ".Renviron"))
-  if (!file.exists(renv_path)) {
-    file.create(renv_path)
-  }
+  renv_path <- renv_path <- renv_file_path()
   renv_lines <- readLines(renv_path)
   
   # look for existing entry, remove if overwrite = TRUE
@@ -57,7 +57,7 @@ auk_set_awk_path <- function(path, overwrite = FALSE) {
   # set path in .Renviron
   write(paste0("AWK_PATH='", path, "'\n"), renv_path, append = TRUE)
   message(paste("AWK_PATH set to", path))
-  invisible(path)
   # set AWK_PATH for this session, so user doesn't have to reload
   Sys.setenv(AWK_PATH = path)
+  invisible(path)
 }

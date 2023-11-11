@@ -27,6 +27,7 @@ get_col_types <- function(header) {
     "SCIENTIFIC NAME" = "character",
     "SUBSPECIES COMMON NAME" = "character",
     "SUBSPECIES SCIENTIFIC NAME" = "character",
+    "EXOTIC CODE" = "character",
     "OBSERVATION COUNT" = "character",
     "BREEDING BIRD ATLAS CODE" = "character",
     "BREEDING BIRD ATLAS CATEGORY" = "character",

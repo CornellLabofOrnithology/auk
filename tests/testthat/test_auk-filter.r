@@ -163,7 +163,7 @@ test_that("auk_filter filter an auk_sampling object", {
   
   expect_is(s_df, "data.frame")
   expect_lt(nrow(s_df), nrow(read_sampling(f)))
-  expect_equal(nrow(s_df), 19)
+  expect_equal(nrow(s_df), 15)
   expect_true(all(s_df$time_observations_started >= filters$filters$time[1]))
   expect_true(all(s_df$time_observations_started <= filters$filters$time[2]))
   expect_true(all(s_df$duration_minutes >= filters$filters$duration[1]))

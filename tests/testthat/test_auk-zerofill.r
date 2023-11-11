@@ -11,7 +11,8 @@ test_that("auk_zerofill zerofill works normally", {
 
   expect_named(zf$observations,
                c("checklist_id", "scientific_name",
-                 "breeding_code", "breeding_category", "age_sex",
+                 "breeding_code", "breeding_category", 
+                 "behavior_code", "age_sex",
                  "observation_count", "species_observed"))
   expect_equal(
     anyDuplicated(zf$observations[, c("checklist_id", "scientific_name")]),

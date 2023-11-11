@@ -24,7 +24,7 @@ of closure."><meta property="og:image" content="/logo.png"><!-- mathjax --><scri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
       </span>
     </div>
 
@@ -179,21 +179,21 @@ combination of the <code>n_days</code> and <code>annual_closure</code> arguments
 <span class="r-in"><span>                       species <span class="op">=</span> <span class="st">"Collared Kingfisher"</span>,</span></span>
 <span class="r-in"><span>                       collapse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">filter_repeat_visits</span><span class="op">(</span><span class="va">ebd_zf</span>, n_days <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 181 × 40</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 251 × 41</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    site          closure_id n_observations checklist_id last_edited_date country</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> L1055540_obs… 2012-9                  2 S11680564    2017-10-19 12:4… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> L1055540_obs… 2012-9                  2 S11718518    2018-02-01 09:2… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> L1277940_obs… 2012-8                  3 S11664225    2017-05-27 11:0… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> L1277940_obs… 2012-8                  3 S11675087    2017-05-27 11:0… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> L1277940_obs… 2012-8                  3 S11668164    2017-05-27 10:2… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> L1361109_obs… 2012-0                 10 S9513531     2017-05-27 10:3… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> L1361109_obs… 2012-0                 10 S9598863     2017-05-27 10:3… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> L1361109_obs… 2012-0                 10 S9640246     2012-03-20 03:2… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> L1361109_obs… 2012-0                 10 S9652466     2012-03-20 03:2… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> L1361109_obs… 2012-0                 10 S9663623     2013-09-11 12:2… Singap…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 171 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 34 more variables: country_code &lt;chr&gt;, state &lt;chr&gt;, state_code &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> L1055540_obs… 2012-2                  2 S49291608    2023-01-31 19:3… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> L1055540_obs… 2012-2                  2 S49291611    2022-03-12 04:3… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> L1361109_obs… 2012-0                 10 S9492400     2021-04-02 03:4… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> L1361109_obs… 2012-0                 10 S9502932     2012-03-20 03:2… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> L1361109_obs… 2012-0                 10 S9598863     2021-04-02 03:4… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> L1361109_obs… 2012-0                 10 S9652466     2012-03-20 03:2… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> L1361109_obs… 2012-0                 10 S9664008     2012-03-20 03:2… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> L1361109_obs… 2012-0                 10 S9664006     2022-03-12 04:3… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> L1361109_obs… 2012-0                 10 S9672138     2022-03-12 04:3… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> L1361109_obs… 2012-0                 10 S9688398     2012-04-11 03:5… Singap…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 241 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 35 more variables: country_code &lt;chr&gt;, state &lt;chr&gt;, state_code &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   county &lt;chr&gt;, county_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;, locality_id &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>

@@ -87,7 +87,7 @@ Once you have access to the data, proceed to the [download page](http://ebird.or
 
 ### Example data
 
-This package comes with two example datasets. The first is suitable for practicing filtering the EBD and producing presence-only data. It's a sample of 500 records from the EBD. It contains data from North and Central America from 2010-2012 on 4 jay species: Canada Jay, Blue Jay, Steller's Jay, and Green Jay. It can be accessed with:
+This package comes with two example datasets. The first is suitable for practicing filtering the EBD and producing presence-only data. It's a sample of 400 records from the EBD. It contains data from North and Central America from 2010-2012 on 3 jay species: Canada Jay, Blue Jay, and Green Jay. It can be accessed with:
 
 ```{r example-data-1, eval = FALSE}
 library(auk)
@@ -95,7 +95,7 @@ library(dplyr)
 system.file("extdata/ebd-sample.txt", package = "auk")
 ```
 
-The second is suitable for producing zero-filled, presence-absence data. It contains every sighting from Singapore in 2012 of Collared Kingfisher, White-throated Kingfisher, and Blue-eared Kingfisher. The full Sampling Event Data file is also included, and contains all checklists from Singapore in 2012. These files can be accessed with:
+The second is suitable for producing zero-filled, presence-absence data. It contains every sighting from Singapore in the first half of 2012 of Collared Kingfisher, White-throated Kingfisher, and Blue-eared Kingfisher. The full Sampling Event Data file is also included, and contains all checklists from Singapore in the first half of 2012. These files can be accessed with:
 
 ```{r example-data-2, eval = FALSE}
 # ebd

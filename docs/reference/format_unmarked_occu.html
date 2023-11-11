@@ -23,7 +23,7 @@ unmarked::formatWide() in which each row is a site."><meta property="og:image" c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
       </span>
     </div>
 
@@ -170,22 +170,22 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> unmarkedFrame Object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47 sites</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66 sites</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maximum number of observations per site: 10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mean number of observations per site: 3.85 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sites with at least one detection: 24 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mean number of observations per site: 3.8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sites with at least one detection: 35 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Tabulation of y observations:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> FALSE  TRUE  &lt;NA&gt; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   131    50   289 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   176    75   409 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Site-level covariates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     latitude       longitude    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :1.206   Min.   :103.7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.315   1st Qu.:103.7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.351   Median :103.8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.348   Mean   :103.8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.369   3rd Qu.:103.8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.303   1st Qu.:103.7  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.337   Median :103.8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.334   Mean   :103.8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.354   3rd Qu.:103.9  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.446   Max.   :104.0  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Observation-level covariates:</span>
@@ -193,10 +193,10 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   : 0.100     Min.   :  1.00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.: 0.200     1st Qu.: 15.00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Median : 1.000     Median : 30.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   : 1.592     Mean   : 67.97  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.: 2.000     3rd Qu.: 90.00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   : 1.455     Mean   : 64.88  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.: 2.000     3rd Qu.: 78.75  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :10.000     Max.   :480.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :395        NA's   :394     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :584        NA's   :584     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># this function can also be used for abundance modeling</span></span></span>
 <span class="r-in"><span><span class="va">abd</span> <span class="op">&lt;-</span> <span class="va">ebd_zf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
@@ -222,22 +222,22 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> unmarkedFrame Object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44 sites</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65 sites</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maximum number of observations per site: 10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mean number of observations per site: 3.89 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sites with at least one detection: 21 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mean number of observations per site: 3.83 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sites with at least one detection: 35 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Tabulation of y observations:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    0    1    2    3    5   10 &lt;NA&gt; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  130   20    9    3    7    2  269 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0    1    2    3    4    5    6    7    9   10 &lt;NA&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  174   35   17    6    5    6    2    1    1    2  401 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Site-level covariates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     latitude       longitude    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :1.206   Min.   :103.7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.315   1st Qu.:103.7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.349   Median :103.8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.347   Mean   :103.8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.364   3rd Qu.:103.8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.302   1st Qu.:103.7  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.337   Median :103.8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.333   Mean   :103.8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.352   3rd Qu.:103.9  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1.446   Max.   :104.0  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Observation-level covariates:</span>
@@ -245,10 +245,10 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   : 0.100     Min.   :  1.00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.: 0.200     1st Qu.: 15.00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Median : 1.000     Median : 30.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   : 1.563     Mean   : 65.75  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   : 1.448     Mean   : 64.26  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.: 2.000     3rd Qu.: 75.00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :10.000     Max.   :480.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :360        NA's   :359     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :577        NA's   :577     </span>
 </code></pre></div>
     </div>
   </div>

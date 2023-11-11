@@ -471,3 +471,18 @@ test_that("auk_observer", {
   ebd <- auk_observer(ebd, obs_int)
   expect_equal(ebd$filters$observer, obs)
 })
+
+test_that("auk_exotic", {
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+    auk_ebd()
+  
+  # works with character
+  ex_code <- ""
+  ebd <- auk_exotic(ebd, ex_code)
+  expect_equal(ebd$filters$exotic, ex_code)
+  
+  # works with integer
+  ex_code <- c("", "X")
+  ebd <- auk_exotic(ebd, ex_code)
+  expect_equal(ebd$filters$exotic, ex_code)
+})

@@ -12,7 +12,7 @@
 #'   [auk_ebd()] or [auk_sampling()].
 #' @param bcr integer; BCRs to filter by. BCRs are identified by an integer, 
 #'   from 1 to 66, that can be looked up in the [bcr_codes] table.
-#' @param replace logical; multiple calls to `auk_state()` are additive,
+#' @param replace logical; multiple calls to `auk_bcr()` are additive,
 #'   unless `replace = FALSE`, in which case the previous list of states to
 #'   filter by will be removed and replaced by that in the current call.
 #' 
@@ -29,7 +29,7 @@
 #'   auk_ebd() %>%
 #'   auk_bcr(bcr = 24)
 #'   
-#' # alternatively, without pipes
+#' # filter to bcr 24
 #' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 #' auk_bcr(ebd, bcr = 24)
 auk_bcr <- function(x, bcr, replace = FALSE)  {

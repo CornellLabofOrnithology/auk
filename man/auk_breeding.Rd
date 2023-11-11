@@ -35,6 +35,7 @@ Other filter:
 \code{\link{auk_date}()},
 \code{\link{auk_distance}()},
 \code{\link{auk_duration}()},
+\code{\link{auk_exotic}()},
 \code{\link{auk_extent}()},
 \code{\link{auk_filter}()},
 \code{\link{auk_last_edited}()},

@@ -6,7 +6,7 @@ skip_on_os("windows")
 
 test_that("auk_split splits correctly", {
   # split into two species files
-  species <- c("Perisoreus canadensis", "Cyanocitta stelleri")
+  species <- c("Perisoreus canadensis", "Cyanocitta cristata")
   prefix <- file.path(tempdir(), "ebd_")
   f <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
     auk_split(species = species, prefix = prefix, overwrite = TRUE)

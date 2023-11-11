@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
       </span>
     </div>
 
@@ -224,18 +224,19 @@ either case, download and decompress the files.</p>
 </h3>
 <p>This package comes with two example datasets. The first is suitable
 for practicing filtering the EBD and producing presence-only data. It’s
-a sample of 500 records from the EBD. It contains data from North and
-Central America from 2010-2012 on 4 jay species: Canada Jay, Blue Jay,
-Steller’s Jay, and Green Jay. It can be accessed with:</p>
+a sample of 400 records from the EBD. It contains data from North and
+Central America from 2010-2012 on 3 jay species: Canada Jay, Blue Jay,
+and Green Jay. It can be accessed with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/CornellLabofOrnithology/auk" class="external-link">auk</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></code></pre></div>
 <p>The second is suitable for producing zero-filled, presence-absence
-data. It contains every sighting from Singapore in 2012 of Collared
-Kingfisher, White-throated Kingfisher, and Blue-eared Kingfisher. The
-full Sampling Event Data file is also included, and contains all
-checklists from Singapore in 2012. These files can be accessed with:</p>
+data. It contains every sighting from Singapore in the first half of
+2012 of Collared Kingfisher, White-throated Kingfisher, and Blue-eared
+Kingfisher. The full Sampling Event Data file is also included, and
+contains all checklists from Singapore in the first half of 2012. These
+files can be accessed with:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ebd</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/zerofill-ex_ebd.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span>
@@ -329,7 +330,7 @@ initial <code>auk_ebd</code> object, use <code><a href="../reference/auk_ebd.htm
 <span>  <span class="fu"><a href="../reference/auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ebd</span></span>
 <span><span class="co">#&gt; Input </span></span>
-<span><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpiRmICh/temp_libpath35e33c916c85/auk/extdata/ebd-sample.txt </span></span>
+<span><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpc50ubH/temp_libpath9bef4ecec75c/auk/extdata/ebd-sample.txt </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Output </span></span>
 <span><span class="co">#&gt;   Filters not executed</span></span>
@@ -350,6 +351,7 @@ initial <code>auk_ebd</code> object, use <code><a href="../reference/auk_ebd.htm
 <span><span class="co">#&gt;   Duration: all</span></span>
 <span><span class="co">#&gt;   Distance travelled: all</span></span>
 <span><span class="co">#&gt;   Records with breeding codes only: no</span></span>
+<span><span class="co">#&gt;   Exotic Codes: all</span></span>
 <span><span class="co">#&gt;   Complete checklists only: no</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -434,7 +436,7 @@ filters have been defined, the filtering is actually conducted using
 <span>  <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ebd_filters</span></span>
 <span><span class="co">#&gt; Input </span></span>
-<span><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpiRmICh/temp_libpath35e33c916c85/auk/extdata/ebd-sample.txt </span></span>
+<span><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpc50ubH/temp_libpath9bef4ecec75c/auk/extdata/ebd-sample.txt </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Output </span></span>
 <span><span class="co">#&gt;   Filters not executed</span></span>
@@ -455,6 +457,7 @@ filters have been defined, the filtering is actually conducted using
 <span><span class="co">#&gt;   Duration: 0-60 minutes</span></span>
 <span><span class="co">#&gt;   Distance travelled: all</span></span>
 <span><span class="co">#&gt;   Records with breeding codes only: no</span></span>
+<span><span class="co">#&gt;   Exotic Codes: all</span></span>
 <span><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
 <p>In all cases, extensive checks are performed to ensure filters are
 valid. For example, species are checked against the official <a href="https://ebird.org/science/use-ebird-data/the-ebird-taxonomy" class="external-link">eBird
@@ -495,52 +498,55 @@ names to <code>snake_case</code>.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/read_ebd.html">read_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 494</span></span>
-<span><span class="co">#&gt; Columns: 45</span></span>
-<span><span class="co">#&gt; $ checklist_id              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S6852862", "S14432467", "S39033556", "S3830…</span></span>
-<span><span class="co">#&gt; $ global_unique_identifier  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "URN:CornellLabOfOrnithology:EBIRD:OBS979359…</span></span>
-<span><span class="co">#&gt; $ last_edited_date          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2016-02-22 14:59:49", "2013-06-16 17:34:19"…</span></span>
-<span><span class="co">#&gt; $ taxonomic_order           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 20145, 20145, 20145, 20145, 20145, 20145, 20…</span></span>
+<span><span class="co">#&gt; Rows: 398</span></span>
+<span><span class="co">#&gt; Columns: 48</span></span>
+<span><span class="co">#&gt; $ checklist_id              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "G1131664", "G1131665", "G1158137", "G115813…</span></span>
+<span><span class="co">#&gt; $ global_unique_identifier  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "URN:CornellLabOfOrnithology:EBIRD:OBS294400…</span></span>
+<span><span class="co">#&gt; $ last_edited_date          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2021-03-29 21:21:52.583259", "2020-02-01 20…</span></span>
+<span><span class="co">#&gt; $ taxonomic_order           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 20724, 20724, 20674, 20674, 20724, 20724, 20…</span></span>
 <span><span class="co">#&gt; $ category                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "species", "species", "species", "species", …</span></span>
-<span><span class="co">#&gt; $ common_name               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Green Jay", "Green Jay", "Green Jay", "Gree…</span></span>
-<span><span class="co">#&gt; $ scientific_name           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Cyanocorax yncas", "Cyanocorax yncas", "Cya…</span></span>
-<span><span class="co">#&gt; $ observation_count         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "4", "2", "1", "1", "2", "X", "6", "3", "3",…</span></span>
+<span><span class="co">#&gt; $ taxon_concept_id          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "avibase-361B447A", "avibase-361B447A", "avi…</span></span>
+<span><span class="co">#&gt; $ common_name               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Green Jay", "Green Jay", "Canada Jay", "Can…</span></span>
+<span><span class="co">#&gt; $ scientific_name           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Cyanocorax yncas", "Cyanocorax yncas", "Per…</span></span>
+<span><span class="co">#&gt; $ exotic_code               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ observation_count         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2", "6", "1", "1", "X", "3", "4", "3", "6",…</span></span>
 <span><span class="co">#&gt; $ breeding_code             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
 <span><span class="co">#&gt; $ breeding_category         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ behavior_code             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
 <span><span class="co">#&gt; $ age_sex                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ country                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Mexico", "Mexico", "Mexico", "Mexico", "Mex…</span></span>
-<span><span class="co">#&gt; $ country_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MX", "MX", "MX", "MX", "MX", "MX", "MX", "M…</span></span>
-<span><span class="co">#&gt; $ state                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yucatan", "Chiapas", "Chiapas", "Chiapas", …</span></span>
-<span><span class="co">#&gt; $ state_code                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MX-YUC", "MX-CHP", "MX-CHP", "MX-CHP", "MX-…</span></span>
-<span><span class="co">#&gt; $ county                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ county_code               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ iba_code                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, "MX_169", NA, NA, NA, "MX_17…</span></span>
-<span><span class="co">#&gt; $ bcr_code                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 56, 60, 60, 60, 60, 55, 55, 60, 56, 55, 55, …</span></span>
+<span><span class="co">#&gt; $ country                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "United States", "United States", "Canada", …</span></span>
+<span><span class="co">#&gt; $ country_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "US", "US", "CA", "CA", "MX", "MX", "CA", "U…</span></span>
+<span><span class="co">#&gt; $ state                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Texas", "Texas", "British Columbia", "Briti…</span></span>
+<span><span class="co">#&gt; $ state_code                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "US-TX", "US-TX", "CA-BC", "CA-BC", "MX-NLE"…</span></span>
+<span><span class="co">#&gt; $ county                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Zapata", "Starr", "Northern Rockies", "Nort…</span></span>
+<span><span class="co">#&gt; $ county_code               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "US-TX-505", "US-TX-427", "CA-BC-NR", "CA-BC…</span></span>
+<span><span class="co">#&gt; $ iba_code                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, "MX_69", NA, NA, NA, NA, NA,…</span></span>
+<span><span class="co">#&gt; $ bcr_code                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 36, 36, 6, 6, 48, 36, 13, 10, 36, 48, 48, 8,…</span></span>
 <span><span class="co">#&gt; $ usfws_code                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
 <span><span class="co">#&gt; $ atlas_block               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ locality                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yuc. Hacienda Chichen", "Berlin2_Punto_06",…</span></span>
-<span><span class="co">#&gt; $ locality_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "L989845", "L2224225", "L6247542", "L6120049…</span></span>
-<span><span class="co">#&gt; $ locality_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P", "P", "P", "P", "P", "H", "P", "P", "P",…</span></span>
-<span><span class="co">#&gt; $ latitude                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 20.67682, 15.77522, 15.77360, 15.82947, 15.7…</span></span>
-<span><span class="co">#&gt; $ longitude                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -88.56896, -92.96472, -93.00260, -92.92293, …</span></span>
-<span><span class="co">#&gt; $ observation_date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2010-09-05, 2011-08-18, 2012-02-02, 2011-12…</span></span>
-<span><span class="co">#&gt; $ time_observations_started <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "06:30:00", "08:00:00", "09:13:00", "06:40:0…</span></span>
-<span><span class="co">#&gt; $ observer_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "obsr55719", "obsr313215", "obsr313215", "ob…</span></span>
-<span><span class="co">#&gt; $ sampling_event_identifier <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S6852862", "S14432467", "S39033556", "S3830…</span></span>
+<span><span class="co">#&gt; $ locality                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Zapata Library / City Park (LTC 085)", "Fal…</span></span>
+<span><span class="co">#&gt; $ locality_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "L846015", "L128962", "L343808", "L343808", …</span></span>
+<span><span class="co">#&gt; $ locality_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "H", "H", "H", "H", "H", "H", "H", "H", "H",…</span></span>
+<span><span class="co">#&gt; $ latitude                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 26.90220, 26.58361, 58.82617, 58.82617, 25.5…</span></span>
+<span><span class="co">#&gt; $ longitude                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -99.27106, -99.14529, -122.90187, -122.90187…</span></span>
+<span><span class="co">#&gt; $ observation_date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2011-11-14, 2011-11-14, 2011-06-14, 2011-06…</span></span>
+<span><span class="co">#&gt; $ time_observations_started <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "06:45:00", "08:15:00", "10:30:00", "07:00:0…</span></span>
+<span><span class="co">#&gt; $ observer_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "obsr554038", "obsr146271", "obsr12384", "ob…</span></span>
+<span><span class="co">#&gt; $ sampling_event_identifier <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S21633922", "S9118288", "S22036612", "S2203…</span></span>
 <span><span class="co">#&gt; $ protocol_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Traveling", "Traveling", "Stationary", "Sta…</span></span>
-<span><span class="co">#&gt; $ protocol_code             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P22", "P22", "P21", "P21", "P22", "P62", "P…</span></span>
-<span><span class="co">#&gt; $ project_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EBIRD", "EBIRD_MEX", "EBIRD_MEX", "EBIRD", …</span></span>
-<span><span class="co">#&gt; $ duration_minutes          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 90, 10, 10, 10, 10, 120, 30, 10, 80, 30, 30,…</span></span>
-<span><span class="co">#&gt; $ effort_distance_km        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.000, 0.257, NA, NA, 0.257, NA, NA, NA, 1.2…</span></span>
-<span><span class="co">#&gt; $ effort_area_ha            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ number_observers          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 3, 1, 1, 1, 1, 2, 2, 1, 13, 2, 1, 1, 1, 1, 1…</span></span>
+<span><span class="co">#&gt; $ protocol_code             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P22", "P22", "P21", "P21", "P22", "P22", "P…</span></span>
+<span><span class="co">#&gt; $ project_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EBIRD", "EBIRD", "EBIRD", "EBIRD", "EBIRD",…</span></span>
+<span><span class="co">#&gt; $ duration_minutes          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 30, 60, 60, 90, 90, 90, 90, 35, 60, 60, 75, …</span></span>
+<span><span class="co">#&gt; $ effort_distance_km        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.609, 3.219, NA, NA, 1.000, 1.500, NA, 3.21…</span></span>
+<span><span class="co">#&gt; $ effort_area_ha            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 4.04…</span></span>
+<span><span class="co">#&gt; $ number_observers          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2, 2, 13, 13, 7, 2, 2, 5, 4, 5, 5, 2, 5, 10,…</span></span>
 <span><span class="co">#&gt; $ all_species_reported      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</span></span>
-<span><span class="co">#&gt; $ group_identifier          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ group_identifier          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "G1131664", "G1131665", "G1158137", "G115813…</span></span>
 <span><span class="co">#&gt; $ has_media                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…</span></span>
 <span><span class="co">#&gt; $ approved                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</span></span>
 <span><span class="co">#&gt; $ reviewed                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…</span></span>
 <span><span class="co">#&gt; $ reason                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ trip_comments             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "Alonso Gomez Hdz Monitoreo Comunitario,…</span></span>
+<span><span class="co">#&gt; $ trip_comments             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "BCFO extension trip", "BCFO extensi…</span></span>
 <span><span class="co">#&gt; $ species_comments          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span></code></pre></div>
 <p><code><a href="../reference/auk_filter.html">auk_filter()</a></code> returns an <code>auk_ebd</code> object with
 the output file paths stored in it. This <code>auk_ebd</code> object can
@@ -586,12 +592,12 @@ run.</p>
 <span><span class="co">#&gt; {</span></span>
 <span><span class="co">#&gt;   keep = 1</span></span>
 <span><span class="co">#&gt;   # filters</span></span>
-<span><span class="co">#&gt;   if (keep == 1 &amp;&amp; ($6 in species)) {</span></span>
+<span><span class="co">#&gt;   if (keep == 1 &amp;&amp; ($7 in species)) {</span></span>
 <span><span class="co">#&gt;     keep = 1</span></span>
 <span><span class="co">#&gt;   } else {</span></span>
 <span><span class="co">#&gt;     keep = 0</span></span>
 <span><span class="co">#&gt;   }</span></span>
-<span><span class="co">#&gt;   if (keep == 1 &amp;&amp; ($14 in countries)) {</span></span>
+<span><span class="co">#&gt;   if (keep == 1 &amp;&amp; ($17 in countries)) {</span></span>
 <span><span class="co">#&gt;     keep = 1</span></span>
 <span><span class="co">#&gt;   } else {</span></span>
 <span><span class="co">#&gt;     keep = 0</span></span>
@@ -634,9 +640,9 @@ however, we can use <code>unique = FALSE</code> then manually run
 <span><span class="va">ebd_unique</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/auk_unique.html">auk_unique</a></span><span class="op">(</span><span class="va">ebd_dupes</span><span class="op">)</span></span>
 <span><span class="co"># compare number of rows</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ebd_dupes</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 500</span></span>
+<span><span class="co">#&gt; [1] 400</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ebd_unique</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 494</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 398</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="taxonomic-rollup">Taxonomic rollup<a class="anchor" aria-label="anchor" href="#taxonomic-rollup"></a>
@@ -672,20 +678,22 @@ level to a single record for each species in each checklist.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">subspecies_common_name</span>,</span>
 <span>         <span class="va">observation_count</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
-<span><span class="co">#&gt;   checklist_id category common_name     subspecies_common_name observation_count</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S8949407     species  Yellow-rumped … <span style="color: #BB0000;">NA</span>                     1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> S8949407     issf     Yellow-rumped … Yellow-rumped Warbler… 13               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> S8949407     issf     Yellow-rumped … Yellow-rumped Warbler… 17</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
+<span><span class="co">#&gt;   checklist_id category   common_name   subspecies_common_name observation_count</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S44943108    intergrade Yellow-rumpe… Yellow-rumped Warbler… 1                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> S129851825   species    Yellow-rumpe… <span style="color: #BB0000;">NA</span>                     1                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> S129851825   issf       Yellow-rumpe… Yellow-rumped Warbler… 1                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> S129851825   issf       Yellow-rumpe… Yellow-rumped Warbler… 2</span></span>
 <span><span class="co"># with rollup, they have been combined</span></span>
 <span><span class="va">ebd_ru</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">common_name</span> <span class="op">==</span> <span class="st">"Yellow-rumped Warbler"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">checklist_id</span>, <span class="va">category</span>, <span class="va">common_name</span>, <span class="va">observation_count</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span></span>
 <span><span class="co">#&gt;   checklist_id category common_name           observation_count</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S8949407     species  Yellow-rumped Warbler 31</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S129851825   species  Yellow-rumped Warbler 4                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> S44943108    species  Yellow-rumped Warbler 1</span></span></code></pre></div>
 <p>By default, <code><a href="../reference/read_ebd.html">read_ebd()</a></code> calls <code>ebd_rollup()</code>
 when importing an eBird Basic Dataset file. To avoid this, and retain
 subspecies, use <code>read_ebd(rollup = FALSE)</code>.</p>
@@ -728,8 +736,8 @@ Collared Kingfisher between 6 and 10am:</p>
 <span>  <span class="fu"><a href="../reference/auk_complete.html">auk_complete</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">filters</span></span>
 <span><span class="co">#&gt; Input </span></span>
-<span><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpiRmICh/temp_libpath35e33c916c85/auk/extdata/zerofill-ex_ebd.txt </span></span>
-<span><span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpiRmICh/temp_libpath35e33c916c85/auk/extdata/zerofill-ex_sampling.txt </span></span>
+<span><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpc50ubH/temp_libpath9bef4ecec75c/auk/extdata/zerofill-ex_ebd.txt </span></span>
+<span><span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpc50ubH/temp_libpath9bef4ecec75c/auk/extdata/zerofill-ex_sampling.txt </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Output </span></span>
 <span><span class="co">#&gt;   Filters not executed</span></span>
@@ -750,6 +758,7 @@ Collared Kingfisher between 6 and 10am:</p>
 <span><span class="co">#&gt;   Duration: all</span></span>
 <span><span class="co">#&gt;   Distance travelled: all</span></span>
 <span><span class="co">#&gt;   Records with breeding codes only: no</span></span>
+<span><span class="co">#&gt;   Exotic Codes: all</span></span>
 <span><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
 <p>As with presence-only data, call <code><a href="../reference/auk_filter.html">auk_filter()</a></code> to
 actually run AWK. Output files must be provided for both the EBD and
@@ -760,8 +769,8 @@ sampling event data.</p>
 <span><span class="co">##                                file_sampling = "sampling-filtered.txt")</span></span>
 <span><span class="va">ebd_sed_filtered</span></span>
 <span><span class="co">#&gt; Input </span></span>
-<span><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpiRmICh/temp_libpath35e33c916c85/auk/extdata/zerofill-ex_ebd.txt </span></span>
-<span><span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpiRmICh/temp_libpath35e33c916c85/auk/extdata/zerofill-ex_sampling.txt </span></span>
+<span><span class="co">#&gt;   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpc50ubH/temp_libpath9bef4ecec75c/auk/extdata/zerofill-ex_ebd.txt </span></span>
+<span><span class="co">#&gt;   Sampling events: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/Rtmpc50ubH/temp_libpath9bef4ecec75c/auk/extdata/zerofill-ex_sampling.txt </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Output </span></span>
 <span><span class="co">#&gt;   EBD: ebd-filtered.txt </span></span>
@@ -783,6 +792,7 @@ sampling event data.</p>
 <span><span class="co">#&gt;   Duration: all</span></span>
 <span><span class="co">#&gt;   Distance travelled: all</span></span>
 <span><span class="co">#&gt;   Records with breeding codes only: no</span></span>
+<span><span class="co">#&gt;   Exotic Codes: all</span></span>
 <span><span class="co">#&gt;   Complete checklists only: yes</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -793,7 +803,7 @@ presence-absence dataset using <code><a href="../reference/auk_zerofill.html">au
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## ebd_zf &lt;- auk_zerofill(ebd_sed_filtered)</span></span>
 <span><span class="va">ebd_zf</span></span>
-<span><span class="co">#&gt; Zero-filled EBD: 168 unique checklists, for 1 species.</span></span></code></pre></div>
+<span><span class="co">#&gt; Zero-filled EBD: 131 unique checklists, for 1 species.</span></span></code></pre></div>
 <p>Filenames or data frames of the basic dataset and sampling event data
 can also be passed to <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code>; see the documentation
 for these cases. By default, <code><a href="../reference/auk_zerofill.html">auk_zerofill()</a></code> returns an
@@ -809,21 +819,22 @@ binary presence-absence variable</li>
 </ul>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ebd_zf</span><span class="op">$</span><span class="va">observations</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
-<span><span class="co">#&gt;   checklist_id scientific_name     breeding_code breeding_category age_sex</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> G1733362     Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> G2469935     Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> G2469959     Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> G2469960     Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> G2469973     Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> G2470208     Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: observation_count &lt;chr&gt;, species_observed &lt;lgl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 8</span></span></span>
+<span><span class="co">#&gt;   checklist_id scientific_name     breeding_code breeding_category behavior_code</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> G2470228     Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> G366411      Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> S10006552    Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> S10006731    Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> S10006786    Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> S10011787    Todiramphus chloris <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: age_sex &lt;chr&gt;, observation_count &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   species_observed &lt;lgl&gt;</span></span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">ebd_zf</span><span class="op">$</span><span class="va">sampling_events</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 168</span></span>
+<span><span class="co">#&gt; Rows: 131</span></span>
 <span><span class="co">#&gt; Columns: 31</span></span>
-<span><span class="co">#&gt; $ checklist_id              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S11332512", "S13581013", "S38296538", "S382…</span></span>
-<span><span class="co">#&gt; $ last_edited_date          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-05-27 10:25:40", "2017-05-27 09:21:26"…</span></span>
+<span><span class="co">#&gt; $ checklist_id              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S9843037", "S34396450", "S9589770", "S16642…</span></span>
+<span><span class="co">#&gt; $ last_edited_date          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-01-13 07:47:42.702684", "2022-01-13 07…</span></span>
 <span><span class="co">#&gt; $ country                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Singapore", "Singapore", "Singapore", "Sing…</span></span>
 <span><span class="co">#&gt; $ country_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SG", "SG", "SG", "SG", "SG", "SG", "SG", "S…</span></span>
 <span><span class="co">#&gt; $ state                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Singapore", "Singapore", "Singapore", "Sing…</span></span>
@@ -834,25 +845,25 @@ binary presence-absence variable</li>
 <span><span class="co">#&gt; $ bcr_code                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
 <span><span class="co">#&gt; $ usfws_code                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
 <span><span class="co">#&gt; $ atlas_block               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ locality                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Singapore - Esplanade", "Boat Quay, Singapo…</span></span>
-<span><span class="co">#&gt; $ locality_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "L1654642", "L2090485", "L3901781", "L399969…</span></span>
-<span><span class="co">#&gt; $ locality_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P", "P", "H", "P", "H", "H", "H", "H", "H",…</span></span>
-<span><span class="co">#&gt; $ latitude                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.289548, 1.287985, 1.395726, 1.407224, 1.37…</span></span>
-<span><span class="co">#&gt; $ longitude                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 103.8632, 103.8506, 103.9257, 103.8595, 103.…</span></span>
-<span><span class="co">#&gt; $ observation_date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2012-08-12, 2012-01-15, 2012-07-11, 2012-12…</span></span>
-<span><span class="co">#&gt; $ time_observations_started <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "09:30:00", "09:00:00", "07:30:00", "07:00:0…</span></span>
-<span><span class="co">#&gt; $ observer_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "obs160139", "obs286526", "obs524811", "obs5…</span></span>
-<span><span class="co">#&gt; $ sampling_event_identifier <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S11332512", "S13581013", "S38296538", "S382…</span></span>
-<span><span class="co">#&gt; $ protocol_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Traveling", "Traveling", "Stationary", "Sta…</span></span>
-<span><span class="co">#&gt; $ protocol_code             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P22", "P22", "P21", "P21", "P22", "P22", "P…</span></span>
-<span><span class="co">#&gt; $ project_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EBIRD", "EBIRD", "EBIRD", "EBIRD", "EBIRD",…</span></span>
-<span><span class="co">#&gt; $ duration_minutes          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 90, 60, 60, 90, 300, 300, 75, 300, 420, 510,…</span></span>
-<span><span class="co">#&gt; $ effort_distance_km        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.609, 3.219, NA, NA, 3.219, 3.219, 0.805, 4…</span></span>
+<span><span class="co">#&gt; $ locality                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Pulau Ubin", "Pulau Ubin", "Pulau Ubin", "P…</span></span>
+<span><span class="co">#&gt; $ locality_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "L1055540", "L1055540", "L1055540", "L105554…</span></span>
+<span><span class="co">#&gt; $ locality_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "H", "H", "H", "H", "H", "H", "H", "H", "H",…</span></span>
+<span><span class="co">#&gt; $ latitude                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.403608, 1.403608, 1.403608, 1.403608, 1.35…</span></span>
+<span><span class="co">#&gt; $ longitude                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 103.9688, 103.9688, 103.9688, 103.9688, 103.…</span></span>
+<span><span class="co">#&gt; $ observation_date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2012-02-16, 2012-06-23, 2012-01-15, 2012-01…</span></span>
+<span><span class="co">#&gt; $ time_observations_started <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "08:00:00", "09:00:00", "08:00:00", "08:00:0…</span></span>
+<span><span class="co">#&gt; $ observer_id               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "obs204697", "obs816783", "obs205759", "obs4…</span></span>
+<span><span class="co">#&gt; $ sampling_event_identifier <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S9843037", "S34396450", "S9589770", "S16642…</span></span>
+<span><span class="co">#&gt; $ protocol_type             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Traveling", "Traveling", "Traveling", "Trav…</span></span>
+<span><span class="co">#&gt; $ protocol_code             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P22", "P22", "P22", "P22", "P21", "P22", "P…</span></span>
+<span><span class="co">#&gt; $ project_code              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EBIRD", "EBIRD", "EBIRD_CAN", "EBIRD_AU", "…</span></span>
+<span><span class="co">#&gt; $ duration_minutes          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 300, 180, 300, 510, 23, 195, 150, 105, 190, …</span></span>
+<span><span class="co">#&gt; $ effort_distance_km        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.609, 4.000, 3.000, 10.000, NA, 3.000, 3.00…</span></span>
 <span><span class="co">#&gt; $ effort_area_ha            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ number_observers          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,…</span></span>
+<span><span class="co">#&gt; $ number_observers          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2, 2, 6, 1, 2, 3, 12, 3, 1, 1, 3, 3, 2, 1, 1…</span></span>
 <span><span class="co">#&gt; $ all_species_reported      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</span></span>
 <span><span class="co">#&gt; $ group_identifier          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ trip_comments             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, "Trip report;--http://redgan…</span></span></code></pre></div>
+<span><span class="co">#&gt; $ trip_comments             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "With Ailin Chuah on day trip", NA, NA, "Spe…</span></span></code></pre></div>
 <p>This format is efficient for storage because the checklist
 information isn’t duplicated, however, a single flat data frame is often
 required for analysis. To collapse the two data frames together use
@@ -864,21 +875,21 @@ with <code>collapse = TRUE</code>.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">ebd_zf_df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "tbl_df"     "tbl"        "data.frame"</span></span>
 <span><span class="va">ebd_zf_df</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 168 × 37</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 131 × 38</span></span></span>
 <span><span class="co">#&gt;    checklist_id last_edited_date    country country_code state state_code county</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> S11332512    2017-05-27 10:25:40 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> S13581013    2017-05-27 09:21:26 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> S38296538    2017-08-10 11:26:23 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> S38296842    2017-07-27 06:26:57 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> S10708009    2017-07-05 13:17:16 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> S10708011    2017-07-05 13:17:16 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> S10926976    2017-07-05 13:20:48 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> S10708018    2018-08-30 12:51:05 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> S10708012    2017-05-28 05:54:20 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> S16642917    2017-10-19 12:47:02 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 158 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 30 more variables: county_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> S9843037     2022-01-13 07:47:4… Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> S34396450    2022-01-13 07:47:4… Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> S9589770     2023-01-31 19:39:0… Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> S16642917    2023-01-31 19:39:0… Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> S10410041    2013-10-14 16:08:30 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> S10366236    2021-04-02 03:48:3… Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> S34396153    2021-08-03 11:08:2… Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> S9760550     2022-03-12 04:34:1… Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> S16899954    2022-03-02 06:47:0… Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> S10920563    2019-08-10 00:41:22 Singap… SG           Sing… SG-        <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 121 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 31 more variables: county_code &lt;chr&gt;, iba_code &lt;chr&gt;, bcr_code &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   usfws_code &lt;chr&gt;, atlas_block &lt;chr&gt;, locality &lt;chr&gt;, locality_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   locality_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   observation_date &lt;date&gt;, time_observations_started &lt;chr&gt;,</span></span></span>

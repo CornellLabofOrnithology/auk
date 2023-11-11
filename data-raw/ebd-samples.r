@@ -1,50 +1,53 @@
 library(auk)
-library(tidyverse)
+library(fs)
+library(glue)
 library(stringi)
-library(stringr)
+library(tidyverse)
 
-ebird_dir <- "~/data/ebird/"
-# ebd
-f_in <- file.path(ebird_dir, "ebd_relAug-2018.txt")
-f_subset <- file.path(ebird_dir, "samples", "ebd_relAug-2018_subset.txt")
-f_sg <- file.path(ebird_dir, "samples", "ebd_relAug-2018_SG.txt")
-f_ru <- file.path(ebird_dir, "samples", "ebd_relAug-2018_rollup.txt")
-# sampling
-s_in <- file.path(ebird_dir, "ebd_sampling_relAug-2018.txt")
-s_subset <- file.path(ebird_dir, "samples",
-                      "ebd_sampling_relAug-2018_subset.txt")
-s_sg <- file.path(ebird_dir, "samples", "ebd_sampling_relAug-2018_SG.txt")
+ebird_dir <- "~/data/ebird/auk/"
 
-# filter
-filters <- auk_ebd(f_in) %>%
-  auk_species(species = c("Canada Jay", "Blue Jay", 
-                          "Steller's Jay", "Green Jay")) %>%
-  auk_country(country = c("US", "Canada", "Mexico", "Belize", 
-                          "Guatemala", "Honduras", "Panama", 
-                          "Costa Rica", "El Salvador")) %>%
-  auk_date(date = c("2010-01-01", "2012-12-31")) %>%
-  auk_time(start_time = c("06:00", "12:00")) %>%
-  auk_duration(duration = c(0, 120))
-if (!file.exists(f_subset)) {
-  auk_filter(filters, file = f_subset, overwrite = TRUE)
+# US observations ----
+
+obs_sampled <- NULL
+for (species in c("gryjay", "grnjay", "blujay")) {
+  tf <- tempfile()
+  # further filtering
+  filtered <- glue("ebd_{species}_201001_201212_relSep-2023.txt") %>% 
+    path(ebird_dir, .) %>% 
+    auk_ebd() %>% 
+    auk_country(country = c("US", "Canada", "Mexico", "Belize", 
+                            "Guatemala", "Honduras", "Panama", 
+                            "Costa Rica", "El Salvador")) %>%
+    auk_date(date = c("2010-01-01", "2012-12-31")) %>%
+    auk_time(start_time = c("06:00", "12:00")) %>%
+    auk_duration(duration = c(0, 120)) %>% 
+    auk_filter(tf)
+  
+  # import
+  obs <- read_tsv(tf, quote = "", col_types = cols(.default = "c")) %>% 
+    select(-`...50`)
+  
+  # sample 500 observations
+  set.seed(1)
+  # sample to 500 records, make sure to get some from central america
+  if (species == "grnjay") {
+    s1 <- obs %>% 
+      filter(!`COUNTRY CODE` %in% c("CA", "US")) %>% 
+      slice_sample(n = 100)
+    s2 <- obs %>% 
+      filter(`COUNTRY CODE` %in% c("CA", "US")) %>% 
+      slice_sample(n = 100)
+    sampled <- bind_rows(s1, s2)
+  } else {
+    sampled <- slice_sample(obs, n = 100)
+  }
+  obs_sampled <- bind_rows(obs_sampled, sampled)
+  unlink(tf)
 }
-
-x <- read_tsv(f_subset, quote = "", 
-              col_types = cols(.default = col_character())) %>% 
-  select(-X47)
-# evenly sample species
-set.seed(1)
-n_min <- min(table(x$`SCIENTIFIC NAME`))
-x <- x %>% 
-  group_by(`SCIENTIFIC NAME`) %>% 
-  sample_n(n_min) %>% 
-  ungroup()
-# sample to 500 records, make sure to get some from central america
-y1 <- sample_n(x %>% filter(!`COUNTRY CODE` %in% c("CA", "US")), 100)
-y2 <- sample_n(x %>% filter(`COUNTRY CODE` %in% c("CA", "US")), 400)
-y <- bind_rows(y1, y2)
+# save as package data
 f <- "inst/extdata/ebd-sample.txt"
-write_tsv(y, f, na = "")
+write_tsv(obs_sampled, f, na = "")
+
 # remove any non-ascii characters
 readLines(f) %>% 
   stri_trans_general("latin-ascii") %>% 
@@ -54,73 +57,62 @@ readLines(f) %>%
 stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
 stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
 
-# filter for zero-fill example
-filters <- auk_ebd(f_in, s_in) %>%
+
+# singapore zero-fill ----
+
+# filter to focal species
+f_ebd_in <- path(ebird_dir, 
+                 "ebd_SG_201201_201212_smp_relSep-2023",
+                 "ebd_SG_201201_201212_smp_relSep-2023.txt")
+f_sed_in <- path(ebird_dir, 
+                 "ebd_SG_201201_201212_smp_relSep-2023",
+                 "ebd_SG_201201_201212_smp_relSep-2023_sampling.txt")
+f_ebd_out <- "inst/extdata/zerofill-ex_ebd.txt"
+f_sed_out <- "inst/extdata/zerofill-ex_sampling.txt"
+filtered <- auk_ebd(f_ebd_in, f_sed_in) %>% 
   auk_species(species = c("Collared Kingfisher", "White-throated Kingfisher", 
                           "Blue-eared Kingfisher")) %>%
   auk_country(country = "Singapore") %>%
-  auk_date(date = c("2012-01-01", "2012-12-31")) %>% 
-  auk_complete()
-if (!file.exists(f_sg)) {
-  auk_filter(filters, file = f_sg, file_sampling = s_sg, overwrite = TRUE)
-}
+  auk_date(date = c("2012-01-01", "2012-07-30")) %>% 
+  auk_complete() %>% 
+  auk_filter(file = f_ebd_out, file_sampling = f_sed_out, overwrite = TRUE)
 
-# export
-# observations
-x_ebd <- read_tsv(f_sg, quote = "", 
-                  col_types = cols(.default = col_character())) %>% 
-  select(-X47)
-f <- "inst/extdata/zerofill-ex_ebd.txt"
-write_tsv(x_ebd, f, na = "")
 # remove any non-ascii characters
-readLines(f) %>% 
+readLines(f_ebd_out) %>% 
   stri_trans_general("latin-ascii") %>% 
   iconv("latin1", "ASCII", sub="") %>% 
   str_replace_all("\"", "") %>% 
-  writeLines(f)
-stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
-stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
-# checklists
-x_samp <- read_tsv(s_sg, quote = "", col_types = cols(.default = col_character())) %>% 
-  select(-X31)
-f <- "inst/extdata/zerofill-ex_sampling.txt"
-write_tsv(x_samp, f, na = "")
-# remove any non-ascii characters
-readLines(f) %>% 
+  writeLines(f_ebd_out)
+stopifnot(length(tools::showNonASCII(readLines(f_ebd_out))) == 0)
+stopifnot(all(read_ebd(f_ebd_out)$scientific_name %in% ebird_taxonomy$scientific_name))
+readLines(f_sed_out) %>% 
   stri_trans_general("latin-ascii") %>% 
   iconv("latin1", "ASCII", sub="") %>% 
   str_replace_all("\"", "") %>% 
-  writeLines(f)
-stopifnot(length(tools::showNonASCII(readLines(f))) == 0)
+  writeLines(f_sed_out)
+stopifnot(length(tools::showNonASCII(readLines(f_sed_out))) == 0)
 
-# rollup
-if (!file.exists(f_ru)) {
-  paste("head -1000000", f_in, ">", f_ru) %>% 
-    system()
-  paste("tail -1000000", f_in, ">>", f_ru) %>% 
-    system()
-}
-x_ebd <- read_tsv(f_ru, quote = "", col_types = cols(.default = col_character())) %>% 
-  select(-X47)
-yrwa_all <- x_ebd %>% 
-  filter(`COMMON NAME` == "Yellow-rumped Warbler") %>% 
-  group_by(`SAMPLING EVENT IDENTIFIER`) %>% 
-  count() %>% 
-  filter(n == 3) %>% 
-  pull(`SAMPLING EVENT IDENTIFIER`) %>% 
-  sample(1)
-stopifnot(length(yrwa_all) == 1)
-# yellow-rumped
+
+# colorado rollup ----
+
+ebd <- path(ebird_dir,
+            "ebd_US-CO_201801_201812_relSep-2023",
+            "ebd_US-CO_201801_201812_relSep-2023.txt") %>% 
+  read_tsv(quote = "", col_types = cols(.default = "c")) %>% 
+  select(-...50)
+# checklist with all three yrwa types
+ru_ex <- ebd %>% 
+  filter(`SAMPLING EVENT IDENTIFIER` == "S129851825",
+         `COMMON NAME` == "Yellow-rumped Warbler")
 set.seed(1)
-ru_ex <- filter(x_ebd, `SAMPLING EVENT IDENTIFIER` == yrwa_all, 
-                `COMMON NAME` == "Yellow-rumped Warbler")
-ru_ex <- x_ebd %>% 
+ru_ex <- ebd %>% 
   filter(CATEGORY %in% c("spuh", "slash", "hybrid", "domestic", "form", 
                          "intergrade")) %>% 
   group_by(CATEGORY) %>% 
-  sample_n(3) %>% 
+  slice_sample(n = 3) %>% 
   ungroup() %>% 
-  rbind(ru_ex)
+  bind_rows(ru_ex) %>% 
+  mutate(`GROUP IDENTIFIER` = "")
 f <- "inst/extdata/ebd-rollup-ex.txt"
 write_tsv(ru_ex, f, na = "")
 # remove any non-ascii characters
