@@ -1,9 +1,9 @@
 citHeader("To cite auk in publications use:")
 
-citEntry(
+bibentry(
   entry        = "Manual",
   title        = "auk: eBird Data Extraction and Processing with AWK",
-  author       = personList(
+  author       = c(
                    as.person("Matthew Strimas-Mackey"),
                    as.person("Eliot Miller"),
                    as.person("Wesley Hochachka")
