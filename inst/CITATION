@@ -1,7 +1,7 @@
 citHeader("To cite auk in publications use:")
 
 bibentry(
-  entry        = "Manual",
+  bibtype      = "Manual",
   title        = "auk: eBird Data Extraction and Processing with AWK",
   author       = c(
                    as.person("Matthew Strimas-Mackey"),
