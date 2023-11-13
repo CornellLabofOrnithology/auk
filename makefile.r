@@ -10,6 +10,7 @@ remotes::install_local(force = TRUE)
 # local tests and checks
 devtools::test()
 devtools::check()
+tools:::.check_package_datasets(".")
 
 # vignettes, readme, site
 dir.create("man/figures/")

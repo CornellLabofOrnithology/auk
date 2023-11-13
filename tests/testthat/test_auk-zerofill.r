@@ -91,7 +91,7 @@ test_that("auk_zerofill lack of complete checklists throws error", {
   f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
   ebd <- read_ebd(f_ebd)
   smpl <- read_sampling(f_smpl)
-  smpl$all_species_reported[sample(1:nrow(smpl), 3)] <- FALSE
+  smpl$all_species_reported[sample(seq_len(nrow(smpl)), 3)] <- FALSE
   expect_error(auk_zerofill(ebd, smpl))
   expect_warning(auk_zerofill(ebd, smpl, complete = FALSE))
 })
