@@ -210,6 +210,7 @@ auk_filter.auk_ebd <- function(x, file, file_sampling, keep, drop, awk_file,
     s_filters <- x$filters
     s_filters$species <- character()
     s_filters$breeding <- FALSE
+    s_filters$exotic <- character()
     # fix observer filter
     s_filters$observer <- stringr::str_replace(s_filters$observer, 
                                                "^obsr", "obs")
