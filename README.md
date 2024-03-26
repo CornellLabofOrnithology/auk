@@ -17,7 +17,7 @@ v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/
 [eBird](http://www.ebird.org) is an online tool for recording bird
 observations. Since its inception, over 600 million records of bird
 sightings (i.e. combinations of location, date, time, and bird species)
-have been collected, making eBird one of the largest community science
+have been collected, making eBird one of the largest citizen science
 projects in history and an extremely valuable resource for bird research
 and conservation. The full eBird database is packaged as a text file and
 available for download as the [eBird Basic Dataset
@@ -88,7 +88,11 @@ eBird](http://help.ebird.org/customer/portal/articles/1006825-the-ebird-taxonomy
 This taxonomy determines the species that can be reported in eBird and
 therefore the species that users of `auk` can extract. eBird releases an
 updated taxonomy once a year, typically in August, at which time `auk`
-will be updated to include the current taxonomy. When using `auk` it's essential to confirm that the version aligns with the current eBird Basic Dataset. This can be achieved by consistently using the latest release of both `auk` and the dataset.
+will be updated to include the current taxonomy. When using `auk`, users
+should be careful to ensure that the version they’re using is in sync
+with the eBird Basic Dataset they’re working with. This is most easily
+accomplished by always using the must recent version of `auk` and the
+most recent release of the dataset.
 
 ## Quick start
 
@@ -105,7 +109,7 @@ eBird Basic Dataset for use in R. This is a multi-step process:
 4.  Import this text file into R as a data frame.
 
 Because the eBird dataset is so large, step 3 typically takes several
-hours to run. Here’s a simple example that extracts all Canada Jay
+hours to run. Here’s a simple example that extract all Canada Jay
 records from within Canada.
 
     library(auk)
@@ -163,9 +167,9 @@ Users should start by defining a reference to the dataset file with
     e.g. `date = c("*-05-01", "*-06-30")` for observations from May and
     June of any year.
 -   `auk_last_edited()`: filter to checklists from a range of last
-    edited dates, useful for extracting new or recently edited
+    edited dates, useful for extracting just new or recently edited
     data.
--   `auk_protocol()`: filter to checklists that follow a specific
+-   `auk_protocol()`: filter to checklists that following a specific
     search protocol, either stationary, traveling, or casual.
 -   `auk_project()`: filter to checklists collected as part of a
     specific project (e.g. a breeding bird survey).
@@ -239,8 +243,8 @@ and countries are checked using the
 [`countrycode`](https://github.com/vincentarelbundock/countrycode)
 package.
 
-The functions described in the *Defining filters* section only
-define filters. Once all of the required filters have been set,
+Each of the functions described in the *Defining filters* section only
+defines a filter. Once all of the required filters have been set,
 `auk_filter()` should be used to compile them into an AWK script and
 execute it to produce an output file. So, as an example of bringing all
 of these steps together, the following commands will extract all Canada
