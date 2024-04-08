@@ -16,7 +16,9 @@ provides data for one species in one week. \code{detection_frequency} gives the
 proportion of checklists in the region that reported the species in the
 given week and \code{n_detections} gives the number of detections. The total
 number of checklists in each week used to estimate detection frequency is
-provided as a data frame stored in the \code{sample_sizes} attribute.
+provided as a data frame stored in the \code{sample_sizes} attribute. Note that
+since most months have more than 28 days, the first three weeks have 7
+days, but the final week has between 7-10 days.
 }
 \description{
 eBird bar charts show the frequency of detection for each week for all
@@ -38,11 +40,15 @@ R.
 # example bar chart data for svalbard
 f <- system.file("extdata/barchart-sample.txt", package = "auk")
 # import and process barchart data
-barchart <- process_barcharts(f)
-head(barchart)
+barcharts <- process_barcharts(f)
+head(barcharts)
 
 # the sample sizes for each week can be access with
-attr(barchart, "sample_sizes")
+attr(barcharts, "sample_sizes")
+
+# bar charts include data for non-species taxa
+# use category to filter to only species
+barcharts[barcharts$category == "species", ]
 }
 \seealso{
 Other helpers: 

@@ -101,7 +101,9 @@ provides data for one species in one week. <code>detection_frequency</code> give
 proportion of checklists in the region that reported the species in the
 given week and <code>n_detections</code> gives the number of detections. The total
 number of checklists in each week used to estimate detection frequency is
-provided as a data frame stored in the <code>sample_sizes</code> attribute.</p>
+provided as a data frame stored in the <code>sample_sizes</code> attribute. Note that
+since most months have more than 28 days, the first three weeks have 7
+days, but the final week has between 7-10 days.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -117,21 +119,21 @@ provided as a data frame stored in the <code>sample_sizes</code> attribute.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example bar chart data for svalbard</span></span></span>
 <span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/barchart-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># import and process barchart data</span></span></span>
-<span class="r-in"><span><span class="va">barchart</span> <span class="op">&lt;-</span> <span class="fu">process_barcharts</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">barchart</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   species_code common_name      scientific_name month  week detection_frequency</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> bahgoo       Bar-headed Goose Anser indicus   jan       1                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> bahgoo       Bar-headed Goose Anser indicus   jan       2                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> bahgoo       Bar-headed Goose Anser indicus   jan       3                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> bahgoo       Bar-headed Goose Anser indicus   jan       4                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> bahgoo       Bar-headed Goose Anser indicus   feb       1                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> bahgoo       Bar-headed Goose Anser indicus   feb       2                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: n_detections &lt;dbl&gt;</span></span>
+<span class="r-in"><span><span class="va">barcharts</span> <span class="op">&lt;-</span> <span class="fu">process_barcharts</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">barcharts</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   species_code common_name      scientific_name category month  week</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> bahgoo       Bar-headed Goose Anser indicus   species  jan       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> bahgoo       Bar-headed Goose Anser indicus   species  jan       2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> bahgoo       Bar-headed Goose Anser indicus   species  jan       3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> bahgoo       Bar-headed Goose Anser indicus   species  jan       4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> bahgoo       Bar-headed Goose Anser indicus   species  feb       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> bahgoo       Bar-headed Goose Anser indicus   species  feb       2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: detection_frequency &lt;dbl&gt;, n_detections &lt;dbl&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># the sample sizes for each week can be access with</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">barchart</span>, <span class="st">"sample_sizes"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">barcharts</span>, <span class="st">"sample_sizes"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 48 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    month  week n_checklists</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -146,6 +148,25 @@ provided as a data frame stored in the <code>sample_sizes</code> attribute.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> mar       1            3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> mar       2            3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 38 more rows</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># bar charts include data for non-species taxa</span></span></span>
+<span class="r-in"><span><span class="co"># use category to filter to only species</span></span></span>
+<span class="r-in"><span><span class="va">barcharts</span><span class="op">[</span><span class="va">barcharts</span><span class="op">$</span><span class="va">category</span> <span class="op">==</span> <span class="st">"species"</span>, <span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4,992 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    species_code common_name      scientific_name category month  week</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> bahgoo       Bar-headed Goose Anser indicus   species  jan       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> bahgoo       Bar-headed Goose Anser indicus   species  jan       2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> bahgoo       Bar-headed Goose Anser indicus   species  jan       3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> bahgoo       Bar-headed Goose Anser indicus   species  jan       4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> bahgoo       Bar-headed Goose Anser indicus   species  feb       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> bahgoo       Bar-headed Goose Anser indicus   species  feb       2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> bahgoo       Bar-headed Goose Anser indicus   species  feb       3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> bahgoo       Bar-headed Goose Anser indicus   species  feb       4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> bahgoo       Bar-headed Goose Anser indicus   species  mar       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> bahgoo       Bar-headed Goose Anser indicus   species  mar       2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4,982 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: detection_frequency &lt;dbl&gt;, n_detections &lt;dbl&gt;</span></span>
 </code></pre></div>
     </div>
   </div>
