@@ -32,6 +32,7 @@ auk_version()
 Other helpers: 
 \code{\link{auk_ebd_version}()},
 \code{\link{ebird_species}()},
-\code{\link{get_ebird_taxonomy}()}
+\code{\link{get_ebird_taxonomy}()},
+\code{\link{process_barcharts}()}
 }
 \concept{helpers}

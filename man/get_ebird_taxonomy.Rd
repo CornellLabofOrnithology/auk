@@ -44,6 +44,7 @@ get_ebird_taxonomy()
 Other helpers: 
 \code{\link{auk_ebd_version}()},
 \code{\link{auk_version}()},
-\code{\link{ebird_species}()}
+\code{\link{ebird_species}()},
+\code{\link{process_barcharts}()}
 }
 \concept{helpers}

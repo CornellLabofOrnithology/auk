@@ -50,6 +50,7 @@ ebird_species("Cordillera Azul Antbird", taxonomy_version = 2017)
 Other helpers: 
 \code{\link{auk_ebd_version}()},
 \code{\link{auk_version}()},
-\code{\link{get_ebird_taxonomy}()}
+\code{\link{get_ebird_taxonomy}()},
+\code{\link{process_barcharts}()}
 }
 \concept{helpers}

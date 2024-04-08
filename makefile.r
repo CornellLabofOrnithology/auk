@@ -9,7 +9,6 @@ remotes::install_local(force = TRUE)
 
 # local tests and checks
 devtools::test()
-devtools::check()
 tools:::.check_package_datasets(".")
 
 # vignettes, readme, site
@@ -21,5 +20,6 @@ pkgdown::check_pkgdown()
 pkgdown::build_site()
 
 # checks
+devtools::check()
 devtools::check_win_devel()
 devtools::check_win_release()
