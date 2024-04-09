@@ -66,13 +66,34 @@ process_barcharts <- function(filename) {
   
   # detection frequency
   detfrq <- l[seq(ss_row + 1, length(l))]
-  cn <- c("common_name", week_vars, "blank")
+  cn <- c("species_name", week_vars, "blank")
   ct <- c("c", rep("d", times = length(cn) - 2), "c")
   ct <- paste(ct, collapse = "")
   detfrq <- readr::read_tsv(I(detfrq), col_names = cn, col_types = ct)
   detfrq$blank <- NULL
+  
+  # does this file have common names, scientific names, or both?
+  has_sci <- stringr::str_detect(detfrq$species_name[1], '<em class=\"sci\">')
+  if (has_sci) {
+    detfrq$scientific_name <- stringr::str_extract(
+      detfrq$species_name,
+      '(?<=<em class="sci">)(.*?)(?=</em>)'
+    )
+  } else {
+    idx <- match(detfrq$species_name, auk::ebird_taxonomy$common_name)
+    if (any(is.na(idx))) {
+      stop("Species names could not be matched to the eBird taxonomy. ",
+           "This function only works on English common names or ",
+           "scientific names. Try modifying your 'Species name display' ",
+           "preferences on the eBird website to show either scientific names ",
+           "or both common and scientific names.")
+    }
+    detfrq$scientific_name <- auk::ebird_taxonomy$scientific_name[idx]
+  }
+  detfrq$species_name <- NULL
+  
   # transform to long
-  detfrq <- tidyr::pivot_longer(detfrq, cols = -"common_name", 
+  detfrq <- tidyr::pivot_longer(detfrq, cols = -"scientific_name", 
                                 values_to = "detection_frequency")
   detfrq <- tidyr::separate(detfrq, col = "name", into = c("month", "week"))
   detfrq$week <- as.integer(detfrq$week)
@@ -81,7 +102,7 @@ process_barcharts <- function(filename) {
   # add in species codes
   tax <- auk::ebird_taxonomy
   tax <- tax[, c("species_code", "common_name", "scientific_name", "category")]
-  detfrq <- dplyr::inner_join(tax, detfrq, by = "common_name")
+  detfrq <- dplyr::inner_join(tax, detfrq, by = "scientific_name")
   
   # add in num detections
   detfrq <- dplyr::inner_join(detfrq, ss, by = c("month", "week"))
