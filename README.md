@@ -7,8 +7,8 @@
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/auk)](https://cran.r-project.org/package=auk)
+[![R-CMD-check](https://github.com/CornellLabofOrnithology/auk/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CornellLabofOrnithology/auk/actions/workflows/R-CMD-check.yaml)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/auk?color=brightgreen)](http://www.r-pkg.org/pkg/auk)
-[![R-CMD-check](https://github.com/CornellLabofOrnithology/auk/workflows/R-CMD-check/badge.svg)](https://github.com/CornellLabofOrnithology/auk/actions)
 [![rOpenSci](https://badges.ropensci.org/136_status.svg)](https://github.com/ropensci/onboarding/issues/136)
 <!-- badges: end -->
 
@@ -212,7 +212,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_complete()
     ebd
     #> Input 
-    #>   EBD: /Users/mes335/projects/auk/inst/extdata/ebd-sample.txt 
+    #>   EBD: /private/var/folders/mg/qh40qmqd7376xn8qxd6hm5lwjyy0h2/T/RtmpZtPd8G/temp_libpath583e6c9c4c9a/auk/extdata/ebd-sample.txt 
     #> 
     #> Output 
     #>   Filters not executed
@@ -298,7 +298,7 @@ eBird Basic Dataset files can be read with `read_ebd()`:
     #>  $ locality_type            : chr [1:398] "H" "H" "H" "H" ...
     #>  $ latitude                 : num [1:398] 26.9 26.6 58.8 58.8 25.5 ...
     #>  $ longitude                : num [1:398] -99.3 -99.1 -122.9 -122.9 -100.3 ...
-    #>  $ observation_date         : Date[1:398], format: "2011-11-14" "2011-11-14" "2011-06-14" ...
+    #>  $ observation_date         : Date[1:398], format: "2011-11-14" "2011-11-14" ...
     #>  $ time_observations_started: chr [1:398] "06:45:00" "08:15:00" "10:30:00" "07:00:00" ...
     #>  $ observer_id              : chr [1:398] "obsr554038" "obsr146271" "obsr12384" "obsr12384" ...
     #>  $ sampling_event_identifier: chr [1:398] "S21633922" "S9118288" "S22036612" "S22036670" ...

@@ -14,7 +14,7 @@ tools:::.check_package_datasets(".")
 # vignettes, readme, site
 dir.create("man/figures/")
 file.copy("cheatsheet/auk-cheatsheet.png", "man/figures/auk-cheatsheet.png")
-rmarkdown::render("README.Rmd")
+devtools::build_readme()
 #devtools::build_vignettes()
 pkgdown::check_pkgdown()
 pkgdown::build_site()

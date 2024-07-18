@@ -19,8 +19,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/auk)](https://cran.r-project.org/package=auk)
+[![R-CMD-check](https://github.com/CornellLabofOrnithology/auk/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CornellLabofOrnithology/auk/actions/workflows/R-CMD-check.yaml)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/auk?color=brightgreen)](http://www.r-pkg.org/pkg/auk)
-[![R-CMD-check](https://github.com/CornellLabofOrnithology/auk/workflows/R-CMD-check/badge.svg)](https://github.com/CornellLabofOrnithology/auk/actions)
 [![rOpenSci](https://badges.ropensci.org/136_status.svg)](https://github.com/ropensci/onboarding/issues/136)
 <!-- badges: end -->
 
