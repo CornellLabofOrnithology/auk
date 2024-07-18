@@ -1,13 +1,11 @@
 navbar:
-  title: ~
-  type: default
-  left:
-  - text: Vignette
-    href: articles/auk.html
-  - text: Function Reference
-    href: reference/index.html
-  - text: Cheatsheet
-    href: https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf
+  structure:
+    left:  [intro, reference, articles, cheatsheet, tutorials, news]
+    right: [search, github, lightswitch]
+  components:
+    cheatsheet:
+      text: Cheatsheet
+      href: https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf
 
 authors:
   Matthew Strimas-Mackey:
