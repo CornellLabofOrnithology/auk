@@ -23,8 +23,8 @@ extract_family <- function(x) {
   str_match(x, "\\((.*)\\)")[, 2, drop = TRUE]
 }
 ebird_taxonomy <- paste0("https://www.birds.cornell.edu/",
-                         "clementschecklist/wp-content/uploads/2023/10/",
-                         "ebird_taxonomy_v2023.csv") %>% 
+                         "clementschecklist/wp-content/uploads/2024/10/",
+                         "eBird_taxonomy_v2024.csv") %>% 
   read_csv() %>% 
   rename_all(tolower) %>% 
   mutate(common_name = stri_trans_general(primary_com_name, "latin-ascii"),
@@ -37,8 +37,8 @@ ebird_taxonomy <- paste0("https://www.birds.cornell.edu/",
 
 # extinct species
 ebird_taxonomy <- paste0("https://www.birds.cornell.edu/",
-                         "clementschecklist/wp-content/uploads/2023/10/",
-                         "Clements-v2023-October-2023.csv") %>% 
+                         "clementschecklist/wp-content/uploads/2024/10/",
+                         "Clements-v2024-October-2024-rev.csv") %>% 
   read_csv() %>% 
   filter(category == "species") %>% 
   transmute(scientific_name = `scientific name`,
