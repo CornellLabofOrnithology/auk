@@ -11,7 +11,7 @@
 #'   expressed as English names or
 #'   [ISO 2-letter country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 #'   English names are matched via regular expressions using
-#'   [countrycode][countrycode()], so there is some flexibility in names.
+#'   [countrycode][countrycode::countrycode()], so there is some flexibility in names.
 #' @param replace logical; multiple calls to `auk_country()` are additive,
 #'   unless `replace = FALSE`, in which case the previous list of countries to
 #'   filter by will be removed and replaced by that in the current call.

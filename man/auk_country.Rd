@@ -14,7 +14,7 @@ auk_country(x, country, replace = FALSE)
 expressed as English names or
 \href{https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2}{ISO 2-letter country codes}.
 English names are matched via regular expressions using
-\link[=countrycode]{countrycode}, so there is some flexibility in names.}
+\link[countrycode:countrycode]{countrycode}, so there is some flexibility in names.}
 
 \item{replace}{logical; multiple calls to \code{auk_country()} are additive,
 unless \code{replace = FALSE}, in which case the previous list of countries to
