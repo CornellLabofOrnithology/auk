@@ -47,3 +47,25 @@ test_that("auk_rollup keeps higher taxa", {
   expect_true(all(dropped_cols %in% names(ebd)))
   expect_true(all(!dropped_cols %in% names(ebd_ru)))
 })
+
+test_that("auk_rollup warns when species are removed", {
+  df_test <- data.frame(
+    checklist_id = c("chk1", "chk2"),
+    scientific_name = c("Spinus psaltria", "Jiggetus bubingai"),
+    category = c("species", "species"),
+    observation_count = c(10, 5)
+  )
+  
+  # Expect a warning when running auk_rollup
+  expect_warning(
+    df_result <- auk_rollup(df_test),
+    regexp = "Removed the following species due to invalid taxonomy"
+  )
+
+  # Ensure the unknown species was removed
+  expect_false("Jiggetus bubingai" %in% df_result$scientific_name)
+
+  # Ensure Lesser Goldfinch remains in the dataset
+  expect_true("Spinus psaltria" %in% df_result$scientific_name)
+})
+

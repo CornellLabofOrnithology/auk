@@ -128,8 +128,31 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
   tax <- dplyr::filter(tax, .data$category %in% include)
   tax <- rbind(tax, undesc)
   tax <- dplyr::select(tax, "scientific_name", "taxon_order")
+  # store species before filtering
+  species_prefilter <- unique(x$scientific_name)
   x <- dplyr::inner_join(x, tax, by = "scientific_name")
+
+  # identify which species were removed
+  species_after <- unique(x$scientific_name)
+  removed_species <- setdiff(species_prefilter, species_after)
+
+  # if species were removed, print a warning
+  if (length(removed_species) > 0) {
+    warning_message <- paste(
+      "Warning message:",
+      "\nRemoved the following species due to invalid taxonomy:\n",
+      paste(removed_species, collapse = ", "),
+      "\n\nIf taxonomy was recently updated, try updating the package:",
+      "\n- Run this command in R: install.packages('auk')",
+      "\n or install the latest version from GitHub: remotes::install_github('CornellLabofOrnithology/auk')"
+    )
+
+    warning(warning_message, call. = FALSE)
+  } 
   
+  # continue with rollup
+  # If all species were removed, return an empty table
+
   if (nrow(x) == 0) {
     if ("subspecies_common_name" %in% names(x)) {
       x$subspecies_common_name <- NULL
