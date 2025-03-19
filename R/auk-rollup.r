@@ -110,10 +110,10 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
   # get the correct ebird taxonomy version
   if (missing(taxonomy_version) || 
       taxonomy_version == auk_version()$taxonomy_version) {
-    tax <- auk::ebird_taxonomy
+    tax_full <- auk::ebird_taxonomy
   } else {
     stopifnot(is_integer(taxonomy_version), length(taxonomy_version) == 1)
-    tax <- get_ebird_taxonomy(version = taxonomy_version)
+    tax_full <- get_ebird_taxonomy(version = taxonomy_version)
   }
   
   # remove anything not identifiable to a species
@@ -124,23 +124,28 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
   }
   # include forms that don't roll up to a species
   # these are mostly undescribed species
-  undesc <- dplyr::filter(tax, .data$category == "form", is.na(.data$report_as))
-  tax <- dplyr::filter(tax, .data$category %in% include)
+  undesc <- dplyr::filter(tax_full,
+                          .data$category == "form",
+                          is.na(.data$report_as))
+  tax <- dplyr::filter(tax_full, .data$category %in% include)
   tax <- rbind(tax, undesc)
   tax <- dplyr::select(tax, "scientific_name", "taxon_order")
-  # store species before filtering
+  # store taxa before filtering
   species_prefilter <- unique(x$scientific_name)
   x <- dplyr::inner_join(x, tax, by = "scientific_name")
 
-  # identify which species were removed
+  # identify which taxa were removed
   species_after <- unique(x$scientific_name)
   removed_species <- setdiff(species_prefilter, species_after)
+  # exclude taxa that were intentionally removed, e.g. because they can't be
+  # identified to species
+  tax_dropped <- dplyr::filter(tax_full, !.data$category %in% include)
+  removed_species <- setdiff(removed_species, tax_dropped$scientific_name)
 
-  # if species were removed, print a warning
+  # if taxa were removed, print a warning
   if (length(removed_species) > 0) {
     warning_message <- paste(
-      "Warning message:",
-      "\nRemoved the following species due to invalid taxonomy:\n",
+      "Removed the following species due to invalid taxonomy:\n",
       paste(removed_species, collapse = ", "),
       "\n\nIf taxonomy was recently updated, try updating the package:",
       "\n- Run this command in R: install.packages('auk')",
@@ -150,10 +155,8 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
     warning(warning_message, call. = FALSE)
   } 
   
-  # continue with rollup
-  # If all species were removed, return an empty table
-
   if (nrow(x) == 0) {
+    # if all species were removed, return an empty table
     if ("subspecies_common_name" %in% names(x)) {
       x$subspecies_common_name <- NULL
     }

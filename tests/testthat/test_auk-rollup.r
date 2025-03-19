@@ -68,4 +68,3 @@ test_that("auk_rollup warns when species are removed", {
   # Ensure Lesser Goldfinch remains in the dataset
   expect_true("Spinus psaltria" %in% df_result$scientific_name)
 })
-

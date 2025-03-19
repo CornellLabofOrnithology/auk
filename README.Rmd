@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# auk: eBird Data Extraction and Processing in R  <img src="logo.png" align="right" width=140/>
+# auk: eBird Data Extraction and Processing in R  <img src="logo.png" align="right" width=140 alt="Hexagonal auk logo featuring a soaring Auk."/>
 
 <!-- badges: start -->
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
@@ -51,7 +51,7 @@ Full details on using `auk` to produce both presence-only and presence-absence d
 
 An `auk` cheatsheet was developed by [Mickayla Johnston](https://www.linkedin.com/in/mickayla-johnston/):
 
-<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="man/figures/auk-cheatsheet.png" width=400/></a>
+<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="man/figures/auk-cheatsheet.png" width=400 alt="A cheat sheet for the R package, showing how the main functions are used."/></a>
 
 
 

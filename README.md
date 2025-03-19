@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width=140/>
+# auk: eBird Data Extraction and Processing in R <img src="logo.png" align="right" width=140 alt="Hexagonal auk logo featuring a soaring Auk."/>
 
 <!-- badges: start -->
 
@@ -64,7 +64,7 @@ presence-absence data are outlined in the
 An `auk` cheatsheet was developed by [Mickayla
 Johnston](https://www.linkedin.com/in/mickayla-johnston/):
 
-<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="man/figures/auk-cheatsheet.png" width=400/></a>
+<a href="https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf"><img src="man/figures/auk-cheatsheet.png" width=400 alt="A cheat sheet for the R package, showing how the main functions are used."/></a>
 
 ## `auk` and `rebird`
 
@@ -212,7 +212,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_complete()
     ebd
     #> Input 
-    #>   EBD: /private/var/folders/wf/y1p0nztd2ps95ppplsl5bjjr0000gs/T/Rtmp7EtevZ/temp_libpathb9796963586e/auk/extdata/ebd-sample.txt 
+    #>   EBD: /private/var/folders/wf/y1p0nztd2ps95ppplsl5bjjr0000gs/T/RtmpCz3NvC/temp_libpath10d1455f7599e/auk/extdata/ebd-sample.txt 
     #> 
     #> Output 
     #>   Filters not executed
