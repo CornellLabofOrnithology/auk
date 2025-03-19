@@ -59,7 +59,7 @@ test_that("auk_rollup warns when species are removed", {
   # Expect a warning when running auk_rollup
   expect_warning(
     df_result <- auk_rollup(df_test),
-    regexp = "Removed the following species due to taxonomic errors"
+    regexp = "Removed the following species due to invalid taxonomy"
   )
 
   # Ensure the unknown species was removed
