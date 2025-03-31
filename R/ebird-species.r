@@ -1,11 +1,12 @@
 #' Lookup species in eBird taxonomy
 #'
-#' Given a list of common or scientific names, check that they appear in the
-#' official eBird taxonomy and convert them all to scientific names, common
-#' names, or species codes. Un-matched species are returned as `NA`.
+#' Given a list of common or scientific names, or species codes, check that they
+#' appear in the official eBird taxonomy and convert them all to scientific
+#' names, common names, or species codes. Un-matched species are returned as
+#' `NA`.
 #'
-#' @param x character; species to look up, provided as scientific or
-#'   English common names, or a mixture of both. Case insensitive.
+#' @param x character; species to look up, provided as scientific names, English
+#'   common names, species codes, or a mixture of all three. Case insensitive.
 #' @param type character; whether to return scientific names (`scientific`),
 #'   English common names (`common`), or 6-letter eBird species codes (`code`). 
 #'   Alternatively, use `all` to return a data frame with the all the taxonomy 
@@ -22,7 +23,7 @@
 #' @examples
 #' # mix common and scientific names, case-insensitive
 #' species <- c("Blackburnian Warbler", "Poecile atricapillus",
-#'              "american dipper", "Caribou")
+#'              "american dipper", "Caribou", "hudgod")
 #' # note that species not in the ebird taxonomy return NA
 #' ebird_species(species)
 #' 
@@ -55,8 +56,10 @@ ebird_species <- function(x, type = c("scientific", "common", "code", "all"),
   sci <- match(x, tolower(tax$scientific_name))
   # then for common names
   com <- match(x, tolower(tax$common_name))
+  # finally for species codes
+  sc <- match(x, tolower(tax$species_code))
   # combine
-  idx <- ifelse(is.na(sci), com, sci)
+  idx <- ifelse(is.na(sci), ifelse(is.na(com), sc, com), sci)
   # convert to output format, default scientific
   if (identical(type, "scientific")) {
     return(tax$scientific_name[idx])

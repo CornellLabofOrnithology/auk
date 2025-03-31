@@ -11,8 +11,8 @@ ebird_species(
 )
 }
 \arguments{
-\item{x}{character; species to look up, provided as scientific or
-English common names, or a mixture of both. Case insensitive.}
+\item{x}{character; species to look up, provided as scientific names, English
+common names, species codes, or a mixture of all three. Case insensitive.}
 
 \item{type}{character; whether to return scientific names (\code{scientific}),
 English common names (\code{common}), or 6-letter eBird species codes (\code{code}).
@@ -29,14 +29,15 @@ name, or species code. If \code{type = "all"} a data frame of the taxonomy of
 the requested species is returned.
 }
 \description{
-Given a list of common or scientific names, check that they appear in the
-official eBird taxonomy and convert them all to scientific names, common
-names, or species codes. Un-matched species are returned as \code{NA}.
+Given a list of common or scientific names, or species codes, check that they
+appear in the official eBird taxonomy and convert them all to scientific
+names, common names, or species codes. Un-matched species are returned as
+\code{NA}.
 }
 \examples{
 # mix common and scientific names, case-insensitive
 species <- c("Blackburnian Warbler", "Poecile atricapillus",
-             "american dipper", "Caribou")
+             "american dipper", "Caribou", "hudgod")
 # note that species not in the ebird taxonomy return NA
 ebird_species(species)
 

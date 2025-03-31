@@ -1,7 +1,6 @@
-# auk 0.8.0
+# auk 0.8.1
 
-- update for 2024 taxonomy
-- added a helper function for processing bar chart data from eBird `process_barcharts()`
+- allow `ebird_species()` to search for species codes in addition to scientific and common names
 
 # Test environments
 
