@@ -9,7 +9,7 @@ bibentry(
                    as.person("Wesley Hochachka")
                  ),
   year         = "2023",
-  note         = "R package version 0.7.0",
+  note         = "R package version 0.8.1",
   url          = "https://cornelllabofornithology.github.io/auk/",
 
   textVersion  =
