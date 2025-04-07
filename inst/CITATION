@@ -15,6 +15,6 @@ bibentry(
   textVersion  =
   paste("Matthew Strimas-Mackey, Eliot Miller, and Wesley Hochachka (2023).",
         "auk: eBird Data Extraction and Processing with AWK.",
-        "R package version 0.7.0.",
+        "R package version 0.8.1.",
         "https://cornelllabofornithology.github.io/auk/")
 )
