@@ -24,8 +24,7 @@ Description: Extract and process bird sightings records from
     temporal filters, to produce a manageable file size that can be
     imported into R.
 License: GPL-3
-URL: https://github.com/CornellLabofOrnithology/auk,
-    https://cornelllabofornithology.github.io/auk/
+URL: https://cornelllabofornithology.github.io/auk/
 BugReports: 
     https://github.com/CornellLabofOrnithology/auk/issues
 Depends: 
