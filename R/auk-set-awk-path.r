@@ -34,7 +34,7 @@ auk_set_awk_path <- function(path, overwrite = FALSE) {
     error = function(e) list(result = NULL),
     warning = function(e) list(result = NULL)
   )
-  if (is.null(awk_test$result) || awk_test$result == "") {
+  if (is.null(awk_test$result)) {
     stop("Specified AWK_PATH doesn't contain a valid AWK executable.")
   }
   
