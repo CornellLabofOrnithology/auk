@@ -67,12 +67,18 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
                         index = seq_along(header),
                         stringsAsFactors = FALSE)
   
+  # check column name for protocol column
+  protocol_col_name <- "protocol name"
+  if (!protocol_col_name %in% header) {
+    protocol_col_name <- "protocol type"
+  }
+  
   # ensure key columns are present
   mandatory <- c("scientific name",
                  "country code", "state code",
                  "latitude", "longitude",
                  "observation date", "time observations started",
-                 "protocol type",
+                 protocol_col_name,
                  "exotic code",
                  "duration minutes", "effort distance km",
                  "all species reported",
@@ -101,7 +107,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
              "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
-             "protocol type", "project code",
+             protocol_col_name, "project code",
              "duration minutes", "effort distance km",
              "breeding code",
              "exotic code",

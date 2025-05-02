@@ -12,7 +12,6 @@ Tools for extracting and processing eBird data from the eBird Basic Dataset
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/CornellLabofOrnithology/auk}
   \item \url{https://cornelllabofornithology.github.io/auk/}
   \item Report bugs at \url{https://github.com/CornellLabofOrnithology/auk/issues}
 }

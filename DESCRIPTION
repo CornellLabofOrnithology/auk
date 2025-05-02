@@ -28,7 +28,7 @@ URL: https://cornelllabofornithology.github.io/auk/
 BugReports: 
     https://github.com/CornellLabofOrnithology/auk/issues
 Depends: 
-    R (>= 3.1.2)
+    R (>= 3.5)
 Imports: 
     assertthat,
     countrycode (>= 1.0.0),
