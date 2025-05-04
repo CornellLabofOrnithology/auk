@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>eBird Data Extraction and Processing in R • auk</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -231,7 +230,7 @@
 <span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>  <span class="fu">auk_complete</span>()</span>
 <span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>ebd</span>
 <span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; Input </span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt;   EBD: /private/var/folders/wf/y1p0nztd2ps95ppplsl5bjjr0000gs/T/RtmpXk8bjH/temp_libpathec945991ac12/auk/extdata/ebd-sample.txt </span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt;   EBD: /private/var/folders/wf/y1p0nztd2ps95ppplsl5bjjr0000gs/T/RtmprjANm2/temp_libpath53c6c21061b/auk/extdata/ebd-sample.txt </span></span>
 <span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; Output </span></span>
 <span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt;   Filters not executed</span></span>
@@ -275,7 +274,7 @@
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;  $ checklist_id             : chr [1:398] "G1131664" "G1131665" "G1158137" "G1158138" ...</span></span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt;  $ global_unique_identifier : chr [1:398] "URN:CornellLabOfOrnithology:EBIRD:OBS294400626" "URN:CornellLabOfOrnithology:EBIRD:OBS130231497" "URN:CornellLabOfOrnithology:EBIRD:OBS299129479" "URN:CornellLabOfOrnithology:EBIRD:OBS299130486" ...</span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt;  $ last_edited_date         : chr [1:398] "2021-03-29 21:21:52.583259" "2020-02-01 20:30:42" "2018-08-03 18:05:21" "2015-02-23 20:14:13" ...</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;  $ taxonomic_order          : num [1:398] 20724 20724 20674 20674 20724 ...</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;  $ taxonomic_order          : int [1:398] 20724 20724 20674 20674 20724 20724 20786 20674 20724 20724 ...</span></span>
 <span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;  $ category                 : chr [1:398] "species" "species" "species" "species" ...</span></span>
 <span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;  $ taxon_concept_id         : chr [1:398] "avibase-361B447A" "avibase-361B447A" "avibase-69A6E32F" "avibase-69A6E32F" ...</span></span>
 <span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt;  $ common_name              : chr [1:398] "Green Jay" "Green Jay" "Canada Jay" "Canada Jay" ...</span></span>
@@ -384,11 +383,11 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8929-7776" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="http://strimas.com" class="external-link">Matthew Strimas-Mackey</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8929-7776" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>
-<a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a> <br><small class="roles"> Author </small>  </li>
+<a href="http://eliotmiller.weebly.com/" class="external-link">Eliot Miller</a> <br><small class="roles"> Author </small>   </li>
 <li>
-<a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a> <br><small class="roles"> Author </small>  </li>
+<a href="https://www.birds.cornell.edu/hochachka/" class="external-link">Wesley Hochachka</a> <br><small class="roles"> Author </small>   </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -415,7 +414,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
       </footer>
