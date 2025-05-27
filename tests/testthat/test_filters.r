@@ -346,13 +346,6 @@ test_that("auk_project", {
   # multiple projects
   ebd <- auk_project(ebd, c("EBIRD", "EBIRD_MEX"))
   expect_equal(ebd$filters$project, c("EBIRD", "EBIRD_MEX"))
-  
-  # raises error for bad input
-  expect_error(auk_project(ebd, "EBIRD MEX"))
-  expect_error(auk_project(ebd, "ebird_mex"))
-  expect_error(auk_project(ebd, 2))
-  expect_error(auk_project(ebd, ""))
-  expect_error(auk_project(ebd, NA))
 })
 
 test_that("auk_time", {

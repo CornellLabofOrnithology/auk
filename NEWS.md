@@ -1,3 +1,7 @@
+# auk 0.8.2
+
+- handle changes to project names resulting from release of eBird Projects
+
 # auk 0.8.1
 
 - allow `ebird_species()` to search for species codes in addition to scientific and common names

@@ -236,13 +236,6 @@ test_that("auk_project", {
   # multiple projects
   sed <- auk_project(sed, c("EBIRD", "EBIRD_MEX"))
   expect_equal(sed$filters$project, c("EBIRD", "EBIRD_MEX"))
-  
-  # raises error for bad input
-  expect_error(auk_project(sed, "EBIRD MEX"))
-  expect_error(auk_project(sed, "ebird_mex"))
-  expect_error(auk_project(sed, 2))
-  expect_error(auk_project(sed, ""))
-  expect_error(auk_project(sed, NA))
 })
 
 test_that("auk_time", {

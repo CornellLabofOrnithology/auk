@@ -45,15 +45,6 @@ auk_project.auk_ebd <- function(x, project) {
     stop("Project column missing from sampling event data")
   }
   
-  # check all project names are valid
-  bad_projects <- grepl("[^_A-Z]", project)
-  if (any(bad_projects)) {
-    stop(
-      paste0("The following project names are not valid: \n\t",
-             paste(project[bad_projects], collapse =", "))
-    )
-  }
-  
   # set filter list
   x$filters$project <- project
   return(x)

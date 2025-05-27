@@ -72,6 +72,11 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
   if (!protocol_col_name %in% header) {
     protocol_col_name <- "protocol type"
   }
+  # check column name for project column
+  project_col_name <- "project names"
+  if (!project_col_name %in% header) {
+    project_col_name <- "project code"
+  }
   
   # ensure key columns are present
   mandatory <- c("scientific name",
@@ -107,7 +112,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
              "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
-             protocol_col_name, "project code",
+             protocol_col_name, project_col_name,
              "duration minutes", "effort distance km",
              "breeding code",
              "exotic code",
