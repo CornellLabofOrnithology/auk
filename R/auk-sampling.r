@@ -43,11 +43,22 @@ auk_sampling <- function(file, sep = "\t") {
                         index = seq_along(header),
                         stringsAsFactors = FALSE)
   
+  # check column name for protocol column
+  protocol_col_name <- "protocol name"
+  if (!protocol_col_name %in% header) {
+    protocol_col_name <- "protocol type"
+  }
+  # check column name for project column
+  project_col_name <- "project names"
+  if (!project_col_name %in% header) {
+    project_col_name <- "project code"
+  }
+  
   # ensure key columns are present
   mandatory <- c("country code", "state code",
                  "latitude", "longitude",
                  "observation date", "time observations started",
-                 "protocol type",
+                 protocol_col_name,
                  "duration minutes", "effort distance km",
                  "all species reported",
                  "sampling event identifier", "group identifier")
@@ -71,7 +82,7 @@ auk_sampling <- function(file, sep = "\t") {
              "latitude", "longitude",
              "observation date", "time observations started",
              "last edited date", 
-             "protocol type", "project code",
+             protocol_col_name, project_col_name,
              "duration minutes", "effort distance km",
              "all species reported",
              "observer id"),

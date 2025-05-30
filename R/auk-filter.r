@@ -520,7 +520,7 @@ awk_translate <- function(filters, col_idx, sep, select) {
     filter_strings$project <- ""
   } else {
     idx <- col_idx$index[col_idx$id == "project"]
-    condition <- paste0("$", idx, " == \"", filters$project, "\"",
+    condition <- paste0("$", idx, " ~ \"", filters$project, "\"",
                         collapse = " || ")
     filter_strings$project <- str_interp(awk_if, list(condition = condition))
   }
