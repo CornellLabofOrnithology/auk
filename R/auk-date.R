@@ -24,8 +24,8 @@
 #' @export
 #' @family filter
 #' @examples
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_date(date = c("2010-01-01", "2010-12-31"))
 #'   
 #' # alternatively, without pipes
@@ -33,14 +33,14 @@
 #' auk_date(ebd, date = c("2010-01-01", "2010-12-31"))
 #' 
 #' # the * wildcard can be used in place of year to select dates from all years
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   # may-june records from all years
 #'   auk_date(date = c("*-05-01", "*-06-30"))
 #'   
 #' # dates can also wrap around the end of the year
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   # dec-jan records from all years
 #'   auk_date(date = c("*-12-01", "*-01-31"))
 auk_date <- function(x, date)  {

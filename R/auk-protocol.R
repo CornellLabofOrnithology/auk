@@ -26,8 +26,8 @@
 #' @export
 #' @family filter
 #' @examples
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_protocol("Stationary")
 #'   
 #' # alternatively, without pipes

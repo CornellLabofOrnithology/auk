@@ -58,4 +58,3 @@ test_that("ebird_species handles versions correctly", {
                              taxonomy_version = 2017), 
                "Myrmoderus [undescribed form]")
 })
-

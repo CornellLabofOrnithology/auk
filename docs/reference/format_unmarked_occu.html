@@ -23,7 +23,7 @@ unmarked::formatWide() in which each row is a site."><meta property="og:image" c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -73,11 +73,11 @@ unmarked::formatWide() in which each row is a site."><meta property="og:image" c
     <div class="ref-description">
     <p>Prepare a data frame of species observations for ingestion into the package
 <code>unmarked</code> for hierarchical modeling of abundance and occurrence. The
-function <code><a href="https://biodiverse.github.io/unmarked/reference/formatWideLong.html" class="external-link">unmarked::formatWide()</a></code> takes a data frame and converts it to one
+function <code><a href="https://ecoverseR.github.io/unmarked/reference/formatWideLong.html" class="external-link">unmarked::formatWide()</a></code> takes a data frame and converts it to one
 of several <code>unmarked</code> objects, which can then be used for modeling. This
 function converts data from a format in which each row is an observation
 (e.g. as in the eBird Basic Dataset) to the esoteric format required by
-<code><a href="https://biodiverse.github.io/unmarked/reference/formatWideLong.html" class="external-link">unmarked::formatWide()</a></code> in which each row is a site.</p>
+<code><a href="https://ecoverseR.github.io/unmarked/reference/formatWideLong.html" class="external-link">unmarked::formatWide()</a></code> in which each row is a site.</p>
     </div>
 
     <div id="ref-usage">
@@ -130,7 +130,7 @@ observations, for example, time or length of observation.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame that can be processed by <code><a href="https://biodiverse.github.io/unmarked/reference/formatWideLong.html" class="external-link">unmarked::formatWide()</a></code>.
+    <p>A data frame that can be processed by <code><a href="https://ecoverseR.github.io/unmarked/reference/formatWideLong.html" class="external-link">unmarked::formatWide()</a></code>.
 Each row will correspond to a unqiue site and, assuming there are a maximum
 of <code>N</code> observations per site, columns will be as follows:</p><ol><li><p>The unique site identifier, named "site".</p></li>
 <li><p><code>N</code> response columns, one for each observation, named "y.1", ..., "y.N".</p></li>
@@ -149,9 +149,9 @@ repeat visits, users should use <code><a href="filter_repeat_visits.html">filter
 output to this function.</p>
 <p><code>format_unmarked_occu()</code> is designed to prepare data to be converted into
 an <code>unmarkedFrameOccu</code> object for occupancy modeling with
-<code><a href="https://biodiverse.github.io/unmarked/reference/occu.html" class="external-link">unmarked::occu()</a></code>; however, it can also be used to prepare data for
+<code><a href="https://ecoverseR.github.io/unmarked/reference/occu.html" class="external-link">unmarked::occu()</a></code>; however, it can also be used to prepare data for
 conversion to an <code>unmarkedFramePCount</code> object for abundance modeling with
-<code><a href="https://biodiverse.github.io/unmarked/reference/pcount.html" class="external-link">unmarked::pcount()</a></code>.</p>
+<code><a href="https://ecoverseR.github.io/unmarked/reference/pcount.html" class="external-link">unmarked::pcount()</a></code>.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -178,7 +178,7 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-in"><span>                                              <span class="st">"duration_minutes"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># create an unmarked object</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"unmarked"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">occ_um</span> <span class="op">&lt;-</span> <span class="fu">unmarked</span><span class="fu">::</span><span class="fu"><a href="https://biodiverse.github.io/unmarked/reference/formatWideLong.html" class="external-link">formatWide</a></span><span class="op">(</span><span class="va">occ_wide</span>, type <span class="op">=</span> <span class="st">"unmarkedFrameOccu"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">occ_um</span> <span class="op">&lt;-</span> <span class="fu">unmarked</span><span class="fu">::</span><span class="fu"><a href="https://ecoverseR.github.io/unmarked/reference/formatWideLong.html" class="external-link">formatWide</a></span><span class="op">(</span><span class="va">occ_wide</span>, type <span class="op">=</span> <span class="st">"unmarkedFrameOccu"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">unmarked</span><span class="fu">::</span><span class="fu">summary</span><span class="op">(</span><span class="va">occ_um</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> unmarkedFrame Object</span>
@@ -212,10 +212,10 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :584        NA's   :584     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># this function can also be used for abundance modeling</span></span></span>
-<span class="r-in"><span><span class="va">abd</span> <span class="op">&lt;-</span> <span class="va">ebd_zf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
+<span class="r-in"><span><span class="va">abd</span> <span class="op">&lt;-</span> <span class="va">ebd_zf</span> <span class="op">|&gt;</span> </span></span>
 <span class="r-in"><span>  <span class="co"># convert count to integer, drop records with no count</span></span></span>
-<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>observation_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">observation_count</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
-<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">observation_count</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>observation_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">observation_count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">observation_count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span></span>
 <span class="r-in"><span>  <span class="co"># filter to repeated visits</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="filter_repeat_visits.html">filter_repeat_visits</a></span><span class="op">(</span>n_days <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There was 1 warning in `dplyr::mutate()`.</span>
@@ -230,7 +230,7 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 <span class="r-in"><span>                                              <span class="st">"duration_minutes"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># create an unmarked object</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"unmarked"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">abd_um</span> <span class="op">&lt;-</span> <span class="fu">unmarked</span><span class="fu">::</span><span class="fu"><a href="https://biodiverse.github.io/unmarked/reference/formatWideLong.html" class="external-link">formatWide</a></span><span class="op">(</span><span class="va">abd_wide</span>, type <span class="op">=</span> <span class="st">"unmarkedFrameOccu"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">abd_um</span> <span class="op">&lt;-</span> <span class="fu">unmarked</span><span class="fu">::</span><span class="fu"><a href="https://ecoverseR.github.io/unmarked/reference/formatWideLong.html" class="external-link">formatWide</a></span><span class="op">(</span><span class="va">abd_wide</span>, type <span class="op">=</span> <span class="st">"unmarkedFrameOccu"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">unmarked</span><span class="fu">::</span><span class="fu">summary</span><span class="op">(</span><span class="va">abd_um</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> unmarkedFrame Object</span>
@@ -276,7 +276,7 @@ conversion to an <code>unmarkedFramePCount</code> object for abundance modeling 
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

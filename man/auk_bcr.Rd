@@ -35,8 +35,8 @@ user only wishes to filter the sampling event data.
 \examples{
 # bcr codes can be looked up in bcr_codes
 dplyr::filter(bcr_codes, bcr_name == "Central Hardwoods")
-system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
-  auk_ebd() \%>\%
+system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
   auk_bcr(bcr = 24)
   
 # filter to bcr 24

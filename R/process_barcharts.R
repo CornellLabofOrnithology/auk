@@ -80,7 +80,8 @@ process_barcharts <- function(filename) {
       '(?<=<em class="sci">)(.*?)(?=</em>)'
     )
   } else {
-    idx <- match(detfrq$species_name, auk::ebird_taxonomy$common_name)
+    ascii <- stringi::stri_trans_general(detfrq$species_name, "latin-ascii")
+    idx <- match(ascii, auk::ebird_taxonomy$common_name)
     if (any(is.na(idx))) {
       stop("Species names could not be matched to the eBird taxonomy. ",
            "This function only works on English common names or ",

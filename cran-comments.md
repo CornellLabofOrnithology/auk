@@ -1,6 +1,6 @@
-# auk 0.8.2
+# auk 0.9.0
 
-- handle changes to project names resulting from release of eBird Projects
+- update to align with the 2025 taxonomy update
 
 # Test environments
 

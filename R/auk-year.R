@@ -30,8 +30,8 @@
 #' # years to filter to
 #' years <- c(2010, 2012)
 #' # set up filter
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_year(year = years)
 #'   
 #' # alternatively, without pipes
@@ -39,9 +39,9 @@
 #' auk_year(ebd, years)
 #' 
 #' # filter to may and june of 2010 and 2012
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
-#'   auk_year(year = c(2010, 2012)) %>% 
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
+#'   auk_year(year = c(2010, 2012)) |> 
 #'   auk_date(date = c("*-05-01", "*-06-30"))
 auk_year <- function(x, year, replace = FALSE)  {
   UseMethod("auk_year")

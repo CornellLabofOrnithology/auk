@@ -81,13 +81,13 @@
 #' # yellow-rump warbler subspecies rollup
 #' library(dplyr)
 #' # without rollup, there are three observations
-#' ebd %>%
-#'   filter(common_name == "Yellow-rumped Warbler") %>% 
+#' ebd |>
+#'   filter(common_name == "Yellow-rumped Warbler") |>
 #'   select(checklist_id, category, common_name, subspecies_common_name, 
 #'          observation_count)
 #' # with rollup, they have been combined
-#' ebd_ru %>%
-#'   filter(common_name == "Yellow-rumped Warbler") %>% 
+#' ebd_ru |>
+#'   filter(common_name == "Yellow-rumped Warbler") |>
 #'   select(checklist_id, category, common_name, observation_count)
 auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
   assertthat::assert_that(

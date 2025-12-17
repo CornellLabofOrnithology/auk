@@ -3,17 +3,11 @@ is_integer <- function(x) {
 }
 
 get_header <- function(x, sep = "\t") {
-  readLines(x, n = 1) %>%
-    stringr::str_split(sep) %>%
-    `[[`(1) %>%
-    trimws()
+  trimws(stringr::str_split(readLines(x, n = 1), pattern = sep)[[1]])
 }
 
 clean_names <- function(x) {
-  x_clean <- tolower(x) %>%
-    trimws() %>%
-    stringr::str_replace_all("[./ ]", "_")
-  x_clean
+  stringr::str_replace_all(trimws(tolower(x)), "[./ ]", "_")
 }
 
 get_col_types <- function(header) {

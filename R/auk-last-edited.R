@@ -18,8 +18,8 @@
 #' @export
 #' @family filter
 #' @examples
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_last_edited(date = c("2010-01-01", "2010-12-31"))
 auk_last_edited <- function(x, date)  {
   UseMethod("auk_last_edited")
@@ -44,7 +44,7 @@ auk_last_edited.auk_ebd <- function(x, date) {
   }
 
   # convert to date object, then format as ISO standard date format
-  date <- as.Date(date) %>%
+  date <- as.Date(date) |>
     format("%Y-%m-%d")
 
   assertthat::assert_that(

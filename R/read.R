@@ -98,7 +98,7 @@ read_ebd.auk_ebd <- function(x, sep = "\t", unique = TRUE,
 #' @export
 #' @examples
 #' # read a sampling event data file
-#' x <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+#' x <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
 #'   read_sampling()
 read_sampling <- function(x, sep = "\t", unique = TRUE) {
   UseMethod("read_sampling")

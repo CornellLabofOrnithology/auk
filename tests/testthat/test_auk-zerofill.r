@@ -22,7 +22,7 @@ test_that("auk_zerofill zerofill works normally", {
 test_that("auk_zerofill input types", {
   f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-  ebd <- auk_ebd(f_ebd, f_smpl) %>%
+  ebd <- auk_ebd(f_ebd, f_smpl) |>
     auk_complete()
   ebd$output <- f_ebd
   ebd$output_sampling <- f_smpl
@@ -99,7 +99,7 @@ test_that("auk_zerofill lack of complete checklists throws error", {
 test_that("auk_zerofill throws errors with bad input data", {
   f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-  ebd <- auk_ebd(f_ebd, f_smpl) %>%
+  ebd <- auk_ebd(f_ebd, f_smpl) |>
     auk_complete()
 
   expect_error(auk_zerofill(ebd))

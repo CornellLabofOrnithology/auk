@@ -20,8 +20,8 @@
 #' @family filter
 #' @examples
 #' # only keep checklists that are less than an hour long
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_duration(duration = c(0, 60))
 #'   
 #' # alternatively, without pipes

@@ -26,8 +26,8 @@ This function can also work with on an \code{auk_sampling} object if the
 user only wishes to filter the sampling event data.
 }
 \examples{
-system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
-  auk_ebd() \%>\%
+system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
   auk_complete()
 }
 \seealso{

@@ -1,7 +1,7 @@
 context("auk_rollup")
 
 test_that("auk_rollup rolls up to species level", {
-  ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") |>
     read_ebd(rollup = FALSE)
   ebd_ru <- auk_rollup(ebd)
   
@@ -16,7 +16,7 @@ test_that("auk_rollup rolls up to species level", {
 })
 
 test_that("auk_rollup works with unique = FALSE", {
-  ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") |>
     read_ebd(unique = FALSE, rollup = FALSE)
   ebd_ru <- auk_rollup(ebd)
   
@@ -30,10 +30,8 @@ test_that("auk_rollup works with unique = FALSE", {
   expect_true(all(!dropped_cols %in% names(ebd_ru)))
 })
 
-context("auk_rollup")
-
 test_that("auk_rollup keeps higher taxa", {
-  ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") |>
     read_ebd(rollup = FALSE)
   ebd_ru <- auk_rollup(ebd, drop_higher = FALSE)
   

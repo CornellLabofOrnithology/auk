@@ -41,19 +41,19 @@ library(auk)
 input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
 # output text file
 output_file <- "ebd_filtered_grja.txt"
-ebird_data <- input_file %>% 
+ebird_data <- input_file |>
   # 1. reference file
-  auk_ebd() %>% 
+  auk_ebd() |>
   # 2. define filters
-  auk_species(species = "Canada Jay") %>% 
-  auk_country(country = "Canada") %>% 
+  auk_species(species = "Canada Jay") |>
+  auk_country(country = "Canada") |>
   # 3. run filtering
-  auk_filter(file = output_file) %>% 
+  auk_filter(file = output_file) |>
   # 4. read text file into r data frame
   read_ebd()
 ```
 
-For those not familiar with the pipe operator (`%>%`), the above code could be rewritten:
+For those not familiar with the pipe operator (`|>`), the above code could be rewritten:
 
 ```{r quickstart-nopipes, eval = FALSE}
 input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
@@ -64,6 +64,8 @@ ebd_filters <- auk_country(ebd_filters, country = "Canada")
 ebd_filtered <- auk_filter(ebd_filters, file = output_file)
 ebd_df <- read_ebd(ebd_filtered)
 ```
+
+Note that the pipe operator used here (`|>`) is the native R pipe introduced in R 4.1.0, which is slightly different than the magrittr pipe (`%>%`) some may be more familiar with. For information on the distinction between the two see https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/.
 
 ## Background
 
@@ -141,7 +143,7 @@ The most common use of the eBird data is to produce a set of bird sightings, i.e
 This package uses an `auk_ebd` object to keep track of the input data file, any filters defined, and the output file that is produced after filtering has been executed. By keeping everything wrapped up in one object, the user can keep track of exactly what set of input data and filters produced any given output data. To set up the initial `auk_ebd` object, use `auk_ebd()`:
 
 ```{r auk-ebd}
-ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
+ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd()
 ebd
 ```
@@ -168,20 +170,20 @@ ebd
 Note that all of the functions listed above only modify the `auk_ebd` object, in order to define the filters. Once the filters have been defined, the filtering is actually conducted using `auk_filter()`.
 
 ```{r auk-filter}
-ebd_filters <- ebd %>% 
+ebd_filters <- ebd |>
   # species: common and scientific names can be mixed
-  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) %>%
+  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) |>
   # country: codes and names can be mixed; case insensitive
-  auk_country(country = c("US", "Canada", "mexico")) %>%
+  auk_country(country = c("US", "Canada", "mexico")) |>
   # bbox: long and lat in decimal degrees
   # formatted as `c(lng_min, lat_min, lng_max, lat_max)`
-  auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
+  auk_bbox(bbox = c(-100, 37, -80, 52)) |>
   # date: use standard ISO date format `"YYYY-MM-DD"`
-  auk_date(date = c("2012-01-01", "2012-12-31")) %>%
+  auk_date(date = c("2012-01-01", "2012-12-31")) |>
   # time: 24h format
-  auk_time(start_time = c("06:00", "09:00")) %>%
+  auk_time(start_time = c("06:00", "09:00")) |>
   # duration: length in minutes of checklists
-  auk_duration(duration = c(0, 60)) %>%
+  auk_duration(duration = c(0, 60)) |>
   # complete: all species seen or heard are recorded
   auk_complete()
 ebd_filters
@@ -195,10 +197,10 @@ Each of the functions described in the *Defining filters* section only defines a
 
 ```{r auk-complete, eval = FALSE}
 output_file <- "ebd_filtered_blja-grja.txt"
-ebd_jays <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
-  auk_ebd() %>% 
-  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) %>% 
-  auk_country(country = "Canada") %>% 
+ebd_jays <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
+  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) |>
+  auk_country(country = "Canada") |>
   auk_filter(file = output_file)
 ```
 
@@ -209,8 +211,8 @@ ebd_jays <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
 eBird Basic Dataset files can be read with `read_ebd()`. This is a wrapper around `readr::read_delim()`. `read_ebd()` uses `stringsAsFactors = FALSE`, `quote = ""`, sets column classes, and converts variable names to `snake_case`.
 
 ```{r read}
-system.file("extdata/ebd-sample.txt", package = "auk") %>% 
-  read_ebd() %>% 
+system.file("extdata/ebd-sample.txt", package = "auk") |>
+  read_ebd() |>
   glimpse()
 ```
 
@@ -218,11 +220,11 @@ system.file("extdata/ebd-sample.txt", package = "auk") %>%
 
 ```{r read-auk-ebd, eval = FALSE}
 output_file <- "ebd_filtered_blja-grja.txt"
-ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
-  auk_ebd() %>% 
-  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) %>% 
-  auk_country(country = "Canada") %>% 
-  auk_filter(file = output_file) %>% 
+ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
+  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) |>
+  auk_country(country = "Canada") |>
+  auk_filter(file = output_file) |>
   read_ebd()
 ```
 
@@ -231,16 +233,16 @@ ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
 The AWK script can be saved for future reference by providing an output filename to `awk_file`. In addition, by setting `execute = FALSE` the AWK script will be generated but not run.
 
 ```{r awk-script}
-awk_script <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
-  auk_ebd() %>% 
-  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) %>% 
-  auk_country(country = "Canada") %>% 
+awk_script <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
+  auk_species(species = c("Canada Jay", "Cyanocitta cristata")) |>
+  auk_country(country = "Canada") |>
   auk_filter(awk_file = "awk-script.txt", execute = FALSE)
 # read back in and prepare for printing
 awk_file <- readLines(awk_script)
 unlink("awk-script.txt")
-awk_file[!grepl("^[[:space:]]*$", awk_file)] %>% 
-  paste0(collapse = "\n") %>% 
+awk_file[!grepl("^[[:space:]]*$", awk_file)] |>
+  paste0(collapse = "\n") |>
   cat()
 ```
 
@@ -252,7 +254,7 @@ eBird allows observers birding together to share checklists. This process create
 
 ```{r auk-unique}
 # read in an ebd file and don't automatically remove duplicates
-ebd_dupes <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+ebd_dupes <- system.file("extdata/ebd-sample.txt", package = "auk") |>
   read_ebd(unique = FALSE)
 # remove duplicates
 ebd_unique <- auk_unique(ebd_dupes)
@@ -267,7 +269,7 @@ The eBird Basic Dataset includes both true species and other taxa, including dom
 
 ```{r auk-rollup}
 # read in sample data without rolling up
-ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") %>%
+ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") |>
   read_ebd(rollup = FALSE)
 # apply roll up
 ebd_ru <- auk_rollup(ebd)
@@ -279,13 +281,13 @@ unique(ebd_ru$category)
 
 # yellow-rump warbler subspecies rollup
 # without rollup, there are three observations
-ebd %>%
-  filter(common_name == "Yellow-rumped Warbler") %>%
+ebd |>
+  filter(common_name == "Yellow-rumped Warbler") |>
   select(checklist_id, category, common_name, subspecies_common_name,
          observation_count)
 # with rollup, they have been combined
-ebd_ru %>%
-  filter(common_name == "Yellow-rumped Warbler") %>%
+ebd_ru |>
+  filter(common_name == "Yellow-rumped Warbler") |>
   select(checklist_id, category, common_name, observation_count)
 ```
 
@@ -305,9 +307,9 @@ For example, the following filters to only include sightings of Collared Kingfis
 # to produce zero-filled data, provide an EBD and sampling event data file
 f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
 f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-filters <- auk_ebd(f_ebd, file_sampling = f_smp) %>% 
-  auk_species("Collared Kingfisher") %>% 
-  auk_time(c("06:00", "10:00")) %>% 
+filters <- auk_ebd(f_ebd, file_sampling = f_smp) |>
+  auk_species("Collared Kingfisher") |>
+  auk_time(c("06:00", "10:00")) |>
   auk_complete()
 filters
 ```

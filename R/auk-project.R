@@ -18,8 +18,8 @@
 #' @export
 #' @family filter
 #' @examples
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_project("EBIRD_MEX")
 #'   
 #' # alternatively, without pipes

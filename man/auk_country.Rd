@@ -37,8 +37,8 @@ user only wishes to filter the sampling event data.
 # country names and ISO2 codes can be mixed
 # not case sensitive
 country <- c("CA", "United States", "mexico")
-system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
-  auk_ebd() \%>\%
+system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
   auk_country(country)
   
 # alternatively, without pipes

@@ -13,8 +13,8 @@
 #' @export
 #' @family filter
 #' @examples
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_breeding()
 auk_breeding <- function(x)  {
   UseMethod("auk_breeding")

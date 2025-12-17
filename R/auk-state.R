@@ -30,8 +30,8 @@
 #' dplyr::filter(ebird_states, country == "Costa Rica")
 #' # choose texas, united states and puntarenas, cost rica
 #' states <- c("US-TX", "CR-P")
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_state(states)
 #'   
 #' # alternatively, without pipes

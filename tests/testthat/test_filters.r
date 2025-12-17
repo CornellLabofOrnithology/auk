@@ -4,8 +4,8 @@ skip_on_cran()
 
 test_that("auk_species", {
   species <- c("Canada Jay", "Pluvialis squatarola")
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |>
     auk_species(species)
   
   # works correctly
@@ -34,7 +34,7 @@ test_that("auk_species", {
   
   # taxonomy versions
   skip_if_offline()
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   ebd$file <- "ebd_relAug-2016.txt"
   expect_warning(auk_species(ebd, "Canada Jay"))
@@ -48,8 +48,8 @@ test_that("auk_species", {
 
 test_that("auk_country", {
   country <- c("CA", "United States", "mexico", "kosovo", "AC")
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |>
     auk_country(country)
   
   # works correctly
@@ -68,13 +68,13 @@ test_that("auk_country", {
   expect_equal(ebd$filters$country, "BZ")
   
   # just code
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |>
     auk_country("CA")
   expect_equal(ebd$filters$country, "CA")
   # just name
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |>
     auk_country("Canada")
   expect_equal(ebd$filters$country, "CA")
   
@@ -87,8 +87,8 @@ test_that("auk_country", {
 
 test_that("auk_state", {
   state <- c("CR-P", "US-TX")
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |>
     auk_state(state)
   
   # works correctly
@@ -115,8 +115,8 @@ test_that("auk_state", {
 
 test_that("auk_county", {
   county <- c("CA-ON-NG", "US-NY-109")
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |>
     auk_county(county)
   
   # works correctly
@@ -142,8 +142,8 @@ test_that("auk_country/state/county mutually exclusive", {
   county <- "US-NY-109"
   state <- c("CR-P", "US-TX")
   country <- c("Costa Rica", "US")
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |>
     auk_state(state)
   
   expect_length(ebd$filters$country, 0)
@@ -164,8 +164,8 @@ test_that("auk_country/state/county mutually exclusive", {
 })
 
 test_that("auk_bcr", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>% 
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |> 
     auk_bcr(bcr = 24)
   
   # works correctly
@@ -183,7 +183,7 @@ test_that("auk_bcr", {
 })
 
 test_that("auk_bbox", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # works correctly
@@ -209,7 +209,7 @@ test_that("auk_bbox", {
 })
 
 test_that("auk_year", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # character input
@@ -225,7 +225,7 @@ test_that("auk_year", {
 })
 
 test_that("auk_date", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # character input
@@ -259,7 +259,7 @@ test_that("auk_date", {
 })
 
 test_that("auk_date wildcards", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   d <- c("*-05-01", "*-06-30")
@@ -280,7 +280,7 @@ test_that("auk_date wildcards", {
 })
 
 test_that("auk_last_edited", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # character input
@@ -317,8 +317,8 @@ test_that("auk_last_edited", {
 })
 
 test_that("auk_protocol", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>% 
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |> 
     auk_protocol("Stationary")
   
   # works correctly
@@ -336,8 +336,8 @@ test_that("auk_protocol", {
 })
 
 test_that("auk_project", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
-    auk_ebd() %>% 
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
+    auk_ebd() |> 
     auk_project("EBIRD")
   
   # works correctly
@@ -349,7 +349,7 @@ test_that("auk_project", {
 })
 
 test_that("auk_time", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # works correctly
@@ -376,7 +376,7 @@ test_that("auk_time", {
 })
 
 test_that("auk_duration", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # works correctly
@@ -400,7 +400,7 @@ test_that("auk_duration", {
 })
 
 test_that("auk_distance", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # works correctly
@@ -431,7 +431,7 @@ test_that("auk_distance", {
 })
 
 test_that("auk_complete", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # works correctly
@@ -441,7 +441,7 @@ test_that("auk_complete", {
 })
 
 test_that("auk_breeding", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # works correctly
@@ -451,7 +451,7 @@ test_that("auk_breeding", {
 })
 
 test_that("auk_observer", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # works with character
@@ -466,7 +466,7 @@ test_that("auk_observer", {
 })
 
 test_that("auk_exotic", {
-  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_ebd()
   
   # works with character

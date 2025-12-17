@@ -24,8 +24,8 @@ been defined, \code{\link[=auk_filter]{auk_filter()}} should be used to call AWK
 filtering.
 }
 \examples{
-system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
-  auk_ebd() \%>\%
+system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
   auk_observer("obsr313215")
   
 # alternatively, without pipes

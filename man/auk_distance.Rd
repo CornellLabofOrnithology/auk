@@ -35,8 +35,8 @@ user only wishes to filter the sampling event data.
 }
 \examples{
 # only keep checklists that are less than 10 km long
-system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
-  auk_ebd() \%>\%
+system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
   auk_distance(distance = c(0, 10))
   
 # alternatively, without pipes

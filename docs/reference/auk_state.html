@@ -20,7 +20,7 @@ filtering."><meta property="og:image" content="https://cornelllabofornithology.g
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -152,11 +152,11 @@ wishes to filter the sampling event data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> Costa Rica CR           <span style="color: #949494;">"</span>San Jos\u001a<span style="color: #949494;">"</span> CR-SJ     </span>
 <span class="r-in"><span><span class="co"># choose texas, united states and puntarenas, cost rica</span></span></span>
 <span class="r-in"><span><span class="va">states</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"US-TX"</span>, <span class="st">"CR-P"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">auk_state</span><span class="op">(</span><span class="va">states</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/wf/y1p0nztd2ps95ppplsl5bjjr0000gs/T/RtmpFBhSHB/temp_libpath9b324d5a97a6/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/gm/kqqxhwr925q1m_jqtz9ydc_80000gr/T/Rtmpo3LyAh/temp_libpath422e78ccfc44/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -184,7 +184,7 @@ wishes to filter the sampling event data.</p>
 <span class="r-in"><span><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">auk_state</span><span class="op">(</span><span class="va">ebd</span>, <span class="va">states</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/wf/y1p0nztd2ps95ppplsl5bjjr0000gs/T/RtmpFBhSHB/temp_libpath9b324d5a97a6/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/gm/kqqxhwr925q1m_jqtz9ydc_80000gr/T/Rtmpo3LyAh/temp_libpath422e78ccfc44/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -221,7 +221,7 @@ wishes to filter the sampling event data.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

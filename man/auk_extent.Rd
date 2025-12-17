@@ -23,8 +23,8 @@ An \code{auk_ebd} object.
 }
 \examples{
 # fliter to locations roughly in the Pacific Northwest
-system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
-  auk_ebd() \%>\%
+system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
   auk_bbox(bbox = c(-125, 37, -120, 52))
   
 # alternatively, without pipes

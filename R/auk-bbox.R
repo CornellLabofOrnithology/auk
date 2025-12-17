@@ -22,8 +22,8 @@
 #' @family filter
 #' @examples
 #' # fliter to locations roughly in the Pacific Northwest
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_bbox(bbox = c(-125, 37, -120, 52))
 #'   
 #' # alternatively, without pipes
@@ -84,8 +84,8 @@ auk_bbox.auk_sampling <- function(x, bbox) {
 #' @family filter
 #' @examples
 #' # fliter to locations roughly in the Pacific Northwest
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_bbox(bbox = c(-125, 37, -120, 52))
 #'   
 #' # alternatively, without pipes

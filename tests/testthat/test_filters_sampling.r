@@ -2,8 +2,8 @@ context("sampling event filter definition")
 
 test_that("auk_country", {
   country <- c("CA", "United States", "mexico")
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
-    auk_sampling() %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
+    auk_sampling() |>
     auk_country(country)
   
   # works correctly
@@ -22,13 +22,13 @@ test_that("auk_country", {
   expect_equal(sed$filters$country, "BZ")
   
   # just code
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
-    auk_sampling() %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
+    auk_sampling() |>
     auk_country("CA")
   expect_equal(sed$filters$country, "CA")
   # just name
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
-    auk_sampling()%>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
+    auk_sampling()|>
     auk_country("Canada")
   expect_equal(sed$filters$country, "CA")
   
@@ -41,8 +41,8 @@ test_that("auk_country", {
 
 test_that("auk_state", {
   state <- c("CR-P", "US-TX")
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
-    auk_sampling() %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
+    auk_sampling() |>
     auk_state(state)
   
   # works correctly
@@ -69,8 +69,8 @@ test_that("auk_state", {
 
 test_that("auk_county", {
   county <- c("CA-ON-NG", "US-NY-109")
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
-    auk_sampling() %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
+    auk_sampling() |>
     auk_county(county)
   
   # works correctly
@@ -93,7 +93,7 @@ test_that("auk_county", {
 })
 
 test_that("auk_bbox", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
     auk_sampling()
   
   # works correctly
@@ -119,7 +119,7 @@ test_that("auk_bbox", {
 })
 
 test_that("auk_year", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
     auk_sampling()
   
   # character input
@@ -135,7 +135,7 @@ test_that("auk_year", {
 })
 
 test_that("auk_date", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
     auk_sampling()
   
   # character input
@@ -170,7 +170,7 @@ test_that("auk_date", {
 })
 
 test_that("auk_last_edited", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
     auk_sampling()
   
   # character input
@@ -207,8 +207,8 @@ test_that("auk_last_edited", {
 })
 
 test_that("auk_protocol", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
-    auk_sampling() %>% 
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
+    auk_sampling() |> 
     auk_protocol("Stationary")
   
   # works correctly
@@ -226,8 +226,8 @@ test_that("auk_protocol", {
 })
 
 test_that("auk_project", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
-    auk_sampling() %>% 
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
+    auk_sampling() |> 
     auk_project("EBIRD")
   
   # works correctly
@@ -239,7 +239,7 @@ test_that("auk_project", {
 })
 
 test_that("auk_time", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
     auk_sampling()
   
   # works correctly
@@ -266,7 +266,7 @@ test_that("auk_time", {
 })
 
 test_that("auk_duration", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
     auk_sampling()
   
   # works correctly
@@ -290,7 +290,7 @@ test_that("auk_duration", {
 })
 
 test_that("auk_distance", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
     auk_sampling()
   
   # works correctly
@@ -321,7 +321,7 @@ test_that("auk_distance", {
 })
 
 test_that("auk_complete", {
-  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") %>%
+  sed <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
     auk_sampling()
   
   # works correctly

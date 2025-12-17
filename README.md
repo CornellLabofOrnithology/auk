@@ -119,18 +119,18 @@ records from within Canada.
     f_in <- system.file("extdata/ebd-sample.txt", package = "auk")
     # output text file
     f_out <- "ebd_filtered_grja.txt"
-    ebird_data <- f_in %>% 
+    ebird_data <- f_in |> 
       # 1. reference file
-      auk_ebd() %>% 
+      auk_ebd() |> 
       # 2. define filters
-      auk_species(species = "Canada Jay") %>% 
-      auk_country(country = "Canada") %>% 
+      auk_species(species = "Canada Jay") |> 
+      auk_country(country = "Canada") |> 
       # 3. run filtering
-      auk_filter(file = f_out) %>% 
+      auk_filter(file = f_out) |> 
       # 4. read text file into r data frame
       read_ebd()
 
-For those not familiar with the pipe operator (`%>%`), the above code
+For those not familiar with the pipe operator (`|>`), the above code
 could be rewritten:
 
     f_in <- system.file("extdata/ebd-sample.txt", package = "auk")
@@ -194,25 +194,25 @@ defined, the filtering is actually conducted using `auk_filter()`.
     # sample data
     f <- system.file("extdata/ebd-sample.txt", package = "auk")
     # define an EBD reference and a set of filters
-    ebd <- auk_ebd(f) %>% 
+    ebd <- auk_ebd(f) |> 
       # species: common and scientific names can be mixed
-      auk_species(species = c("Canada Jay", "Cyanocitta cristata")) %>%
+      auk_species(species = c("Canada Jay", "Cyanocitta cristata")) |>
       # country: codes and names can be mixed; case insensitive
-      auk_country(country = c("US", "Canada", "mexico")) %>%
+      auk_country(country = c("US", "Canada", "mexico")) |>
       # bbox: long and lat in decimal degrees
       # formatted as `c(lng_min, lat_min, lng_max, lat_max)`
-      auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
+      auk_bbox(bbox = c(-100, 37, -80, 52)) |>
       # date: use standard ISO date format `"YYYY-MM-DD"`
-      auk_date(date = c("2012-01-01", "2012-12-31")) %>%
+      auk_date(date = c("2012-01-01", "2012-12-31")) |>
       # time: 24h format
-      auk_time(start_time = c("06:00", "09:00")) %>%
+      auk_time(start_time = c("06:00", "09:00")) |>
       # duration: length in minutes of checklists
-      auk_duration(duration = c(0, 60)) %>%
+      auk_duration(duration = c(0, 60)) |>
       # complete: all species seen or heard are recorded
       auk_complete()
     ebd
     #> Input 
-    #>   EBD: /private/var/folders/wf/y1p0nztd2ps95ppplsl5bjjr0000gs/T/RtmpFBhSHB/temp_libpath9b323c8f60e8/auk/extdata/ebd-sample.txt 
+    #>   EBD: /private/var/folders/gm/kqqxhwr925q1m_jqtz9ydc_80000gr/T/Rtmpo3LyAh/temp_libpath422e17f29944/auk/extdata/ebd-sample.txt 
     #> 
     #> Output 
     #>   Filters not executed
@@ -252,10 +252,10 @@ Jay and Blue Jay records from Canada and save the results to a
 tab-separated text file for subsequent use:
 
     output_file <- "ebd_filtered_blja-grja.txt"
-    ebd_filtered <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
-      auk_ebd() %>% 
-      auk_species(species = c("Canada Jay", "Cyanocitta cristata")) %>% 
-      auk_country(country = "Canada") %>% 
+    ebd_filtered <- system.file("extdata/ebd-sample.txt", package = "auk") |> 
+      auk_ebd() |> 
+      auk_species(species = c("Canada Jay", "Cyanocitta cristata")) |> 
+      auk_country(country = "Canada") |> 
       auk_filter(file = output_file)
 
 **Filtering the full dataset typically takes at least a couple hours**,
@@ -265,8 +265,8 @@ so set it running then go grab lunch!
 
 eBird Basic Dataset files can be read with `read_ebd()`:
 
-    system.file("extdata/ebd-sample.txt", package = "auk") %>% 
-      read_ebd() %>% 
+    system.file("extdata/ebd-sample.txt", package = "auk") |> 
+      read_ebd() |> 
       str()
     #> tibble [398 × 48] (S3: tbl_df/tbl/data.frame)
     #>  $ checklist_id             : chr [1:398] "G1131664" "G1131665" "G1158137" "G1158138" ...

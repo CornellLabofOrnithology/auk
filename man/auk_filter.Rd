@@ -108,13 +108,13 @@ will likely need to install \href{https://www.cygwin.com}{Cygwin}.
 # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt"
 f <- system.file("extdata/ebd-sample.txt", package = "auk")
 # define filters
-filters <- auk_ebd(f) \%>\%
-  auk_species(species = c("Canada Jay", "Blue Jay")) \%>\%
-  auk_country(country = c("US", "Canada")) \%>\%
-  auk_bbox(bbox = c(-100, 37, -80, 52)) \%>\%
-  auk_date(date = c("2012-01-01", "2012-12-31")) \%>\%
-  auk_time(start_time = c("06:00", "09:00")) \%>\%
-  auk_duration(duration = c(0, 60)) \%>\%
+filters <- auk_ebd(f) |>
+  auk_species(species = c("Canada Jay", "Blue Jay")) |>
+  auk_country(country = c("US", "Canada")) |>
+  auk_bbox(bbox = c(-100, 37, -80, 52)) |>
+  auk_date(date = c("2012-01-01", "2012-12-31")) |>
+  auk_time(start_time = c("06:00", "09:00")) |>
+  auk_duration(duration = c(0, 60)) |>
   auk_complete()
   
 # alternatively, without pipes

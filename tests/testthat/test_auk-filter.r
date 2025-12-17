@@ -6,13 +6,13 @@ skip_on_os("windows")
 test_that("auk_filter filter an ebd", {
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
-  filters <- auk_ebd(f) %>%
-    auk_species(species = c("Canada Jay", "Blue Jay")) %>%
-    auk_country(country = c("US", "Canada")) %>%
-    auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
-    auk_date(date = c("2012-01-01", "2012-12-31")) %>%
-    auk_time(start_time = c("06:00", "09:00")) %>%
-    auk_duration(duration = c(0, 120)) %>%
+  filters <- auk_ebd(f) |>
+    auk_species(species = c("Canada Jay", "Blue Jay")) |>
+    auk_country(country = c("US", "Canada")) |>
+    auk_bbox(bbox = c(-100, 37, -80, 52)) |>
+    auk_date(date = c("2012-01-01", "2012-12-31")) |>
+    auk_time(start_time = c("06:00", "09:00")) |>
+    auk_duration(duration = c(0, 120)) |>
     auk_complete()
   # run filters
   tmp <- tempfile()
@@ -41,11 +41,11 @@ test_that("auk_filter filter an ebd", {
   
   # filter again
   tmp <- tempfile()
-  ebd <- auk_ebd(f) %>%
-    auk_project("EBIRD_CAN") %>% 
-    auk_protocol("Traveling") %>% 
-    auk_state("CA-ON") %>% 
-    auk_filter(file = tmp) %>% 
+  ebd <- auk_ebd(f) |>
+    auk_project("EBIRD_CAN") |> 
+    auk_protocol("Traveling") |> 
+    auk_state("CA-ON") |> 
+    auk_filter(file = tmp) |> 
     read_ebd()
   unlink(tmp)
   
@@ -54,10 +54,10 @@ test_that("auk_filter filter an ebd", {
   expect_true(all(ebd$state_code == "CA-ON"))
   
   # again
-  ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk") %>% 
-    auk_ebd() %>%
-    auk_breeding() %>% 
-    auk_filter(file = tmp) %>% 
+  ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk") |> 
+    auk_ebd() |>
+    auk_breeding() |> 
+    auk_filter(file = tmp) |> 
     read_ebd()
   expect_true(all(!is.na(ebd$breeding_code)))
 })
@@ -66,10 +66,10 @@ test_that("auk_filter filter sampling and ebd files", {
   # set up filters
   f <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-  filters <- auk_ebd(f, f_smp) %>%
-    auk_species(species = "Collared Kingfisher") %>%
-    auk_time(start_time = c("06:00", "09:00")) %>%
-    auk_duration(duration = c(0, 60)) %>%
+  filters <- auk_ebd(f, f_smp) |>
+    auk_species(species = "Collared Kingfisher") |>
+    auk_time(start_time = c("06:00", "09:00")) |>
+    auk_duration(duration = c(0, 60)) |>
     auk_complete()
   # run filters
   tmp <- tempfile()
@@ -100,8 +100,8 @@ test_that("auk_filter turn off filtering of sampling event data", {
   f <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
   f_tmp <- tempfile()
-  ebd <- auk_ebd(f, f_smp) %>%
-    auk_species(species = "Collared Kingfisher") %>%
+  ebd <- auk_ebd(f, f_smp) |>
+    auk_species(species = "Collared Kingfisher") |>
     auk_filter(file = f_tmp, filter_sampling = FALSE)
 
   expect_equal(ebd$output, normalizePath(f_tmp, winslash = "/"))
@@ -113,7 +113,7 @@ test_that("auk_filter turn off filtering of sampling event data", {
 test_that("auk_filter won't overwrite files", {
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
-  filters <- auk_ebd(f) %>%
+  filters <- auk_ebd(f) |>
     auk_species(species = c("Canada Jay", "Blue Jay"))
 
   # run first time
@@ -129,7 +129,7 @@ test_that("auk_filter won't overwrite files", {
 test_that("auk_filter can save awk file on any system", {
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
-  filters <- auk_ebd(f) %>%
+  filters <- auk_ebd(f) |>
     auk_species(species = c("Canada Jay", "Blue Jay"))
 
   # run first time
@@ -146,9 +146,9 @@ test_that("auk_filter can save awk file on any system", {
 test_that("auk_filter filter an auk_sampling object", {
   # set up filters
   f <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-  filters <- auk_sampling(f) %>%
-    auk_time(start_time = c("06:00", "09:00")) %>%
-    auk_duration(duration = c(0, 60)) %>%
+  filters <- auk_sampling(f) |>
+    auk_time(start_time = c("06:00", "09:00")) |>
+    auk_duration(duration = c(0, 60)) |>
     auk_complete()
   # run filters
   tmp <- tempfile()
@@ -174,16 +174,16 @@ test_that("auk_filter works with wildcard dates", {
   # set up filters
   f <- system.file("extdata/ebd-sample.txt", package = "auk")
   tmp <- tempfile()
-  filters <- auk_ebd(f) %>%
+  filters <- auk_ebd(f) |>
     auk_date(date = c("*-05-01", "*-06-30"))
-  ebd <- auk_filter(filters, file = tmp) %>% 
+  ebd <- auk_filter(filters, file = tmp) |> 
     read_ebd()
   unlink(tmp)
   
   expect_is(ebd, "data.frame")
   expect_lt(nrow(ebd), nrow(read_ebd(f)))
   expect_gt(nrow(ebd), 0)
-  month_day <- as.Date(ebd$observation_date) %>% 
+  month_day <- as.Date(ebd$observation_date) |> 
     format("%m-%d")
   md_range <- sub("*-", "", filters$filters$date, fixed = TRUE)
   expect_true(all(month_day >= md_range[1]))

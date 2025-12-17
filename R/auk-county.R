@@ -29,8 +29,8 @@
 #' @family filter
 #' @examples
 #' # choose tompkins county, ny, united states
-#' system.file("extdata/ebd-sample.txt", package = "auk") %>%
-#'   auk_ebd() %>%
+#' system.file("extdata/ebd-sample.txt", package = "auk") |>
+#'   auk_ebd() |>
 #'   auk_county("US-NY-109")
 #'   
 #' # alternatively, without pipes

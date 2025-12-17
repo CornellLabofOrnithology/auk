@@ -96,10 +96,10 @@ if (requireNamespace("unmarked", quietly = TRUE)) {
 }
 
 # this function can also be used for abundance modeling
-abd <- ebd_zf \%>\% 
+abd <- ebd_zf |> 
   # convert count to integer, drop records with no count
-  dplyr::mutate(observation_count = as.integer(observation_count)) \%>\% 
-  dplyr::filter(!is.na(observation_count)) \%>\% 
+  dplyr::mutate(observation_count = as.integer(observation_count)) |> 
+  dplyr::filter(!is.na(observation_count)) |> 
   # filter to repeated visits
   filter_repeat_visits(n_days = 30)
 # prepare for conversion to unmarkedFramePCount object

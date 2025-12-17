@@ -8,14 +8,14 @@ test_that("auk_split splits correctly", {
   # split into two species files
   species <- c("Perisoreus canadensis", "Cyanocitta cristata")
   prefix <- file.path(tempdir(), "ebd_")
-  f <- system.file("extdata/ebd-sample.txt", package = "auk") %>%
+  f <- system.file("extdata/ebd-sample.txt", package = "auk") |>
     auk_split(species = species, prefix = prefix, overwrite = TRUE)
   
   # check
   for (i in seq_along(species)) {
     ebd <- read_ebd(f[i])
-    ebd_full <- system.file("extdata/ebd-sample.txt", package = "auk") %>% 
-      read_ebd() %>% 
+    ebd_full <- system.file("extdata/ebd-sample.txt", package = "auk") |> 
+      read_ebd() |> 
       filter(scientific_name == species[i])
     expect_is(ebd, "data.frame")
     expect_true(all(ebd$scientific_name == species[i]))

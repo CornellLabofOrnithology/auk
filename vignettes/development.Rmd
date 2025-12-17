@@ -61,7 +61,7 @@ Create a new function that will allow users to define a filter. Be sure to follo
 
 1. Extensive checks on the incoming arguments. Remember that filtering with AWK takes multiple hours, so it's best to catch any errors early, prior to running `auk_filter()`. At the very least, check data types and, where possible, check that values are valid (e.g. `color` should be in `c("red", "green", "blue", ...)`). Provide informative error or warning messages where appropriate.
 2. Setting the filter criteria in the `auk_ebd` object. This is generally as simple as `x$filters$color = color`.
-3. Thorough documentation. Document all the arguments and provide examples with and without the pipe operator (`%>%`).
+3. Thorough documentation. Document all the arguments and provide examples with and without the pipe operator (`|>`).
 
 ### 3. Update `auk_filter()`
 

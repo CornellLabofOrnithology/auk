@@ -55,13 +55,13 @@
 #' # in practice, provide path to ebd, e.g. f <- "data/ebd_relFeb-2018.txt"
 #' f <- system.file("extdata/ebd-sample.txt", package = "auk")
 #' # define filters
-#' filters <- auk_ebd(f) %>%
-#'   auk_species(species = c("Canada Jay", "Blue Jay")) %>%
-#'   auk_country(country = c("US", "Canada")) %>%
-#'   auk_bbox(bbox = c(-100, 37, -80, 52)) %>%
-#'   auk_date(date = c("2012-01-01", "2012-12-31")) %>%
-#'   auk_time(start_time = c("06:00", "09:00")) %>%
-#'   auk_duration(duration = c(0, 60)) %>%
+#' filters <- auk_ebd(f) |>
+#'   auk_species(species = c("Canada Jay", "Blue Jay")) |>
+#'   auk_country(country = c("US", "Canada")) |>
+#'   auk_bbox(bbox = c(-100, 37, -80, 52)) |>
+#'   auk_date(date = c("2012-01-01", "2012-12-31")) |>
+#'   auk_time(start_time = c("06:00", "09:00")) |>
+#'   auk_duration(duration = c(0, 60)) |>
 #'   auk_complete()
 #'   
 #' # alternatively, without pipes
@@ -446,7 +446,7 @@ awk_translate <- function(filters, col_idx, sep, select) {
     condition <- paste0("$${lng_idx} >= ${xmn} && ",
                         "$${lng_idx} <= ${xmx} && ",
                         "$${lat_idx} >= ${ymn} && ",
-                        "$${lat_idx} <= ${ymx}") %>%
+                        "$${lat_idx} <= ${ymx}") |>
       str_interp(list(lat_idx = lat_idx, lng_idx = lng_idx,
                       xmn = filters$bbox[1], xmx = filters$bbox[3],
                       ymn = filters$bbox[2], ymx = filters$bbox[4]))

@@ -40,8 +40,8 @@ the eBird API will be queried to get the correct version of the taxonomy.
 \examples{
 # common and scientific names can be mixed
 species <- c("Canada Jay", "Pluvialis squatarola")
-system.file("extdata/ebd-sample.txt", package = "auk") \%>\%
-  auk_ebd() \%>\%
+system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
   auk_species(species)
   
 # alternatively, without pipes
