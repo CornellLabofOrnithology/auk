@@ -7,18 +7,24 @@
 \format{
 A data frame with eight variables and 16,248 rows:
 \itemize{
+\item \code{species_code}: a unique alphanumeric code identifying each species.
+\item \code{taxon_concept_id}: a unique alphanumeric code identifying each species
+in the Avibase taxonomy.
 \item \code{scientific_name}: scientific name.
 \item \code{common_name}: common name, defaults to English, but different languages
 can be selected using the \code{locale} parameter.
-\item \code{species_code}: a unique alphanumeric code identifying each species.
-\item \code{category}: whether the entry is for a species or another
-field-identifiable taxon, such as \code{spuh}, \code{slash}, \code{hybrid}, etc.
-\item \code{taxon_order}: numeric value used to sort rows in taxonomic order.
 \item \code{order}: the scientific name of the order that the species belongs to.
 \item \code{family}: the scientific name of the family that the species belongs to.
+\item \code{family_common}: the common name of the family that the species belongs
+to.
+\item \code{category}: whether the entry is for a species or another
+field-identifiable taxon, such as \code{spuh}, \code{slash}, \code{hybrid}, etc.
+\item \code{taxonomic_order}: integer value used to sort rows in taxonomic order.
 \item \code{report_as}: for taxa that can be resolved to true species (i.e. species,
 subspecies, and recognizable forms), this field links to the corresponding
 species code. For taxa that can't be resolved, this field is \code{NA}.
+\item \code{extinct}: logical variable indicating whether the species is listed as
+extinct in the eBird taxonomy.
 }
 
 For further details, see \url{https://support.ebird.org/support/solutions/articles/48000837816-the-ebird-taxonomy}

@@ -12,9 +12,6 @@
 #'
 #' @param x data.frame; data frame of eBird data, typically as imported by
 #'   [read_ebd()]
-#' @param taxonomy_version integer; the version (i.e. year) of the taxonomy. In
-#'   most cases, this should be left empty to use the version of the taxonomy
-#'   included in the package. See [get_ebird_taxonomy()].
 #' @param drop_higher logical; whether to remove taxa above species during the 
 #'   rollup process, e.g. "spuhs" like "duck sp.".
 #'   
@@ -89,7 +86,7 @@
 #' ebd_ru |>
 #'   filter(common_name == "Yellow-rumped Warbler") |>
 #'   select(checklist_id, category, common_name, observation_count)
-auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
+auk_rollup <- function(x, drop_higher = TRUE) {
   assertthat::assert_that(
     is.data.frame(x),
     "scientific_name" %in% names(x)
@@ -107,14 +104,8 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
     cid <- "sampling_event_identifier"
   }
   
-  # get the correct ebird taxonomy version
-  if (missing(taxonomy_version) || 
-      taxonomy_version == auk_version()$taxonomy_version) {
-    tax_full <- auk::ebird_taxonomy
-  } else {
-    stopifnot(is_integer(taxonomy_version), length(taxonomy_version) == 1)
-    tax_full <- get_ebird_taxonomy(version = taxonomy_version)
-  }
+  # get the ebird taxonomy version
+  tax_full <- auk::ebird_taxonomy
   
   # remove anything not identifiable to a species
   if (drop_higher) {
@@ -129,7 +120,9 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
                           is.na(.data$report_as))
   tax <- dplyr::filter(tax_full, .data$category %in% include)
   tax <- rbind(tax, undesc)
-  tax <- dplyr::select(tax, "scientific_name", "taxon_order")
+  tax <- dplyr::select(tax, "scientific_name",
+                       taxonomic_order_tax = "taxonomic_order",
+                       taxon_concept_id_tax = "taxon_concept_id")
   # store taxa before filtering
   species_prefilter <- unique(x$scientific_name)
   x <- dplyr::inner_join(x, tax, by = "scientific_name")
@@ -183,14 +176,17 @@ auk_rollup <- function(x, taxonomy_version, drop_higher = TRUE) {
   x <- dplyr::group_by(x, 
                        dplyr::across(dplyr::all_of(c(cid, "scientific_name"))))
   # give precedence to true species records
-  x <- dplyr::slice_min(x, n = 1, order_by = .data$taxon_order, 
+  x <- dplyr::slice_min(x, n = 1, order_by = .data$taxonomic_order_tax, 
                         with_ties = FALSE)
   x <- dplyr::ungroup(x)
   
   # update counts with summary
   x <- dplyr::inner_join(x, sp, by = c(cid, "scientific_name"))
-  x <- dplyr::mutate(x, observation_count = .data$count)
-  x <- dplyr::select(x, -"count", -"taxon_order")
+  x <- dplyr::mutate(x,
+                     observation_count = .data$count,
+                     taxonomic_order = .data$taxonomic_order_tax,
+                     taxon_concept_id = .data$taxon_concept_id_tax)
+  x <- dplyr::select(x, -"count", -"taxonomic_order_tax", -"taxon_concept_id_tax")
   
   # drop subspecies fields, set category to species
   if ("category" %in% names(x)) {

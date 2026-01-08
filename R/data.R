@@ -8,18 +8,24 @@
 #' equivalents in this data frame.
 #'
 #' @format A data frame with eight variables and 16,248 rows:
+#'   - `species_code`: a unique alphanumeric code identifying each species.
+#'   - `taxon_concept_id`: a unique alphanumeric code identifying each species 
+#'   in the Avibase taxonomy.
 #'   - `scientific_name`: scientific name.
 #'   - `common_name`: common name, defaults to English, but different languages 
 #'   can be selected using the `locale` parameter.
-#'   - `species_code`: a unique alphanumeric code identifying each species.
-#'   - `category`: whether the entry is for a species or another 
-#'   field-identifiable taxon, such as `spuh`, `slash`, `hybrid`, etc.
-#'   - `taxon_order`: numeric value used to sort rows in taxonomic order.
 #'   - `order`: the scientific name of the order that the species belongs to.
 #'   - `family`: the scientific name of the family that the species belongs to.
+#'   - `family_common`: the common name of the family that the species belongs
+#'   to.
+#'   - `category`: whether the entry is for a species or another 
+#'   field-identifiable taxon, such as `spuh`, `slash`, `hybrid`, etc.
+#'   - `taxonomic_order`: integer value used to sort rows in taxonomic order.
 #'   - `report_as`: for taxa that can be resolved to true species (i.e. species,
 #'   subspecies, and recognizable forms), this field links to the corresponding
 #'   species code. For taxa that can't be resolved, this field is `NA`.
+#'   - `extinct`: logical variable indicating whether the species is listed as 
+#'   extinct in the eBird taxonomy.
 #'
 #' For further details, see \url{https://support.ebird.org/support/solutions/articles/48000837816-the-ebird-taxonomy}
 #' @family data

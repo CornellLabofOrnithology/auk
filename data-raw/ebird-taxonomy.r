@@ -3,22 +3,6 @@ library(stringi)
 library(readxl)
 library(auk)
 
-# via api -----
-
-# eBird taxonomy
-# typically updated annually in the late summer
-ebird_taxonomy <- get_ebird_taxonomy() |>
-  # ascii conversion
-  mutate(common_name = stri_trans_general(common_name, "latin-ascii")) |> 
-  as.data.frame(stringsAsFactors = FALSE)
-
-write_csv(ebird_taxonomy, "data-raw/ebird-taxonomy.csv", na = "")
-usethis::use_data(ebird_taxonomy, overwrite = TRUE, compress = "xz")
-filter(ebird_taxonomy, scientific_name == "Gyps rueppelli")
-
-
-# via csv - including common family names -----
-
 extract_family <- function(x) {
   str_match(x, "\\((.*)\\)")[, 2, drop = TRUE]
 }
@@ -29,22 +13,27 @@ ebird_taxonomy <- paste0("https://www.birds.cornell.edu/",
   rename_all(tolower) |> 
   mutate(common_name = stri_trans_general(primary_com_name, "latin-ascii"),
          family_common = extract_family(family),
-         family = str_remove(family, " \\(.+\\)")) |> 
-  select(species_code, scientific_name = sci_name, common_name,
+         family = str_remove(family, " \\(.+\\)"),
+         # bug in the csv duplicating "avibase-"
+         taxon_concept_id = str_replace(taxon_concept_id,
+                                        "avibase-avibase-",
+                                        "avibase-")) |> 
+  select(species_code, taxon_concept_id,
+         scientific_name = sci_name, common_name,
          order, family, family_common,
-         category, taxon_order, report_as) |> 
+         category, taxonomic_order = taxon_order, report_as) |> 
   as.data.frame(stringsAsFactors = FALSE)
 
 # extinct species
-ebird_taxonomy <- paste0("https://www.birds.cornell.edu/",
-                         "clementschecklist/wp-content/uploads/2025/10/",
-                         "Clements_v2025-October-2025.csv") |> 
+extinction <- paste0("https://www.birds.cornell.edu/",
+                     "clementschecklist/wp-content/uploads/2025/10/",
+                     "Clements_v2025-October-2025.csv") |> 
   read_csv() |> 
   filter(category == "species") |> 
-  mutate(scientific_name = `scientific name`,
+  mutate(taxon_concept_id = `taxon concept ID`,
          extinct = !is.na(extinct) & extinct == 1,
-         .keep = "none") |> 
-  left_join(ebird_taxonomy, y = _, by = "scientific_name")
+         .keep = "none")
+ebird_taxonomy <- left_join(ebird_taxonomy, extinction, by = "taxon_concept_id")
 
 write_csv(ebird_taxonomy, "data-raw/ebird-taxonomy.csv", na = "")
 usethis::use_data(ebird_taxonomy, overwrite = TRUE, compress = "xz")

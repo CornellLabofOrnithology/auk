@@ -22,7 +22,7 @@ should be used to call AWK and perform the filtering."><meta property="og:image"
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.1</span>
       </span>
     </div>
 
@@ -114,25 +114,25 @@ user only wishes to filter the sampling event data.</p>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other filter:
-<code><a href="auk_bbox.html">auk_bbox</a>()</code>,
-<code><a href="auk_breeding.html">auk_breeding</a>()</code>,
-<code><a href="auk_complete.html">auk_complete</a>()</code>,
-<code><a href="auk_country.html">auk_country</a>()</code>,
-<code><a href="auk_county.html">auk_county</a>()</code>,
-<code><a href="auk_date.html">auk_date</a>()</code>,
-<code><a href="auk_distance.html">auk_distance</a>()</code>,
-<code><a href="auk_duration.html">auk_duration</a>()</code>,
-<code><a href="auk_exotic.html">auk_exotic</a>()</code>,
-<code><a href="auk_extent.html">auk_extent</a>()</code>,
-<code><a href="auk_filter.html">auk_filter</a>()</code>,
-<code><a href="auk_last_edited.html">auk_last_edited</a>()</code>,
-<code><a href="auk_observer.html">auk_observer</a>()</code>,
-<code><a href="auk_project.html">auk_project</a>()</code>,
-<code><a href="auk_protocol.html">auk_protocol</a>()</code>,
-<code><a href="auk_species.html">auk_species</a>()</code>,
-<code><a href="auk_state.html">auk_state</a>()</code>,
-<code><a href="auk_time.html">auk_time</a>()</code>,
-<code><a href="auk_year.html">auk_year</a>()</code></p></div>
+<code><a href="auk_bbox.html">auk_bbox()</a></code>,
+<code><a href="auk_breeding.html">auk_breeding()</a></code>,
+<code><a href="auk_complete.html">auk_complete()</a></code>,
+<code><a href="auk_country.html">auk_country()</a></code>,
+<code><a href="auk_county.html">auk_county()</a></code>,
+<code><a href="auk_date.html">auk_date()</a></code>,
+<code><a href="auk_distance.html">auk_distance()</a></code>,
+<code><a href="auk_duration.html">auk_duration()</a></code>,
+<code><a href="auk_exotic.html">auk_exotic()</a></code>,
+<code><a href="auk_extent.html">auk_extent()</a></code>,
+<code><a href="auk_filter.html">auk_filter()</a></code>,
+<code><a href="auk_last_edited.html">auk_last_edited()</a></code>,
+<code><a href="auk_observer.html">auk_observer()</a></code>,
+<code><a href="auk_project.html">auk_project()</a></code>,
+<code><a href="auk_protocol.html">auk_protocol()</a></code>,
+<code><a href="auk_species.html">auk_species()</a></code>,
+<code><a href="auk_state.html">auk_state()</a></code>,
+<code><a href="auk_time.html">auk_time()</a></code>,
+<code><a href="auk_year.html">auk_year()</a></code></p></div>
     </div>
 
     <div id="ref-examples">
@@ -147,7 +147,7 @@ user only wishes to filter the sampling event data.</p>
 <span class="r-in"><span>  <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">auk_bcr</span><span class="op">(</span>bcr <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/gm/kqqxhwr925q1m_jqtz9ydc_80000gr/T/Rtmpo3LyAh/temp_libpath422e78ccfc44/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpJYh6zC/temp_libpath1e50b43c95d/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -175,7 +175,7 @@ user only wishes to filter the sampling event data.</p>
 <span class="r-in"><span><span class="va">ebd</span> <span class="op">&lt;-</span> <span class="fu"><a href="auk_ebd.html">auk_ebd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/ebd-sample.txt"</span>, package <span class="op">=</span> <span class="st">"auk"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">auk_bcr</span><span class="op">(</span><span class="va">ebd</span>, bcr <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/gm/kqqxhwr925q1m_jqtz9ydc_80000gr/T/Rtmpo3LyAh/temp_libpath422e78ccfc44/auk/extdata/ebd-sample.txt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpJYh6zC/temp_libpath1e50b43c95d/auk/extdata/ebd-sample.txt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Output </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Filters not executed</span>
@@ -212,7 +212,7 @@ user only wishes to filter the sampling event data.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

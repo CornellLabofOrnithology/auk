@@ -1,3 +1,7 @@
+# auk 0.9.1
+
+- ensure taxon_concept_id behaves correctly in auk_rollup() (issue #94)
+
 # auk 0.9.0
 
 - update to align with the 2025 taxonomy update
