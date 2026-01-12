@@ -280,7 +280,7 @@ unique(ebd$category)
 unique(ebd_ru$category)
 
 # yellow-rump warbler subspecies rollup
-# without rollup, there are three observations
+# without rollup, there are multiple observations per checklists
 ebd |>
   filter(common_name == "Yellow-rumped Warbler") |>
   select(checklist_id, category, common_name, subspecies_common_name,

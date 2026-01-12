@@ -4,7 +4,7 @@ devtools::clean_vignettes()
 pkgdown::clean_site()
 
 # rebuild docs and install
-devtools::document()
+devtools::document(); devtools::document()
 pak::local_install(ask = FALSE, dependencies = TRUE)
 
 # local tests and checks
@@ -23,3 +23,6 @@ pkgdown::build_site()
 devtools::check()
 devtools::check_win_devel()
 devtools::check_win_release()
+
+# revdeps
+revdepcheck::revdep_check(num_workers = 4)

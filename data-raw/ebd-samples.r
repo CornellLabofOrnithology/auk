@@ -13,7 +13,7 @@ for (species in c("gryjay", "grnjay", "blujay")) {
   tf <- tempfile()
   # further filtering
   filtered <- path(ebird_dir,
-                   glue("ebd_{species}_201001_201212_relSep-2023.txt")) |> 
+                   glue("ebd_{species}_201001_201212_relNov-2025.txt")) |> 
     auk_ebd() |> 
     auk_country(country = c("US", "Canada", "Mexico", "Belize", 
                             "Guatemala", "Honduras", "Panama", 
@@ -25,12 +25,12 @@ for (species in c("gryjay", "grnjay", "blujay")) {
   
   # import
   obs <- read_tsv(tf, quote = "", col_types = cols(.default = "c")) |> 
-    select(-`...50`)
+    select(-`...53`)
   
-  # sample 500 observations
+  # sample observations
   set.seed(1)
-  # sample to 500 records, make sure to get some from central america
   if (species == "grnjay") {
+    # make sure to get some from central america
     s1 <- obs |> 
       filter(!`COUNTRY CODE` %in% c("CA", "US")) |> 
       slice_sample(n = 100)
@@ -61,12 +61,8 @@ stopifnot(all(read_ebd(f)$scientific_name %in% ebird_taxonomy$scientific_name))
 # singapore zero-fill ----
 
 # filter to focal species
-f_ebd_in <- path(ebird_dir, 
-                 "ebd_SG_201201_201212_smp_relSep-2023",
-                 "ebd_SG_201201_201212_smp_relSep-2023.txt")
-f_sed_in <- path(ebird_dir, 
-                 "ebd_SG_201201_201212_smp_relSep-2023",
-                 "ebd_SG_201201_201212_smp_relSep-2023_sampling.txt")
+f_ebd_in <- path(ebird_dir, "ebd_SG_201201_201212_smp_relNov-2025.txt")
+f_sed_in <- path(ebird_dir, "ebd_SG_201201_201212_smp_relNov-2025_sampling.txt")
 f_ebd_out <- "inst/extdata/zerofill-ex_ebd.txt"
 f_sed_out <- "inst/extdata/zerofill-ex_sampling.txt"
 filtered <- auk_ebd(f_ebd_in, f_sed_in) |> 
@@ -93,21 +89,21 @@ readLines(f_sed_out) |>
 stopifnot(length(tools::showNonASCII(readLines(f_sed_out))) == 0)
 
 
-# colorado rollup ----
+# rollup example ----
 
-ebd <- path(ebird_dir,
-            "ebd_US-CO_201801_201812_relSep-2023",
-            "ebd_US-CO_201801_201812_relSep-2023.txt") |> 
+ebd <- path(ebird_dir, "ebd_US-WA-033_202401_202412_smp_relNov-2025.txt") |> 
   read_tsv(quote = "", col_types = cols(.default = "c")) |> 
-  select(-...50)
-# checklist with all three yrwa types
+  select(-...53) |> 
+  filter(is.na(`GROUP IDENTIFIER`))
+# checklist with all four yrwa types
 ru_ex <- ebd |> 
-  filter(`SAMPLING EVENT IDENTIFIER` == "S129851825",
-         `COMMON NAME` == "Yellow-rumped Warbler")
+  filter(`COMMON NAME` == "Yellow-rumped Warbler") |> 
+  group_by(`SAMPLING EVENT IDENTIFIER`) |> 
+  filter(n() == 4) |>
+  ungroup()
 set.seed(1)
 ru_ex <- ebd |> 
-  filter(CATEGORY %in% c("spuh", "slash", "hybrid", "domestic", "form", 
-                         "intergrade")) |> 
+  filter(CATEGORY %in% c("spuh", "slash", "hybrid", "domestic", "form")) |> 
   group_by(CATEGORY) |> 
   slice_sample(n = 3) |> 
   ungroup() |> 

@@ -9,7 +9,7 @@ test_that("auk_filter correctly keeps all columns by default", {
     auk_species(species = c("Canada Jay", "Blue Jay")) |> 
     auk_filter(file = tempfile()) |> 
     read_ebd(unique = FALSE, rollup = FALSE)
-  expect_equal(ncol(ebd), 49)
+  expect_equal(ncol(ebd), 52)
 })
 
 test_that("auk_filter correctly keeps columns", {
@@ -31,7 +31,7 @@ test_that("auk_filter correctly drops columns", {
     auk_species(species = c("Canada Jay", "Blue Jay")) |> 
     auk_filter(file = tempfile(), drop = "species comments") |> 
     read_ebd(unique = FALSE, rollup = FALSE)
-  expect_equal(ncol(ebd), 48)
+  expect_equal(ncol(ebd), 51)
   expect_true(!"species_comments" %in% names(ebd))
 })
 
@@ -63,7 +63,7 @@ test_that("auk_filter correctly keeps sampling event data columns", {
                     keep = to_keep)
   
   # read in results
-  ebd_df <- read_ebd(ebd)
+  ebd_df <- read_ebd(ebd, rollup = FALSE)
   smp_df <- read_sampling(ebd)
   
   expect_equal(ncol(ebd_df), 6)

@@ -16,7 +16,7 @@ test_that("auk_filter filter an ebd", {
     auk_complete()
   # run filters
   tmp <- tempfile()
-  ebd <- auk_filter(filters, file = tmp)
+  ebd <- auk_filter(filters, file = tmp, overwrite = TRUE)
 
   expect_is(ebd, "auk_ebd")
   expect_equal(ebd$output, normalizePath(tmp, winslash = "/"))
@@ -42,15 +42,13 @@ test_that("auk_filter filter an ebd", {
   # filter again
   tmp <- tempfile()
   ebd <- auk_ebd(f) |>
-    auk_project("EBIRD_CAN") |> 
     auk_protocol("Traveling") |> 
     auk_state("CA-ON") |> 
-    auk_filter(file = tmp) |> 
+    auk_filter(file = tmp, overwrite = TRUE) |> 
     read_ebd()
   unlink(tmp)
   
-  expect_true(all(ebd$project_code == "EBIRD_CAN"))
-  expect_true(all(ebd$protocol_type == "Traveling"))
+  expect_true(all(ebd$protocol_name == "Traveling"))
   expect_true(all(ebd$state_code == "CA-ON"))
   
   # again
@@ -163,7 +161,7 @@ test_that("auk_filter filter an auk_sampling object", {
   
   expect_is(s_df, "data.frame")
   expect_lt(nrow(s_df), nrow(read_sampling(f)))
-  expect_equal(nrow(s_df), 15)
+  expect_equal(nrow(s_df), 16)
   expect_true(all(s_df$time_observations_started >= filters$filters$time[1]))
   expect_true(all(s_df$time_observations_started <= filters$filters$time[2]))
   expect_true(all(s_df$duration_minutes >= filters$filters$duration[1]))

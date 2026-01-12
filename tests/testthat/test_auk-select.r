@@ -12,7 +12,7 @@ test_that("auk_select works on ebd", {
   tmp <- tempfile()
   ebd <- auk_ebd(f) |> 
     auk_select(select = cols, file = tmp) |> 
-    read_ebd(unique = FALSE)
+    read_ebd(unique = FALSE, rollup = FALSE)
   unlink(tmp)
   
   expect_is(ebd, "data.frame")

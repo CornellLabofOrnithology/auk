@@ -1,10 +1,7 @@
 # auk 0.9.1
 
 - ensure taxon_concept_id behaves correctly in auk_rollup() (issue #94)
-
-# auk 0.9.0
-
-- update to align with the 2025 taxonomy update
+- update EBD example files to get latest format (e.g. add taxon_concept_id)
 
 # Test environments
 
@@ -24,4 +21,3 @@ We checked 1 reverse dependencies, comparing R CMD check results across CRAN and
 
  * We saw 0 new problems
  * We failed to check 0 packages
-
