@@ -1,0 +1,308 @@
+# auk development
+
+This vignette describes the process of updating and extending `auk`.
+Three topics are covered: updating `auk` when a new eBird taxonomy is
+released, extending `auk` to include new filters, and CRAN submission.
+
+## Updating the eBird taxonomy
+
+The species, and other taxa, available for entry into the eBird database
+is dependent on the [eBird
+taxonomy](https://ebird.org/science/use-ebird-data/the-ebird-taxonomy).
+Every August, the eBird team updates this taxonomy to reflect name
+changes splits, merges, new species, or any other changes. Historical
+eBird records are then updated accordingly and subsequent EBD files
+reflect this updated taxonomy. The `auk` package stores a copy of this
+taxonomy as the data frame `ebird_taxonomy`, and uses it both for
+filtering by species
+([`auk_species()`](https://cornelllabofornithology.github.io/auk/reference/auk_species.md))
+and for taxonomic roll-up
+([`auk_rollup()`](https://cornelllabofornithology.github.io/auk/reference/auk_rollup.md)).
+Therefore, `auk` must be updated when a new eBird taxonomy is released.
+This section described how this is done. It is best to do this after the
+new taxonomy **and** the new EBD have both been released, otherwise the
+taxonomy and EBD will be out of sync.
+
+When the eBird taxonomy is updated, the new version can be downloaded
+from the [eBird
+website](https://ebird.org/science/use-ebird-data/the-ebird-taxonomy).
+The taxonomy can be downloaded in csv or Excel format, **be sure to
+download the Excel file** because the csv file has character encoding
+issues. Copy this file to `data-raw/`. At this point, you should check
+that this new taxonomy has the same format as the previous file, which
+will also be in this directory. Ensure that the same columns are present
+and that they’re named the same.
+
+The file `data-raw/ebird-taxonomy.r` prepares the taxonomy as a data
+frame to be stored in the package. Open this file and edit the
+`read_xlsx()` call to point to the new file you just downloaded. Run the
+code, then open the `ebird_taxonomy` data frame to inspect it and make
+sure there’s no glaring issues. One potential error that should be
+investigated is non-ASCII characters. Some common names have accented
+characters (e.g. Rüppell’s Griffon, Gyps rueppelli), which can cause
+problems. `ebird-taxonomy.r` converts these characters to their
+unaccented equivalents (e.g. Ruppell’s Griffon). Check that this record,
+or others with accented characters, has been properly converted.
+
+Next, update `auk_version_date()` (`R/auk-version-date.r`) to reflect
+the date of the new taxonomy and the new EBD.
+
+Finally, build the package
+([`devtools::build()`](https://devtools.r-lib.org/reference/build.html))
+and run `R CMD check`
+([`devtools::check()`](https://devtools.r-lib.org/reference/check.html)).
+If everything looks good, commit to git and push to GitHub.
+
+## Adding new filters
+
+The primary functionality of `auk` is to apply filters to the EBD to
+extract a subset of records that can be imported into R and further
+analyzed. Individual filters are defined by a particular function
+(e.g. [`auk_date()`](https://cornelllabofornithology.github.io/auk/reference/auk_date.md)
+or
+[`auk_country()`](https://cornelllabofornithology.github.io/auk/reference/auk_country.md))
+and correspond to subsetting on a particular column (e.g. “OBSERVATION
+DATE” and “COUNTRY CODE”, respectively). Defining a new filter is a
+fairly complicated process, involving carefully updating many components
+of the package, and should only be attempted by experienced R
+programmers. To add a filter called `color`, the following steps are
+required:
+
+1.  Update
+    [`auk_ebd()`](https://cornelllabofornithology.github.io/auk/reference/auk_ebd.md)
+    (in file `R/auk-ebd.r`) to define the column number for the new
+    filter, create a placeholder in the `auk_ebd` object to store the
+    filtering criteria, and update the `auk_ebd` print method for the
+    new filter.
+2.  Create a new function `auk_color()` (in file `R/auk-color.r`) that
+    defines the new filter. As a starting point, use one of the other
+    filtering functions. For example to filter on a range of numeric
+    values, start with
+    [`auk_duration()`](https://cornelllabofornithology.github.io/auk/reference/auk_duration.md),
+    to filter on a logical (true/false) variable use
+    [`auk_complete()`](https://cornelllabofornithology.github.io/auk/reference/auk_complete.md),
+    or to filter on a discrete, categorical variable use
+    [`auk_country()`](https://cornelllabofornithology.github.io/auk/reference/auk_country.md).
+    Be sure to apply extensive checking on the validity of inputs and
+    update the documentation, including examples.
+3.  Update
+    [`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md)
+    (in file `R/auk-filter.r`) to incorporate the filtering criteria
+    into the AWK script. Again, use an existing filter as a template.
+4.  Create unit tests for the new filter by creating a new `test_that()`
+    block in `tests/testthat/test_filters.r`. Again, use an existing
+    filter as a template.
+5.  Update `README.md` and `vignettes/auk.Rmd` to add the new filter to
+    the list of potential filters.
+6.  Build, test, check, and push to GitHub
+
+### 1. Update `auk_ebd()`
+
+Near the top of the code for
+[`auk_ebd()`](https://cornelllabofornithology.github.io/auk/reference/auk_ebd.md),
+a data frame named `filter_cols` is defined which specifies which
+columns have associated filters. Add a new row to this data frame and
+set `name` as the name of the column in the file header that will be
+filtered on and `id` as the name of the filter. For example, if you’re
+creating a filter called `auk_color()` that filters on the column
+“FEATHER COLOR”, then set `id = "color"` and `name = "feather color"`.
+Ideally, similar filters should be grouped together in this data frame,
+so insert the new row accordingly.
+
+For filters that don’t apply to the sampling event data file,
+i.e. filters at the species level rather than the checklist level, add
+the id to the character vector `not_in_sampling`. For example, modify
+the code to read:
+`not_in_sampling <- c("species", "breeding", "color")`.
+
+Next, at the end of the code for
+[`auk_ebd()`](https://cornelllabofornithology.github.io/auk/reference/auk_ebd.md),
+the `auk_ebd` object is created and returned with the statement
+beginning with `structure(...`. This object should have placeholders for
+every filter. So, add a new element to the list, naming the variable
+after the `id` in the above data frame, putting it in the same order as
+in the above data frame, and choosing a sensible data type. For example,
+if `color` is a categorical variable, add a new list element
+`color = character()`, and if it’s a numeric variable, add
+`color = numeric()`.
+
+Finally, within `auk-ebd.r` a `print.auk_ebd()` method is defined, which
+you’ll need to update to print the filter in a sensible way. Here you’re
+best to find another filter with a similar format and use that as a
+template. Again, be sure to put the print code for the filter in the
+right order. For example, for a categorical filter allow multiple
+potential values, you may way something like:
+
+``` r
+# color filter
+cat("  Feather color: ")
+if (length(x$filters$color) == 0) {
+  cat("all")
+} else {
+  cat(paste(x$filters$color, collapse = ", "))
+}
+cat("\n")
+```
+
+### 2. Create filter function
+
+Create a new function that will allow users to define a filter. Be sure
+to following the naming conventions used, for our color example, the
+function should be named `auk_color()` and it should be in a file called
+`auk-color.r`. It’s easiest to use an existing function as a template
+here. In general, the function should take two argument, the `auk_ebd`
+object to modify, and an argument with the filter criteria,
+e.g. `auk_color(x, color)`. Note how the name of the function matches
+the name of the second argument. The function should be edited to
+include the following:
+
+1.  Extensive checks on the incoming arguments. Remember that filtering
+    with AWK takes multiple hours, so it’s best to catch any errors
+    early, prior to running
+    [`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md).
+    At the very least, check data types and, where possible, check that
+    values are valid (e.g. `color` should be in
+    `c("red", "green", "blue", ...)`). Provide informative error or
+    warning messages where appropriate.
+2.  Setting the filter criteria in the `auk_ebd` object. This is
+    generally as simple as `x$filters$color = color`.
+3.  Thorough documentation. Document all the arguments and provide
+    examples with and without the pipe operator (`|>`).
+
+### 3. Update `auk_filter()`
+
+The actual work of filtering is done by
+[`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md),
+which generates an AWK script, then calls AWK. This function must be
+updated to parse the filters defined using the function you created in
+step 2 into AWK code. In the code for
+[`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md),
+there are two calls to the internal function `awk_translate()`, which is
+an internal function defined in the same file. It’s `awk_translate()`
+that you’ll need to edit. This function has a series of code blocks each
+of which prepares the AWK code for a different filter. Find an existing
+filter that is similar to the new one you’re creating and copy it over
+to the correct spot (remember to preserve the ordering of the filters).
+For the `auk_color()` example, the code chunk would look like:
+
+``` r
+  # color filter
+  if (length(filters$color) == 0) {
+    filter_strings$color <- ""
+  } else {
+    idx <- col_idx$index[col_idx$id == "color"]
+    condition <- paste0("$", idx, " == \"", filters$color, "\"",
+                        collapse = " || ")
+    filter_strings$color <- str_interp(awk_if, list(condition = condition))
+  }
+```
+
+When given a sampling event data file in addition to a EBD file,
+[`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md)
+will filter both files. By default
+[`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md)
+will apply all filters to both files, however, some filters
+(e.g. species) are only appropriate for the EBD. To address this, prior
+to calling `auk_translate()` for the sampling data, reset the
+species-specific filters. In the case of color, which is a species
+specific variable, modify the code as follows:
+
+``` r
+s_filters <- x$filters
+s_filters$species <- character()
+## ADD THIS LINE
+s_filters$color <- character()
+##
+awk_script_sampling <- awk_translate(filters = s_filters,
+                                     col_idx = x$col_idx_sampling,
+                                     sep = sep,
+                                     select = select_cols)
+```
+
+Finally, at the end of the `auk-filter.r` file, there’s a string named
+`awk_filter`, which defines the template for the AWK script. Each filter
+has a line in this string (e.g. `${species}`) where the AWK code will be
+inserted. You’ll need to add a line in this file for your new filter:
+`${color}`.
+
+### 4. Unit tests
+
+Now that you’ve successfully created the filter, play around with it a
+bit to make sure it works as expected. Once you feel the filter is
+working, it’s time to formalize this testing process by defining unit
+tests. Open the file `tests/testthat/test_filters.r` and you’ll notice a
+series of calls like `test_that("auk_species", ...`, each of which
+contains tests for a specific filter.
+
+Using an existing test block as an example, define a new block (again,
+put it in the correct order relative to the other filters). Consult the
+[Testing chapter](https://r-pkgs.org/testing-basics.html) of Hadley
+Wickham’s [R packages book](https://r-pkgs.org/) for details on defining
+good unit tests. At the very least, define tests to make sure that
+typical use works as expected, that errors are caught when input is
+invalid, and that edge cases are correctly handled.
+
+### 5. Update vignette and README
+
+Both the vignette (`vignettes/auk.Rmd`) and README (`README.Rmd`) have
+sections giving a short description of each filter. Add the new filter
+you’ve created here.
+
+### 6. Build, test, check, and push to GitHub
+
+Carry out the following final steps:
+
+1.  Run
+    [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
+    to generate package documentation
+2.  Run
+    [`devtools::build()`](https://devtools.r-lib.org/reference/build.html)
+    to build and install the package
+3.  Run
+    [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
+    to run the units tests and variety of other checks via `R CMD check`
+4.  Build the vignettes with
+    [`devtools::build_vignettes()`](https://devtools.r-lib.org/reference/build_vignettes.html)
+5.  Build the package website with
+    [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html)
+6.  Commit to git, then push to GitHub
+
+## CRAN submission
+
+Minor updates to `auk` can be pushed to GitHub giving users the option
+of installing the development version from there. However, at least once
+a year, when a new eBird taxonomy is released, a new version of `auk`
+should be released on CRAN. For full details on this process, consult
+Hadley Wickham’s [R Packages book](https://r-pkgs.org/release.html),
+however, I’ll provide a quick guide here. Once The package has been
+updated following the instructions from the above sections:
+
+1.  Check the package. Run
+    [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
+    to run `R CMD check` locally. Check that a Windows binary can be
+    built by running `devtools::build_win()`. The results will be
+    emailed to you within about 30 minutes. Also, this package uses
+    continuous integration to automatically check the package on Linux,
+    Mac, and Windows whenever it’s pushed to GitHub. Check the badges at
+    the top of the GitHub repo to ensure the builds are passing. Any
+    NOTEs, ERRORs, or WARNINGs returned by R CMD check must be fixed
+    before submission to CRAN.
+2.  Increment the version number in the `DESCRIPTION` file.
+3.  Update `NEWS.md` to note any new features or changes.
+4.  Build the package with
+    [`devtools::build()`](https://devtools.r-lib.org/reference/build.html),
+    the vignettes with
+    [`devtools::build_vignettes()`](https://devtools.r-lib.org/reference/build_vignettes.html),
+    and the website with
+    [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html).
+5.  Commit to git and push to GitHub.
+6.  Submit to CRAN with
+    [`devtools::release()`](https://devtools.r-lib.org/reference/release.html)
+
+At this point, you’ll need to wait for binaries of your package to
+build, which could take a couple days. It’s possible that problems will
+arise during this process and your package will be rejected, in which
+case, you’ll need to fix any problems and resubmit.
+
+Once the package is on CRAN, create a new release on GitHub and tag it
+with the version number.

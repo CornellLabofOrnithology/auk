@@ -1,0 +1,148 @@
+# Filter the eBird data by state
+
+Define a filter for the eBird Basic Dataset (EBD) based on a set of
+states. This function only defines the filter and, once all filters have
+been defined,
+[`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md)
+should be used to call AWK and perform the filtering.
+
+## Usage
+
+``` r
+auk_state(x, state, replace = FALSE)
+```
+
+## Arguments
+
+- x:
+
+  `auk_ebd` or `auk_sampling` object; reference to file created by
+  [`auk_ebd()`](https://cornelllabofornithology.github.io/auk/reference/auk_ebd.md)
+  or
+  [`auk_sampling()`](https://cornelllabofornithology.github.io/auk/reference/auk_sampling.md).
+
+- state:
+
+  character; states to filter by. eBird uses 4 to 6 character state
+  codes consisting of two parts, the 2-letter ISO country code and a 1-3
+  character state code, separated by a dash. For example, `"US-NY"`
+  corresponds to New York State in the United States. Refer to the data
+  frame
+  [ebird_states](https://cornelllabofornithology.github.io/auk/reference/ebird_states.md)
+  for look up state codes.
+
+- replace:
+
+  logical; multiple calls to `auk_state()` are additive, unless
+  `replace = FALSE`, in which case the previous list of states to filter
+  by will be removed and replaced by that in the current call.
+
+## Value
+
+An `auk_ebd` object.
+
+## Details
+
+It is not possible to filter by both country and state, so calling
+`auk_state()` will reset the country filter to all countries, and vice
+versa.
+
+This function can also work with on an `auk_sampling` object if the user
+only wishes to filter the sampling event data.
+
+## See also
+
+Other filter:
+[`auk_bbox()`](https://cornelllabofornithology.github.io/auk/reference/auk_bbox.md),
+[`auk_bcr()`](https://cornelllabofornithology.github.io/auk/reference/auk_bcr.md),
+[`auk_breeding()`](https://cornelllabofornithology.github.io/auk/reference/auk_breeding.md),
+[`auk_complete()`](https://cornelllabofornithology.github.io/auk/reference/auk_complete.md),
+[`auk_country()`](https://cornelllabofornithology.github.io/auk/reference/auk_country.md),
+[`auk_county()`](https://cornelllabofornithology.github.io/auk/reference/auk_county.md),
+[`auk_date()`](https://cornelllabofornithology.github.io/auk/reference/auk_date.md),
+[`auk_distance()`](https://cornelllabofornithology.github.io/auk/reference/auk_distance.md),
+[`auk_duration()`](https://cornelllabofornithology.github.io/auk/reference/auk_duration.md),
+[`auk_exotic()`](https://cornelllabofornithology.github.io/auk/reference/auk_exotic.md),
+[`auk_extent()`](https://cornelllabofornithology.github.io/auk/reference/auk_extent.md),
+[`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md),
+[`auk_last_edited()`](https://cornelllabofornithology.github.io/auk/reference/auk_last_edited.md),
+[`auk_observer()`](https://cornelllabofornithology.github.io/auk/reference/auk_observer.md),
+[`auk_project()`](https://cornelllabofornithology.github.io/auk/reference/auk_project.md),
+[`auk_protocol()`](https://cornelllabofornithology.github.io/auk/reference/auk_protocol.md),
+[`auk_species()`](https://cornelllabofornithology.github.io/auk/reference/auk_species.md),
+[`auk_time()`](https://cornelllabofornithology.github.io/auk/reference/auk_time.md),
+[`auk_year()`](https://cornelllabofornithology.github.io/auk/reference/auk_year.md)
+
+## Examples
+
+``` r
+# state codes for a given country can be looked up in ebird_states
+dplyr::filter(ebird_states, country == "Costa Rica")
+#> # A tibble: 7 × 4
+#>   country    country_code state           state_code
+#>   <chr>      <chr>        <chr>           <chr>     
+#> 1 Costa Rica CR           "Alajuela"      CR-A      
+#> 2 Costa Rica CR           "Cartago"       CR-C      
+#> 3 Costa Rica CR           "Guanacaste"    CR-G      
+#> 4 Costa Rica CR           "Heredia"       CR-H      
+#> 5 Costa Rica CR           "Lim\u001an"    CR-L      
+#> 6 Costa Rica CR           "Puntarenas"    CR-P      
+#> 7 Costa Rica CR           "San Jos\u001a" CR-SJ     
+# choose texas, united states and puntarenas, cost rica
+states <- c("US-TX", "CR-P")
+system.file("extdata/ebd-sample.txt", package = "auk") |>
+  auk_ebd() |>
+  auk_state(states)
+#> Input 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/ebd-sample.txt 
+#> 
+#> Output 
+#>   Filters not executed
+#> 
+#> Filters 
+#>   Species: all
+#>   Countries: all
+#>   States: CR-P, US-TX
+#>   Counties: all
+#>   BCRs: all
+#>   Bounding box: full extent
+#>   Years: all
+#>   Date: all
+#>   Start time: all
+#>   Last edited date: all
+#>   Protocol: all
+#>   Project code: all
+#>   Duration: all
+#>   Distance travelled: all
+#>   Records with breeding codes only: no
+#>   Exotic Codes: all
+#>   Complete checklists only: no
+  
+# alternatively, without pipes
+ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
+auk_state(ebd, states)
+#> Input 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/ebd-sample.txt 
+#> 
+#> Output 
+#>   Filters not executed
+#> 
+#> Filters 
+#>   Species: all
+#>   Countries: all
+#>   States: CR-P, US-TX
+#>   Counties: all
+#>   BCRs: all
+#>   Bounding box: full extent
+#>   Years: all
+#>   Date: all
+#>   Start time: all
+#>   Last edited date: all
+#>   Protocol: all
+#>   Project code: all
+#>   Duration: all
+#>   Distance travelled: all
+#>   Records with breeding codes only: no
+#>   Exotic Codes: all
+#>   Complete checklists only: no
+```

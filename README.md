@@ -100,8 +100,9 @@ This package uses the command-line program AWK to extract subsets of the
 eBird Basic Dataset for use in R. This is a multi-step process:
 
 1.  Make sure that you have decompressed eBird `.txt.gz` files into a
-    `.txt` file. On Linux, you might need to use [`gzip`](https://www.gnu.org/software/gzip/)
-    to properly decompress the archive (as opposed to using other tools like `tar`).
+    `.txt` file. On Linux, you might need to use
+    [`gzip`](https://www.gnu.org/software/gzip/) to properly decompress
+    the archive (as opposed to using other tools like `tar`).
 2.  Define a reference to the eBird data file.
 3.  Define a set of spatial, temporal, or taxonomic filters. Each type
     of filter corresponds to a different function, e.g. `auk_species` to
@@ -215,7 +216,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_complete()
     ebd
     #> Input 
-    #>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpjQJky9/temp_libpath13dd0af62724/auk/extdata/ebd-sample.txt 
+    #>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c60f7a454/auk/extdata/ebd-sample.txt 
     #> 
     #> Output 
     #>   Filters not executed

@@ -1,0 +1,59 @@
+# eBird Taxonomy
+
+A simplified version of the taxonomy used by eBird. Includes proper
+species as well as various other categories such as `spuh` (e.g. *duck
+sp.*) and *slash* (e.g. *American Black Duck/Mallard*). This taxonomy is
+based on the Clements Checklist, which is updated annually, typically in
+the late summer. Non-ASCII characters (e.g. those with accents) have
+been converted to ASCII equivalents in this data frame.
+
+## Usage
+
+``` r
+ebird_taxonomy
+```
+
+## Format
+
+A data frame with eight variables and 16,248 rows:
+
+- `species_code`: a unique alphanumeric code identifying each species.
+
+- `taxon_concept_id`: a unique alphanumeric code identifying each
+  species in the Avibase taxonomy.
+
+- `scientific_name`: scientific name.
+
+- `common_name`: common name, defaults to English, but different
+  languages can be selected using the `locale` parameter.
+
+- `order`: the scientific name of the order that the species belongs to.
+
+- `family`: the scientific name of the family that the species belongs
+  to.
+
+- `family_common`: the common name of the family that the species
+  belongs to.
+
+- `category`: whether the entry is for a species or another
+  field-identifiable taxon, such as `spuh`, `slash`, `hybrid`, etc.
+
+- `taxonomic_order`: integer value used to sort rows in taxonomic order.
+
+- `report_as`: for taxa that can be resolved to true species (i.e.
+  species, subspecies, and recognizable forms), this field links to the
+  corresponding species code. For taxa that can't be resolved, this
+  field is `NA`.
+
+- `extinct`: logical variable indicating whether the species is listed
+  as extinct in the eBird taxonomy.
+
+For further details, see
+<https://support.ebird.org/support/solutions/articles/48000837816-the-ebird-taxonomy>
+
+## See also
+
+Other data:
+[`bcr_codes`](https://cornelllabofornithology.github.io/auk/reference/bcr_codes.md),
+[`ebird_states`](https://cornelllabofornithology.github.io/auk/reference/ebird_states.md),
+[`valid_protocols`](https://cornelllabofornithology.github.io/auk/reference/valid_protocols.md)

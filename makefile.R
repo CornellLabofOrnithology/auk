@@ -15,7 +15,7 @@ tools:::.check_package_datasets(".")
 dir.create("man/figures/")
 file.copy("cheatsheet/auk-cheatsheet.png", "man/figures/auk-cheatsheet.png")
 devtools::build_readme()
-#devtools::build_vignettes()
+devtools::build_vignettes()
 pkgdown::check_pkgdown()
 pkgdown::build_site()
 

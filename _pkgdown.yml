@@ -45,3 +45,6 @@ reference:
 - title: Helpers
   contents:
   - has_concept("helpers")
+
+template:
+  bootstrap: 5
