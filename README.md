@@ -102,14 +102,14 @@ eBird Basic Dataset for use in R. This is a multi-step process:
 1.  Make sure that you have decompressed eBird `.txt.gz` files into a
     `.txt` file. On Linux, you might need to use [`gzip`](https://www.gnu.org/software/gzip/)
     to properly decompress the archive (as opposed to using other tools like `tar`).
-3.  Define a reference to the eBird data file.
-4.  Define a set of spatial, temporal, or taxonomic filters. Each type
+2.  Define a reference to the eBird data file.
+3.  Define a set of spatial, temporal, or taxonomic filters. Each type
     of filter corresponds to a different function, e.g. `auk_species` to
     filter by species. At this stage the filters are only set up, no
     actual filtering is done until the next step.
-5.  Filter the eBird data text file, producing a new text file with only
+4.  Filter the eBird data text file, producing a new text file with only
     the selected rows.
-6.  Import this text file into R as a data frame.
+5.  Import this text file into R as a data frame.
 
 Because the eBird dataset is so large, step 3 typically takes several
 hours to run. Here’s a simple example that extract all Canada Jay
