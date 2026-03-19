@@ -41,15 +41,21 @@ get_ebird_taxonomy <- function(version, locale) {
     q <- c(q, locale = locale)
   }
   # query
-  response <- tryCatch(httr::GET(url, query = q),
-                       error = function(e) NULL)
-  if (is.null(response)) {
-    stop("eBird taxonomy API cannont be accessed, visit https://ebird.org/ ",
-         "to see if eBird is currently down.")
-  }
-  httr::stop_for_status(response)
+  response <- tryCatch(
+    httr2::request(url) |>
+      httr2::req_url_query(!!!q) |>
+      httr2::req_perform(),
+    error = function(e) {
+      rlang::abort(c(
+        "Cannot access eBird taxonomy API.",
+        "i" = "Check https://ebird.org/ to see if eBird is down.",
+        "x" = conditionMessage(e)
+      ))
+    }
+  )
+  httr2::resp_check_status(response)
   # read to data frame
-  tax <- readBin(response$content, "character")
+  tax <- httr2::resp_body_string(response)
   tax <- suppressWarnings(readr::read_csv(I(tax), col_types = list(), lazy = FALSE))
   names(tax) <- tolower(names(tax))
   # tidy up

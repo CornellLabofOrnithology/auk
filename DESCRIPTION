@@ -33,7 +33,7 @@ Imports:
     assertthat,
     countrycode (>= 1.0.0),
     dplyr (>= 0.7.8),
-    httr,
+    httr2,
     magrittr,
     readr (>= 2.0.0),
     rlang (>= 0.3.0),
