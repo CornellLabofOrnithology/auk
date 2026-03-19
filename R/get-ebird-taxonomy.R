@@ -30,7 +30,7 @@
 #' }
 get_ebird_taxonomy <- function(version, locale) {
   # prepare query
-  url <- "https://ebird.org/ws2.0/ref/taxonomy/ebird"
+  url <- "https://api.ebird.org/v2/ref/taxonomy/ebird"
   q <- list(fmt = "csv")
   if (!missing(version)) {
     stopifnot(is_integer(version), version >= 2015)
