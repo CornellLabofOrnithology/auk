@@ -1,3 +1,8 @@
+# auk 0.9.2
+
+- update to v2 of the eBird API and httr2 (PR #97)
+- drop magrittr pipe re-export
+
 # auk 0.9.1
 
 - ensure taxon_concept_id behaves correctly in auk_rollup() (issue #94)

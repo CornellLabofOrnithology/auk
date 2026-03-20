@@ -135,7 +135,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
     col_miss <- mandatory_sampl[!(mandatory_sampl %in% header)]
     if (length(col_miss) > 0) {
       m <- sprintf("Required columns missing from the sampling file:\n\t%s",
-                   paste(mandatory, collapse = "\n\t"))
+                   paste(col_miss, collapse = "\n\t"))
       stop(m)
     }
     # identify column locations
@@ -362,4 +362,5 @@ print.auk_ebd <- function(x, ...) {
     cat("no")
   }
   cat("\n")
+  return(invisible(x))
 }

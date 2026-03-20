@@ -279,4 +279,5 @@ print.auk_zerofill <- function(x, ...) {
       "for ", format(species, big.mark = ","), " species.\n"
     )
   )
+  return(invisible(x))
 }

@@ -41,10 +41,10 @@ get_ebird_taxonomy <- function(version, locale) {
     q <- c(q, locale = locale)
   }
   # query
+  req <- httr2::request(url)
+  req <- httr2::req_url_query(req, !!!q)
   response <- tryCatch(
-    httr2::request(url) |>
-      httr2::req_url_query(!!!q) |>
-      httr2::req_perform(),
+    httr2::req_perform(req),
     error = function(e) {
       rlang::abort(c(
         "Cannot access eBird taxonomy API.",

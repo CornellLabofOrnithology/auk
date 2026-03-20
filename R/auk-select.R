@@ -80,13 +80,13 @@ auk_select.auk_ebd <- function(x, select, file, sep = "\t", overwrite = FALSE) {
   if (exit_code != 0) {
     stop("Error running AWK command.")
   }
-  invisible(file)
+  return(invisible(file))
 }
 
 #' @export
-auk_select.auk_sampling <- function(x, select, file, sep = "\t", 
+auk_select.auk_sampling <- function(x, select, file, sep = "\t",
                                     overwrite = FALSE) {
-  auk_select.auk_ebd(x, select, file, sep, overwrite)
+  return(auk_select.auk_ebd(x, select, file, sep, overwrite))
 }
 
 # awk script template

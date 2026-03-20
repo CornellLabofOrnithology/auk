@@ -1,5 +1,11 @@
 # Changelog
 
+## auk 0.9.2
+
+- update to v2 of the eBird API and httr2 (PR
+  [\#97](https://github.com/CornellLabofOrnithology/auk/issues/97))
+- drop magrittr pipe re-export
+
 ## auk 0.9.1
 
 CRAN release: 2026-01-13

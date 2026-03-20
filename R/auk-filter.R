@@ -443,13 +443,14 @@ awk_translate <- function(filters, col_idx, sep, select) {
   } else {
     lat_idx <- col_idx$index[col_idx$id == "lat"]
     lng_idx <- col_idx$index[col_idx$id == "lng"]
-    condition <- paste0("$${lng_idx} >= ${xmn} && ",
-                        "$${lng_idx} <= ${xmx} && ",
-                        "$${lat_idx} >= ${ymn} && ",
-                        "$${lat_idx} <= ${ymx}") |>
-      str_interp(list(lat_idx = lat_idx, lng_idx = lng_idx,
-                      xmn = filters$bbox[1], xmx = filters$bbox[3],
-                      ymn = filters$bbox[2], ymx = filters$bbox[4]))
+    condition_tmpl <- paste0("$${lng_idx} >= ${xmn} && ",
+                             "$${lng_idx} <= ${xmx} && ",
+                             "$${lat_idx} >= ${ymn} && ",
+                             "$${lat_idx} <= ${ymx}")
+    condition <- str_interp(condition_tmpl,
+                            list(lat_idx = lat_idx, lng_idx = lng_idx,
+                                 xmn = filters$bbox[1], xmx = filters$bbox[3],
+                                 ymn = filters$bbox[2], ymx = filters$bbox[4]))
     filter_strings$bbox <- str_interp(awk_if, list(condition = condition))
   }
   # year filter

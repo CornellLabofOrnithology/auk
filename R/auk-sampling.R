@@ -246,4 +246,5 @@ print.auk_sampling <- function(x, ...) {
     cat("no")
   }
   cat("\n")
+  return(invisible(x))
 }

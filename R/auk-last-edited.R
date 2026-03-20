@@ -44,8 +44,8 @@ auk_last_edited.auk_ebd <- function(x, date) {
   }
 
   # convert to date object, then format as ISO standard date format
-  date <- as.Date(date) |>
-    format("%Y-%m-%d")
+  date <- as.Date(date)
+  date <- format(date, "%Y-%m-%d")
 
   assertthat::assert_that(
     all(!is.na(date)),

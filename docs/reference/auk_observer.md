@@ -61,7 +61,7 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
   auk_observer("obsr313215")
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -89,7 +89,7 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 auk_observer(ebd, observer = 313215)
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed

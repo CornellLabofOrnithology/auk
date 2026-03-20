@@ -266,7 +266,7 @@ ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd()
 ebd
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -368,7 +368,7 @@ ebd_filters <- ebd |>
   auk_complete()
 ebd_filters
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -696,8 +696,8 @@ filters <- auk_ebd(f_ebd, file_sampling = f_smp) |>
   auk_complete()
 filters
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/zerofill-ex_ebd.txt 
-#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/zerofill-ex_sampling.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/zerofill-ex_ebd.txt 
+#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/zerofill-ex_sampling.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -733,8 +733,8 @@ sampling event data.
 ##                                file_sampling = "sampling-filtered.txt")
 ebd_sed_filtered
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/zerofill-ex_ebd.txt 
-#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmppZXGo8/temp_libpath917c7939de6e/auk/extdata/zerofill-ex_sampling.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/zerofill-ex_ebd.txt 
+#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/zerofill-ex_sampling.txt 
 #> 
 #> Output 
 #>   EBD: ebd-filtered.txt 

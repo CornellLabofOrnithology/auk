@@ -18,13 +18,13 @@ Source:
 [`DESCRIPTION`](https://github.com/CornellLabofOrnithology/auk/blob/HEAD/DESCRIPTION)
 
 Strimas-Mackey M, Miller E, Hochachka W (2026). *auk: eBird Data
-Extraction and Processing in R*. R package version 0.9.1,
+Extraction and Processing in R*. R package version 0.9.2,
 <https://cornelllabofornithology.github.io/auk/>.
 
     @Manual{,
       title = {auk: eBird Data Extraction and Processing in R},
       author = {Matthew Strimas-Mackey and Eliot Miller and Wesley Hochachka},
       year = {2026},
-      note = {R package version 0.9.1},
+      note = {R package version 0.9.2},
       url = {https://cornelllabofornithology.github.io/auk/},
     }

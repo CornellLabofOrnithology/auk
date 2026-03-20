@@ -85,8 +85,6 @@ auk_species.auk_ebd <- function(x, species, taxonomy_version, replace = FALSE) {
   } else {
     x$filters$species <- c(x$filters$species, species_clean)
   }
-  x$filters$species <- c(x$filters$species, species_clean) |>
-    unique() |>
-    sort()
+  x$filters$species <- sort(unique(x$filters$species))
   return(x)
 }
