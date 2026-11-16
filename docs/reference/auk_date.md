@@ -73,7 +73,7 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
   auk_date(date = c("2010-01-01", "2010-12-31"))
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -96,12 +96,12 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
 #>   Records with breeding codes only: no
 #>   Exotic Codes: all
 #>   Complete checklists only: no
-  
+
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 auk_date(ebd, date = c("2010-01-01", "2010-12-31"))
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -131,7 +131,7 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
   # may-june records from all years
   auk_date(date = c("*-05-01", "*-06-30"))
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -154,14 +154,14 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
 #>   Records with breeding codes only: no
 #>   Exotic Codes: all
 #>   Complete checklists only: no
-  
+
 # dates can also wrap around the end of the year
 system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
   # dec-jan records from all years
   auk_date(date = c("*-12-01", "*-01-31"))
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed

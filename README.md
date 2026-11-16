@@ -43,8 +43,8 @@ al. 2021](https://onlinelibrary.wiley.com/doi/10.1111/ddi.13271)).
     install.packages("auk")
 
     # or install the development version from github
-    # install.packages("remotes")
-    remotes::install_github("CornellLabofOrnithology/auk")
+    if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak")
+    pak::pak("CornellLabofOrnithology/auk")
 
 `auk` requires the Unix utility AWK, which is available on most Linux
 and Mac OS X machines. Windows users will first need to install
@@ -154,42 +154,41 @@ for defining filters, which can then be compiled into an AWK script.
 Users should start by defining a reference to the dataset file with
 `auk_ebd()`. Then any of the following filters can be applied:
 
--   `auk_species()`: filter by species using common or scientific names.
--   `auk_country()`: filter by country using the standard English names
-    or [ISO 2-letter country
-    codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
--   `auk_state()`: filter by state using eBird state codes, see
-    `?ebird_states`.
--   `auk_bcr()`: filter by [Bird Conservation Region
-    (BCR)](http://nabci-us.org/resources/bird-conservation-regions/)
-    using BCR codes, see `?bcr_codes`.
--   `auk_bbox()`: filter by spatial bounding box, i.e. a range of
-    latitudes and longitudes in decimal degrees.
--   `auk_date()`: filter to checklists from a range of dates. To extract
-    observations from a range of dates, regardless of year, use the
-    wildcard “`*`” in place of the year,
-    e.g. `date = c("*-05-01", "*-06-30")` for observations from May and
-    June of any year.
--   `auk_last_edited()`: filter to checklists from a range of last
-    edited dates, useful for extracting just new or recently edited
-    data.
--   `auk_protocol()`: filter to checklists that following a specific
-    search protocol, either stationary, traveling, or casual.
--   `auk_project()`: filter to checklists collected as part of a
-    specific project (e.g. a breeding bird survey).
--   `auk_time()`: filter to checklists started during a range of
-    times-of-day.
--   `auk_duration()`: filter to checklists with observation durations
-    within a given range.
--   `auk_distance()`: filter to checklists with distances travelled
-    within a given range.
--   `auk_breeding()`: only retain observations that have an associate
-    breeding bird atlas code.
--   `auk_complete()`: only retain checklists in which the observer has
-    specified that they recorded all species seen or heard. It is
-    necessary to retain only complete records for the creation of
-    presence-absence data, because the “absence”” information is
-    inferred by the lack of reporting of a species on checklists.
+- `auk_species()`: filter by species using common or scientific names.
+- `auk_country()`: filter by country using the standard English names or
+  [ISO 2-letter country
+  codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+- `auk_state()`: filter by state using eBird state codes, see
+  `?ebird_states`.
+- `auk_bcr()`: filter by [Bird Conservation Region
+  (BCR)](http://nabci-us.org/resources/bird-conservation-regions/) using
+  BCR codes, see `?bcr_codes`.
+- `auk_bbox()`: filter by spatial bounding box, i.e. a range of
+  latitudes and longitudes in decimal degrees.
+- `auk_date()`: filter to checklists from a range of dates. To extract
+  observations from a range of dates, regardless of year, use the
+  wildcard “`*`” in place of the year,
+  e.g. `date = c("*-05-01", "*-06-30")` for observations from May and
+  June of any year.
+- `auk_last_edited()`: filter to checklists from a range of last edited
+  dates, useful for extracting just new or recently edited data.
+- `auk_protocol()`: filter to checklists that following a specific
+  search protocol, either stationary, traveling, or casual.
+- `auk_project()`: filter to checklists collected as part of a specific
+  project (e.g. a breeding bird survey).
+- `auk_time()`: filter to checklists started during a range of
+  times-of-day.
+- `auk_duration()`: filter to checklists with observation durations
+  within a given range.
+- `auk_distance()`: filter to checklists with distances travelled within
+  a given range.
+- `auk_breeding()`: only retain observations that have an associate
+  breeding bird atlas code.
+- `auk_complete()`: only retain checklists in which the observer has
+  specified that they recorded all species seen or heard. It is
+  necessary to retain only complete records for the creation of
+  presence-absence data, because the “absence”” information is inferred
+  by the lack of reporting of a species on checklists.
 
 Note that all of the functions listed above only modify the `auk_ebd`
 object, in order to define the filters. Once the filters have been
@@ -216,7 +215,7 @@ defined, the filtering is actually conducted using `auk_filter()`.
       auk_complete()
     ebd
     #> Input 
-    #>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c6248eecf2/auk/extdata/ebd-sample.txt 
+    #>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a520a9829/auk/extdata/ebd-sample.txt 
     #> 
     #> Output 
     #>   Filters not executed

@@ -1,6 +1,6 @@
 #' Return EBD data path
-#' 
-#' Returns the environment variable `EBD_PATH`, which users are encouraged to 
+#'
+#' Returns the environment variable `EBD_PATH`, which users are encouraged to
 #' set to the directory that stores the eBird Basic Dataset (EBD) text files.
 #'
 #' @return The path stored in the `EBD_PATH` environment variable.

@@ -154,7 +154,7 @@ auk_zerofill(x = f_ebd, sampling_events = f_smpl,
 ebd_df <- auk_zerofill(x = f_ebd, sampling_events = f_smpl, collapse = TRUE)
 }
 \seealso{
-Other import: 
-\code{\link{read_ebd}()}
+Other import:
+\code{\link[=read_ebd]{read_ebd()}}
 }
 \concept{import}

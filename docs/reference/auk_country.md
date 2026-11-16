@@ -27,7 +27,7 @@ auk_country(x, country, replace = FALSE)
   as English names or [ISO 2-letter country
   codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). English
   names are matched via regular expressions using
-  [countrycode](https://vincentarelbundock.github.io/countrycode/man/countrycode.html),
+  [countrycode](https://rdrr.io/pkg/countrycode/man/countrycode.html),
   so there is some flexibility in names.
 
 - replace:
@@ -78,7 +78,7 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
   auk_country(country)
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -101,12 +101,12 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
 #>   Records with breeding codes only: no
 #>   Exotic Codes: all
 #>   Complete checklists only: no
-  
+
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 auk_country(ebd, country)
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed

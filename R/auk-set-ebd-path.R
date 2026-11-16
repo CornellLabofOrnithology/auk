@@ -1,5 +1,5 @@
 #' Set the path to EBD text files
-#' 
+#'
 #' Users of `auk` are encouraged to set the path to the directory containing the
 #' eBird Basic Dataset (EBD) text files in the `EBD_PATH` environment variable.
 #' All functions referencing the EBD or sampling event data files will check in
@@ -9,7 +9,7 @@
 #' manually edit the file. This function first looks for for an .Renviron
 #' location defined by `R_ENVIRON_USER`, then defaults to ~/.Renviron.
 #'
-#' @param path character; directory where the EBD text files are stored, e.g. 
+#' @param path character; directory where the EBD text files are stored, e.g.
 #'   `"/home/matt/ebd"`.
 #' @param overwrite logical; should the existing `EBD_PATH` be overwritten if it
 #'   has already been set in .Renviron.
@@ -28,11 +28,11 @@ auk_set_ebd_path <- function(path, overwrite = FALSE) {
     dir.exists(path)
   )
   path <- normalizePath(path, winslash = "/", mustWork = TRUE)
-  
+
   # find .Renviron
   renv_path <- renv_file_path()
   renv_lines <- readLines(renv_path)
-  
+
   # look for existing entry, remove if overwrite = TRUE
   renv_exists <- grepl("^EBD_PATH[[:space:]]*=.*", renv_lines)
   if (any(renv_exists)) {
@@ -60,7 +60,7 @@ renv_file_path <- function() {
   } else {
     renv <- path.expand(file.path("~", ".Renviron"))
   }
-  
+
   if (!file.exists(renv)) {
     file.create(renv)
   }

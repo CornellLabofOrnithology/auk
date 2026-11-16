@@ -6,12 +6,12 @@
 #' filters have been defined, [auk_filter()] should be used to call AWK and
 #' perform the filtering.
 #'
-#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by
 #'   [auk_ebd()] or [auk_sampling()].
 #' @param date character or date; date range to filter by, provided either as a
 #'   character vector in the format `"2015-12-31"` or a vector of Date objects.
-#' 
-#' @details This function can also work with on an `auk_sampling` object if the 
+#'
+#' @details This function can also work with on an `auk_sampling` object if the
 #'   user only wishes to filter the sampling event data.
 #'
 #' @return An `auk_ebd` object.
@@ -21,7 +21,7 @@
 #' system.file("extdata/ebd-sample.txt", package = "auk") |>
 #'   auk_ebd() |>
 #'   auk_last_edited(date = c("2010-01-01", "2010-12-31"))
-auk_last_edited <- function(x, date)  {
+auk_last_edited <- function(x, date) {
   UseMethod("auk_last_edited")
 }
 
@@ -33,13 +33,15 @@ auk_last_edited.auk_ebd <- function(x, date) {
     is.character(date) || assertthat::is.date(date),
     date[1] <= date[2]
   )
-  
+
   # check for last edit date column
   if (!"last_edited" %in% x$col_idx$id) {
     stop("Last edited data column missing from EBD")
   }
-  if (!is.null(x$col_idx_sampling) && 
-      !"last_edited" %in% x$col_idx_sampling$id) {
+  if (
+    !is.null(x$col_idx_sampling) &&
+      !"last_edited" %in% x$col_idx_sampling$id
+  ) {
     stop("Last edited data column missing from sampling event data")
   }
 
@@ -48,7 +50,7 @@ auk_last_edited.auk_ebd <- function(x, date) {
   date <- format(date, "%Y-%m-%d")
 
   assertthat::assert_that(
-    all(!is.na(date)),
+    !anyNA(date),
     date[1] <= date[2],
     date[1] >= "1850-01-01",
     date[2] >= "1850-01-01"

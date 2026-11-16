@@ -20,3 +20,6 @@
 ^cheatsheet
 ^\.github$
 ^CRAN-SUBMISSION$
+^CLAUDE\.md$
+^air\.toml$
+^jarl\.toml$

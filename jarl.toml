@@ -1,0 +1,11 @@
+# jarl linter configuration
+# https://jarl.etiennebacher.com/reference/config-file
+#
+# scope: only lint package code in R/, regardless of the path jarl is
+# invoked with (e.g. `jarl check .` still only checks R/).
+
+[lint]
+include = ["R/"]
+
+[lint.assignment]
+operator = "<-"

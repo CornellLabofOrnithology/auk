@@ -14,7 +14,7 @@ valid_protocols
 A vector of valid protocol names, e.g. "Traveling", "Stationary", etc.
 }
 \seealso{
-Other data: 
+Other data:
 \code{\link{bcr_codes}},
 \code{\link{ebird_states}},
 \code{\link{ebird_taxonomy}}

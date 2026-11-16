@@ -1,9 +1,9 @@
 #' Select a subset of columns
-#' 
-#' Select a subset of columns from the eBird Basic Dataset (EBD) or the sampling 
+#'
+#' Select a subset of columns from the eBird Basic Dataset (EBD) or the sampling
 #' events file. Subsetting the columns can significantly decrease file size.
 #'
-#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by
 #'   [auk_ebd()] or [auk_sampling()].
 #' @param select character; a character vector specifying the names of the
 #'   columns to select. Columns should be as they appear in the header of the
@@ -25,7 +25,7 @@
 #' out_file <- tempfile()
 #' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 #' cols <- c("latitude", "longitude",
-#'           "group identifier", "sampling event identifier", 
+#'           "group identifier", "sampling event identifier",
 #'           "scientific name", "observation count",
 #'           "observer_id")
 #' selected <- auk_select(ebd, select = cols, file = out_file)
@@ -59,24 +59,35 @@ auk_select.auk_ebd <- function(x, select, file, sep = "\t", overwrite = FALSE) {
     stop("Selected variable not found in header: \n\t ", col_miss)
   }
   # certain columns must be kept
-  must_keep <- c("group identifier", "sampling event identifier",
-                 "scientific name", "observation count")
+  must_keep <- c(
+    "group identifier",
+    "sampling event identifier",
+    "scientific name",
+    "observation count"
+  )
   must_keep <- intersect(must_keep, x$col_idx$name)
   if (!all(must_keep %in% select)) {
-    m <- paste("The following columns must be retained:",
-               paste(setdiff(must_keep, select), collapse = ", "))
+    m <- paste(
+      "The following columns must be retained:",
+      paste(setdiff(must_keep, select), collapse = ", ")
+    )
     stop(m)
   }
   # find column numbers
   idx <- x$col_idx$index[x$col_idx$name %in% select]
   select_cols <- paste0("$", idx, collapse = ", ")
   # generate awk script
-  awk_script <- stringr::str_interp(awk_select, 
-                                    list(sep = sep, select = select_cols))
+  awk_script <- stringr::str_interp(
+    awk_select,
+    list(sep = sep, select = select_cols)
+  )
   # run
-  exit_code <- system2(awk_path,
-                       args = paste0("'", awk_script, "' '", x$file, "'"),
-                       stdout = file, stderr = FALSE)
+  exit_code <- system2(
+    awk_path,
+    args = paste0("'", awk_script, "' '", x$file, "'"),
+    stdout = file,
+    stderr = FALSE
+  )
   if (exit_code != 0) {
     stop("Error running AWK command.")
   }
@@ -84,8 +95,13 @@ auk_select.auk_ebd <- function(x, select, file, sep = "\t", overwrite = FALSE) {
 }
 
 #' @export
-auk_select.auk_sampling <- function(x, select, file, sep = "\t",
-                                    overwrite = FALSE) {
+auk_select.auk_sampling <- function(
+  x,
+  select,
+  file,
+  sep = "\t",
+  overwrite = FALSE
+) {
   return(auk_select.auk_ebd(x, select, file, sep, overwrite))
 }
 

@@ -37,7 +37,7 @@ events file. Subsetting the columns can significantly decrease file size.
 out_file <- tempfile()
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 cols <- c("latitude", "longitude",
-          "group identifier", "sampling event identifier", 
+          "group identifier", "sampling event identifier",
           "scientific name", "observation count",
           "observer_id")
 selected <- auk_select(ebd, select = cols, file = out_file)
@@ -45,8 +45,8 @@ str(read_ebd(selected))
 }
 }
 \seealso{
-Other text: 
-\code{\link{auk_clean}()},
-\code{\link{auk_split}()}
+Other text:
+\code{\link[=auk_clean]{auk_clean()}},
+\code{\link[=auk_split]{auk_split()}}
 }
 \concept{text}

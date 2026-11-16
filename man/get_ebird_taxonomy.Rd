@@ -41,10 +41,10 @@ get_ebird_taxonomy()
 }
 }
 \seealso{
-Other helpers: 
-\code{\link{auk_ebd_version}()},
-\code{\link{auk_version}()},
-\code{\link{ebird_species}()},
-\code{\link{process_barcharts}()}
+Other helpers:
+\code{\link[=auk_ebd_version]{auk_ebd_version()}},
+\code{\link[=auk_version]{auk_version()}},
+\code{\link[=ebird_species]{ebird_species()}},
+\code{\link[=process_barcharts]{process_barcharts()}}
 }
 \concept{helpers}

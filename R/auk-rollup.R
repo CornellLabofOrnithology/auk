@@ -1,32 +1,32 @@
 #' Roll up eBird taxonomy to species
-#' 
+#'
 #' The eBird Basic Dataset (EBD) includes both true species and every other
-#' field-identifiable taxon that could be relevant for birders to report. This 
+#' field-identifiable taxon that could be relevant for birders to report. This
 #' includes taxa not identifiable to a species (e.g. hybrids) and taxa reported
-#' below the species level (e.g. subspecies). This function produces a list of 
-#' observations of true species, by removing the former and rolling the latter 
-#' up to the species level. In the resulting EBD data.frame, 
-#' `category` will be `"species"` for all records and the subspecies fields will 
-#' be dropped. By default, [read_ebd()] calls `ebd_rollup()` when importing an 
+#' below the species level (e.g. subspecies). This function produces a list of
+#' observations of true species, by removing the former and rolling the latter
+#' up to the species level. In the resulting EBD data.frame,
+#' `category` will be `"species"` for all records and the subspecies fields will
+#' be dropped. By default, [read_ebd()] calls `ebd_rollup()` when importing an
 #' eBird data file.
 #'
 #' @param x data.frame; data frame of eBird data, typically as imported by
 #'   [read_ebd()]
-#' @param drop_higher logical; whether to remove taxa above species during the 
+#' @param drop_higher logical; whether to remove taxa above species during the
 #'   rollup process, e.g. "spuhs" like "duck sp.".
-#'   
+#'
 #' @details When rolling observations up to species level the observed counts
 #'   are summed across any taxa that resolve to the same species. However, if
 #'   any of these taxa have a count of "X" (i.e. the observer did not enter a
-#'   count), then the rolled up record will get an "X" as well. For example, if 
-#'   an observer saw 3 Myrtle and 2 Audubon's Warblers, this will roll up to 5 
-#'   Yellow-rumped Warblers. However, if an "X" was entered for Myrtle, this 
+#'   count), then the rolled up record will get an "X" as well. For example, if
+#'   an observer saw 3 Myrtle and 2 Audubon's Warblers, this will roll up to 5
+#'   Yellow-rumped Warblers. However, if an "X" was entered for Myrtle, this
 #'   would roll up to "X" for Yellow-rumped Warbler.
-#'   
-#'   The eBird taxonomy groups taxa into eight different categories. These 
+#'
+#'   The eBird taxonomy groups taxa into eight different categories. These
 #'   categories, and the way they are treated by [auk_rollup()] are as follows:
-#'   
-#'   - **Species:** e.g., Mallard. Combined with lower level taxa if present on 
+#'
+#'   - **Species:** e.g., Mallard. Combined with lower level taxa if present on
 #'   the same checklist.
 #'   - **ISSF or Identifiable Sub-specific Group:** Identifiable subspecies or
 #'   group of subspecies, e.g., Mallard (Mexican). Rolled-up to species level.
@@ -46,16 +46,16 @@
 #'   - **Domestic:** Distinctly-plumaged domesticated varieties that may be
 #'   free-flying (these do not count on personal lists) e.g., Mallard (Domestic
 #'   type). Dropped by `auk_rollup()`.
-#'   
+#'
 #'   The rollup process is based on the eBird taxonomy, which is updated once a
 #'   year in August. The `auk` package includes a copy of the eBird taxonomy,
 #'   current at the time of release; however, if the EBD and `auk` versions are
 #'   not aligned, you may need to explicitly specify which version of the
 #'   taxonomy to use, in which case the eBird API will be queried to get the
 #'   correct version of the taxonomy.
-#'   
+#'
 #' @return A data frame of the eBird data with taxonomic rollup applied.
-#' @references Consult the [eBird taxonomy](https://ebird.org/science/use-ebird-data/the-ebird-taxonomy) 
+#' @references Consult the [eBird taxonomy](https://ebird.org/science/use-ebird-data/the-ebird-taxonomy)
 #'   page for further details.
 #' @export
 #' @family pre
@@ -69,18 +69,18 @@
 #' ebd_ru <- auk_rollup(ebd)
 #' # keep higher taxa
 #' ebd_higher <- auk_rollup(ebd, drop_higher = FALSE)
-#' 
+#'
 #' # all taxa not identifiable to species are dropped
 #' unique(ebd$category)
 #' unique(ebd_ru$category)
 #' unique(ebd_higher$category)
-#' 
+#'
 #' # yellow-rump warbler subspecies rollup
 #' library(dplyr)
 #' # without rollup, there are multiple observations per checklists
 #' ebd |>
 #'   filter(common_name == "Yellow-rumped Warbler") |>
-#'   select(checklist_id, category, common_name, subspecies_common_name, 
+#'   select(checklist_id, category, common_name, subspecies_common_name,
 #'          observation_count)
 #' # with rollup, they have been combined
 #' ebd_ru |>
@@ -91,22 +91,22 @@ auk_rollup <- function(x, drop_higher = TRUE) {
     is.data.frame(x),
     "scientific_name" %in% names(x)
   )
-  
+
   # return as is if already run
   if (isTRUE(attr(x, "rollup"))) {
     return(x)
   }
-  
+
   # has auk_unique been applied?
   if ("checklist_id" %in% names(x)) {
     cid <- "checklist_id"
   } else {
     cid <- "sampling_event_identifier"
   }
-  
+
   # get the ebird taxonomy version
   tax_full <- auk::ebird_taxonomy
-  
+
   # remove anything not identifiable to a species
   if (drop_higher) {
     include <- "species"
@@ -115,14 +115,19 @@ auk_rollup <- function(x, drop_higher = TRUE) {
   }
   # include forms that don't roll up to a species
   # these are mostly undescribed species
-  undesc <- dplyr::filter(tax_full,
-                          .data$category == "form",
-                          is.na(.data$report_as))
+  undesc <- dplyr::filter(
+    tax_full,
+    .data$category == "form",
+    is.na(.data$report_as)
+  )
   tax <- dplyr::filter(tax_full, .data$category %in% include)
   tax <- rbind(tax, undesc)
-  tax <- dplyr::select(tax, "scientific_name",
-                       taxonomic_order_tax = "taxonomic_order",
-                       taxon_concept_id_tax = "taxon_concept_id")
+  tax <- dplyr::select(
+    tax,
+    "scientific_name",
+    taxonomic_order_tax = "taxonomic_order",
+    taxon_concept_id_tax = "taxon_concept_id"
+  )
   # store taxa before filtering
   species_prefilter <- unique(x$scientific_name)
   x <- dplyr::inner_join(x, tax, by = "scientific_name")
@@ -146,8 +151,8 @@ auk_rollup <- function(x, drop_higher = TRUE) {
     )
 
     warning(warning_message, call. = FALSE)
-  } 
-  
+  }
+
   if (nrow(x) == 0) {
     # if all species were removed, return an empty table
     if ("subspecies_common_name" %in% names(x)) {
@@ -159,35 +164,55 @@ auk_rollup <- function(x, drop_higher = TRUE) {
     attr(x, "rollup") <- TRUE
     return(dplyr::as_tibble(x))
   }
-  
+
   # summarize species for cases where multiple subspecies reported on same list
-  sp <- dplyr::select(x, dplyr::all_of(c(cid, "scientific_name", "observation_count")))
+  sp <- dplyr::select(
+    x,
+    dplyr::all_of(c(cid, "scientific_name", "observation_count"))
+  )
   suppressWarnings({
     sp$count <- as.integer(sp$observation_count)
   })
-  sp <- dplyr::group_by(sp, 
-                        dplyr::across(dplyr::all_of(c(cid, "scientific_name"))))
+  sp <- dplyr::group_by(
+    sp,
+    dplyr::across(dplyr::all_of(c(cid, "scientific_name")))
+  )
   sp <- dplyr::summarise(sp, count = sum(.data$count), .groups = "drop")
-  sp <- dplyr::mutate(sp,
-                      count = as.character(.data$count),
-                      count = dplyr::coalesce(.data$count, "X"))
-  
+  sp <- dplyr::mutate(
+    sp,
+    count = as.character(.data$count),
+    count = dplyr::coalesce(.data$count, "X")
+  )
+
   # drop any duplicate species records
-  x <- dplyr::group_by(x, 
-                       dplyr::across(dplyr::all_of(c(cid, "scientific_name"))))
+  x <- dplyr::group_by(
+    x,
+    dplyr::across(dplyr::all_of(c(cid, "scientific_name")))
+  )
   # give precedence to true species records
-  x <- dplyr::slice_min(x, n = 1, order_by = .data$taxonomic_order_tax, 
-                        with_ties = FALSE)
+  x <- dplyr::slice_min(
+    x,
+    n = 1,
+    order_by = .data$taxonomic_order_tax,
+    with_ties = FALSE
+  )
   x <- dplyr::ungroup(x)
-  
+
   # update counts with summary
   x <- dplyr::inner_join(x, sp, by = c(cid, "scientific_name"))
-  x <- dplyr::mutate(x,
-                     observation_count = .data$count,
-                     taxonomic_order = .data$taxonomic_order_tax,
-                     taxon_concept_id = .data$taxon_concept_id_tax)
-  x <- dplyr::select(x, -"count", -"taxonomic_order_tax", -"taxon_concept_id_tax")
-  
+  x <- dplyr::mutate(
+    x,
+    observation_count = .data$count,
+    taxonomic_order = .data$taxonomic_order_tax,
+    taxon_concept_id = .data$taxon_concept_id_tax
+  )
+  x <- dplyr::select(
+    x,
+    -"count",
+    -"taxonomic_order_tax",
+    -"taxon_concept_id_tax"
+  )
+
   # drop subspecies fields, set category to species
   if ("category" %in% names(x)) {
     x$category <- ifelse(x$category %in% include, x$category, "species")
@@ -198,7 +223,7 @@ auk_rollup <- function(x, drop_higher = TRUE) {
   if ("subspecies_scientific_name" %in% names(x)) {
     x$subspecies_scientific_name <- NULL
   }
-  
+
   # attribute flag
   attr(x, "rollup") <- TRUE
   dplyr::as_tibble(x)

@@ -1,5 +1,5 @@
 #' Set a custom path to AWK executable
-#' 
+#'
 #' If AWK has been installed in a non-standard location, the environment
 #' variable `AWK_PATH` must be set to specify the location of the executable.
 #' Use this function to set `AWK_PATH` in your .Renviron file. **Most users
@@ -8,7 +8,7 @@
 #' for for an .Renviron location defined by `R_ENVIRON_USER`, then defaults to
 #' ~/.Renviron.
 #'
-#' @param path character; path to the AWK executable on your system, e.g. 
+#' @param path character; path to the AWK executable on your system, e.g.
 #'   `"C:/cygwin64/bin/gawk.exe"` or `"/usr/bin/awk"`.
 #' @param overwrite logical; should the existing `AWK_PATH` be overwritten if it
 #'   has already been set in .Renviron.
@@ -29,19 +29,24 @@ auk_set_awk_path <- function(path, overwrite = FALSE) {
   path <- normalizePath(path, winslash = "/", mustWork = TRUE)
   # make sure awk executable is there
   awk_test <- tryCatch(
-    list(result = system(paste(path, "--version"),
-                         intern = TRUE, ignore.stderr = TRUE)),
+    list(
+      result = system(
+        paste(path, "--version"),
+        intern = TRUE,
+        ignore.stderr = TRUE
+      )
+    ),
     error = function(e) list(result = NULL),
     warning = function(e) list(result = NULL)
   )
   if (is.null(awk_test$result)) {
     stop("Specified AWK_PATH doesn't contain a valid AWK executable.")
   }
-  
+
   # find .Renviron
   renv_path <- renv_path <- renv_file_path()
   renv_lines <- readLines(renv_path)
-  
+
   # look for existing entry, remove if overwrite = TRUE
   renv_exists <- grepl("^AWK_PATH[[:space:]]*=.*", renv_lines)
   if (any(renv_exists)) {

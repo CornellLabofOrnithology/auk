@@ -131,7 +131,7 @@ library(dplyr)
 # without rollup, there are multiple observations per checklists
 ebd |>
   filter(common_name == "Yellow-rumped Warbler") |>
-  select(checklist_id, category, common_name, subspecies_common_name, 
+  select(checklist_id, category, common_name, subspecies_common_name,
          observation_count)
 #> # A tibble: 8 × 5
 #>   checklist_id category   common_name   subspecies_common_name observation_count

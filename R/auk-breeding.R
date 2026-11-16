@@ -16,7 +16,7 @@
 #' system.file("extdata/ebd-sample.txt", package = "auk") |>
 #'   auk_ebd() |>
 #'   auk_breeding()
-auk_breeding <- function(x)  {
+auk_breeding <- function(x) {
   UseMethod("auk_breeding")
 }
 
@@ -26,7 +26,7 @@ auk_breeding.auk_ebd <- function(x) {
   if (!"breeding" %in% x$col_idx$id) {
     stop("Breeding code column missing from EBD")
   }
-  
+
   # define filter
   x$filters$breeding <- TRUE
   return(x)

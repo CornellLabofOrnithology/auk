@@ -18,8 +18,13 @@ auk_get_awk_path <- function() {
   if (Sys.getenv("AWK_PATH") != "") {
     awk <- Sys.getenv("AWK_PATH")
     awk_test <- tryCatch(
-      list(result = system(paste(awk, "--version"),
-                           intern = TRUE, ignore.stderr = TRUE)),
+      list(
+        result = system(
+          paste(awk, "--version"),
+          intern = TRUE,
+          ignore.stderr = TRUE
+        )
+      ),
       error = function(e) list(result = NULL),
       warning = function(e) list(result = NULL)
     )
@@ -44,8 +49,13 @@ auk_get_awk_path <- function() {
     }
     # test
     awk_test <- tryCatch(
-      list(result = system(paste(awk, "--version"),
-                           intern = TRUE, ignore.stderr = TRUE)),
+      list(
+        result = system(
+          paste(awk, "--version"),
+          intern = TRUE,
+          ignore.stderr = TRUE
+        )
+      ),
       error = function(e) list(result = NULL),
       warning = function(e) list(result = NULL)
     )

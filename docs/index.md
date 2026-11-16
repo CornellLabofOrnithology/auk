@@ -32,8 +32,8 @@ al. 2021](https://onlinelibrary.wiley.com/doi/10.1111/ddi.13271)).
 install.packages("auk")
 
 # or install the development version from github
-# install.packages("remotes")
-remotes::install_github("CornellLabofOrnithology/auk")
+if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak")
+pak::pak("CornellLabofOrnithology/auk")
 ```
 
 `auk` requires the Unix utility AWK, which is available on most Linux
@@ -223,7 +223,7 @@ ebd <- auk_ebd(f) |>
   auk_complete()
 ebd
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c6248eecf2/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a520a9829/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed

@@ -5,7 +5,7 @@
 #' only use `auk_sampling()` if you intend to only work with checklist-level
 #' data.
 #'
-#' @param file character; input sampling event data file, which contains 
+#' @param file character; input sampling event data file, which contains
 #'   checklist data from eBird.
 #' @param sep character; the input field separator, the eBird data are tab
 #'   separated so this should generally not be modified. Must only be a single
@@ -14,9 +14,9 @@
 #'
 #' @details eBird data can be downloaded as a tab-separated text file from the
 #'   [eBird website](http://ebird.org/ebird/data/download) after submitting a
-#'   request for access. In the eBird Basic Dataset (EBD) each row corresponds 
-#'   to a observation of a single bird species on a single checklist, while the 
-#'   sampling event data file contains a single row for every checklist. This 
+#'   request for access. In the eBird Basic Dataset (EBD) each row corresponds
+#'   to a observation of a single bird species on a single checklist, while the
+#'   sampling event data file contains a single row for every checklist. This
 #'   function creates an R object to reference only the sampling data.
 #'
 #' @return An `auk_sampling` object storing the file reference and the desired
@@ -32,17 +32,21 @@
 auk_sampling <- function(file, sep = "\t") {
   # checks
   assertthat::assert_that(
-    assertthat::is.string(sep), nchar(sep) == 1, sep != " "
+    assertthat::is.string(sep),
+    nchar(sep) == 1,
+    sep != " "
   )
   file <- ebd_file(file)
   # read header rows
   header <- tolower(get_header(file, sep))
   header <- stringr::str_replace_all(header, "_", " ")
-  col_idx <- data.frame(id = NA_character_, 
-                        name = header, 
-                        index = seq_along(header),
-                        stringsAsFactors = FALSE)
-  
+  col_idx <- data.frame(
+    id = NA_character_,
+    name = header,
+    index = seq_along(header),
+    stringsAsFactors = FALSE
+  )
+
   # check column name for protocol column
   protocol_col_name <- "protocol name"
   if (!protocol_col_name %in% header) {
@@ -53,43 +57,72 @@ auk_sampling <- function(file, sep = "\t") {
   if (!project_col_name %in% header) {
     project_col_name <- "project code"
   }
-  
+
   # ensure key columns are present
-  mandatory <- c("country code", "state code",
-                 "latitude", "longitude",
-                 "observation date", "time observations started",
-                 protocol_col_name,
-                 "duration minutes", "effort distance km",
-                 "all species reported",
-                 "sampling event identifier", "group identifier")
+  mandatory <- c(
+    "country code",
+    "state code",
+    "latitude",
+    "longitude",
+    "observation date",
+    "time observations started",
+    protocol_col_name,
+    "duration minutes",
+    "effort distance km",
+    "all species reported",
+    "sampling event identifier",
+    "group identifier"
+  )
   col_miss <- mandatory[!(mandatory %in% header)]
   if (length(col_miss) > 0) {
-    m <- sprintf("Required columns missing from the sampling file:\n\t%s",
-                 paste(col_miss, collapse = "\n\t"))
+    m <- sprintf(
+      "Required columns missing from the sampling file:\n\t%s",
+      paste(col_miss, collapse = "\n\t")
+    )
     stop(m)
   }
-  
+
   # identify columns required for filtering
   filter_cols <- data.frame(
-    id = c("country", "state", "county", "bcr", 
-           "lat", "lng",
-           "date", "time", "last_edited",
-           "protocol", "project", 
-           "duration", "distance", 
-           "complete",
-           "observer"),
-    name = c("country code", "state code", "county code", "bcr code",
-             "latitude", "longitude",
-             "observation date", "time observations started",
-             "last edited date", 
-             protocol_col_name, project_col_name,
-             "duration minutes", "effort distance km",
-             "all species reported",
-             "observer id"),
-    stringsAsFactors = FALSE)
+    id = c(
+      "country",
+      "state",
+      "county",
+      "bcr",
+      "lat",
+      "lng",
+      "date",
+      "time",
+      "last_edited",
+      "protocol",
+      "project",
+      "duration",
+      "distance",
+      "complete",
+      "observer"
+    ),
+    name = c(
+      "country code",
+      "state code",
+      "county code",
+      "bcr code",
+      "latitude",
+      "longitude",
+      "observation date",
+      "time observations started",
+      "last edited date",
+      protocol_col_name,
+      project_col_name,
+      "duration minutes",
+      "effort distance km",
+      "all species reported",
+      "observer id"
+    ),
+    stringsAsFactors = FALSE
+  )
   filter_cols <- filter_cols[filter_cols$name %in% col_idx$name, ]
   col_idx$id[match(filter_cols$name, col_idx$name)] <- filter_cols$id
-  
+
   # output
   structure(
     list(
@@ -105,7 +138,7 @@ auk_sampling <- function(file, sep = "\t") {
         date = character(),
         time = character(),
         last_edited = character(),
-        protocol = character(), 
+        protocol = character(),
         project = character(),
         duration = numeric(),
         distance = numeric(),
@@ -122,7 +155,7 @@ print.auk_sampling <- function(x, ...) {
   cat("Input \n")
   cat(paste("  Sampling events:", x$file, "\n"))
   cat("\n")
-  
+
   cat("Output \n")
   if (is.null(x$output)) {
     cat("  Filters not executed\n")
@@ -130,7 +163,7 @@ print.auk_sampling <- function(x, ...) {
     cat(paste("  Sampling events:", x$output, "\n"))
   }
   cat("\n")
-  
+
   cat("Filters \n")
   # country filter
   cat("  Countries: ")

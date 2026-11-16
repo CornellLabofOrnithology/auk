@@ -49,8 +49,8 @@ auk_clean(f, f_out)
 }
 }
 \seealso{
-Other text: 
-\code{\link{auk_select}()},
-\code{\link{auk_split}()}
+Other text:
+\code{\link[=auk_select]{auk_select()}},
+\code{\link[=auk_split]{auk_split()}}
 }
 \concept{text}

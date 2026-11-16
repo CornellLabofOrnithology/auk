@@ -1,10 +1,10 @@
 #' Clean an eBird data file (Deprecated)
 #'
-#' This function is no longer required by current versions of the eBird Basic 
+#' This function is no longer required by current versions of the eBird Basic
 #' Dataset (EBD).
 #'
-#' @param f_in character; input file. If file is not found as specified, it will 
-#'   be looked for in the directory specified by the `EBD_PATH` environment 
+#' @param f_in character; input file. If file is not found as specified, it will
+#'   be looked for in the directory specified by the `EBD_PATH` environment
 #'   variable.
 #' @param f_out character; output file.
 #' @param sep character; the input field separator, the basic dataset is tab
@@ -35,8 +35,13 @@
 #' # note: this function is deprecated and no longer does anything
 #' auk_clean(f, f_out)
 #' }
-auk_clean <- function(f_in, f_out, sep = "\t", remove_text = FALSE, 
-                      overwrite = FALSE) {
+auk_clean <- function(
+  f_in,
+  f_out,
+  sep = "\t",
+  remove_text = FALSE,
+  overwrite = FALSE
+) {
   .Deprecated()
   # checks
   awk_path <- auk_get_awk_path()
@@ -44,7 +49,9 @@ auk_clean <- function(f_in, f_out, sep = "\t", remove_text = FALSE,
     stop("auk_clean() requires a valid AWK install.")
   }
   assertthat::assert_that(
-    assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
+    assertthat::is.string(sep),
+    nchar(sep) == 1,
+    sep != " ",
     assertthat::is.flag(remove_text),
     assertthat::is.flag(overwrite)
   )
@@ -67,33 +74,42 @@ auk_clean <- function(f_in, f_out, sep = "\t", remove_text = FALSE,
   ncols <- length(header)
   if (ncols < 30) {
     stop(
-      sprintf("There is an error in your EBD file, only %i columns detected.",
-            ncols)
+      sprintf(
+        "There is an error in your EBD file, only %i columns detected.",
+        ncols
       )
+    )
   }
-  
+
   # columns to drop
   if (remove_text) {
-    text_cols <- c("locality", 
-                   "first name", "last name", 
-                   "trip comments", 
-                   "species comments")
+    text_cols <- c(
+      "locality",
+      "first name",
+      "last name",
+      "trip comments",
+      "species comments"
+    )
     keep_cols <- which(!tolower(header) %in% text_cols)
     print_cols <- paste0("$", keep_cols, collapse = ",")
   } else {
     print_cols <- "$0"
   }
-  
 
   # construct awk command
-  awk <- str_interp(awk_clean, 
-                    list(sep = sep, ncols = ncols, print_cols = print_cols))
+  awk <- str_interp(
+    awk_clean,
+    list(sep = sep, ncols = ncols, print_cols = print_cols)
+  )
 
   # run command
-  exit_code <- system2(awk_path,
-                       args = paste0("'", awk, "' ", f_in),
-                       stdout = f_out, stderr = FALSE)
-  
+  exit_code <- system2(
+    awk_path,
+    args = paste0("'", awk, "' ", f_in),
+    stdout = f_out,
+    stderr = FALSE
+  )
+
   if (exit_code == 0) {
     f_out
   } else {

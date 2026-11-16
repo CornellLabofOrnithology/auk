@@ -81,7 +81,7 @@ can be defined using the various other functions in this package, e.g.
 at least a couple hours to run on the full dataset}
 }
 \details{
-If a sampling file is provided in the \link[=auk_ebd]{auk_ebd} object, this
+If a sampling file is provided in the \link{auk_ebd} object, this
 function will filter both the eBird Basic Dataset and the sampling data using
 the same set of filters. This ensures that the files are in sync, i.e. that
 they contain data on the same set of checklists.
@@ -116,7 +116,7 @@ filters <- auk_ebd(f) |>
   auk_time(start_time = c("06:00", "09:00")) |>
   auk_duration(duration = c(0, 60)) |>
   auk_complete()
-  
+
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 filters <- auk_species(ebd, species = c("Canada Jay", "Blue Jay"))
@@ -138,25 +138,25 @@ str(read_ebd(filtered))
 }
 }
 \seealso{
-Other filter: 
-\code{\link{auk_bbox}()},
-\code{\link{auk_bcr}()},
-\code{\link{auk_breeding}()},
-\code{\link{auk_complete}()},
-\code{\link{auk_country}()},
-\code{\link{auk_county}()},
-\code{\link{auk_date}()},
-\code{\link{auk_distance}()},
-\code{\link{auk_duration}()},
-\code{\link{auk_exotic}()},
-\code{\link{auk_extent}()},
-\code{\link{auk_last_edited}()},
-\code{\link{auk_observer}()},
-\code{\link{auk_project}()},
-\code{\link{auk_protocol}()},
-\code{\link{auk_species}()},
-\code{\link{auk_state}()},
-\code{\link{auk_time}()},
-\code{\link{auk_year}()}
+Other filter:
+\code{\link[=auk_bbox]{auk_bbox()}},
+\code{\link[=auk_bcr]{auk_bcr()}},
+\code{\link[=auk_breeding]{auk_breeding()}},
+\code{\link[=auk_complete]{auk_complete()}},
+\code{\link[=auk_country]{auk_country()}},
+\code{\link[=auk_county]{auk_county()}},
+\code{\link[=auk_date]{auk_date()}},
+\code{\link[=auk_distance]{auk_distance()}},
+\code{\link[=auk_duration]{auk_duration()}},
+\code{\link[=auk_exotic]{auk_exotic()}},
+\code{\link[=auk_extent]{auk_extent()}},
+\code{\link[=auk_last_edited]{auk_last_edited()}},
+\code{\link[=auk_observer]{auk_observer()}},
+\code{\link[=auk_project]{auk_project()}},
+\code{\link[=auk_protocol]{auk_protocol()}},
+\code{\link[=auk_species]{auk_species()}},
+\code{\link[=auk_state]{auk_state()}},
+\code{\link[=auk_time]{auk_time()}},
+\code{\link[=auk_year]{auk_year()}}
 }
 \concept{filter}

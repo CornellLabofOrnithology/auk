@@ -134,6 +134,7 @@ right order. For example, for a categorical filter allow multiple
 potential values, you may way something like:
 
 ``` r
+
 # color filter
 cat("  Feather color: ")
 if (length(x$filters$color) == 0) {
@@ -186,6 +187,7 @@ to the correct spot (remember to preserve the ordering of the filters).
 For the `auk_color()` example, the code chunk would look like:
 
 ``` r
+
   # color filter
   if (length(filters$color) == 0) {
     filter_strings$color <- ""
@@ -208,6 +210,7 @@ species-specific filters. In the case of color, which is a species
 specific variable, modify the code as follows:
 
 ``` r
+
 s_filters <- x$filters
 s_filters$species <- character()
 ## ADD THIS LINE

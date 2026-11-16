@@ -3,8 +3,11 @@
   p <- auk_get_ebd_path()
   v <- auk_version()
   if (is.na(p)) {
-    m <- paste(m, "\nNo EBD data directory set, see ?auk_set_ebd_path to set",
-               "EBD_PATH")
+    m <- paste(
+      m,
+      "\nNo EBD data directory set, see ?auk_set_ebd_path to set",
+      "EBD_PATH"
+    )
   } else {
     m <- paste(m, "\nEBD data directory: ", p)
   }

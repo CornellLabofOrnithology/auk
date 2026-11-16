@@ -22,6 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Matthew Strimas-Mackey \email{mes335@cornell.edu} (\href{https://orcid.org/0000-0001-8929-7776}{ORCID})
   \item Eliot Miller
   \item Wesley Hochachka
 }

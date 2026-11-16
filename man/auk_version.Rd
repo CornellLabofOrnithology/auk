@@ -29,10 +29,10 @@ version of the auk package and the EBD.
 auk_version()
 }
 \seealso{
-Other helpers: 
-\code{\link{auk_ebd_version}()},
-\code{\link{ebird_species}()},
-\code{\link{get_ebird_taxonomy}()},
-\code{\link{process_barcharts}()}
+Other helpers:
+\code{\link[=auk_ebd_version]{auk_ebd_version()}},
+\code{\link[=ebird_species]{ebird_species()}},
+\code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}},
+\code{\link[=process_barcharts]{process_barcharts()}}
 }
 \concept{helpers}

@@ -38,7 +38,7 @@ covariates, i.e. covariates that vary within sites, at the level of
 observations, for example, time or length of observation.}
 }
 \value{
-A data frame that can be processed by \code{\link[unmarked:formatWideLong]{unmarked::formatWide()}}.
+A data frame that can be processed by \code{\link[unmarked:formatWide]{unmarked::formatWide()}}.
 Each row will correspond to a unqiue site and, assuming there are a maximum
 of \code{N} observations per site, columns will be as follows:
 \enumerate{
@@ -53,11 +53,11 @@ covariate per observation, names "covariate_name.1", ...,
 \description{
 Prepare a data frame of species observations for ingestion into the package
 \code{unmarked} for hierarchical modeling of abundance and occurrence. The
-function \code{\link[unmarked:formatWideLong]{unmarked::formatWide()}} takes a data frame and converts it to one
+function \code{\link[unmarked:formatWide]{unmarked::formatWide()}} takes a data frame and converts it to one
 of several \code{unmarked} objects, which can then be used for modeling. This
 function converts data from a format in which each row is an observation
 (e.g. as in the eBird Basic Dataset) to the esoteric format required by
-\code{\link[unmarked:formatWideLong]{unmarked::formatWide()}} in which each row is a site.
+\code{\link[unmarked:formatWide]{unmarked::formatWide()}} in which each row is a site.
 }
 \details{
 Hierarchical modeling requires repeat observations at each "site" to
@@ -87,7 +87,7 @@ occ <- filter_repeat_visits(ebd_zf, n_days = 30)
 occ_wide <- format_unmarked_occu(occ,
                                  response = "species_observed",
                                  site_covs = c("latitude", "longitude"),
-                                 obs_covs = c("effort_distance_km", 
+                                 obs_covs = c("effort_distance_km",
                                               "duration_minutes"))
 # create an unmarked object
 if (requireNamespace("unmarked", quietly = TRUE)) {
@@ -96,17 +96,17 @@ if (requireNamespace("unmarked", quietly = TRUE)) {
 }
 
 # this function can also be used for abundance modeling
-abd <- ebd_zf |> 
+abd <- ebd_zf |>
   # convert count to integer, drop records with no count
-  dplyr::mutate(observation_count = as.integer(observation_count)) |> 
-  dplyr::filter(!is.na(observation_count)) |> 
+  dplyr::mutate(observation_count = as.integer(observation_count)) |>
+  dplyr::filter(!is.na(observation_count)) |>
   # filter to repeated visits
   filter_repeat_visits(n_days = 30)
 # prepare for conversion to unmarkedFramePCount object
 abd_wide <- format_unmarked_occu(abd,
                                  response = "observation_count",
                                  site_covs = c("latitude", "longitude"),
-                                 obs_covs = c("effort_distance_km", 
+                                 obs_covs = c("effort_distance_km",
                                               "duration_minutes"))
 # create an unmarked object
 if (requireNamespace("unmarked", quietly = TRUE)) {
@@ -115,7 +115,7 @@ if (requireNamespace("unmarked", quietly = TRUE)) {
 }
 }
 \seealso{
-Other modeling: 
-\code{\link{filter_repeat_visits}()}
+Other modeling:
+\code{\link[=filter_repeat_visits]{filter_repeat_visits()}}
 }
 \concept{modeling}

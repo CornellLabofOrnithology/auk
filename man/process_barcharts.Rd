@@ -51,10 +51,10 @@ attr(barcharts, "sample_sizes")
 barcharts[barcharts$category == "species", ]
 }
 \seealso{
-Other helpers: 
-\code{\link{auk_ebd_version}()},
-\code{\link{auk_version}()},
-\code{\link{ebird_species}()},
-\code{\link{get_ebird_taxonomy}()}
+Other helpers:
+\code{\link[=auk_ebd_version]{auk_ebd_version()}},
+\code{\link[=auk_version]{auk_version()}},
+\code{\link[=ebird_species]{ebird_species()}},
+\code{\link[=get_ebird_taxonomy]{get_ebird_taxonomy()}}
 }
 \concept{helpers}

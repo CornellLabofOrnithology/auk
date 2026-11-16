@@ -19,17 +19,17 @@
 #'   character and space delimited is not allowed since spaces appear in many of
 #'   the fields.
 #'
-#' @details 
-#' eBird data can be downloaded as a tab-separated text file from the 
-#' [eBird website](http://ebird.org/ebird/data/download) after submitting a 
+#' @details
+#' eBird data can be downloaded as a tab-separated text file from the
+#' [eBird website](http://ebird.org/ebird/data/download) after submitting a
 #' request for access. As of February 2017, this file is nearly 150 GB making it
 #' challenging to work with. If you're only interested in a single species or a
 #' small region it is possible to submit a custom download request. This
 #' approach is suggested to speed up processing time.
 #'
 #' There are two potential pathways for preparing eBird data. Users wishing to
-#' produce presence only data, should download the 
-#' [eBird Basic Dataset](http://ebird.org/ebird/data/download/) and reference 
+#' produce presence only data, should download the
+#' [eBird Basic Dataset](http://ebird.org/ebird/data/download/) and reference
 #' this file when calling `auk_ebd()`. Users wishing to produce zero-filled,
 #' presence absence data should additionally download the sampling event data
 #' file associated with the basic dataset This file contains only checklist
@@ -53,7 +53,9 @@
 auk_ebd <- function(file, file_sampling, sep = "\t") {
   # checks
   assertthat::assert_that(
-    assertthat::is.string(sep), nchar(sep) == 1, sep != " "
+    assertthat::is.string(sep),
+    nchar(sep) == 1,
+    sep != " "
   )
   file <- ebd_file(file)
   # read header rows
@@ -62,11 +64,13 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
   # fix for custom download
   header[header == "state province"] <- "state"
   header[header == "subnational1 code"] <- "state code"
-  col_idx <- data.frame(id = NA_character_, 
-                        name = header, 
-                        index = seq_along(header),
-                        stringsAsFactors = FALSE)
-  
+  col_idx <- data.frame(
+    id = NA_character_,
+    name = header,
+    index = seq_along(header),
+    stringsAsFactors = FALSE
+  )
+
   # check column name for protocol column
   protocol_col_name <- "protocol name"
   if (!protocol_col_name %in% header) {
@@ -77,51 +81,81 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
   if (!project_col_name %in% header) {
     project_col_name <- "project code"
   }
-  
+
   # ensure key columns are present
-  mandatory <- c("scientific name",
-                 "country code", "state code",
-                 "latitude", "longitude",
-                 "observation date", "time observations started",
-                 protocol_col_name,
-                 "exotic code",
-                 "duration minutes", "effort distance km",
-                 "all species reported",
-                 "observer id",
-                 "sampling event identifier", "group identifier")
+  mandatory <- c(
+    "scientific name",
+    "country code",
+    "state code",
+    "latitude",
+    "longitude",
+    "observation date",
+    "time observations started",
+    protocol_col_name,
+    "exotic code",
+    "duration minutes",
+    "effort distance km",
+    "all species reported",
+    "observer id",
+    "sampling event identifier",
+    "group identifier"
+  )
   col_miss <- mandatory[!(mandatory %in% header)]
   if (length(col_miss) > 0) {
-    m <- sprintf("Required columns missing from the EBD file:\n\t%s",
-                 paste(col_miss, collapse = "\n\t"))
+    m <- sprintf(
+      "Required columns missing from the EBD file:\n\t%s",
+      paste(col_miss, collapse = "\n\t")
+    )
     stop(m)
   }
-  
+
   # identify columns required for filtering
   filter_cols <- data.frame(
-    id = c("species",
-           "country", "state", "county", "bcr",
-           "lat", "lng", 
-           "date", "time", "last_edited",
-           "protocol", "project", 
-           "duration", "distance", 
-           "breeding", "exotic", 
-           "complete",
-           "observer"),
-    name = c("scientific name",
-             "country code", "state code", "county code", "bcr code", 
-             "latitude", "longitude",
-             "observation date", "time observations started",
-             "last edited date", 
-             protocol_col_name, project_col_name,
-             "duration minutes", "effort distance km",
-             "breeding code",
-             "exotic code",
-             "all species reported",
-             "observer id"),
-    stringsAsFactors = FALSE)
+    id = c(
+      "species",
+      "country",
+      "state",
+      "county",
+      "bcr",
+      "lat",
+      "lng",
+      "date",
+      "time",
+      "last_edited",
+      "protocol",
+      "project",
+      "duration",
+      "distance",
+      "breeding",
+      "exotic",
+      "complete",
+      "observer"
+    ),
+    name = c(
+      "scientific name",
+      "country code",
+      "state code",
+      "county code",
+      "bcr code",
+      "latitude",
+      "longitude",
+      "observation date",
+      "time observations started",
+      "last edited date",
+      protocol_col_name,
+      project_col_name,
+      "duration minutes",
+      "effort distance km",
+      "breeding code",
+      "exotic code",
+      "all species reported",
+      "observer id"
+    ),
+    stringsAsFactors = FALSE
+  )
   filter_cols <- filter_cols[filter_cols$name %in% col_idx$name, ]
   col_idx$id[match(filter_cols$name, col_idx$name)] <- filter_cols$id
-  
+
   # process sampling data header
   if (!missing(file_sampling)) {
     file_sampling <- ebd_file(file_sampling)
@@ -134,15 +168,19 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
     mandatory_sampl <- setdiff(mandatory, "scientific name")
     col_miss <- mandatory_sampl[!(mandatory_sampl %in% header)]
     if (length(col_miss) > 0) {
-      m <- sprintf("Required columns missing from the sampling file:\n\t%s",
-                   paste(col_miss, collapse = "\n\t"))
+      m <- sprintf(
+        "Required columns missing from the sampling file:\n\t%s",
+        paste(col_miss, collapse = "\n\t")
+      )
       stop(m)
     }
     # identify column locations
-    col_idx_sampling <- data.frame(id = NA_character_, 
-                                   name = header_sampling, 
-                                   index = seq_along(header_sampling),
-                                   stringsAsFactors = FALSE)
+    col_idx_sampling <- data.frame(
+      id = NA_character_,
+      name = header_sampling,
+      index = seq_along(header_sampling),
+      stringsAsFactors = FALSE
+    )
     col_found <- filter_cols_sampling$name %in% col_idx$name
     filter_cols_sampling <- filter_cols_sampling[col_found, ]
     mtch <- match(filter_cols_sampling$name, col_idx_sampling$name)
@@ -172,7 +210,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
         date = character(),
         time = character(),
         last_edited = character(),
-        protocol = character(), 
+        protocol = character(),
         project = character(),
         duration = numeric(),
         distance = numeric(),
@@ -346,10 +384,12 @@ print.auk_ebd <- function(x, ...) {
   if (length(x$filters$exotic) %in% c(0, 4)) {
     cat("all")
   } else {
-    ex_codes <- dplyr::recode(x$filters$exotic,
-                              "N" = "Naturalized",
-                              "P" = "Provisional",
-                              "X" = "Escapee")
+    ex_codes <- dplyr::recode(
+      x$filters$exotic,
+      "N" = "Naturalized",
+      "P" = "Provisional",
+      "X" = "Escapee"
+    )
     ex_codes <- ifelse(ex_codes == "", "Native", ex_codes)
     cat(paste(ex_codes, collapse = ", "))
   }

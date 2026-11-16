@@ -1,6 +1,6 @@
 #' `auk`: eBird Data Extraction and Processing in R
 #'
-#' Tools for extracting and processing eBird data from the eBird Basic Dataset 
+#' Tools for extracting and processing eBird data from the eBird Basic Dataset
 #' (EBD).
 #'
 #' @keywords internal

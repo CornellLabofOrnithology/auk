@@ -1,20 +1,20 @@
 #' Get eBird taxonomy via the eBird API
-#' 
-#' Get the taxonomy used in eBird via the eBird API. 
 #'
-#' @param version integer; the version (i.e. year) of the taxonomy. The eBird 
-#'   taxonomy is updated once a year in August. Leave this parameter blank to 
+#' Get the taxonomy used in eBird via the eBird API.
+#'
+#' @param version integer; the version (i.e. year) of the taxonomy. The eBird
+#'   taxonomy is updated once a year in August. Leave this parameter blank to
 #'   get the current taxonomy.
-#' @param locale character; the [locale for the common names](https://support.ebird.org/support/solutions/articles/48000804865-bird-names-in-ebird), 
+#' @param locale character; the [locale for the common names](https://support.ebird.org/support/solutions/articles/48000804865-bird-names-in-ebird),
 #'   defaults to English.
 #'
-#' @return A data frame of all species in the eBird taxonomy, consisting of the 
+#' @return A data frame of all species in the eBird taxonomy, consisting of the
 #'   following columns:
 #'   - `scientific_name`: scientific name.
-#'   - `common_name`: common name, defaults to English, but different languages 
+#'   - `common_name`: common name, defaults to English, but different languages
 #'   can be selected using the `locale` parameter.
 #'   - `species_code`: a unique alphanumeric code identifying each species.
-#'   - `category`: whether the entry is for a species or another 
+#'   - `category`: whether the entry is for a species or another
 #'   field-identifiable taxon, such as `spuh`, `slash`, `hybrid`, etc.
 #'   - `taxon_order`: numeric value used to sort rows in taxonomic order.
 #'   - `order`: the scientific name of the order that the species belongs to.
@@ -56,17 +56,29 @@ get_ebird_taxonomy <- function(version, locale) {
   httr2::resp_check_status(response)
   # read to data frame
   tax <- httr2::resp_body_string(response)
-  tax <- suppressWarnings(readr::read_csv(I(tax), col_types = list(), lazy = FALSE))
+  tax <- suppressWarnings(readr::read_csv(
+    I(tax),
+    col_types = list(),
+    lazy = FALSE
+  ))
   names(tax) <- tolower(names(tax))
   # tidy up
-  keep_names <- c("scientific_name", "common_name", "species_code", 
-                  "category", "taxon_order",
-                  "order", "family_sci_name", 
-                  "report_as")
+  keep_names <- c(
+    "scientific_name",
+    "common_name",
+    "species_code",
+    "category",
+    "taxon_order",
+    "order",
+    "family_sci_name",
+    "report_as"
+  )
   keep_names <- intersect(keep_names, names(tax))
   if (length(keep_names) == 0) {
-    stop("eBird taxonomy API cannont be accessed, visit https://ebird.org/ ",
-         "to see if eBird is currently down.")
+    stop(
+      "eBird taxonomy API cannont be accessed, visit https://ebird.org/ ",
+      "to see if eBird is currently down."
+    )
   }
   out <- dplyr::select(tax, dplyr::all_of(keep_names))
   names(out)[names(out) == "family_sci_name"] <- "family"

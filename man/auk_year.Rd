@@ -44,7 +44,7 @@ years <- c(2010, 2012)
 system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
   auk_year(year = years)
-  
+
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 auk_year(ebd, years)
@@ -52,29 +52,29 @@ auk_year(ebd, years)
 # filter to may and june of 2010 and 2012
 system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
-  auk_year(year = c(2010, 2012)) |> 
+  auk_year(year = c(2010, 2012)) |>
   auk_date(date = c("*-05-01", "*-06-30"))
 }
 \seealso{
-Other filter: 
-\code{\link{auk_bbox}()},
-\code{\link{auk_bcr}()},
-\code{\link{auk_breeding}()},
-\code{\link{auk_complete}()},
-\code{\link{auk_country}()},
-\code{\link{auk_county}()},
-\code{\link{auk_date}()},
-\code{\link{auk_distance}()},
-\code{\link{auk_duration}()},
-\code{\link{auk_exotic}()},
-\code{\link{auk_extent}()},
-\code{\link{auk_filter}()},
-\code{\link{auk_last_edited}()},
-\code{\link{auk_observer}()},
-\code{\link{auk_project}()},
-\code{\link{auk_protocol}()},
-\code{\link{auk_species}()},
-\code{\link{auk_state}()},
-\code{\link{auk_time}()}
+Other filter:
+\code{\link[=auk_bbox]{auk_bbox()}},
+\code{\link[=auk_bcr]{auk_bcr()}},
+\code{\link[=auk_breeding]{auk_breeding()}},
+\code{\link[=auk_complete]{auk_complete()}},
+\code{\link[=auk_country]{auk_country()}},
+\code{\link[=auk_county]{auk_county()}},
+\code{\link[=auk_date]{auk_date()}},
+\code{\link[=auk_distance]{auk_distance()}},
+\code{\link[=auk_duration]{auk_duration()}},
+\code{\link[=auk_exotic]{auk_exotic()}},
+\code{\link[=auk_extent]{auk_extent()}},
+\code{\link[=auk_filter]{auk_filter()}},
+\code{\link[=auk_last_edited]{auk_last_edited()}},
+\code{\link[=auk_observer]{auk_observer()}},
+\code{\link[=auk_project]{auk_project()}},
+\code{\link[=auk_protocol]{auk_protocol()}},
+\code{\link[=auk_species]{auk_species()}},
+\code{\link[=auk_state]{auk_state()}},
+\code{\link[=auk_time]{auk_time()}}
 }
 \concept{filter}

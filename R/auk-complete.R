@@ -7,10 +7,10 @@
 #' filters have been defined, [auk_filter()] should be used to call AWK and
 #' perform the filtering.
 #'
-#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by
 #'   [auk_ebd()] or [auk_sampling()].
-#' 
-#' @details This function can also work with on an `auk_sampling` object if the 
+#'
+#' @details This function can also work with on an `auk_sampling` object if the
 #'   user only wishes to filter the sampling event data.
 #'
 #' @return An `auk_ebd` object.
@@ -20,7 +20,7 @@
 #' system.file("extdata/ebd-sample.txt", package = "auk") |>
 #'   auk_ebd() |>
 #'   auk_complete()
-auk_complete <- function(x)  {
+auk_complete <- function(x) {
   UseMethod("auk_complete")
 }
 

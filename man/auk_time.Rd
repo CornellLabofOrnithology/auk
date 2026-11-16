@@ -31,31 +31,31 @@ user only wishes to filter the sampling event data.
 system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
   auk_time(start_time = c("06:00", "08:00"))
-  
+
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 auk_time(ebd, start_time = c("06:00", "08:00"))
 }
 \seealso{
-Other filter: 
-\code{\link{auk_bbox}()},
-\code{\link{auk_bcr}()},
-\code{\link{auk_breeding}()},
-\code{\link{auk_complete}()},
-\code{\link{auk_country}()},
-\code{\link{auk_county}()},
-\code{\link{auk_date}()},
-\code{\link{auk_distance}()},
-\code{\link{auk_duration}()},
-\code{\link{auk_exotic}()},
-\code{\link{auk_extent}()},
-\code{\link{auk_filter}()},
-\code{\link{auk_last_edited}()},
-\code{\link{auk_observer}()},
-\code{\link{auk_project}()},
-\code{\link{auk_protocol}()},
-\code{\link{auk_species}()},
-\code{\link{auk_state}()},
-\code{\link{auk_year}()}
+Other filter:
+\code{\link[=auk_bbox]{auk_bbox()}},
+\code{\link[=auk_bcr]{auk_bcr()}},
+\code{\link[=auk_breeding]{auk_breeding()}},
+\code{\link[=auk_complete]{auk_complete()}},
+\code{\link[=auk_country]{auk_country()}},
+\code{\link[=auk_county]{auk_county()}},
+\code{\link[=auk_date]{auk_date()}},
+\code{\link[=auk_distance]{auk_distance()}},
+\code{\link[=auk_duration]{auk_duration()}},
+\code{\link[=auk_exotic]{auk_exotic()}},
+\code{\link[=auk_extent]{auk_extent()}},
+\code{\link[=auk_filter]{auk_filter()}},
+\code{\link[=auk_last_edited]{auk_last_edited()}},
+\code{\link[=auk_observer]{auk_observer()}},
+\code{\link[=auk_project]{auk_project()}},
+\code{\link[=auk_protocol]{auk_protocol()}},
+\code{\link[=auk_species]{auk_species()}},
+\code{\link[=auk_state]{auk_state()}},
+\code{\link[=auk_year]{auk_year()}}
 }
 \concept{filter}

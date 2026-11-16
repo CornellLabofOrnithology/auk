@@ -171,7 +171,7 @@ filters <- auk_ebd(f) |>
   auk_time(start_time = c("06:00", "09:00")) |>
   auk_duration(duration = c(0, 60)) |>
   auk_complete()
-  
+
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 filters <- auk_species(ebd, species = c("Canada Jay", "Blue Jay"))

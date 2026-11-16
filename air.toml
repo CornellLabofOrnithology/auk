@@ -1,0 +1,9 @@
+# air formatter configuration
+# https://posit-dev.github.io/air/configuration.html
+
+[format]
+line-width = 80
+indent-width = 2
+indent-style = "space"
+line-ending = "auto"
+exclude = []

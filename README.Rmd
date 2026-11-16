@@ -37,8 +37,8 @@ For a comprehensive resource on using eBird data for modeling species distributi
 install.packages("auk")
 
 # or install the development version from github
-# install.packages("remotes")
-remotes::install_github("CornellLabofOrnithology/auk")
+if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak")
+pak::pak("CornellLabofOrnithology/auk")
 ```
 
 `auk` requires the Unix utility AWK, which is available on most Linux and Mac OS X machines. Windows users will first need to install [Cygwin](https://www.cygwin.com) before using this package. Note that **Cygwin must be installed in the default location** (`C:/cygwin/bin/gawk.exe` or `C:/cygwin64/bin/gawk.exe`) in order for `auk` to work.

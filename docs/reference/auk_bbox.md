@@ -71,7 +71,7 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
   auk_bbox(bbox = c(-125, 37, -120, 52))
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -94,12 +94,12 @@ system.file("extdata/ebd-sample.txt", package = "auk") |>
 #>   Records with breeding codes only: no
 #>   Exotic Codes: all
 #>   Complete checklists only: no
-  
+
 # alternatively, without pipes
 ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 auk_bbox(ebd, bbox = c(-125, 37, -120, 52))
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed

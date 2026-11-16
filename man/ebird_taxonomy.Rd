@@ -41,7 +41,7 @@ Non-ASCII characters (e.g. those with accents) have been converted to ASCII
 equivalents in this data frame.
 }
 \seealso{
-Other data: 
+Other data:
 \code{\link{bcr_codes}},
 \code{\link{ebird_states}},
 \code{\link{valid_protocols}}

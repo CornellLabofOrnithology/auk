@@ -64,11 +64,12 @@ get_col_types <- function(header) {
     "REVIEWED" = "logical",
     "REASON" = "character",
     "CHECKLIST COMMENTS" = "character",
-    "SPECIES COMMENTS" = "character")
-  
+    "SPECIES COMMENTS" = "character"
+  )
+
   # remove any columns not in header
   col_types <- col_types[names(col_types) %in% header]
-  
+
   # make reader specific changes
   col_types <- substr(col_types, 1, 1)
   # add in guesses

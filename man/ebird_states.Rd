@@ -28,7 +28,7 @@ Note that some countries are not broken into states in eBird and therefore do
 not appear in this data frame.
 }
 \seealso{
-Other data: 
+Other data:
 \code{\link{bcr_codes}},
 \code{\link{ebird_taxonomy}},
 \code{\link{valid_protocols}}

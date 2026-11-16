@@ -5,12 +5,12 @@
 #' filters have been defined, [auk_filter()] should be used to call AWK and
 #' perform the filtering.
 #'
-#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by
 #'   [auk_ebd()] or [auk_sampling()].
-#' @param start_time character; 2 element character vector giving the range of 
+#' @param start_time character; 2 element character vector giving the range of
 #'   times in 24 hour format, e.g. `"06:30"` or `"16:22"`.
-#' 
-#' @details This function can also work with on an `auk_sampling` object if the 
+#'
+#' @details This function can also work with on an `auk_sampling` object if the
 #'   user only wishes to filter the sampling event data.
 #'
 #' @return An `auk_ebd` object.
@@ -21,11 +21,11 @@
 #' system.file("extdata/ebd-sample.txt", package = "auk") |>
 #'   auk_ebd() |>
 #'   auk_time(start_time = c("06:00", "08:00"))
-#'   
+#'
 #' # alternatively, without pipes
 #' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 #' auk_time(ebd, start_time = c("06:00", "08:00"))
-auk_time <- function(x, start_time)  {
+auk_time <- function(x, start_time) {
   UseMethod("auk_time")
 }
 
@@ -37,8 +37,9 @@ auk_time.auk_ebd <- function(x, start_time) {
     is.character(start_time)
   )
   # check for valid times
-  if (!all(stringr::str_detect(start_time, 
-                               "^([01]?\\d|2[0-3]):?([0-5]\\d)$"))) {
+  if (
+    !all(stringr::str_detect(start_time, "^([01]?\\d|2[0-3]):?([0-5]\\d)$"))
+  ) {
     stop("Invalid time format.")
   }
 

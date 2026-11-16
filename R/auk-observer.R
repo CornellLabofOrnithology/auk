@@ -5,10 +5,10 @@
 #' been defined, [auk_filter()] should be used to call AWK and perform the
 #' filtering.
 #'
-#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by 
+#' @param x `auk_ebd` or `auk_sampling` object; reference to file created by
 #'   [auk_ebd()] or [auk_sampling()].
 #' @param observer_id character or integer; observers to filter by. Observer IDs
-#'   can be provided either as integer (e.g. 12345) or character with the "obsr" 
+#'   can be provided either as integer (e.g. 12345) or character with the "obsr"
 #'   prefix as they appear in the EBD (e.g. "obsr12345").
 #'
 #' @return An `auk_ebd` or `auk_sampling`` object.
@@ -18,11 +18,11 @@
 #' system.file("extdata/ebd-sample.txt", package = "auk") |>
 #'   auk_ebd() |>
 #'   auk_observer("obsr313215")
-#'   
+#'
 #' # alternatively, without pipes
 #' ebd <- auk_ebd(system.file("extdata/ebd-sample.txt", package = "auk"))
 #' auk_observer(ebd, observer = 313215)
-auk_observer <- function(x, observer_id)  {
+auk_observer <- function(x, observer_id) {
   UseMethod("auk_observer")
 }
 
@@ -38,7 +38,7 @@ auk_observer.auk_ebd <- function(x, observer_id) {
     stop("observer_id must be a character or integer vector of valid IDs.")
   }
   observer_id <- tolower(observer_id)
-  
+
   # add observer to filter list
   x$filters$observer <- observer_id
   return(x)

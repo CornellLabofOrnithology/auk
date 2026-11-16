@@ -3,15 +3,15 @@
 #' Read an eBird Basic Dataset file using [readr::read_delim()]. `read_ebd()`
 #' reads the EBD itself, while read_sampling()` reads a sampling event data
 #' file.
-#' 
+#'
 #' @param x filename or `auk_ebd` object with associated output
 #'   files as created by [auk_filter()].
 #' @param sep character; single character used to separate fields within a row.
 #' @param unique logical; should duplicate grouped checklists be removed. If
 #'   `unique = TRUE`, [auk_unique()] is called on the EBD before returning.
-#' @param rollup logical; should taxonomic rollup to species level be applied. 
-#'   If `rollup = TRUE`, [auk_rollup()] is called on the EBD before returning. 
-#'   Note that this process can be time consuming for large files, try turning 
+#' @param rollup logical; should taxonomic rollup to species level be applied.
+#'   If `rollup = TRUE`, [auk_rollup()] is called on the EBD before returning.
+#'   Note that this process can be time consuming for large files, try turning
 #'   rollup off if reading is taking too long.
 #'
 #' @details  This functions performs the following processing steps:
@@ -40,31 +40,38 @@ read_ebd <- function(x, sep = "\t", unique = TRUE, rollup = TRUE) {
 
 #' @export
 #' @describeIn read_ebd Filename of EBD.
-read_ebd.character <- function(x, sep = "\t", unique = TRUE, 
-                               rollup = TRUE) {
+read_ebd.character <- function(x, sep = "\t", unique = TRUE, rollup = TRUE) {
   # checks
   assertthat::assert_that(
     assertthat::is.string(x),
     file.exists(x),
-    assertthat::is.string(sep), nchar(sep) == 1, sep != " ",
-    length(readLines(x, 2)) > 1)
-  
+    assertthat::is.string(sep),
+    nchar(sep) == 1,
+    sep != " ",
+    length(readLines(x, 2)) > 1
+  )
+
   # get header
   header <- get_header(x, sep = sep)
 
   col_types <- get_col_types(header)
-  out <- readr::read_delim(x, delim = sep, quote = "", na = "",
-                           col_types = col_types,
-                           col_select = which(header != ""),
-                           name_repair = "minimal")
+  out <- readr::read_delim(
+    x,
+    delim = sep,
+    quote = "",
+    na = "",
+    col_types = col_types,
+    col_select = which(header != ""),
+    name_repair = "minimal"
+  )
   if ("spec" %in% names(attributes(out))) {
     attr(out, "spec") <- NULL
   }
   out <- dplyr::as_tibble(out)
-  
+
   # names to snake case
   names(out) <- clean_names(names(out))
-  
+
   # remove duplicate group checklists
   if (unique) {
     if (!"group_identifier" %in% names(out)) {
@@ -85,13 +92,11 @@ read_ebd.character <- function(x, sep = "\t", unique = TRUE,
 
 #' @export
 #' @describeIn read_ebd `auk_ebd` object output from [auk_filter()]
-read_ebd.auk_ebd <- function(x, sep = "\t", unique = TRUE, 
-                             rollup = TRUE) {
+read_ebd.auk_ebd <- function(x, sep = "\t", unique = TRUE, rollup = TRUE) {
   if (is.null(x$output)) {
     stop("No output EBD file in this auk_ebd object, try calling auk_filter().")
   }
-  read_ebd(x$output, sep = sep, unique = unique, 
-           rollup = rollup)
+  read_ebd(x$output, sep = sep, unique = unique, rollup = rollup)
 }
 
 #' @rdname read_ebd
@@ -107,8 +112,7 @@ read_sampling <- function(x, sep = "\t", unique = TRUE) {
 #' @export
 #' @describeIn read_ebd Filename of sampling event data file
 read_sampling.character <- function(x, sep = "\t", unique = TRUE) {
-  out <- read_ebd(x = x, sep = sep, unique = FALSE, 
-                  rollup = FALSE)
+  out <- read_ebd(x = x, sep = sep, unique = FALSE, rollup = FALSE)
   if (unique) {
     out <- auk_unique(out, checklists_only = TRUE)
   }
@@ -129,8 +133,10 @@ read_sampling.auk_ebd <- function(x, sep = "\t", unique = TRUE) {
 #' @describeIn read_ebd `auk_sampling` object output from [auk_filter()].
 read_sampling.auk_sampling <- function(x, sep = "\t", unique = TRUE) {
   if (is.null(x$output)) {
-    stop("No output sampling file in this auk_ebd object, ",
-         "try calling auk_filter().")
+    stop(
+      "No output sampling file in this auk_ebd object, ",
+      "try calling auk_filter()."
+    )
   }
   read_sampling(x$output, sep = sep, unique = unique)
 }

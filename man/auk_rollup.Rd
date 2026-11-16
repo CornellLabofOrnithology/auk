@@ -89,7 +89,7 @@ library(dplyr)
 # without rollup, there are multiple observations per checklists
 ebd |>
   filter(common_name == "Yellow-rumped Warbler") |>
-  select(checklist_id, category, common_name, subspecies_common_name, 
+  select(checklist_id, category, common_name, subspecies_common_name,
          observation_count)
 # with rollup, they have been combined
 ebd_ru |>
@@ -101,7 +101,7 @@ Consult the \href{https://ebird.org/science/use-ebird-data/the-ebird-taxonomy}{e
 page for further details.
 }
 \seealso{
-Other pre: 
-\code{\link{auk_unique}()}
+Other pre:
+\code{\link[=auk_unique]{auk_unique()}}
 }
 \concept{pre}

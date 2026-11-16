@@ -41,6 +41,7 @@ hours to run. Here’s a simple example that extract all Canada Jay
 records from within Canada.
 
 ``` r
+
 library(auk)
 # path to the ebird data file, here a sample included in the package
 # in practice, provide path to ebd, e.g. input_file <- "data/ebd_relFeb-2018.txt"
@@ -63,6 +64,7 @@ For those not familiar with the pipe operator (`|>`), the above code
 could be rewritten:
 
 ``` r
+
 input_file <- system.file("extdata/ebd-sample.txt", package = "auk")
 output_file <- "ebd_filtered_grja.txt"
 ebd <- auk_ebd(input_file)
@@ -155,6 +157,7 @@ Central America from 2010-2012 on 3 jay species: Canada Jay, Blue Jay,
 and Green Jay. It can be accessed with:
 
 ``` r
+
 library(auk)
 library(dplyr)
 system.file("extdata/ebd-sample.txt", package = "auk")
@@ -168,6 +171,7 @@ contains all checklists from Singapore in the first half of 2012. These
 files can be accessed with:
 
 ``` r
+
 # ebd
 system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
 # sampling event data
@@ -262,11 +266,12 @@ object, use
 [`auk_ebd()`](https://cornelllabofornithology.github.io/auk/reference/auk_ebd.md):
 
 ``` r
+
 ebd <- system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd()
 ebd
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -350,6 +355,7 @@ defined, the filtering is actually conducted using
 [`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md).
 
 ``` r
+
 ebd_filters <- ebd |>
   # species: common and scientific names can be mixed
   auk_species(species = c("Canada Jay", "Cyanocitta cristata")) |>
@@ -368,7 +374,7 @@ ebd_filters <- ebd |>
   auk_complete()
 ebd_filters
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/ebd-sample.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/ebd-sample.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -414,6 +420,7 @@ Jay records from Canada and save the results to a tab-separated text
 file for subsequent use:
 
 ``` r
+
 output_file <- "ebd_filtered_blja-grja.txt"
 ebd_jays <- system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
@@ -436,6 +443,7 @@ uses `stringsAsFactors = FALSE`, `quote = ""`, sets column classes, and
 converts variable names to `snake_case`.
 
 ``` r
+
 system.file("extdata/ebd-sample.txt", package = "auk") |>
   read_ebd() |>
   glimpse()
@@ -502,6 +510,7 @@ allowing for a complete pipeline. For example, we can create an
 results all at once.
 
 ``` r
+
 output_file <- "ebd_filtered_blja-grja.txt"
 ebd_df <- system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
@@ -518,6 +527,7 @@ filename to `awk_file`. In addition, by setting `execute = FALSE` the
 AWK script will be generated but not run.
 
 ``` r
+
 awk_script <- system.file("extdata/ebd-sample.txt", package = "auk") |>
   auk_ebd() |>
   auk_species(species = c("Canada Jay", "Cyanocitta cristata")) |>
@@ -585,6 +595,7 @@ however, we can use `unique = FALSE` then manually run
 [`auk_unique()`](https://cornelllabofornithology.github.io/auk/reference/auk_unique.md).
 
 ``` r
+
 # read in an ebd file and don't automatically remove duplicates
 ebd_dupes <- system.file("extdata/ebd-sample.txt", package = "auk") |>
   read_ebd(unique = FALSE)
@@ -611,6 +622,7 @@ rolling up taxa identified below species level to a single record for
 each species in each checklist.
 
 ``` r
+
 # read in sample data without rolling up
 ebd <- system.file("extdata/ebd-rollup-ex.txt", package = "auk") |>
   read_ebd(rollup = FALSE)
@@ -687,6 +699,7 @@ For example, the following filters to only include sightings of Collared
 Kingfisher between 6 and 10am:
 
 ``` r
+
 # to produce zero-filled data, provide an EBD and sampling event data file
 f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
 f_smp <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
@@ -696,8 +709,8 @@ filters <- auk_ebd(f_ebd, file_sampling = f_smp) |>
   auk_complete()
 filters
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/zerofill-ex_ebd.txt 
-#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/zerofill-ex_sampling.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/zerofill-ex_ebd.txt 
+#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/zerofill-ex_sampling.txt 
 #> 
 #> Output 
 #>   Filters not executed
@@ -728,13 +741,14 @@ to actually run AWK. Output files must be provided for both the EBD and
 sampling event data.
 
 ``` r
+
 ## ebd_sed_filtered <- auk_filter(filters, 
 ##                                file = "ebd-filtered.txt",
 ##                                file_sampling = "sampling-filtered.txt")
 ebd_sed_filtered
 #> Input 
-#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/zerofill-ex_ebd.txt 
-#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpKUZwru/temp_libpath46c66a2d6343/auk/extdata/zerofill-ex_sampling.txt 
+#>   EBD: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/zerofill-ex_ebd.txt 
+#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/RtmpybTy47/temp_libpathb99a730cdd3d/auk/extdata/zerofill-ex_sampling.txt 
 #> 
 #> Output 
 #>   EBD: ebd-filtered.txt 
@@ -767,6 +781,7 @@ presence-absence dataset using
 [`auk_zerofill()`](https://cornelllabofornithology.github.io/auk/reference/auk_zerofill.md).
 
 ``` r
+
 ## ebd_zf <- auk_zerofill(ebd_sed_filtered)
 ebd_zf
 #> Zero-filled EBD: 145 unique checklists, for 1 species.
@@ -785,6 +800,7 @@ be linked by a common `checklist_id` field:
   presence-absence variable
 
 ``` r
+
 head(ebd_zf$observations)
 #> # A tibble: 6 × 8
 #>   checklist_id scientific_name     breeding_code breeding_category behavior_code
@@ -845,6 +861,7 @@ or call
 with `collapse = TRUE`.
 
 ``` r
+
 ## ebd_zf_df <- auk_zerofill(ebd_filtered, collapse = TRUE)
 ebd_zf_df <- collapse_zerofill(ebd_zf)
 class(ebd_zf_df)

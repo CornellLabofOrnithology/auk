@@ -117,7 +117,7 @@ occ <- filter_repeat_visits(ebd_zf, n_days = 30)
 occ_wide <- format_unmarked_occu(occ,
                                  response = "species_observed",
                                  site_covs = c("latitude", "longitude"),
-                                 obs_covs = c("effort_distance_km", 
+                                 obs_covs = c("effort_distance_km",
                                               "duration_minutes"))
 # create an unmarked object
 if (requireNamespace("unmarked", quietly = TRUE)) {
@@ -129,11 +129,11 @@ if (requireNamespace("unmarked", quietly = TRUE)) {
 #> 70 sites
 #> Maximum number of observations per site: 10 
 #> Mean number of observations per site: 3.7 
-#> Sites with at least one detection: 40 
+#> Sites with at least one detection: 39 
 #> 
 #> Tabulation of y observations:
 #> FALSE  TRUE  <NA> 
-#>   173    86   441 
+#>   176    83   441 
 #> 
 #> Site-level covariates:
 #>     latitude       longitude    
@@ -149,16 +149,16 @@ if (requireNamespace("unmarked", quietly = TRUE)) {
 #>  Min.   : 0.100     Min.   :  1.00  
 #>  1st Qu.: 0.200     1st Qu.: 15.00  
 #>  Median : 1.000     Median : 30.00  
-#>  Mean   : 1.391     Mean   : 64.59  
-#>  3rd Qu.: 2.000     3rd Qu.: 80.00  
+#>  Mean   : 1.439     Mean   : 66.96  
+#>  3rd Qu.: 2.000     3rd Qu.: 88.75  
 #>  Max.   :10.000     Max.   :480.00  
-#>  NA's   :617        NA's   :617     
+#>  NAs    :618        NAs    :618     
 
 # this function can also be used for abundance modeling
-abd <- ebd_zf |> 
+abd <- ebd_zf |>
   # convert count to integer, drop records with no count
-  dplyr::mutate(observation_count = as.integer(observation_count)) |> 
-  dplyr::filter(!is.na(observation_count)) |> 
+  dplyr::mutate(observation_count = as.integer(observation_count)) |>
+  dplyr::filter(!is.na(observation_count)) |>
   # filter to repeated visits
   filter_repeat_visits(n_days = 30)
 #> Warning: There was 1 warning in `dplyr::mutate()`.
@@ -169,7 +169,7 @@ abd <- ebd_zf |>
 abd_wide <- format_unmarked_occu(abd,
                                  response = "observation_count",
                                  site_covs = c("latitude", "longitude"),
-                                 obs_covs = c("effort_distance_km", 
+                                 obs_covs = c("effort_distance_km",
                                               "duration_minutes"))
 # create an unmarked object
 if (requireNamespace("unmarked", quietly = TRUE)) {
@@ -185,7 +185,7 @@ if (requireNamespace("unmarked", quietly = TRUE)) {
 #> 
 #> Tabulation of y observations:
 #>    0    1    2    3    4    5    6    7    9   10 <NA> 
-#>  179   37   18    6    5    6    2    1    1    2  433 
+#>  175   41   17    7    5    6    2    1    1    2  433 
 #> 
 #> Site-level covariates:
 #>     latitude       longitude    
@@ -201,8 +201,8 @@ if (requireNamespace("unmarked", quietly = TRUE)) {
 #>  Min.   : 0.100     Min.   :  1.00  
 #>  1st Qu.: 0.200     1st Qu.: 15.00  
 #>  Median : 1.000     Median : 30.00  
-#>  Mean   : 1.403     Mean   : 63.54  
-#>  3rd Qu.: 2.000     3rd Qu.: 75.00  
+#>  Mean   : 1.429     Mean   : 66.31  
+#>  3rd Qu.: 2.000     3rd Qu.: 85.00  
 #>  Max.   :10.000     Max.   :480.00  
-#>  NA's   :605        NA's   :605     
+#>  NAs    :609        NAs    :609     
 ```

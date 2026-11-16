@@ -66,8 +66,8 @@ species_files <- auk_split(f, species = species, prefix = prefix)
 }
 }
 \seealso{
-Other text: 
-\code{\link{auk_clean}()},
-\code{\link{auk_select}()}
+Other text:
+\code{\link[=auk_clean]{auk_clean()}},
+\code{\link[=auk_select]{auk_select()}}
 }
 \concept{text}

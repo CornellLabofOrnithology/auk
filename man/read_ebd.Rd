@@ -87,7 +87,7 @@ x <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
   read_sampling()
 }
 \seealso{
-Other import: 
-\code{\link{auk_zerofill}()}
+Other import:
+\code{\link[=auk_zerofill]{auk_zerofill()}}
 }
 \concept{import}
