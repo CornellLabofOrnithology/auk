@@ -58,6 +58,70 @@ test_that("auk_unique combines ids correctly", {
   expect_equal(ebd_g$oid, ebd_g$observer_id)
 })
 
+test_that("auk_unique retains the union of species across group members", {
+  # obsr1 reports sp1 and sp2, obsr2 reports sp2 and sp3 on the same checklist
+  x <- data.frame(
+    group_identifier = c("G1", "G1", "G1", "G1"),
+    sampling_event_identifier = c("S1", "S1", "S2", "S2"),
+    scientific_name = c("sp1", "sp2", "sp2", "sp3"),
+    observer_id = c("obsr1", "obsr1", "obsr2", "obsr2"),
+    duration_minutes = c(30, 30, 30, 30),
+    stringsAsFactors = FALSE
+  )
+  x_unique <- auk_unique(x)
+
+  expect_equal(nrow(x_unique), 3)
+  expect_setequal(x_unique$scientific_name, c("sp1", "sp2", "sp3"))
+  # sp2, reported by both members, is deduplicated to the lowest checklist id
+  sp2 <- x_unique[x_unique$scientific_name == "sp2", ]
+  expect_equal(sp2$checklist_id, "G1")
+  expect_equal(sp2$observer_id, "obsr1,obsr2")
+})
+
+test_that("auk_unique flag_disagreement detects effort disagreement", {
+  x <- data.frame(
+    group_identifier = c("G1", "G1", "G2", "G2", NA),
+    sampling_event_identifier = c("S1", "S2", "S3", "S4", "S5"),
+    scientific_name = c("sp1", "sp1", "sp1", "sp1", "sp1"),
+    observer_id = c("obsr1", "obsr2", "obsr3", "obsr4", "obsr5"),
+    duration_minutes = c(30, 30, 30, 45, 60),
+    effort_distance_km = c(1, 1, 1, 1, 2),
+    protocol_type = c(
+      "Traveling",
+      "Traveling",
+      "Traveling",
+      "Traveling",
+      "Stationary"
+    ),
+    all_species_reported = c(TRUE, TRUE, TRUE, TRUE, TRUE),
+    stringsAsFactors = FALSE
+  )
+
+  # not flagged by default, and the column shouldn't exist at all
+  x_unique <- auk_unique(x)
+  expect_false("effort_disagreement" %in% names(x_unique))
+
+  x_flagged <- auk_unique(x, flag_disagreement = TRUE)
+  disagreement_by_id <- function(x, id) {
+    x$effort_disagreement[x$checklist_id == id]
+  }
+  # G1 agrees on all effort fields, G2 disagrees on duration_minutes, and the
+  # non-group checklist S5 trivially has no disagreement
+  expect_false(disagreement_by_id(x_flagged, "G1"))
+  expect_true(disagreement_by_id(x_flagged, "G2"))
+  expect_false(disagreement_by_id(x_flagged, "S5"))
+  # disagreement doesn't change which value is kept: still the lowest id
+  expect_equal(x_flagged$duration_minutes[x_flagged$checklist_id == "G2"], 30)
+
+  # only columns actually present in x are checked
+  x_unique_restricted <- auk_unique(
+    x,
+    flag_disagreement = TRUE,
+    effort_cols = "protocol_type"
+  )
+  expect_false(disagreement_by_id(x_unique_restricted, "G2"))
+})
+
 test_that("auk_unique throws error for invalid input", {
   ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk") |>
     read_ebd(unique = FALSE)

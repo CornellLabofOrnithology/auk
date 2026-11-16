@@ -10,7 +10,10 @@ auk_unique(
   checklist_id = "sampling_event_identifier",
   species_id = "scientific_name",
   observer_id = "observer_id",
-  checklists_only = FALSE
+  checklists_only = FALSE,
+  flag_disagreement = FALSE,
+  effort_cols = c("duration_minutes", "effort_distance_km", "protocol_type",
+    "all_species_reported")
 )
 }
 \arguments{
@@ -42,10 +45,26 @@ comma separated checklist IDs.}
 checklist information as with the sampling event data file. If this
 argument is \code{TRUE}, then the \code{species_id} argument is ignored and removing
 of duplicated records is done at the checklist level not the species level.}
+
+\item{flag_disagreement}{logical; whether to add an \code{effort_disagreement}
+column flagging shared checklist groups whose members disagreed (ignoring
+\code{NA}s) on any of the checklist-level fields named in \code{effort_cols}. As
+described in Details, only the member with the lowest \code{checklist_id} is
+ever used for these fields in the output, so this flag only lets you
+detect where that choice discarded disagreeing information; it does not
+change which value is kept. \code{FALSE} for checklists that aren't part of a
+group.}
+
+\item{effort_cols}{character; checklist-level columns to check for
+disagreement when \code{flag_disagreement = TRUE}. Columns not present in \code{x}
+(e.g. because of \code{keep}/\code{drop} in \code{\link[=auk_filter]{auk_filter()}}) are ignored. Unused
+when \code{flag_disagreement = FALSE}.}
 }
 \value{
 A data frame with unique observations, and an additional field,
-\code{checklist_id}, which is a combination of the sampling event and group IDs.
+\code{checklist_id}, which is a combination of the sampling event and group
+IDs. If \code{flag_disagreement = TRUE}, an additional logical field,
+\code{effort_disagreement}, is also added.
 }
 \description{
 eBird checklists can be shared among a group of multiple observers, in which
@@ -65,6 +84,21 @@ the field specified by the \code{group_id} parameter for grouped checklists.
 All the checklist and observer IDs for the checklists that comprise a given
 group checklist will be retained as a comma separated string ordered by
 checklist ID.
+
+Within a shared checklist, every species reported by \emph{any} member of the
+group is retained in the output, not just those reported by the member
+with the lowest \code{checklist_id}. The deduplication key is the combination
+of \code{species_id} and \code{group_id}, so a record is only dropped as a
+duplicate if another member of the same group reported that exact same
+species.
+
+Checklist-level fields that aren't part of this deduplication key (e.g.
+observed duration, distance travelled, protocol, or whether all species
+were reported) are \strong{not} combined or reconciled across group members:
+the value from the member with the lowest \code{checklist_id} is kept, and
+values from other members are silently discarded, even if they disagree.
+Set \code{flag_disagreement = TRUE} to add a column flagging where this
+happened.
 }
 \examples{
 # read in an ebd file and don't automatically remove duplicates
@@ -74,6 +108,11 @@ ebd <- read_ebd(f, unique = FALSE)
 ebd_unique <- auk_unique(ebd)
 nrow(ebd)
 nrow(ebd_unique)
+
+# flag shared checklists whose members disagreed on effort fields like
+# duration, distance, protocol, or completeness
+ebd_unique <- auk_unique(ebd, flag_disagreement = TRUE)
+"effort_disagreement" \%in\% names(ebd_unique)
 }
 \seealso{
 Other pre:
