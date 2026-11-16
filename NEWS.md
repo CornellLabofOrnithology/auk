@@ -6,8 +6,8 @@
   shared checklist are retained, and that for checklist-level effort fields
   (duration, distance, protocol, completeness) the value from the member
   with the lowest checklist ID is kept when members disagree (issue #99)
-- add flag_disagreement argument to auk_unique() to flag shared checklists
-  whose members disagreed on effort fields (issue #99)
+- auk_unique() now always adds an effort_disagreement column flagging
+  shared checklists whose members disagreed on effort fields (issue #99)
 
 # auk 0.9.1
 

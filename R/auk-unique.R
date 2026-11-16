@@ -30,18 +30,10 @@
 #'   checklist information as with the sampling event data file. If this
 #'   argument is `TRUE`, then the `species_id` argument is ignored and removing
 #'   of duplicated records is done at the checklist level not the species level.
-#' @param flag_disagreement logical; whether to add an `effort_disagreement`
-#'   column flagging shared checklist groups whose members disagreed (ignoring
-#'   `NA`s) on any of the checklist-level fields named in `effort_cols`. As
-#'   described in Details, only the member with the lowest `checklist_id` is
-#'   ever used for these fields in the output, so this flag only lets you
-#'   detect where that choice discarded disagreeing information; it does not
-#'   change which value is kept. `FALSE` for checklists that aren't part of a
-#'   group.
 #' @param effort_cols character; checklist-level columns to check for
-#'   disagreement when `flag_disagreement = TRUE`. Columns not present in `x`
-#'   (e.g. because of `keep`/`drop` in [auk_filter()]) are ignored. Unused
-#'   when `flag_disagreement = FALSE`.
+#'   disagreement among group members, used to populate the
+#'   `effort_disagreement` column described in Details. Columns not present
+#'   in `x` (e.g. because of `keep`/`drop` in [auk_filter()]) are ignored.
 #'
 #' @details This function chooses the checklist within in each that has the
 #'   lowest value for the field specified by `checklist_id`. A new column is
@@ -64,14 +56,15 @@
 #'   observed duration, distance travelled, protocol, or whether all species
 #'   were reported) are **not** combined or reconciled across group members:
 #'   the value from the member with the lowest `checklist_id` is kept, and
-#'   values from other members are silently discarded, even if they disagree.
-#'   Set `flag_disagreement = TRUE` to add a column flagging where this
-#'   happened.
+#'   values from other members are discarded, even if they disagree. The
+#'   output's `effort_disagreement` column flags groups where this happened,
+#'   i.e. where members disagreed (ignoring `NA`s) on any of the columns
+#'   named in `effort_cols`; it's always `FALSE` for checklists that aren't
+#'   part of a group.
 #'
-#' @return A data frame with unique observations, and an additional field,
-#'   `checklist_id`, which is a combination of the sampling event and group
-#'   IDs. If `flag_disagreement = TRUE`, an additional logical field,
-#'   `effort_disagreement`, is also added.
+#' @return A data frame with unique observations, and two additional fields:
+#'   `checklist_id`, a combination of the sampling event and group IDs, and
+#'   `effort_disagreement`, a logical field described in Details.
 #' @export
 #' @family pre
 #' @examples
@@ -82,10 +75,8 @@
 #' ebd_unique <- auk_unique(ebd)
 #' nrow(ebd)
 #' nrow(ebd_unique)
-#'
-#' # flag shared checklists whose members disagreed on effort fields like
-#' # duration, distance, protocol, or completeness
-#' ebd_unique <- auk_unique(ebd, flag_disagreement = TRUE)
+#' # shared checklists whose members disagreed on effort fields like
+#' # duration, distance, protocol, or completeness are flagged
 #' "effort_disagreement" %in% names(ebd_unique)
 auk_unique <- function(
   x,
@@ -94,7 +85,6 @@ auk_unique <- function(
   species_id = "scientific_name",
   observer_id = "observer_id",
   checklists_only = FALSE,
-  flag_disagreement = FALSE,
   effort_cols = c(
     "duration_minutes",
     "effort_distance_km",
@@ -106,7 +96,6 @@ auk_unique <- function(
   assertthat::assert_that(
     is.data.frame(x),
     assertthat::is.flag(checklists_only),
-    assertthat::is.flag(flag_disagreement),
     is.character(effort_cols),
     assertthat::is.string(group_id),
     group_id %in% names(x),
@@ -145,11 +134,8 @@ auk_unique <- function(
     cols <- c(species_id, group_id)
   }
 
-  # columns to check for effort disagreement within a group, if requested
-  disagreement_cols <- character()
-  if (flag_disagreement) {
-    disagreement_cols <- intersect(effort_cols, names(x_grouped))
-  }
+  # columns to check for effort disagreement within a group
+  disagreement_cols <- intersect(effort_cols, names(x_grouped))
 
   # generate list of checklist and observer ids
   ids <- dplyr::select(
@@ -183,9 +169,7 @@ auk_unique <- function(
   x_grouped[[observer_id]] <- x_grouped$.oid
   x_grouped$.cid <- NULL
   x_grouped$.oid <- NULL
-  if (flag_disagreement) {
-    x_grouped$effort_disagreement <- x_grouped$.disagree
-  }
+  x_grouped$effort_disagreement <- x_grouped$.disagree
   x_grouped$.disagree <- NULL
 
   # remove duplicated records, ensuring different species treated independently
@@ -196,9 +180,7 @@ auk_unique <- function(
   x_grouped$checklist_id <- x_grouped[[group_id]]
 
   # non-group checklists can't have effort disagreement
-  if (flag_disagreement) {
-    x$effort_disagreement <- FALSE
-  }
+  x$effort_disagreement <- FALSE
 
   # only keep non-group or non-duplicated records
   x <- rbind(x[!grouped, ], x_grouped)

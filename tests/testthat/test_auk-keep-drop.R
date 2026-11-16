@@ -78,6 +78,6 @@ test_that("auk_filter correctly keeps sampling event data columns", {
   ebd_df <- read_ebd(ebd, rollup = FALSE)
   smp_df <- read_sampling(ebd)
 
-  expect_equal(ncol(ebd_df), 6)
-  expect_equal(ncol(smp_df), 4)
+  expect_equal(ncol(ebd_df), 7)
+  expect_equal(ncol(smp_df), 5)
 })

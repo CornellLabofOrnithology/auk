@@ -12,7 +12,7 @@ test_that("auk_unique removes duplicates", {
   unique_cols <- c("scientific_name", "group_identifier")
 
   expect_lt(nrow(ebd_unique), nrow(ebd))
-  expect_equal(ncol(ebd_unique), ncol(ebd) + 1)
+  expect_equal(ncol(ebd_unique), ncol(ebd) + 2)
   expect_true(!"checklist_id" %in% names(ebd))
   expect_true("checklist_id" %in% names(ebd_unique))
   expect_gt(anyDuplicated(ebd_g[, unique_cols]), 0)
@@ -31,7 +31,7 @@ test_that("auk_unique removes duplicates in sampling file", {
   unique_cols <- "group_identifier"
 
   expect_lt(nrow(ebd_unique), nrow(ebd))
-  expect_equal(ncol(ebd_unique), ncol(ebd) + 1)
+  expect_equal(ncol(ebd_unique), ncol(ebd) + 2)
   expect_true(!"checklist_id" %in% names(ebd))
   expect_true("checklist_id" %in% names(ebd_unique))
   expect_gt(anyDuplicated(ebd_g[, unique_cols]), 0)
@@ -78,7 +78,7 @@ test_that("auk_unique retains the union of species across group members", {
   expect_equal(sp2$observer_id, "obsr1,obsr2")
 })
 
-test_that("auk_unique flag_disagreement detects effort disagreement", {
+test_that("auk_unique detects effort disagreement", {
   x <- data.frame(
     group_identifier = c("G1", "G1", "G2", "G2", NA),
     sampling_event_identifier = c("S1", "S2", "S3", "S4", "S5"),
@@ -97,28 +97,20 @@ test_that("auk_unique flag_disagreement detects effort disagreement", {
     stringsAsFactors = FALSE
   )
 
-  # not flagged by default, and the column shouldn't exist at all
   x_unique <- auk_unique(x)
-  expect_false("effort_disagreement" %in% names(x_unique))
-
-  x_flagged <- auk_unique(x, flag_disagreement = TRUE)
   disagreement_by_id <- function(x, id) {
     x$effort_disagreement[x$checklist_id == id]
   }
   # G1 agrees on all effort fields, G2 disagrees on duration_minutes, and the
   # non-group checklist S5 trivially has no disagreement
-  expect_false(disagreement_by_id(x_flagged, "G1"))
-  expect_true(disagreement_by_id(x_flagged, "G2"))
-  expect_false(disagreement_by_id(x_flagged, "S5"))
+  expect_false(disagreement_by_id(x_unique, "G1"))
+  expect_true(disagreement_by_id(x_unique, "G2"))
+  expect_false(disagreement_by_id(x_unique, "S5"))
   # disagreement doesn't change which value is kept: still the lowest id
-  expect_equal(x_flagged$duration_minutes[x_flagged$checklist_id == "G2"], 30)
+  expect_equal(x_unique$duration_minutes[x_unique$checklist_id == "G2"], 30)
 
   # only columns actually present in x are checked
-  x_unique_restricted <- auk_unique(
-    x,
-    flag_disagreement = TRUE,
-    effort_cols = "protocol_type"
-  )
+  x_unique_restricted <- auk_unique(x, effort_cols = "protocol_type")
   expect_false(disagreement_by_id(x_unique_restricted, "G2"))
 })
 
