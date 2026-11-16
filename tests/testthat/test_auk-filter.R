@@ -140,6 +140,22 @@ test_that("auk_filter can save awk file on any system", {
   unlink(tmp)
 })
 
+test_that("auk_project generates an exact-match awk condition", {
+  # should match exactly, not as a substring (e.g. "EBIRD_MEX" shouldn't
+  # match a hypothetical "EBIRD_MEX_ATLAS")
+  f <- system.file("extdata/ebd-sample.txt", package = "auk")
+  filters <- auk_ebd(f) |> auk_project("EBIRD_MEX")
+
+  tmp <- tempfile()
+  awk_file <- auk_filter(filters, awk_file = tmp, execute = FALSE)
+  awk_script <- readLines(awk_file)
+
+  expect_true(any(grepl('== "EBIRD_MEX"', awk_script, fixed = TRUE)))
+  expect_false(any(grepl('~ "EBIRD_MEX"', awk_script, fixed = TRUE)))
+
+  unlink(tmp)
+})
+
 test_that("auk_filter filter an auk_sampling object", {
   # set up filters
   f <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")

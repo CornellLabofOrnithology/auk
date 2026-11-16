@@ -274,10 +274,12 @@ auk_zerofill.character <- function(
     x = ebd,
     sampling_events = sed,
     species = species,
+    taxonomy_version = taxonomy_version,
     collapse = collapse,
     unique = unique,
     complete = complete,
-    rollup = rollup
+    rollup = rollup,
+    drop_higher = drop_higher
   )
 }
 
@@ -310,10 +312,12 @@ auk_zerofill.auk_ebd <- function(
     x = x$output,
     sampling_events = x$output_sampling,
     species = species,
+    taxonomy_version = taxonomy_version,
     collapse = collapse,
     unique = unique,
     complete = complete,
     rollup = rollup,
+    drop_higher = drop_higher,
     sep = sep
   )
 }

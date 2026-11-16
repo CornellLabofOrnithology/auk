@@ -99,6 +99,30 @@ test_that("auk_zerofill error is auk_unique() hasn't been run", {
   expect_error(auk_zerofill(ebd, smp, unique = FALSE))
 })
 
+test_that("auk_zerofill forwards taxonomy_version and drop_higher", {
+  f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
+  f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
+  ebd <- auk_ebd(f_ebd, f_smpl) |> auk_complete()
+  ebd$output <- f_ebd
+  ebd$output_sampling <- f_smpl
+
+  captured <- list()
+  capture_args <- function(x, sampling_events, species, taxonomy_version, ...) {
+    captured$taxonomy_version <<- taxonomy_version
+    captured$drop_higher <<- list(...)$drop_higher
+    NULL
+  }
+  local_mocked_bindings(auk_zerofill.data.frame = capture_args)
+
+  auk_zerofill(f_ebd, f_smpl, taxonomy_version = 2021, drop_higher = FALSE)
+  expect_equal(captured$taxonomy_version, 2021)
+  expect_false(captured$drop_higher)
+
+  auk_zerofill(ebd, taxonomy_version = 2022, drop_higher = FALSE)
+  expect_equal(captured$taxonomy_version, 2022)
+  expect_false(captured$drop_higher)
+})
+
 test_that("auk_zerofill lack of complete checklists throws error", {
   f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")

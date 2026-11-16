@@ -34,6 +34,30 @@ test_that("auk_ebd refrence ebd and sampling files", {
   expect_true(all(!is.na(ebd$col_idx_sampling$index)))
 })
 
+test_that("auk_ebd detects missing required columns in the sampling file", {
+  f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
+  f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
+
+  # drop a mandatory column (duration minutes) from the sampling file, but
+  # leave it present in the ebd file, so only checking against the sampling
+  # file's own header (not the ebd's) will catch this
+  lines <- readLines(f_smpl)
+  header <- strsplit(lines[1], "\t")[[1]]
+  drop_col <- which(tolower(header) == "duration minutes")
+  expect_length(drop_col, 1)
+  lines <- vapply(
+    strsplit(lines, "\t"),
+    function(x) paste(x[-drop_col], collapse = "\t"),
+    character(1)
+  )
+  tmp <- withr::local_tempfile(lines = lines)
+
+  expect_error(
+    auk_ebd(f_ebd, file_sampling = tmp),
+    regexp = "Required columns missing from the sampling file"
+  )
+})
+
 test_that("auk_ebd bad file references throws error", {
   expect_error(auk_ebd("AAAAAA"))
   expect_error(auk_ebd("AAAAAA", file_sampling = "BBBBBB"))

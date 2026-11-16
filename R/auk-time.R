@@ -37,14 +37,21 @@ auk_time.auk_ebd <- function(x, start_time) {
     is.character(start_time)
   )
   # check for valid times
-  if (
-    !all(stringr::str_detect(start_time, "^([01]?\\d|2[0-3]):?([0-5]\\d)$"))
-  ) {
+  time_match <- stringr::str_match(
+    start_time,
+    "^([01]?\\d|2[0-3]):?([0-5]\\d)$"
+  )
+  if (anyNA(time_match[, 1])) {
     stop("Invalid time format.")
   }
 
-  # add optional 0 at start
-  start_time <- paste0(ifelse(nchar(start_time) == 4, "0", ""), start_time)
+  # normalize to zero-padded HH:MM, regardless of the input format, e.g.
+  # "6:00", "600", and "06:00" should all become "06:00"
+  start_time <- sprintf(
+    "%02d:%s",
+    as.integer(time_match[, 2]),
+    time_match[, 3]
+  )
 
   # check ordering of times makes sense
   assertthat::assert_that(start_time[1] <= start_time[2])

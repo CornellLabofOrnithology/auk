@@ -381,6 +381,17 @@ test_that("auk_time", {
 
   # times not sequential
   expect_error(auk_time(ebd, c("08:00", "07:00")))
+
+  # zero-padding normalizes all valid formats to HH:MM, regardless of length
+  expect_equal(auk_time(ebd, c("600", "900"))$filters$time, c("06:00", "09:00"))
+  expect_equal(
+    auk_time(ebd, c("6:00", "9:00"))$filters$time,
+    c("06:00", "09:00")
+  )
+  expect_equal(
+    auk_time(ebd, c("0600", "0900"))$filters$time,
+    c("06:00", "09:00")
+  )
 })
 
 test_that("auk_duration", {

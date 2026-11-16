@@ -97,11 +97,23 @@ auk_rollup <- function(x, drop_higher = TRUE) {
     return(x)
   }
 
+  # dplyr::slice_min() below drops the unique attribute set by auk_unique(),
+  # so capture it here and reapply it to every return path
+  was_unique <- isTRUE(attr(x, "unique"))
+
   # has auk_unique been applied?
   if ("checklist_id" %in% names(x)) {
     cid <- "checklist_id"
   } else {
     cid <- "sampling_event_identifier"
+  }
+
+  # domestic/feral taxa are always dropped, regardless of drop_higher. Their
+  # scientific_name is identical to the parent species (eBird stores the
+  # domestic-specific name in subspecies_scientific_name instead), so they
+  # can't be excluded via the taxonomy join below and must be removed here
+  if ("category" %in% names(x)) {
+    x <- x[is.na(x$category) | x$category != "domestic", ]
   }
 
   # get the ebird taxonomy version
@@ -162,12 +174,34 @@ auk_rollup <- function(x, drop_higher = TRUE) {
       x$subspecies_scientific_name <- NULL
     }
     attr(x, "rollup") <- TRUE
+    attr(x, "unique") <- was_unique
     return(dplyr::as_tibble(x))
   }
 
+  # split off checklist x species groups with only a single record (the vast
+  # majority: no subspecies/form duplication to resolve) from groups with
+  # multiple records that genuinely need to be rolled up. This avoids
+  # running the expensive group_by()/slice_min() machinery below on the
+  # full data set when it would be a no-op for almost all of it
+  group_key <- paste(x[[cid]], x$scientific_name, sep = "\r")
+  is_dup <- duplicated(group_key) | duplicated(group_key, fromLast = TRUE)
+  x_single <- x[!is_dup, ]
+  x_multi <- x[is_dup, ]
+
+  # for singleton groups, the rollup below would be a no-op except for
+  # normalizing a non-numeric count (e.g. "") to "X", so replicate just that
+  count_num <- suppressWarnings(as.integer(x_single$observation_count))
+  count_chr <- as.character(count_num)
+  count_chr[is.na(count_num)] <- "X"
+  x_single$observation_count <- count_chr
+  x_single$taxonomic_order <- x_single$taxonomic_order_tax
+  x_single$taxon_concept_id <- x_single$taxon_concept_id_tax
+  x_single$taxonomic_order_tax <- NULL
+  x_single$taxon_concept_id_tax <- NULL
+
   # summarize species for cases where multiple subspecies reported on same list
   sp <- dplyr::select(
-    x,
+    x_multi,
     dplyr::all_of(c(cid, "scientific_name", "observation_count"))
   )
   suppressWarnings({
@@ -185,33 +219,35 @@ auk_rollup <- function(x, drop_higher = TRUE) {
   )
 
   # drop any duplicate species records
-  x <- dplyr::group_by(
-    x,
+  x_multi <- dplyr::group_by(
+    x_multi,
     dplyr::across(dplyr::all_of(c(cid, "scientific_name")))
   )
   # give precedence to true species records
-  x <- dplyr::slice_min(
-    x,
+  x_multi <- dplyr::slice_min(
+    x_multi,
     n = 1,
     order_by = .data$taxonomic_order_tax,
     with_ties = FALSE
   )
-  x <- dplyr::ungroup(x)
+  x_multi <- dplyr::ungroup(x_multi)
 
   # update counts with summary
-  x <- dplyr::inner_join(x, sp, by = c(cid, "scientific_name"))
-  x <- dplyr::mutate(
-    x,
+  x_multi <- dplyr::inner_join(x_multi, sp, by = c(cid, "scientific_name"))
+  x_multi <- dplyr::mutate(
+    x_multi,
     observation_count = .data$count,
     taxonomic_order = .data$taxonomic_order_tax,
     taxon_concept_id = .data$taxon_concept_id_tax
   )
-  x <- dplyr::select(
-    x,
+  x_multi <- dplyr::select(
+    x_multi,
     -"count",
     -"taxonomic_order_tax",
     -"taxon_concept_id_tax"
   )
+
+  x <- dplyr::bind_rows(x_single, x_multi)
 
   # drop subspecies fields, set category to species
   if ("category" %in% names(x)) {
@@ -226,5 +262,6 @@ auk_rollup <- function(x, drop_higher = TRUE) {
 
   # attribute flag
   attr(x, "rollup") <- TRUE
-  dplyr::as_tibble(x)
+  attr(x, "unique") <- was_unique
+  return(dplyr::as_tibble(x))
 }

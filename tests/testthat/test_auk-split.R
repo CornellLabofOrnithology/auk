@@ -25,6 +25,24 @@ test_that("auk_split splits correctly", {
   unlink(list.files(dirname(prefix), basename(prefix), full.names = TRUE))
 })
 
+test_that("auk_split works with a file path containing spaces", {
+  space_dir <- file.path(withr::local_tempdir(), "a dir with spaces")
+  dir.create(space_dir)
+  f <- file.path(space_dir, "ebd sample.txt")
+  file.copy(system.file("extdata/ebd-sample.txt", package = "auk"), f)
+
+  species <- "Perisoreus canadensis"
+  prefix <- file.path(tempdir(), "ebd_space_")
+  out <- auk_split(f, species = species, prefix = prefix, overwrite = TRUE)
+
+  ebd <- read_ebd(out)
+  expect_is(ebd, "data.frame")
+  expect_true(all(ebd$scientific_name == species))
+  expect_gt(nrow(ebd), 0)
+
+  unlink(list.files(dirname(prefix), basename(prefix), full.names = TRUE))
+})
+
 test_that("auk_split throws error for bad input", {
   species <- c("Perisoreus canadensis", "Cyanocitta stelleri")
   prefix <- file.path(tempdir(), "ebd_")

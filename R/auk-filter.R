@@ -599,7 +599,7 @@ awk_translate <- function(filters, col_idx, sep, select) {
     condition <- paste0(
       "$",
       idx,
-      " ~ \"",
+      " == \"",
       filters$project,
       "\"",
       collapse = " || "

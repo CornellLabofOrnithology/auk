@@ -117,63 +117,73 @@ auk_unique <- function(
     return(x)
   }
 
-  # convert empty string groud_id to NA
-  x[[group_id]][x[[group_id]] == ""] <- NA_integer_
+  # convert empty string group_id to NA
+  x[[group_id]][x[[group_id]] == ""] <- NA_character_
 
   # identify and separate non-group records
   grouped <- !is.na(x[[group_id]])
   x_grouped <- x[grouped, ]
 
-  # sort by sampling event id
-  x_grouped <- x_grouped[order(x_grouped[[checklist_id]]), ]
-
   # identify grouping variables
   if (checklists_only) {
     cols <- group_id
+    group_key <- x_grouped[[group_id]]
   } else {
     cols <- c(species_id, group_id)
+    group_key <- paste(
+      x_grouped[[species_id]],
+      x_grouped[[group_id]],
+      sep = "\r"
+    )
   }
 
   # columns to check for effort disagreement within a group
   disagreement_cols <- intersect(effort_cols, names(x_grouped))
 
-  # generate list of checklist and observer ids
-  ids <- dplyr::select(
-    x_grouped,
-    dplyr::all_of(c(cols, checklist_id, observer_id, disagreement_cols))
-  )
-  ids <- dplyr::group_by_at(ids, cols)
-  ids <- dplyr::arrange_at(ids, checklist_id)
-  ids <- dplyr::summarize(
-    ids,
-    .cid = paste(.data[[checklist_id]], collapse = ","),
-    .oid = paste(.data[[observer_id]], collapse = ","),
-    dplyr::across(
-      dplyr::all_of(disagreement_cols),
-      \(x) dplyr::n_distinct(x, na.rm = TRUE) > 1,
-      .names = "disagree_{.col}"
-    )
-  )
-  ids <- dplyr::ungroup(ids)
-  if (length(disagreement_cols) > 0) {
-    disagree_cols <- paste0("disagree_", disagreement_cols)
-    ids$.disagree <- apply(as.matrix(ids[disagree_cols]), 1, any)
-    ids[disagree_cols] <- NULL
-  } else {
-    ids$.disagree <- FALSE
+  # row indices of the records making up each group. this groups the data
+  # without an expensive full-table sort, and avoids running a separate
+  # dplyr group_by()/summarize() pass (slow for the large numbers of small
+  # groups typical of shared checklists) in favor of operating directly on
+  # the relevant id columns within each group
+  group_rows <- split(seq_len(nrow(x_grouped)), group_key, drop = TRUE)
+  cid_vec <- x_grouped[[checklist_id]]
+  oid_vec <- x_grouped[[observer_id]]
+
+  # for each group: the row with the lowest checklist_id (the record whose
+  # other fields are kept), and the comma separated, checklist_id-ordered
+  # lists of checklist and observer ids
+  rep_row <- integer(length(group_rows))
+  checklist_ids <- character(length(group_rows))
+  observer_ids <- character(length(group_rows))
+  for (i in seq_along(group_rows)) {
+    rows <- group_rows[[i]]
+    rows <- rows[order(cid_vec[rows])]
+    rep_row[i] <- rows[1]
+    checklist_ids[i] <- paste(cid_vec[rows], collapse = ",")
+    observer_ids[i] <- paste(oid_vec[rows], collapse = ",")
   }
 
-  # add the collapsed ids
-  x_grouped <- dplyr::inner_join(x_grouped, ids, by = cols)
-  x_grouped[[checklist_id]] <- x_grouped$.cid
-  x_grouped[[observer_id]] <- x_grouped$.oid
-  x_grouped$.cid <- NULL
-  x_grouped$.oid <- NULL
-  x_grouped$effort_disagreement <- x_grouped$.disagree
-  x_grouped$.disagree <- NULL
+  # flag groups whose members disagree (ignoring NAs) on any effort column
+  effort_disagreement <- logical(length(group_rows))
+  for (col in disagreement_cols) {
+    col_vec <- x_grouped[[col]]
+    disagree <- vapply(
+      group_rows,
+      function(rows) {
+        vals <- col_vec[rows]
+        length(unique(vals[!is.na(vals)])) > 1
+      },
+      logical(1)
+    )
+    effort_disagreement <- effort_disagreement | disagree
+  }
 
-  # remove duplicated records, ensuring different species treated independently
-  x_grouped <- x_grouped[!duplicated(x_grouped[, cols]), ]
+  # reduce to one record per group, keeping the lowest checklist_id record,
+  # and attach the collapsed ids and disagreement flag
+  x_grouped <- x_grouped[rep_row, ]
+  x_grouped[[checklist_id]] <- checklist_ids
+  x_grouped[[observer_id]] <- observer_ids
+  x_grouped$effort_disagreement <- effort_disagreement
 
   # set id field
   x$checklist_id <- x[[checklist_id]]
@@ -191,5 +201,5 @@ auk_unique <- function(
   # attribute flag
   attr(x, "unique") <- TRUE
 
-  dplyr::as_tibble(x)
+  return(dplyr::as_tibble(x))
 }

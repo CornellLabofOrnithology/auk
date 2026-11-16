@@ -165,8 +165,10 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
     # read header rows
     header_sampling <- tolower(get_header(file_sampling, sep))
     # ensure key columns are present
-    mandatory_sampl <- setdiff(mandatory, "scientific name")
-    col_miss <- mandatory_sampl[!(mandatory_sampl %in% header)]
+    # scientific name and exotic code are species-level fields that aren't
+    # present in the checklist-only sampling event data
+    mandatory_sampl <- setdiff(mandatory, c("scientific name", "exotic code"))
+    col_miss <- mandatory_sampl[!(mandatory_sampl %in% header_sampling)]
     if (length(col_miss) > 0) {
       m <- sprintf(
         "Required columns missing from the sampling file:\n\t%s",
@@ -181,7 +183,7 @@ auk_ebd <- function(file, file_sampling, sep = "\t") {
       index = seq_along(header_sampling),
       stringsAsFactors = FALSE
     )
-    col_found <- filter_cols_sampling$name %in% col_idx$name
+    col_found <- filter_cols_sampling$name %in% header_sampling
     filter_cols_sampling <- filter_cols_sampling[col_found, ]
     mtch <- match(filter_cols_sampling$name, col_idx_sampling$name)
     col_idx_sampling$id[mtch] <- filter_cols_sampling$id
