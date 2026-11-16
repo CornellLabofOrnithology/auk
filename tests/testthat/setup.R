@@ -12,4 +12,3 @@ cleanup <- function() {
 }
 # run cleanup after tests are complete
 withr::defer(cleanup(), teardown_env())
-

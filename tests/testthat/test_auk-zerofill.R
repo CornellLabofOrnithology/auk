@@ -9,14 +9,23 @@ test_that("auk_zerofill zerofill works normally", {
   expect_is(zf$observations, "data.frame")
   expect_is(zf$sampling_events, "data.frame")
 
-  expect_named(zf$observations,
-               c("checklist_id", "scientific_name",
-                 "breeding_code", "breeding_category", 
-                 "behavior_code", "age_sex",
-                 "observation_count", "species_observed"))
+  expect_named(
+    zf$observations,
+    c(
+      "checklist_id",
+      "scientific_name",
+      "breeding_code",
+      "breeding_category",
+      "behavior_code",
+      "age_sex",
+      "observation_count",
+      "species_observed"
+    )
+  )
   expect_equal(
     anyDuplicated(zf$observations[, c("checklist_id", "scientific_name")]),
-    0)
+    0
+  )
 })
 
 test_that("auk_zerofill input types", {
@@ -38,8 +47,11 @@ test_that("auk_zerofill input types", {
 test_that("auk_zerofill subset by species", {
   f_ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk")
   f_smpl <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
-  zf <- auk_zerofill(x = f_ebd, sampling_events = f_smpl,
-                     species = "Collared Kingfisher")
+  zf <- auk_zerofill(
+    x = f_ebd,
+    sampling_events = f_smpl,
+    species = "Collared Kingfisher"
+  )
 
   expect_true(all(zf$observations$scientific_name == "Todiramphus chloris"))
   expect_equal(anyDuplicated(zf$observations[, "checklist_id"]), 0)
@@ -54,7 +66,8 @@ test_that("auk_zerofill return a data frame", {
   expect_is(zf, "data.frame")
   expect_equal(
     anyDuplicated(zf[, c("checklist_id", "scientific_name")]),
-    0)
+    0
+  )
 })
 
 test_that("collapse_zerofill converts an auk_zerofill object to df", {
@@ -109,6 +122,8 @@ test_that("auk_zerofill throws errors with bad input data", {
 
   expect_error(auk_zerofill(ebd, species = "asdf"))
   expect_error(auk_zerofill(ebd, species = "Blue Jay"))
-  expect_warning(auk_zerofill(ebd, species = c("Collared Kingfisher",
-                                               "Blue Jay")))
+  expect_warning(auk_zerofill(
+    ebd,
+    species = c("Collared Kingfisher", "Blue Jay")
+  ))
 })

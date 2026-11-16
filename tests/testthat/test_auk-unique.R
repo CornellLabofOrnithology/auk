@@ -2,7 +2,7 @@ context("auk_unique")
 library(dplyr)
 
 test_that("auk_unique removes duplicates", {
-  ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk") |> 
+  ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk") |>
     read_ebd(unique = FALSE)
   ebd_unique <- auk_unique(ebd)
 
@@ -43,15 +43,17 @@ test_that("auk_unique combines ids correctly", {
   ebd <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk") |>
     read_sampling(unique = FALSE)
   ebd_unique <- auk_unique(ebd, checklists_only = TRUE)
-  
-  ebd_g <- ebd |> 
-    filter(!is.na(group_identifier)) |> 
-    group_by(group_identifier) |> 
-    arrange(sampling_event_identifier) |> 
-    summarize(cid = paste(sampling_event_identifier, collapse = ","),
-              oid = paste(observer_id, collapse = ",")) |> 
+
+  ebd_g <- ebd |>
+    filter(!is.na(group_identifier)) |>
+    group_by(group_identifier) |>
+    arrange(sampling_event_identifier) |>
+    summarize(
+      cid = paste(sampling_event_identifier, collapse = ","),
+      oid = paste(observer_id, collapse = ",")
+    ) |>
     inner_join(ebd_unique, by = "group_identifier")
-  
+
   expect_equal(ebd_g$cid, ebd_g$sampling_event_identifier)
   expect_equal(ebd_g$oid, ebd_g$observer_id)
 })

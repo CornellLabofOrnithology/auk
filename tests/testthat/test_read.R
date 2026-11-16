@@ -20,7 +20,7 @@ test_that("reads a sampling file correctly", {
   ebd$output <- f_ebd
   ebd$output_sampling <- f
   nm <- names(read_sampling(f))
-  
+
   # auk_sampling
   sampling <- auk_sampling(f)
   sampling$output <- f

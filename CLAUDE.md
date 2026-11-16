@@ -27,33 +27,42 @@ devtools::build_readme()     # regenerate README.md from README.Rmd
 Run a single test file from an R session in the package root:
 
 ```r
-testthat::test_file("tests/testthat/test_auk-filter.r")
+testthat::test_file("tests/testthat/test_auk-filter.R")
 ```
 
 Run a single `test_that()` block by temporarily adding `only_test = "..."`
 or simply isolating it — there is no CLI equivalent to `devtools::test()`
 for a single test name; use `devtools::load_all()` then call the test
 file's contents directly, or filter with `devtools::test(filter = "filter")`
-(matches test file names, e.g. `test_auk-filter.r`).
+(matches test file names, e.g. `test_auk-filter.R`).
 
 After changing any roxygen2 (`#'`) comment, re-run `devtools::document()`
 — `man/*.Rd` and `NAMESPACE` are generated files, don't hand-edit them.
 
 ## Formatting and linting — always run these
 
-- After writing or editing any file in `R/`, run `air format R/`. The
-  repo's `air.toml` scopes formatting to `R/` only, so `air format .` is
-  also safe to run from the repo root.
+- After writing or editing any `.R` file anywhere in the repo (`R/`,
+  `tests/testthat/`, `data-raw/`), run `air format` on it (or
+  `air format .` from the repo root — `air.toml` has no path
+  restriction, so it reformats everything).
 - After writing or editing any file in `R/`, run `jarl check R/` (or
-  `jarl check .` — `jarl.toml` restricts it to `R/` regardless). Fix
-  obvious/auto-fixable issues with `jarl check --fix R/` (add
-  `--allow-dirty` if the working tree already has unrelated uncommitted
-  changes). For warnings that require judgment, use judgment rather than
-  blindly forcing a fix.
+  `jarl check .` — `jarl.toml`'s `lint.include = ["R/"]` restricts
+  linting to `R/` regardless of the path given). `jarl` intentionally
+  does not lint `tests/` or `data-raw/`. Fix obvious/auto-fixable issues
+  with `jarl check --fix R/` (add `--allow-dirty` if the working tree
+  already has unrelated uncommitted changes). For warnings that require
+  judgment, use judgment rather than blindly forcing a fix.
 - Do this on every change, not just when explicitly asked to format or
   lint.
-- Never run air/jarl over `tests/`, `data-raw/`, `inst/`, or `makefile.R`
-  — those are intentionally out of scope per `air.toml` / `jarl.toml`.
+- All package/test/maintainer-script source files use the `.R`
+  extension (uppercase) — no `.r` files remain anywhere in the repo.
+  Watch out for this repo's case-insensitive-filesystem gotcha: `git mv`
+  between `foo.r` and `foo.R` can silently delete the file on disk
+  instead of renaming it unless done as a two-step rename through a
+  temporary name (`git mv foo.r foo.R.tmp && git mv foo.R.tmp foo.R`).
+  Always verify with `git status`/`git diff --stat` after any rename or
+  merge that touches case-only path changes, and restore any file that
+  disappears via `git show HEAD:<path> > <path>`.
 
 ## Pipe operator
 
@@ -159,10 +168,8 @@ doesn't match.
 
 ## Testing notes
 
-- Tests live in `tests/testthat/`; most existing files use the historical
-  `.r` extension (`test_auk-filter.r`) rather than `.R` — match whichever
-  extension a given file already uses; new test files should use `.R`
-  per the user's global style.
+- Tests live in `tests/testthat/`, named `test_{name}.R` (not
+  `test-{name}.R`, which is the testthat/usethis default elsewhere).
 - `tests/testthat/setup.R` creates a shared `temp_dir` under `tempdir()`
   and preserves/restores `R_ENVIRON_USER` and `EBD_PATH` env vars around
   the whole run.

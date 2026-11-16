@@ -5,7 +5,7 @@ test_that("auk_ebd_version works", {
   ver <- auk_ebd_version(file, check_exists = FALSE)
   expect_equal(ver$ebd_version, as.Date("2018-08-01", "%Y-%m-%d"))
   expect_equal(ver$taxonomy_version, 2018)
-  
+
   file <- "ebd_relMay-2016.txt"
   ver <- auk_ebd_version(file, check_exists = FALSE)
   expect_equal(ver$ebd_version, as.Date("2016-05-01", "%Y-%m-%d"))
@@ -20,11 +20,11 @@ test_that("auk_ebd_version works on objects", {
   sed <- auk_sampling(f_cl)
   ebd$file <- "ebd_relAug-2018.txt"
   sed$file <- "ebd_relAug-2018.txt"
-  
+
   ver <- auk_ebd_version(ebd, check_exists = FALSE)
   expect_equal(ver$ebd_version, as.Date("2018-08-01", "%Y-%m-%d"))
   expect_equal(ver$taxonomy_version, 2018)
-  
+
   ver <- auk_ebd_version(sed, check_exists = FALSE)
   expect_equal(ver$ebd_version, as.Date("2018-08-01", "%Y-%m-%d"))
   expect_equal(ver$taxonomy_version, 2018)

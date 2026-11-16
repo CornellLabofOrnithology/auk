@@ -38,24 +38,24 @@ test_that("auk_filter filter an ebd", {
   expect_true(all(ebd$longitude <= filters$filters$bbox[3]))
   expect_true(all(ebd$latitude >= filters$filters$bbox[2]))
   expect_true(all(ebd$latitude <= filters$filters$bbox[4]))
-  
+
   # filter again
   tmp <- tempfile()
   ebd <- auk_ebd(f) |>
-    auk_protocol("Traveling") |> 
-    auk_state("CA-ON") |> 
-    auk_filter(file = tmp, overwrite = TRUE) |> 
+    auk_protocol("Traveling") |>
+    auk_state("CA-ON") |>
+    auk_filter(file = tmp, overwrite = TRUE) |>
     read_ebd()
   unlink(tmp)
-  
+
   expect_true(all(ebd$protocol_name == "Traveling"))
   expect_true(all(ebd$state_code == "CA-ON"))
-  
+
   # again
-  ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk") |> 
+  ebd <- system.file("extdata/zerofill-ex_ebd.txt", package = "auk") |>
     auk_ebd() |>
-    auk_breeding() |> 
-    auk_filter(file = tmp) |> 
+    auk_breeding() |>
+    auk_filter(file = tmp) |>
     read_ebd()
   expect_true(all(!is.na(ebd$breeding_code)))
 })
@@ -76,8 +76,7 @@ test_that("auk_filter filter sampling and ebd files", {
 
   expect_is(ebd, "auk_ebd")
   expect_equal(ebd$output, normalizePath(tmp, winslash = "/"))
-  expect_equal(ebd$output_sampling,
-               normalizePath(tmp_smp, winslash = "/"))
+  expect_equal(ebd$output_sampling, normalizePath(tmp_smp, winslash = "/"))
 
   # read in results
   ebd_df <- read_ebd(ebd)
@@ -151,14 +150,14 @@ test_that("auk_filter filter an auk_sampling object", {
   # run filters
   tmp <- tempfile()
   sampling <- auk_filter(filters, file = tmp)
-  
+
   expect_is(sampling, "auk_sampling")
   expect_equal(sampling$output, normalizePath(tmp, winslash = "/"))
-  
+
   # read in results
   s_df <- read_sampling(sampling)
   unlink(tmp)
-  
+
   expect_is(s_df, "data.frame")
   expect_lt(nrow(s_df), nrow(read_sampling(f)))
   expect_equal(nrow(s_df), 16)
@@ -174,14 +173,14 @@ test_that("auk_filter works with wildcard dates", {
   tmp <- tempfile()
   filters <- auk_ebd(f) |>
     auk_date(date = c("*-05-01", "*-06-30"))
-  ebd <- auk_filter(filters, file = tmp) |> 
+  ebd <- auk_filter(filters, file = tmp) |>
     read_ebd()
   unlink(tmp)
-  
+
   expect_is(ebd, "data.frame")
   expect_lt(nrow(ebd), nrow(read_ebd(f)))
   expect_gt(nrow(ebd), 0)
-  month_day <- as.Date(ebd$observation_date) |> 
+  month_day <- as.Date(ebd$observation_date) |>
     format("%m-%d")
   md_range <- sub("*-", "", filters$filters$date, fixed = TRUE)
   expect_true(all(month_day >= md_range[1]))
