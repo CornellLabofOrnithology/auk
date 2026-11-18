@@ -127,7 +127,7 @@ ebd_zf <- auk_zerofill(x = f_ebd, sampling_events = f_smpl,
                        species = "Collared Kingfisher",
                        collapse = TRUE)
 filter_repeat_visits(ebd_zf, n_days = 30)
-#> # A tibble: 259 × 44
+#> # A tibble: 259 × 45
 #>    site          closure_id n_observations checklist_id last_edited_date country
 #>    <chr>         <chr>               <int> <chr>        <chr>            <chr>  
 #>  1 L1055540_obs… 2012-2                  2 S49291608    2023-01-31 19:3… Singap…
@@ -141,7 +141,7 @@ filter_repeat_visits(ebd_zf, n_days = 30)
 #>  9 L1361109_obs… 2012-0                 10 S9681492     2024-05-08 04:4… Singap…
 #> 10 L1361109_obs… 2012-0                 10 S9688019     2024-05-08 04:5… Singap…
 #> # ℹ 249 more rows
-#> # ℹ 38 more variables: country_code <chr>, state <chr>, state_code <chr>,
+#> # ℹ 39 more variables: country_code <chr>, state <chr>, state_code <chr>,
 #> #   county <chr>, county_code <chr>, iba_code <chr>, bcr_code <int>,
 #> #   usfws_code <chr>, atlas_block <chr>, locality <chr>, locality_id <chr>,
 #> #   locality_type <chr>, latitude <dbl>, longitude <dbl>,

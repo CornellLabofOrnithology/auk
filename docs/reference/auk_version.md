@@ -41,12 +41,12 @@ Other helpers:
 ``` r
 auk_version()
 #> $auk_version
-#> [1] "auk 0.9.0"
+#> [1] "auk 1.0.0"
 #> 
 #> $ebd_version
-#> [1] "2025-10-28"
+#> [1] "2026-11-27"
 #> 
 #> $taxonomy_version
-#> [1] 2025
+#> [1] 2026
 #> 
 ```

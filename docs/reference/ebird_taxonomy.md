@@ -27,13 +27,13 @@ A data frame with eight variables and 16,248 rows:
 - `common_name`: common name, defaults to English, but different
   languages can be selected using the `locale` parameter.
 
-- `order`: the scientific name of the order that the species belongs to.
-
 - `family`: the scientific name of the family that the species belongs
   to.
 
 - `family_common`: the common name of the family that the species
   belongs to.
+
+- `order`: the scientific name of the order that the species belongs to.
 
 - `category`: whether the entry is for a species or another
   field-identifiable taxon, such as `spuh`, `slash`, `hybrid`, etc.
@@ -44,6 +44,9 @@ A data frame with eight variables and 16,248 rows:
   species, subspecies, and recognizable forms), this field links to the
   corresponding species code. For taxa that can't be resolved, this
   field is `NA`.
+
+- `report_as_filled`: similar to `report_as` except that species also
+  have a value filled in such that `species_code == report_as_filled`.
 
 - `extinct`: logical variable indicating whether the species is listed
   as extinct in the eBird taxonomy.

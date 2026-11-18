@@ -19,7 +19,9 @@ auk_unique(
   checklist_id = "sampling_event_identifier",
   species_id = "scientific_name",
   observer_id = "observer_id",
-  checklists_only = FALSE
+  checklists_only = FALSE,
+  effort_cols = c("duration_minutes", "effort_distance_km", "protocol_type",
+    "all_species_reported")
 )
 ```
 
@@ -67,11 +69,20 @@ auk_unique(
   duplicated records is done at the checklist level not the species
   level.
 
+- effort_cols:
+
+  character; checklist-level columns to check for disagreement among
+  group members, used to populate the `effort_disagreement` column
+  described in Details. Columns not present in `x` (e.g. because of
+  `keep`/`drop` in
+  [`auk_filter()`](https://cornelllabofornithology.github.io/auk/reference/auk_filter.md))
+  are ignored.
+
 ## Value
 
-A data frame with unique observations, and an additional field,
-`checklist_id`, which is a combination of the sampling event and group
-IDs.
+A data frame with unique observations, and two additional fields:
+`checklist_id`, a combination of the sampling event and group IDs, and
+`effort_disagreement`, a logical field described in Details.
 
 ## Details
 
@@ -85,6 +96,23 @@ checklists.
 All the checklist and observer IDs for the checklists that comprise a
 given group checklist will be retained as a comma separated string
 ordered by checklist ID.
+
+Within a shared checklist, every species reported by *any* member of the
+group is retained in the output, not just those reported by the member
+with the lowest `checklist_id`. The deduplication key is the combination
+of `species_id` and `group_id`, so a record is only dropped as a
+duplicate if another member of the same group reported that exact same
+species.
+
+Checklist-level fields that aren't part of this deduplication key (e.g.
+observed duration, distance travelled, protocol, or whether all species
+were reported) are **not** combined or reconciled across group members:
+the value from the member with the lowest `checklist_id` is kept, and
+values from other members are discarded, even if they disagree. The
+output's `effort_disagreement` column flags groups where this happened,
+i.e. where members disagreed (ignoring `NA`s) on any of the columns
+named in `effort_cols`; it's always `FALSE` for checklists that aren't
+part of a group.
 
 ## See also
 
@@ -103,4 +131,8 @@ nrow(ebd)
 #> [1] 400
 nrow(ebd_unique)
 #> [1] 392
+# shared checklists whose members disagreed on effort fields like
+# duration, distance, protocol, or completeness are flagged
+"effort_disagreement" %in% names(ebd_unique)
+#> [1] TRUE
 ```

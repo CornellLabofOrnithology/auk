@@ -109,22 +109,22 @@ Other import:
 ``` r
 f <- system.file("extdata/ebd-sample.txt", package = "auk")
 read_ebd(f)
-#> # A tibble: 392 × 51
+#> # A tibble: 392 × 52
 #>    checklist_id global_unique_identi…¹ last_edited_date taxonomic_order category
 #>    <chr>        <chr>                  <chr>                      <dbl> <chr>   
-#>  1 G1158137     URN:CornellLabOfOrnit… 2025-10-09 04:1…           21181 species 
-#>  2 G1248339     URN:CornellLabOfOrnit… 2023-10-24 20:2…           21233 species 
-#>  3 G1277458     URN:CornellLabOfOrnit… 2025-10-20 12:2…           21233 species 
-#>  4 G1277459     URN:CornellLabOfOrnit… 2021-06-19 16:1…           21233 species 
-#>  5 G1277523     URN:CornellLabOfOrnit… 2025-10-20 12:1…           21233 species 
-#>  6 G1351311     URN:CornellLabOfOrnit… 2022-07-29 00:5…           21181 species 
-#>  7 G138493      URN:CornellLabOfOrnit… 2023-11-30 12:3…           21233 species 
-#>  8 G1402887     URN:CornellLabOfOrnit… 2020-07-05 14:1…           21233 species 
-#>  9 G143641      URN:CornellLabOfOrnit… 2021-04-01 18:2…           21233 species 
-#> 10 G144144      URN:CornellLabOfOrnit… 2019-03-29 15:0…           21181 species 
+#>  1 S8726496     URN:CornellLabOfOrnit… 2013-11-13 14:5…           21280 species 
+#>  2 S11593649    URN:CornellLabOfOrnit… 2013-03-15 17:3…           21280 species 
+#>  3 S47574783    URN:CornellLabOfOrnit… 2025-06-30 10:1…           21280 species 
+#>  4 S6090024     URN:CornellLabOfOrnit… 2014-10-06 20:2…           21280 species 
+#>  5 S6649345     URN:CornellLabOfOrnit… 2025-10-19 13:3…           21280 species 
+#>  6 S119788037   URN:CornellLabOfOrnit… 2022-10-01 17:0…           21280 species 
+#>  7 S8526215     URN:CornellLabOfOrnit… 2021-11-11 12:5…           21280 species 
+#>  8 S7346666     URN:CornellLabOfOrnit… 2021-03-26 03:5…           21280 species 
+#>  9 S286008945   URN:CornellLabOfOrnit… 2025-11-24 17:5…           21280 species 
+#> 10 S9957382     URN:CornellLabOfOrnit… 2024-02-16 20:5…           21280 species 
 #> # ℹ 382 more rows
 #> # ℹ abbreviated name: ¹​global_unique_identifier
-#> # ℹ 46 more variables: taxon_concept_id <chr>, common_name <chr>,
+#> # ℹ 47 more variables: taxon_concept_id <chr>, common_name <chr>,
 #> #   scientific_name <chr>, exotic_code <chr>, observation_count <chr>,
 #> #   breeding_code <chr>, breeding_category <chr>, behavior_code <chr>,
 #> #   age_sex <chr>, country <chr>, country_code <chr>, state <chr>,

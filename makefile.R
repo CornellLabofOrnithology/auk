@@ -1,9 +1,4 @@
-# clean up
-unlink(list.files("man", full.names = TRUE))
-pkgdown::clean_site()
-
 # rebuild docs and install
-devtools::document()
 devtools::document()
 pak::local_install(ask = FALSE, dependencies = TRUE)
 
@@ -16,6 +11,7 @@ file.copy("cheatsheet/auk-cheatsheet.png", "man/figures/auk-cheatsheet.png")
 devtools::build_readme()
 pkgdown::check_pkgdown()
 pkgdown::build_site()
+unlink(c("docs/CLAUDE.md", "docs/CLAUDE.html"))
 
 # checks
 devtools::check()

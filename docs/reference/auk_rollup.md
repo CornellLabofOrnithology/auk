@@ -116,7 +116,7 @@ unique(ebd$category)
 unique(ebd_ru$category)
 #> [1] "species"
 unique(ebd_higher$category)
-#> [1] "slash"   "spuh"    "hybrid"  "species"
+#> [1] "species" "hybrid"  "slash"   "spuh"   
 
 # yellow-rump warbler subspecies rollup
 library(dplyr)

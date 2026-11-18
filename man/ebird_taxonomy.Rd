@@ -13,16 +13,18 @@ in the Avibase taxonomy.
 \item \code{scientific_name}: scientific name.
 \item \code{common_name}: common name, defaults to English, but different languages
 can be selected using the \code{locale} parameter.
-\item \code{order}: the scientific name of the order that the species belongs to.
 \item \code{family}: the scientific name of the family that the species belongs to.
 \item \code{family_common}: the common name of the family that the species belongs
 to.
+\item \code{order}: the scientific name of the order that the species belongs to.
 \item \code{category}: whether the entry is for a species or another
 field-identifiable taxon, such as \code{spuh}, \code{slash}, \code{hybrid}, etc.
 \item \code{taxonomic_order}: integer value used to sort rows in taxonomic order.
 \item \code{report_as}: for taxa that can be resolved to true species (i.e. species,
 subspecies, and recognizable forms), this field links to the corresponding
 species code. For taxa that can't be resolved, this field is \code{NA}.
+\item \code{report_as_filled}: similar to \code{report_as} except that species also have
+a value filled in such that \code{species_code == report_as_filled}.
 \item \code{extinct}: logical variable indicating whether the species is listed as
 extinct in the eBird taxonomy.
 }

@@ -60,7 +60,10 @@ ebird_species <- function(
   # first check for scientific names
   sci <- match(x, tolower(tax$scientific_name))
   # then for common names
-  com <- match(x, tolower(tax$common_name))
+  com <- match(
+    x,
+    stringi::stri_trans_general(tolower(tax$common_name), "latin-ascii")
+  )
   # finally for species codes
   sc <- match(x, tolower(tax$species_code))
   # combine

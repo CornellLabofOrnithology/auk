@@ -6,52 +6,38 @@ library(auk)
 extract_family <- function(x) {
   str_match(x, "\\((.*)\\)")[, 2, drop = TRUE]
 }
-ebird_taxonomy <- paste0(
-  "https://www.birds.cornell.edu/",
-  "clementschecklist/wp-content/uploads/2025/10/",
-  "eBird_taxonomy_v2025.csv"
-) |>
-  read_csv() |>
+
+# ebird clements taxonomy
+tax_url <- paste0(
+  "https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/",
+  "2026/11/eBird_Taxonomy_v2026-october-2026.csv"
+)
+message("Download CSV and copy to data-raw/ directory:\n", tax_url)
+ebird_taxonomy <- read_csv("data-raw/eBird_Taxonomy_v2026-october-2026.csv") |>
+
   rename_all(tolower) |>
   mutate(
     common_name = stri_trans_general(primary_com_name, "latin-ascii"),
     family_common = extract_family(family),
     family = str_remove(family, " \\(.+\\)"),
-    # bug in the csv duplicating "avibase-"
-    taxon_concept_id = str_replace(
-      taxon_concept_id,
-      "avibase-avibase-",
-      "avibase-"
-    )
+    extinct = (extinct == 1),
+    report_as_filled = report_as
   ) |>
   select(
     species_code,
-    taxon_concept_id,
+    taxon_concept_id = bio_concept_code,
     scientific_name = sci_name,
-    common_name,
-    order,
+    common_name = primary_com_name,
     family,
     family_common,
+    order = order1,
     category,
     taxonomic_order = taxon_order,
-    report_as
+    report_as = sparse_report_as,
+    report_as_filled,
+    extinct
   ) |>
   as.data.frame(stringsAsFactors = FALSE)
-
-# extinct species
-extinction <- paste0(
-  "https://www.birds.cornell.edu/",
-  "clementschecklist/wp-content/uploads/2025/10/",
-  "Clements_v2025-October-2025.csv"
-) |>
-  read_csv() |>
-  filter(category == "species") |>
-  mutate(
-    taxon_concept_id = `taxon concept ID`,
-    extinct = !is.na(extinct) & extinct == 1,
-    .keep = "none"
-  )
-ebird_taxonomy <- left_join(ebird_taxonomy, extinction, by = "taxon_concept_id")
 
 write_csv(ebird_taxonomy, "data-raw/ebird-taxonomy.csv", na = "")
 usethis::use_data(ebird_taxonomy, overwrite = TRUE, compress = "xz")

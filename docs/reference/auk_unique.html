@@ -17,7 +17,7 @@ read_sampling()."><meta property="og:image" content="https://cornelllabofornitho
 
     <a class="navbar-brand me-2" href="../index.html">auk</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,9 @@ observations. This function is called automatically by <code><a href="read_ebd.h
 <span>  checklist_id <span class="op">=</span> <span class="st">"sampling_event_identifier"</span>,</span>
 <span>  species_id <span class="op">=</span> <span class="st">"scientific_name"</span>,</span>
 <span>  observer_id <span class="op">=</span> <span class="st">"observer_id"</span>,</span>
-<span>  checklists_only <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  checklists_only <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  effort_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"duration_minutes"</span>, <span class="st">"effort_distance_km"</span>, <span class="st">"protocol_type"</span>,</span>
+<span>    <span class="st">"all_species_reported"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -113,11 +115,19 @@ checklist information as with the sampling event data file. If this
 argument is <code>TRUE</code>, then the <code>species_id</code> argument is ignored and removing
 of duplicated records is done at the checklist level not the species level.</p></dd>
 
+
+<dt id="arg-effort-cols">effort_cols<a class="anchor" aria-label="anchor" href="#arg-effort-cols"></a></dt>
+<dd><p>character; checklist-level columns to check for
+disagreement among group members, used to populate the
+<code>effort_disagreement</code> column described in Details. Columns not present
+in <code>x</code> (e.g. because of <code>keep</code>/<code>drop</code> in <code><a href="auk_filter.html">auk_filter()</a></code>) are ignored.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data frame with unique observations, and an additional field,
-<code>checklist_id</code>, which is a combination of the sampling event and group IDs.</p>
+    <p>A data frame with unique observations, and two additional fields:
+<code>checklist_id</code>, a combination of the sampling event and group IDs, and
+<code>effort_disagreement</code>, a logical field described in Details.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -129,6 +139,21 @@ the field specified by the <code>group_id</code> parameter for grouped checklist
 <p>All the checklist and observer IDs for the checklists that comprise a given
 group checklist will be retained as a comma separated string ordered by
 checklist ID.</p>
+<p>Within a shared checklist, every species reported by <em>any</em> member of the
+group is retained in the output, not just those reported by the member
+with the lowest <code>checklist_id</code>. The deduplication key is the combination
+of <code>species_id</code> and <code>group_id</code>, so a record is only dropped as a
+duplicate if another member of the same group reported that exact same
+species.</p>
+<p>Checklist-level fields that aren't part of this deduplication key (e.g.
+observed duration, distance travelled, protocol, or whether all species
+were reported) are <strong>not</strong> combined or reconciled across group members:
+the value from the member with the lowest <code>checklist_id</code> is kept, and
+values from other members are discarded, even if they disagree. The
+output's <code>effort_disagreement</code> column flags groups where this happened,
+i.e. where members disagreed (ignoring <code>NA</code>s) on any of the columns
+named in <code>effort_cols</code>; it's always <code>FALSE</code> for checklists that aren't
+part of a group.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -147,6 +172,10 @@ checklist ID.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 400</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ebd_unique</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 392</span>
+<span class="r-in"><span><span class="co"># shared checklists whose members disagreed on effort fields like</span></span></span>
+<span class="r-in"><span><span class="co"># duration, distance, protocol, or completeness are flagged</span></span></span>
+<span class="r-in"><span><span class="st">"effort_disagreement"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ebd_unique</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -204,4 +204,4 @@ This package is based on AWK scripts provided as part of the eBird Data Workshop
 eBird Basic Dataset. Version: ebd_relFeb-2018. Cornell Lab of Ornithology, Ithaca, New York. May 2013.
 ```
 
-[![](http://www.ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![rOpenSci logo](http://www.ropensci.org/public_images/github_footer.png)](http://ropensci.org)

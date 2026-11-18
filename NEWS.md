@@ -1,5 +1,6 @@
-# auk 0.9.2
+# auk 1.0.0
 
+- update to 2026 eBird taxonomy
 - update to v2 of the eBird API and httr2 (PR #97)
 - drop magrittr pipe re-export
 - clarify in auk_unique() docs that species reported by any member of a
