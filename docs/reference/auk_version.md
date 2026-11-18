@@ -41,7 +41,7 @@ Other helpers:
 ``` r
 auk_version()
 #> $auk_version
-#> [1] "auk 1.0.0"
+#> [1] "auk 0.10.0"
 #> 
 #> $ebd_version
 #> [1] "2026-11-27"

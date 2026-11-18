@@ -1,4 +1,4 @@
-# auk 1.0.0
+# auk 0.10.0
 
 - update to 2026 eBird taxonomy
 - update to v2 of the eBird API and httr2 (PR #97)

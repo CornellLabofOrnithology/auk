@@ -55,7 +55,7 @@ Other objects:
 f <- system.file("extdata/zerofill-ex_sampling.txt", package = "auk")
 auk_sampling(f)
 #> Input 
-#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/Rtmpf0S4DQ/temp_libpath44eb560ccb28/auk/extdata/zerofill-ex_sampling.txt 
+#>   Sampling events: /private/var/folders/wf/957fnnnd127fsdkxc1dtmc2m0000gp/T/Rtmpf0S4DQ/temp_libpath44eb6ac9d7db/auk/extdata/zerofill-ex_sampling.txt 
 #> 
 #> Output 
 #>   Filters not executed
