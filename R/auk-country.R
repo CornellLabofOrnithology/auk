@@ -94,23 +94,20 @@ auk_country.auk_sampling <- function(x, country, replace = FALSE) {
 }
 
 missing_countries <- function(x) {
-  cc <- structure(
-    c("AC", "CP", "CS", "XX", "XK", "FM"),
-    .Names = c(
-      "ashmore and cartier islands",
-      "clipperton island",
-      "coral sea islands",
-      "high seas",
-      "kosovo",
-      "micronesia"
-    )
+  cc <- c(
+    "ashmore and cartier islands" = "AC",
+    "clipperton island" = "CP",
+    "coral sea islands" = "CS",
+    "high seas" = "XX",
+    "kosovo" = "XK",
+    "micronesia" = "FM"
   )
+
   # convert country names to codes
   name_codes <- cc[match(toupper(x), cc)]
   # lookup codes
   code_codes <- cc[tolower(x)]
+
   # combine, preference to codes
-  out <- dplyr::coalesce(code_codes, name_codes)
-  names(out) <- NULL
-  out
+  unname(dplyr::coalesce(code_codes, name_codes))
 }
